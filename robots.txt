@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /
+
+# Сайт пока закрыт для индексации. Когда откроем публично - заменить на:
+# User-agent: *
+# Allow: /
+# Sitemap: https://sychinnikov.com/sitemap.xml

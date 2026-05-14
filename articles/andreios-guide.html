@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AndreiOS — как работает моя система</title>
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --green: #4a7c59;
+    --blue: #3a5a8c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  .hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 50px;
+  }
+  .hero h1 {
+    font-size: 56px;
+    margin: 0 0 12px;
+    letter-spacing: -1px;
+  }
+  .hero .tagline {
+    font-size: 22px;
+    color: var(--muted);
+    font-weight: 300;
+    margin: 0 0 8px;
+  }
+  .hero .small {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+  section {
+    margin-bottom: 60px;
+  }
+  h2 {
+    font-size: 32px;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  h2 .num {
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+  .lead {
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-size: 18px;
+  }
+  h3 {
+    font-size: 22px;
+    margin: 24px 0 10px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 700px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 40px; }
+    .hero .tagline { font-size: 18px; }
+    h2 { font-size: 26px; }
+  }
+  .map {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+  }
+  .map-level {
+    margin-bottom: 26px;
+  }
+  .map-level-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .map-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .map-item {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 15px;
+  }
+  .map-item.foundation { border-color: var(--blue); }
+  .map-item.client { border-color: var(--accent); }
+  .map-item.cycle { border-color: var(--green); }
+  .map-item .icon {
+    margin-right: 6px;
+  }
+  .map-item .filename {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+  .day-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 20px;
+  }
+  .day-step {
+    display: flex;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .day-step:last-child { border-bottom: none; }
+  .day-time {
+    flex-shrink: 0;
+    width: 130px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .day-content {
+    flex: 1;
+  }
+  .day-content strong { display: block; margin-bottom: 4px; font-size: 18px; }
+  .day-content .desc { color: var(--muted); font-size: 15px; }
+  .command {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 22px 26px;
+    box-shadow: var(--shadow);
+  }
+  .command .cmd-name {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    background: #f0ebe0;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .command h4 {
+    font-size: 19px;
+    margin: 0 0 6px;
+  }
+  .command .when {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .principle {
+    background: var(--card);
+    border-left: 4px solid var(--accent);
+    padding: 20px 24px;
+    border-radius: 0 12px 12px 0;
+    box-shadow: var(--shadow);
+  }
+  .principle.green { border-left-color: var(--green); }
+  .principle.blue { border-left-color: var(--blue); }
+  .principle h4 {
+    margin: 0 0 8px;
+    font-size: 18px;
+  }
+  .kitchen-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .kitchen-row:last-child { border-bottom: none; }
+  .kitchen-emoji {
+    flex-shrink: 0;
+    font-size: 32px;
+    width: 50px;
+    text-align: center;
+  }
+  .kitchen-text { flex: 1; }
+  .kitchen-text strong { display: block; }
+  .kitchen-text .equals {
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 6px;
+  }
+  .arrow {
+    text-align: center;
+    color: var(--muted);
+    font-size: 24px;
+    margin: 8px 0;
+  }
+  .target-card {
+    background: linear-gradient(135deg, #fff 0%, #faf5e8 100%);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .target-card h4 {
+    color: var(--accent);
+    margin: 0 0 12px;
+    font-size: 20px;
+  }
+  .target-list { margin: 0; padding-left: 20px; }
+  .target-list li { margin: 6px 0; }
+  .pill {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .pill.green { background: var(--green); }
+  .pill.blue { background: var(--blue); }
+  .pill.muted { background: var(--muted); }
+  .legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+  blockquote {
+    margin: 16px 0;
+    padding: 14px 20px;
+    background: #faf5e8;
+    border-left: 3px solid var(--accent);
+    font-style: italic;
+    color: var(--muted);
+  }
+  hr {
+    border: none;
+    border-top: 2px solid var(--line);
+    margin: 50px 0;
+  }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+  }
+  ul.clean { list-style: none; padding-left: 0; }
+  ul.clean li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+  }
+  ul.clean li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>AndreiOS</h1>
+    <p class="tagline">Моя операционная система — как я устроил работу и жизнь</p>
+    <p class="small">Если вы это читаете — добро пожаловать. За 10 минут вы поймёте, что я делаю и как с этим работать.</p>
+  </div>
+
+  <!-- 1. ЗАЧЕМ -->
+  <section>
+    <h2><span class="num">1.</span>Зачем нужна эта система</h2>
+    <p class="lead">Чтобы каждый день шли действия, которые ведут к большой цели. А не к иллюзии работы.</p>
+
+    <div class="card">
+      <h3>Большая цель</h3>
+      <p>Построить большую серьёзную компанию, которая изменит мир.<br>
+      Финансовый ориентир: <strong>капитал $10М+ к 40 годам (2033)</strong> — через долю в 6–10 стартапах + переезд семьи в США.</p>
+
+      <h3>Стратегия — два такта</h3>
+      <div class="grid-2">
+        <div>
+          <span class="pill blue">ТАКТ 1 — сейчас, 5–7 лет</span>
+          <p>Работаю с разными компаниями как <em>operational architect</em> — собираю опыт, капитал, связи, equity-портфель. Это <strong>не финал</strong>, это «большой контекст-симулятор».</p>
+        </div>
+        <div>
+          <span class="pill green">ТАКТ 2 — потом</span>
+          <p>Когда сформируется (а) опыт, (б) ресурсы, (в) связи, (г) <strong>точное понимание сферы</strong> — запускаю свой большой проект.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="target-card">
+      <h4>Главный фильтр любого решения</h4>
+      <p style="margin: 0 0 12px;"><strong>Деньги → Семья → Фокус</strong></p>
+      <p style="margin: 0 0 12px;">Перед любым действием задаю один вопрос:</p>
+      <ul class="target-list">
+        <li>Это движет меня к одной из <strong>трёх 90-дневных целей</strong>?</li>
+        <li>Это не жертвует <strong>семьёй, здоровьем, впечатлениями, разносторонностью</strong>?</li>
+      </ul>
+      <p style="margin: 12px 0 0;">Если «нет» хотя бы на один — отложить или отказать.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 2. КАРТА СИСТЕМЫ -->
+  <section>
+    <h2><span class="num">2.</span>Из чего состоит — карта</h2>
+    <p class="lead">Система — это набор папок и файлов в одной директории на компьютере. Никаких сложных программ, всё в обычных текстовых файлах.</p>
+
+    <div class="map">
+
+      <div class="map-level">
+        <div class="map-level-title">Фундамент — 5 файлов в корне</div>
+        <div class="map-row">
+          <div class="map-item foundation">
+            <span class="icon">🧭</span>Я — кто я, ценности, цели
+            <span class="filename">me.md</span>
+          </div>
+          <div class="map-item foundation">
+            <span class="icon">💰</span>Деньги — финансы, runway, цели
+            <span class="filename">money.md</span>
+          </div>
+          <div class="map-item foundation">
+            <span class="icon">👨‍👩‍👧</span>Семья — миграция, дети, планы
+            <span class="filename">family.md</span>
+          </div>
+          <div class="map-item foundation">
+            <span class="icon">📋</span>Решения — журнал стратегий
+            <span class="filename">decisions.md</span>
+          </div>
+          <div class="map-item foundation">
+            <span class="icon">📅</span>Эта неделя — план и приоритеты
+            <span class="filename">this-week.md</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="map-level">
+        <div class="map-level-title">Клиенты — на чём зарабатываю сейчас</div>
+        <div class="map-row">
+          <div class="map-item client">
+            <span class="icon">🐟</span>Fishok — латвийский B2B зоокорм
+            <span class="filename">clients/fishok/</span>
+          </div>
+          <div class="map-item client">
+            <span class="icon">🐙</span>Octo — релокация + стартап-инкубатор
+            <span class="filename">clients/octo/</span>
+          </div>
+          <div class="map-item client">
+            <span class="icon">📥</span>Pipeline — потенциальные клиенты
+            <span class="filename">clients/pipeline.md</span>
+          </div>
+        </div>
+        <p style="margin-top: 12px; font-size: 14px; color: var(--muted);">Внутри каждого клиента: <code>state.md</code> (что сейчас), <code>shared.md</code> (можно показать), <code>private.md</code> (моя разведка), <code>work/</code> (мини-проекты — сайт, CRM, презентации).</p>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="map-level">
+        <div class="map-level-title">Методология — как я работаю с клиентами</div>
+        <div class="map-row">
+          <div class="map-item">
+            <span class="icon">📚</span>Operational Foundation — мой метод
+            <span class="filename">practice/</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="map-level">
+        <div class="map-level-title">Циклы — что происходит каждый день/неделю</div>
+        <div class="map-row">
+          <div class="map-item cycle">
+            <span class="icon">📥</span>Inbox — сырые мысли за день
+            <span class="filename">inbox/today.md</span>
+          </div>
+          <div class="map-item cycle">
+            <span class="icon">📊</span>Daily — своды дней
+            <span class="filename">daily/</span>
+          </div>
+          <div class="map-item cycle">
+            <span class="icon">🌀</span>Weekly — недельные рефлексии
+            <span class="filename">weekly/</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="border-color: var(--blue);"></div>
+          <span>Фундамент (редко меняется)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="border-color: var(--accent);"></div>
+          <span>Клиенты (часто меняется)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="border-color: var(--green);"></div>
+          <span>Циклы (генерируется ежедневно)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 3. ДЕНЬ В СИСТЕМЕ -->
+  <section>
+    <h2><span class="num">3.</span>Как идёт день в этой системе</h2>
+    <p class="lead">Главное — не путать систему с рутиной. Система работает в трёх точках дня. Между точками — обычная работа.</p>
+
+    <div class="card">
+      <div class="day-flow">
+
+        <div class="day-step">
+          <div class="day-time">🌅 Утро</div>
+          <div class="day-content">
+            <strong>Открыть <code>this-week.md</code> — что P1 сегодня</strong>
+            <p class="desc">5 минут. Не «открыть всё», а посмотреть три задачи, которые двигают неделю. Если не помню — записываю в `inbox/today.md`.</p>
+          </div>
+        </div>
+
+        <div class="day-step">
+          <div class="day-time">🌞 День</div>
+          <div class="day-content">
+            <strong>Работаю. Всё, что приходит в голову — в inbox</strong>
+            <p class="desc">Команда <code>/intake</code> (или просто <code>/i</code>) — кидаю мысль, ссылку, заметку. Не разбираю — это вечером. Главное — не держать в голове.</p>
+          </div>
+        </div>
+
+        <div class="day-step">
+          <div class="day-time">🌙 Вечер</div>
+          <div class="day-content">
+            <strong>Команда <code>/day-close</code> — закрыть день</strong>
+            <p class="desc">~15 минут. Система сама разбирает inbox по клиентам, обновляет state-файлы, делает короткий свод в <code>daily/</code>. Я отвечаю на 1-2 уточняющих вопроса и иду к семье.</p>
+          </div>
+        </div>
+
+        <div class="day-step">
+          <div class="day-time">🎯 Пятница<br>или суббота утром</div>
+          <div class="day-content">
+            <strong>Команда <code>/weekly-dialogue</code> — рефлексия</strong>
+            <p class="desc">30–60 минут. Не отчёт, а сессия — мне задают вопросы, я думаю и рождаю идеи. Обновляется <code>this-week.md</code> на следующую неделю.</p>
+          </div>
+        </div>
+
+        <div class="day-step">
+          <div class="day-time">🚫 Выходные</div>
+          <div class="day-content">
+            <strong>Не работаю. Это договорённость с Викой</strong>
+            <p class="desc">Это не «правило», это часть системы. Если я работаю в субботу — значит система сломалась, и в понедельник `/day-close` это покажет.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="target-card">
+      <h4>Три маркера: как понять, что день прошёл правильно</h4>
+      <ul class="target-list">
+        <li><strong>Энергия вечером.</strong> Прихожу заряженным = живу правильно. Выжат — что-то не так в режиме.</li>
+        <li><strong>Действия по главным приоритетам.</strong> Делаю каждый день P1-задачи = иду к цели. Не делаю — в антипаттерне, неважно как много суеты.</li>
+        <li><strong>Деньги.</strong> Растут — я в правильной точке. Не растут — я не там, даже если кажусь занятым.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 4. КОМАНДЫ -->
+  <section>
+    <h2><span class="num">4.</span>Четыре команды — это всё, что нужно знать</h2>
+    <p class="lead">Команда — это короткое слово, которое я пишу системе. Она знает, что делать дальше.</p>
+
+    <div class="grid-2">
+
+      <div class="command">
+        <span class="cmd-name">/intake</span> или <span class="cmd-name">/i</span>
+        <h4>Кинуть что-то в inbox</h4>
+        <p>Любая мысль, заметка, файл, идея. Не разбирается сразу — просто складывается с таймстампом в <code>inbox/today.md</code>.</p>
+        <p class="when">Когда: в течение дня, как только что-то пришло в голову.</p>
+      </div>
+
+      <div class="command">
+        <span class="cmd-name">/day-close</span>
+        <h4>Закрыть день</h4>
+        <p>Система разбирает inbox по проектам, обновляет state-файлы клиентов, сохраняет свод дня в <code>daily/</code>, архивирует разобранное.</p>
+        <p class="when">Когда: один раз вечером, перед тем как закрыть ноутбук.</p>
+      </div>
+
+      <div class="command">
+        <span class="cmd-name">/weekly-dialogue</span>
+        <h4>Недельная рефлексия</h4>
+        <p>Не отчёт. Сессия-диалог: система задаёт вопросы, я отвечаю и нахожу решения. На выходе — обновлённый <code>this-week.md</code>.</p>
+        <p class="when">Когда: пятница вечером или суббота утром.</p>
+      </div>
+
+      <div class="command">
+        <span class="cmd-name">/update-state &lt;путь&gt;</span>
+        <h4>Обновить state вручную</h4>
+        <p>Когда нужно срочно зафиксировать изменение по конкретному проекту, не дожидаясь вечернего <code>/day-close</code>.</p>
+        <p class="when">Когда: важная новость, не хочу потерять до вечера.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 5. ПРИНЦИПЫ -->
+  <section>
+    <h2><span class="num">5.</span>Главные принципы — на чём всё держится</h2>
+    <p class="lead">Не правила «по учебнику», а реально работающие у меня в голове установки.</p>
+
+    <div class="principle">
+      <h4>🎯 Один фильтр выше всего: Деньги → Семья → Фокус</h4>
+      <p>В таком порядке. Без денег нет семьи. Без семьи нет смысла. Без фокуса нет ни того, ни другого.</p>
+    </div>
+
+    <div class="principle blue">
+      <h4>📐 Двойной критерий любого решения</h4>
+      <p>Решение проходит, только если выполнены <strong>оба</strong> условия:<br>
+      <strong>1.</strong> Накапливает капитал / опыт / связи под Такт 2 (или equity-портфель, или усиливает точку гения)<br>
+      <strong>2.</strong> Не жертвует семьёй, здоровьем, впечатлениями, разносторонностью</p>
+    </div>
+
+    <div class="principle green">
+      <h4>💡 Каждый проект = «cash в моменте» + «+1»</h4>
+      <p>Не беру проекты без денег в моменте (фикс или процент). И не беру проекты без нелинейной возможности роста (equity, связи, выход на инвестора).<br>
+      Только cash без «+1» = плохой проект. Только «+1» без cash = плохой проект.</p>
+    </div>
+
+    <div class="principle">
+      <h4>🌱 Правило роста системы — без триггера ничего не создаём</h4>
+      <p>Новая папка или файл создаётся только когда: (а) текущий файл перерос 200 строк, (б) появилось ≥3 однотипных артефакта, (в) явно нужно для одной из 90-дневных целей.<br>
+      Запрещено: создавать «на всякий случай», «потому что красиво», «потому что в OS-моделях так».</p>
+    </div>
+
+    <div class="principle blue">
+      <h4>🛑 Kill-switch</h4>
+      <p>Если 14 дней подряд нет коммитов в репозитории — система признана мёртвой. Не строим следующую итерацию ещё 30 дней. Сначала ретроспектива «почему не работало», потом решение.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 6. ОБЪЯСНЕНИЕ ДЛЯ МАМЫ -->
+  <section>
+    <h2><span class="num">6.</span>Если объяснять самым простым языком</h2>
+    <p class="lead">Представьте кухню в хорошем ресторане. Там тоже всё держится на системе — иначе хаос.</p>
+
+    <div class="card">
+
+      <div class="kitchen-row">
+        <div class="kitchen-emoji">🧊</div>
+        <div class="kitchen-text">
+          <strong>Холодильник</strong>
+          <span class="equals">=</span>
+          <code>inbox/today.md</code> — туда я кладу всё свежее за день: мысли, разговоры, заметки. Утром было пусто, к вечеру наполнилось. Перед закрытием смены — всё разобрали по местам.
+        </div>
+      </div>
+
+      <div class="kitchen-row">
+        <div class="kitchen-emoji">🥫</div>
+        <div class="kitchen-text">
+          <strong>Полки с заготовками</strong>
+          <span class="equals">=</span>
+          <code>clients/fishok/</code>, <code>clients/octo/</code> — каждому проекту своя полка. На полке порядок: что есть сейчас (state), что хорошее (shared), что для своих (private).
+        </div>
+      </div>
+
+      <div class="kitchen-row">
+        <div class="kitchen-emoji">📕</div>
+        <div class="kitchen-text">
+          <strong>Поваренная книга шефа</strong>
+          <span class="equals">=</span>
+          <code>practice/</code> — моя методология. Как я работаю с клиентами, какие у меня «рецепты» работы с финансами, оргструктурой, продажами.
+        </div>
+      </div>
+
+      <div class="kitchen-row">
+        <div class="kitchen-emoji">📔</div>
+        <div class="kitchen-text">
+          <strong>Журнал шефа</strong>
+          <span class="equals">=</span>
+          <code>decisions.md</code> — все важные решения, которые я принял. Не для красоты, а чтобы через год понять «почему я тогда так решил».
+        </div>
+      </div>
+
+      <div class="kitchen-row">
+        <div class="kitchen-emoji">📋</div>
+        <div class="kitchen-text">
+          <strong>План смены на неделю</strong>
+          <span class="equals">=</span>
+          <code>this-week.md</code> — что главное сделать на этой неделе. Обновляется в пятницу вечером — план на следующую.
+        </div>
+      </div>
+
+      <div class="kitchen-row">
+        <div class="kitchen-emoji">🗄️</div>
+        <div class="kitchen-text">
+          <strong>Кладовка</strong>
+          <span class="equals">=</span>
+          <code>archive/</code> — туда уходит то, что устарело, но выкидывать жалко. Чтобы при необходимости поднять историю — но не путать рабочее пространство.
+        </div>
+      </div>
+
+      <div class="kitchen-row">
+        <div class="kitchen-emoji">📜</div>
+        <div class="kitchen-text">
+          <strong>Книга правил кухни</strong>
+          <span class="equals">=</span>
+          <code>CLAUDE.md</code> — главный документ. Кто я, что мы делаем, чего не делаем. Читается каждый раз перед началом смены.
+        </div>
+      </div>
+
+    </div>
+
+    <blockquote>
+      В обычном ресторане всё это держится в голове у шеф-повара. Когда шеф устаёт — всё рассыпается. У меня это лежит в файлах, и мне помогает Claude — это умный помощник, который читает все правила, помнит контекст и каждый вечер вместе со мной закрывает день.
+    </blockquote>
+  </section>
+
+  <hr>
+
+  <!-- 7. ПЕРВЫЕ ШАГИ -->
+  <section>
+    <h2><span class="num">7.</span>Если бы кто-то другой захотел работать в этой системе</h2>
+    <p class="lead">Если бы вы открыли эту систему вместо меня — вот первые 3 шага.</p>
+
+    <div class="card">
+      <ul class="clean">
+        <li><strong>Шаг 1.</strong> Открыть <code>CLAUDE.md</code> в корне — там вся карта и правила. На это уйдёт 10 минут.</li>
+        <li><strong>Шаг 2.</strong> Открыть <code>me.md</code> — понять, кто такой Андрей, какие у него цели, ценности и красные линии. Ещё 10 минут.</li>
+        <li><strong>Шаг 3.</strong> Открыть <code>this-week.md</code> — что мы делаем на этой неделе. Если это понятно — можно работать.</li>
+      </ul>
+      <p style="margin-top: 16px;">Дальше — по запросу. Нужна финансовая картина → <code>money.md</code>. Нужно понять, что с клиентом → <code>clients/&lt;имя&gt;/state.md</code>. Не нужно читать всё сразу — система не для этого.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    AndreiOS v1 · собрано вручную, 14 мая 2026<br>
+    Система живёт в обычной папке на компьютере. Файлы — простые тексты в формате Markdown. Никакой магии, кроме правил, которые я сам себе поставил.
+  </div>
+
+</div>
+</body>
+</html>
