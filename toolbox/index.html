@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toolbox — skills, агенты, хуки и команды AndreiOS</title>
+<meta name="description" content="Полный набор инструментов AndreiOS: 4 skills, 3 субагента, hooks и команды для повседневной работы.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --green: #4a7c59;
+    --blue: #3a5a8c;
+    --purple: #6b4a8c;
+    --red: #b04c4c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 15px; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  h1 { font-size: 38px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 18px; color: var(--muted); margin: 0 0 50px; }
+  h2 { font-size: 24px; margin: 50px 0 18px; font-weight: 600; color: var(--accent); border-bottom: 2px solid var(--line); padding-bottom: 8px; }
+  h2 .count { font-size: 14px; color: var(--muted); font-weight: 500; margin-left: 8px; }
+  h3 { font-size: 19px; margin: 0 0 8px; font-weight: 600; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .card.skill { border-left: 4px solid var(--accent); }
+  .card.agent { border-left: 4px solid var(--purple); }
+  .card.hook { border-left: 4px solid var(--blue); }
+  .card.system { border-left: 4px solid var(--green); }
+  .card-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .triggers { display: flex; gap: 6px; flex-wrap: wrap; }
+  .trig { background: #f0ebe1; color: var(--ink); padding: 2px 8px; border-radius: 4px; font-size: 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .desc { font-size: 14px; color: var(--ink); margin: 0 0 12px; }
+  .when { font-size: 13px; color: var(--muted); margin: 8px 0; }
+  .when strong { color: var(--ink); }
+  .meta { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .meta span { display: inline-flex; align-items: center; gap: 4px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  .badge.opus { background: #f3e9f5; color: var(--purple); }
+  .badge.sonnet { background: #eaf1ee; color: var(--green); }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  pre { background: #2a2a2a; color: #f0ebe1; padding: 14px 18px; border-radius: 8px; font-size: 13px; overflow-x: auto; line-height: 1.5; }
+  pre code { background: transparent; padding: 0; color: inherit; }
+  .principle { background: #faf6ee; border-left: 3px solid var(--accent); padding: 14px 18px; margin: 12px 0; font-size: 15px; border-radius: 0 6px 6px 0; }
+  ul.tight { margin: 8px 0; padding-left: 20px; }
+  ul.tight li { margin-bottom: 4px; font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  footer { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  @media (max-width: 700px) {
+    h1 { font-size: 28px; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/system/">карта системы</a> · <a href="/dashboard/">дашборд</a></nav>
+
+<h1>Toolbox</h1>
+<p class="subtitle">Полный набор инструментов AndreiOS: skills, субагенты, hooks и интересные команды.</p>
+
+<div class="principle">
+  <strong>Логика:</strong> Skills — атомарные процедуры по слэш-команде. Субагенты — специализированные «коллеги» с изолированным контекстом. Hooks — автоматические действия системы. Команды — точечные триггеры для запуска skills.
+</div>
+
+<!-- ==================== SKILLS ==================== -->
+<h2>🛠 Skills <span class="count">— 4 шт.</span></h2>
+<p>Атомарные процедуры. Каждый skill решает одну задачу строго по своему сценарию.</p>
+
+<div class="card skill">
+  <div class="card-header">
+    <h3>📥 /intake</h3>
+    <div class="triggers">
+      <span class="trig">/i &lt;текст&gt;</span>
+      <span class="trig">/intake &lt;текст&gt;</span>
+      <span class="trig">«запиши в инбокс»</span>
+    </div>
+  </div>
+  <p class="desc">Микро-операция: добавить сырую запись в <code>inbox/today.md</code> с таймстампом. Не классифицирует, не анализирует, не комментирует. Просто записывает.</p>
+  <div class="when"><strong>Когда:</strong> в течение дня, постоянно. Любая мысль / событие / цифра / решение / файл — сразу в инбокс. Чтобы не держать в голове.</div>
+  <div class="meta">
+    <span>📄 inbox/today.md</span>
+    <span>⚡ &lt;500 токенов</span>
+    <span>🔁 десятки раз в день</span>
+  </div>
+</div>
+
+<div class="card skill">
+  <div class="card-header">
+    <h3>🌙 /day-close</h3>
+    <div class="triggers">
+      <span class="trig">/day-close</span>
+      <span class="trig">«закроем день»</span>
+    </div>
+  </div>
+  <p class="desc">Закрытие дня — главный регулярный цикл. Разбирает накопленный inbox, классифицирует записи по проектам, обновляет state-файлы, пишет свод в <code>daily/YYYY-MM-DD.md</code>, архивирует inbox.</p>
+  <div class="when"><strong>Когда:</strong> один раз вечером. Перед сном или после ужина — когда поток сырья закончился.</div>
+  <ul class="tight">
+    <li>Запускает субагент <strong>business-operator</strong> для классификации</li>
+    <li>При денежных событиях подключает <strong>finance-director</strong></li>
+    <li>Обновляет: state.md проектов, money.md, decisions.md, family.md</li>
+    <li>Stop hook делает git commit автоматически</li>
+  </ul>
+  <div class="meta">
+    <span>📄 daily/, state.md клиентов, money.md, decisions.md</span>
+    <span>⚡ ~10-20K токенов</span>
+    <span>🔁 1 раз / день</span>
+  </div>
+</div>
+
+<div class="card skill">
+  <div class="card-header">
+    <h3>💭 /weekly-dialogue</h3>
+    <div class="triggers">
+      <span class="trig">/weekly-dialogue</span>
+      <span class="trig">/weekly</span>
+      <span class="trig">«закроем неделю»</span>
+    </div>
+  </div>
+  <p class="desc">Недельная рефлексия в формате <strong>диалога 60-90 минут</strong>. Не отчёт. Claude задаёт по одному вопросу за раз, копает глубже, спорит. Цель — родить новые смыслы, не просто записать факты.</p>
+  <div class="when"><strong>Когда:</strong> пятница вечером или суббота утром.</div>
+  <p style="font-size: 14px; color: var(--muted); margin: 8px 0;">8 блоков сессии: 💰 Финансы → 🐟 Fishok → 🐙 Octo → 📥 Pipeline → 👨‍👩‍👧 Семья → 🎯 Стратегия → 🧠 Личное → ✅ Синтез</p>
+  <ul class="tight">
+    <li>Читает 7 последних daily/, all state.md, money.md, decisions.md</li>
+    <li>Записывает <code>weekly/YYYY-Wнн.md</code></li>
+    <li>Обновляет <code>this-week.md</code> на следующую неделю</li>
+    <li>В конце предлагает запустить <strong>context-architect</strong> для health-check</li>
+  </ul>
+  <div class="meta">
+    <span>📄 weekly/, this-week.md, state.md</span>
+    <span>⚡ ~30-50K токенов</span>
+    <span>🔁 1 раз / неделю</span>
+  </div>
+</div>
+
+<div class="card skill">
+  <div class="card-header">
+    <h3>🔄 /update-state</h3>
+    <div class="triggers">
+      <span class="trig">/update-state &lt;путь&gt;</span>
+      <span class="trig">«обнови state по Fishok»</span>
+    </div>
+  </div>
+  <p class="desc">Точечное обновление <code>state.md</code> проекта вне регулярного цикла. Аварийный инструмент — для срочной фиксации изменения.</p>
+  <div class="when"><strong>Когда:</strong> по запросу. Если используется чаще 1-2 раз в день — значит inbox + day-close не справляются, надо разбираться почему.</div>
+  <div class="meta">
+    <span>📄 state.md одного проекта</span>
+    <span>⚡ ~3-5K токенов</span>
+    <span>🔁 редко, по запросу</span>
+  </div>
+</div>
+
+<!-- ==================== AGENTS ==================== -->
+<h2>🧑‍💼 Субагенты <span class="count">— 3 шт.</span></h2>
+<p>Специализированные «коллеги» с собственным контекстом и моделью. Изолируют сложные задачи от основного диалога — экономят токены, дают чистый фокус.</p>
+
+<div class="card agent">
+  <div class="card-header">
+    <h3>🐙 business-operator</h3>
+    <span class="badge sonnet">Sonnet</span>
+  </div>
+  <p class="desc">Операционный архитектор. Главный исполнитель по клиентским проектам и обработке inbox.</p>
+  <p class="when"><strong>Когда вызывается:</strong></p>
+  <ul class="tight">
+    <li>В <code>/day-close</code> — классифицирует записи inbox по проектам, обновляет state-файлы</li>
+    <li>При работе с Fishok / Octo — помогает с операционкой</li>
+    <li>При создании регламентов, отчётов, оргструктур</li>
+    <li>При работе с воронками продаж и CRM</li>
+  </ul>
+  <div class="meta">
+    <span>🔧 Read, Glob, Grep, Edit, Write, Bash</span>
+    <span>📋 Operational Foundation как фон</span>
+  </div>
+</div>
+
+<div class="card agent">
+  <div class="card-header">
+    <h3>💰 finance-director</h3>
+    <span class="badge sonnet">Sonnet</span>
+  </div>
+  <p class="desc">Семейный и проектный финдиректор. Cashflow, runway, долги, риски, инвестиции, equity-портфель.</p>
+  <p class="when"><strong>Когда вызывается:</strong></p>
+  <ul class="tight">
+    <li>В <code>/day-close</code> если за день были денежные события</li>
+    <li>В <code>/weekly-dialogue</code> — раздел «Финансы»</li>
+    <li>При работе с money.md и финансовыми решениями</li>
+    <li>При обсуждении equity-сделок и инвестиций</li>
+  </ul>
+  <p style="font-size: 13px; color: var(--muted); margin: 8px 0;"><strong>Принципы:</strong> Деньги → Семья → Фокус. В каждом обновлении явно пишет runway X месяцев. Equity &gt; Cash на 7-летнем горизонте.</p>
+  <div class="meta">
+    <span>🔧 Read, Glob, Grep, Edit, Write, Bash</span>
+    <span>📄 money.md, decisions.md</span>
+  </div>
+</div>
+
+<div class="card agent">
+  <div class="card-header">
+    <h3>🏛 context-architect</h3>
+    <span class="badge opus">Opus</span>
+  </div>
+  <p class="desc">Архитектор контекста AndreiOS. Не операционный исполнитель — «уборщик» системы. Чистит дубли, ищет противоречия, предлагает структурные изменения.</p>
+  <p class="when"><strong>Когда вызывается:</strong> вручную, раз в неделю в <code>/weekly-dialogue</code> или когда чувствуется, что система раздувается хаотично. Также при срабатывании kill-switch — для ретроспективы.</p>
+  <p style="font-size: 13px; color: var(--muted); margin: 8px 0;"><strong>Что делает:</strong> ищет дубли фактов, противоречия state.md ↔ decisions.md, устаревшие страницы (>14 дней), сиротские файлы, нарушения правила роста.</p>
+  <div class="principle" style="background: #faf6ee; margin: 10px 0;">
+    Не правит содержание файлов, только <strong>предлагает</strong>. Финальное решение всегда за Андреем.
+  </div>
+  <div class="meta">
+    <span>🔧 Read, Glob, Grep, Edit, Write</span>
+    <span>🎯 цель: система остаётся управляемой через 6/12/24 месяца</span>
+  </div>
+</div>
+
+<!-- ==================== HOOKS ==================== -->
+<h2>⚙️ Hooks и permissions</h2>
+<p>Автоматические действия системы и правила безопасности. Срабатывают без явных команд.</p>
+
+<div class="card hook">
+  <h3>🪝 Stop hook — авто-коммит сессии</h3>
+  <p class="desc">После каждой завершённой сессии Claude автоматически делает git commit изменений в репозитории. Так история всегда сохраняется без ручного «не забыть закоммитить».</p>
+  <pre><code>cd "$CLAUDE_PROJECT_DIR" && git add -A && git commit -m "auto: $(date '+%Y-%m-%d %H:%M') — session end"</code></pre>
+  <p style="font-size: 13px; color: var(--muted); margin: 10px 0 0;"><strong>Зачем:</strong> каждая сессия = checkpoint. Если что-то сломается через 3 дня — можно вернуться. Плюс это входной сигнал в kill-switch (14 дней без коммита = система мёртвая).</p>
+</div>
+
+<div class="card hook">
+  <h3>🔒 Permissions — что разрешено и запрещено</h3>
+  <div class="grid-2">
+    <div>
+      <strong style="color: var(--red); font-size: 14px;">DENY (запрещено всегда):</strong>
+      <ul class="tight" style="margin-top: 6px;">
+        <li><code>rm -rf</code> в любом виде</li>
+        <li><code>sudo rm</code></li>
+        <li>чтение <code>.env</code>, <code>*.key</code>, <code>*.pem</code></li>
+        <li><code>curl</code> / <code>wget</code> с экспортом</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="color: var(--green); font-size: 14px;">ALLOW (разрешено автоматом):</strong>
+      <ul class="tight" style="margin-top: 6px;">
+        <li><code>git add/commit/status/log/diff/init</code></li>
+        <li><code>ls, mkdir, mv, cp, cat, echo, pwd</code></li>
+        <li><code>Read, Write, Edit</code> любых файлов</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0;"><strong>Логика:</strong> разрешено всё что нужно для работы со state-файлами и git, запрещено всё что может удалить данные или утечь секреты.</p>
+</div>
+
+<!-- ==================== USEFUL COMMANDS ==================== -->
+<h2>⌨️ Полезные команды Claude Code <span class="count">— системные</span></h2>
+<p>Это не «мои» команды, а встроенные в Claude Code. Полезны для нашей системы.</p>
+
+<div class="grid-2">
+  <div class="card system">
+    <h3>/init</h3>
+    <p class="desc">Создаёт <code>CLAUDE.md</code> в новой папке с описанием контекста. Использовать при создании нового клиентского проекта.</p>
+  </div>
+  <div class="card system">
+    <h3>/review</h3>
+    <p class="desc">Code review текущей ветки или PR. Для нашей системы — обзор изменений перед закрытием недели.</p>
+  </div>
+  <div class="card system">
+    <h3>/loop &lt;интервал&gt; &lt;команда&gt;</h3>
+    <p class="desc">Запустить команду повторно с интервалом. Например <code>/loop 5m /day-close</code> — но мы не используем, регулярность через day-close достаточна.</p>
+  </div>
+  <div class="card system">
+    <h3>/schedule</h3>
+    <p class="desc">Запланировать запуск задачи по расписанию (cron). Кандидат для авто-обновления дашборда раз в день.</p>
+  </div>
+  <div class="card system">
+    <h3>/simplify</h3>
+    <p class="desc">Ревью изменённого кода: дубли, упрощения, вытащить общее. Полезен при росте HTML-портала.</p>
+  </div>
+  <div class="card system">
+    <h3>/update-config</h3>
+    <p class="desc">Настроить hooks, permissions, env-переменные в <code>settings.json</code>. Через него добавляли Stop hook.</p>
+  </div>
+  <div class="card system">
+    <h3>/fewer-permission-prompts</h3>
+    <p class="desc">Сканирует историю сессий и предлагает добавить часто используемые команды в allow-list. Уменьшает число подтверждений.</p>
+  </div>
+  <div class="card system">
+    <h3>/telegram:configure</h3>
+    <p class="desc">Настроить Telegram-канал для общения с Claude. Полезно когда нужно кинуть мысль/файл с телефона в inbox.</p>
+  </div>
+</div>
+
+<!-- ==================== PATTERNS ==================== -->
+<h2>🎯 Типичные паттерны использования</h2>
+
+<div class="card">
+  <h3>Обычный день</h3>
+  <ol>
+    <li>В течение дня — <code>/i &lt;любая мысль&gt;</code> постоянно. Десятки раз. Не думать «куда положить» — всё в инбокс.</li>
+    <li>Вечером — <code>/day-close</code>. Один раз. Разбирает накопленное, обновляет state, пишет свод.</li>
+    <li>Спать. Stop hook закоммитил.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h3>Конец недели</h3>
+  <ol>
+    <li>Сначала <code>/day-close</code> текущего дня (если ещё не сделан).</li>
+    <li>Потом <code>/weekly-dialogue</code> — 60-90 минут разговора. Без спешки.</li>
+    <li>В конце Claude предложит <strong>context-architect</strong> — соглашайся раз в 2-4 недели.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h3>Когда что-то важное случилось «прямо сейчас»</h3>
+  <ul class="tight">
+    <li>Мелкое → <code>/i &lt;описание&gt;</code>, обработается вечером в day-close.</li>
+    <li>Срочное обновление state.md → <code>/update-state clients/octo</code></li>
+    <li>Финансовый вопрос → просто работа с агентом <strong>finance-director</strong> в обычном диалоге.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Когда чувствуется хаос в системе</h3>
+  <ol>
+    <li>Не создавай новые файлы / папки — это усилит хаос.</li>
+    <li>Запусти <strong>context-architect</strong> — он покажет дубли, противоречия, сиротские файлы.</li>
+    <li>По его предложениям — чистка. Только после твоего подтверждения.</li>
+  </ol>
+</div>
+
+<footer>
+  <p>Toolbox обновляется по мере роста системы. Каждый новый skill должен соответствовать <strong>правилу роста</strong>: повторяется ≥3 раз ИЛИ нужен для одной из трёх целей 90 дней.</p>
+  <p><a href="/" style="color: var(--blue);">← Главная</a> · <a href="/system/" style="color: var(--blue);">Карта системы</a> · <a href="/dashboard/" style="color: var(--blue);">Дашборд</a></p>
+</footer>
+
+</div>
+</body>
+</html>
