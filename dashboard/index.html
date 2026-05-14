@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дашборд — состояние проектов</title>
+<meta name="description" content="Оперативный дашборд по проектам Андрея Сычинникова: цели 90 дней, финансы, клиенты, pipeline.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --green: #4a7c59;
+    --blue: #3a5a8c;
+    --red: #b04c4c;
+    --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 40px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+  nav a { color: var(--blue); text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  .updated { font-size: 13px; color: var(--muted); }
+  h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 16px; color: var(--muted); margin: 0 0 36px; }
+  h2 { font-size: 20px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 17px; margin: 0 0 12px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; box-shadow: var(--shadow); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+  /* Goals */
+  .goal { display: flex; flex-direction: column; gap: 6px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .goal:last-child { border-bottom: none; }
+  .goal-title { font-weight: 600; font-size: 15px; }
+  .goal-meta { font-size: 13px; color: var(--muted); }
+  .bar { background: var(--line); border-radius: 100px; height: 8px; overflow: hidden; margin-top: 6px; }
+  .bar-fill { height: 100%; border-radius: 100px; background: var(--green); }
+  .bar-fill.red { background: var(--red); }
+  .bar-fill.amber { background: var(--amber); }
+
+  /* Stats */
+  .stat { padding: 14px 0; }
+  .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-size: 26px; font-weight: 700; margin-top: 2px; }
+  .stat-value.red { color: var(--red); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.amber { color: var(--amber); }
+  .stat-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* Client cards */
+  .client-card { display: grid; grid-template-rows: auto 1fr; gap: 12px; }
+  .client-header { display: flex; justify-content: space-between; align-items: center; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.active { background: #e9f1ec; color: var(--green); }
+  .badge.risk { background: #f9e9e9; color: var(--red); }
+  .badge.amber { background: #faf2dd; color: var(--amber); }
+  .client-row { display: flex; gap: 10px; margin-top: 8px; font-size: 14px; }
+  .client-row .label { color: var(--muted); min-width: 110px; flex-shrink: 0; }
+  .placeholder { color: var(--muted); font-style: italic; font-size: 14px; }
+
+  /* Pipeline */
+  .pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .stage { background: #f0ebe1; border-radius: 8px; padding: 12px; font-size: 13px; min-height: 100px; }
+  .stage h4 { margin: 0 0 8px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; }
+  .stage .count { font-size: 22px; font-weight: 700; }
+
+  /* Tasks */
+  .task-list { list-style: none; padding: 0; margin: 0; }
+  .task-list li { padding: 8px 0; font-size: 14px; display: flex; gap: 10px; align-items: baseline; }
+  .priority { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .priority.p1 { background: #f9e9e9; color: var(--red); }
+  .priority.p2 { background: #faf2dd; color: var(--amber); }
+  .priority.p3 { background: #eef1ee; color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 800px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .pipeline { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <span><a href="/">← главная</a> · <a href="/system/">карта системы</a></span>
+  <span class="updated">обновлено: 2026-05-14 17:30 (вручную, прототип)</span>
+</nav>
+
+<h1>Дашборд</h1>
+<p class="subtitle">Состояние проектов, финансов и приоритетов. Источник правды — state-файлы. Будет авто-обновляться в <code>/day-close</code>.</p>
+
+<!-- ===== БЛОК 1: ТРИ ЦЕЛИ 90 ДНЕЙ ===== -->
+<h2>🎯 Три цели 90 дней</h2>
+<div class="card">
+  <div class="goal">
+    <div class="goal-title">1. Третий клиент (желательно через инкубатор Сергея)</div>
+    <div class="goal-meta">Pipeline пуст · ожидается тестовое предложение от Сергея · equity-кейс</div>
+    <div class="bar"><div class="bar-fill red" style="width: 5%"></div></div>
+  </div>
+  <div class="goal">
+    <div class="goal-title">2. Первая equity-позиция (Partnership Framework с Сергеем)</div>
+    <div class="goal-meta">Framework в проработке · конкретного оффера ещё нет</div>
+    <div class="bar"><div class="bar-fill amber" style="width: 20%"></div></div>
+  </div>
+  <div class="goal">
+    <div class="goal-title">3. €8 000–10 000/мес чистыми к 1 августа</div>
+    <div class="goal-meta">Сейчас фикс €4 500 · нужно закрыть разрыв €3 500-5 500</div>
+    <div class="bar"><div class="bar-fill red" style="width: 30%"></div></div>
+  </div>
+</div>
+
+<!-- ===== БЛОК 2: ФИНАНСЫ ===== -->
+<h2>💰 Финансы (агрегаты)</h2>
+<div class="grid-4">
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Фикс / мес</div>
+      <div class="stat-value">€4 500</div>
+      <div class="stat-sub">Fishok €3 500 + Octo €1 000</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Дефицит</div>
+      <div class="stat-value red">€1 100/мес</div>
+      <div class="stat-sub">с учётом кредита РФ</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Runway</div>
+      <div class="stat-value red">~1 мес ⚠️</div>
+      <div class="stat-sub">критический уровень</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Цель 1 авг</div>
+      <div class="stat-value amber">€6 000+ / мес</div>
+      <div class="stat-sub">+ €6К накоплений</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 14px;">
+  <h3>Ближайшие финансовые дедлайны</h3>
+  <table>
+    <thead><tr><th>Дата</th><th>Что</th><th>Сумма</th></tr></thead>
+    <tbody>
+      <tr><td>Май 2026</td><td>Требование номад-визы</td><td>€5 000+/мес на счёт</td></tr>
+      <tr><td>10 июля 2026</td><td>Годовщина свадьбы — Париж</td><td>€2 000</td></tr>
+      <tr><td>1 августа 2026</td><td>Стабильный доход + накопления</td><td>€6 000+/мес, €6К</td></tr>
+      <tr><td>Сентябрь 2026</td><td>Поездка в США (3 нед)</td><td>€9 000</td></tr>
+      <tr><td>1 января 2027</td><td>Стабильный доход</td><td>€10 000/мес</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== БЛОК 3: КЛИЕНТЫ ===== -->
+<h2>👥 Клиенты</h2>
+<div class="grid-2">
+  <div class="card client-card">
+    <div class="client-header">
+      <h3>🐟 Fishok</h3>
+      <span class="badge active">активный</span>
+    </div>
+    <div>
+      <div class="client-row"><span class="label">Роль:</span><span class="placeholder">заполнить в state.md</span></div>
+      <div class="client-row"><span class="label">Доход:</span><span>€3 500/мес, 14-го числа</span></div>
+      <div class="client-row"><span class="label">Главный риск:</span><span>зарплата идёт с личного кармана В.В. Кузакова, не из бюджета</span></div>
+      <div class="client-row"><span class="label">Цель 30 дней:</span><span class="placeholder">заполнить в state.md</span></div>
+      <div class="client-row"><span class="label">Bottleneck:</span><span class="placeholder">заполнить в state.md</span></div>
+      <div class="client-row"><span class="label">Стратегия:</span><span>до €4К+ независимого дохода - не соглашаться на понижение</span></div>
+    </div>
+  </div>
+
+  <div class="card client-card">
+    <div class="client-header">
+      <h3>🐙 Octo Relocate</h3>
+      <span class="badge active">активный</span>
+    </div>
+    <div>
+      <div class="client-row"><span class="label">Роль:</span><span class="placeholder">заполнить в state.md</span></div>
+      <div class="client-row"><span class="label">Доход:</span><span>€1 000 фикс + до €3 000 бонус (триггер: выручка &gt;€50К/мес)</span></div>
+      <div class="client-row"><span class="label">Главный актив:</span><span>канал Сергея → equity-портфель → $10М цель</span></div>
+      <div class="client-row"><span class="label">Воронка:</span><span>7 этапов (Контакт → Квалификация → ... → Первый клиент)</span></div>
+      <div class="client-row"><span class="label">Мини-проекты:</span><span>website, presentations, crm</span></div>
+      <div class="client-row"><span class="label">Bottleneck:</span><span class="placeholder">заполнить в state.md</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== БЛОК 4: СЕРГЕЙ-КАНАЛ ===== -->
+<h2>🌱 Сергей-канал (главный стратегический актив)</h2>
+<div class="card">
+  <div class="grid-2">
+    <div>
+      <h3>План активации</h3>
+      <ol style="margin: 0; padding-left: 18px; font-size: 14px;">
+        <li>Сейчас (1-2 нед): получить от Сергея <strong>первое тестовое предложение</strong>, взять на его условиях как разведку</li>
+        <li>К проекту №2: прийти с <strong>Partnership Framework</strong> (fixed fee + 1-3% equity + 15-20% Сергею)</li>
+        <li>Через 6-12 мес: концепт <strong>Operational Foundation Module</strong> как продукт инкубатора</li>
+        <li>Через 12+ мес: <strong>Operating Partner</strong> в инкубаторе с carried interest</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Открытые вопросы</h3>
+      <ul style="margin: 0; padding-left: 18px; font-size: 14px;">
+        <li>Какой % Сергей будет ожидать с моих сделок в инкубаторе?</li>
+        <li>Какой первый AI-агент запустить (Discover / Reporting / Octo-воронка)?</li>
+      </ul>
+      <h3 style="margin-top: 18px;">Текущий статус</h3>
+      <p style="font-size: 14px; margin: 0; color: var(--muted);">Ожидается тестовое предложение от Сергея.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== БЛОК 5: PIPELINE ===== -->
+<h2>📥 Pipeline по новым клиентам</h2>
+<div class="pipeline">
+  <div class="stage">
+    <h4>1. Холодный контакт</h4>
+    <div class="count">0</div>
+  </div>
+  <div class="stage">
+    <h4>2. Квалификация</h4>
+    <div class="count">0</div>
+  </div>
+  <div class="stage">
+    <h4>3. Discovery</h4>
+    <div class="count">0</div>
+  </div>
+  <div class="stage">
+    <h4>4. Diagnostic offer</h4>
+    <div class="count">0</div>
+  </div>
+  <div class="stage">
+    <h4>5. Подписан</h4>
+    <div class="count">0</div>
+  </div>
+</div>
+<p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Воронка пустая. Источники лидов: Сергей-канал (главный), тёплые связи (В.В., бывшие коллеги), рекомендации. LinkedIn отложен до июня.</p>
+
+<!-- ===== БЛОК 6: ЭТА НЕДЕЛЯ ===== -->
+<h2>📅 Эта неделя</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>Задачи</h3>
+    <ul class="task-list">
+      <li class="placeholder">Заполнить в this-week.md через /weekly-dialogue или вручную.</li>
+    </ul>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Дашборд тянет P1/P2/P3 из <code>this-week.md</code>. Сейчас файл шаблонный.</p>
+  </div>
+  <div class="card">
+    <h3>Последние решения</h3>
+    <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+      <li style="padding: 8px 0; border-bottom: 1px solid var(--line);">
+        <strong>2026-05-14</strong> · <span style="color: var(--green);">strategic, finance</span><br>
+        Наполнен фундамент AndreiOS — me.md и money.md
+      </li>
+    </ul>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Источник: <code>decisions.md</code></p>
+  </div>
+</div>
+
+<!-- ===== БЛОК 7: КРАСНЫЕ ЛИНИИ ===== -->
+<h2>🚨 Что под наблюдением</h2>
+<div class="grid-3">
+  <div class="card">
+    <h3 style="color: var(--red);">Runway &lt;1 мес</h3>
+    <p style="font-size: 14px; margin: 0;">Критический уровень ликвида. Любое финансовое решение - через scarcity-фильтр в money.md.</p>
+  </div>
+  <div class="card">
+    <h3 style="color: var(--amber);">Fishok зависит от одного человека</h3>
+    <p style="font-size: 14px; margin: 0;">Зарплата из личного кармана В.В. Кузакова. Точку проверки «+1»-возможности не подтвердили за 4 мес.</p>
+  </div>
+  <div class="card">
+    <h3 style="color: var(--amber);">Третьего клиента нет</h3>
+    <p style="font-size: 14px; margin: 0;">Цель 90 дней №1 не движется. Pipeline пуст. Главная активность - канал Сергея.</p>
+  </div>
+</div>
+
+<footer>
+  <p>
+    <strong>Этот дашборд - прототип.</strong> Дальше будет интегрирован в <code>/day-close</code>, чтобы обновляться автоматически каждый вечер.
+    Источники данных: <code>money.md</code>, <code>decisions.md</code>, <code>this-week.md</code>, <code>clients/*/state.md</code>, <code>pipeline.md</code>.
+  </p>
+  <p><a href="/" style="color: var(--blue);">← Главная</a> · <a href="/system/" style="color: var(--blue);">Карта системы →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

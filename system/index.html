@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AndreiOS — карта системы</title>
+<meta name="description" content="Архитектура операционной системы Андрея Сычинникова: фундамент, клиенты, AI-команда, циклы работы.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --green: #4a7c59;
+    --blue: #3a5a8c;
+    --purple: #6b4a8c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  h1 { font-size: 38px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 18px; color: var(--muted); margin: 0 0 50px; }
+  h2 { font-size: 24px; margin: 50px 0 18px; font-weight: 600; color: var(--accent); border-bottom: 2px solid var(--line); padding-bottom: 8px; }
+  h3 { font-size: 18px; margin: 24px 0 10px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 24px 28px; box-shadow: var(--shadow); margin-bottom: 16px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .file-list { list-style: none; padding: 0; margin: 0; }
+  .file-list li { padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 12px; }
+  .file-list li:last-child { border-bottom: none; }
+  .file-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; color: var(--purple); flex-shrink: 0; min-width: 140px; }
+  .file-desc { font-size: 14px; color: var(--ink); }
+  .principle { background: #faf6ee; border-left: 3px solid var(--accent); padding: 14px 18px; margin: 12px 0; font-size: 15px; border-radius: 0 6px 6px 0; }
+  .mermaid-wrap { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 16px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.4px; }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .tag { display: inline-block; background: var(--card); border: 1px solid var(--line); padding: 2px 8px; border-radius: 4px; font-size: 12px; color: var(--muted); margin-right: 4px; }
+  footer { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  @media (max-width: 700px) {
+    h1 { font-size: 30px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .file-list li { flex-direction: column; gap: 4px; }
+    .file-name { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a></nav>
+
+<h1>AndreiOS — карта системы</h1>
+<p class="subtitle">Как устроена моя операционная система: фундамент, клиенты, AI-команда, циклы работы и правила.</p>
+
+<div class="principle">
+  <strong>Главный принцип:</strong> AndreiOS - это не «инструмент управления задачами». Это <strong>контекстная база</strong>, в которую раз в день стекаются события, а AI-команда помогает разложить их по проектам, обновить состояние и поставить приоритеты на завтра.
+</div>
+
+<h2>1. Карта зависимостей</h2>
+
+<div class="mermaid-wrap">
+<pre class="mermaid">
+flowchart TD
+    A[Андрей] -->|/intake| INBOX[inbox/today.md]
+    A -->|вечером /day-close| DC{day-close}
+    A -->|пятница /weekly-dialogue| WD{weekly-dialogue}
+
+    DC --> INBOX
+    DC --> STATE
+    DC --> DAILY[daily/YYYY-MM-DD.md]
+    DC --> DECISIONS[decisions.md]
+    DC --> MONEY[money.md]
+
+    WD --> WEEK[weekly/YYYY-Wnn.md]
+    WD --> TW[this-week.md]
+    WD --> STATE
+
+    subgraph FUND[Фундамент]
+        ME[me.md]
+        MONEY
+        FAM[family.md]
+        DECISIONS
+        TW
+    end
+
+    subgraph CLIENTS[Клиенты]
+        FISHOK[fishok/state.md]
+        OCTO[octo/state.md]
+        PIPE[pipeline.md]
+    end
+
+    STATE[state-файлы] -.-> FISHOK
+    STATE -.-> OCTO
+    STATE -.-> PIPE
+
+    FUND --> A
+    CLIENTS --> A
+
+    classDef foundation fill:#faf6ee,stroke:#c25c2c,stroke-width:2px
+    classDef clients fill:#eef4f0,stroke:#4a7c59,stroke-width:2px
+    classDef cycle fill:#eaeef7,stroke:#3a5a8c,stroke-width:2px
+    class FUND foundation
+    class CLIENTS clients
+    class DC,WD cycle
+</pre>
+</div>
+
+<p style="font-size: 14px; color: var(--muted);">
+  <strong>Чтение схемы:</strong> Андрей кидает сырьё в <code>inbox</code> через день, вечером <code>/day-close</code> разбирает его и обновляет нужные файлы. Раз в неделю <code>/weekly-dialogue</code> переосмысляет состояние и обновляет план.
+</p>
+
+<h2>2. Фундамент — 5 файлов в корне</h2>
+<p>Это база. Меняется редко, но влияет на каждое решение.</p>
+
+<ul class="file-list">
+  <li class="card" style="padding: 14px 18px;">
+    <span class="file-name">me.md</span>
+    <span class="file-desc">Кто я, ценности, антицели, главная цель, двухтактная стратегия, фильтры решений</span>
+  </li>
+  <li class="card" style="padding: 14px 18px;">
+    <span class="file-name">money.md</span>
+    <span class="file-desc">Cashflow, runway, долги, цели по горизонтам (6/12 мес, 10 лет), фонды</span>
+  </li>
+  <li class="card" style="padding: 14px 18px;">
+    <span class="file-name">family.md</span>
+    <span class="file-desc">Семейный снимок: миграция, дети, документы, договорённости с Викой</span>
+  </li>
+  <li class="card" style="padding: 14px 18px;">
+    <span class="file-name">decisions.md</span>
+    <span class="file-desc">Журнал стратегических решений с YAML-тегами scope (strategic/finance/family/fishok/octo/pipeline)</span>
+  </li>
+  <li class="card" style="padding: 14px 18px;">
+    <span class="file-name">this-week.md</span>
+    <span class="file-desc">Недельный план: P1/P2/P3 задачи, блоки по проектам, гипотеза недели</span>
+  </li>
+</ul>
+
+<h2>3. Клиенты — изолированные проекты</h2>
+<p>Каждый клиент - отдельная папка с собственной структурой. Никакого «общего» state - изоляция предотвращает утечки контекста.</p>
+
+<div class="card">
+  <h3>Структура папки клиента</h3>
+  <ul class="file-list">
+    <li><span class="file-name">CLAUDE.md</span><span class="file-desc">Контекст проекта, читается автоматически</span></li>
+    <li><span class="file-name">state.md</span><span class="file-desc">Оперативная память, 1-2 страницы, обновляется в /day-close</span></li>
+    <li><span class="file-name">private.md</span><span class="file-desc">Моя разведка, риски, гипотезы - <strong>НЕ показывать</strong></span></li>
+    <li><span class="file-name">shared.md</span><span class="file-desc">То, что ОК показать команде клиента</span></li>
+    <li><span class="file-name">meetings/</span><span class="file-desc">Транскрипты созвонов</span></li>
+    <li><span class="file-name">raw/</span><span class="file-desc">Файлы клиента, скриншоты, выгрузки</span></li>
+    <li><span class="file-name">work/</span><span class="file-desc">Мини-проекты внутри клиента (сайт, CRM, презентации)</span></li>
+  </ul>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <h3>🐟 Fishok</h3>
+    <p style="font-size: 14px; color: var(--muted);">Текущая позиция, основной доход. Тег в <code>decisions.md</code>: <span class="tag">fishok</span></p>
+  </div>
+  <div class="card">
+    <h3>🐙 Octo Relocate</h3>
+    <p style="font-size: 14px; color: var(--muted);">Релокация Испания. Главный путь к equity-портфелю через канал Сергея. Тег: <span class="tag">octo</span></p>
+  </div>
+</div>
+
+<h2>4. Циклы — где живёт время</h2>
+
+<div class="grid-3">
+  <div class="card">
+    <h3>День</h3>
+    <p style="font-size: 14px;"><code>/intake</code> → <code>inbox/today.md</code></p>
+    <p style="font-size: 14px;"><code>/day-close</code> → разбор → <code>daily/</code></p>
+  </div>
+  <div class="card">
+    <h3>Неделя</h3>
+    <p style="font-size: 14px;"><code>/weekly-dialogue</code> → диалог-рефлексия → <code>weekly/</code></p>
+    <p style="font-size: 14px;">Обновляет <code>this-week.md</code></p>
+  </div>
+  <div class="card">
+    <h3>По запросу</h3>
+    <p style="font-size: 14px;"><code>/update-state &lt;path&gt;</code></p>
+    <p style="font-size: 14px;"><code>/deep-dive &lt;path&gt;</code> - аварийная сессия</p>
+  </div>
+</div>
+
+<h2>5. AI-команда</h2>
+
+<div class="grid-2">
+  <div class="card">
+    <h3>Субагенты <code>.claude/agents/</code></h3>
+    <p style="font-size: 14px; color: var(--muted);">Специализированные «роли», каждый со своим контекстом и инструментами. Изолируют сложные задачи от основного диалога.</p>
+  </div>
+  <div class="card">
+    <h3>Skills <code>.claude/skills/</code></h3>
+    <p style="font-size: 14px; color: var(--muted);">Атомарные процедуры: <code>/intake</code>, <code>/day-close</code>, <code>/weekly-dialogue</code>, <code>/update-state</code>. Вызываются по слэш-командам.</p>
+  </div>
+</div>
+
+<h2>6. Правила (что держит систему от деградации)</h2>
+
+<div class="principle">
+  <strong>Правило роста:</strong> новая папка или файл создаётся только когда (а) действующий перерос 200 строк, (б) появилось ≥3 однотипных артефакта, или (в) явное решение «нужно для одной из трёх целей 90 дней». Запрещено «на всякий случай».
+</div>
+
+<div class="principle">
+  <strong>Kill-switch:</strong> если 14 дней нет коммитов в репозитории - система признана мёртвой. 30 дней не строим следующую итерацию. Сначала ретроспектива «почему не работало».
+</div>
+
+<div class="principle">
+  <strong>Изоляция контекста:</strong> при работе с проектом - только его файлы. При работе с мини-проектом внутри клиента (<code>clients/octo/work/website/</code>) - только локальные файлы, не весь клиент. Экономия токенов и фокус.
+</div>
+
+<div class="principle">
+  <strong>Не читать без явного запроса:</strong> <code>archive/</code> (старые версии), <code>inbox/today.md</code> вне <code>/day-close</code>, <code>private.md</code> клиентов в публичных артефактах.
+</div>
+
+<h2>7. Как улучшать систему</h2>
+
+<p>Три направления роста, в порядке приоритета:</p>
+
+<ol>
+  <li><strong>Наполнение state-файлов клиентов.</strong> Сейчас они почти пустые - заполнятся через первые <code>/day-close</code> и <code>/weekly-dialogue</code>.</li>
+  <li><strong>Новые skills под повторяющиеся операции.</strong> Если задача делается ≥3 раз - превращать в skill. Кандидаты: <code>/dashboard-update</code>, <code>/client-onboarding</code>, <code>/decision-add</code>.</li>
+  <li><strong>Новые субагенты под равные задачи.</strong> Кандидаты: agent для подготовки коммерческих предложений, agent для анализа звонков из <code>meetings/</code>.</li>
+</ol>
+
+<footer>
+  <p>Это живая страница. Обновляется по мере эволюции системы. <a href="/" style="color: var(--blue);">← Главная</a> · <a href="/dashboard/" style="color: var(--blue);">Дашборд →</a></p>
+</footer>
+
+</div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral', themeVariables: { fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif', primaryColor: '#faf6ee', primaryBorderColor: '#c25c2c', lineColor: '#6b6b6b', fontSize: '14px' } });
+</script>
+
+</body>
+</html>
