@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Toolbox — skills, агенты, хуки и команды AndreiOS</title>
-<meta name="description" content="Полный набор инструментов AndreiOS: 4 skills, 3 субагента, hooks и команды для повседневной работы.">
+<meta name="description" content="Полный набор инструментов AndreiOS: 6 skills, 4 субагента, hooks и команды для повседневной работы.">
 <meta name="robots" content="noindex">
 
 <style>
@@ -18,6 +18,7 @@
     --blue: #3a5a8c;
     --purple: #6b4a8c;
     --red: #b04c4c;
+    --amber: #c89a3c;
     --shadow: 0 2px 12px rgba(0,0,0,0.06);
     --line: #e5dfd3;
   }
@@ -44,11 +45,13 @@
   .desc { font-size: 14px; color: var(--ink); margin: 0 0 12px; }
   .when { font-size: 13px; color: var(--muted); margin: 8px 0; }
   .when strong { color: var(--ink); }
-  .meta { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .meta { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); flex-wrap: wrap; }
   .meta span { display: inline-flex; align-items: center; gap: 4px; }
   .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
   .badge.opus { background: #f3e9f5; color: var(--purple); }
   .badge.sonnet { background: #eaf1ee; color: var(--green); }
+  .badge.new { background: #e9f1ec; color: var(--green); }
+  .badge.private { background: #f9e9e9; color: var(--red); }
   code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
   pre { background: #2a2a2a; color: #f0ebe1; padding: 14px 18px; border-radius: 8px; font-size: 13px; overflow-x: auto; line-height: 1.5; }
   pre code { background: transparent; padding: 0; color: inherit; }
@@ -68,7 +71,7 @@
 <body>
 <div class="container">
 
-<nav><a href="/">← главная</a> · <a href="/system/">карта системы</a> · <a href="/dashboard/">дашборд</a></nav>
+<nav><a href="/">← главная</a> · <a href="/system/">карта системы</a> · <a href="/structure/">структура</a> · <a href="/dashboard/">дашборд</a></nav>
 
 <h1>Toolbox</h1>
 <p class="subtitle">Полный набор инструментов AndreiOS: skills, субагенты, hooks и интересные команды.</p>
@@ -78,7 +81,7 @@
 </div>
 
 <!-- ==================== SKILLS ==================== -->
-<h2>🛠 Skills <span class="count">— 4 шт.</span></h2>
+<h2>🛠 Skills <span class="count">— 6 шт.</span></h2>
 <p>Атомарные процедуры. Каждый skill решает одну задачу строго по своему сценарию.</p>
 
 <div class="card skill">
@@ -101,6 +104,31 @@
 
 <div class="card skill">
   <div class="card-header">
+    <h3>💰 /finance <span class="badge new">новое</span></h3>
+    <div class="triggers">
+      <span class="trig">/finance</span>
+      <span class="trig">/f</span>
+      <span class="trig">«обед 18 евро картой»</span>
+      <span class="trig">«пришла зарплата Fishok»</span>
+    </div>
+  </div>
+  <p class="desc">Учёт личных финансов по принципу план-факт. Записывает транзакцию (доход/расход/перевод), обновляет конверт, остаток счёта и общую картину. Показывает остатки, закрывает месяц.</p>
+  <div class="when"><strong>Когда:</strong> при любом денежном событии. Цель — записать за 1-2 секунды и забыть. Skill сам распарсит сумму, категорию, счёт.</div>
+  <ul class="tight">
+    <li>Запись свободным текстом: «такси 12 наличными», «купил Саре куртку 45», «пришла зарплата Fishok 3500»</li>
+    <li>Slash: <code>/f</code> — открыть состояние, <code>/finance close</code> — закрытие месяца, <code>/finance budget</code> — изменить план</li>
+    <li>Запросы: «сколько в конверте няня?», «сколько потратил на еду в мае?»</li>
+    <li>Дедупликация: для регулярных доходов (Fishok 14-го, Octo 1-го) проверяет последние 5 дней</li>
+  </ul>
+  <div class="meta">
+    <span>📄 finance/state.md, finance/ledger.md, finance/budget.md</span>
+    <span>⚡ ~1-2K токенов</span>
+    <span>🔁 несколько раз в день</span>
+  </div>
+</div>
+
+<div class="card skill">
+  <div class="card-header">
     <h3>🌙 /day-close</h3>
     <div class="triggers">
       <span class="trig">/day-close</span>
@@ -112,11 +140,12 @@
   <ul class="tight">
     <li>Запускает субагент <strong>business-operator</strong> для классификации</li>
     <li>При денежных событиях подключает <strong>finance-director</strong></li>
-    <li>Обновляет: state.md проектов, money.md, decisions.md, family.md</li>
+    <li>Обновляет: state.md проектов, finance/state.md, decisions.md, family.md</li>
+    <li>Шаг 2a проверяет проектные inbox-ы (например <code>clients/octo/inbox/</code>)</li>
     <li>Stop hook делает git commit автоматически</li>
   </ul>
   <div class="meta">
-    <span>📄 daily/, state.md клиентов, money.md, decisions.md</span>
+    <span>📄 daily/, state.md клиентов, finance/, decisions.md</span>
     <span>⚡ ~10-20K токенов</span>
     <span>🔁 1 раз / день</span>
   </div>
@@ -135,7 +164,7 @@
   <div class="when"><strong>Когда:</strong> пятница вечером или суббота утром.</div>
   <p style="font-size: 14px; color: var(--muted); margin: 8px 0;">8 блоков сессии: 💰 Финансы → 🐟 Fishok → 🐙 Octo → 📥 Pipeline → 👨‍👩‍👧 Семья → 🎯 Стратегия → 🧠 Личное → ✅ Синтез</p>
   <ul class="tight">
-    <li>Читает 7 последних daily/, all state.md, money.md, decisions.md</li>
+    <li>Читает 7 последних daily/, all state.md, finance/state.md, money.md, decisions.md</li>
     <li>Записывает <code>weekly/YYYY-Wнн.md</code></li>
     <li>Обновляет <code>this-week.md</code> на следующую неделю</li>
     <li>В конце предлагает запустить <strong>context-architect</strong> для health-check</li>
@@ -164,8 +193,30 @@
   </div>
 </div>
 
+<div class="card skill">
+  <div class="card-header">
+    <h3>🐙 /octo-intake <span class="badge private">только Octo</span></h3>
+    <div class="triggers">
+      <span class="trig">/octo-intake</span>
+      <span class="trig">«разбери Octo inbox»</span>
+    </div>
+  </div>
+  <p class="desc">Полноценный разбор сырья из <code>clients/octo/inbox/</code> и разнос по нужным файлам проекта Octo. В отличие от <code>/intake</code> (микро-операция «положить в inbox»), это разбор с обновлением state-файлов проекта.</p>
+  <div class="when"><strong>Когда:</strong> когда в octo/inbox/ накопилось сырьё. Обычно после звонков или серии записей про Octo.</div>
+  <ul class="tight">
+    <li>Использует субагент <strong>octo-advisor</strong> для классификации в логике Octo</li>
+    <li>Обновляет: <code>command/state.md</code>, <code>funnel/pipeline.md</code>, <code>ops/people/</code>, <code>command/decisions.md</code>, <code>command/issues.md</code></li>
+    <li>Никогда не лезет в другие клиентские папки</li>
+  </ul>
+  <div class="meta">
+    <span>📄 clients/octo/* (всё кроме private/)</span>
+    <span>⚡ ~10-15K токенов</span>
+    <span>🔁 по запросу</span>
+  </div>
+</div>
+
 <!-- ==================== AGENTS ==================== -->
-<h2>🧑‍💼 Субагенты <span class="count">— 3 шт.</span></h2>
+<h2>🧑‍💼 Субагенты <span class="count">— 4 шт.</span></h2>
 <p>Специализированные «коллеги» с собственным контекстом и моделью. Изолируют сложные задачи от основного диалога — экономят токены, дают чистый фокус.</p>
 
 <div class="card agent">
@@ -203,7 +254,7 @@
   <p style="font-size: 13px; color: var(--muted); margin: 8px 0;"><strong>Принципы:</strong> Деньги → Семья → Фокус. В каждом обновлении явно пишет runway X месяцев. Equity &gt; Cash на 7-летнем горизонте.</p>
   <div class="meta">
     <span>🔧 Read, Glob, Grep, Edit, Write, Bash</span>
-    <span>📄 money.md, decisions.md</span>
+    <span>📄 money.md, finance/, decisions.md</span>
   </div>
 </div>
 
@@ -214,13 +265,32 @@
   </div>
   <p class="desc">Архитектор контекста AndreiOS. Не операционный исполнитель — «уборщик» системы. Чистит дубли, ищет противоречия, предлагает структурные изменения.</p>
   <p class="when"><strong>Когда вызывается:</strong> вручную, раз в неделю в <code>/weekly-dialogue</code> или когда чувствуется, что система раздувается хаотично. Также при срабатывании kill-switch — для ретроспективы.</p>
-  <p style="font-size: 13px; color: var(--muted); margin: 8px 0;"><strong>Что делает:</strong> ищет дубли фактов, противоречия state.md ↔ decisions.md, устаревшие страницы (>14 дней), сиротские файлы, нарушения правила роста.</p>
+  <p style="font-size: 13px; color: var(--muted); margin: 8px 0;"><strong>Что делает:</strong> ищет дубли фактов, противоречия state.md ↔ decisions.md, устаревшие страницы (&gt;14 дней), сиротские файлы, нарушения правила роста.</p>
   <div class="principle" style="background: #faf6ee; margin: 10px 0;">
     Не правит содержание файлов, только <strong>предлагает</strong>. Финальное решение всегда за Андреем.
   </div>
   <div class="meta">
     <span>🔧 Read, Glob, Grep, Edit, Write</span>
     <span>🎯 цель: система остаётся управляемой через 6/12/24 месяца</span>
+  </div>
+</div>
+
+<div class="card agent">
+  <div class="card-header">
+    <h3>🐙 octo-advisor <span class="badge private">только Octo</span> <span class="badge new">новое</span></h3>
+    <span class="badge opus">Opus</span>
+  </div>
+  <p class="desc">Внутренний советник проекта Octo Relocate. Архетип: опытный сооснователь/инвестор в mobility/relocation отрасли + AI engineer (context-engineering, Claude Code).</p>
+  <p class="when"><strong>Когда вызывается:</strong> явно, для стратегических разборов, аудита системы Octo, помощи с улучшением проекта. <strong>Не для рутины — для глубокого мышления.</strong></p>
+  <ul class="tight">
+    <li>Работает <strong>только</strong> с папкой <code>clients/octo/</code> — полная изоляция от остальной AndreiOS</li>
+    <li>Полный Read/Edit/Write по всему дереву Octo, кроме <code>clients/octo/private/</code> (только чтение)</li>
+    <li>Используется в <code>/octo-intake</code> для классификации</li>
+    <li>Не видит Fishok, money.md, family.md и остальной общий контекст</li>
+  </ul>
+  <div class="meta">
+    <span>🔧 Read, Glob, Grep, Edit, Write, Bash</span>
+    <span>🔒 изолирован от других клиентов</span>
   </div>
 </div>
 
@@ -231,7 +301,7 @@
 <div class="card hook">
   <h3>🪝 Stop hook — авто-коммит сессии</h3>
   <p class="desc">После каждой завершённой сессии Claude автоматически делает git commit изменений в репозитории. Так история всегда сохраняется без ручного «не забыть закоммитить».</p>
-  <pre><code>cd "$CLAUDE_PROJECT_DIR" && git add -A && git commit -m "auto: $(date '+%Y-%m-%d %H:%M') — session end"</code></pre>
+  <pre><code>cd "$CLAUDE_PROJECT_DIR" &amp;&amp; git add -A &amp;&amp; git commit -m "auto: $(date '+%Y-%m-%d %H:%M') — session end"</code></pre>
   <p style="font-size: 13px; color: var(--muted); margin: 10px 0 0;"><strong>Зачем:</strong> каждая сессия = checkpoint. Если что-то сломается через 3 дня — можно вернуться. Плюс это входной сигнал в kill-switch (14 дней без коммита = система мёртвая).</p>
 </div>
 
@@ -305,6 +375,7 @@
   <h3>Обычный день</h3>
   <ol>
     <li>В течение дня — <code>/i &lt;любая мысль&gt;</code> постоянно. Десятки раз. Не думать «куда положить» — всё в инбокс.</li>
+    <li>Любая трата / зарплата → пишу как в чате: «обед 18 евро картой», «такси 12 наличными». Skill <code>/finance</code> сам разберёт.</li>
     <li>Вечером — <code>/day-close</code>. Один раз. Разбирает накопленное, обновляет state, пишет свод.</li>
     <li>Спать. Stop hook закоммитил.</li>
   </ol>
@@ -316,6 +387,23 @@
     <li>Сначала <code>/day-close</code> текущего дня (если ещё не сделан).</li>
     <li>Потом <code>/weekly-dialogue</code> — 60-90 минут разговора. Без спешки.</li>
     <li>В конце Claude предложит <strong>context-architect</strong> — соглашайся раз в 2-4 недели.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h3>Конец месяца</h3>
+  <ol>
+    <li>1-го числа — <code>/finance close</code>. Закрытие месяца: сверка остатков, снимок в archive/, обнуление ledger.</li>
+    <li>Если планы конвертов меняются (новые расходы, изменился доход) — обнови <code>finance/budget.md</code> через <code>/finance budget</code>.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h3>Работа с Octo</h3>
+  <ol>
+    <li>Сырьё/мысли по Octo → можно через общий <code>/i</code> (попадёт в inbox), или через <code>clients/octo/inbox/</code>.</li>
+    <li>Накопилось много Octo-сырья → <code>/octo-intake</code> разберёт целенаправленно.</li>
+    <li>Глубокая стратегическая сессия по Octo → вызывай агент <strong>octo-advisor</strong> явно. Он изолирован от остального — чистый фокус.</li>
   </ol>
 </div>
 
@@ -339,7 +427,7 @@
 
 <footer>
   <p>Toolbox обновляется по мере роста системы. Каждый новый skill должен соответствовать <strong>правилу роста</strong>: повторяется ≥3 раз ИЛИ нужен для одной из трёх целей 90 дней.</p>
-  <p><a href="/" style="color: var(--blue);">← Главная</a> · <a href="/system/" style="color: var(--blue);">Карта системы</a> · <a href="/dashboard/" style="color: var(--blue);">Дашборд</a></p>
+  <p><a href="/" style="color: var(--blue);">← Главная</a> · <a href="/system/" style="color: var(--blue);">Карта системы</a> · <a href="/structure/" style="color: var(--blue);">Структура</a> · <a href="/dashboard/" style="color: var(--blue);">Дашборд</a></p>
 </footer>
 
 </div>

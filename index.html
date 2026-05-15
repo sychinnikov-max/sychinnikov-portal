@@ -40,6 +40,9 @@
     --accent: #c25c2c;
     --green: #4a7c59;
     --blue: #3a5a8c;
+    --purple: #6b4a8c;
+    --red: #b04c4c;
+    --amber: #c89a3c;
     --shadow: 0 2px 12px rgba(0,0,0,0.06);
     --line: #e5dfd3;
   }
@@ -58,7 +61,7 @@
     padding: 60px 24px;
   }
   header {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
   }
   h1 {
     font-size: 42px;
@@ -78,9 +81,15 @@
   }
   h2 {
     font-size: 22px;
-    margin: 48px 0 20px;
+    margin: 48px 0 16px;
     font-weight: 600;
     color: var(--accent);
+  }
+  h2 .sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 8px;
   }
   .article-list {
     list-style: none;
@@ -95,7 +104,15 @@
     margin-bottom: 14px;
     box-shadow: var(--shadow);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border-left: 4px solid var(--line);
   }
+  .article-list li.dashboard { border-left-color: var(--accent); }
+  .article-list li.health { border-left-color: var(--green); }
+  .article-list li.simple { border-left-color: var(--amber); }
+  .article-list li.system { border-left-color: var(--blue); }
+  .article-list li.toolbox { border-left-color: var(--purple); }
+  .article-list li.structure { border-left-color: var(--blue); }
+  .article-list li.octo { border-left-color: var(--red); }
   .article-list li:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 18px rgba(0,0,0,0.08);
@@ -120,6 +137,20 @@
     color: var(--muted);
     margin-top: 8px;
   }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; vertical-align: middle; margin-left: 6px; letter-spacing: 0.3px; }
+  .pill.new { background: #e9f1ec; color: var(--green); }
+  .pill.updated { background: #eaeef7; color: var(--blue); }
+
+  .intro {
+    background: #faf6ee;
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 6px 6px 0;
+    font-size: 15px;
+    margin: 0 0 30px;
+  }
+  .intro strong { color: var(--accent); }
+
   footer {
     margin-top: 80px;
     padding-top: 24px;
@@ -143,52 +174,79 @@
   <p class="location">Хихон, Испания · planning move to US</p>
 </header>
 
+<div class="intro">
+  <strong>Что это за сайт.</strong> Внешний интерфейс к моей операционной системе <strong>AndreiOS</strong> — где живут все проекты, финансы, решения и AI-команда. Здесь — карта, дашборд состояния, и пояснения. Сама система — в локальном git-репо, не в облаке.
+</div>
+
 <main>
-  <h2>Оперативное</h2>
+
+  <h2>Что происходит прямо сейчас<span class="sub">оперативная картина</span></h2>
   <ul class="article-list">
-    <li>
+    <li class="dashboard">
       <a href="/dashboard/">
         <p class="article-title">📊 Дашборд — состояние проектов</p>
-        <p class="article-desc">Цели 90 дней, финансы, клиенты, pipeline, эта неделя. Источник правды для оперативной картины.</p>
-        <p class="article-meta">Обновляется ежедневно</p>
+        <p class="article-desc">Цели 90 дней, финансы (план-факт + конверты), клиенты, pipeline, ближайшие дедлайны. Источник правды для оперативной картины.</p>
+        <p class="article-meta">Обновляется в /day-close</p>
       </a>
     </li>
-    <li>
+    <li class="health">
+      <a href="/health/">
+        <p class="article-title">🩺 Здоровье системы<span class="pill new">новое</span></p>
+        <p class="article-desc">Индекс здоровья, динамика активности, рейтинг по 6 критериям. Что выросло, что атрофируется, kill-switch таймер. Метрики самой системы, а не проектов.</p>
+        <p class="article-meta">Авто-метрики из git и state-файлов</p>
+      </a>
+    </li>
+  </ul>
+
+  <h2>Как устроена система<span class="sub">архитектура</span></h2>
+  <ul class="article-list">
+    <li class="simple">
+      <a href="/how-it-works/">
+        <p class="article-title">🧒 Как это работает — простыми словами<span class="pill new">новое</span></p>
+        <p class="article-desc">Объяснение системы на уровне «понятно ребёнку и маме»: что куда стекается, кто что делает, зачем вообще всё это нужно. Без терминов.</p>
+        <p class="article-meta">Если впервые видишь систему — начни отсюда</p>
+      </a>
+    </li>
+    <li class="system">
       <a href="/system/">
         <p class="article-title">🗺 AndreiOS — карта системы</p>
-        <p class="article-desc">Архитектура: фундамент, клиенты, AI-команда, циклы работы, правила. Как всё устроено и от чего зависит.</p>
+        <p class="article-desc">Концептуальная архитектура: фундамент, клиенты, финансы, AI-команда, циклы работы, правила. Как всё устроено и от чего зависит.</p>
         <p class="article-meta">Живая страница</p>
       </a>
     </li>
-    <li>
-      <a href="/toolbox/">
-        <p class="article-title">🛠 Toolbox — skills, агенты, хуки</p>
-        <p class="article-desc">Полный набор инструментов: 4 skills, 3 субагента, hooks, типичные паттерны использования.</p>
-        <p class="article-meta">Справочник</p>
-      </a>
-    </li>
-    <li>
+    <li class="structure">
       <a href="/structure/">
-        <p class="article-title">🗂 AI структура — полная карта AndreiOS</p>
-        <p class="article-desc">Дерево всех папок и файлов по всем проектам: фундамент, циклы, клиенты (Octo, Fishok), практика, AI-команда, архив. Что для чего.</p>
+        <p class="article-title">🗂 AI структура — полная карта файлов<span class="pill updated">обновлено</span></p>
+        <p class="article-desc">Дерево всех папок и файлов по всем проектам: фундамент, финансы, циклы, клиенты (Octo, Fishok), AI-команда, архив. Что для чего.</p>
         <p class="article-meta">Архитектурная карта</p>
       </a>
     </li>
-    <li>
+    <li class="toolbox">
+      <a href="/toolbox/">
+        <p class="article-title">🛠 Toolbox — skills, агенты, хуки<span class="pill updated">обновлено</span></p>
+        <p class="article-desc">Полный набор инструментов: 6 skills, 4 субагента, hooks, типичные паттерны использования.</p>
+        <p class="article-meta">Справочник</p>
+      </a>
+    </li>
+  </ul>
+
+  <h2>Проекты<span class="sub">детальная зона Octo</span></h2>
+  <ul class="article-list">
+    <li class="octo">
       <a href="/octo-project/">
-        <p class="article-title">🐙 Octo</p>
-        <p class="article-desc">Два контура проекта Octo Relocate. Company — рабочая база команды: CRM, активные партнёры, дедлайны, фокусы. Personal — закрытая зона: стратегия, аудит, ошибки, equity-трек.</p>
+        <p class="article-title">🐙 Octo Relocate</p>
+        <p class="article-desc">Два контура проекта. Company — рабочая база команды: CRM, активные партнёры, дедлайны, фокусы. Personal — закрытая зона: стратегия, аудит, ошибки, equity-трек.</p>
         <p class="article-meta">Operating System · Company + Personal</p>
       </a>
     </li>
   </ul>
 
   <h2>Материалы</h2>
-  <ul class="article-list">
-    <li>
+  <ul class="article-list" style="border-left: none;">
+    <li style="border-left-color: var(--muted);">
       <a href="/articles/andreios-guide.html">
-        <p class="article-title">AndreiOS — как работает моя система управления</p>
-        <p class="article-desc">Гайд по операционной архитектуре: как устроена работа с клиентами, AI-агентами и контекстом проектов.</p>
+        <p class="article-title">AndreiOS — гайд по системе управления</p>
+        <p class="article-desc">Подробный текст про операционную архитектуру: как устроена работа с клиентами, AI-агентами и контекстом проектов.</p>
         <p class="article-meta">Май 2026</p>
       </a>
     </li>
@@ -197,6 +255,7 @@
 
 <footer>
   <p>sychinnikov.com · <a href="mailto:sychinnikov@gmail.com">sychinnikov@gmail.com</a></p>
+  <p style="margin-top: 6px; font-size: 12px;">Обновлено 2026-05-15. Каждая страница помечает себя датой последнего изменения.</p>
 </footer>
 
 </div>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI структура — полная карта AndreiOS</title>
-<meta name="description" content="Полное дерево папок и файлов AndreiOS: фундамент, циклы, клиентские проекты, AI-команда, практика. Что для чего.">
+<meta name="description" content="Полное дерево папок и файлов AndreiOS: фундамент, финансы, циклы, клиентские проекты, AI-команда, практика. Что для чего.">
 <meta name="robots" content="noindex">
 
 <style>
@@ -26,6 +26,7 @@
 
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 16px; }
   .card.foundation { border-left: 4px solid var(--accent); }
+  .card.finance { border-left: 4px solid var(--red); }
   .card.cycle { border-left: 4px solid var(--green); }
   .card.client { border-left: 4px solid var(--blue); }
   .card.practice { border-left: 4px solid var(--purple); }
@@ -37,9 +38,10 @@
   .tree .file { color: var(--ink); }
   .tree .note { color: var(--muted); font-family: -apple-system, sans-serif; font-size: 12.5px; padding-left: 8px; font-style: italic; font-weight: 400; }
   .tree .empty-folder { color: var(--muted); font-style: italic; }
+  .tree .new { color: var(--green); font-weight: 600; }
 
   .file-list { list-style: none; padding: 0; margin: 12px 0; }
-  .file-list li { display: grid; grid-template-columns: 200px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .file-list li { display: grid; grid-template-columns: 220px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
   .file-list li:last-child { border-bottom: none; }
   .file-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--purple); font-weight: 600; }
   .file-name.empty { color: var(--muted); font-weight: 400; }
@@ -51,6 +53,7 @@
 
   .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; vertical-align: middle; margin-left: 4px; }
   .badge.active { background: #e9f1ec; color: var(--green); }
+  .badge.new { background: #e9f1ec; color: var(--green); }
   .badge.detail { background: #eaeef7; color: var(--blue); }
   .badge.legacy { background: #eef1ee; color: var(--muted); }
   .badge.empty { background: #f0ebe1; color: var(--muted); }
@@ -72,7 +75,7 @@
 <body>
 <div class="container">
 
-<nav class="top"><a href="/">← главная</a> · <a href="/system/">карта системы</a> · <a href="/dashboard/">дашборд</a></nav>
+<nav class="top"><a href="/">← главная</a> · <a href="/system/">карта системы</a> · <a href="/dashboard/">дашборд</a> · <a href="/toolbox/">toolbox</a></nav>
 
 <h1>🗂 AI структура AndreiOS</h1>
 <p class="subtitle">Полная карта папок и документов. Что за что отвечает, по всем проектам. Источник правды для архитектуры системы.</p>
@@ -83,10 +86,10 @@
 
 <div class="legend">
   <div class="legend-item"><span class="legend-dot" style="background: var(--accent);"></span>Фундамент</div>
+  <div class="legend-item"><span class="legend-dot" style="background: var(--red);"></span>Финансы / AI-команда</div>
   <div class="legend-item"><span class="legend-dot" style="background: var(--green);"></span>Циклы</div>
   <div class="legend-item"><span class="legend-dot" style="background: var(--blue);"></span>Клиенты</div>
   <div class="legend-item"><span class="legend-dot" style="background: var(--purple);"></span>Практика</div>
-  <div class="legend-item"><span class="legend-dot" style="background: var(--red);"></span>AI-команда</div>
   <div class="legend-item"><span class="legend-dot" style="background: var(--muted);"></span>Архив / Legacy</div>
 </div>
 
@@ -96,17 +99,18 @@
 <span class="folder">~/Documents/Claude-Context/</span>
 ├── <span class="file">CLAUDE.md</span>                  <span class="note">главная конституция (роутер)</span>
 ├── <span class="file">me.md</span>                       <span class="note">кто я, ценности, антицели</span>
-├── <span class="file">money.md</span>                    <span class="note">cashflow, runway, долги</span>
+├── <span class="file">money.md</span>                    <span class="note">стратегические финансы (горизонты, equity, долги)</span>
 ├── <span class="file">family.md</span>                   <span class="note">семейный снимок</span>
 ├── <span class="file">decisions.md</span>                <span class="note">журнал стратегических решений</span>
 ├── <span class="file">this-week.md</span>                <span class="note">недельный план P1/P2/P3</span>
 │
+├── <span class="folder new">finance/</span>                  <span class="note">новый слой: оперативные финансы план-факт</span>
 ├── <span class="folder">inbox/</span>                    <span class="note">сырьё дня</span>
 ├── <span class="folder">daily/</span>                    <span class="note">своды дней (генерируется /day-close)</span>
 ├── <span class="folder">weekly/</span>                   <span class="note">недельные рефлексии</span>
 │
 ├── <span class="folder">clients/</span>                  <span class="note">клиентские проекты, изолированно</span>
-│   ├── <span class="folder">octo/</span>                  <span class="note">Octo Relocate (детально ниже)</span>
+│   ├── <span class="folder">octo/</span>                  <span class="note">Octo Relocate (пересобран 2026-05-15, детально ниже)</span>
 │   ├── <span class="folder">fishok/</span>                <span class="note">Fishok (текущий доход)</span>
 │   └── <span class="file">pipeline.md</span>              <span class="note">потенциальные клиенты</span>
 │
@@ -114,7 +118,7 @@
 │
 ├── <span class="folder">.claude/</span>                   <span class="note">конфиг AI-команды</span>
 │   ├── <span class="folder">agents/</span>                 <span class="note">4 субагента</span>
-│   ├── <span class="folder">skills/</span>                 <span class="note">5 скиллов</span>
+│   ├── <span class="folder">skills/</span>                 <span class="note">6 скиллов</span>
 │   └── <span class="file">settings.json</span>            <span class="note">hooks, permissions</span>
 │
 ├── <span class="folder">archive/</span>                  <span class="note">старые версии, исторические</span>
@@ -138,7 +142,7 @@
     </li>
     <li>
       <span class="file-name">money.md</span>
-      <span class="file-desc">Cashflow, runway, долги, цели по горизонтам (6/12 мес, 10 лет), фонды. <small>Личные финансы, не финансы клиентов.</small></span>
+      <span class="file-desc">Стратегические финансы: горизонты (6/12 мес, 10 лет), долги, equity-портфель, фонды, scarcity-фильтр. <small>Не оперативка — для оперативки см. finance/ ниже.</small></span>
     </li>
     <li>
       <span class="file-name">family.md</span>
@@ -146,7 +150,7 @@
     </li>
     <li>
       <span class="file-name">decisions.md</span>
-      <span class="file-desc">Журнал стратегических решений с YAML-тегами scope (strategic / finance / family / fishok / octo / pipeline). <small>Append-only.</small></span>
+      <span class="file-desc">Журнал стратегических решений с YAML-тегами scope (strategic / finance / family / fishok / octo / pipeline / personal). <small>Append-only.</small></span>
     </li>
     <li>
       <span class="file-name">this-week.md</span>
@@ -155,8 +159,36 @@
   </ul>
 </div>
 
+<!-- ===== ФИНАНСЫ ===== -->
+<h2>2. Финансы <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— план-факт + ledger</span> <span class="badge new">новое 2026-05-15</span></h2>
+
+<div class="card finance">
+  <p style="margin-top: 0;">Отдельный оперативный слой. Появился, когда стало ясно: <code>money.md</code> хорошо описывает стратегию, но не годится для ежедневного учёта трат. Запись транзакций — через skill <code>/finance</code> или просто «обед 18 евро картой» в чате.</p>
+  <ul class="file-list">
+    <li>
+      <span class="file-name">finance/state.md</span>
+      <span class="file-desc">Живая картина текущего месяца: план-факт по 12 конвертам, остатки счетов, прогресс к подушке, сигналы. <small>Обновляется при каждой транзакции.</small></span>
+    </li>
+    <li>
+      <span class="file-name">finance/budget.md</span>
+      <span class="file-desc">Структура конвертов, шаблоны распределения (зарплата Fishok €3500, Octo €1000), правила фондов фазы 1, категории расходов. <small>Меняется раз в месяц.</small></span>
+    </li>
+    <li>
+      <span class="file-name">finance/ledger.md</span>
+      <span class="file-desc">Append-only журнал транзакций месяца. Колонки: дата / тип / сумма / валюта / категория / счёт / комментарий. <small>1-го числа архивируется.</small></span>
+    </li>
+    <li>
+      <span class="file-name">finance/archive/</span>
+      <span class="file-desc">Закрытые месяцы: снимок плана-факта + полный ledger по каждому месяцу.</span>
+    </li>
+  </ul>
+  <div class="principle" style="margin-top: 10px;">
+    <strong>Связь с money.md:</strong> <code>finance/</code> — это «как я живу деньгами в этом месяце». <code>money.md</code> — «куда я иду по деньгам в 6/12/120 месяцев». Не дублируются, разные горизонты.
+  </div>
+</div>
+
 <!-- ===== ЦИКЛЫ ===== -->
-<h2>2. Циклы <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— где живёт время</span></h2>
+<h2>3. Циклы <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— где живёт время</span></h2>
 
 <div class="card cycle">
   <p style="margin-top: 0;">Три такта: день, неделя, по запросу. Через них стекает сырьё, генерируются своды и обновляется state.</p>
@@ -185,44 +217,73 @@
 </div>
 
 <!-- ===== КЛИЕНТЫ ===== -->
-<h2>3. Клиенты <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— изолированные проекты</span></h2>
+<h2>4. Клиенты <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— изолированные проекты</span></h2>
 
 <div class="card client">
   <p style="margin-top: 0;">Каждый клиент — отдельная папка с собственной структурой. Никакого «общего» state — изоляция предотвращает утечки контекста и экономит токены.</p>
 
-  <h3>🐙 clients/octo/ <span class="badge active">активный</span> <a href="/octo/system.html" class="badge detail">детально</a></h3>
-  <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Octo Relocate — релокационно-визовая компания. Главный путь к equity-портфелю через канал Сергея. <strong>Самый детально проработанный клиент.</strong></p>
+  <h3>🐙 clients/octo/ <span class="badge active">активный</span> <span class="badge new">пересобран 2026-05-15</span> <a href="/octo-project/" class="badge detail">детально</a></h3>
+  <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Octo Relocate — стартап-студия с релокационным продуктом. Главный путь к equity-портфелю через канал Сергея. <strong>Полная пересборка структуры:</strong> вместо плоского state.md — 7 верхних папок по функциям. Старое уехало в <code>_archive/2026-05-15-restructure/</code>.</p>
 
 <div class="tree" style="margin: 8px 0;">
 <span class="folder">clients/octo/</span>
-├── <span class="file">CLAUDE.md</span>                <span class="note">карта проекта (≤150 строк)</span>
-├── <span class="file">state.md</span>                  <span class="note">оперативка</span>
-├── <span class="file">scorecard.md</span>              <span class="note">метрики (Pipeline + Content)</span>
-├── <span class="file">issues.md</span>                 <span class="note">EOS open issues</span>
-├── <span class="file">decisions.md</span>              <span class="note">ADR-журнал (6 ставок)</span>
-├── <span class="file">company.md</span>                <span class="note">финансы компании</span>
-├── <span class="file">product.md</span>                <span class="note">ICP, воронка, репозиционирование</span>
-├── <span class="file">weekly.md</span>                 <span class="note">рамка L10</span>
-├── <span class="file">sergey-partnership.md</span>     <span class="note">equity-вектор, меню моделей</span>
-├── <span class="file">shared.md</span>                 <span class="note">публичная картина</span>
-├── <span class="file">private.md</span>                <span class="note">моя разведка (НЕ показывать)</span>
+├── <span class="file">CLAUDE.md</span>                <span class="note">главная карта проекта</span>
 │
-├── <span class="folder">inbox/</span>                  <span class="note">сырьё проекта Octo</span>
-├── <span class="folder">meetings/</span>               <span class="note">транскрипты звонков</span>
-├── <span class="folder">artifacts/</span>              <span class="note">deck'и, скрипты, шаблоны</span>
+├── <span class="folder">acquisition/</span>            <span class="note">генерация входящего потока партнёров и клиентов</span>
+│   ├── <span class="folder">partner-attraction/</span>  <span class="note">⭐ ПРИОРИТЕТ №1 — позиционирование, материалы, скрипты</span>
+│   ├── <span class="folder">market-tests/</span>        <span class="note">R&D — сайт, SEO, соцсети, парсинг</span>
+│   └── <span class="file">experiments.md</span>         <span class="note">журнал гипотез</span>
 │
-├── <span class="folder">people/</span>
-│   ├── <span class="file">tatyana.md</span>             <span class="note">партнёр-менеджер</span>
-│   └── <span class="folder">partners/</span>            <span class="note">горячая пятёрка партнёров</span>
+├── <span class="folder">funnel/</span>                  <span class="note">7 этапов партнёрской воронки</span>
+│   ├── <span class="folder">stages/</span>              <span class="note">01-contact ... 07-first-client</span>
+│   ├── <span class="folder">playbooks/</span>           <span class="note">сложные этапы (маркетинг-разбор)</span>
+│   └── <span class="file">pipeline.md</span>            <span class="note">живое состояние воронки</span>
 │
-└── <span class="folder">work/</span>                    <span class="note">мини-проекты с дедлайнами</span>
-    ├── <span class="folder">_template/</span>            <span class="note">шаблон нового мини-проекта</span>
-    ├── <span class="folder">website/</span>              <span class="note">сайт</span>
-    └── <span class="folder">presentations/</span>        <span class="note">презентации</span>
+├── <span class="folder">handover/</span>                <span class="note">мост к команде Елены (delivery)</span>
+│   ├── <span class="file">lead-handover-process.md</span>
+│   └── <span class="file">commitments.md</span>
+│
+├── <span class="folder">expertise/</span>               <span class="note">извлечение знаний Сергея</span>
+│   ├── <span class="folder">transcripts/</span>
+│   ├── <span class="folder">playbooks/</span>           <span class="note">Spain visa, France visa, Nomad</span>
+│   ├── <span class="file">faq.md</span>
+│   └── <span class="file">objections.md</span>
+│
+├── <span class="folder">ops/</span>                     <span class="note">поддерживающие функции</span>
+│   ├── <span class="folder">people/</span>              <span class="note">команда (Татьяна)</span>
+│   ├── <span class="folder">finance/</span>             <span class="note">P&L компании, юнит-экономика</span>
+│   ├── <span class="folder">tooling/</span>             <span class="note">CRM, AI-агенты</span>
+│   └── <span class="file">scorecard.md</span>           <span class="note">приборная панель</span>
+│
+├── <span class="folder">command/</span>                 <span class="note">командный пункт — где живут решения</span>
+│   ├── <span class="file">state.md</span>               <span class="note">что на столе СЕЙЧАС</span>
+│   ├── <span class="file">decisions.md</span>           <span class="note">ADR-журнал</span>
+│   ├── <span class="file">issues.md</span>              <span class="note">открытые вопросы</span>
+│   ├── <span class="file">weekly.md</span>              <span class="note">синхроны + рефлексия</span>
+│   └── <span class="file">roadmap.md</span>             <span class="note">90 дней + путь к GD</span>
+│
+├── <span class="folder">private/</span>                 <span class="note">🔒 личное Андрея, НЕ передаётся при экзите</span>
+│   ├── <span class="file">compensation.md</span>
+│   ├── <span class="file">sergey-relationship.md</span>
+│   ├── <span class="file">partner-track.md</span>
+│   ├── <span class="file">incubator-portability.md</span>
+│   └── <span class="file">methodology-notes.md</span>
+│
+├── <span class="folder">_archive/</span>                <span class="note">старые версии файлов (read-only)</span>
+│   └── <span class="folder">2026-05-15-restructure/</span>
+│
+├── <span class="folder">inbox/</span>                   <span class="note">сырьё на разбор через /octo-intake</span>
+├── <span class="folder">meetings/</span>                <span class="note">транскрипты (legacy)</span>
+├── <span class="folder">artifacts/</span>               <span class="note">готовые материалы (legacy)</span>
+└── <span class="folder">work/</span>                    <span class="note">мини-проекты со своим life-cycle</span>
+    ├── <span class="folder">_template/</span>
+    ├── <span class="folder">website/</span>
+    ├── <span class="folder">presentations/</span>
+    └── <span class="folder">sergey-month-review/</span>  <span class="note">подготовка к 18.05</span>
 </div>
 
   <h3 style="margin-top: 24px;">🐟 clients/fishok/ <span class="badge active">активный</span></h3>
-  <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Fishok (Латвия) — текущий доход €3 500/мес. Производство натуральных рыбных лакомств, B2B. <strong>Структура минимальная</strong> — Fishok работает в режиме «не сломать», а Octo — в режиме «строить».</p>
+  <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Fishok (Латвия) — текущий доход €3 500/мес. Производство натуральных рыбных лакомств, B2B. <strong>Структура минимальная</strong> — Fishok в режиме «не сломать», а Octo — «строить».</p>
 
 <div class="tree" style="margin: 8px 0;">
 <span class="folder">clients/fishok/</span>
@@ -240,7 +301,7 @@
 </div>
 
 <!-- ===== ПРАКТИКА ===== -->
-<h2>4. Практика <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— методология Operational Foundation</span></h2>
+<h2>5. Практика <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— методология Operational Foundation</span></h2>
 
 <div class="card practice">
   <p style="margin-top: 0;">Моя методология работы с клиентами. Это «продукт» — то, что я продаю стартапам.</p>
@@ -265,10 +326,10 @@
 </div>
 
 <!-- ===== AI КОМАНДА ===== -->
-<h2>5. AI-команда <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— .claude/</span></h2>
+<h2>6. AI-команда <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— .claude/</span></h2>
 
 <div class="card ai-team">
-  <p style="margin-top: 0;">Конфигурация AI-инструментов: субагенты с изолированным контекстом, скиллы как атомарные процедуры, hooks для автоматизации.</p>
+  <p style="margin-top: 0;">Конфигурация AI-инструментов: 4 субагента с изолированным контекстом, 6 скиллов как атомарные процедуры, hooks для автоматизации.</p>
 
   <h3>🧑‍💼 .claude/agents/ — 4 субагента</h3>
   <ul class="file-list">
@@ -286,19 +347,23 @@
     </li>
     <li>
       <span class="file-name">octo-advisor.md</span>
-      <span class="file-desc">Внутренний советник проекта Octo. Архетип: фаундер mobility-индустрии + AI engineer. Полная изоляция от других клиентов. <span class="badge private">только Octo</span></span>
+      <span class="file-desc">Внутренний советник проекта Octo. Архетип: сооснователь/инвестор mobility + AI engineer. Полная изоляция от других клиентов. <span class="badge private">только Octo</span></span>
     </li>
   </ul>
 
-  <h3 style="margin-top: 24px;">🛠 .claude/skills/ — 5 скиллов</h3>
+  <h3 style="margin-top: 24px;">🛠 .claude/skills/ — 6 скиллов</h3>
   <ul class="file-list">
     <li>
       <span class="file-name">intake/</span>
       <span class="file-desc"><code>/i</code>, <code>/intake</code> — микро-операция: добавить сырую запись в <code>inbox/today.md</code>. <small>Десятки раз в день.</small></span>
     </li>
     <li>
+      <span class="file-name">finance/</span> <span class="badge new">новое</span>
+      <span class="file-desc"><code>/finance</code>, <code>/f</code> — запись транзакции (доход/расход/перевод), показ остатков по конвертам, закрытие месяца. <small>Триггеры: «обед 18 евро», «пришла зарплата», «такси 12».</small></span>
+    </li>
+    <li>
       <span class="file-name">day-close/</span>
-      <span class="file-desc"><code>/day-close</code> — главный регулярный цикл. Разбирает inbox, классифицирует, обновляет state, пишет свод. Шаг 2a проверяет проектные inbox-ы. <small>1 раз в день вечером.</small></span>
+      <span class="file-desc"><code>/day-close</code> — главный регулярный цикл. Разбирает inbox, классифицирует, обновляет state, пишет свод. <small>1 раз в день вечером.</small></span>
     </li>
     <li>
       <span class="file-name">weekly-dialogue/</span>
@@ -319,7 +384,7 @@
 </div>
 
 <!-- ===== АРХИВ ===== -->
-<h2>6. Архив и legacy</h2>
+<h2>7. Архив и legacy</h2>
 
 <div class="card archive">
   <h3>📦 archive/</h3>
@@ -333,35 +398,17 @@
 
   <h3 style="margin-top: 24px;">📁 Gd контекст/ <span class="badge legacy">legacy</span></h3>
   <p style="font-size: 14px;">Папка с историческими файлами прошлой версии системы. Постепенно перерабатывается: значимое — в новую структуру, остальное — в архив.</p>
-  <ul class="file-list">
-    <li>
-      <span class="file-name">Operational_Foundation_v1.md</span>
-      <span class="file-desc">Старая версия методологии. Актуальная — в <code>practice/operational-foundation.md</code>.</span>
-    </li>
-    <li>
-      <span class="file-name">Лог_стратегических_решений.md</span>
-      <span class="file-desc">Старый лог решений. Актуальный — корневой <code>decisions.md</code>.</span>
-    </li>
-    <li>
-      <span class="file-name">Резюме_Fishok.md</span>
-      <span class="file-desc">Резюме кейса Fishok. Актуальное — будет распилено в <code>clients/fishok/</code> по мере необходимости.</span>
-    </li>
-    <li>
-      <span class="file-name">США.md, История проекта "Испания".md</span>
-      <span class="file-desc">Стратегические заметки. Актуальная семейная картина — корневой <code>family.md</code>.</span>
-    </li>
-  </ul>
 
   <h3 style="margin-top: 24px;">📁 GD/ <span class="badge legacy">legacy</span></h3>
   <p style="font-size: 14px;">Папка эксперимента <code>_NEW_SYSTEM/</code> прошлой версии — отложенная система 6 GPT-агентов. На паузе до стабилизации дохода €8К+/мес.</p>
 </div>
 
 <div class="principle legacy">
-  <strong>Принцип миграции:</strong> старые папки <code>Gd контекст/</code> и <code>GD/</code> намеренно не трогаем массово. Распиливаем только то, что нужно для текущей цели (так как сделали с Octo). Остальное — естественно отмирает или мигрирует когда становится нужным.
+  <strong>Принцип миграции:</strong> старые папки <code>Gd контекст/</code> и <code>GD/</code> намеренно не трогаем массово. Распиливаем только то, что нужно для текущей цели (как сделали с Octo). Остальное — естественно отмирает или мигрирует когда становится нужным.
 </div>
 
 <!-- ===== ПРИНЦИПЫ ===== -->
-<h2>7. Принципы, держащие систему</h2>
+<h2>8. Принципы, держащие систему</h2>
 
 <div class="principle">
   <strong>Правило роста:</strong> новая папка/файл — только когда (а) действующий перерос 200 строк, (б) появилось ≥3 однотипных артефакта, или (в) явное решение «нужно для одной из трёх целей 90 дней». Никогда «на всякий случай».
@@ -381,7 +428,7 @@
 
 <footer>
   <p>Карта обновляется по мере роста системы. Если что-то добавилось / изменилось / удалено — здесь должно отразиться.</p>
-  <p><a href="/">← Главная</a> · <a href="/system/">Концептуальная карта системы →</a> · <a href="/toolbox/">Toolbox →</a></p>
+  <p><a href="/">← Главная</a> · <a href="/system/">Концептуальная карта</a> · <a href="/toolbox/">Toolbox</a> · <a href="/health/">Здоровье системы</a></p>
 </footer>
 
 </div>

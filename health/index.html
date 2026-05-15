@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Здоровье системы — AndreiOS</title>
+<meta name="description" content="Метрики здоровья самой системы AndreiOS: kill-switch, активность, полнота state, динамика.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --green: #4a7c59;
+    --blue: #3a5a8c;
+    --purple: #6b4a8c;
+    --red: #b04c4c;
+    --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 40px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  .updated { font-size: 13px; color: var(--muted); }
+  h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 16px; color: var(--muted); margin: 0 0 36px; }
+  h2 { font-size: 20px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 17px; margin: 0 0 12px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+
+  /* Hero score */
+  .score-hero { background: linear-gradient(135deg, #faf6ee 0%, #f0ebe1 100%); border-radius: 14px; padding: 30px; display: grid; grid-template-columns: auto 1fr; gap: 30px; align-items: center; box-shadow: var(--shadow); border: 1px solid var(--line); margin-bottom: 30px; }
+  .score-circle { width: 140px; height: 140px; border-radius: 50%; background: var(--card); display: flex; flex-direction: column; align-items: center; justify-content: center; border: 8px solid var(--green); flex-shrink: 0; }
+  .score-circle.amber { border-color: var(--amber); }
+  .score-circle.red { border-color: var(--red); }
+  .score-num { font-size: 44px; font-weight: 700; line-height: 1; }
+  .score-max { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .score-desc h3 { font-size: 22px; margin: 0 0 6px; color: var(--green); }
+  .score-desc h3.amber { color: var(--amber); }
+  .score-desc h3.red { color: var(--red); }
+  .score-desc p { margin: 0; font-size: 15px; color: var(--ink); }
+
+  /* Criteria */
+  .criterion { display: grid; grid-template-columns: 80px 1fr 100px; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: center; }
+  .criterion:last-child { border-bottom: none; }
+  .crit-score { font-size: 28px; font-weight: 700; text-align: center; }
+  .crit-score.green { color: var(--green); }
+  .crit-score.amber { color: var(--amber); }
+  .crit-score.red { color: var(--red); }
+  .crit-title { font-size: 16px; font-weight: 600; margin: 0 0 4px; }
+  .crit-desc { font-size: 13px; color: var(--muted); margin: 0; }
+  .crit-trend { text-align: right; font-size: 13px; color: var(--muted); }
+  .crit-trend .arrow { font-size: 18px; font-weight: 700; }
+  .crit-trend .arrow.up { color: var(--green); }
+  .crit-trend .arrow.down { color: var(--red); }
+  .crit-trend .arrow.flat { color: var(--muted); }
+
+  /* Kill-switch timer */
+  .killswitch { background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--green); border-radius: 10px; padding: 22px 26px; }
+  .killswitch.amber { border-left-color: var(--amber); }
+  .killswitch.red { border-left-color: var(--red); }
+  .killswitch-row { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
+  .killswitch-num { font-size: 56px; font-weight: 700; line-height: 1; color: var(--green); }
+  .killswitch-num.amber { color: var(--amber); }
+  .killswitch-num.red { color: var(--red); }
+  .killswitch-bar { background: var(--line); border-radius: 100px; height: 12px; overflow: hidden; margin-top: 8px; }
+  .killswitch-bar-fill { height: 100%; background: var(--green); border-radius: 100px; }
+  .killswitch-bar-fill.amber { background: var(--amber); }
+  .killswitch-bar-fill.red { background: var(--red); }
+  .killswitch-status { font-size: 13px; padding: 6px 12px; border-radius: 100px; font-weight: 600; }
+  .killswitch-status.ok { background: #e9f1ec; color: var(--green); }
+
+  /* Stats */
+  .stat { padding: 14px 0; }
+  .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-size: 26px; font-weight: 700; margin-top: 2px; }
+  .stat-value.red { color: var(--red); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.amber { color: var(--amber); }
+  .stat-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* Activity heatmap */
+  .heat-grid { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; margin-top: 12px; }
+  .heat-cell { aspect-ratio: 1; border-radius: 3px; background: var(--line); position: relative; }
+  .heat-cell.low { background: #e3edd6; }
+  .heat-cell.mid { background: #a8c89e; }
+  .heat-cell.high { background: #4a7c59; }
+  .heat-cell .date { display: none; }
+  .heat-labels { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; font-size: 10px; color: var(--muted); margin-top: 6px; }
+  .heat-labels span { text-align: center; }
+
+  /* Timeline */
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .timeline li { padding: 14px 0 14px 28px; border-left: 2px solid var(--line); position: relative; margin-left: 8px; }
+  .timeline li::before { content: ""; position: absolute; left: -7px; top: 18px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+  .timeline li.structural::before { background: var(--blue); }
+  .timeline li.finance::before { background: var(--red); }
+  .timeline li.strategic::before { background: var(--green); }
+  .timeline-date { font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
+  .timeline-title { font-size: 15px; font-weight: 600; margin: 0 0 2px; }
+  .timeline-desc { font-size: 14px; color: var(--ink); margin: 0; }
+  .timeline-tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-left: 6px; background: #f0ebe1; color: var(--muted); }
+  .timeline-tag.struct { background: #eaeef7; color: var(--blue); }
+  .timeline-tag.fin { background: #f5edee; color: var(--red); }
+  .timeline-tag.strat { background: #e9f1ec; color: var(--green); }
+
+  /* Progress bars in tables */
+  .bar { background: var(--line); border-radius: 100px; height: 6px; overflow: hidden; min-width: 60px; display: inline-block; vertical-align: middle; }
+  .bar-fill { height: 100%; background: var(--green); border-radius: 100px; }
+  .bar-fill.amber { background: var(--amber); }
+  .bar-fill.red { background: var(--red); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 800px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .grid-6 { grid-template-columns: repeat(3, 1fr); }
+    .score-hero { grid-template-columns: 1fr; text-align: center; }
+    .score-circle { margin: 0 auto; }
+    .criterion { grid-template-columns: 60px 1fr; }
+    .crit-trend { display: none; }
+    .killswitch-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <span><a href="/">← главная</a> · <a href="/dashboard/">дашборд</a> · <a href="/system/">карта</a> · <a href="/structure/">структура</a></span>
+  <span class="updated">снимок: 2026-05-15</span>
+</nav>
+
+<h1>🩺 Здоровье системы</h1>
+<p class="subtitle">Метрики самой системы AndreiOS, а не проектов. Источники: git-history, размер state-файлов, наличие циклов.</p>
+
+<!-- ===== ГЛАВНЫЙ ИНДЕКС ===== -->
+<div class="score-hero">
+  <div class="score-circle amber">
+    <div class="score-num">72</div>
+    <div class="score-max">из 100</div>
+  </div>
+  <div class="score-desc">
+    <h3 class="amber">Система работает, но циклы ещё не запущены</h3>
+    <p>Каркас собран и наполнен (фундамент, финансы, Octo пересобран), коммитов много, kill-switch далеко. Но ни одного <code>/day-close</code> или <code>/weekly-dialogue</code> ещё не было — то, что превращает систему из <em>склада данных</em> в <em>работающий цикл</em>. Главный фокус сейчас: запустить ежевечерний day-close.</p>
+  </div>
+</div>
+
+<!-- ===== KILL-SWITCH ===== -->
+<h2>⏱ Kill-switch таймер</h2>
+<div class="killswitch">
+  <div class="killswitch-row">
+    <div>
+      <div class="killswitch-num">14</div>
+      <div style="font-size: 13px; color: var(--muted);">дней до выключателя</div>
+    </div>
+    <div>
+      <p style="margin: 0 0 6px; font-size: 14px;">Последний коммит: <strong>2026-05-15 (сегодня)</strong>. Правило: 14 дней без коммитов → система признана мёртвой, 30 дней не строим новую.</p>
+      <div class="killswitch-bar"><div class="killswitch-bar-fill" style="width: 100%"></div></div>
+      <p style="margin: 6px 0 0; font-size: 12px; color: var(--muted);">Шкала идёт справа налево — чем меньше дней, тем ближе красная зона.</p>
+    </div>
+    <div>
+      <span class="killswitch-status ok">✓ безопасно</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 6 КРИТЕРИЕВ ===== -->
+<h2>📊 Рейтинг по 6 критериям</h2>
+<div class="card">
+  <div class="criterion">
+    <div class="crit-score green">90</div>
+    <div>
+      <p class="crit-title">1. Активность (коммиты в репо)</p>
+      <p class="crit-desc">26 коммитов за 14 дней. Stop hook работает — каждая сессия автокоммитится. Концентрация в 2 дня (12 + 14) — нормальная для интенсивной сборки.</p>
+    </div>
+    <div class="crit-trend"><span class="arrow up">↑</span><br>vs прошлая неделя</div>
+  </div>
+
+  <div class="criterion">
+    <div class="crit-score green">85</div>
+    <div>
+      <p class="crit-title">2. Полнота фундамента (5 файлов корня)</p>
+      <p class="crit-desc">me.md (147 строк), money.md (320), family.md (112), decisions.md (81), this-week.md (79) — все наполнены. this-week.md пока шаблонный, ждёт первого /weekly-dialogue.</p>
+    </div>
+    <div class="crit-trend"><span class="arrow up">↑</span><br>+ family.md</div>
+  </div>
+
+  <div class="criterion">
+    <div class="crit-score green">95</div>
+    <div>
+      <p class="crit-title">3. Структура клиентов</p>
+      <p class="crit-desc">Octo пересобран 2026-05-15: 7 верхних папок, 10 ADR в decisions.md, scorecard, partner-track. Fishok — компактно (68 строк state.md, без placeholders).</p>
+    </div>
+    <div class="crit-trend"><span class="arrow up">↑↑</span><br>Octo restructure</div>
+  </div>
+
+  <div class="criterion">
+    <div class="crit-score green">88</div>
+    <div>
+      <p class="crit-title">4. Финансовая дисциплина</p>
+      <p class="crit-desc">finance/state.md + budget.md + ledger.md запущены. 5 транзакций мая записаны, план-факт по 12 конвертам. Остатки счетов BBVA/Santander/Wise — частично уточнить.</p>
+    </div>
+    <div class="crit-trend"><span class="arrow up">↑↑</span><br>новый слой</div>
+  </div>
+
+  <div class="criterion">
+    <div class="crit-score red">25</div>
+    <div>
+      <p class="crit-title">5. Циклы работают (day-close + weekly)</p>
+      <p class="crit-desc">⚠ 0 файлов в <code>daily/</code>, 0 файлов в <code>weekly/</code>. Inbox/today.md накопил 19 строк, но не разбирался. <strong>Главная зона роста.</strong></p>
+    </div>
+    <div class="crit-trend"><span class="arrow flat">→</span><br>не запускали</div>
+  </div>
+
+  <div class="criterion">
+    <div class="crit-score green">85</div>
+    <div>
+      <p class="crit-title">6. AI-команда полная</p>
+      <p class="crit-desc">4 субагента (business-operator, finance-director, context-architect, octo-advisor), 6 skills (включая новый /finance). Все настроены. Stop hook + permissions работают.</p>
+    </div>
+    <div class="crit-trend"><span class="arrow up">↑</span><br>+ octo-advisor, finance</div>
+  </div>
+</div>
+
+<!-- ===== АКТИВНОСТЬ ===== -->
+<h2>📈 Активность за 14 дней</h2>
+<div class="grid-3">
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Коммитов</div>
+      <div class="stat-value green">26</div>
+      <div class="stat-sub">в 2 активных дня</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Активных дней</div>
+      <div class="stat-value amber">2 / 14</div>
+      <div class="stat-sub">14% покрытие</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Сессий</div>
+      <div class="stat-value green">26</div>
+      <div class="stat-sub">автокоммитов</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 14px;">
+  <h3>Карта активности (последние 14 дней)</h3>
+  <div class="heat-grid">
+    <div class="heat-cell" title="2026-05-02"></div>
+    <div class="heat-cell" title="2026-05-03"></div>
+    <div class="heat-cell" title="2026-05-04"></div>
+    <div class="heat-cell" title="2026-05-05"></div>
+    <div class="heat-cell" title="2026-05-06"></div>
+    <div class="heat-cell" title="2026-05-07"></div>
+    <div class="heat-cell" title="2026-05-08"></div>
+    <div class="heat-cell" title="2026-05-09"></div>
+    <div class="heat-cell" title="2026-05-10"></div>
+    <div class="heat-cell" title="2026-05-11"></div>
+    <div class="heat-cell" title="2026-05-12"></div>
+    <div class="heat-cell" title="2026-05-13"></div>
+    <div class="heat-cell mid" title="2026-05-14: 12 commits"></div>
+    <div class="heat-cell high" title="2026-05-15: 14 commits"></div>
+  </div>
+  <div class="heat-labels">
+    <span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+  </div>
+  <p style="font-size: 13px; color: var(--muted); margin-top: 14px;">
+    <strong>Чтение:</strong> зелёный = коммиты в этот день, серый = тишина. До 14 мая система была собрана только каркасом. Все 26 коммитов — за 14-15 мая (наполнение фундамента, Octo restructure, finance launch). Регулярность пока не сложилась — следующий месяц должен показать сплошную полосу.
+  </p>
+</div>
+
+<!-- ===== ПОЛНОТА STATE ===== -->
+<h2>📋 Заполненность ключевых файлов</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Файл</th>
+        <th class="num">Строк</th>
+        <th>Заполненность</th>
+        <th>Состояние</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>me.md</code></td><td class="num">147</td>
+        <td><span class="bar"><span class="bar-fill" style="width: 90%"></span></span></td>
+        <td style="color: var(--green);">✓ наполнен</td>
+      </tr>
+      <tr>
+        <td><code>money.md</code></td><td class="num">320</td>
+        <td><span class="bar"><span class="bar-fill" style="width: 95%"></span></span></td>
+        <td style="color: var(--green);">✓ детально</td>
+      </tr>
+      <tr>
+        <td><code>family.md</code></td><td class="num">112</td>
+        <td><span class="bar"><span class="bar-fill" style="width: 80%"></span></span></td>
+        <td style="color: var(--green);">✓ наполнен</td>
+      </tr>
+      <tr>
+        <td><code>decisions.md</code></td><td class="num">81</td>
+        <td><span class="bar"><span class="bar-fill amber" style="width: 40%"></span></span></td>
+        <td style="color: var(--amber);">1 ADR — мало</td>
+      </tr>
+      <tr>
+        <td><code>this-week.md</code></td><td class="num">79</td>
+        <td><span class="bar"><span class="bar-fill red" style="width: 15%"></span></span></td>
+        <td style="color: var(--red);">шаблон, не заполнен</td>
+      </tr>
+      <tr>
+        <td><code>finance/state.md</code></td><td class="num">81</td>
+        <td><span class="bar"><span class="bar-fill" style="width: 85%"></span></span></td>
+        <td style="color: var(--green);">✓ актуально (май)</td>
+      </tr>
+      <tr>
+        <td><code>finance/budget.md</code></td><td class="num">114</td>
+        <td><span class="bar"><span class="bar-fill" style="width: 90%"></span></span></td>
+        <td style="color: var(--green);">✓ конверты прописаны</td>
+      </tr>
+      <tr>
+        <td><code>finance/ledger.md</code></td><td class="num">30</td>
+        <td><span class="bar"><span class="bar-fill amber" style="width: 30%"></span></span></td>
+        <td style="color: var(--amber);">5 транзакций мая</td>
+      </tr>
+      <tr>
+        <td><code>clients/fishok/state.md</code></td><td class="num">68</td>
+        <td><span class="bar"><span class="bar-fill" style="width: 80%"></span></span></td>
+        <td style="color: var(--green);">✓ без placeholders</td>
+      </tr>
+      <tr>
+        <td><code>clients/octo/command/state.md</code></td><td class="num">107</td>
+        <td><span class="bar"><span class="bar-fill" style="width: 95%"></span></span></td>
+        <td style="color: var(--green);">✓ детально (10 секций)</td>
+      </tr>
+      <tr>
+        <td><code>inbox/today.md</code></td><td class="num">19</td>
+        <td><span class="bar"><span class="bar-fill amber" style="width: 50%"></span></span></td>
+        <td style="color: var(--amber);">накопилось, ждёт /day-close</td>
+      </tr>
+      <tr>
+        <td>daily/, weekly/</td><td class="num">0</td>
+        <td><span class="bar"><span class="bar-fill red" style="width: 0%"></span></span></td>
+        <td style="color: var(--red);">пусто — нет циклов</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== ХРОНИКА ИЗМЕНЕНИЙ ===== -->
+<h2>🕐 Хроника изменений системы</h2>
+<div class="card">
+  <ul class="timeline">
+    <li class="structural">
+      <div class="timeline-date">2026-05-15</div>
+      <p class="timeline-title">Пересборка Octo + запуск финансов <span class="timeline-tag struct">structure</span> <span class="timeline-tag fin">finance</span></p>
+      <p class="timeline-desc">7 верхних папок Octo (acquisition, funnel, handover, expertise, ops, command, private, work). 10 ADR в Octo decisions.md. Запущена система finance/ (state + budget + ledger) + skill <code>/finance</code>. Добавлен агент <code>octo-advisor</code>. 14 коммитов за день.</p>
+    </li>
+    <li class="strategic">
+      <div class="timeline-date">2026-05-14</div>
+      <p class="timeline-title">Наполнен фундамент AndreiOS <span class="timeline-tag strat">strategic</span></p>
+      <p class="timeline-desc">me.md и money.md из шаблонов превращены в живые документы. Двухтактная стратегия зафиксирована, scarcity-фильтр прописан, система фондов запущена. AndreiOS-guide.html создан. 12 коммитов за день.</p>
+    </li>
+    <li>
+      <div class="timeline-date">~2026-05-13</div>
+      <p class="timeline-title">Начало системы — каркас</p>
+      <p class="timeline-desc">Создан репозиторий <code>Claude-Context/</code>, прописан корневой CLAUDE.md, заложены пустые шаблоны (me, money, family, decisions, this-week). 4 субагента + базовые skills.</p>
+    </li>
+  </ul>
+  <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Источник: <code>git log</code> + <code>decisions.md</code> + ADR клиентов.</p>
+</div>
+
+<!-- ===== РИСКИ ===== -->
+<h2>⚠️ Что не так и куда смотреть</h2>
+<div class="grid-2">
+  <div class="card" style="border-left: 4px solid var(--red);">
+    <h3 style="color: var(--red);">🔴 Ни одного /day-close не запущено</h3>
+    <p style="font-size: 14px; margin: 0 0 8px;">Главный регулярный цикл — основа системы. Без него inbox копится, state-файлы устаревают, decisions не пополняется.</p>
+    <p style="font-size: 13px; color: var(--muted); margin: 0;"><strong>Действие:</strong> сегодня вечером — первый <code>/day-close</code>. Дальше — каждый вечер.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--red);">
+    <h3 style="color: var(--red);">🔴 this-week.md шаблонный</h3>
+    <p style="font-size: 14px; margin: 0 0 8px;">Нет P1/P2/P3, нет гипотезы недели. Дашборд тянет задачи отсюда — там сейчас placeholder.</p>
+    <p style="font-size: 13px; color: var(--muted); margin: 0;"><strong>Действие:</strong> пятница вечером — первый <code>/weekly-dialogue</code>, или вручную P1 на эту неделю.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--amber);">
+    <h3 style="color: var(--amber);">🟠 Остатки счетов не уточнены</h3>
+    <p style="font-size: 14px; margin: 0 0 8px;">BBVA, Santander, Wise, Bybit — в <code>finance/state.md</code> стоит «уточнить». Без этого ликвид и runway считаются по 3 счетам из 6.</p>
+    <p style="font-size: 13px; color: var(--muted); margin: 0;"><strong>Действие:</strong> зайти в банки, записать остатки одной командой <code>/finance</code>.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--amber);">
+    <h3 style="color: var(--amber);">🟠 Регулярность не сложилась</h3>
+    <p style="font-size: 14px; margin: 0 0 8px;">Все 26 коммитов в 2 дня. Это сборочные дни, не повседневное использование. Системе нужно «прижиться» — 30 дней регулярного <code>/day-close</code>.</p>
+    <p style="font-size: 13px; color: var(--muted); margin: 0;"><strong>Метрика для отслеживания:</strong> activeDays / 14. Целевое значение: 10+ из 14.</p>
+  </div>
+</div>
+
+<!-- ===== ЦЕЛИ ЗДОРОВЬЯ ===== -->
+<h2>🎯 Куда движемся (метрики на 30 дней)</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Метрика</th><th>Сейчас</th><th>Цель через 30 дней</th><th>Зачем</th></tr></thead>
+    <tbody>
+      <tr><td>Индекс здоровья</td><td>72/100</td><td><strong>85+</strong></td><td>Все циклы работают</td></tr>
+      <tr><td>Активных дней / 14</td><td>2</td><td><strong>10+</strong></td><td>Регулярность как привычка</td></tr>
+      <tr><td>Файлов в daily/</td><td>0</td><td><strong>20+</strong></td><td>Day-close стал автоматизмом</td></tr>
+      <tr><td>Файлов в weekly/</td><td>0</td><td><strong>4</strong></td><td>Каждая неделя осмыслена</td></tr>
+      <tr><td>ADR в decisions.md</td><td>1</td><td><strong>5-8</strong></td><td>Решения фиксируются на ходу</td></tr>
+      <tr><td>Уточнённых счетов</td><td>2/6</td><td><strong>6/6</strong></td><td>Реальный runway видно</td></tr>
+      <tr><td>Транзакций в ledger</td><td>5/мес</td><td><strong>40+/мес</strong></td><td>План-факт ведётся реально</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  <p>
+    <strong>Эта страница — снимок.</strong> Дальше будет авто-обновляться через скрипт, читающий git и state-файлы. Сейчас цифры заполняются вручную.
+    Источники: <code>git log</code>, <code>wc -l</code> по state-файлам, <code>ls daily/ weekly/</code>, <code>finance/ledger.md</code>, <code>decisions.md</code>.
+  </p>
+  <p><a href="/" style="color: var(--blue);">← Главная</a> · <a href="/dashboard/" style="color: var(--blue);">Дашборд →</a> · <a href="/how-it-works/" style="color: var(--blue);">Как это работает</a></p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AndreiOS — карта системы</title>
-<meta name="description" content="Архитектура операционной системы Андрея Сычинникова: фундамент, клиенты, AI-команда, циклы работы.">
+<meta name="description" content="Архитектура операционной системы Андрея Сычинникова: фундамент, клиенты, финансы, AI-команда, циклы работы.">
 <meta name="robots" content="noindex">
 
 <style>
@@ -17,6 +17,8 @@
     --green: #4a7c59;
     --blue: #3a5a8c;
     --purple: #6b4a8c;
+    --red: #b04c4c;
+    --amber: #c89a3c;
     --shadow: 0 2px 12px rgba(0,0,0,0.06);
     --line: #e5dfd3;
   }
@@ -43,7 +45,7 @@
   .file-list { list-style: none; padding: 0; margin: 0; }
   .file-list li { padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 12px; }
   .file-list li:last-child { border-bottom: none; }
-  .file-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; color: var(--purple); flex-shrink: 0; min-width: 140px; }
+  .file-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; color: var(--purple); flex-shrink: 0; min-width: 200px; }
   .file-desc { font-size: 14px; color: var(--ink); }
   .principle { background: #faf6ee; border-left: 3px solid var(--accent); padding: 14px 18px; margin: 12px 0; font-size: 15px; border-radius: 0 6px 6px 0; }
   .mermaid-wrap { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 16px; overflow-x: auto; }
@@ -64,13 +66,13 @@
 <body>
 <div class="container">
 
-<nav><a href="/">← главная</a></nav>
+<nav><a href="/">← главная</a> · <a href="/dashboard/">дашборд</a> · <a href="/structure/">полная структура</a> · <a href="/how-it-works/">простыми словами</a></nav>
 
 <h1>AndreiOS — карта системы</h1>
-<p class="subtitle">Как устроена моя операционная система: фундамент, клиенты, AI-команда, циклы работы и правила.</p>
+<p class="subtitle">Концептуальная архитектура: фундамент, финансы, клиенты, AI-команда, циклы работы и правила.</p>
 
 <div class="principle">
-  <strong>Главный принцип:</strong> AndreiOS - это не «инструмент управления задачами». Это <strong>контекстная база</strong>, в которую раз в день стекаются события, а AI-команда помогает разложить их по проектам, обновить состояние и поставить приоритеты на завтра.
+  <strong>Главный принцип:</strong> AndreiOS — это не «инструмент управления задачами». Это <strong>контекстная база</strong>, в которую раз в день стекаются события, а AI-команда помогает разложить их по проектам, обновить состояние и поставить приоритеты на завтра.
 </div>
 
 <h2>1. Карта зависимостей</h2>
@@ -79,6 +81,7 @@
 <pre class="mermaid">
 flowchart TD
     A[Андрей] -->|/intake| INBOX[inbox/today.md]
+    A -->|деньги| FIN[/finance]
     A -->|вечером /day-close| DC{day-close}
     A -->|пятница /weekly-dialogue| WD{weekly-dialogue}
 
@@ -86,23 +89,30 @@ flowchart TD
     DC --> STATE
     DC --> DAILY[daily/YYYY-MM-DD.md]
     DC --> DECISIONS[decisions.md]
-    DC --> MONEY[money.md]
+    DC --> FINSYS
 
+    FIN --> FINSYS
     WD --> WEEK[weekly/YYYY-Wnn.md]
     WD --> TW[this-week.md]
     WD --> STATE
 
     subgraph FUND[Фундамент]
         ME[me.md]
-        MONEY
         FAM[family.md]
         DECISIONS
         TW
     end
 
+    subgraph FINSYS[Финансы]
+        FSTATE[finance/state.md]
+        BUDGET[finance/budget.md]
+        LEDGER[finance/ledger.md]
+        MONEY[money.md]
+    end
+
     subgraph CLIENTS[Клиенты]
         FISHOK[fishok/state.md]
-        OCTO[octo/state.md]
+        OCTO[octo/command/state.md]
         PIPE[pipeline.md]
     end
 
@@ -111,32 +121,35 @@ flowchart TD
     STATE -.-> PIPE
 
     FUND --> A
+    FINSYS --> A
     CLIENTS --> A
 
     classDef foundation fill:#faf6ee,stroke:#c25c2c,stroke-width:2px
     classDef clients fill:#eef4f0,stroke:#4a7c59,stroke-width:2px
+    classDef finance fill:#f5edee,stroke:#b04c4c,stroke-width:2px
     classDef cycle fill:#eaeef7,stroke:#3a5a8c,stroke-width:2px
     class FUND foundation
     class CLIENTS clients
-    class DC,WD cycle
+    class FINSYS finance
+    class DC,WD,FIN cycle
 </pre>
 </div>
 
 <p style="font-size: 14px; color: var(--muted);">
-  <strong>Чтение схемы:</strong> Андрей кидает сырьё в <code>inbox</code> через день, вечером <code>/day-close</code> разбирает его и обновляет нужные файлы. Раз в неделю <code>/weekly-dialogue</code> переосмысляет состояние и обновляет план.
+  <strong>Чтение схемы:</strong> Андрей кидает сырьё в <code>inbox</code> в течение дня, любые денежные события — сразу в <code>/finance</code>. Вечером <code>/day-close</code> разбирает inbox и обновляет нужные файлы. Раз в неделю <code>/weekly-dialogue</code> переосмысляет состояние и обновляет план.
 </p>
 
-<h2>2. Фундамент — 5 файлов в корне</h2>
-<p>Это база. Меняется редко, но влияет на каждое решение.</p>
+<h2>2. Фундамент <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— 5 файлов в корне</span></h2>
+<p>База. Меняется редко, но влияет на каждое решение.</p>
 
 <ul class="file-list">
   <li class="card" style="padding: 14px 18px;">
-    <span class="file-name">me.md</span>
-    <span class="file-desc">Кто я, ценности, антицели, главная цель, двухтактная стратегия, фильтры решений</span>
+    <span class="file-name">CLAUDE.md</span>
+    <span class="file-desc">Главная конституция-роутер. Читается перед каждым сообщением. Три цели 90 дней, правила контекста, что НЕ делать.</span>
   </li>
   <li class="card" style="padding: 14px 18px;">
-    <span class="file-name">money.md</span>
-    <span class="file-desc">Cashflow, runway, долги, цели по горизонтам (6/12 мес, 10 лет), фонды</span>
+    <span class="file-name">me.md</span>
+    <span class="file-desc">Кто я, ценности, антицели, главная цель, двухтактная стратегия, фильтры решений</span>
   </li>
   <li class="card" style="padding: 14px 18px;">
     <span class="file-name">family.md</span>
@@ -152,96 +165,151 @@ flowchart TD
   </li>
 </ul>
 
-<h2>3. Клиенты — изолированные проекты</h2>
-<p>Каждый клиент - отдельная папка с собственной структурой. Никакого «общего» state - изоляция предотвращает утечки контекста.</p>
+<h2>3. Финансы <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— отдельный слой</span></h2>
+<p>В мае 2026 финансы выделены в отдельную папку с системой план-факт. Раньше всё жило в <code>money.md</code>, теперь — три файла + skill для записи транзакций.</p>
 
 <div class="card">
-  <h3>Структура папки клиента</h3>
   <ul class="file-list">
-    <li><span class="file-name">CLAUDE.md</span><span class="file-desc">Контекст проекта, читается автоматически</span></li>
-    <li><span class="file-name">state.md</span><span class="file-desc">Оперативная память, 1-2 страницы, обновляется в /day-close</span></li>
-    <li><span class="file-name">private.md</span><span class="file-desc">Моя разведка, риски, гипотезы - <strong>НЕ показывать</strong></span></li>
-    <li><span class="file-name">shared.md</span><span class="file-desc">То, что ОК показать команде клиента</span></li>
-    <li><span class="file-name">meetings/</span><span class="file-desc">Транскрипты созвонов</span></li>
-    <li><span class="file-name">raw/</span><span class="file-desc">Файлы клиента, скриншоты, выгрузки</span></li>
-    <li><span class="file-name">work/</span><span class="file-desc">Мини-проекты внутри клиента (сайт, CRM, презентации)</span></li>
+    <li>
+      <span class="file-name">finance/state.md</span>
+      <span class="file-desc">Живая картина месяца: план-факт по конвертам, остатки счетов, прогресс к подушке, сигналы. Обновляется при каждой записи транзакции.</span>
+    </li>
+    <li>
+      <span class="file-name">finance/budget.md</span>
+      <span class="file-desc">Структура 12 конвертов, шаблоны распределения зарплаты, правила фондов. Меняется редко (раз в месяц).</span>
+    </li>
+    <li>
+      <span class="file-name">finance/ledger.md</span>
+      <span class="file-desc">Append-only журнал транзакций текущего месяца. Архивируется в <code>finance/archive/</code> при закрытии месяца.</span>
+    </li>
+    <li>
+      <span class="file-name">finance/archive/</span>
+      <span class="file-desc">Закрытые месяцы: снимок плана-факта + полный ledger.</span>
+    </li>
+    <li>
+      <span class="file-name">money.md (корень)</span>
+      <span class="file-desc">Стратегический слой: cashflow по горизонтам (6/12 мес, 10 лет), долги, equity-портфель, фонды. Не оперативка.</span>
+    </li>
   </ul>
+  <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">
+    <strong>Как записывать:</strong> просто «обед 18 евро картой» в чате — skill <code>/finance</code> разберёт сумму, категорию, счёт, дополнит state и ledger.
+  </p>
 </div>
+
+<h2>4. Клиенты <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— изолированные проекты</span></h2>
+<p>Каждый клиент — отдельная папка с собственной структурой. Никакого «общего» state — изоляция предотвращает утечки контекста.</p>
 
 <div class="grid-2">
   <div class="card">
-    <h3>🐟 Fishok</h3>
-    <p style="font-size: 14px; color: var(--muted);">Текущая позиция, основной доход. Тег в <code>decisions.md</code>: <span class="tag">fishok</span></p>
+    <h3>🐟 Fishok <span class="tag">текущий доход</span></h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Латвия. €3 500/мес. Производство натуральных рыбных лакомств, B2B. Стандартная структура: CLAUDE.md, state.md, private/shared, meetings, raw, work.</p>
+    <p style="font-size: 13px; color: var(--muted);">Тег в <code>decisions.md</code>: <span class="tag">fishok</span></p>
   </div>
   <div class="card">
-    <h3>🐙 Octo Relocate</h3>
-    <p style="font-size: 14px; color: var(--muted);">Релокация Испания. Главный путь к equity-портфелю через канал Сергея. Тег: <span class="tag">octo</span></p>
+    <h3>🐙 Octo Relocate <span class="tag">главный equity-канал</span></h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Испания. €1К фикс + до €3К бонус. Релокационно-визовая компания. <strong>Расширенная структура из 7 верхних папок</strong> (см. <a href="/structure/" style="color: var(--blue);">полную карту</a>): acquisition, funnel, handover, expertise, ops, command, private + work.</p>
+    <p style="font-size: 13px; color: var(--muted);">Тег: <span class="tag">octo</span> · <a href="/octo-project/" style="color: var(--blue);">детальная зона →</a></p>
   </div>
 </div>
 
-<h2>4. Циклы — где живёт время</h2>
+<div class="card" style="margin-top: 16px;">
+  <h3>Стандартная структура папки клиента</h3>
+  <ul class="file-list">
+    <li><span class="file-name">CLAUDE.md</span><span class="file-desc">Контекст проекта, читается автоматически</span></li>
+    <li><span class="file-name">state.md</span><span class="file-desc">Оперативная память, обновляется в /day-close</span></li>
+    <li><span class="file-name">private.md / private/</span><span class="file-desc">Моя разведка, риски, equity-трек — <strong>не передаётся при экзите</strong></span></li>
+    <li><span class="file-name">shared.md</span><span class="file-desc">То, что ОК показать команде клиента</span></li>
+    <li><span class="file-name">meetings/</span><span class="file-desc">Транскрипты созвонов</span></li>
+    <li><span class="file-name">work/</span><span class="file-desc">Мини-проекты внутри клиента (сайт, презентации, разовые задачи)</span></li>
+  </ul>
+  <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Octo — продвинутый вариант: вместо плоского state.md — папка <code>command/</code> с разделёнными state, decisions, issues, weekly, roadmap. Это шаблон для будущих клиентов с большим объёмом.</p>
+</div>
+
+<h2>5. Циклы <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— где живёт время</span></h2>
 
 <div class="grid-3">
   <div class="card">
     <h3>День</h3>
     <p style="font-size: 14px;"><code>/intake</code> → <code>inbox/today.md</code></p>
-    <p style="font-size: 14px;"><code>/day-close</code> → разбор → <code>daily/</code></p>
+    <p style="font-size: 14px;"><code>/finance</code> → запись транзакции</p>
+    <p style="font-size: 14px;"><code>/day-close</code> → разбор inbox → <code>daily/</code></p>
   </div>
   <div class="card">
     <h3>Неделя</h3>
-    <p style="font-size: 14px;"><code>/weekly-dialogue</code> → диалог-рефлексия → <code>weekly/</code></p>
+    <p style="font-size: 14px;"><code>/weekly-dialogue</code> → диалог-рефлексия 60-90 мин → <code>weekly/</code></p>
     <p style="font-size: 14px;">Обновляет <code>this-week.md</code></p>
   </div>
   <div class="card">
     <h3>По запросу</h3>
     <p style="font-size: 14px;"><code>/update-state &lt;path&gt;</code></p>
-    <p style="font-size: 14px;"><code>/deep-dive &lt;path&gt;</code> - аварийная сессия</p>
+    <p style="font-size: 14px;"><code>/octo-intake</code> — разбор сырья Octo</p>
+    <p style="font-size: 14px;"><code>/finance close</code> — закрытие месяца</p>
   </div>
 </div>
 
-<h2>5. AI-команда</h2>
+<h2>6. AI-команда <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— 4 субагента + 6 skills</span></h2>
 
 <div class="grid-2">
   <div class="card">
     <h3>Субагенты <code>.claude/agents/</code></h3>
-    <p style="font-size: 14px; color: var(--muted);">Специализированные «роли», каждый со своим контекстом и инструментами. Изолируют сложные задачи от основного диалога.</p>
+    <p style="font-size: 14px; color: var(--muted);">Специализированные «коллеги» с изолированным контекстом. Изолируют сложные задачи от основного диалога.</p>
+    <ul style="margin: 8px 0; padding-left: 18px; font-size: 14px;">
+      <li><strong>business-operator</strong> — операционка по клиентам</li>
+      <li><strong>finance-director</strong> — финансовые решения</li>
+      <li><strong>context-architect</strong> — чистка системы (раз в 2-4 нед)</li>
+      <li><strong>octo-advisor</strong> — внутренний советник Octo (изолирован от других клиентов)</li>
+    </ul>
   </div>
   <div class="card">
     <h3>Skills <code>.claude/skills/</code></h3>
-    <p style="font-size: 14px; color: var(--muted);">Атомарные процедуры: <code>/intake</code>, <code>/day-close</code>, <code>/weekly-dialogue</code>, <code>/update-state</code>. Вызываются по слэш-командам.</p>
+    <p style="font-size: 14px; color: var(--muted);">Атомарные процедуры по слэш-команде.</p>
+    <ul style="margin: 8px 0; padding-left: 18px; font-size: 14px;">
+      <li><code>/intake</code>, <code>/i</code> — десятки раз в день</li>
+      <li><code>/finance</code>, <code>/f</code> — учёт транзакций</li>
+      <li><code>/day-close</code> — 1 раз вечером</li>
+      <li><code>/weekly-dialogue</code> — пятница вечером</li>
+      <li><code>/update-state</code> — по запросу</li>
+      <li><code>/octo-intake</code> — разбор сырья Octo</li>
+    </ul>
   </div>
 </div>
 
-<h2>6. Правила (что держит систему от деградации)</h2>
+<p style="font-size: 14px; color: var(--muted);">Полный справочник — <a href="/toolbox/" style="color: var(--blue);">в toolbox →</a></p>
+
+<h2>7. Правила <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— что держит систему от деградации</span></h2>
 
 <div class="principle">
   <strong>Правило роста:</strong> новая папка или файл создаётся только когда (а) действующий перерос 200 строк, (б) появилось ≥3 однотипных артефакта, или (в) явное решение «нужно для одной из трёх целей 90 дней». Запрещено «на всякий случай».
 </div>
 
 <div class="principle">
-  <strong>Kill-switch:</strong> если 14 дней нет коммитов в репозитории - система признана мёртвой. 30 дней не строим следующую итерацию. Сначала ретроспектива «почему не работало».
+  <strong>Kill-switch:</strong> если 14 дней нет коммитов в репозитории — система признана мёртвой. 30 дней не строим следующую итерацию. Сначала ретроспектива «почему не работало». <a href="/health/" style="color: var(--blue);">Текущее состояние таймера →</a>
 </div>
 
 <div class="principle">
-  <strong>Изоляция контекста:</strong> при работе с проектом - только его файлы. При работе с мини-проектом внутри клиента (<code>clients/octo/work/website/</code>) - только локальные файлы, не весь клиент. Экономия токенов и фокус.
+  <strong>Изоляция контекста:</strong> при работе с проектом — только его файлы. При работе с мини-проектом внутри клиента (<code>clients/octo/work/website/</code>) — только локальные файлы, не весь клиент. Экономия токенов и фокус. <strong>octo-advisor физически не видит fishok/.</strong>
 </div>
 
 <div class="principle">
-  <strong>Не читать без явного запроса:</strong> <code>archive/</code> (старые версии), <code>inbox/today.md</code> вне <code>/day-close</code>, <code>private.md</code> клиентов в публичных артефактах.
+  <strong>Не читать без явного запроса:</strong> <code>archive/</code> (старые версии), <code>inbox/today.md</code> вне <code>/day-close</code>, <code>private/</code> клиентов в публичных артефактах.
 </div>
 
-<h2>7. Как улучшать систему</h2>
+<div class="principle">
+  <strong>Append-only для decisions:</strong> ADR никогда не редактируются. Если решение изменилось — пишется новый ADR со ссылкой на старый. История мышления сохраняется.
+</div>
+
+<h2>8. Как улучшать систему</h2>
 
 <p>Три направления роста, в порядке приоритета:</p>
 
 <ol>
-  <li><strong>Наполнение state-файлов клиентов.</strong> Сейчас они почти пустые - заполнятся через первые <code>/day-close</code> и <code>/weekly-dialogue</code>.</li>
-  <li><strong>Новые skills под повторяющиеся операции.</strong> Если задача делается ≥3 раз - превращать в skill. Кандидаты: <code>/dashboard-update</code>, <code>/client-onboarding</code>, <code>/decision-add</code>.</li>
-  <li><strong>Новые субагенты под равные задачи.</strong> Кандидаты: agent для подготовки коммерческих предложений, agent для анализа звонков из <code>meetings/</code>.</li>
+  <li><strong>Наполнение state-файлов клиентов.</strong> Сейчас Fishok ещё частично пуст — наполнится через первые <code>/day-close</code> и <code>/weekly-dialogue</code>.</li>
+  <li><strong>Новые skills под повторяющиеся операции.</strong> Если задача делается ≥3 раз — превращать в skill. Кандидаты сейчас: <code>/dashboard-update</code>, <code>/client-onboarding</code>, <code>/decision-add</code>.</li>
+  <li><strong>Новые субагенты под равные задачи.</strong> Когда новый клиент потребует своего advisor — добавится. Кандидат: agent для анализа звонков из <code>meetings/</code>.</li>
 </ol>
 
 <footer>
-  <p>Это живая страница. Обновляется по мере эволюции системы. <a href="/" style="color: var(--blue);">← Главная</a> · <a href="/dashboard/" style="color: var(--blue);">Дашборд →</a></p>
+  <p>Это живая страница. Обновляется по мере эволюции системы. <a href="/" style="color: var(--blue);">← Главная</a> · <a href="/dashboard/" style="color: var(--blue);">Дашборд</a> · <a href="/health/" style="color: var(--blue);">Здоровье системы →</a></p>
 </footer>
 
 </div>

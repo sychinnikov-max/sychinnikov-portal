@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как это работает — простыми словами</title>
+<meta name="description" content="Объяснение системы AndreiOS на уровне «понятно ребёнку и маме». Без терминов.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --green: #4a7c59;
+    --blue: #3a5a8c;
+    --purple: #6b4a8c;
+    --red: #b04c4c;
+    --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 18px;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 40px; line-height: 1.15; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 18px; color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 28px; margin: 60px 0 16px; font-weight: 700; color: var(--accent); line-height: 1.2; }
+  h3 { font-size: 21px; margin: 24px 0 10px; font-weight: 600; }
+
+  p { margin: 0 0 16px; }
+
+  .big-emoji { font-size: 48px; line-height: 1; margin-bottom: 8px; display: block; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px 28px; box-shadow: var(--shadow); margin-bottom: 16px; }
+  .card-emoji { font-size: 32px; line-height: 1; margin-bottom: 8px; display: block; }
+
+  .scene {
+    background: #faf6ee;
+    border-left: 4px solid var(--accent);
+    padding: 18px 22px;
+    border-radius: 0 10px 10px 0;
+    margin: 20px 0;
+    font-size: 17px;
+  }
+  .scene strong { color: var(--accent); }
+
+  .quote {
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 30px 0;
+    padding: 20px 24px;
+    background: #faf6ee;
+    border-radius: 10px;
+    font-style: italic;
+  }
+
+  .step-list { list-style: none; padding: 0; margin: 24px 0; counter-reset: step; }
+  .step-list li { position: relative; padding: 12px 0 12px 60px; counter-increment: step; }
+  .step-list li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 8px;
+    width: 40px; height: 40px;
+    background: var(--accent); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 18px;
+  }
+  .step-list li strong { display: block; font-size: 18px; margin-bottom: 4px; }
+  .step-list li span { color: var(--muted); font-size: 15px; }
+
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+  .grid-3 .card { padding: 18px; text-align: center; margin-bottom: 0; }
+  .grid-3 .card-emoji { font-size: 40px; }
+  .grid-3 .card strong { font-size: 16px; display: block; margin-bottom: 6px; }
+  .grid-3 .card span { font-size: 14px; color: var(--muted); }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
+  .compare .col { background: var(--card); border-radius: 10px; padding: 18px 22px; border: 1px solid var(--line); }
+  .compare .col.bad { border-left: 4px solid var(--red); }
+  .compare .col.good { border-left: 4px solid var(--green); }
+  .compare h4 { margin: 0 0 8px; font-size: 16px; }
+  .compare ul { margin: 0; padding-left: 18px; font-size: 15px; }
+  .compare li { margin-bottom: 4px; }
+
+  .toc { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; margin-bottom: 30px; }
+  .toc strong { display: block; margin-bottom: 8px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .toc ol { margin: 0; padding-left: 20px; font-size: 16px; }
+  .toc li { margin-bottom: 4px; }
+  .toc a { color: var(--blue); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  footer { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  footer a { color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 30px; }
+    h2 { font-size: 22px; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    body { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/system/">карта системы</a> · <a href="/structure/">полная структура</a></nav>
+
+<span class="big-emoji">🧒</span>
+<h1>Как это работает</h1>
+<p class="subtitle">Если коротко и без терминов — для Вики, мамы, или будущего меня.</p>
+
+<div class="toc">
+  <strong>На этой странице</strong>
+  <ol>
+    <li><a href="#why">Зачем вообще всё это нужно</a></li>
+    <li><a href="#how">Главная картинка</a></li>
+    <li><a href="#day">Как выглядит день</a></li>
+    <li><a href="#week">Как выглядит неделя</a></li>
+    <li><a href="#team">Кто помощники</a></li>
+    <li><a href="#rules">Главные правила</a></li>
+    <li><a href="#why-good">Почему это работает</a></li>
+  </ol>
+</div>
+
+<!-- ============ 1. ЗАЧЕМ ============ -->
+<h2 id="why">1. Зачем вообще всё это нужно</h2>
+
+<p>Представь, что у Андрея в голове живут одновременно:</p>
+
+<ul>
+  <li>🐟 <strong>Fishok</strong> — компания, где он работает и которая платит зарплату</li>
+  <li>🐙 <strong>Octo</strong> — другая компания, через которую он строит будущее</li>
+  <li>💰 <strong>Деньги</strong> — сколько пришло, сколько ушло, что осталось</li>
+  <li>👨‍👩‍👧 <strong>Семья</strong> — Вика, Сара, малыш, переезд в США</li>
+  <li>🎯 <strong>Цели</strong> — на 3 месяца, на год, на 10 лет</li>
+</ul>
+
+<p>Это слишком много, чтобы держать в голове. Если просто <em>пытаться запомнить</em> — половина теряется, важное забывается, мысли скачут.</p>
+
+<div class="quote">
+  «Голова — для того, чтобы <em>думать</em>, а не <em>помнить</em>».
+</div>
+
+<p>Поэтому Андрей построил <strong>систему</strong>, которая помнит за него. А голова — освобождена для мышления.</p>
+
+<!-- ============ 2. ГЛАВНАЯ КАРТИНКА ============ -->
+<h2 id="how">2. Главная картинка</h2>
+
+<p>Представь большой деревянный <strong>стол</strong>. На столе:</p>
+
+<div class="grid-3">
+  <div class="card">
+    <span class="card-emoji">📥</span>
+    <strong>Коробка «новое»</strong>
+    <span>Сюда сыплется всё, что приходит в голову за день</span>
+  </div>
+  <div class="card">
+    <span class="card-emoji">📁</span>
+    <strong>Папки проектов</strong>
+    <span>Fishok, Octo, деньги, семья — каждая своя</span>
+  </div>
+  <div class="card">
+    <span class="card-emoji">📓</span>
+    <strong>Книга решений</strong>
+    <span>Всё важное, что было решено, и почему</span>
+  </div>
+</div>
+
+<p>Андрей в течение дня <strong>кидает всё в коробку «новое»</strong>. Не думая куда положить, не сортируя. Просто: «такси 12 евро», «звонок с Сергеем во вторник», «надо проверить детский сад», «идея для презентации».</p>
+
+<p>Вечером он садится с помощником (AI-команда) и они <strong>вместе разбирают коробку</strong>. Каждую запись — в нужную папку. Что-то — в проект. Что-то — в деньги. Что-то — в книгу решений.</p>
+
+<p>На утро коробка пустая. Голова — лёгкая. Все папки знают свежее состояние.</p>
+
+<!-- ============ 3. ДЕНЬ ============ -->
+<h2 id="day">3. Как выглядит день</h2>
+
+<ol class="step-list">
+  <li>
+    <strong>Утром Андрей встаёт</strong>
+    <span>Он открывает любой проект (Octo, Fishok) — система за 2 секунды показывает ему, что было вчера, что важно сегодня. Он не вспоминает — он <em>видит</em>.</span>
+  </li>
+  <li>
+    <strong>Весь день идёт сырьё</strong>
+    <span>Каждую мысль / трату / задачу / звонок Андрей кидает в коробку. Одной строчкой. Постоянно. Не думая «где правильно записать».</span>
+  </li>
+  <li>
+    <strong>Любая трата → одна фраза</strong>
+    <span>«Обед 18 евро картой» — система сама разносит: в категорию «еда», в конверт «еда и быт», списывает с карты. Готово.</span>
+  </li>
+  <li>
+    <strong>Вечером — «закрытие дня»</strong>
+    <span>Андрей пишет одну команду. AI-команда разбирает коробку, обновляет проекты, пишет короткий итог дня. Время — 5-10 минут.</span>
+  </li>
+  <li>
+    <strong>Спать</strong>
+    <span>Система сама сохранила всё в архив (git commit). Если что-то сломается через месяц — можно вернуться к любому дню.</span>
+  </li>
+</ol>
+
+<div class="scene">
+  <strong>Пример из жизни:</strong> Андрей в кафе. Только что был звонок с партнёром — что-то важное обсудили. Раньше он бы попытался запомнить или открыл бы заметки и долго писал. Сейчас он за 3 секунды пишет в чат:<br><br>
+  <em>«звонок с Сергеем, тестовое предложение через 2 недели, ждать»</em><br><br>
+  Возвращается к кофе. Вечером это превратится в обновление проекта Octo, запись в книге решений, и задачу на следующую неделю — <strong>без участия Андрея</strong>.
+</div>
+
+<!-- ============ 4. НЕДЕЛЯ ============ -->
+<h2 id="week">4. Как выглядит неделя</h2>
+
+<p>В пятницу вечером (или субботу утром) — особая сессия. Не отчёт, не план. <strong>Разговор</strong>.</p>
+
+<p>AI задаёт Андрею вопросы, по одному. Не «что сделал», а «что увидел», «что удивило», «какая гипотеза была — подтвердилась?». Андрей думает вслух. AI копает глубже, спорит, если видит ошибку.</p>
+
+<p>Через 60-90 минут — рождается:</p>
+
+<ul>
+  <li>📝 Запись недели — что было важного, что узнал, что решил</li>
+  <li>📅 План следующей недели — три главные задачи, не больше</li>
+  <li>💡 Одна гипотеза — что хочет проверить на следующей неделе</li>
+</ul>
+
+<p>Без этой сессии — недели сливаются в кашу. С ней — каждая неделя становится <strong>отдельным куском пути</strong>, и видно, куда движешься.</p>
+
+<!-- ============ 5. КОМАНДА ============ -->
+<h2 id="team">5. Кто помощники</h2>
+
+<p>У Андрея нет команды людей. Но есть <strong>AI-команда</strong> — четыре «специалиста», каждый со своей ролью:</p>
+
+<div class="card">
+  <span class="card-emoji">🐙</span>
+  <h3>Operator («операционник»)</h3>
+  <p>Разбирает коробку «новое». Понимает, куда что положить. Обновляет проекты. Работает каждый вечер.</p>
+</div>
+
+<div class="card">
+  <span class="card-emoji">💰</span>
+  <h3>Финдиректор</h3>
+  <p>Следит за деньгами. Считает сколько осталось до конца месяца, сколько накоплено на подушку, через сколько дней закончатся деньги. Подключается, когда речь о деньгах.</p>
+</div>
+
+<div class="card">
+  <span class="card-emoji">🏛</span>
+  <h3>Архитектор</h3>
+  <p>Раз в 2-4 недели приходит и наводит порядок. Смотрит, не появилось ли дублей, не противоречат ли разные документы друг другу, не разрослась ли система хаотично. <strong>Только предлагает</strong> — финальное слово за Андреем.</p>
+</div>
+
+<div class="card">
+  <span class="card-emoji">🐙</span>
+  <h3>Octo-советник</h3>
+  <p>Знает только проект Octo. Не видит ни Fishok, ни деньги, ни семью. Это специально — он играет роль опытного со-основателя в индустрии релокации. Когда Андрею нужен глубокий разбор Octo — зовёт его.</p>
+</div>
+
+<p>Каждый «специалист» видит только то, что ему нужно. Это важно — не путаются контексты, и можно говорить честно. Octo-советник не знает деталей про Fishok — и наоборот.</p>
+
+<!-- ============ 6. ПРАВИЛА ============ -->
+<h2 id="rules">6. Главные правила, которые держат систему</h2>
+
+<div class="card">
+  <h3>📏 Правило роста</h3>
+  <p>Новую папку или файл можно создать <strong>только если</strong>:</p>
+  <ul>
+    <li>текущий файл стал больше 200 строк (слишком большой)</li>
+    <li>появилось 3+ одинаковых артефакта, которые мешают друг другу</li>
+    <li>это явно нужно для одной из трёх главных целей</li>
+  </ul>
+  <p style="margin-top: 12px;"><em>Без триггера — нельзя.</em> Иначе система за полгода превратится в свалку из 500 файлов «на всякий случай».</p>
+</div>
+
+<div class="card">
+  <h3>🚨 Kill-switch (выключатель)</h3>
+  <p>Если 14 дней подряд не было ни одного сохранения в системе — значит, ей не пользуются. Система признаётся <strong>мёртвой</strong>.</p>
+  <p>30 дней нельзя строить новую — сначала разобраться, <em>почему</em> предыдущая не работала. Без этого можно вечно перестраивать, не пользуясь.</p>
+</div>
+
+<div class="card">
+  <h3>🔒 Изоляция</h3>
+  <p>Octo и Fishok не пересекаются. Octo-советник не видит Fishok. Это и про безопасность (нельзя случайно показать клиенту чужое), и про фокус (когда говоришь про Octo — думаешь только про Octo).</p>
+</div>
+
+<div class="card">
+  <h3>📓 Решения — только дописывают, не переписывают</h3>
+  <p>Если Андрей в марте решил одно, а в июне — другое, в книге будут <strong>обе записи</strong>. Видно, как менялось мышление. Это важнее, чем «свежий правильный ответ».</p>
+</div>
+
+<!-- ============ 7. ПОЧЕМУ ХОРОШО ============ -->
+<h2 id="why-good">7. Почему это работает</h2>
+
+<div class="compare">
+  <div class="col bad">
+    <h4>❌ Без системы</h4>
+    <ul>
+      <li>Половина мыслей теряется</li>
+      <li>Каждый понедельник «куда я шёл?»</li>
+      <li>Деньги непонятны, тревога</li>
+      <li>Решения забываются — потом принимаются заново</li>
+      <li>Энергия уходит на «вспоминание»</li>
+      <li>Через год — не видно прогресса</li>
+    </ul>
+  </div>
+  <div class="col good">
+    <h4>✅ С системой</h4>
+    <ul>
+      <li>Всё, что важно — записано</li>
+      <li>Каждое утро — видишь, где находишься</li>
+      <li>Деньги — каждый евро в нужном конверте</li>
+      <li>Решения — со ссылкой на причину</li>
+      <li>Энергия — на мышление, не на «помнить»</li>
+      <li>Через год — видна траектория</li>
+    </ul>
+  </div>
+</div>
+
+<div class="quote">
+  Это не про «инструмент управления задачами». Это про <strong>внешний мозг</strong>, который помнит контекст, а Андрей просто живёт и работает.
+</div>
+
+<p>И ещё одно — <strong>система живёт в обычных текстовых файлах</strong>, в обычной папке на компьютере. Ничего магического. Если завтра пропадёт интернет / сервис / помощник — все данные останутся. Это важно, потому что система должна работать 5-10 лет, а не до следующего апдейта приложения.</p>
+
+<h2>Куда дальше</h2>
+
+<p>Если хочешь увидеть детали — есть три уровня:</p>
+
+<ul style="list-style: none; padding: 0;">
+  <li style="padding: 12px 0; border-bottom: 1px solid var(--line);">
+    <a href="/dashboard/" style="color: var(--blue); text-decoration: none; font-weight: 600;">📊 Дашборд</a>
+    <span style="color: var(--muted);"> — что происходит прямо сейчас</span>
+  </li>
+  <li style="padding: 12px 0; border-bottom: 1px solid var(--line);">
+    <a href="/health/" style="color: var(--blue); text-decoration: none; font-weight: 600;">🩺 Здоровье системы</a>
+    <span style="color: var(--muted);"> — как сама система себя чувствует</span>
+  </li>
+  <li style="padding: 12px 0; border-bottom: 1px solid var(--line);">
+    <a href="/system/" style="color: var(--blue); text-decoration: none; font-weight: 600;">🗺 Карта системы</a>
+    <span style="color: var(--muted);"> — концептуально, с диаграммой</span>
+  </li>
+  <li style="padding: 12px 0; border-bottom: 1px solid var(--line);">
+    <a href="/structure/" style="color: var(--blue); text-decoration: none; font-weight: 600;">🗂 Полная структура</a>
+    <span style="color: var(--muted);"> — все папки и файлы, что для чего</span>
+  </li>
+  <li style="padding: 12px 0;">
+    <a href="/toolbox/" style="color: var(--blue); text-decoration: none; font-weight: 600;">🛠 Toolbox</a>
+    <span style="color: var(--muted);"> — все инструменты и команды</span>
+  </li>
+</ul>
+
+<footer>
+  <p>Если что-то непонятно — это сигнал, что страницу надо улучшить. Пиши.</p>
+  <p><a href="/">← Главная</a></p>
+</footer>
+
+</div>
+</body>
+</html>
