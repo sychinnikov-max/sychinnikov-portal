@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Octo Scoreboard — все цифры воронки</title>
+<meta name="description" content="Полный scoreboard Octo: 7 этапов воронки, конверсии, content & funnel метрики, горячие партнёры.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b;
+    --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c;
+    --red: #b04c4c; --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 40px 24px; }
+  nav.top { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  nav.top a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 16px; color: var(--muted); margin: 0 0 36px; }
+  h2 { font-size: 22px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 17px; margin: 0 0 12px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  td.num { font-weight: 700; font-size: 17px; }
+  td.empty { color: var(--muted); font-style: italic; }
+  .funnel { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 14px 0; }
+  .stage { background: #f0ebe1; border-radius: 8px; padding: 14px 10px; text-align: center; font-size: 13px; }
+  .stage.hot { background: #faf2dd; }
+  .stage h4 { margin: 0 0 8px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.3; }
+  .stage .count { font-size: 24px; font-weight: 700; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.hot { background: #faf2dd; color: var(--amber); }
+  .badge.unmeasured { background: #f9e9e9; color: var(--red); }
+  .placeholder { color: var(--muted); font-style: italic; }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } .funnel { grid-template-columns: 1fr 1fr; } h1 { font-size: 28px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav class="top"><a href="/">← главная</a> · <a href="/octo/">Octo</a></nav>
+
+<h1>📊 Scoreboard</h1>
+<p class="subtitle">Все цифры по проекту Octo. Источник правды: <code>clients/octo/scorecard.md</code>. Обновляется по пятницам или в <code>/weekly-dialogue</code>.</p>
+
+<!-- ===== ВОРОНКА ===== -->
+<h2>Партнёрская воронка — 7 этапов</h2>
+<div class="funnel">
+  <div class="stage"><h4>1. Контакт</h4><div class="count">—</div></div>
+  <div class="stage"><h4>2. Квалификация</h4><div class="count">—</div></div>
+  <div class="stage"><h4>3. УТП отправлено</h4><div class="count">—</div></div>
+  <div class="stage"><h4>4. Подкаст</h4><div class="count">—</div></div>
+  <div class="stage hot"><h4>5. Маркетинг-разбор ⭐</h4><div class="count">5</div></div>
+  <div class="stage"><h4>6. Готов к запуску</h4><div class="count">1</div></div>
+  <div class="stage"><h4>7. Первый клиент ✅</h4><div class="count">0</div></div>
+</div>
+<p style="font-size: 13px; color: var(--muted);"><strong>Всего активных:</strong> 94 партнёра · <strong>В архиве:</strong> 20 · <strong>Этап 5 «Маркетинг-разбор»</strong> — новый обязательный этап с 04.05.2026.</p>
+
+<!-- ===== КОНВЕРСИИ ===== -->
+<h2>Конверсии между этапами</h2>
+<div class="card">
+  <p style="margin-top: 0;">Это <strong>главный пробел</strong> в дашборде. До замеров реальной конверсии — летим вслепую. <span class="badge unmeasured">не замерено</span></p>
+  <table>
+    <thead><tr><th>Переход</th><th>Конверсия</th><th>Замер начат</th></tr></thead>
+    <tbody>
+      <tr><td>Подкаст → Маркетинг-разбор</td><td class="empty">—</td><td class="empty">не запущен</td></tr>
+      <tr><td>Маркетинг-разбор → Готов</td><td class="empty">—</td><td class="empty">не запущен</td></tr>
+      <tr><td>Готов → Первый клиент</td><td class="empty">—</td><td class="empty">не запущен</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size: 13px; color: var(--muted); margin-bottom: 0;"><strong>Контекст:</strong> 80% — допущение Сергея, не данные. Первая задача GD-фокуса: поставить замер начиная с этапа 4 → 5.</p>
+</div>
+
+<!-- ===== ГОРЯЧИЕ ПАРТНЁРЫ ===== -->
+<h2>Горячие партнёры</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Партнёр</th><th>Этап</th><th>Тип</th><th>Следующее действие</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Anderson/81</strong></td><td><span class="badge hot">6 (ближайший к ✅)</span></td><td>trust-based expert</td><td class="placeholder">заполнить</td></tr>
+      <tr><td><strong>Viktor/7</strong></td><td><span class="badge hot">5</span></td><td class="placeholder">—</td><td class="placeholder">заполнить</td></tr>
+      <tr><td><strong>Elena/5</strong></td><td><span class="badge hot">5</span></td><td class="placeholder">—</td><td class="placeholder">заполнить</td></tr>
+      <tr><td><strong>FRANCABILITY/11</strong></td><td><span class="badge hot">5</span></td><td class="placeholder">—</td><td class="placeholder">заполнить</td></tr>
+      <tr><td><strong>Migron pro/30</strong></td><td><span class="badge hot">5</span></td><td class="placeholder">—</td><td class="placeholder">заполнить</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size: 13px; color: var(--muted); margin-bottom: 0;">Детальные профили: <a href="/octo/people.html" style="color: var(--blue);">people.html</a> + файлы <code>clients/octo/people/partners/&lt;name&gt;.md</code></p>
+</div>
+
+<!-- ===== КОНТЕНТ ===== -->
+<h2>Content &amp; Funnel</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>Производство контента</h3>
+    <table>
+      <tbody>
+        <tr><td>Подкастов записано (нед/мес)</td><td class="num placeholder">—</td></tr>
+        <tr><td>Подкастов опубликовано</td><td class="num placeholder">—</td></tr>
+        <tr><td>Маркетинг-разборов проведено</td><td class="num placeholder">—</td></tr>
+        <tr><td>Instagram-эфиры</td><td class="num">июнь — запланирован</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h3>Воронка контента (новая модель)</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-top: 0;">podcast → marketing consultation → integration strategy → launch</p>
+    <table>
+      <tbody>
+        <tr><td>Подкаст (записан)</td><td class="num placeholder">—</td></tr>
+        <tr><td>→ Marketing consultation</td><td class="num placeholder">—</td></tr>
+        <tr><td>→ Integration strategy</td><td class="num placeholder">—</td></tr>
+        <tr><td>→ Launch</td><td class="num placeholder">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== КЛИЕНТЫ В ЗАПУСКЕ ===== -->
+<h2>Клиенты в запуске</h2>
+<div class="card">
+  <p class="placeholder" style="margin-top: 0;">Пока 0 клиентов. Когда появится первый — здесь будет: клиент / через какого партнёра / стадия / дедлайн.</p>
+</div>
+
+<footer>
+  <p>Источник всех цифр: <code>clients/octo/scorecard.md</code>. Если в этом файле пусто — здесь тоже пусто. Заполнять — в <code>/weekly-dialogue</code> или вручную после звонков с Татьяной.</p>
+  <p><a href="/octo/">← Octo</a> · <a href="/octo/people.html">People →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

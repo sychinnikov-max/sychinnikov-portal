@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как работает система Octo — гайд</title>
+<meta name="description" content="Гайд по структуре проекта Octo: папки, файлы, скиллы, агент octo-advisor. Простыми словами.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b;
+    --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c;
+    --red: #b04c4c; --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; font-size: 15px; }
+  .container { max-width: 980px; margin: 0 auto; padding: 40px 24px; }
+  nav.top { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  nav.top a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 17px; color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 24px; margin: 50px 0 18px; font-weight: 600; color: var(--accent); border-bottom: 2px solid var(--line); padding-bottom: 8px; }
+  h3 { font-size: 18px; margin: 24px 0 10px; font-weight: 600; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .card.skill { border-left: 4px solid var(--accent); }
+  .card.agent { border-left: 4px solid var(--purple); }
+  .card.folder { border-left: 4px solid var(--blue); }
+
+  .file-list { list-style: none; padding: 0; margin: 0; }
+  .file-list li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .file-list li:last-child { border-bottom: none; }
+  .file-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; color: var(--purple); font-weight: 600; display: inline-block; margin-bottom: 4px; }
+  .file-desc { font-size: 14px; color: var(--ink); }
+  .file-when { font-size: 13px; color: var(--muted); margin-top: 4px; font-style: italic; }
+
+  .principle { background: #faf6ee; border-left: 3px solid var(--accent); padding: 14px 18px; margin: 12px 0; font-size: 14px; border-radius: 0 6px 6px 0; }
+
+  .flow-step { display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 14px 0; align-items: start; }
+  .flow-num { background: var(--accent); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; }
+  .flow-content h4 { margin: 0 0 6px; font-size: 16px; }
+  .flow-content p { margin: 0; font-size: 14px; }
+
+  .triggers { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .trig { background: #f0ebe1; color: var(--ink); padding: 3px 10px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  .badge.opus { background: #f3e9f5; color: var(--purple); }
+  .badge.sonnet { background: #eaf1ee; color: var(--green); }
+  footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 700px) { h1 { font-size: 28px; } .flow-step { grid-template-columns: 40px 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav class="top"><a href="/">← главная</a> · <a href="/octo/">Octo</a></nav>
+
+<h1>🗺 Как работает система Octo</h1>
+<p class="subtitle">Подробный гайд по структуре. Простыми словами: что это за папки, для чего файлы, как работают скилл и агент. Чтобы я (или будущий человек в команде) мог зайти и понять всё за 15 минут.</p>
+
+<div class="principle">
+  <strong>Главный принцип:</strong> система — это <strong>контекст</strong>, а не «папка с документами». Каждый файл существует чтобы при работе с конкретной задачей я не тратил энергию вспоминать. Зашёл — увидел — действую.
+</div>
+
+<!-- ===== СТРУКТУРА ПАПКИ ===== -->
+<h2>1. Структура папки <code>clients/octo/</code></h2>
+<p>Это база. Лежит локально в репозитории AndreiOS. Каждый файл имеет одну ясную задачу — не путать с другими.</p>
+
+<h3>Самое важное (читаю каждый раз)</h3>
+<div class="card folder">
+  <ul class="file-list">
+    <li>
+      <span class="file-name">CLAUDE.md</span>
+      <div class="file-desc"><strong>Карта проекта.</strong> Объясняет Claude, где что лежит, как работают правила. ≤150 строк, без воды. Читается автоматически при работе в этой папке.</div>
+      <div class="file-when">Меняется редко — когда меняется сама архитектура.</div>
+    </li>
+    <li>
+      <span class="file-name">state.md</span>
+      <div class="file-desc"><strong>Оперативный снимок.</strong> Что сейчас происходит: моя роль, цель на 30 дней, активные задачи (P1/P2/P3), статус мини-проектов, bottleneck. 1-2 страницы.</div>
+      <div class="file-when">Обновляется ежедневно в <code>/day-close</code> или вручную.</div>
+    </li>
+    <li>
+      <span class="file-name">scorecard.md</span>
+      <div class="file-desc"><strong>Метрики.</strong> Все цифры по 7 этапам воронки, конверсии, content/funnel. EOS Scoreboard в нашем масштабе.</div>
+      <div class="file-when">Обновляется по пятницам или в <code>/weekly-dialogue</code>.</div>
+    </li>
+    <li>
+      <span class="file-name">issues.md</span>
+      <div class="file-desc"><strong>Открытые проблемы и блокеры.</strong> Не задачи (они в state.md), а вопросы, на которые нужно решение. EOS Issues List.</div>
+      <div class="file-when">Append-first: добавляем сразу, закрываем когда решено (с ссылкой на ADR).</div>
+    </li>
+  </ul>
+</div>
+
+<h3>Стратегические слои (читаю по запросу)</h3>
+<div class="card folder">
+  <ul class="file-list">
+    <li>
+      <span class="file-name">sergey-partnership.md</span>
+      <div class="file-desc"><strong>Equity-вектор через Сергея.</strong> Меню моделей A/B/C/D, план активации в 4 шага, что нельзя, вопросы к Сергею. <strong>Главный стратегический актив.</strong></div>
+    </li>
+    <li>
+      <span class="file-name">decisions.md</span>
+      <div class="file-desc"><strong>ADR-журнал.</strong> Каждое значимое решение — отдельная запись с контекстом, альтернативами, последствиями. <strong>Append-only</strong> — не редактируем уже записанные.</div>
+    </li>
+    <li>
+      <span class="file-name">product.md</span>
+      <div class="file-desc">ICP, воронка 7 этапов, репозиционирование («оператор проектного кейса»), модель partner-driven growth.</div>
+    </li>
+    <li>
+      <span class="file-name">company.md</span>
+      <div class="file-desc">Финансы <strong>компании</strong> Octo (P&amp;L, выручка, моя компенсация). Не путать с моими личными финансами — те в корневом <code>money.md</code>, который Claude этого проекта не видит.</div>
+    </li>
+    <li>
+      <span class="file-name">weekly.md</span>
+      <div class="file-desc">Рамка L10 — формат еженедельного синхрона с Сергеем (Hard Goals, Scoreboard, Rocks, Partners, Issues, To-do recap). EOS-практика в нашем масштабе.</div>
+    </li>
+    <li>
+      <span class="file-name">shared.md</span>
+      <div class="file-desc">Публичная картина — что ОК показывать Сергею, Татьяне, партнёрам.</div>
+    </li>
+    <li>
+      <span class="file-name">private.md</span>
+      <div class="file-desc"><strong>Моя разведка, гипотезы, скрытые риски.</strong> Не показывать никому.</div>
+    </li>
+  </ul>
+</div>
+
+<h3>Папки</h3>
+<div class="card folder">
+  <ul class="file-list">
+    <li>
+      <span class="file-name">inbox/</span>
+      <div class="file-desc"><strong>Единая точка сырья.</strong> Кидаю сюда что угодно: транскрипты митингов, скрины CRM, файлы партнёров, мысли. Claude (через skill <code>/octo-intake</code>) разбирает по правилам.</div>
+    </li>
+    <li>
+      <span class="file-name">meetings/</span>
+      <div class="file-desc">Разобранные транскрипты звонков по схеме <code>YYYY-MM-DD-&lt;тема&gt;.md</code>. Туда же — ключевые решения извлечённые в decisions.md.</div>
+    </li>
+    <li>
+      <span class="file-name">people/</span>
+      <div class="file-desc">Команда (<code>tatyana.md</code>) и горячие/equity-кандидаты в <code>partners/</code>. Не вся CRM — только те, кто заслуживает отдельного файла.</div>
+    </li>
+    <li>
+      <span class="file-name">work/</span>
+      <div class="file-desc">Мини-проекты с дедлайнами: <code>website/</code>, <code>presentations/</code>, <code>crm/</code>. Внутри каждого — план, артефакты, состояние.</div>
+    </li>
+    <li>
+      <span class="file-name">artifacts/</span>
+      <div class="file-desc">Готовые переиспользуемые ассеты: deck'и, скрипты, шаблоны писем, one-pager Partnership Framework (когда будет готов).</div>
+    </li>
+  </ul>
+</div>
+
+<h3>Чего намеренно нет (по правилу роста)</h3>
+<div class="card">
+  <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+    <li><code>areas/</code> — пока нет. Создаётся когда конкретная зона перерастёт раздел в <code>state.md</code> (партнёрская сеть, sales, marketing-разбор, контент, sites/SEO, трафик, CRM)</li>
+    <li><code>agents/</code> — пока только один <code>octo-advisor</code> в <code>.claude/agents/</code>. Sub-agents под каждый домен (sales / marketing / SEO) — рано</li>
+    <li><code>departments/</code> — рано. Команда из 3 человек. При x10 — добавим</li>
+  </ul>
+</div>
+
+<!-- ===== SKILL ===== -->
+<h2>2. Skill <code>/octo-intake</code></h2>
+
+<div class="card skill">
+  <h3>📥 /octo-intake — разбор сырья</h3>
+  <div class="triggers">
+    <span class="trig">/octo-intake</span>
+    <span class="trig">«разбери Octo inbox»</span>
+    <span class="trig">«распили инбокс Octo»</span>
+  </div>
+  <p style="margin: 14px 0;"><strong>Что делает:</strong> читает всё что я положил в <code>clients/octo/inbox/</code>, классифицирует по таблице правил, показывает план раздачи на ревью, после моего «да» — раскидывает по нужным местам.</p>
+
+  <h4 style="margin-top: 16px;">Логика разбора (упрощённо):</h4>
+  <table>
+    <thead><tr><th>Что в inbox</th><th>Куда уходит</th></tr></thead>
+    <tbody>
+      <tr><td>Транскрипт встречи (Granola, Zoom)</td><td><code>meetings/YYYY-MM-DD-&lt;тема&gt;.md</code> + решения в <code>decisions.md</code></td></tr>
+      <tr><td>Решение / развилка</td><td><code>decisions.md</code> по ADR-шаблону</td></tr>
+      <tr><td>Новая задача / действие</td><td><code>state.md</code> в P1/P2/P3</td></tr>
+      <tr><td>Цифры компании</td><td><code>company.md</code></td></tr>
+      <tr><td>Метрики воронки</td><td><code>scorecard.md</code></td></tr>
+      <tr><td>Открытая проблема</td><td><code>issues.md</code></td></tr>
+      <tr><td>Файл-артефакт (deck/pdf)</td><td><code>artifacts/</code> + ссылка</td></tr>
+      <tr><td>Сырая идея</td><td><code>private.md</code></td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size: 13px; color: var(--muted); margin-top: 14px;">Также вызывается автоматически в <code>/day-close</code> — отдельным шагом перед основным разбором.</p>
+</div>
+
+<!-- ===== АГЕНТ ===== -->
+<h2>3. Sub-agent <code>octo-advisor</code></h2>
+
+<div class="card agent">
+  <h3>🐙 octo-advisor — внутренний советник <span class="badge sonnet">Sonnet</span></h3>
+  <p style="font-size: 15px; margin: 10px 0;"><strong>Архетип:</strong> опытный фаундер mobility/relocation отрасли (прошёл 0 → $10M+ через partner-driven growth) + AI engineer (context-engineering, Claude Code). EOS-mindset.</p>
+
+  <h4 style="margin-top: 16px;">Что видит / не видит</h4>
+  <table>
+    <thead><tr><th>Видит</th><th>НЕ видит</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>
+          Всё в <code>clients/octo/</code>:<br>
+          CLAUDE.md, state, scorecard, issues, decisions,<br>
+          sergey-partnership, product, company, weekly,<br>
+          shared, private, inbox, meetings, people, work, artifacts
+        </td>
+        <td>
+          <code>me.md</code>, <code>money.md</code>, <code>family.md</code>,<br>
+          корневой <code>decisions.md</code>, <code>this-week.md</code>,<br>
+          <code>clients/fishok/*</code>, <code>practice/*</code>,<br>
+          <code>archive/*</code>, корневой <code>inbox/</code>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top: 16px;">Что может делать</h4>
+  <ul style="padding-left: 20px; font-size: 14px;">
+    <li><strong>Читать</strong> всё в Octo</li>
+    <li><strong>Править</strong> state, scorecard, issues, people, weekly</li>
+    <li><strong>Добавлять</strong> новые ADR в decisions.md (только append)</li>
+    <li><strong>Предлагать</strong> правки в CLAUDE.md (не вносить молча)</li>
+    <li><strong>Вызывать</strong> skill <code>/octo-intake</code></li>
+  </ul>
+
+  <h4 style="margin-top: 16px;">Как запустить</h4>
+  <div class="triggers">
+    <span class="trig">«запусти octo-advisor»</span>
+    <span class="trig">«нужен совет по Octo»</span>
+    <span class="trig">«зови советника»</span>
+  </div>
+  <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Запускается из любой сессии — он откроет своё изолированное окно. Полная конфигурация в <code>.claude/agents/octo-advisor.md</code>.</p>
+</div>
+
+<!-- ===== FLOW ===== -->
+<h2>4. Как это работает в обычный день</h2>
+
+<div class="flow-step">
+  <div class="flow-num">1</div>
+  <div class="flow-content">
+    <h4>Сырьё в течение дня</h4>
+    <p>После звонка с Татьяной — Granola-транскрипт в <code>inbox/granola/</code>. Скриншот CRM — туда же. Идея «попробовать новый формат разбора» — заметка в inbox/. Имя свободное, формат любой.</p>
+  </div>
+</div>
+
+<div class="flow-step">
+  <div class="flow-num">2</div>
+  <div class="flow-content">
+    <h4>Разбор по запросу</h4>
+    <p>Когда хочу разобрать — пишу <code>/octo-intake</code>. Claude читает inbox, показывает план: «транскрипт → meetings/, метрики из скрина → scorecard, идея → private». Я говорю «да» — он раскидывает.</p>
+  </div>
+</div>
+
+<div class="flow-step">
+  <div class="flow-num">3</div>
+  <div class="flow-content">
+    <h4>Вечером <code>/day-close</code></h4>
+    <p>Это глобальный ритуал AndreiOS, не только Octo. Шаг 2a — проверяет проектные inbox-ы. Если в octo/inbox/ что-то осталось — вызывает <code>/octo-intake</code> до основного разбора корневого <code>inbox/today.md</code>.</p>
+  </div>
+</div>
+
+<div class="flow-step">
+  <div class="flow-num">4</div>
+  <div class="flow-content">
+    <h4>Раз в неделю — синхронизация</h4>
+    <p>В <code>/weekly-dialogue</code> обновляю <code>scorecard.md</code> (цифры), пересматриваю <code>issues.md</code> (что закрыли, что добавилось), смотрю <code>state.md</code> (актуальные задачи). Опционально — запускаю <code>octo-advisor</code> для глубокого разбора.</p>
+  </div>
+</div>
+
+<div class="flow-step">
+  <div class="flow-num">5</div>
+  <div class="flow-content">
+    <h4>При стратегических развилках</h4>
+    <p>Перед серьёзным разговором с Сергеем или решением по продукту — открываю <code>octo-advisor</code>. Он читает контекст, задаёт вопросы-зеркала, помогает увидеть слепые пятна. После — фиксирую решение в <code>decisions.md</code>.</p>
+  </div>
+</div>
+
+<footer>
+  <p>Этот гайд — карта системы. Если что-то меняется в архитектуре проекта Octo — обновляется здесь. Источник правды: реальные файлы в <code>clients/octo/</code>, эта страница — их объяснение.</p>
+  <p><a href="/octo/">← Octo</a> · <a href="/octo/future.html">Future / x10 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

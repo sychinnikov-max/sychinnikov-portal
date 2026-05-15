@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Octo — командный мостик</title>
+<meta name="description" content="Состояние проекта Octo Relocate на сегодня: Northstar, воронка, ближайший ход.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --green: #4a7c59;
+    --blue: #3a5a8c;
+    --purple: #6b4a8c;
+    --red: #b04c4c;
+    --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 40px 24px; }
+  nav.top { font-size: 14px; color: var(--muted); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  nav.top a { color: var(--blue); text-decoration: none; }
+  nav.top a:hover { text-decoration: underline; }
+  .updated { font-size: 13px; color: var(--muted); }
+
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 16px; color: var(--muted); margin: 0 0 36px; }
+  h2 { font-size: 20px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 17px; margin: 0 0 12px; font-weight: 600; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; box-shadow: var(--shadow); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+  /* Northstar */
+  .northstar { background: linear-gradient(135deg, #faf6ee 0%, #f0ebe1 100%); border: 1px solid var(--accent); border-radius: 12px; padding: 28px 32px; margin-bottom: 28px; }
+  .northstar-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .northstar-text { font-size: 22px; font-weight: 600; line-height: 1.35; margin-bottom: 14px; }
+  .northstar-tracks { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; }
+  .track { display: flex; align-items: center; gap: 8px; }
+  .indicator { display: inline-block; width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .indicator.green { background: var(--green); }
+  .indicator.amber { background: var(--amber); }
+  .indicator.red { background: var(--red); }
+
+  /* Stats */
+  .stat { padding: 8px 0; }
+  .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-size: 32px; font-weight: 700; margin-top: 4px; }
+  .stat-value.red { color: var(--red); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.amber { color: var(--amber); }
+  .stat-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .delta { font-size: 13px; margin-top: 2px; }
+  .delta.up { color: var(--green); }
+  .delta.down { color: var(--red); }
+  .delta.flat { color: var(--muted); }
+
+  /* P1 block */
+  .p1-block { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; padding: 24px 28px; margin: 14px 0 28px; }
+  .p1-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .p1-text { font-size: 20px; font-weight: 600; line-height: 1.4; }
+  .p1-meta { font-size: 14px; color: var(--muted); margin-top: 10px; }
+
+  /* Roadmap bar */
+  .roadmap { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin: 14px 0; border-radius: 8px; overflow: hidden; }
+  .phase { padding: 16px 18px; font-size: 14px; }
+  .phase-num { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.8; font-weight: 700; }
+  .phase-name { font-weight: 700; margin: 4px 0; font-size: 16px; }
+  .phase-desc { font-size: 13px; opacity: 0.95; line-height: 1.4; }
+  .phase.active { background: var(--accent); color: white; }
+  .phase.next { background: #f0ebe1; color: var(--ink); }
+  .phase.future { background: #eaeae5; color: var(--muted); }
+
+  /* Section cards (nav) */
+  .section-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .section-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; box-shadow: var(--shadow); transition: transform 0.15s, box-shadow 0.15s; text-decoration: none; color: var(--ink); display: block; }
+  .section-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
+  .section-card h3 { color: var(--ink); margin: 0 0 6px; font-size: 17px; }
+  .section-card p { color: var(--muted); font-size: 14px; margin: 0; }
+  .section-card .emoji { font-size: 22px; margin-bottom: 8px; display: block; }
+
+  /* Footer */
+  footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 800px) {
+    .grid-2, .grid-3, .grid-4, .section-grid { grid-template-columns: 1fr; }
+    .roadmap { grid-template-columns: 1fr; }
+    h1 { font-size: 28px; }
+    .northstar-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav class="top">
+  <span><a href="/">← главная</a> · <a href="/dashboard/">общий дашборд</a> · <a href="/system/">AndreiOS</a></span>
+  <span class="updated">Octo · обновлено 2026-05-15 (вручную)</span>
+</nav>
+
+<h1>🐙 Octo Relocate</h1>
+<p class="subtitle">Командный мостик: где мы сегодня и куда я толкаю компанию.</p>
+
+<!-- ===== NORTHSTAR ===== -->
+<div class="northstar">
+  <div class="northstar-label">Главная цель к сентябрю 2026</div>
+  <div class="northstar-text">Первый клиент из инкубатора Сергея с equity-долей <strong>ИЛИ</strong> подписанный Partnership Framework на расширенный формат.</div>
+  <div class="northstar-tracks">
+    <div class="track"><span class="indicator amber"></span><span><strong>Трек A</strong> — первый клиент инкубатора · ожидаем тестовое предложение</span></div>
+    <div class="track"><span class="indicator amber"></span><span><strong>Трек B</strong> — Partnership Framework one-pager · в подготовке (модель C)</span></div>
+  </div>
+</div>
+
+<!-- ===== 3 ЦИФРЫ ВОРОНКИ ===== -->
+<h2>Пульс воронки</h2>
+<div class="grid-3">
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Активных партнёров</div>
+      <div class="stat-value">94</div>
+      <div class="stat-sub">из 114 всего · 20 в архиве</div>
+      <div class="delta flat">Δ неделя: не замерено</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Горячих (этап 5+)</div>
+      <div class="stat-value amber">5</div>
+      <div class="stat-sub">Anderson, Viktor, Elena, FRANCABILITY, Migron pro</div>
+      <div class="delta flat">Δ неделя: —</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Клиентов в запуске</div>
+      <div class="stat-value red">0</div>
+      <div class="stat-sub">первый клиент = критическое событие</div>
+      <div class="delta flat">цель Q3: ≥1</div>
+    </div>
+  </div>
+</div>
+<p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Все цифры по 7-этапной воронке — на <a href="/octo/scoreboard.html" style="color: var(--blue);">scoreboard →</a></p>
+
+<!-- ===== СЛЕДУЮЩИЙ ХОД ===== -->
+<div class="p1-block">
+  <div class="p1-label">Следующий ход (один P1 на эту неделю)</div>
+  <div class="p1-text">Подготовить структуру и сценарий маркетинг-разбора партнёра</div>
+  <div class="p1-meta">Это новый обязательный этап воронки (ADR-2026-05-04). Без чёткого сценария — узкое место для всей фазы 1 «Оцифровка». Дедлайн внутренний: до конца мая.</div>
+</div>
+
+<!-- ===== ROADMAP 90 ДНЕЙ ===== -->
+<h2>Roadmap 90 дней</h2>
+<div class="roadmap">
+  <div class="phase active">
+    <div class="phase-num">Фаза 1 · сейчас</div>
+    <div class="phase-name">Май — Оцифровка</div>
+    <div class="phase-desc">Управляемая воронка с замеряемой конверсией. Татьяна выходит на самостоятельный operator layer. Partnership Framework one-pager.</div>
+  </div>
+  <div class="phase next">
+    <div class="phase-num">Фаза 2 · следующий шаг</div>
+    <div class="phase-name">Июнь — Качество + масштаб</div>
+    <div class="phase-desc">Улучшить узкое место воронки, масштабировать партнёрскую базу, обучение партнёров. Запуск AI-агента партнёрской воронки.</div>
+  </div>
+  <div class="phase future">
+    <div class="phase-num">Фаза 3 · горизонт</div>
+    <div class="phase-name">Июль — Продукт для инкубатора</div>
+    <div class="phase-desc">Кейс Octo «до/после», описание Operational Foundation Module, новые условия с Сергеем — переход на partnership-модель.</div>
+  </div>
+</div>
+
+<!-- ===== РАЗДЕЛЫ БАЗЫ ===== -->
+<h2>Разделы базы знаний</h2>
+<div class="section-grid">
+  <a href="/octo/scoreboard.html" class="section-card">
+    <span class="emoji">📊</span>
+    <h3>Scoreboard</h3>
+    <p>Все цифры по 7 этапам, конверсии, content/funnel метрики, горячие партнёры.</p>
+  </a>
+  <a href="/octo/decisions.html" class="section-card">
+    <span class="emoji">🎯</span>
+    <h3>Decisions &amp; Bets</h3>
+    <p>Лента активных ADR — почему я что-то решил полгода назад.</p>
+  </a>
+  <a href="/octo/people.html" class="section-card">
+    <span class="emoji">👥</span>
+    <h3>People &amp; Sergey</h3>
+    <p>Татьяна, горячая пятёрка партнёров, equity-канал Сергея.</p>
+  </a>
+  <a href="/octo/system.html" class="section-card">
+    <span class="emoji">🗺</span>
+    <h3>Гайд по системе</h3>
+    <p>Структура папок простыми словами, агент octo-advisor, /octo-intake skill, flow работы.</p>
+  </a>
+  <a href="/octo/future.html" class="section-card">
+    <span class="emoji">🚀</span>
+    <h3>Future / x10</h3>
+    <p>Placeholders под Financials, Org &amp; Roles, AI Layer, сценарий роста компании в 10 раз.</p>
+  </a>
+  <a href="/dashboard/" class="section-card">
+    <span class="emoji">📍</span>
+    <h3>Общий дашборд</h3>
+    <p>Octo в контексте всей AndreiOS: финансы, цели 90 дней, Fishok, pipeline.</p>
+  </a>
+</div>
+
+<!-- ===== ЧТО ПОД НАБЛЮДЕНИЕМ ===== -->
+<h2>Что под наблюдением</h2>
+<div class="grid-3">
+  <div class="card">
+    <h3 style="color: var(--red);">Конверсия воронки не замерена</h3>
+    <p style="font-size: 14px; margin: 0;">80% — допущение Сергея. Пока не замерим — летим вслепую. Первая метрика, которую надо поставить.</p>
+  </div>
+  <div class="card">
+    <h3 style="color: var(--amber);">Compensation Андрея — открыт</h3>
+    <p style="font-size: 14px; margin: 0;">€1К фикс + до €3К бонус (при €50К/мес выручке). Бонусную планку компания пока не пробила. Формальный контракт не зафиксирован.</p>
+  </div>
+  <div class="card">
+    <h3 style="color: var(--amber);">Татьяна — без должностных / ЦКП / KPI</h3>
+    <p style="font-size: 14px; margin: 0;">Прошла испытательный срок. Дальше без формализации = риск разрушения роли при росте.</p>
+  </div>
+</div>
+
+<footer>
+  <p>Этот мостик обновляется вручную. В будущем подключим к state.md / scorecard.md для авто-обновления.</p>
+  <p><a href="/">← Главная sychinnikov.com</a> · <a href="/octo/system.html">Как работает система Octo →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

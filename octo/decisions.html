@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Octo Decisions &amp; Bets</title>
+<meta name="description" content="Журнал стратегических решений по Octo: ADR-записи, активные ставки, отменённые.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b;
+    --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c;
+    --red: #b04c4c; --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 15px; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 40px 24px; }
+  nav.top { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  nav.top a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 16px; color: var(--muted); margin: 0 0 36px; }
+  h2 { font-size: 22px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  .adr { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 16px; border-left: 4px solid var(--accent); }
+  .adr.cancelled { border-left-color: var(--muted); opacity: 0.7; }
+  .adr.watching { border-left-color: var(--amber); }
+  .adr-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .adr-id { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--purple); font-weight: 600; }
+  .adr-title { font-size: 18px; font-weight: 600; margin: 4px 0 12px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.active { background: #e9f1ec; color: var(--green); }
+  .badge.watching { background: #faf2dd; color: var(--amber); }
+  .badge.cancelled { background: #eef1ee; color: var(--muted); }
+  .meta-row { display: flex; gap: 14px; font-size: 13px; color: var(--muted); margin-bottom: 12px; flex-wrap: wrap; }
+  .adr-body { font-size: 14px; line-height: 1.6; }
+  .adr-body strong { color: var(--ink); }
+  .adr-section { margin: 10px 0; }
+  .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+  .pros, .cons { background: #faf6ee; padding: 10px 14px; border-radius: 6px; font-size: 13px; }
+  .pros strong { color: var(--green); }
+  .cons strong { color: var(--red); }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .principle { background: #faf6ee; border-left: 3px solid var(--accent); padding: 14px 18px; margin: 12px 0; font-size: 14px; border-radius: 0 6px 6px 0; }
+  footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 700px) { .pros-cons { grid-template-columns: 1fr; } h1 { font-size: 28px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav class="top"><a href="/">← главная</a> · <a href="/octo/">Octo</a></nav>
+
+<h1>🎯 Decisions &amp; Bets</h1>
+<p class="subtitle">Журнал значимых решений по Octo (ADR). Зачем: через полгода я не вспомню логику ни одного. Источник: <code>clients/octo/decisions.md</code> · append-only.</p>
+
+<div class="principle">
+  <strong>Правило:</strong> ADR не редактируются. Если решение изменилось — пишется НОВЫЙ ADR со ссылкой на старый.
+</div>
+
+<!-- ===== АКТИВНЫЕ СТАВКИ ===== -->
+<h2>Активные ставки</h2>
+
+<div class="adr">
+  <div class="adr-header">
+    <span class="adr-id">ADR-2026-05-11</span>
+    <span class="badge active">в работе</span>
+  </div>
+  <div class="adr-title">Эволюция модели — partner-driven growth company</div>
+  <div class="meta-row"><span><strong>Кто:</strong> Андрей (фиксация), Сергей (подтверждение)</span></div>
+  <div class="adr-body">
+    <div class="adr-section"><strong>Контекст:</strong> До 11.05 Octo воспринимался как «компания + сеть рефералов». Стало понятно, что суть глубже.</div>
+    <div class="adr-section"><strong>Решение:</strong> Octo формулируется как partner-driven growth company. Новая воронка: podcast → marketing consultation → integration strategy → launch. Главная ценность: audience monetization + partner enablement, не передача лидов.</div>
+    <div class="adr-section"><strong>Последствия:</strong> Меняется коммуникация на этапе квалификации. Появляются типы партнёров: scalable growth vs trust-based expert.</div>
+    <div class="adr-section"><strong>Открыто:</strong> разные flow onboarding под разные типы партнёров.</div>
+  </div>
+</div>
+
+<div class="adr">
+  <div class="adr-header">
+    <span class="adr-id">ADR-2026-05-06</span>
+    <span class="badge active">стратегическое</span>
+  </div>
+  <div class="adr-title">Equity &gt; Cash в стратегии клиентов</div>
+  <div class="meta-row"><span><strong>Кто:</strong> Андрей</span></div>
+  <div class="adr-body">
+    <div class="adr-section"><strong>Контекст:</strong> При горизонте 7 лет к $10М чистый консалтинг-доход не приводит к цели даже при идеальном сценарии.</div>
+    <div class="adr-section"><strong>Решение:</strong> Каждый новый клиент оценивается через призму «можно ли получить долю?». Если нет — это разовая сделка для cashflow, не стратегическая.</div>
+    <div class="adr-section"><strong>Octo-конкретика:</strong> Сергей + инкубатор — главный equity-актив. Не «ещё один клиент», а доступ к десяткам стартапов. См. <code>sergey-partnership.md</code>.</div>
+  </div>
+</div>
+
+<div class="adr">
+  <div class="adr-header">
+    <span class="adr-id">ADR-2026-05-04</span>
+    <span class="badge active">в работе</span>
+  </div>
+  <div class="adr-title">Маркетинг-разбор как обязательный этап воронки</div>
+  <div class="meta-row"><span><strong>Кто:</strong> Андрей, Сергей</span></div>
+  <div class="adr-body">
+    <div class="adr-section"><strong>Контекст:</strong> Подкаст работал как финальная точка контакта. Конверсия в первого клиента после подкаста была близка к нулю. Партнёры уходили без понимания, как продавать продукт.</div>
+    <div class="adr-section"><strong>Решение:</strong> Между подкастом и «готов к запуску» добавляется обязательный этап — маркетинг-разбор партнёра. Сергей приглашает, Андрей проводит.</div>
+    <div class="pros-cons">
+      <div class="pros"><strong>+ Плюсы:</strong> Партнёр выходит с конкретным контент-планом. Замеряемая метрика: конверсия подкаст → разбор.</div>
+      <div class="cons"><strong>− Минусы:</strong> Андрей тратит 1 час на партнёра вместо 0. Нет структуры разбора (открыто).</div>
+    </div>
+    <div class="adr-section"><strong>Альтернативы (отклонены):</strong> Усилить подкаст (не масштабируется). Дать партнёру шаблонные материалы (не привязывает к нашему предложению).</div>
+  </div>
+</div>
+
+<div class="adr">
+  <div class="adr-header">
+    <span class="adr-id">ADR-2026-05-04</span>
+    <span class="badge active">внедрено</span>
+  </div>
+  <div class="adr-title">Полная переработка CRM (Google Sheet)</div>
+  <div class="meta-row"><span><strong>Кто:</strong> Андрей</span></div>
+  <div class="adr-body">
+    <div class="adr-section"><strong>Контекст:</strong> Старая CRM (Google Sheet) смешивала горячих и архивных партнёров, не показывала «дни без контакта», нет приоритизации. CRM в Octo — самописная, не Pipedrive.</div>
+    <div class="adr-section"><strong>Решение:</strong> Новая структура: 7-этапная воронка, приоритеты, дни без контакта, следующее действие с дедлайном. Архив отвалившихся партнёров выделен отдельно.</div>
+    <div class="adr-section"><strong>Открыто:</strong> интеграция с Telegram-чатами (114 контактов), миграция на более серьёзный инструмент при росте.</div>
+  </div>
+</div>
+
+<div class="adr">
+  <div class="adr-header">
+    <span class="adr-id">ADR-2026-04-XX</span>
+    <span class="badge active">внедрено</span>
+  </div>
+  <div class="adr-title">Переход с брокерской модели на реферальную</div>
+  <div class="meta-row"><span><strong>Кто:</strong> Сергей, Андрей</span></div>
+  <div class="adr-body">
+    <div class="adr-section"><strong>Контекст:</strong> Раньше партнёр сам продавал клиенту услугу Octo и брал комиссию. Это давало низкую конверсию: партнёр не знал продукт глубоко, не мог отвечать на возражения.</div>
+    <div class="adr-section"><strong>Решение:</strong> Теперь партнёр передаёт контакт, Octo ведёт клиента полностью.</div>
+    <div class="pros-cons">
+      <div class="pros"><strong>+ Плюсы:</strong> Партнёру проще — не нужно учить продукт. Octo контролирует качество delivery.</div>
+      <div class="cons"><strong>− Минусы:</strong> Партнёр получает меньше денег за одного клиента → нужна частота.</div>
+    </div>
+  </div>
+</div>
+
+<div class="adr">
+  <div class="adr-header">
+    <span class="adr-id">ADR-2026-05-XX</span>
+    <span class="badge active">внедрено</span>
+  </div>
+  <div class="adr-title">Татьяна — замена Елены (partner/account manager)</div>
+  <div class="meta-row"><span><strong>Кто:</strong> Сергей, Андрей</span></div>
+  <div class="adr-body">
+    <div class="adr-section"><strong>Контекст:</strong> Елена ушла 01.05. Нужен человек, ведущий CRM, чаты с партнёрами, follow-up, Zoom-записи.</div>
+    <div class="adr-section"><strong>Решение:</strong> Татьяна нанята как partner/account manager. Прошла испытательный срок ~15.05.</div>
+    <div class="adr-section"><strong>Последствия:</strong> Андрей освобождается от операционки воронки, фокус на маркетинг-разборах и стратегии. <strong>Открыто:</strong> должностные / ЦКП / KPI ещё не зафиксированы.</div>
+  </div>
+</div>
+
+<h2>Отменённые / заменённые</h2>
+<p style="color: var(--muted); font-style: italic;">Пока нет.</p>
+
+<h2>В наблюдении</h2>
+<p style="color: var(--muted); font-style: italic;">Пока нет.</p>
+
+<footer>
+  <p>Источник: <code>clients/octo/decisions.md</code>. Append-only — никогда не редактируем существующие ADR. Если решение изменилось, пишется новый со ссылкой на старый.</p>
+  <p><a href="/octo/">← Octo</a> · <a href="/octo/people.html">People →</a></p>
+</footer>
+
+</div>
+</body>
+</html>
