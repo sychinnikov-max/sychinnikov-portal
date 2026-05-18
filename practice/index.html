@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operational Foundation — методология</title>
+<meta name="description" content="Operational Foundation — методология работы Андрея Сычинникова как Operational Architect для стартапов.">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; font-size: 16px; }
+  .container { max-width: 880px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 38px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 18px; color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 24px; margin: 50px 0 16px; font-weight: 700; color: var(--accent); }
+  h3 { font-size: 19px; margin: 24px 0 10px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 14px; border-left: 4px solid var(--purple); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .principle { background: #faf6ee; border-left: 4px solid var(--accent); padding: 16px 20px; margin: 16px 0; font-size: 15px; border-radius: 0 6px 6px 0; }
+  .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 24px 0; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; box-shadow: var(--shadow); border-top: 4px solid var(--blue); text-align: center; }
+  .step:nth-child(2) { border-top-color: var(--accent); }
+  .step:nth-child(3) { border-top-color: var(--green); }
+  .step:nth-child(4) { border-top-color: var(--purple); }
+  .step .num { font-size: 28px; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+  .step h4 { margin: 0 0 6px; font-size: 16px; }
+  .step p { margin: 0; font-size: 13px; color: var(--muted); }
+  .icp { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+  .icp-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; box-shadow: var(--shadow); }
+  .icp-card.fit { border-left: 4px solid var(--green); }
+  .icp-card.unfit { border-left: 4px solid var(--red); }
+  ul { margin: 8px 0; padding-left: 20px; }
+  ul li { margin-bottom: 4px; font-size: 14px; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+  @media (max-width: 700px) { .process { grid-template-columns: 1fr 1fr; } .icp, .grid-2 { grid-template-columns: 1fr; } h1 { font-size: 30px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/practice/pricing-ladder.html">pricing</a> · <a href="/practice/cases.html">кейсы</a></nav>
+
+<h1>📚 Operational Foundation</h1>
+<p class="subtitle">Что я делаю с клиентами как Operational Architect. Методология построения бизнеса как архитектуры.</p>
+
+<div class="principle">
+  <strong>Главный тезис:</strong> большинство стартапов умирают не от отсутствия идеи, продукта или денег. Они умирают от <strong>отсутствия операционной системы</strong> — повторяющихся процессов, измеримых метрик, чёткой оргструктуры. Моя работа — построить эту систему как архитектор, а не как менеджер.
+</div>
+
+<h2>Кто мой идеальный клиент</h2>
+<div class="icp">
+  <div class="icp-card fit">
+    <h3 style="margin-top: 0;">✅ Подходит</h3>
+    <ul>
+      <li>Русскоязычный фаундер</li>
+      <li>Стадия pre-seed → Series A</li>
+      <li>5-30 человек в команде</li>
+      <li>Есть продукт + первые клиенты</li>
+      <li>Готов к equity-партнёрству</li>
+      <li>Понимает что нужна система, не люди-герои</li>
+    </ul>
+  </div>
+  <div class="icp-card unfit">
+    <h3 style="margin-top: 0;">❌ Не подходит</h3>
+    <ul>
+      <li>Pre-revenue без продукта</li>
+      <li>«Нужен человек», а не «нужна система»</li>
+      <li>Готов платить только % от продаж</li>
+      <li>Корпоративные клиенты (не моя стадия)</li>
+      <li>Соло-фаундер без команды (некем управлять)</li>
+      <li>Не готов делиться equity</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Процесс работы — 4 этапа</h2>
+<div class="process">
+  <div class="step">
+    <div class="num">1</div>
+    <h4>Discover</h4>
+    <p>Глубокий аудит: люди, процессы, метрики, deals, продукт. 2-3 недели разговоров и наблюдения.</p>
+  </div>
+  <div class="step">
+    <div class="num">2</div>
+    <h4>Architect</h4>
+    <p>Проектирование операционной системы: оргструктура, ключевые процессы, метрики, AI-операции.</p>
+  </div>
+  <div class="step">
+    <div class="num">3</div>
+    <h4>Build</h4>
+    <p>Внедрение через 6 модулей: People, Process, Metrics, Sales, Marketing, AI. 3-6 месяцев.</p>
+  </div>
+  <div class="step">
+    <div class="num">4</div>
+    <h4>Handover</h4>
+    <p>Передача системы клиенту: документация, обучение, retainer-режим для поддержки.</p>
+  </div>
+</div>
+
+<h2>Что в результате</h2>
+<div class="card">
+  <ul>
+    <li><strong>Документированная оргструктура</strong> — кто кому подчиняется, чьи KPI, кто принимает решения</li>
+    <li><strong>5-10 ключевых процессов</strong> — описанных, измеряемых, делегируемых</li>
+    <li><strong>Метрики-скоркард</strong> — North Star + 5-7 supporting metrics, обновляемые еженедельно</li>
+    <li><strong>Funnel и pipeline</strong> — измеряемая воронка продаж со стадиями и конверсией</li>
+    <li><strong>AI-операции</strong> — 2-3 ключевых процесса автоматизированы через AI-агентов</li>
+    <li><strong>Стратегический ритм</strong> — еженедельные синхроны, месячные итоги, квартальные пересмотры</li>
+  </ul>
+</div>
+
+<h2>Что я НЕ делаю</h2>
+<div class="card" style="border-left-color: var(--red);">
+  <ul>
+    <li>❌ Не операционный менеджер «на каждый день» — я архитектор</li>
+    <li>❌ Не продавец — могу настроить воронку, не закрывать сделки</li>
+    <li>❌ Не маркетолог — могу спроектировать маркетинговую систему, не вести аккаунты</li>
+    <li>❌ Не coding/dev — могу спроектировать AI-операции, не писать прод-код</li>
+    <li>❌ Не делаю «всё за вас» — это путь к concentration risk у фаундера</li>
+    <li>❌ Не работаю на голую success-fee — только fixed fee + equity или Diagnostic upfront</li>
+  </ul>
+</div>
+
+<h2>Продуктовая лестница</h2>
+<a href="/practice/pricing-ladder.html" style="text-decoration: none; color: inherit;">
+<div class="card">
+  <h3 style="margin-top: 0;">4 уровня входа в работу — от точечного до полного</h3>
+  <p style="font-size: 14px;"><strong>L1 Diagnostic</strong> (€3-5К, 2-3 нед) → <strong>L2 Foundation</strong> (€8-15К, 2-3 мес + 1-2% equity) → <strong>L3 Full OS</strong> (€18-30К, 4-6 мес + 2-3% equity) → <strong>L4 Retainer</strong> (€2-4К/мес + equity).</p>
+  <p style="font-size: 13px; color: var(--muted); margin: 0;"><strong>→ Детально с описанием каждого уровня</strong></p>
+</div>
+</a>
+
+<h2>Кейсы</h2>
+<a href="/practice/cases.html" style="text-decoration: none; color: inherit;">
+<div class="card">
+  <h3 style="margin-top: 0;">Реальные проекты — Silver Spa, Fishok, Octo</h3>
+  <p style="font-size: 14px;">Три кейса с упаковкой: исходная ситуация, что построил, результаты. Используются как референс для новых клиентов и для самоверификации методологии.</p>
+  <p style="font-size: 13px; color: var(--muted); margin: 0;"><strong>→ Подробнее</strong></p>
+</div>
+</a>
+
+<h2>Связь с AndreiOS</h2>
+<div class="card" style="border-left-color: var(--blue);">
+  <p style="margin-top: 0;">AndreiOS — это <strong>моя собственная Operational Foundation</strong>. Я живу в системе, которую продаю клиентам. Это создаёт три эффекта:</p>
+  <ul>
+    <li><strong>Постоянное R&D</strong> — каждый день я улучшаю систему на себе, прежде чем продавать клиенту</li>
+    <li><strong>Доверие</strong> — могу показать что у меня самого работает</li>
+    <li><strong>Шаблоны</strong> — структуры AndreiOS становятся шаблонами для клиентов</li>
+  </ul>
+  <p style="margin-bottom: 0;">Подробнее: <a href="/system/" style="color: var(--blue);">Карта AndreiOS</a> · <a href="/how-it-works/" style="color: var(--blue);">Как это работает</a></p>
+</div>
+
+<footer>
+  <p>📁 Источник в AndreiOS: <code>practice/</code> — operational-foundation.md, pricing-ladder.md, cases.md, templates/. Эта страница — публичная упаковка.</p>
+  <p><a href="/">← Главная</a> · <a href="/practice/pricing-ladder.html">Pricing →</a> · <a href="/practice/cases.html">Кейсы →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

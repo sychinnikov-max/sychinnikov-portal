@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Клиенты — Андрей Сычинников</title>
+<meta name="description" content="Все клиенты и проекты Андрея Сычинникова: Fishok, Octo Relocate, Vitaly Textile, Pipeline.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 16px; }
+  .container { max-width: 980px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 38px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 17px; color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 22px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 19px; margin: 0 0 8px; font-weight: 600; }
+  .client-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .client-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); border-left: 4px solid var(--line); }
+  .client-card.fishok { border-left-color: var(--blue); }
+  .client-card.octo { border-left-color: var(--red); }
+  .client-card.vitaly { border-left-color: var(--amber); }
+  .client-card.pipeline { border-left-color: var(--muted); }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.active { background: #e9f1ec; color: var(--green); }
+  .badge.paused { background: #f9e9e9; color: var(--red); }
+  .badge.amber { background: #faf2dd; color: var(--amber); }
+  .badge.muted { background: #eef1ee; color: var(--muted); }
+  .client-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .row { display: flex; gap: 10px; margin-top: 6px; font-size: 14px; }
+  .row .label { color: var(--muted); min-width: 110px; flex-shrink: 0; }
+  .meta { font-size: 13px; color: var(--muted); margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); }
+  .meta a { color: var(--blue); text-decoration: none; }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+  @media (max-width: 700px) { .client-grid { grid-template-columns: 1fr; } h1 { font-size: 30px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/dashboard/">дашборд</a> · <a href="/goals/">цели</a> · <a href="/pipeline/">pipeline</a></nav>
+
+<h1>👥 Клиенты и проекты</h1>
+<p class="subtitle">Обзор активных клиентов, паузных и pipeline. Каждый клиент — изолированная зона в AndreiOS.</p>
+
+<h2>Текущая картина (на 2026-05-18)</h2>
+<div style="background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; box-shadow: var(--shadow); margin-bottom: 24px;">
+<table>
+  <thead>
+    <tr>
+      <th>Клиент</th>
+      <th>Статус</th>
+      <th>Доход / мес</th>
+      <th>Главное</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🐟 Fishok</td>
+      <td><span class="badge active">активный</span></td>
+      <td>€3 500</td>
+      <td>Текущий стабильный фикс. Зарплата в USDT.</td>
+    </tr>
+    <tr>
+      <td>🐙 Octo Relocate</td>
+      <td><span class="badge paused">на паузе</span></td>
+      <td style="color: var(--red);">€0 (был €1К)</td>
+      <td>Пауза с 18.05. Долг €1К не зафиксирован. Дедлайн 17.06.</td>
+    </tr>
+    <tr>
+      <td>🧵 Vitaly Textile</td>
+      <td><span class="badge amber">diagnostic-offer</span></td>
+      <td>€2К (за 3 нед пилот)</td>
+      <td>Лид Сергея, под угрозой паузы канала.</td>
+    </tr>
+    <tr>
+      <td>📥 Pipeline новых</td>
+      <td><span class="badge muted">пусто</span></td>
+      <td>—</td>
+      <td>Поиск вне Сергея — главная задача недели.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Детально по каждому</h2>
+
+<div class="client-grid">
+
+  <a href="/clients/fishok.html" style="text-decoration: none; color: inherit;">
+  <div class="client-card fishok">
+    <div class="client-header">
+      <h3>🐟 Fishok</h3>
+      <span class="badge active">активный</span>
+    </div>
+    <div class="row"><span class="label">Что:</span><span>Производство натуральных рыбных лакомств для собак, B2B</span></div>
+    <div class="row"><span class="label">Локация:</span><span>Латвия</span></div>
+    <div class="row"><span class="label">Доход:</span><span>€3 500/мес, 14-го числа, USDT на Bybit</span></div>
+    <div class="row"><span class="label">Моя роль:</span><span>фикшнал operations / стратегическая поддержка</span></div>
+    <div class="row"><span class="label">Главный риск:</span><span>зарплата из личного кармана В.В. Кузакова</span></div>
+    <div class="meta">📁 <code>clients/fishok/</code> · <strong>Подробнее →</strong></div>
+  </div>
+  </a>
+
+  <a href="/octo-project/" style="text-decoration: none; color: inherit;">
+  <div class="client-card octo">
+    <div class="client-header">
+      <h3>🐙 Octo Relocate</h3>
+      <span class="badge paused">на паузе с 18.05</span>
+    </div>
+    <div class="row"><span class="label">Что:</span><span>Стартап-инкубатор + релокационные визы (Испания, Франция, Nomad)</span></div>
+    <div class="row"><span class="label">Локация:</span><span>Испания</span></div>
+    <div class="row"><span class="label">Моя роль:</span><span>COO + CMO + Sales Lead + Head of AI (de facto)</span></div>
+    <div class="row"><span class="label">Долг:</span><span style="color: var(--red);">€1 000 за май, не зафиксирован письменно</span></div>
+    <div class="row"><span class="label">Дедлайн:</span><span>17.06 — точка решения</span></div>
+    <div class="meta">📁 <code>clients/octo/</code> · <strong>Детальная Octo OS →</strong></div>
+  </div>
+  </a>
+
+  <a href="/clients/vitaly-textile.html" style="text-decoration: none; color: inherit;">
+  <div class="client-card vitaly">
+    <div class="client-header">
+      <h3>🧵 Vitaly Textile</h3>
+      <span class="badge amber">diagnostic-offer</span>
+    </div>
+    <div class="row"><span class="label">Что:</span><span>RFID smart-textile для отелей, франшиза Raccoon Москва</span></div>
+    <div class="row"><span class="label">Локация:</span><span>Россия (Москва), Виталий в Риге</span></div>
+    <div class="row"><span class="label">Стадия:</span><span>discovery прошёл, пилот €2 000 / 3 недели обсуждается</span></div>
+    <div class="row"><span class="label">Канал:</span><span>через Сергея (зависим от Octo-паузы)</span></div>
+    <div class="row"><span class="label">Confidence:</span><span>60% · equity-опция после пилота возможна</span></div>
+    <div class="meta">📁 <code>clients/vitaly-textile/</code> · <strong>Подробнее →</strong></div>
+  </div>
+  </a>
+
+  <a href="/clients/pipeline.html" style="text-decoration: none; color: inherit;">
+  <div class="client-card pipeline">
+    <div class="client-header">
+      <h3>📥 Pipeline лидов</h3>
+      <span class="badge muted">воронка</span>
+    </div>
+    <div class="row"><span class="label">Сейчас в воронке:</span><span>1 (Vitaly в diagnostic-offer)</span></div>
+    <div class="row"><span class="label">На паузе:</span><span>sergey-partner-1 (был discovery)</span></div>
+    <div class="row"><span class="label">Источники:</span><span>Сергей (на пересмотре), тёплые связи, рекомендации</span></div>
+    <div class="row"><span class="label">Главная задача:</span><span>найти лид <strong>вне</strong> канала Сергея</span></div>
+    <div class="meta">📁 <code>clients/pipeline.md</code> · <strong>Воронка →</strong></div>
+  </div>
+  </a>
+
+</div>
+
+<h2>Принципы работы с клиентами</h2>
+<div style="background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 14px;">
+  <p style="margin-top: 0;"><strong>Изоляция контекста:</strong> у каждого клиента своя папка <code>clients/&lt;name&gt;/</code> с собственной структурой. Никакого «общего» state. Octo-advisor (специальный субагент) не видит Fishok — и наоборот. Это экономит токены и предотвращает утечки.</p>
+  <p><strong>Стандартная структура:</strong></p>
+  <ul style="margin: 8px 0;">
+    <li><code>CLAUDE.md</code> — контекст проекта</li>
+    <li><code>state.md</code> с YAML frontmatter — оперативная память</li>
+    <li><code>private.md</code> или <code>private/</code> — моя разведка, НЕ передаётся при экзите</li>
+    <li><code>shared.md</code> — что ОК показать команде клиента</li>
+    <li><code>touches.md</code> — лог касаний (для проспектов)</li>
+    <li><code>raw/</code> — транскрипты, PDF, исходники</li>
+    <li><code>work/</code> — мини-проекты с собственным жизненным циклом</li>
+  </ul>
+  <p style="margin-bottom: 0;"><strong>Octo</strong> — продвинутый вариант (7 верхних папок, см. <a href="/octo-project/" style="color: var(--blue);">Octo OS →</a>). Используется как шаблон для крупных клиентов.</p>
+</div>
+
+<footer>
+  <p>Каждый клиент имеет state.md с YAML frontmatter. Pipeline.md автогенерируется из state-файлов в /day-close.</p>
+  <p><a href="/">← Главная</a> · <a href="/dashboard/">Дашборд</a> · <a href="/practice/">Методология</a></p>
+</footer>
+
+</div>
+</body>
+</html>

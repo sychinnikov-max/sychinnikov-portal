@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline — потенциальные клиенты</title>
+<meta name="description" content="Воронка потенциальных клиентов: текущие лиды, Сергей-канал статус, источники.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 16px; }
+  .container { max-width: 980px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 17px; color: var(--muted); margin: 0 0 30px; }
+  h2 { font-size: 22px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 19px; margin: 0 0 8px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 16px; }
+  .pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 16px 0; }
+  .stage { background: #f0ebe1; border-radius: 8px; padding: 14px; font-size: 13px; min-height: 130px; }
+  .stage h4 { margin: 0 0 8px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; }
+  .stage .count { font-size: 28px; font-weight: 700; }
+  .stage .item { background: var(--card); border-radius: 4px; padding: 5px 8px; margin-top: 6px; font-size: 12px; }
+  .stage.active { background: #faf2dd; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+  .badge.amber { background: #faf2dd; color: var(--amber); }
+  .badge.paused { background: #f9e9e9; color: var(--red); }
+  .badge.muted { background: #eef1ee; color: var(--muted); }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .principle { background: #faf6ee; border-left: 4px solid var(--accent); padding: 16px 20px; margin: 16px 0; font-size: 15px; border-radius: 0 6px 6px 0; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+  @media (max-width: 700px) { .pipeline { grid-template-columns: 1fr 1fr; } h1 { font-size: 30px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/clients/">клиенты</a> · <a href="/dashboard/">дашборд</a></nav>
+
+<h1>📥 Pipeline</h1>
+<p class="subtitle">Воронка потенциальных клиентов. Главная цель 90 дней — третий клиент.</p>
+
+<h2>Текущая воронка</h2>
+<div class="pipeline">
+  <div class="stage">
+    <h4>1. Холодный</h4>
+    <div class="count">0</div>
+  </div>
+  <div class="stage">
+    <h4>2. Квалификация</h4>
+    <div class="count">0</div>
+  </div>
+  <div class="stage">
+    <h4>3. Discovery</h4>
+    <div class="count">0</div>
+  </div>
+  <div class="stage active">
+    <h4>4. Diagnostic-offer</h4>
+    <div class="count">1</div>
+    <a href="/clients/vitaly-textile.html" style="color: var(--ink); text-decoration: none;"><div class="item">🧵 Vitaly Textile</div></a>
+  </div>
+  <div class="stage">
+    <h4>5. Подписан</h4>
+    <div class="count">0</div>
+  </div>
+</div>
+
+<h2>На паузе / Lost</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Код / Имя</th><th>Стадия</th><th>Last meaningful touch</th><th>Источник</th><th>Статус</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>sergey-partner-1</strong></td>
+        <td>был Discovery</td>
+        <td>2026-05-18 (month-1 review)</td>
+        <td>Сергей</td>
+        <td><span class="badge paused">пауза до 17.06</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size: 13px; color: var(--muted); margin-top: 12px;">Сергей-партнёрство было главной ставкой как канал к equity-портфелю. После 18.05 — на пересмотре. Дедлайн внутренний — 17.06 (4 недели от паузы Octo).</p>
+</div>
+
+<h2>🌱 Сергей-канал — статус</h2>
+<div class="card" style="border-left: 4px solid var(--amber);">
+  <h3 style="margin-top: 0;">Где разговор сейчас</h3>
+  <p style="font-size: 14px;"><strong>Пауза с 2026-05-18.</strong> После month-1 review Сергей отказался письменно зафиксировать долг €1К за май и предложил вернуться к работе только за процент при выручке ≥10К — модель «голой комиссии», запрещённая в моей конституции.</p>
+
+  <h3 style="margin-top: 16px;">Что изменилось в гипотезе</h3>
+  <p style="font-size: 14px;">До 18.05 — главный стратегический канал к третьему клиенту и equity. После — переоценка:</p>
+  <ul style="font-size: 14px;">
+    <li>Юрструктура Octo (компания США + крипта мимо юрлица + Европа «потом») — equity ничего не стоит</li>
+    <li>Готовность к partnership-формату не подтверждена даже на уровне фиксации долга</li>
+    <li>Pitch-day Узбекистан (Минцифры + венчурный фонд) — реальный актив, но контроль не делит</li>
+    <li>Vitaly (vitaly-textile) — лид Сергея, под угрозой вместе со всем каналом</li>
+  </ul>
+
+  <h3 style="margin-top: 16px;">План на горизонт 4 недель</h3>
+  <ol style="font-size: 14px;">
+    <li><strong>До 21.05 (чт)</strong> — письменное резюме звонка Сергею (тест на согласие с фактами)</li>
+    <li><strong>21.05</strong> — синхрон-созвон</li>
+    <li><strong>К 17.06</strong> — точка решения. Если статус не изменился → закрыть как основной канал, оставить как опцию через 6-12 мес</li>
+    <li><strong>Параллельно</strong> — поиск третьего клиента ВНЕ Сергея + закрытие дефицита €1 100/мес через другие каналы</li>
+  </ol>
+</div>
+
+<h2>Источники лидов</h2>
+<div class="card">
+  <ul>
+    <li><strong>Сергей-канал</strong> — на пересмотре до 17.06</li>
+    <li><strong>Тёплые связи</strong> — В.В. (Fishok), бывшие коллеги по 120М-выручке</li>
+    <li><strong>Рекомендации от текущих клиентов</strong> — Fishok довольны → можно просить</li>
+    <li><strong>LinkedIn</strong> — отложен до июня 2026 (фокус-ограничение)</li>
+    <li><strong>Холодные продажи в РФ</strong> — НЕ делать (правило в me.md)</li>
+  </ul>
+</div>
+
+<h2>Правила работы с лидами</h2>
+<div class="card">
+  <ul>
+    <li><strong>Не соглашаться</strong> на проекты без обсуждения equity-варианта</li>
+    <li><strong>Diagnostic €3-5К</strong> — точка входа, не сразу Foundation (см. <a href="/practice/pricing-ladder.html" style="color: var(--blue);">pricing ladder</a>)</li>
+    <li><strong>Идеальный клиент:</strong> русскоязычный фаундер pre-seed → Series A, 5-30 чел, готов к equity-сделке</li>
+    <li><strong>Структура клиента:</strong> обязательны state.md (YAML), touches.md, private.md, raw/</li>
+    <li><strong>Meaningful touch (★)</strong> — не любой пинг, а реально двигающее отношения касание</li>
+  </ul>
+</div>
+
+<h2>Главная задача на эту неделю</h2>
+<div class="principle">
+  <strong>Минимум одно конкретное действие по поиску третьего клиента ВНЕ канала Сергея до пятницы 23.05.</strong> Не теоретическое «надо подумать», а реальный пинг: LinkedIn-сообщение / письмо тёплой связи / звонок. Хотя бы одно.
+</div>
+
+<footer>
+  <p>📁 Источник правды: <code>clients/pipeline.md</code> в AndreiOS. Автогенерация из YAML frontmatter всех клиентских state.md в /day-close.</p>
+  <p><a href="/clients/">← Все клиенты</a> · <a href="/goals/90-days.html">Цели 90 дней →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

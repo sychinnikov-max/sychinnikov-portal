@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цели 90 дней — Андрей Сычинников</title>
+<meta name="description" content="Три цели на 90 дней с актуальным прогрессом и переоценкой после паузы Octo 18.05.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 16px; }
+  .container { max-width: 880px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 17px; color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 22px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 19px; margin: 0 0 8px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 16px; }
+  .card.goal { border-left: 4px solid var(--accent); }
+  .card.alert { background: #f9e9e9; border: 1px solid #e8c4c4; border-left: 4px solid var(--red); }
+  .card.alert strong { color: var(--red); }
+  .goal-num { display: inline-block; width: 32px; height: 32px; background: var(--accent); color: white; border-radius: 50%; text-align: center; line-height: 32px; font-weight: 700; margin-right: 10px; vertical-align: middle; }
+  .bar { background: var(--line); border-radius: 100px; height: 10px; overflow: hidden; margin: 8px 0; }
+  .bar-fill { height: 100%; border-radius: 100px; background: var(--green); }
+  .bar-fill.red { background: var(--red); }
+  .bar-fill.amber { background: var(--amber); }
+  .meta { font-size: 13px; color: var(--muted); }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+  .pill.risk { background: #f9e9e9; color: var(--red); }
+  .pill.amber { background: #faf2dd; color: var(--amber); }
+  .pill.green { background: #e9f1ec; color: var(--green); }
+  .pill.paused { background: #f9e9e9; color: var(--red); }
+  ul.tight { margin: 8px 0; padding-left: 20px; }
+  ul.tight li { margin-bottom: 4px; font-size: 14px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.was { background: #eef1ee; color: var(--muted); }
+  .badge.now { background: #faf2dd; color: var(--amber); }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/goals/">все цели</a> · <a href="/dashboard/">дашборд</a></nav>
+
+<h1>📅 Цели 90 дней</h1>
+<p class="subtitle">Период: <strong>2026-05 → 2026-08</strong>. Переоценка после паузы Octo 18.05 — гипотеза «через Сергея» под вопросом.</p>
+
+<div class="card alert">
+  <strong>Важно:</strong> После 18.05 две из трёх целей под угрозой. Цель №1 (третий клиент) — Vitaly зависит от паузы Сергея. Цель №2 (equity) — гипотеза «через Сергея» переоценена. Параллельно нужен канал ВНЕ Сергея.
+</div>
+
+<!-- Цель 1 -->
+<div class="card goal">
+  <h3><span class="goal-num">1</span>Третий клиент<span class="pill amber">в работе, риск</span></h3>
+  <p style="margin: 12px 0 6px;">Желательно через инкубатор Сергея (equity-кейс), но <strong>не обязательно</strong>. Это слово делает цель гибкой.</p>
+  <div class="bar"><div class="bar-fill amber" style="width: 25%"></div></div>
+  <p class="meta">Прогресс ~25% · 1 лид в diagnostic-offer</p>
+
+  <h4 style="margin-top: 16px; margin-bottom: 6px;">Текущее состояние</h4>
+  <ul class="tight">
+    <li><strong>Vitaly Textile</strong> — RFID smart-textile для отелей, франшиза Raccoon Москва. Пилот €2 000 / 3 недели предложен через Сергея. Стадия diagnostic-offer. Confidence 60%. <a href="/clients/vitaly-textile.html" style="color: var(--blue);">детали →</a></li>
+    <li><strong>Risk:</strong> Vitaly — лид Сергея. Если канал Сергея закроется к 17.06 — Vitaly может выпасть вместе с ним.</li>
+    <li><strong>Pipeline вне Сергея:</strong> пустой. Это главный пробел.</li>
+  </ul>
+
+  <h4 style="margin-top: 16px; margin-bottom: 6px;">План активации</h4>
+  <ul class="tight">
+    <li>До чт 21.05 — синхрон с Сергеем, прояснить судьбу Vitaly при паузе</li>
+    <li>До пт 23.05 — минимум одно действие по 3-му клиенту вне Сергея (LinkedIn / тёплая связь / письмо)</li>
+    <li>До 17.06 — определить: возвращаюсь в канал Сергея или ищу другой</li>
+    <li>До 01.07 — пилот с Vitaly запущен (или закрыт) + параллельный лид на discovery</li>
+    <li>До 01.08 — третий клиент в работе, фикс приходит</li>
+  </ul>
+</div>
+
+<!-- Цель 2 -->
+<div class="card goal">
+  <h3><span class="goal-num">2</span>Первая equity-позиция<span class="pill risk">переоценка</span></h3>
+  <p style="margin: 12px 0 6px;">Раньше: Partnership Framework с Сергеем. После 18.05 — гипотеза под вопросом.</p>
+  <div class="bar"><div class="bar-fill red" style="width: 10%"></div></div>
+  <p class="meta">Прогресс ~10% · переоценка гипотезы</p>
+
+  <h4 style="margin-top: 16px; margin-bottom: 6px;">Что изменилось 18.05</h4>
+  <p style="font-size: 14px;">Юрструктура Octo (компания США + крипта мимо юрлица + Европа «потом») не позволяет осмысленный equity. Сергей не предлагает долю — и сам это знает: доля от размытой структуры ничего не стоит.</p>
+
+  <h4 style="margin-top: 16px; margin-bottom: 6px;">Новые критерии equity-партнёрства</h4>
+  <p style="font-size: 14px;">До 18.05 — критериев не было. После — четыре жёстких:</p>
+  <ol style="font-size: 14px;">
+    <li><strong>Юрлицо с прозрачной cap-table</strong> — конкретная компания, юрисдикция, реестр долей</li>
+    <li><strong>Устойчивая выручка ≥€30К/мес</strong> — три месяца подряд</li>
+    <li><strong>Defensibility кроме людей</strong> — продукт, бренд, технология, клиентская база</li>
+    <li><strong>Обсуждение equity ДО работы</strong> — конкретный %, vesting, cliff, exit terms</li>
+  </ol>
+  <p style="font-size: 14px;">Без всех четырёх — это success-fee, а не equity-партнёрство.</p>
+
+  <h4 style="margin-top: 16px; margin-bottom: 6px;">План</h4>
+  <ul class="tight">
+    <li>До 17.06 — точка решения по Сергею. Если он закроет долг + предложит equity на серьёзной основе — обсуждаем. Иначе — закрываем как канал.</li>
+    <li>До 01.07 — список 2-3 потенциальных партнёров для equity-разговора (не Сергей)</li>
+    <li>До 01.08 — первый предметный разговор о доле в чьём-то стартапе</li>
+    <li>До 01.10 (за 90-дневным горизонтом) — первая equity-позиция оформлена</li>
+  </ul>
+</div>
+
+<!-- Цель 3 -->
+<div class="card goal">
+  <h3><span class="goal-num">3</span>€8 000-10 000/мес чистыми к 1 августа<span class="pill risk">под угрозой</span></h3>
+  <p style="margin: 12px 0 6px;">Закрыть разрыв между текущим фиксом и реальными семейными обязательствами.</p>
+  <div class="bar"><div class="bar-fill red" style="width: 22%"></div></div>
+  <p class="meta">Прогресс ~22% · после паузы Octo разрыв увеличился</p>
+
+  <h4 style="margin-top: 16px; margin-bottom: 6px;">Картина дохода</h4>
+  <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0;">
+    <tr style="border-bottom: 1px solid var(--line);"><th style="text-align: left; padding: 6px; color: var(--muted); text-transform: uppercase; font-size: 11px;">Источник</th><th style="text-align: right; padding: 6px; color: var(--muted); text-transform: uppercase; font-size: 11px;">Было до 18.05</th><th style="text-align: right; padding: 6px; color: var(--muted); text-transform: uppercase; font-size: 11px;">Сейчас</th></tr>
+    <tr style="border-bottom: 1px solid var(--line);"><td style="padding: 8px 6px;">Fishok</td><td style="padding: 8px 6px; text-align: right;">€3 500</td><td style="padding: 8px 6px; text-align: right;">€3 500</td></tr>
+    <tr style="border-bottom: 1px solid var(--line);"><td style="padding: 8px 6px;">Octo</td><td style="padding: 8px 6px; text-align: right;">€1 000 (план)</td><td style="padding: 8px 6px; text-align: right; color: var(--red);">€0 (пауза)</td></tr>
+    <tr style="border-bottom: 1px solid var(--line); font-weight: 600;"><td style="padding: 8px 6px;">Итого фикс</td><td style="padding: 8px 6px; text-align: right;">€4 500</td><td style="padding: 8px 6px; text-align: right; color: var(--red);">€3 500</td></tr>
+    <tr style="font-weight: 600;"><td style="padding: 8px 6px;">Цель 1.08</td><td style="padding: 8px 6px; text-align: right; color: var(--green);" colspan="2">€8 000-10 000</td></tr>
+  </table>
+  <p style="font-size: 14px;"><strong>Разрыв сейчас:</strong> €4 500-6 500 в месяц нужно добавить.</p>
+
+  <h4 style="margin-top: 16px; margin-bottom: 6px;">Каналы закрытия разрыва</h4>
+  <ul class="tight">
+    <li><strong>Возврат Octo</strong> с фикс + % после 17.06 — оптимистичный сценарий, +€1-2К/мес</li>
+    <li><strong>Vitaly пилот</strong> — единоразово €2 000 за 3 недели + продолжение если будет</li>
+    <li><strong>Третий клиент вне Сергея</strong> — Diagnostic €3-5К единоразово или Foundation €2-4К/мес retainer</li>
+    <li><strong>Fishok +1</strong> — обсудить с В.В. equity / партнёрство (точка проверки июнь)</li>
+  </ul>
+
+  <h4 style="margin-top: 16px; margin-bottom: 6px;">Что съедает: семейные обязательства</h4>
+  <p style="font-size: 14px;">Базовые расходы Испании ~€3 200-3 500/мес + кредит РФ €1 700/мес (с 2.08 — из евро-дохода) + резерв на налоги €220/мес + Париж 10.07 €2 000 единоразово + США сентябрь €9 000.</p>
+</div>
+
+<h2>📋 Главный фильтр</h2>
+<div class="card" style="background: #faf6ee; border-left: 4px solid var(--accent);">
+  <p style="margin: 0; font-size: 17px;"><strong>Перед любым действием спросить:</strong> «Это движет к одной из трёх целей?»</p>
+  <p style="margin: 8px 0 0; font-size: 14px; color: var(--muted);">Нет → отложить. Противоречит ценностям (см. /goals/values.html) → нет.</p>
+</div>
+
+<footer>
+  <p>Цели обновляются после каждого <code>/weekly-dialogue</code>. Источник в AndreiOS: <code>CLAUDE.md</code> + <code>me.md</code> + <code>this-week.md</code>. Прогресс — оценка вручную.</p>
+  <p><a href="/goals/">← Все цели</a> · <a href="/goals/long-term.html">10 лет →</a> · <a href="/dashboard/">Дашборд</a></p>
+</footer>
+
+</div>
+</body>
+</html>

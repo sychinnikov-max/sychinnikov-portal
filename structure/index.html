@@ -110,15 +110,16 @@
 ├── <span class="folder">weekly/</span>                   <span class="note">недельные рефлексии</span>
 │
 ├── <span class="folder">clients/</span>                  <span class="note">клиентские проекты, изолированно</span>
-│   ├── <span class="folder">octo/</span>                  <span class="note">Octo Relocate (пересобран 2026-05-15, детально ниже)</span>
-│   ├── <span class="folder">fishok/</span>                <span class="note">Fishok (текущий доход)</span>
+│   ├── <span class="folder">octo/</span>                  <span class="note">Octo Relocate (на паузе с 18.05, детально ниже)</span>
+│   ├── <span class="folder">fishok/</span>                <span class="note">Fishok (текущий доход €3.5К/мес)</span>
+│   ├── <span class="folder new">vitaly-textile/</span>          <span class="note">Vitaly (3-й клиент, diagnostic-offer)</span>
 │   └── <span class="file">pipeline.md</span>              <span class="note">потенциальные клиенты</span>
 │
 ├── <span class="folder">practice/</span>                  <span class="note">методология Operational Foundation</span>
 │
 ├── <span class="folder">.claude/</span>                   <span class="note">конфиг AI-команды</span>
 │   ├── <span class="folder">agents/</span>                 <span class="note">4 субагента</span>
-│   ├── <span class="folder">skills/</span>                 <span class="note">6 скиллов</span>
+│   ├── <span class="folder">skills/</span>                 <span class="note">8 скиллов</span>
 │   └── <span class="file">settings.json</span>            <span class="note">hooks, permissions</span>
 │
 ├── <span class="folder">archive/</span>                  <span class="note">старые версии, исторические</span>
@@ -222,8 +223,8 @@
 <div class="card client">
   <p style="margin-top: 0;">Каждый клиент — отдельная папка с собственной структурой. Никакого «общего» state — изоляция предотвращает утечки контекста и экономит токены.</p>
 
-  <h3>🐙 clients/octo/ <span class="badge active">активный</span> <span class="badge new">пересобран 2026-05-15</span> <a href="/octo-project/" class="badge detail">детально</a></h3>
-  <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Octo Relocate — стартап-студия с релокационным продуктом. Главный путь к equity-портфелю через канал Сергея. <strong>Полная пересборка структуры:</strong> вместо плоского state.md — 7 верхних папок по функциям. Старое уехало в <code>_archive/2026-05-15-restructure/</code>.</p>
+  <h3>🐙 clients/octo/ <span class="badge" style="background: #f9e9e9; color: #b04c4c;">на паузе 18.05</span> <a href="/octo-project/" class="badge detail">детально</a></h3>
+  <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Octo Relocate — стартап-студия с релокационным продуктом. После month-1 review 18.05 Андрей на паузе до 17.06 (см. <code>command/decisions.md</code> ADR-2026-05-18). <strong>Структура из 7 верхних папок:</strong> acquisition, funnel, handover, expertise, ops, command, private + work.</p>
 
 <div class="tree" style="margin: 8px 0;">
 <span class="folder">clients/octo/</span>
@@ -280,6 +281,17 @@
     ├── <span class="folder">website/</span>
     ├── <span class="folder">presentations/</span>
     └── <span class="folder">sergey-month-review/</span>  <span class="note">подготовка к 18.05</span>
+</div>
+
+  <h3 style="margin-top: 24px;">🧵 clients/vitaly-textile/ <span class="badge" style="background: #faf2dd; color: #c89a3c;">diagnostic-offer</span> <span class="badge new">новый клиент</span></h3>
+  <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Vitaly Textile (Москва) — RFID smart-textile для отелей, франшиза Raccoon. Канал — через Сергея. Confidence 60%. Стадия: пилот €2 000 / 3 недели обсуждается. После паузы Octo — под угрозой.</p>
+
+<div class="tree" style="margin: 8px 0;">
+<span class="folder">clients/vitaly-textile/</span>
+├── <span class="file">state.md</span>                <span class="note">YAML frontmatter (stage, confidence, equity_likelihood)</span>
+├── <span class="file">touches.md</span>              <span class="note">лог касаний, ★ meaningful touches</span>
+├── <span class="file">private.md</span>              <span class="note">моя разведка</span>
+└── <span class="folder">raw/</span>                    <span class="note">deck Raccoon, транскрипты, PDF</span>
 </div>
 
   <h3 style="margin-top: 24px;">🐟 clients/fishok/ <span class="badge active">активный</span></h3>
@@ -351,7 +363,7 @@
     </li>
   </ul>
 
-  <h3 style="margin-top: 24px;">🛠 .claude/skills/ — 6 скиллов</h3>
+  <h3 style="margin-top: 24px;">🛠 .claude/skills/ — 8 скиллов</h3>
   <ul class="file-list">
     <li>
       <span class="file-name">intake/</span>
@@ -376,6 +388,14 @@
     <li>
       <span class="file-name">octo-intake/</span>
       <span class="file-desc"><code>/octo-intake</code> — разбор сырья из <code>clients/octo/inbox/</code> с классификацией по правилам Octo. <span class="badge private">только Octo</span></span>
+    </li>
+    <li>
+      <span class="file-name">expert-panel/</span> <span class="badge new">новое</span>
+      <span class="file-desc"><code>/expert-panel</code>, <code>/panel</code> — прогнать решение/артефакт через 3+ экспертных ролей: каждый критикует мой вариант, предлагает свой. Дальше — сравнение и поэлементный выбор. <small>Для больших структурных решений до применения.</small></span>
+    </li>
+    <li>
+      <span class="file-name">bpmn-generator/</span> <span class="badge new">новое</span>
+      <span class="file-desc"><code>/bpmn</code>, <code>/process</code> — генерация BPMN 2.0 диаграммы процесса как валидный XML, готовый к импорту в bpmn.io / Camunda / draw.io. <small>Когда нужна схема процесса в нотации BPMN.</small></span>
     </li>
   </ul>
 
