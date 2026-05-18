@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ценности и антицели — Андрей Сычинников</title>
+<meta name="description" content="Три ценности, четыре антицели, антипаттерны и маркеры самоконтроля.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 16px; }
+  .container { max-width: 880px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 17px; color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 22px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 18px; margin: 0 0 8px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .value-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px; box-shadow: var(--shadow); border-top: 4px solid var(--green); }
+  .anti-card { border-top-color: var(--red); }
+  .pattern-card { border-left: 4px solid var(--purple); }
+  .marker-card { border-left: 4px solid var(--amber); }
+  .big-emoji { font-size: 36px; display: block; margin-bottom: 8px; }
+  ul { margin: 8px 0; padding-left: 20px; }
+  ul li { margin-bottom: 6px; font-size: 14px; }
+  .principle { background: #faf6ee; border-left: 4px solid var(--accent); padding: 18px 22px; margin: 20px 0; font-size: 16px; border-radius: 0 8px 8px 0; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+  @media (max-width: 700px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } h1 { font-size: 30px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/goals/">все цели</a></nav>
+
+<h1>🧭 Ценности и антицели</h1>
+<p class="subtitle">Не цели, а — что НЕ теряем по пути. Фильтр всех решений.</p>
+
+<div class="principle">
+  <strong>Двойной фильтр любого решения:</strong> накапливает под долгосрочную цель + не жертвует антицелями. Если жертвует — решение неправильное, даже если оно «выгодное».
+</div>
+
+<h2>💚 Три ценности</h2>
+<div class="grid-3">
+  <div class="value-card">
+    <span class="big-emoji">🕊</span>
+    <h3>Свобода</h3>
+    <p style="font-size: 14px;">Свобода выбора чем заниматься, с кем работать, где жить. Никогда не загонять себя в позицию, где «нет выбора кроме как».</p>
+  </div>
+  <div class="value-card">
+    <span class="big-emoji">🌍</span>
+    <h3>Мобильность</h3>
+    <p style="font-size: 14px;">Возможность жить где хочется. Сейчас Испания. Через 2 года США. Потом — куда позовёт жизнь. Документы, банки, активы — все строятся под мобильность.</p>
+  </div>
+  <div class="value-card">
+    <span class="big-emoji">⚖️</span>
+    <h3>Стратегическое отношение к деньгам и времени</h3>
+    <p style="font-size: 14px;">Деньги и время — ресурсы для будущего, не «приятный сейчас». Каждое решение по тратам — через фильтр «движет ли это к цели».</p>
+  </div>
+</div>
+
+<h2>🛡 Четыре антицели</h2>
+<p style="font-size: 14px; color: var(--muted);">Антицель — это не «то, что хочу не делать». Это <strong>то, что нельзя потерять</strong>, даже ради главной цели. Жертвование антицелью = стратегия проиграла, даже если деньги пришли.</p>
+
+<div class="grid-2">
+  <div class="value-card anti-card">
+    <span class="big-emoji">👨‍👩‍👧‍👦</span>
+    <h3>Семья</h3>
+    <p style="font-size: 14px;">Вика, Сара, сын. Не работать в выходные (договорённость с Викой). Дети растут сейчас — это нельзя «закроем потом, когда заработаю».</p>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Маркер: если &gt;3 недель подряд пропускаются семейные планы — стоп, переоценка.</p>
+  </div>
+  <div class="value-card anti-card">
+    <span class="big-emoji">✨</span>
+    <h3>Впечатления</h3>
+    <p style="font-size: 14px;">Путешествия, новые места, новый опыт. Жизнь не только в режиме «работать → копить». Париж 10.07 годовщина, США сентябрь — это не «расходы», это инвестиции в качество жизни.</p>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Маркер: если за квартал не было ни одной поездки / нового места — это сигнал.</p>
+  </div>
+  <div class="value-card anti-card">
+    <span class="big-emoji">📚</span>
+    <h3>Разностороннее развитие</h3>
+    <p style="font-size: 14px;">Не только бизнес. Книги, искусство, новые навыки. Не превращаться в человека-функцию для денег.</p>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Маркер: если месяц без одной книги / разговора не о работе — это сигнал.</p>
+  </div>
+  <div class="value-card anti-card">
+    <span class="big-emoji">🏃</span>
+    <h3>Здоровье</h3>
+    <p style="font-size: 14px;">Тело, сон, психика. Спорт, регулярные чек-апы. Деньги без здоровья — пустой счёт.</p>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Маркер: если &lt;3 тренировок в неделю или &lt;7 часов сна в среднем — стоп.</p>
+  </div>
+</div>
+
+<h2>⚠️ Пять антипаттернов</h2>
+<p style="font-size: 14px; color: var(--muted);">Поведенческие ловушки, в которые я знаю что попадаю. Записаны явно, чтобы ловить их в моменте.</p>
+
+<div class="card pattern-card">
+  <h3>1. Распыление вместо фокуса</h3>
+  <p style="font-size: 14px;">Хочется делать сразу три вещи. Каждая по 30%. В итоге ни одна не закрыта. <strong>Лекарство:</strong> правило одной P1-задачи в день. Остальное — после.</p>
+</div>
+<div class="card pattern-card">
+  <h3>2. Анализ вместо действия</h3>
+  <p style="font-size: 14px;">Тенденция «ещё разобраться, ещё прочитать, ещё подумать». В какой-то момент это перестаёт быть подготовкой и становится прокрастинацией. <strong>Лекарство:</strong> ставлю себе таймер на анализ. Когда время вышло — действие, даже неидеальное.</p>
+</div>
+<div class="card pattern-card">
+  <h3>3. Слишком быстрое «да» в переговорах</h3>
+  <p style="font-size: 14px;">Тенденция соглашаться чтобы сохранить отношения, в ущерб своим интересам. Особенно с людьми которых уважаю. <strong>Лекарство:</strong> «дай мне 24 часа подумать» — стандартный ответ на любое предложение.</p>
+</div>
+<div class="card pattern-card">
+  <h3>4. Sunk cost — продолжаю проигрышное</h3>
+  <p style="font-size: 14px;">«Я уже столько вложил, обидно бросить». Тенденция держаться за плохо работающую тактику. <strong>Лекарство:</strong> регулярные точки переоценки. Внутренние дедлайны (как 17.06 для Octo).</p>
+</div>
+<div class="card pattern-card">
+  <h3>5. Работа на надежде «потом расскажут»</h3>
+  <p style="font-size: 14px;">Расширение скоупа в надежде что upside окупит. Без письменной фиксации. <strong>Лекарство:</strong> рамки работы — письменно ДО старта. Расширение — отдельный разговор о компенсации.</p>
+</div>
+
+<h2>🎯 Три маркера самоконтроля</h2>
+<p style="font-size: 14px; color: var(--muted);">Сигналы из тела и работы, которые показывают: всё ОК / надо переоценить.</p>
+
+<div class="grid-3">
+  <div class="card marker-card" style="margin-bottom: 0;">
+    <h3>⚡ Энергия</h3>
+    <p style="font-size: 14px;"><strong>Зелёный:</strong> просыпаюсь до будильника, утром хочется работать.</p>
+    <p style="font-size: 14px;"><strong>Красный:</strong> постоянная усталость, прокрастинация, утро через силу.</p>
+    <p style="font-size: 13px; color: var(--muted);">Красный 5+ дней — переоценка приоритетов.</p>
+  </div>
+  <div class="card marker-card" style="margin-bottom: 0;">
+    <h3>✅ P1-действия</h3>
+    <p style="font-size: 14px;"><strong>Зелёный:</strong> главная задача дня закрывается до обеда.</p>
+    <p style="font-size: 14px;"><strong>Красный:</strong> P1 переносится 3+ дня подряд.</p>
+    <p style="font-size: 13px; color: var(--muted);">Если P1 «не делается» — либо задача неправильная, либо не P1.</p>
+  </div>
+  <div class="card marker-card" style="margin-bottom: 0;">
+    <h3>💰 Деньги</h3>
+    <p style="font-size: 14px;"><strong>Зелёный:</strong> чистая прибыль &gt;0, runway растёт.</p>
+    <p style="font-size: 14px;"><strong>Красный:</strong> runway &lt;3 мес, scarcity-fillter включается.</p>
+    <p style="font-size: 13px; color: var(--muted);">Scarcity искажает решения. Распознавать и компенсировать.</p>
+  </div>
+</div>
+
+<h2>🚫 Что НЕ делать (договорённости с собой)</h2>
+<div class="card">
+  <ul>
+    <li>Не предлагать холодные продажи через нетворки в РФ</li>
+    <li>Не предлагать LinkedIn-каналы привлечения до июня</li>
+    <li>Не покупать технику и необязательные вещи до стабильного дохода €8К+/мес</li>
+    <li>Не соглашаться на любые проекты без обсуждения equity-варианта</li>
+    <li>Не подписывать с Сергеем модель «агент платит процент» — худшая структура</li>
+    <li>Не ставить задачи на выходные (договорённость с Викой)</li>
+    <li>Не создавать новых файлов/папок без триггера правила роста</li>
+  </ul>
+</div>
+
+<footer>
+  <p>Ценности и антицели зафиксированы в <code>me.md</code>. Обновляются редко — раз в полгода или при кризисах.</p>
+  <p><a href="/goals/">← Все цели</a> · <a href="/goals/90-days.html">90 дней</a> · <a href="/goals/long-term.html">10 лет</a></p>
+</footer>
+
+</div>
+</body>
+</html>

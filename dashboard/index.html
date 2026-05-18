@@ -4,23 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Дашборд — состояние проектов</title>
-<meta name="description" content="Оперативный дашборд по проектам Андрея Сычинникова: цели 90 дней, финансы план-факт, клиенты, pipeline.">
+<meta name="description" content="Оперативный дашборд по проектам Андрея Сычинникова: цели 90 дней, клиенты, pipeline, недельные приоритеты.">
 <meta name="robots" content="noindex">
 
 <style>
   :root {
-    --bg: #f7f3ec;
-    --card: #ffffff;
-    --ink: #2a2a2a;
-    --muted: #6b6b6b;
-    --accent: #c25c2c;
-    --green: #4a7c59;
-    --blue: #3a5a8c;
-    --purple: #6b4a8c;
-    --red: #b04c4c;
-    --amber: #c89a3c;
-    --shadow: 0 2px 12px rgba(0,0,0,0.06);
-    --line: #e5dfd3;
+    --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b;
+    --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c;
+    --red: #b04c4c; --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3;
   }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
@@ -38,7 +30,6 @@
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
   .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
-  /* Goals */
   .goal { display: flex; flex-direction: column; gap: 6px; padding: 14px 0; border-bottom: 1px solid var(--line); }
   .goal:last-child { border-bottom: none; }
   .goal-title { font-weight: 600; font-size: 15px; }
@@ -48,7 +39,6 @@
   .bar-fill.red { background: var(--red); }
   .bar-fill.amber { background: var(--amber); }
 
-  /* Stats */
   .stat { padding: 14px 0; }
   .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
   .stat-value { font-size: 26px; font-weight: 700; margin-top: 2px; }
@@ -57,41 +47,34 @@
   .stat-value.amber { color: var(--amber); }
   .stat-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
-  /* Envelope plan-fact */
-  .env-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  .env-table th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
-  .env-table td { padding: 8px 8px; border-bottom: 1px solid var(--line); }
-  .env-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  .env-table .envbar { height: 6px; background: var(--line); border-radius: 100px; overflow: hidden; min-width: 80px; }
-  .env-table .envbar-fill { height: 100%; background: var(--green); }
-  .env-table .envbar-fill.amber { background: var(--amber); }
-  .env-table .envbar-fill.red { background: var(--red); }
-  .env-table .envbar-fill.empty { background: var(--line); }
-
-  /* Client cards */
   .client-card { display: grid; grid-template-rows: auto 1fr; gap: 12px; }
   .client-header { display: flex; justify-content: space-between; align-items: center; }
   .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
   .badge.active { background: #e9f1ec; color: var(--green); }
   .badge.risk { background: #f9e9e9; color: var(--red); }
   .badge.amber { background: #faf2dd; color: var(--amber); }
+  .badge.paused { background: #f9e9e9; color: var(--red); }
+  .badge.blue { background: #e5ecf5; color: var(--blue); }
   .client-row { display: flex; gap: 10px; margin-top: 8px; font-size: 14px; }
   .client-row .label { color: var(--muted); min-width: 110px; flex-shrink: 0; }
-  .placeholder { color: var(--muted); font-style: italic; font-size: 14px; }
 
-  /* Pipeline */
   .pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
   .stage { background: #f0ebe1; border-radius: 8px; padding: 12px; font-size: 13px; min-height: 100px; }
   .stage h4 { margin: 0 0 8px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; }
   .stage .count { font-size: 22px; font-weight: 700; }
+  .stage .item { background: var(--card); border-radius: 4px; padding: 4px 8px; margin-top: 6px; font-size: 12px; }
 
-  /* Tasks */
   .task-list { list-style: none; padding: 0; margin: 0; }
-  .task-list li { padding: 8px 0; font-size: 14px; display: flex; gap: 10px; align-items: baseline; }
+  .task-list li { padding: 8px 0; font-size: 14px; display: flex; gap: 10px; align-items: baseline; border-bottom: 1px solid var(--line); }
+  .task-list li:last-child { border-bottom: none; }
   .priority { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; flex-shrink: 0; }
   .priority.p1 { background: #f9e9e9; color: var(--red); }
   .priority.p2 { background: #faf2dd; color: var(--amber); }
   .priority.p3 { background: #eef1ee; color: var(--muted); }
+  .priority.done { background: #e9f1ec; color: var(--green); }
+
+  .alert { background: #f9e9e9; border: 1px solid #e8c4c4; border-left: 4px solid var(--red); border-radius: 8px; padding: 16px 20px; margin-bottom: 24px; }
+  .alert strong { color: var(--red); }
 
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
@@ -110,65 +93,71 @@
 <div class="container">
 
 <nav>
-  <span><a href="/">← главная</a> · <a href="/health/">здоровье системы</a> · <a href="/system/">карта</a> · <a href="/structure/">структура</a></span>
-  <span class="updated">обновлено: 2026-05-18 (вручную, прототип)</span>
+  <span><a href="/">← главная</a> · <a href="/goals/">цели</a> · <a href="/finance/">финансы</a> · <a href="/health/">здоровье</a> · <a href="/clients/">клиенты</a></span>
+  <span class="updated">обновлено: 2026-05-18 (после month-1 review с Сергеем)</span>
 </nav>
 
 <h1>Дашборд</h1>
-<p class="subtitle">Состояние проектов и приоритетов. Источник правды — state-файлы. Будет авто-обновляться в <code>/day-close</code>. Финансовая картина вынесена в отдельный раздел — <a href="/finance/" style="color: var(--blue);">/finance/</a>.</p>
+<p class="subtitle">Состояние проектов и приоритетов. Источник правды — state-файлы AndreiOS. Финансы — отдельно в <a href="/finance/" style="color: var(--blue);">/finance/</a>.</p>
 
-<!-- ===== БЛОК 1: ТРИ ЦЕЛИ 90 ДНЕЙ ===== -->
+<!-- ===== ALERT BLOCK ===== -->
+<div class="alert">
+  <strong>Главное событие 2026-05-18:</strong> Month-1 review с Сергеем (Octo) прошёл без выплат. Долг €1 000 за май не зафиксирован письменно. <strong>Андрей на паузе</strong> до 17.06. <a href="/octo-project/personal/" style="color: var(--blue);">Подробнее в Octo Personal →</a>
+</div>
+
+<!-- ===== ТРИ ЦЕЛИ 90 ДНЕЙ ===== -->
 <h2>🎯 Три цели 90 дней</h2>
 <div class="card">
   <div class="goal">
-    <div class="goal-title">1. Третий клиент (желательно через инкубатор Сергея)</div>
-    <div class="goal-meta">Pipeline пуст · ожидается тестовое предложение от Сергея · equity-кейс</div>
-    <div class="bar"><div class="bar-fill red" style="width: 5%"></div></div>
-  </div>
-  <div class="goal">
-    <div class="goal-title">2. Первая equity-позиция (Partnership Framework с Сергеем)</div>
-    <div class="goal-meta">Разговор по итогам месяца 18.05 · фиксируем формат, scope, компенсацию</div>
+    <div class="goal-title">1. Третий клиент</div>
+    <div class="goal-meta">Vitaly Textile в diagnostic-offer (через Сергея, под угрозой паузы). Параллельно — поиск клиента вне канала Сергея.</div>
     <div class="bar"><div class="bar-fill amber" style="width: 25%"></div></div>
   </div>
   <div class="goal">
-    <div class="goal-title">3. €8 000–10 000/мес чистыми к 1 августа</div>
-    <div class="goal-meta">Сейчас фикс €4 500 · нужно закрыть разрыв €3 500-5 500</div>
-    <div class="bar"><div class="bar-fill red" style="width: 30%"></div></div>
+    <div class="goal-title">2. Первая equity-позиция</div>
+    <div class="goal-meta">Гипотеза «через Сергея» переоценена 18.05. Текущая юрструктура Octo не позволяет осмысленный equity. Новые критерии: юрлицо + ≥€30К/мес выручки + defensibility + обсуждение ДО работы.</div>
+    <div class="bar"><div class="bar-fill red" style="width: 10%"></div></div>
   </div>
+  <div class="goal">
+    <div class="goal-title">3. €8 000–10 000/мес чистыми к 1 августа</div>
+    <div class="goal-meta">Сейчас фикс €3 500 (только Fishok после паузы Octo). Дефицит €4 500-6 500. Закрывать через Fishok upside / новые каналы / 3-й клиент.</div>
+    <div class="bar"><div class="bar-fill red" style="width: 22%"></div></div>
+  </div>
+  <p style="font-size: 13px; color: var(--muted); margin-top: 14px;">Детальный разбор и переоценка: <a href="/goals/90-days.html" style="color: var(--blue);">/goals/90-days.html →</a></p>
 </div>
 
-<!-- ===== БЛОК 2: ФИНАНСЫ — КРАТКИЙ УКАЗАТЕЛЬ ===== -->
+<!-- ===== ФИНАНСЫ КРАТКО ===== -->
 <h2>💰 Финансы <span style="font-weight: 400; font-size: 13px; color: var(--muted);">(сводка — детально в /finance/)</span></h2>
 <div class="card">
   <div class="grid-4" style="gap: 14px;">
     <div>
-      <div class="stat-label">Ликвид</div>
-      <div class="stat-value amber" style="font-size: 22px;">~€3 000</div>
-      <div class="stat-sub">+ неизв. на BBVA/Santander/Wise/Bybit</div>
+      <div class="stat-label">Евро-ликвид</div>
+      <div class="stat-value amber" style="font-size: 22px;">€5 911</div>
+      <div class="stat-sub">нал €2 305 + Bybit €3 506 + банки €100</div>
     </div>
     <div>
       <div class="stat-label">Фикс / мес</div>
-      <div class="stat-value" style="font-size: 22px;">€4 500</div>
-      <div class="stat-sub">Fishok €3 500 + Octo €1 000</div>
+      <div class="stat-value red" style="font-size: 22px;">€3 500</div>
+      <div class="stat-sub">только Fishok · Octo на паузе</div>
     </div>
     <div>
       <div class="stat-label">Runway</div>
-      <div class="stat-value red" style="font-size: 22px;">~1 мес ⚠</div>
-      <div class="stat-sub">фаза 1: разовые → подушка</div>
+      <div class="stat-value amber" style="font-size: 22px;">~1.5 мес</div>
+      <div class="stat-sub">при расходах €4К/мес</div>
     </div>
     <div>
-      <div class="stat-label">Подушка</div>
-      <div class="stat-value red" style="font-size: 22px;">€0 / €16 800</div>
-      <div class="stat-sub">цель 3 мес расходов</div>
+      <div class="stat-label">Чистая прибыль мая</div>
+      <div class="stat-value green" style="font-size: 22px;">+€1 865</div>
+      <div class="stat-sub">первый плюсовой месяц</div>
     </div>
   </div>
   <p style="font-size: 14px; margin-top: 18px; margin-bottom: 0;">
-    Полная картина — балансы по счетам, движение средств, план-факт по конвертам, накопления на цели, долги и дедлайны — на отдельной странице:
+    Полная картина — балансы по счетам, движение средств, план-факт по конвертам, накопления на цели, долги:
     <strong><a href="/finance/" style="color: var(--blue);">💰 /finance/ — финансовый дашборд →</a></strong>
   </p>
 </div>
 
-<!-- ===== БЛОК 5: КЛИЕНТЫ ===== -->
+<!-- ===== КЛИЕНТЫ ===== -->
 <h2>👥 Клиенты</h2>
 <div class="grid-2">
   <div class="card client-card">
@@ -178,73 +167,85 @@
     </div>
     <div>
       <div class="client-row"><span class="label">Доход:</span><span>€3 500/мес, 14-го числа</span></div>
-      <div class="client-row"><span class="label">Главный риск:</span><span>зарплата идёт с личного кармана В.В. Кузакова, не из бюджета</span></div>
-      <div class="client-row"><span class="label">Стратегия:</span><span>до €4К+ независимого дохода — не соглашаться на понижение</span></div>
-      <div class="client-row"><span class="label">Папка:</span><code>clients/fishok/</code></div>
+      <div class="client-row"><span class="label">Канал выплат:</span><span>USDT на Bybit (нужна стратегия конвертации)</span></div>
+      <div class="client-row"><span class="label">Главный риск:</span><span>зарплата с личного кармана В.В. Кузакова, не из бюджета компании</span></div>
+      <div class="client-row"><span class="label">Стратегия:</span><span>держать, искать «+1»-возможность (партнёрство / equity)</span></div>
+      <div class="client-row"><span class="label">Папка:</span><code>clients/fishok/</code> · <a href="/clients/fishok.html" style="color: var(--blue);">детали →</a></div>
     </div>
   </div>
 
-  <div class="card client-card">
+  <div class="card client-card" style="border-left: 4px solid var(--red);">
     <div class="client-header">
       <h3>🐙 Octo Relocate</h3>
-      <span class="badge active">активный</span>
+      <span class="badge paused">на паузе</span>
     </div>
     <div>
-      <div class="client-row"><span class="label">Роль:</span><span>COO + CMO + Sales Lead + Head of AI</span></div>
-      <div class="client-row"><span class="label">Доход:</span><span>€1 000 фикс + до €3 000 бонус (триггер: выручка &gt;€50К/мес)</span></div>
-      <div class="client-row"><span class="label">Главный актив:</span><span>канал Сергея → equity-портфель → $10М цель</span></div>
-      <div class="client-row"><span class="label">Фаза:</span><span>«Оцифровка» (май 2026) — управляемая воронка + Татьяна как operator</span></div>
+      <div class="client-row"><span class="label">Статус:</span><span>пауза с 18.05 после month-1 review</span></div>
+      <div class="client-row"><span class="label">Долг компании:</span><span>€1 000 за май, не зафиксирован письменно</span></div>
+      <div class="client-row"><span class="label">Следующий шаг:</span><span>созвон 21.05 (чт) + дедлайн 17.06</span></div>
+      <div class="client-row"><span class="label">Татьяна:</span><span>остаётся с Сергеем · я не вмешиваюсь</span></div>
       <div class="client-row"><span class="label">Папка:</span><code>clients/octo/</code> · <a href="/octo-project/" style="color: var(--blue);">детально →</a></div>
     </div>
   </div>
-</div>
 
-<!-- ===== БЛОК 6: ГОРЯЧЕЕ OCTO ===== -->
-<h2>🔥 Octo — что на столе на этой неделе</h2>
-<div class="card">
-  <p style="margin-top: 0; font-size: 14px;">Полный контекст и приоритеты — <a href="/octo-project/" style="color: var(--blue);">в зоне Octo</a>. Здесь — топ-3 горячих контент-плана с дедлайнами.</p>
-  <table>
-    <thead><tr><th>#</th><th>Партнёр</th><th>Дедлайн</th><th>Статус</th></tr></thead>
-    <tbody>
-      <tr><td>11</td><td>FRANCABILITY</td><td><strong style="color: var(--red);">15.05 (сегодня)</strong></td><td>контент-план</td></tr>
-      <tr><td>44</td><td>Arno</td><td>19.05</td><td>контент-план</td></tr>
-      <tr><td>69</td><td>Pravo I Slovo</td><td>22.05</td><td>контент-план</td></tr>
-    </tbody>
-  </table>
-  <p style="font-size: 13px; color: var(--muted); margin-top: 10px;"><strong>+ 18.05 (пн):</strong> разговор с Сергеем по итогам месяца. Самый важный разговор недели — фиксируем формат, scope, компенсацию.</p>
-</div>
-
-<!-- ===== БЛОК 7: СЕРГЕЙ-КАНАЛ ===== -->
-<h2>🌱 Сергей-канал <span style="font-weight: 400; font-size: 13px; color: var(--muted);">(главный стратегический актив)</span></h2>
-<div class="card">
-  <div class="grid-2">
-    <div>
-      <h3>План активации</h3>
-      <ol style="margin: 0; padding-left: 18px; font-size: 14px;">
-        <li>Сейчас (1-2 нед): получить от Сергея <strong>первое тестовое предложение</strong>, взять как разведку</li>
-        <li>К проекту №2: прийти с <strong>Partnership Framework</strong> (fixed fee + 1-3% equity + 15-20% Сергею)</li>
-        <li>Через 6-12 мес: концепт <strong>Operational Foundation Module</strong> как продукт инкубатора</li>
-        <li>Через 12+ мес: <strong>Operating Partner</strong> в инкубаторе с carried interest</li>
-      </ol>
+  <div class="card client-card" style="border-left: 4px solid var(--amber);">
+    <div class="client-header">
+      <h3>🧵 Vitaly Textile</h3>
+      <span class="badge amber">diagnostic-offer</span>
     </div>
     <div>
-      <h3>Открытые вопросы</h3>
-      <ul style="margin: 0; padding-left: 18px; font-size: 14px;">
-        <li>Какой % Сергей будет ожидать с моих сделок в инкубаторе?</li>
-        <li>Какой первый AI-агент запустить (Discover / Reporting / Octo-воронка)?</li>
-        <li>Compensation Андрея — открытый вопрос (до 01.07.2026)</li>
-      </ul>
-      <h3 style="margin-top: 18px;">Текущий статус</h3>
-      <p style="font-size: 14px; margin: 0; color: var(--muted);">18.05 — разговор. Подготовка в <code>clients/octo/work/sergey-month-review/</code>.</p>
+      <div class="client-row"><span class="label">Что:</span><span>RFID smart-textile для отелей, франшиза Raccoon Москва</span></div>
+      <div class="client-row"><span class="label">Канал:</span><span>через Сергея · €2 000 / 3 недели пилот</span></div>
+      <div class="client-row"><span class="label">Risk:</span><span>лид Сергея, под угрозой вместе с паузой канала</span></div>
+      <div class="client-row"><span class="label">Папка:</span><code>clients/vitaly-textile/</code> · <a href="/clients/vitaly-textile.html" style="color: var(--blue);">детали →</a></div>
+    </div>
+  </div>
+
+  <div class="card client-card" style="border-left: 4px solid var(--muted);">
+    <div class="client-header">
+      <h3>📥 Pipeline лидов</h3>
+      <span class="badge" style="background: #eef1ee; color: var(--muted);">в работе</span>
+    </div>
+    <div>
+      <div class="client-row"><span class="label">Сейчас:</span><span>только Vitaly активный лид</span></div>
+      <div class="client-row"><span class="label">Сергей-канал:</span><span>на пересмотре до 17.06</span></div>
+      <div class="client-row"><span class="label">Новая задача:</span><span>искать 3-го клиента <strong>вне</strong> Сергея</span></div>
+      <div class="client-row"><span class="label">Pipeline:</span><a href="/clients/pipeline.html" style="color: var(--blue);">детали →</a></div>
     </div>
   </div>
 </div>
 
-<!-- ===== БЛОК 8: PIPELINE ===== -->
+<!-- ===== СЕРГЕЙ-КАНАЛ ===== -->
+<h2>🌱 Сергей-канал <span style="font-weight: 400; font-size: 13px; color: var(--muted);">(на пересмотре с 18.05)</span></h2>
+<div class="card" style="border-left: 4px solid var(--amber);">
+  <div class="grid-2">
+    <div>
+      <h3>Где разговор сейчас</h3>
+      <p style="font-size: 14px; margin: 0 0 10px;">Пауза. Андрей не работает по Octo до закрытия долга €1К и письменной фиксации новой модели. Татьяна остаётся с Сергеем.</p>
+      <ul style="margin: 0; padding-left: 18px; font-size: 14px;">
+        <li><strong>До 21.05 (чт):</strong> письменное резюме звонка Сергею</li>
+        <li><strong>21.05:</strong> синхрон-созвон</li>
+        <li><strong>17.06:</strong> дедлайн решения. Если нет действий — Octo закрыт как канал</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Переоценка гипотезы</h3>
+      <p style="font-size: 14px; margin: 0 0 10px;">Гипотеза «Сергей → equity-партнёрство → $10М» переоценена. Видно что:</p>
+      <ul style="margin: 0; padding-left: 18px; font-size: 14px;">
+        <li>Юрструктура Octo не позволяет осмысленный equity (компания США + крипта + Европа «потом»)</li>
+        <li>Готовность к partnership не подтверждена даже на уровне фиксации долга</li>
+        <li>Pitch-day Узбекистан — реальный актив, но Сергей не делит контроль</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0;">Полный поведенческий профиль и серая зона на случай разрыва — <a href="/octo-project/personal/" style="color: var(--blue);">Octo Personal →</a></p>
+</div>
+
+<!-- ===== PIPELINE ===== -->
 <h2>📥 Pipeline по новым клиентам</h2>
 <div class="pipeline">
   <div class="stage">
-    <h4>1. Холодный контакт</h4>
+    <h4>1. Холодный</h4>
     <div class="count">0</div>
   </div>
   <div class="stage">
@@ -255,70 +256,73 @@
     <h4>3. Discovery</h4>
     <div class="count">0</div>
   </div>
-  <div class="stage">
-    <h4>4. Diagnostic offer</h4>
-    <div class="count">0</div>
+  <div class="stage" style="background: #faf2dd;">
+    <h4>4. Diagnostic-offer</h4>
+    <div class="count">1</div>
+    <div class="item">Vitaly Textile</div>
   </div>
   <div class="stage">
     <h4>5. Подписан</h4>
     <div class="count">0</div>
   </div>
 </div>
-<p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Воронка пустая. Источники лидов: Сергей-канал (главный), тёплые связи (В.В., бывшие коллеги), рекомендации. LinkedIn отложен до июня.</p>
+<p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><strong>Lost / на паузе:</strong> sergey-partner-1 (был discovery, ушёл на паузу 18.05). Источники лидов: тёплые связи, рекомендации. LinkedIn отложен до июня. Главная задача недели — минимум одно действие по 3-му клиенту <strong>вне</strong> Сергея.</p>
 
-<!-- ===== БЛОК 9: ЭТА НЕДЕЛЯ ===== -->
-<h2>📅 Эта неделя</h2>
+<!-- ===== ЭТА НЕДЕЛЯ ===== -->
+<h2>📅 Эта неделя (W21, 18-24.05)</h2>
 <div class="grid-2">
   <div class="card">
-    <h3>Задачи</h3>
+    <h3>Задачи P1</h3>
     <ul class="task-list">
-      <li class="placeholder">Заполнить в this-week.md через /weekly-dialogue или вручную.</li>
+      <li><span class="priority done">✓</span><span>Octo / разговор с Сергеем по итогам месяца — <strong>сделано 18.05</strong></span></li>
+      <li><span class="priority p1">P1</span><span>Octo / письменное резюме Сергею с фиксацией паузы и условий (до чт 21.05)</span></li>
+      <li><span class="priority p1">P1</span><span>Octo / синхрон-созвон с Сергеем (чт 21.05)</span></li>
+      <li><span class="priority p1">P1</span><span>Fishok / созвон с отделом продаж + отчёт W20 ВВ</span></li>
+      <li><span class="priority p1">P1</span><span>Поиск 3-го клиента вне Сергея — минимум одно действие до пятницы</span></li>
     </ul>
-    <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Дашборд тянет P1/P2/P3 из <code>this-week.md</code>. Сейчас файл шаблонный.</p>
   </div>
   <div class="card">
     <h3>Последние решения</h3>
     <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
       <li style="padding: 8px 0; border-bottom: 1px solid var(--line);">
-        <strong>2026-05-15</strong> · <span style="color: var(--green);">octo, structural</span><br>
-        Полная пересборка структуры Octo (7 верхних папок, ADR-2026-05-15)
+        <strong>2026-05-18</strong> · <span style="color: var(--red);">strategic, octo, pipeline, finance</span><br>
+        Пауза по Octo. Переоценка Сергея как канала к equity. Дедлайн 17.06.
       </li>
       <li style="padding: 8px 0; border-bottom: 1px solid var(--line);">
-        <strong>2026-05-15</strong> · <span style="color: var(--green);">finance, structural</span><br>
-        Запущена система финансов план-факт: <code>finance/</code> с state/budget/ledger + skill <code>/finance</code>
+        <strong>2026-05-15</strong> · <span style="color: var(--green);">octo, structural</span><br>
+        Полная пересборка структуры Octo (7 верхних папок, 10 ADR)
       </li>
       <li style="padding: 8px 0;">
-        <strong>2026-05-14</strong> · <span style="color: var(--green);">strategic, finance</span><br>
-        Наполнен фундамент AndreiOS — me.md и money.md
+        <strong>2026-05-15</strong> · <span style="color: var(--green);">finance, structural</span><br>
+        Запущена система финансов план-факт + skill /finance
       </li>
     </ul>
-    <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Источник: <code>decisions.md</code></p>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Полная лента: <a href="/decisions/" style="color: var(--blue);">/decisions/ →</a></p>
   </div>
 </div>
 
-<!-- ===== БЛОК 10: КРАСНЫЕ ЛИНИИ ===== -->
+<!-- ===== КРАСНЫЕ ЛИНИИ ===== -->
 <h2>🚨 Что под наблюдением</h2>
 <div class="grid-3">
-  <div class="card">
-    <h3 style="color: var(--red);">Runway &lt;1 мес</h3>
-    <p style="font-size: 14px; margin: 0;">Критический уровень ликвида. Любое финансовое решение — через scarcity-фильтр в money.md. Фаза 1: 100% разовых → подушка.</p>
+  <div class="card" style="border-left: 4px solid var(--red);">
+    <h3 style="color: var(--red);">Дефицит €1 100/мес</h3>
+    <p style="font-size: 14px; margin: 0;">После паузы Octo фикс упал с €4 500 до €3 500. Семейные обязательства ~€3 900+. Закрывать без Octo до 1.08.</p>
   </div>
-  <div class="card">
-    <h3 style="color: var(--amber);">Fishok зависит от одного человека</h3>
-    <p style="font-size: 14px; margin: 0;">Зарплата из личного кармана В.В. Кузакова. Точку проверки «+1»-возможности не подтвердили за 4 мес.</p>
+  <div class="card" style="border-left: 4px solid var(--amber);">
+    <h3 style="color: var(--amber);">Fishok — concentration risk</h3>
+    <p style="font-size: 14px; margin: 0;">Зарплата из личного кармана В.В. Кузакова. +1-возможность не подтверждена за 4 мес. Точка проверки — июнь.</p>
   </div>
-  <div class="card">
-    <h3 style="color: var(--amber);">Третьего клиента нет</h3>
-    <p style="font-size: 14px; margin: 0;">Цель 90 дней №1 не движется. Pipeline пуст. Главная активность — канал Сергея.</p>
+  <div class="card" style="border-left: 4px solid var(--amber);">
+    <h3 style="color: var(--amber);">Долг €1К без письма</h3>
+    <p style="font-size: 14px; margin: 0;">Сергей отказался письменно фиксировать. Высокий риск полной потери. Тест на честность через резюме звонка.</p>
   </div>
 </div>
 
 <footer>
   <p>
-    <strong>Этот дашборд — прототип.</strong> Дальше будет интегрирован в <code>/day-close</code>, чтобы обновляться автоматически каждый вечер.
-    Источники данных: <code>finance/state.md</code>, <code>finance/budget.md</code>, <code>decisions.md</code>, <code>this-week.md</code>, <code>clients/*/state.md</code>, <code>clients/octo/command/state.md</code>, <code>pipeline.md</code>.
+    <strong>Источники данных:</strong> <code>finance/state.md</code>, <code>decisions.md</code>, <code>this-week.md</code>, <code>clients/*/state.md</code>, <code>clients/octo/command/state.md</code>, <code>pipeline.md</code>.
   </p>
-  <p><a href="/" style="color: var(--blue);">← Главная</a> · <a href="/health/" style="color: var(--blue);">Здоровье системы →</a> · <a href="/system/" style="color: var(--blue);">Карта системы →</a></p>
+  <p><a href="/" style="color: var(--blue);">← Главная</a> · <a href="/goals/" style="color: var(--blue);">Цели →</a> · <a href="/health/" style="color: var(--blue);">Здоровье →</a></p>
 </footer>
 
 </div>

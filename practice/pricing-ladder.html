@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing Ladder — Operational Foundation</title>
+<meta name="description" content="Продуктовая лестница Operational Foundation: 4 уровня от Diagnostic до Retainer.">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 16px; }
+  .container { max-width: 880px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 17px; color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 22px; margin: 50px 0 16px; font-weight: 700; color: var(--accent); }
+  h3 { font-size: 22px; margin: 0; font-weight: 700; }
+  .level { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 28px 30px; box-shadow: var(--shadow); margin-bottom: 20px; }
+  .level.l1 { border-top: 6px solid var(--blue); }
+  .level.l2 { border-top: 6px solid var(--green); }
+  .level.l3 { border-top: 6px solid var(--accent); }
+  .level.l4 { border-top: 6px solid var(--purple); }
+  .level-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+  .level-tag { display: inline-block; background: #f0ebe1; color: var(--muted); padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+  .level-price { font-size: 26px; font-weight: 700; color: var(--accent); }
+  .level-meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 14px 0; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .meta-item { font-size: 14px; }
+  .meta-item .label { color: var(--muted); display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
+  ul { margin: 8px 0; padding-left: 20px; }
+  ul li { margin-bottom: 4px; font-size: 14px; }
+  .principle { background: #faf6ee; border-left: 4px solid var(--accent); padding: 16px 20px; margin: 16px 0; font-size: 15px; border-radius: 0 6px 6px 0; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+  @media (max-width: 700px) { .level-meta { grid-template-columns: 1fr; } h1 { font-size: 30px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/practice/">методология</a> · <a href="/practice/cases.html">кейсы</a></nav>
+
+<h1>💰 Pricing Ladder</h1>
+<p class="subtitle">Четыре уровня входа в работу — от точечного аудита до полной системы.</p>
+
+<div class="principle">
+  <strong>Логика лестницы:</strong> начинаем с малого (Diagnostic) — клиент видит, могу ли я мыслить системно и приносить ценность. Дальше — выбор продолжения по результату, не по обещаниям. Каждый уровень самодостаточен — можно закончить и быть довольным.
+</div>
+
+<div class="level l1">
+  <span class="level-tag">Level 1 · Точка входа</span>
+  <div class="level-header">
+    <h3>🔍 Diagnostic</h3>
+    <div class="level-price">€3 000 – €5 000</div>
+  </div>
+  <p style="font-size: 15px;">Глубокий аудит операционной системы клиента. Артефакт — отчёт с дорожной картой.</p>
+
+  <div class="level-meta">
+    <div class="meta-item">
+      <span class="label">Длительность</span>
+      2-3 недели
+    </div>
+    <div class="meta-item">
+      <span class="label">Equity</span>
+      Нет
+    </div>
+    <div class="meta-item">
+      <span class="label">Платёж</span>
+      50% upfront, 50% при сдаче
+    </div>
+  </div>
+
+  <h4>Что входит</h4>
+  <ul>
+    <li>Аудит оргструктуры, ключевых процессов, метрик</li>
+    <li>Анализ воронки продаж и юнит-экономики</li>
+    <li>5-10 интервью с командой</li>
+    <li>Отчёт с рекомендациями (15-25 страниц)</li>
+    <li>Дорожная карта на 90 дней с приоритетами</li>
+  </ul>
+
+  <h4>Кому подходит</h4>
+  <ul>
+    <li>Хочет понять — где система не работает и почему</li>
+    <li>Не готов сразу к большому контракту</li>
+    <li>Использует Diagnostic как «тест-драйв» меня</li>
+  </ul>
+</div>
+
+<div class="level l2">
+  <span class="level-tag">Level 2 · Главный продукт</span>
+  <div class="level-header">
+    <h3>🏗 Foundation</h3>
+    <div class="level-price">€8 000 – €15 000 + 1-2% equity</div>
+  </div>
+  <p style="font-size: 15px;">Построение базовой операционной системы. Диагностика включена. Артефакт — рабочая система, не отчёт.</p>
+
+  <div class="level-meta">
+    <div class="meta-item">
+      <span class="label">Длительность</span>
+      2-3 месяца
+    </div>
+    <div class="meta-item">
+      <span class="label">Equity</span>
+      1-2% с vesting 4 года
+    </div>
+    <div class="meta-item">
+      <span class="label">Платёж</span>
+      30% upfront + 30% mid + 40% finish
+    </div>
+  </div>
+
+  <h4>Что входит</h4>
+  <ul>
+    <li>Всё из Diagnostic +</li>
+    <li>Внедрение 3-5 ключевых процессов</li>
+    <li>Построение скоркарда с метриками</li>
+    <li>Найм и онбординг 1-2 ключевых ролей (если нужно)</li>
+    <li>Настройка CRM / pipeline</li>
+    <li>Стратегический ритм (weekly syncs, monthly reviews)</li>
+    <li>2-3 AI-агента для рутинных операций</li>
+  </ul>
+
+  <h4>Кому подходит</h4>
+  <ul>
+    <li>Pre-seed → seed, есть продукт и первые клиенты</li>
+    <li>Готов делиться equity</li>
+    <li>Понимает, что нужна система, а не «героический исполнитель»</li>
+  </ul>
+</div>
+
+<div class="level l3">
+  <span class="level-tag">Level 3 · Полная сборка</span>
+  <div class="level-header">
+    <h3>🌐 Full Operating System</h3>
+    <div class="level-price">€18 000 – €30 000 + 2-3% equity</div>
+  </div>
+  <p style="font-size: 15px;">Полная операционная система компании от founders до production-ready команды. Включает Foundation + всё что нужно для масштабирования.</p>
+
+  <div class="level-meta">
+    <div class="meta-item">
+      <span class="label">Длительность</span>
+      4-6 месяцев
+    </div>
+    <div class="meta-item">
+      <span class="label">Equity</span>
+      2-3% с vesting + anti-dilution
+    </div>
+    <div class="meta-item">
+      <span class="label">Платёж</span>
+      Помесячно + бонус при сдаче
+    </div>
+  </div>
+
+  <h4>Что входит</h4>
+  <ul>
+    <li>Всё из Foundation +</li>
+    <li>Маркетинговая система (positioning, content, channels)</li>
+    <li>Sales pipeline с предсказуемой конверсией</li>
+    <li>People system (hiring, onboarding, performance)</li>
+    <li>Financial planning (budgeting, scenarios, P&L)</li>
+    <li>AI-операции — 5+ агентов в продакшене</li>
+    <li>Документация для будущего operating partner</li>
+  </ul>
+
+  <h4>Кому подходит</h4>
+  <ul>
+    <li>Seed → Series A, реальная выручка ≥€30К/мес</li>
+    <li>Готов к серьёзной equity-доле</li>
+    <li>Видит меня как со-основателя на этом периоде</li>
+  </ul>
+</div>
+
+<div class="level l4">
+  <span class="level-tag">Level 4 · Поддержание</span>
+  <div class="level-header">
+    <h3>🔄 Retainer / Operating Partner</h3>
+    <div class="level-price">€2 000 – €4 000 / месяц + equity</div>
+  </div>
+  <p style="font-size: 15px;">После Foundation или Full OS — поддержание системы и стратегическая поддержка. Низкая интенсивность, высокая ценность.</p>
+
+  <div class="level-meta">
+    <div class="meta-item">
+      <span class="label">Длительность</span>
+      6-24 месяца
+    </div>
+    <div class="meta-item">
+      <span class="label">Equity</span>
+      Уже есть от Foundation/Full OS
+    </div>
+    <div class="meta-item">
+      <span class="label">Платёж</span>
+      Помесячно
+    </div>
+  </div>
+
+  <h4>Что входит</h4>
+  <ul>
+    <li>Еженедельный 1-час sync с фаундером</li>
+    <li>Quarterly strategic review (4 часа)</li>
+    <li>Доступ к моей AI-операционке (агенты, шаблоны)</li>
+    <li>On-demand консультации (до 4 часов/мес)</li>
+    <li>Помощь с найм-вопросами для ключевых ролей</li>
+  </ul>
+
+  <h4>Кому подходит</h4>
+  <ul>
+    <li>Завершили Foundation или Full OS</li>
+    <li>Система работает, но хотят поддерживать качество</li>
+    <li>Готовы к долгосрочному партнёрству</li>
+  </ul>
+</div>
+
+<h2>Принципы ценообразования</h2>
+<div class="principle">
+  <strong>1.</strong> Никогда не работаю на голую success-fee (только % от продаж).<br>
+  <strong>2.</strong> Equity обсуждается ДО старта работы, не «потом разберёмся».<br>
+  <strong>3.</strong> Каждый уровень самодостаточен — можно закончить, не переходя на следующий.<br>
+  <strong>4.</strong> Цены фиксированные при подписании, не «time & materials».
+</div>
+
+<footer>
+  <p>📁 Источник в AndreiOS: <code>practice/pricing-ladder.md</code>. Эта страница — публичная версия для потенциальных клиентов.</p>
+  <p><a href="/practice/">← Методология</a> · <a href="/practice/cases.html">Кейсы →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

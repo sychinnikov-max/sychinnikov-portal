@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitaly Textile — клиент</title>
+<meta name="description" content="Vitaly Textile (Москва) — RFID smart-textile для отелей, франшиза Raccoon. На стадии diagnostic-offer.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 16px; }
+  .container { max-width: 880px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 17px; color: var(--muted); margin: 0 0 30px; }
+  h2 { font-size: 22px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h3 { font-size: 18px; margin: 0 0 8px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 16px; border-left: 4px solid var(--amber); }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.amber { background: #faf2dd; color: var(--amber); }
+  .row { display: flex; gap: 10px; margin-top: 8px; font-size: 14px; }
+  .row .label { color: var(--muted); min-width: 140px; flex-shrink: 0; }
+  ul { margin: 8px 0; padding-left: 20px; }
+  ul li { margin-bottom: 4px; font-size: 14px; }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .alert-red { background: #f9e9e9; border: 1px solid #e8c4c4; border-left: 4px solid var(--red); border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 14px; }
+  .alert-red strong { color: var(--red); }
+  .stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 16px 0; }
+  .stage { background: #f0ebe1; padding: 8px; border-radius: 6px; font-size: 12px; text-align: center; color: var(--muted); }
+  .stage.current { background: #faf2dd; color: var(--amber); font-weight: 600; border: 1px solid var(--amber); }
+  .stage.done { background: #e9f1ec; color: var(--green); }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+  @media (max-width: 700px) { .stages { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/clients/">все клиенты</a> · <a href="/clients/pipeline.html">pipeline</a></nav>
+
+<h1>🧵 Vitaly Textile</h1>
+<p class="subtitle">RFID smart-textile для отелей, франшиза Raccoon Москва. <span class="badge amber">diagnostic-offer</span></p>
+
+<h2>Стадия в воронке</h2>
+<div class="stages">
+  <div class="stage done">1. Холодный</div>
+  <div class="stage done">2. Квалификация</div>
+  <div class="stage done">3. Discovery</div>
+  <div class="stage current">4. Diagnostic-offer</div>
+  <div class="stage">5. Подписан</div>
+</div>
+<p style="font-size: 13px; color: var(--muted);">Discovery прошёл 2026-05-15. Сейчас на этапе обсуждения цены и формата пилота.</p>
+
+<div class="card">
+  <h3 style="margin-top: 0;">Профиль клиента</h3>
+  <div class="row"><span class="label">Имя:</span><span>Виталий</span></div>
+  <div class="row"><span class="label">Бизнес:</span><span>«Умный текстиль» — RFID-метки для отельного текстиля. Франшиза Raccoon (мать-проект — Сергей).</span></div>
+  <div class="row"><span class="label">Локация:</span><span>Москва (бизнес). Сам Виталий — Рига → июнь поездка с сыном → Москва.</span></div>
+  <div class="row"><span class="label">Стадия бизнеса:</span><span>pre-revenue. ~1.5 недели активной работы. Ноль закрытых отелей. Solo founder.</span></div>
+  <div class="row"><span class="label">Канал:</span><span>через Сергея (мать-проект). Сергей сам ведёт переговоры о моём входе.</span></div>
+</div>
+
+<div class="alert-red">
+  <strong>Главный риск:</strong> Vitaly — лид Сергея. После паузы Octo 18.05 канал Сергея под пересмотром. Если Сергей не закроет долг до 17.06 — Vitaly может выпасть вместе с каналом. Параллельно нужен лид <strong>вне</strong> Сергея.
+</div>
+
+<h2>Условия пилота</h2>
+<div class="card">
+  <h3 style="margin-top: 0;">Этап 1 — диагностический пилот</h3>
+  <div class="row"><span class="label">Цена:</span><span>€2 000 фикс</span></div>
+  <div class="row"><span class="label">Длительность:</span><span>3 недели</span></div>
+  <div class="row"><span class="label">Scope:</span><span>аудит + юнит-экономика + дорожная карта на 90 дней</span></div>
+  <div class="row"><span class="label">Что НЕ входит:</span><span>исполнение, операционка, найм. Только аналитика и план.</span></div>
+  <div class="row"><span class="label">Платёж:</span><span>50% upfront, 50% при сдаче — нужно настоять через Сергея</span></div>
+  <div class="row"><span class="label">Confidence:</span><span>60% (Сергей продаёт, ждём подтверждения от Виталия)</span></div>
+
+  <h3 style="margin-top: 20px;">Этап 2 — продолжение (опционально)</h3>
+  <ul>
+    <li>Если после пилота Виталий захочет дальше — отдельный контракт</li>
+    <li>Возможна обсуждение equity-опции (5-10% в юр.лице) или повышенная ставка</li>
+    <li>Не предложение, а опция: «если хочешь дальше — вот два варианта»</li>
+  </ul>
+</div>
+
+<h2>Что артикулирует Виталий</h2>
+<div class="card">
+  <ul>
+    <li>Нужен МВП, образцовый отель, кейсы</li>
+    <li>Нужны фин.расчёты и модель показать клиентам</li>
+    <li>Нужны план продаж, воронка, закрытие возражений</li>
+    <li>Нужны сайт, ролик, буклеты, домен, почта</li>
+    <li>Нужна команда и руководитель (но не может взять, пока не понимает экономику)</li>
+    <li>50 отелей за период — заявленный амбициозный план</li>
+  </ul>
+  <p style="font-size: 13px; color: var(--muted);"><strong>Что вижу между строк:</strong> Виталий не готов платить мне сам — это давление Сергея. Equity не на столе — он о моём вознаграждении не думал. Реальная проблема — отсутствие юнит-экономики; из неё каскадно решается всё остальное.</p>
+</div>
+
+<h2>Открытые вопросы</h2>
+<div class="card">
+  <ul>
+    <li>Согласовал ли Сергей с Виталием €2 000 / 3 недели? Когда подтверждение?</li>
+    <li>Кто платит — Виталий лично или Сергей через мать-структуру Raccoon?</li>
+    <li>Юр.лицо контракта со стороны Виталия — какое?</li>
+    <li>Возможна ли equity-опция после пилота? В каком объёме?</li>
+    <li>Что с уже подписанной работой при паузе канала Сергея?</li>
+  </ul>
+</div>
+
+<h2>Следующие шаги</h2>
+<div class="card">
+  <ul>
+    <li><strong>Не работать</strong> до письменного подтверждения условий — ноль файлов по Raccoon</li>
+    <li><strong>21.05 (чт)</strong> — синхрон с Сергеем, прояснить судьбу Vitaly при паузе Octo</li>
+    <li><strong>25.05</strong> — мягкий пинг Сергею: «по Виталию что-то прояснилось?»</li>
+    <li><strong>При подтверждении</strong> — попросить письменно зафиксировать scope + 50/50 платёж + equity-опцию</li>
+    <li><strong>Старт пилота</strong> — отдельный план на 3 недели, разбит на 3 итерации</li>
+  </ul>
+</div>
+
+<footer>
+  <p>📁 Полная папка клиента: <code>clients/vitaly-textile/</code> · Содержит: state.md (YAML), touches.md, private.md, raw/ (deck + транскрипты).</p>
+  <p><a href="/clients/">← Все клиенты</a> · <a href="/clients/pipeline.html">Pipeline →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

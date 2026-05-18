@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Журнал стратегических решений — Андрей Сычинников</title>
+<meta name="description" content="Хронология стратегических решений Андрея Сычинникова. Append-only — старые решения не редактируются.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; font-size: 16px; }
+  .container { max-width: 880px; margin: 0 auto; padding: 50px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 17px; color: var(--muted); margin: 0 0 30px; }
+  h2 { font-size: 22px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  .principle { background: #faf6ee; border-left: 4px solid var(--accent); padding: 16px 20px; margin: 16px 0; font-size: 15px; border-radius: 0 6px 6px 0; }
+  .decision { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 24px 28px; box-shadow: var(--shadow); margin-bottom: 16px; border-left: 4px solid var(--line); }
+  .decision.strategic { border-left-color: var(--accent); }
+  .decision.octo { border-left-color: var(--red); }
+  .decision.finance { border-left-color: var(--green); }
+  .decision.pipeline { border-left-color: var(--blue); }
+  .decision.structural { border-left-color: var(--purple); }
+  .dec-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+  .dec-date { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .dec-title { font-size: 19px; font-weight: 700; margin: 0; line-height: 1.3; }
+  .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .tag.strategic { background: #fdf1e9; color: var(--accent); }
+  .tag.octo { background: #f9e9e9; color: var(--red); }
+  .tag.finance { background: #e9f1ec; color: var(--green); }
+  .tag.pipeline { background: #eaeef7; color: var(--blue); }
+  .tag.structural { background: #f3e9f5; color: var(--purple); }
+  .tag.personal { background: #f0ebe1; color: var(--muted); }
+  .tag.family { background: #fdf8eb; color: var(--amber); }
+  .dec-section { margin: 14px 0; font-size: 15px; }
+  .dec-section strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .dec-section ul { margin: 6px 0; padding-left: 20px; }
+  .status { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .status.active { background: #e9f1ec; color: var(--green); }
+  .status.reversed { background: #f9e9e9; color: var(--red); }
+  .status.obsolete { background: #eef1ee; color: var(--muted); }
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav><a href="/">← главная</a> · <a href="/dashboard/">дашборд</a></nav>
+
+<h1>📓 Журнал стратегических решений</h1>
+<p class="subtitle">Хронология решений и переосмыслений. Самые свежие — сверху.</p>
+
+<div class="principle">
+  <strong>Принцип append-only:</strong> старые решения не редактируются. Если решение пересмотрено — пишется новое со ссылкой на старое. Так сохраняется история мышления, а не только «свежий правильный ответ».
+</div>
+
+<!-- ===== 2026-05-18 ===== -->
+<div class="decision octo">
+  <div class="dec-header">
+    <div>
+      <span class="dec-date">2026-05-18</span>
+      <h3 class="dec-title">Пауза по Octo — переоценка Сергея как стратегического канала</h3>
+      <div class="tags">
+        <span class="tag strategic">strategic</span>
+        <span class="tag octo">octo</span>
+        <span class="tag pipeline">pipeline</span>
+        <span class="tag finance">finance</span>
+      </div>
+    </div>
+    <span class="status active">active</span>
+  </div>
+  <div class="dec-section">
+    <strong>Контекст</strong>
+    Месяц работы в Octo (17.04 — 18.05) на «no win / no fee» модели. De-facto выполнял COO + CMO + Sales Lead + Head of Systems. Сделка €4 400 (Nomad) поступила — условие испытательного формально выполнено. На month-1 review Сергей: €0 заплачено, отказался <strong>письменно</strong> фиксировать долг €1К, предложил вернуться к работе только за процент.
+  </div>
+  <div class="dec-section">
+    <strong>Решение</strong>
+    Пауза до 17.06 (4 недели). Татьяна остаётся с Сергеем. Созвон 21.05. До чт — письменное резюме. Если к 17.06 долг не закрыт и письменная модель не получена — Octo выпадает из cashflow и переоценивается как канал к equity.
+  </div>
+  <div class="dec-section">
+    <strong>Что отверг</strong>
+    <ul>
+      <li>Доработать неделю до 10К — sunk cost, нарушение собственных правил</li>
+      <li>Уйти со скандалом / через юриста — несоразмерно, сжигает мост</li>
+      <li>Бесконечное ожидание без дедлайна — главный риск sunk cost</li>
+    </ul>
+  </div>
+  <div class="dec-section">
+    <strong>Уроки</strong>
+    <ul>
+      <li>No win / no fee допустимо только при письменной фиксации скоупа</li>
+      <li>Equity имеет смысл только когда: юрлицо + ≥€30К/мес выручки + defensibility + обсуждение ДО работы</li>
+      <li>Отказ подписать долг = красная линия</li>
+      <li>Поведение при свидетеле ≠ поведение наедине</li>
+    </ul>
+  </div>
+  <div class="dec-section">
+    <strong>Когда пересмотреть</strong>
+    17.06.2026 — точка решения по статусу Octo как канала. Или раньше, если Сергей закроет долг + пришлёт письменную модель.
+  </div>
+</div>
+
+<!-- ===== 2026-05-15 Octo Restructure ===== -->
+<div class="decision structural">
+  <div class="dec-header">
+    <div>
+      <span class="dec-date">2026-05-15</span>
+      <h3 class="dec-title">Полная пересборка структуры Octo — 7 верхних папок</h3>
+      <div class="tags">
+        <span class="tag octo">octo</span>
+        <span class="tag structural">structural</span>
+      </div>
+    </div>
+    <span class="status active">active</span>
+  </div>
+  <div class="dec-section">
+    <strong>Контекст</strong>
+    Плоский <code>state.md</code> Octo стал управлять задачами 5+ функций (CRM, контент-планы, expertise, decisions). Лимит «правила роста» превышен: 200+ строк, 3+ типа артефактов. Нужна функциональная декомпозиция.
+  </div>
+  <div class="dec-section">
+    <strong>Решение</strong>
+    Octo получает 7 верхних папок: <code>acquisition/</code>, <code>funnel/</code>, <code>handover/</code>, <code>expertise/</code>, <code>ops/</code>, <code>command/</code>, <code>private/</code>, <code>work/</code>. Старое в <code>_archive/2026-05-15-restructure/</code>. 10 ADR в Octo decisions.md.
+  </div>
+  <div class="dec-section">
+    <strong>Связано</strong>
+    Также 2026-05-15: запуск системы <code>finance/</code> (state + budget + ledger) + skill <code>/finance</code> + добавление агента <code>octo-advisor</code>.
+  </div>
+</div>
+
+<!-- ===== 2026-05-14 ===== -->
+<div class="decision strategic">
+  <div class="dec-header">
+    <div>
+      <span class="dec-date">2026-05-14</span>
+      <h3 class="dec-title">Наполнен фундамент AndreiOS — me.md и money.md</h3>
+      <div class="tags">
+        <span class="tag strategic">strategic</span>
+        <span class="tag finance">finance</span>
+        <span class="tag personal">personal</span>
+      </div>
+    </div>
+    <span class="status active">active</span>
+  </div>
+  <div class="dec-section">
+    <strong>Что зафиксировано в me.md</strong>
+    <ul>
+      <li>Главная цель: построить большую компанию, меняющую мир ($10М+ к 2033)</li>
+      <li>Двухтактная стратегия: Такт 1 (Operational Foundation, 5-7 лет) → Такт 2 (свой проект)</li>
+      <li>3 ценности (свобода, мобильность, стратегическое отношение к деньгам и времени)</li>
+      <li>4 антицели (семья, впечатления, разностороннее развитие, здоровье)</li>
+      <li>Двойной фильтр любого решения: накапливает под Такт 2 + не жертвует антицелями</li>
+    </ul>
+  </div>
+  <div class="dec-section">
+    <strong>Что зафиксировано в money.md</strong>
+    <ul>
+      <li>Дефицит €2 200/мес с учётом кредита и налогов (не €1 100, как считалось)</li>
+      <li>Подушка-цель: €60К (12 мес жизни)</li>
+      <li>Scarcity mindset как риск стратегических решений — пометка на runway &lt;3 мес</li>
+      <li>Система фондов для разовых поступлений (фаза 1: 100% в подушку)</li>
+      <li>Три зоны cash↔equity + правило-фундамент (никаких чистых equity-only)</li>
+    </ul>
+  </div>
+  <div class="dec-section">
+    <strong>Когда пересмотреть</strong>
+    Через месяц или после первого <code>/weekly-dialogue</code> — проверить, работает ли двойной фильтр на реальных решениях.
+  </div>
+</div>
+
+<!-- ===== Старые ADR — заметка ===== -->
+<h2>Octo-специфичные решения</h2>
+<div style="background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow);">
+  <p style="margin-top: 0;">У Octo собственный ADR-журнал (<code>clients/octo/command/decisions.md</code>). Содержит 11 ADR по операционным решениям проекта:</p>
+  <ul>
+    <li>ADR-2026-04: Переход с брокерской модели на реферальную</li>
+    <li>ADR-2026-05-04: Маркетинг-разбор как обязательный этап воронки</li>
+    <li>ADR-2026-05-04: Полная переработка CRM</li>
+    <li>ADR-2026-05-01: Уход операционного менеджера Елены</li>
+    <li>ADR-2026-05-XX: Татьяна как замена operational</li>
+    <li>ADR-2026-05-11: Эволюция модели — partner-driven growth company</li>
+    <li>ADR-2026-05-15: Полная пересборка структуры папок проекта</li>
+    <li>ADR-2026-05-18: Google Tasks как единый канал задач</li>
+    <li>ADR-2026-05-18: Андрей на паузе — отказ работать без письменной фиксации</li>
+  </ul>
+  <p style="font-size: 13px; color: var(--muted); margin-bottom: 0;">Octo ADR — приватный журнал, не публикуется. Здесь — оглавление.</p>
+</div>
+
+<h2>Принципы фиксации решений</h2>
+<div style="background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow);">
+  <ul>
+    <li><strong>YAML-теги scope</strong> — strategic / finance / family / fishok / octo / pipeline / personal</li>
+    <li><strong>Структура записи:</strong> Контекст · Варианты · Выбрал · Что отверг · Риски · Когда пересмотреть</li>
+    <li><strong>Status:</strong> active / reversed / obsolete</li>
+    <li><strong>Никогда не редактирую старые</strong> — только добавляю новые</li>
+    <li>Записываются: автоматически в <code>/day-close</code> и <code>/weekly-dialogue</code>, вручную при значимых событиях</li>
+  </ul>
+</div>
+
+<footer>
+  <p>📁 Источник правды: <code>decisions.md</code> в корне AndreiOS. Здесь — публичная часть (не все Octo ADR).</p>
+  <p><a href="/">← Главная</a> · <a href="/dashboard/">Дашборд →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

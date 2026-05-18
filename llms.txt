@@ -4,12 +4,53 @@
 
 База: Хихон, Испания. Email: sychinnikov@gmail.com
 
+## Main pages
+
+- [Главная](https://sychinnikov.com/): Карта портала, статусы проектов
+- [Дашборд](https://sychinnikov.com/dashboard/): Оперативная картина — цели 90 дней, клиенты, pipeline
+- [Финансы](https://sychinnikov.com/finance/): Личный финансовый дашборд план-факт
+- [Здоровье системы](https://sychinnikov.com/health/): Метрики самой системы AndreiOS
+- [Как это работает](https://sychinnikov.com/how-it-works/): Объяснение AndreiOS простыми словами
+
+## Goals
+
+- [Все цели](https://sychinnikov.com/goals/): Три горизонта — 90 дней, 10 лет, ценности
+- [Цели 90 дней](https://sychinnikov.com/goals/90-days.html): Три цели с актуальным прогрессом
+- [Долгосрочная цель](https://sychinnikov.com/goals/long-term.html): $10М+ к 2033, двухтактная стратегия
+- [Ценности и антицели](https://sychinnikov.com/goals/values.html): Фильтры решений
+
+## Clients
+
+- [Все клиенты](https://sychinnikov.com/clients/): Обзор всех проектов
+- [Fishok](https://sychinnikov.com/clients/fishok.html): Текущий доход €3 500/мес, Латвия
+- [Vitaly Textile](https://sychinnikov.com/clients/vitaly-textile.html): Третий клиент в diagnostic-offer
+- [Pipeline](https://sychinnikov.com/clients/pipeline.html): Воронка + Сергей-канал статус
+- [Octo Project](https://sychinnikov.com/octo-project/): Octo OS — Company + Personal
+
+## Methodology
+
+- [Operational Foundation](https://sychinnikov.com/practice/): Моя публичная методология
+- [Pricing Ladder](https://sychinnikov.com/practice/pricing-ladder.html): 4 уровня продукта
+- [Кейсы](https://sychinnikov.com/practice/cases.html): Silver Spa, Fishok, Octo
+
+## Decisions
+
+- [Журнал решений](https://sychinnikov.com/decisions/): Стратегические решения и переоценки
+
+## System architecture
+
+- [Карта системы](https://sychinnikov.com/system/): Концептуальная архитектура AndreiOS
+- [Полная структура](https://sychinnikov.com/structure/): Все папки и файлы
+- [Toolbox](https://sychinnikov.com/toolbox/): 8 skills, 4 субагента, hooks
+
 ## Materials
 
-- [AndreiOS — система управления через AI](https://sychinnikov.com/articles/andreios-guide.html): Описание моей операционной системы — как я веду клиентские проекты с помощью Claude Code, как устроены контексты, агенты, циклы работы.
+- [AndreiOS guide](https://sychinnikov.com/articles/andreios-guide.html): Подробный гайд по системе управления
 
 ## Context
 
 - Фокус: операционная архитектура, AI-driven management, equity-партнёрство в стартапах
 - Языки: русский (родной), английский (рабочий), испанский (бытовой)
 - Юрисдикции: ЕС (Испания), готовлю переезд в США
+- Долгосрочная цель: $10М+ к 2033 через equity-портфель из 6-10 долей в стартапах
+- Стиль работы: системное мышление, deep dive, AI-driven, без шаблонов
