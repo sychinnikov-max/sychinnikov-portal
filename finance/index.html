@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Финансы — личный дашборд</title>
+<meta name="description" content="Личный финансовый дашборд Андрея Сычинникова: баланс по счетам, движение средств, план-факт, накопления на цели, долги, дедлайны.">
+<meta name="robots" content="noindex">
+
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --green: #4a7c59;
+    --blue: #3a5a8c;
+    --purple: #6b4a8c;
+    --red: #b04c4c;
+    --amber: #c89a3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --line: #e5dfd3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 40px 24px; }
+  nav { font-size: 14px; color: var(--muted); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  .updated { font-size: 13px; color: var(--muted); }
+  h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 16px; color: var(--muted); margin: 0 0 12px; }
+  .owner-badge { display: inline-flex; align-items: center; gap: 6px; background: #eef1ee; color: var(--green); padding: 4px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; margin-bottom: 30px; }
+  h2 { font-size: 20px; margin: 40px 0 16px; font-weight: 600; color: var(--accent); }
+  h2 .sub { font-size: 13px; color: var(--muted); font-weight: 400; margin-left: 8px; }
+  h3 { font-size: 17px; margin: 0 0 12px; font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; box-shadow: var(--shadow); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+  /* Stats */
+  .stat { padding: 4px 0; }
+  .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-size: 26px; font-weight: 700; margin-top: 2px; }
+  .stat-value.red { color: var(--red); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.amber { color: var(--amber); }
+  .stat-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* Alert banner */
+  .alert-card { background: #f9e9e9; border: 1px solid #e8c4c4; border-left: 4px solid var(--red); }
+  .alert-card h3 { color: var(--red); margin-bottom: 8px; }
+  .alert-item { padding: 8px 0; border-bottom: 1px solid #e8c4c4; font-size: 14px; }
+  .alert-item:last-child { border-bottom: none; }
+  .alert-item strong { color: var(--red); }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  td { padding: 8px 8px; border-bottom: 1px solid var(--line); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.muted { color: var(--muted); font-style: italic; }
+
+  /* Envelope bar */
+  .envbar { height: 6px; background: var(--line); border-radius: 100px; overflow: hidden; min-width: 80px; }
+  .envbar-fill { height: 100%; background: var(--green); }
+  .envbar-fill.amber { background: var(--amber); }
+  .envbar-fill.red { background: var(--red); }
+  .envbar-fill.empty { background: var(--line); }
+  .envbar-fill.blue { background: var(--blue); }
+
+  /* Goal progress */
+  .goal-row { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .goal-row:last-child { border-bottom: none; }
+  .goal-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .goal-name { font-weight: 600; font-size: 15px; }
+  .goal-meta { font-size: 13px; color: var(--muted); }
+  .goal-prog { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .bar { background: var(--line); border-radius: 100px; height: 8px; overflow: hidden; margin-top: 4px; }
+  .bar-fill { height: 100%; border-radius: 100px; background: var(--green); }
+  .bar-fill.red { background: var(--red); }
+  .bar-fill.amber { background: var(--amber); }
+  .bar-fill.blue { background: var(--blue); }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
+  .badge.green { background: #e9f1ec; color: var(--green); }
+  .badge.red { background: #f9e9e9; color: var(--red); }
+  .badge.amber { background: #faf2dd; color: var(--amber); }
+  .badge.muted { background: #eef1ee; color: var(--muted); }
+
+  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .note strong { color: var(--ink); }
+
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); }
+
+  @media (max-width: 800px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <span><a href="/">← главная</a> · <a href="/dashboard/">дашборд проектов</a> · <a href="/health/">здоровье системы</a> · <a href="/system/">карта</a></span>
+  <span class="updated">обновлено: 2026-05-18 (вручную, прототип)</span>
+</nav>
+
+<h1>Финансы</h1>
+<p class="subtitle">Личный финансовый дашборд. Одно окно для оперативной картины: что есть, что входит и выходит, что копится на цели, что под наблюдением.</p>
+<span class="owner-badge">● ведёт финдиректор-агент · детальные разборы в чате</span>
+
+<!-- ===== БЛОК 0: ОПАСНЫЕ ТОЧКИ ===== -->
+<h2>🚨 Что под наблюдением прямо сейчас</h2>
+<div class="card alert-card">
+  <div class="alert-item">
+    <strong>Runway ~1 месяц.</strong> Критический уровень ликвида. Действует фаза 1: 100% разовых поступлений → подушка (минус Париж).
+  </div>
+  <div class="alert-item">
+    <strong>Зарплата Fishok €3 500 — должна была прийти 14-15.05.</strong> Статус не подтверждён. Это первая контрольная точка по риску «зависимость от В.В. Кузакова».
+  </div>
+  <div class="alert-item">
+    <strong>Остатки 4 счетов неизвестны.</strong> BBVA / Santander / Wise (EUR + USD) / Bybit — нужно зафиксировать вручную. Реальный ликвид может быть существенно больше или меньше €3 000.
+  </div>
+  <div class="alert-item">
+    <strong>Май 1-13 не разнесён в ledger.</strong> Продукты, транспорт, коммуналка, подписки. План-факт месяца неполный.
+  </div>
+  <div class="alert-item">
+    <strong>Подушка €0 при цели €16 800 (3 мес расходов).</strong> Подушка — фундамент любого решения. До неё нельзя соглашаться на проекты без денежной части и нельзя увеличивать обязательные расходы.
+  </div>
+</div>
+
+<!-- ===== БЛОК 1: ГЛАВНЫЕ ЦИФРЫ ===== -->
+<h2>💰 Главные цифры <span class="sub">(на 2026-05-18)</span></h2>
+<div class="grid-4">
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Ликвид (известный)</div>
+      <div class="stat-value amber">~€3 000</div>
+      <div class="stat-sub">+ €? на BBVA/Santander/Wise/Bybit</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Фикс / мес</div>
+      <div class="stat-value">€4 500</div>
+      <div class="stat-sub">Fishok €3 500 + Octo €1 000</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Дефицит / мес</div>
+      <div class="stat-value red">−€1 200</div>
+      <div class="stat-sub">расходы €5 700 при фиксе €4 500</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Runway</div>
+      <div class="stat-value red">~1 мес ⚠</div>
+      <div class="stat-sub">до зарплаты Fishok и распродажи РФ</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== БЛОК 2: СЧЕТА И БАЛАНС ===== -->
+<h2>🏦 Счета и баланс <span class="sub">«сколько у меня денег и где»</span></h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>Счёт</th><th>Тип</th><th>Валюта</th><th class="num">Остаток</th><th class="num">≈ EUR</th><th>Обновлено</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Наличные дома</td><td>кэш</td><td>EUR</td><td class="num">€1 190</td><td class="num">€1 190</td><td>2026-05-15</td></tr>
+      <tr><td>Рубли РФ</td><td>банк</td><td>RUB</td><td class="num">180 000 ₽</td><td class="num">€1 800</td><td>2026-05-13</td></tr>
+      <tr><td>BBVA</td><td>банк</td><td>EUR</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
+      <tr><td>Santander</td><td>банк</td><td>EUR</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
+      <tr><td>Wise</td><td>банк</td><td>EUR</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
+      <tr><td>Wise</td><td>банк</td><td>USD</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
+      <tr><td>Bybit</td><td>крипто</td><td>USDT</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
+      <tr><td>Товарные остатки РФ</td><td>актив</td><td>RUB</td><td class="num muted">оценить</td><td class="num muted">~€2 000 ожидаемая распродажа</td><td class="muted">—</td></tr>
+      <tr style="font-weight: 600; background: #faf6ee;">
+        <td colspan="4">Итого известный ликвид</td>
+        <td class="num">≈ €3 000</td>
+        <td class="muted">+ неизвестное</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note"><strong>Регулярно обновляй остатки.</strong> Раз в неделю минимум — иначе цифры наверху ничего не значат. Запиши в чате «BBVA 2400, Santander 800, Wise 150 — обнови» — я внесу.</p>
+</div>
+
+<!-- ===== БЛОК 3: ДВИЖЕНИЕ СРЕДСТВ МЕСЯЦА ===== -->
+<h2>🔄 Движение средств — май 2026 <span class="sub">cashflow текущего месяца</span></h2>
+<div class="grid-3">
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Получено в мае</div>
+      <div class="stat-value">€0</div>
+      <div class="stat-sub">ожидается Fishok €3 500 (14-15.05)</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Потрачено в мае</div>
+      <div class="stat-value">€1 210</div>
+      <div class="stat-sub">факт по 7 транзакциям</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Чистый поток (на сегодня)</div>
+      <div class="stat-value red">−€1 210</div>
+      <div class="stat-sub">плановый по итогам месяца: −€1 200</div>
+    </div>
+  </div>
+</div>
+<p class="note">Журнал транзакций — <code>finance/ledger.md</code>. Записывать через skill <code>/finance</code> или просто «обед 18 евро картой» в чате.</p>
+
+<!-- ===== БЛОК 4: ПЛАН-ФАКТ ПО КОНВЕРТАМ ===== -->
+<h2>📦 План-факт по конвертам <span class="sub">(категории расходов · 16 дней до конца месяца)</span></h2>
+<div class="card">
+  <p style="font-size: 13px; color: var(--muted); margin-top: 0;">
+    <strong>«Конверт» — это бюджетная корзина:</strong> каждый месяц фикс-сумма «нарезается» на статьи (аренда, еда, дети...). Тратишь только из конверта — закончился, стоп. Метод envelope budgeting.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Конверт</th><th class="num">План</th><th class="num">Факт</th><th class="num">Остаток</th><th>Заполнение</th><th>Статус</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Аренда</td><td class="num">€1 000</td><td class="num">€1 000</td><td class="num">€0</td><td><div class="envbar"><div class="envbar-fill" style="width: 100%"></div></div></td><td><span class="badge green">✓ полностью</span></td></tr>
+      <tr><td>Еда и быт</td><td class="num">€700</td><td class="num">€0</td><td class="num">€700</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">пусто</span></td></tr>
+      <tr><td>Няня и дети</td><td class="num">€700</td><td class="num">€0</td><td class="num">€700</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">пусто</span></td></tr>
+      <tr><td>Транспорт</td><td class="num">€100</td><td class="num">€0</td><td class="num">€100</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">—</span></td></tr>
+      <tr><td>Связь и подписки</td><td class="num">€80</td><td class="num">€9</td><td class="num">€71</td><td><div class="envbar"><div class="envbar-fill" style="width: 11%"></div></div></td><td><span class="badge muted">—</span></td></tr>
+      <tr><td>Здоровье</td><td class="num">€120</td><td class="num">€140</td><td class="num" style="color: var(--red);">−€20</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">⚠ перерасход</span></td></tr>
+      <tr><td>Жена-карманные</td><td class="num">€150</td><td class="num">€70</td><td class="num">€80</td><td><div class="envbar"><div class="envbar-fill" style="width: 47%"></div></div></td><td><span class="badge muted">—</span></td></tr>
+      <tr><td>Коворкинг</td><td class="num">€150</td><td class="num">€0</td><td class="num">€150</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">—</span></td></tr>
+      <tr><td>Кредит РФ</td><td class="num">€1 700</td><td class="num">€0</td><td class="num">€1 700</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge amber">ждёт зарплаты</span></td></tr>
+      <tr><td>Париж 10.07</td><td class="num">€1 000</td><td class="num">€0</td><td class="num">€1 000</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge amber">ждёт разовых</span></td></tr>
+      <tr style="font-weight: 600; background: #faf6ee;">
+        <td>Итого</td><td class="num">€5 700</td><td class="num">€1 210</td><td class="num">€4 490</td><td>—</td><td>21% бюджета · 47% времени</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">Источник: <code>finance/state.md</code>. Структура — <code>finance/budget.md</code>.</p>
+</div>
+
+<!-- ===== БЛОК 5: НАКОПЛЕНИЯ НА ЦЕЛИ ===== -->
+<h2>🎯 Накопления на цели <span class="sub">«сколько накоплено на каждую цель»</span></h2>
+<div class="card">
+  <div class="goal-row">
+    <div class="goal-head">
+      <span class="goal-name">Подушка безопасности — 3 мес расходов</span>
+      <span class="goal-prog"><strong>€0</strong> / €16 800 · 0%</span>
+    </div>
+    <div class="goal-meta">Фундамент. До неё держим фазу 1: все разовые → сюда. Без подушки нельзя ослаблять давление на доход.</div>
+    <div class="bar"><div class="bar-fill red" style="width: 1%"></div></div>
+  </div>
+  <div class="goal-row">
+    <div class="goal-head">
+      <span class="goal-name">Париж — годовщина свадьбы 10.07</span>
+      <span class="goal-prog"><strong>€0</strong> / €2 000 · 0%</span>
+    </div>
+    <div class="goal-meta">Делим на 2 месяца: май и июнь по €1 000. Идёт из конверта «Париж 10.07» (ждёт зарплаты / разовых).</div>
+    <div class="bar"><div class="bar-fill red" style="width: 1%"></div></div>
+  </div>
+  <div class="goal-row">
+    <div class="goal-head">
+      <span class="goal-name">США сентябрь — поездка 3 недели</span>
+      <span class="goal-prog"><strong>€0</strong> / €9 000 · 0%</span>
+    </div>
+    <div class="goal-meta">Цель 90 дней. Закладывается на нерегулярные поступления и бонус Octo. Лоукост-вариант через жильё знакомых.</div>
+    <div class="bar"><div class="bar-fill red" style="width: 1%"></div></div>
+  </div>
+  <div class="goal-row">
+    <div class="goal-head">
+      <span class="goal-name">Подушка 12 мес (после фазы 1)</span>
+      <span class="goal-prog"><strong>€0</strong> / €60 000 · 0%</span>
+    </div>
+    <div class="goal-meta">Дальний горизонт. Стартует когда подушка 3 мес закрыта.</div>
+    <div class="bar"><div class="bar-fill amber" style="width: 1%"></div></div>
+  </div>
+  <div class="goal-row">
+    <div class="goal-head">
+      <span class="goal-name">Equity-портфель — путь к $10M к 2033</span>
+      <span class="goal-prog">тек. вес: 0 долей</span>
+    </div>
+    <div class="goal-meta">Не деньги, а доли. Первая позиция — Partnership Framework с Сергеем. Цель 6-10 долей за 7 лет.</div>
+    <div class="bar"><div class="bar-fill blue" style="width: 1%"></div></div>
+  </div>
+</div>
+
+<!-- ===== БЛОК 6: ДОЛГИ ===== -->
+<h2>💳 Долги и обязательства</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>Обязательство</th><th>Тип</th><th class="num">Остаток</th><th class="num">Ежемесячно</th><th>Срок</th><th>Статус</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Кредит РФ</td><td>долг</td><td class="num muted">уточнить тело</td><td class="num">€1 700 (170 000 ₽)</td><td>в действии</td><td><span class="badge amber">обслуживается из зарплаты</span></td>
+      </tr>
+      <tr>
+        <td>Аренда жилья</td><td>обязательный платёж</td><td class="num">—</td><td class="num">€1 000</td><td>1-го числа</td><td><span class="badge green">в графике</span></td>
+      </tr>
+      <tr>
+        <td>Налоги Испания (резерв)</td><td>будущее обязательство</td><td class="num">—</td><td class="num">€220 (с июня)</td><td>2026-06+</td><td><span class="badge muted">включить с июня</span></td>
+      </tr>
+      <tr>
+        <td>Париж 10.07</td><td>будущее обязательство</td><td class="num">€2 000</td><td class="num">€1 000 × 2 мес</td><td>10.07.2026</td><td><span class="badge amber">копится</span></td>
+      </tr>
+      <tr>
+        <td>США сентябрь</td><td>будущее обязательство</td><td class="num">€9 000</td><td class="num">—</td><td>сентябрь 2026</td><td><span class="badge muted">не покрыто</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note"><strong>Уточнить:</strong> точное тело кредита РФ и эффективная ставка. Без этой цифры не построить плана досрочного погашения.</p>
+</div>
+
+<!-- ===== БЛОК 7: ФИНАНСОВЫЕ ДЕДЛАЙНЫ ===== -->
+<h2>📅 Финансовые дедлайны</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Дата</th><th>Что</th><th class="num">Сумма</th><th>Статус</th></tr></thead>
+    <tbody>
+      <tr><td>14–15 мая 2026</td><td>Зарплата Fishok</td><td class="num">€3 500</td><td><span class="badge red">ожидается, не подтверждено</span></td></tr>
+      <tr><td>1 июня 2026</td><td>Аренда июнь</td><td class="num">€1 000</td><td><span class="badge muted">плановое</span></td></tr>
+      <tr><td>Июнь 2026</td><td>Налоговый резерв — включить</td><td class="num">€220 / мес</td><td><span class="badge muted">плановое</span></td></tr>
+      <tr><td>10 июля 2026</td><td>Париж — годовщина свадьбы</td><td class="num">€2 000</td><td><span class="badge amber">копим</span></td></tr>
+      <tr><td>1 августа 2026</td><td>Стабильный доход €8К-10К/мес</td><td class="num">€6 000+ накоплено</td><td><span class="badge muted">цель 90 дней</span></td></tr>
+      <tr><td>Сентябрь 2026</td><td>Поездка в США (3 нед)</td><td class="num">€9 000</td><td><span class="badge muted">плановое</span></td></tr>
+      <tr><td>1 января 2027</td><td>Стабильный доход €10К/мес</td><td class="num">—</td><td><span class="badge muted">цель 12 мес</span></td></tr>
+      <tr><td>~2028</td><td>Переезд семьи в США</td><td class="num">—</td><td><span class="badge muted">стратегическая</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== БЛОК 8: ИСТОЧНИКИ ДОХОДА ===== -->
+<h2>📈 Источники дохода <span class="sub">структура фикса</span></h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>🐟 Fishok</h3>
+    <div class="stat">
+      <div class="stat-value">€3 500 / мес</div>
+      <div class="stat-sub">14-го числа · доля 78% от фикса</div>
+    </div>
+    <p style="font-size: 14px; margin-top: 12px;"><span class="badge amber">риск</span> зарплата идёт с личного кармана В.В. Кузакова, не из бюджета компании.</p>
+  </div>
+  <div class="card">
+    <h3>🐙 Octo Relocate</h3>
+    <div class="stat">
+      <div class="stat-value">€1 000 / мес</div>
+      <div class="stat-sub">1-го числа · доля 22% от фикса · + бонус до €3К при выручке &gt;€50К/мес</div>
+    </div>
+    <p style="font-size: 14px; margin-top: 12px;"><span class="badge green">стратегический</span> канал Сергея → equity → $10М. Compensation Андрея — открытый вопрос до 01.07.2026.</p>
+  </div>
+</div>
+<p class="note"><strong>Третьего клиента нет.</strong> Главная цель 90 дней №1. Pipeline пуст. Основная активность — через канал Сергея.</p>
+
+<!-- ===== БЛОК 9: ЧТО ДАЛЬШЕ ===== -->
+<h2>⚙️ Как пополнять этот дашборд</h2>
+<div class="card">
+  <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+    <li><strong>Транзакции (расход / доход / перевод)</strong> — пиши в чат: «обед 18 евро картой», «зарплата Fishok 3500 пришла», «переведу 500 с BBVA на наличку». Skill <code>/finance</code>.</li>
+    <li><strong>Остатки по счетам</strong> — раз в неделю минимум. «BBVA 2400, Santander 800, Wise 150».</li>
+    <li><strong>Финансовые решения</strong> — фиксирую в <code>decisions.md</code> с тегом <code>finance</code>.</li>
+    <li><strong>Закрытие месяца</strong> — 1-го числа: <code>/finance close</code>. Снимок капитала + перенос ledger в архив.</li>
+    <li><strong>Этот раздел</strong> — отдельно от <code>/dashboard/</code>. Веду его только я (финдиректор-агент). Не редактируется руками в общем дашборде.</li>
+  </ul>
+</div>
+
+<footer>
+  <p>
+    <strong>Принцип раздела:</strong> картина без углубления. Цифры, риски, прогресс. Детальные разборы (распределение зарплаты, equity-сделки, налоги, инвестиции) — в чате с финдиректором.
+  </p>
+  <p>
+    <strong>Источники данных:</strong> <code>finance/state.md</code>, <code>finance/budget.md</code>, <code>finance/ledger.md</code>, <code>money.md</code>, <code>decisions.md</code>.
+  </p>
+  <p><a href="/">← Главная</a> · <a href="/dashboard/">Дашборд проектов →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

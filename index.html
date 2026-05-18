@@ -107,6 +107,7 @@
     border-left: 4px solid var(--line);
   }
   .article-list li.dashboard { border-left-color: var(--accent); }
+  .article-list li.finance { border-left-color: var(--green); }
   .article-list li.health { border-left-color: var(--green); }
   .article-list li.simple { border-left-color: var(--amber); }
   .article-list li.system { border-left-color: var(--blue); }
@@ -185,8 +186,15 @@
     <li class="dashboard">
       <a href="/dashboard/">
         <p class="article-title">📊 Дашборд — состояние проектов</p>
-        <p class="article-desc">Цели 90 дней, финансы (план-факт + конверты), клиенты, pipeline, ближайшие дедлайны. Источник правды для оперативной картины.</p>
+        <p class="article-desc">Цели 90 дней, клиенты, pipeline, ближайшие дедлайны. Источник правды для оперативной картины.</p>
         <p class="article-meta">Обновляется в /day-close</p>
+      </a>
+    </li>
+    <li class="finance">
+      <a href="/finance/">
+        <p class="article-title">💰 Финансы — личный дашборд<span class="pill new">новое</span></p>
+        <p class="article-desc">Баланс по счетам, движение средств, план-факт по конвертам, накопления на цели, долги, дедлайны. Картина в одном окне без углубления.</p>
+        <p class="article-meta">Ведёт финдиректор-агент</p>
       </a>
     </li>
     <li class="health">
