@@ -55,6 +55,8 @@
   .alert-item { padding: 8px 0; border-bottom: 1px solid #e8c4c4; font-size: 14px; }
   .alert-item:last-child { border-bottom: none; }
   .alert-item strong { color: var(--red); }
+  .alert-item.amber-item { background: #fdf8eb; border-bottom-color: #e8d8a0; }
+  .alert-item.amber-item strong { color: var(--amber); }
 
   /* Tables */
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -89,6 +91,7 @@
   .badge.red { background: #f9e9e9; color: var(--red); }
   .badge.amber { background: #faf2dd; color: var(--amber); }
   .badge.muted { background: #eef1ee; color: var(--muted); }
+  .badge.blue { background: #e5ecf5; color: var(--blue); }
 
   code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
   .note { font-size: 13px; color: var(--muted); margin-top: 12px; }
@@ -107,7 +110,7 @@
 
 <nav>
   <span><a href="/">← главная</a> · <a href="/dashboard/">дашборд проектов</a> · <a href="/health/">здоровье системы</a> · <a href="/system/">карта</a></span>
-  <span class="updated">обновлено: 2026-05-18 (вручную, прототип)</span>
+  <span class="updated">обновлено: 2026-05-18 · полная разноска по скриншотам · балансы подтверждены</span>
 </nav>
 
 <h1>Финансы</h1>
@@ -115,151 +118,291 @@
 <span class="owner-badge">● ведёт финдиректор-агент · детальные разборы в чате</span>
 
 <!-- ===== БЛОК 0: ОПАСНЫЕ ТОЧКИ ===== -->
-<h2>🚨 Что под наблюдением прямо сейчас</h2>
+<h2>Что под наблюдением прямо сейчас</h2>
 <div class="card alert-card">
   <div class="alert-item">
-    <strong>Runway ~1 месяц.</strong> Критический уровень ликвида. Действует фаза 1: 100% разовых поступлений → подушка (минус Париж).
+    <strong>Аренда €1 000 платится 30-31.05 — нужно отложить.</strong> Сейчас нал €2 305 — формально хватит. После платежа останется €1 305 на нал + Bybit €3 506. Лучший вариант — вывести часть USDT в евро до конца месяца.
   </div>
   <div class="alert-item">
-    <strong>Зарплата Fishok €3 500 — должна была прийти 14-15.05.</strong> Статус не подтверждён. Это первая контрольная точка по риску «зависимость от В.В. Кузакова».
+    <strong>Перерасход еды €170 при 13 днях до конца.</strong> Факт €870 / план €700. Драйверы: рестораны на выходных (€95 нал) + ежедневные Manolo Bakes / Starbucks. До конца мая — только продукты домой.
   </div>
   <div class="alert-item">
-    <strong>Остатки 4 счетов неизвестны.</strong> BBVA / Santander / Wise (EUR + USD) / Bybit — нужно зафиксировать вручную. Реальный ликвид может быть существенно больше или меньше €3 000.
+    <strong>Перерасход здоровья €80.</strong> Факт €200 / план €120. Физиотерапевт ×2 + Amazon зубные щётки и паста.
   </div>
   <div class="alert-item">
-    <strong>Май 1-13 не разнесён в ledger.</strong> Продукты, транспорт, коммуналка, подписки. План-факт месяца неполный.
+    <strong>3 банковских счёта (BBVA €26 + Santander €64 + Wise €10) ниже буфера €500.</strong> Основной ликвид — нал €2 305 + Bybit USDT €3 506. Нужна конвертация Bybit → евро для регулярных платежей.
   </div>
   <div class="alert-item">
-    <strong>Подушка €0 при цели €16 800 (3 мес расходов).</strong> Подушка — фундамент любого решения. До неё нельзя соглашаться на проекты без денежной части и нельзя увеличивать обязательные расходы.
+    <strong>Зарплата Fishok пришла криптой 4 100 USDT на Bybit (13.05).</strong> Стратегия конвертации в евро — отложена до проработки фондов.
+  </div>
+  <div class="alert-item">
+    <strong>Через 3 платежа кредит РФ ляжет на евро-доход.</strong> Контрольная дата: <strong>2026-08-02</strong>. На счёте РФ 250К ₽ (хватит на 1.5 платежа) + 500К ₽ заморожено в товарах.
   </div>
 </div>
 
-<!-- ===== БЛОК 1: ГЛАВНЫЕ ЦИФРЫ ===== -->
-<h2>💰 Главные цифры <span class="sub">(на 2026-05-18)</span></h2>
+<!-- ===== БЛОК 1: БИЗНЕС-ЦИФРЫ МЕСЯЦА ===== -->
+<h2>P&L месяца — май 2026 <span class="sub">бизнес-логика: доход → опер. расходы → опер. прибыль → обязательства → чистая прибыль</span></h2>
 <div class="grid-4">
   <div class="card">
     <div class="stat">
-      <div class="stat-label">Ликвид (известный)</div>
-      <div class="stat-value amber">~€3 000</div>
-      <div class="stat-sub">+ €? на BBVA/Santander/Wise/Bybit</div>
+      <div class="stat-label">Доход</div>
+      <div class="stat-value green">€3 500</div>
+      <div class="stat-sub">Fishok 4 100 USDT (Bybit 13.05) + €0.21 кэшбэк</div>
     </div>
   </div>
   <div class="card">
     <div class="stat">
-      <div class="stat-label">Фикс / мес</div>
-      <div class="stat-value">€4 500</div>
-      <div class="stat-sub">Fishok €3 500 + Octo €1 000</div>
+      <div class="stat-label">Операционные расходы</div>
+      <div class="stat-value">€1 635</div>
+      <div class="stat-sub">Испания: жильё + еда + дети + транспорт + здоровье + быт</div>
     </div>
   </div>
   <div class="card">
     <div class="stat">
-      <div class="stat-label">Дефицит / мес</div>
-      <div class="stat-value red">−€1 200</div>
-      <div class="stat-sub">расходы €5 700 при фиксе €4 500</div>
+      <div class="stat-label">Операционная прибыль</div>
+      <div class="stat-value green">+€1 865</div>
+      <div class="stat-sub">доход − опер. расходы</div>
     </div>
   </div>
   <div class="card">
     <div class="stat">
-      <div class="stat-label">Runway</div>
-      <div class="stat-value red">~1 мес ⚠</div>
-      <div class="stat-sub">до зарплаты Fishok и распродажи РФ</div>
+      <div class="stat-label">Чистая прибыль</div>
+      <div class="stat-value green">+€1 865</div>
+      <div class="stat-sub">кредит РФ из РФ-контура · до фондов</div>
+    </div>
+  </div>
+</div>
+<p class="note"><strong>Май — первый плюсовой месяц по учёту.</strong> +€1 865 к распределению по фондам. Решение по распределению откладываем до следующих сессий (фонды, цели). До 2026-08-02 кредит РФ не вычитается из евро-прибыли — гасится из РФ-контура.</p>
+
+<!-- ===== БЛОК 1.5: ЛИКВИД ===== -->
+<h2>Ликвид <span class="sub">сколько денег и где · на 2026-05-18</span></h2>
+<div class="grid-3">
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Банки + нал</div>
+      <div class="stat-value amber">€2 405</div>
+      <div class="stat-sub">нал €2 305 + BBVA €26 + Santander €64 + Wise €10</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Bybit (USDT)</div>
+      <div class="stat-value">€3 506</div>
+      <div class="stat-sub">4 105.98 USDT · зарплата Fishok · не сконвертирована</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="stat">
+      <div class="stat-label">Итого евро-ликвид</div>
+      <div class="stat-value">€5 911</div>
+      <div class="stat-sub">runway ~1.5 мес при расходах €4 000/мес</div>
     </div>
   </div>
 </div>
 
 <!-- ===== БЛОК 2: СЧЕТА И БАЛАНС ===== -->
-<h2>🏦 Счета и баланс <span class="sub">«сколько у меня денег и где»</span></h2>
+<h2>Счета и баланс <span class="sub">евровый контур — основной · все данные на 2026-05-18</span></h2>
 <div class="card">
   <table>
     <thead>
-      <tr><th>Счёт</th><th>Тип</th><th>Валюта</th><th class="num">Остаток</th><th class="num">≈ EUR</th><th>Обновлено</th></tr>
+      <tr><th>Счёт</th><th>Тип</th><th>Валюта</th><th class="num">Остаток</th><th class="num">≈ EUR</th><th>Источник / Примечание</th></tr>
     </thead>
     <tbody>
-      <tr><td>Наличные дома</td><td>кэш</td><td>EUR</td><td class="num">€1 190</td><td class="num">€1 190</td><td>2026-05-15</td></tr>
-      <tr><td>Рубли РФ</td><td>банк</td><td>RUB</td><td class="num">180 000 ₽</td><td class="num">€1 800</td><td>2026-05-13</td></tr>
-      <tr><td>BBVA</td><td>банк</td><td>EUR</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
-      <tr><td>Santander</td><td>банк</td><td>EUR</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
-      <tr><td>Wise</td><td>банк</td><td>EUR</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
-      <tr><td>Wise</td><td>банк</td><td>USD</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
-      <tr><td>Bybit</td><td>крипто</td><td>USDT</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">—</td></tr>
-      <tr><td>Товарные остатки РФ</td><td>актив</td><td>RUB</td><td class="num muted">оценить</td><td class="num muted">~€2 000 ожидаемая распродажа</td><td class="muted">—</td></tr>
+      <tr><td>Наличные дома</td><td>кэш</td><td>EUR</td><td class="num"><strong>€2 305</strong></td><td class="num"><strong>€2 305</strong></td><td>Факт от Андрея · разрыв +€1 100 vs расчёт — уточнить</td></tr>
+      <tr><td>BBVA</td><td>банк</td><td>EUR</td><td class="num" style="color: var(--red);"><strong>€26.18</strong></td><td class="num"><strong>€26</strong></td><td>Скриншот · ещё ~€49 ушло после выписки — уточнить</td></tr>
+      <tr><td>Santander</td><td>банк</td><td>EUR</td><td class="num">€63.90</td><td class="num">€64</td><td>Скриншот · карта 9281</td></tr>
+      <tr><td>Wise EUR</td><td>банк</td><td>EUR</td><td class="num">€9.80</td><td class="num">€10</td><td>Скриншот · почти пуст — не в оперативном ликвиде</td></tr>
+      <tr><td>Wise USD</td><td>банк</td><td>USD</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">нет данных</td></tr>
+      <tr><td><strong>Bybit</strong></td><td>крипто</td><td>USDT</td><td class="num"><strong>4 105.98</strong></td><td class="num"><strong>€3 506</strong></td><td>Скриншот · зарплата Fishok 13.05 · курс 0.854 EUR/USDT · не сконвертирована</td></tr>
       <tr style="font-weight: 600; background: #faf6ee;">
-        <td colspan="4">Итого известный ликвид</td>
-        <td class="num">≈ €3 000</td>
-        <td class="muted">+ неизвестное</td>
+        <td colspan="3">Итого евровый ликвид (банки + нал)</td>
+        <td class="num" colspan="2">€2 405</td>
+        <td>+ Bybit USDT €3 506 отдельно · + Wise USD (?)</td>
       </tr>
     </tbody>
   </table>
-  <p class="note"><strong>Регулярно обновляй остатки.</strong> Раз в неделю минимум — иначе цифры наверху ничего не значат. Запиши в чате «BBVA 2400, Santander 800, Wise 150 — обнови» — я внесу.</p>
+  <p class="note"><strong>Дебиторка:</strong> возврат Amazon ~€70 ожидаем на BBVA (отправлено через почту Gijón 11.05).</p>
 </div>
 
 <!-- ===== БЛОК 3: ДВИЖЕНИЕ СРЕДСТВ МЕСЯЦА ===== -->
-<h2>🔄 Движение средств — май 2026 <span class="sub">cashflow текущего месяца</span></h2>
+<h2>Движение средств — май 2026 <span class="sub">cashflow на 18.05</span></h2>
 <div class="grid-3">
   <div class="card">
     <div class="stat">
-      <div class="stat-label">Получено в мае</div>
-      <div class="stat-value">€0</div>
-      <div class="stat-sub">ожидается Fishok €3 500 (14-15.05)</div>
+      <div class="stat-label">Получено в мае (доход)</div>
+      <div class="stat-value green">≈€3 500</div>
+      <div class="stat-sub">Fishok 4 100 USDT на Bybit (13.05) + €0.21 кэшбэк BBVA</div>
     </div>
   </div>
   <div class="card">
     <div class="stat">
       <div class="stat-label">Потрачено в мае</div>
-      <div class="stat-value">€1 210</div>
-      <div class="stat-sub">факт по 7 транзакциям</div>
+      <div class="stat-value red">≈€2 888</div>
+      <div class="stat-sub">евро-контур · часть транзакций уточняется · 13 дней до конца</div>
     </div>
   </div>
   <div class="card">
     <div class="stat">
-      <div class="stat-label">Чистый поток (на сегодня)</div>
-      <div class="stat-value red">−€1 210</div>
-      <div class="stat-sub">плановый по итогам месяца: −€1 200</div>
+      <div class="stat-label">Чистый поток (оценка)</div>
+      <div class="stat-value green">≈+€612</div>
+      <div class="stat-sub">уточнится после закрытия открытых вопросов</div>
     </div>
   </div>
 </div>
-<p class="note">Журнал транзакций — <code>finance/ledger.md</code>. Записывать через skill <code>/finance</code> или просто «обед 18 евро картой» в чате.</p>
+<p class="note"><strong>Переводы Wise → BBVA €910</strong> (5 операций — 4×€200 + €110) — это перекладывания между своими счетами, не доход. Все парные transfer-out внесены в ledger. Журнал — <code>finance/ledger.md</code>.</p>
 
-<!-- ===== БЛОК 4: ПЛАН-ФАКТ ПО КОНВЕРТАМ ===== -->
-<h2>📦 План-факт по конвертам <span class="sub">(категории расходов · 16 дней до конца месяца)</span></h2>
+<!-- ===== БЛОК 4: ОПЕРАЦИОННЫЕ РАСХОДЫ ===== -->
+<h2>Зона 1 — Операционные расходы (Испания) <span class="sub">жильё + еда + дети + быт · 13 дней до конца мая</span></h2>
 <div class="card">
   <p style="font-size: 13px; color: var(--muted); margin-top: 0;">
-    <strong>«Конверт» — это бюджетная корзина:</strong> каждый месяц фикс-сумма «нарезается» на статьи (аренда, еда, дети...). Тратишь только из конверта — закончился, стоп. Метод envelope budgeting.
+    То, что съедает доход «на месте». Аренда платится 30-31 числа за следующий месяц — её план стоит на конец мая.
   </p>
   <table>
     <thead>
       <tr>
-        <th>Конверт</th><th class="num">План</th><th class="num">Факт</th><th class="num">Остаток</th><th>Заполнение</th><th>Статус</th>
+        <th>Статья</th><th class="num">План</th><th class="num">Факт</th><th class="num">Остаток</th><th>Заполнение</th><th>Статус</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Аренда</td><td class="num">€1 000</td><td class="num">€1 000</td><td class="num">€0</td><td><div class="envbar"><div class="envbar-fill" style="width: 100%"></div></div></td><td><span class="badge green">✓ полностью</span></td></tr>
-      <tr><td>Еда и быт</td><td class="num">€700</td><td class="num">€0</td><td class="num">€700</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">пусто</span></td></tr>
+      <tr><td><strong>Аренда</strong> <span class="muted" style="font-size: 11px;">(на 30-31.05 за июнь)</span></td><td class="num">€1 000</td><td class="num">€0</td><td class="num">€1 000</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge amber">отложить к концу месяца</span></td></tr>
+      <tr><td>Коммуналка <span class="muted" style="font-size: 11px;">(Comunidad Adosinda)</span></td><td class="num">€145</td><td class="num">€145.00</td><td class="num">€0</td><td><div class="envbar"><div class="envbar-fill" style="width: 100%"></div></div></td><td><span class="badge green">✓ оплачено</span></td></tr>
+      <tr><td>Электричество <span class="muted" style="font-size: 11px;">(BASER)</span></td><td class="num">€35</td><td class="num">€31.59</td><td class="num">€3</td><td><div class="envbar"><div class="envbar-fill" style="width: 90%"></div></div></td><td><span class="badge green">✓ оплачено</span></td></tr>
+      <tr><td>Еда и быт <span class="muted" style="font-size: 11px;">(продукты+кафе+доставка)</span></td><td class="num">€700</td><td class="num" style="color: var(--red);">€870.31</td><td class="num" style="color: var(--red);">−€170</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">перерасход €170</span></td></tr>
       <tr><td>Няня и дети</td><td class="num">€700</td><td class="num">€0</td><td class="num">€700</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">пусто</span></td></tr>
-      <tr><td>Транспорт</td><td class="num">€100</td><td class="num">€0</td><td class="num">€100</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">—</span></td></tr>
-      <tr><td>Связь и подписки</td><td class="num">€80</td><td class="num">€9</td><td class="num">€71</td><td><div class="envbar"><div class="envbar-fill" style="width: 11%"></div></div></td><td><span class="badge muted">—</span></td></tr>
-      <tr><td>Здоровье</td><td class="num">€120</td><td class="num">€140</td><td class="num" style="color: var(--red);">−€20</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">⚠ перерасход</span></td></tr>
-      <tr><td>Жена-карманные</td><td class="num">€150</td><td class="num">€70</td><td class="num">€80</td><td><div class="envbar"><div class="envbar-fill" style="width: 47%"></div></div></td><td><span class="badge muted">—</span></td></tr>
-      <tr><td>Коворкинг</td><td class="num">€150</td><td class="num">€0</td><td class="num">€150</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">—</span></td></tr>
-      <tr><td>Кредит РФ</td><td class="num">€1 700</td><td class="num">€0</td><td class="num">€1 700</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge amber">ждёт зарплаты</span></td></tr>
-      <tr><td>Париж 10.07</td><td class="num">€1 000</td><td class="num">€0</td><td class="num">€1 000</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge amber">ждёт разовых</span></td></tr>
+      <tr><td>Транспорт</td><td class="num">€100</td><td class="num">€13.20</td><td class="num">€87</td><td><div class="envbar"><div class="envbar-fill" style="width: 13%"></div></div></td><td><span class="badge muted">в плане</span></td></tr>
+      <tr><td>Связь и подписки</td><td class="num">€80</td><td class="num">€21.23</td><td class="num">€59</td><td><div class="envbar"><div class="envbar-fill" style="width: 27%"></div></div></td><td><span class="badge muted">в плане</span></td></tr>
+      <tr><td>Здоровье <span class="muted" style="font-size: 11px;">(врачи+аптека)</span></td><td class="num">€120</td><td class="num" style="color: var(--red);">€200.17</td><td class="num" style="color: var(--red);">−€80</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">перерасход €80</span></td></tr>
+      <tr><td>Жена-карманные</td><td class="num">€150</td><td class="num">€70.00</td><td class="num">€80</td><td><div class="envbar"><div class="envbar-fill" style="width: 47%"></div></div></td><td><span class="badge muted">нал (20+40+10)</span></td></tr>
+      <tr><td>Коворкинг <span class="muted" style="font-size: 11px;">(150→160)</span></td><td class="num">€160</td><td class="num">€0</td><td class="num">€160</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">—</span></td></tr>
+      <tr style="background: #fdf8eb;">
+        <td><strong>Семья:Собака</strong> <span class="muted" style="font-size: 11px;">(вне плана · ввести €80/мес с июня)</span></td><td class="num muted">—</td><td class="num">€62.39</td><td class="num muted">—</td><td><div class="envbar"><div class="envbar-fill amber" style="width: 100%"></div></div></td><td><span class="badge amber">Tiendanimal корм 12кг</span></td>
+      </tr>
+      <tr style="background: #fdf8eb;">
+        <td><strong>Семья:Прочее</strong> <span class="muted" style="font-size: 11px;">(вне плана)</span></td><td class="num muted">—</td><td class="num">€107.57</td><td class="num muted">—</td><td><div class="envbar"><div class="envbar-fill amber" style="width: 100%"></div></div></td><td><span class="badge amber">Sephora €99 + почта €8</span></td>
+      </tr>
+      <tr style="background: #fdf8eb;">
+        <td><strong>Дети:Товары</strong> <span class="muted" style="font-size: 11px;">(вне плана, разовое)</span></td><td class="num muted">—</td><td class="num">€113.83</td><td class="num muted">—</td><td><div class="envbar"><div class="envbar-fill amber" style="width: 100%"></div></div></td><td><span class="badge amber">IKEA — стул + зеркала + мелочи</span></td>
+      </tr>
       <tr style="font-weight: 600; background: #faf6ee;">
-        <td>Итого</td><td class="num">€5 700</td><td class="num">€1 210</td><td class="num">€4 490</td><td>—</td><td>21% бюджета · 47% времени</td>
+        <td>Итого операционные</td><td class="num">€3 190</td><td class="num">€1 635.29</td><td class="num">€1 555</td><td>—</td><td>51% бюджета · 65% времени</td>
       </tr>
     </tbody>
   </table>
-  <p class="note">Источник: <code>finance/state.md</code>. Структура — <code>finance/budget.md</code>.</p>
+  <p class="note"><strong>Операционная прибыль на 18.05:</strong> €3 500 − €1 635 = <strong>+€1 865</strong>. Хороший месяц.</p>
+</div>
+
+<!-- ===== БЛОК 4.2: ОБЯЗАТЕЛЬСТВА ===== -->
+<h2>Зона 2 — Финансовые обязательства <span class="sub">кредит и налоги</span></h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>Обязательство</th><th class="num">План</th><th class="num">Факт</th><th>Источник</th><th>Статус</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Налоги-резерв (Испания)</td><td class="num">€0</td><td class="num">€0</td><td>евро</td><td><span class="badge muted">с июня €220/мес</span></td></tr>
+      <tr><td>Кредит РФ (170 000 ₽)</td><td class="num">≈€1 700</td><td class="num">≈€1 700</td><td><strong>рубли РФ</strong></td><td><span class="badge green">✓ оплачен 02.05 (РФ-контур)</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note"><strong>Чистая прибыль = операционная прибыль</strong>, потому что кредит РФ не из евро-кошелька. До 2026-08-02 евро-доход не нагружен кредитом.</p>
+</div>
+  <p class="note"><strong>С июня добавить в план:</strong> Коммуналка €145/мес + Собака €80/мес = новый план обязательных €4 225/мес. Профицит при доходе €4 500 сократится до €275/мес.</p>
+</div>
+
+<!-- ===== БЛОК 4.5: ПЛАТЁЖНЫЙ КАЛЕНДАРЬ ===== -->
+<h2>Платёжный календарь <span class="sub">по неделям · план поступлений и расходов</span></h2>
+<div class="card">
+  <p style="font-size: 13px; color: var(--muted); margin-top: 0;">
+    Куда уходят и откуда приходят деньги в разрезе недель. Заполняется в диалоге: 25-26 числа каждого месяца я спрашиваю план следующего месяца + примерные даты, каждый понедельник уточняю предстоящую неделю.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Неделя</th>
+        <th>Период</th>
+        <th class="num">Поступления</th>
+        <th class="num">Расходы</th>
+        <th class="num">Чистый поток</th>
+        <th class="num">Остаток на конец</th>
+        <th>Сигналы</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Тек.</strong></td>
+        <td>18-24 мая</td>
+        <td class="num muted">— (Fishok уже пришла на Bybit)</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td><span class="badge red">срочно: конвертация Bybit</span></td>
+      </tr>
+      <tr>
+        <td>+1</td>
+        <td>25-31 мая</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td><span class="badge muted">пусто</span></td>
+      </tr>
+      <tr>
+        <td>+2</td>
+        <td>1-7 июня</td>
+        <td class="num muted">Octo €1 000 (1.06)</td>
+        <td class="num muted">Аренда €1 000 (1.06) · Кредит РФ (2.06, из рублей)</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td><span class="badge muted">шаблон</span></td>
+      </tr>
+      <tr>
+        <td>+3</td>
+        <td>8-14 июня</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td><span class="badge muted">пусто</span></td>
+      </tr>
+      <tr>
+        <td>+4</td>
+        <td>15-21 июня</td>
+        <td class="num muted">Fishok ≈€3 500 (14-15.06, ожидаем USDT)</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td class="num muted">—</td>
+        <td><span class="badge muted">шаблон</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note"><strong>Как наполнять:</strong> я спрошу у тебя плановые даты крупных расходов на июнь (продукты, дети, врачи, поездки, разовые покупки) — 25-26 мая. После этого календарь покажет реальную картину по неделям. Сейчас — каркас.</p>
+</div>
+
+<!-- ===== БЛОК 4.6: КАССОВЫЕ РАЗРЫВЫ ===== -->
+<h2>Кассовые разрывы <span class="sub">недели когда денег не хватает</span></h2>
+<div class="card">
+  <p style="font-size: 13px; color: var(--muted); margin-top: 0;">
+    Здесь подсвечиваются точки где плановый остаток на конец недели падает в минус или ниже минимального буфера (€500). Считается автоматически на основе платёжного календаря.
+  </p>
+  <table>
+    <thead>
+      <tr><th>Дата</th><th>Описание</th><th class="num">Прогноз остатка</th><th class="num">Дефицит</th><th>Источник покрытия</th></tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="5" class="muted" style="text-align: center; padding: 20px;">Заполнится после первого полного цикла платёжного календаря (после 25-26 мая, когда соберём план на июнь).</td></tr>
+    </tbody>
+  </table>
+  <p class="note"><strong>Минимальный буфер на счетах:</strong> €500. Всё что ниже — сигнал, всё что в минус — разрыв. Финдиректор предупреждает заблаговременно, чтобы перенести / разовать платёж / ускорить поступление.</p>
 </div>
 
 <!-- ===== БЛОК 5: НАКОПЛЕНИЯ НА ЦЕЛИ ===== -->
-<h2>🎯 Накопления на цели <span class="sub">«сколько накоплено на каждую цель»</span></h2>
+<h2>Накопления на цели <span class="sub">сколько накоплено на каждую цель</span></h2>
 <div class="card">
   <div class="goal-row">
     <div class="goal-head">
       <span class="goal-name">Подушка безопасности — 3 мес расходов</span>
       <span class="goal-prog"><strong>€0</strong> / €16 800 · 0%</span>
     </div>
-    <div class="goal-meta">Фундамент. До неё держим фазу 1: все разовые → сюда. Без подушки нельзя ослаблять давление на доход.</div>
+    <div class="goal-meta">Фундамент. До неё держим фазу 1: все разовые → сюда. Без подушки нельзя ослаблять давление на доход. Bybit USDT — де-факто текущий резерв, но формально не выделен в подушку.</div>
     <div class="bar"><div class="bar-fill red" style="width: 1%"></div></div>
   </div>
   <div class="goal-row">
@@ -267,7 +410,7 @@
       <span class="goal-name">Париж — годовщина свадьбы 10.07</span>
       <span class="goal-prog"><strong>€0</strong> / €2 000 · 0%</span>
     </div>
-    <div class="goal-meta">Делим на 2 месяца: май и июнь по €1 000. Идёт из конверта «Париж 10.07» (ждёт зарплаты / разовых).</div>
+    <div class="goal-meta">Делим на 2 месяца: май и июнь по €1 000. Идёт из конверта «Париж 10.07» (ждёт конвертации Bybit / разовых). Дедлайн 10 июля — 53 дня.</div>
     <div class="bar"><div class="bar-fill red" style="width: 1%"></div></div>
   </div>
   <div class="goal-row">
@@ -296,8 +439,8 @@
   </div>
 </div>
 
-<!-- ===== БЛОК 6: ДОЛГИ ===== -->
-<h2>💳 Долги и обязательства</h2>
+<!-- ===== БЛОК 6: ОБЯЗАТЕЛЬСТВА (БЕЗ КРЕДИТА) ===== -->
+<h2>Обязательства <span class="sub">регулярные и будущие · кредит РФ — отдельной зоной внизу</span></h2>
 <div class="card">
   <table>
     <thead>
@@ -305,36 +448,39 @@
     </thead>
     <tbody>
       <tr>
-        <td>Кредит РФ</td><td>долг</td><td class="num muted">уточнить тело</td><td class="num">€1 700 (170 000 ₽)</td><td>в действии</td><td><span class="badge amber">обслуживается из зарплаты</span></td>
+        <td>Аренда жилья</td><td>регулярный</td><td class="num">—</td><td class="num">€1 000</td><td>1-го числа</td><td><span class="badge green">в графике</span></td>
       </tr>
       <tr>
-        <td>Аренда жилья</td><td>обязательный платёж</td><td class="num">—</td><td class="num">€1 000</td><td>1-го числа</td><td><span class="badge green">в графике</span></td>
+        <td>Коммуналка (Comunidad Adosinda)</td><td>регулярный</td><td class="num">—</td><td class="num">€145</td><td>~15-го числа</td><td><span class="badge amber">добавлено в план с июня</span></td>
       </tr>
       <tr>
-        <td>Налоги Испания (резерв)</td><td>будущее обязательство</td><td class="num">—</td><td class="num">€220 (с июня)</td><td>2026-06+</td><td><span class="badge muted">включить с июня</span></td>
+        <td>Налоги Испания (резерв)</td><td>будущее</td><td class="num">—</td><td class="num">€220 (с июня)</td><td>2026-06+</td><td><span class="badge muted">включить с июня</span></td>
       </tr>
       <tr>
-        <td>Париж 10.07</td><td>будущее обязательство</td><td class="num">€2 000</td><td class="num">€1 000 × 2 мес</td><td>10.07.2026</td><td><span class="badge amber">копится</span></td>
+        <td>Париж 10.07</td><td>будущее</td><td class="num">€2 000</td><td class="num">€1 000 × 2 мес</td><td>10.07.2026</td><td><span class="badge amber">копится</span></td>
       </tr>
       <tr>
-        <td>США сентябрь</td><td>будущее обязательство</td><td class="num">€9 000</td><td class="num">—</td><td>сентябрь 2026</td><td><span class="badge muted">не покрыто</span></td>
+        <td>США сентябрь</td><td>будущее</td><td class="num">€9 000</td><td class="num">—</td><td>сентябрь 2026</td><td><span class="badge muted">не покрыто</span></td>
       </tr>
     </tbody>
   </table>
-  <p class="note"><strong>Уточнить:</strong> точное тело кредита РФ и эффективная ставка. Без этой цифры не построить плана досрочного погашения.</p>
 </div>
 
 <!-- ===== БЛОК 7: ФИНАНСОВЫЕ ДЕДЛАЙНЫ ===== -->
-<h2>📅 Финансовые дедлайны</h2>
+<h2>Финансовые дедлайны</h2>
 <div class="card">
   <table>
     <thead><tr><th>Дата</th><th>Что</th><th class="num">Сумма</th><th>Статус</th></tr></thead>
     <tbody>
-      <tr><td>14–15 мая 2026</td><td>Зарплата Fishok</td><td class="num">€3 500</td><td><span class="badge red">ожидается, не подтверждено</span></td></tr>
-      <tr><td>1 июня 2026</td><td>Аренда июнь</td><td class="num">€1 000</td><td><span class="badge muted">плановое</span></td></tr>
-      <tr><td>Июнь 2026</td><td>Налоговый резерв — включить</td><td class="num">€220 / мес</td><td><span class="badge muted">плановое</span></td></tr>
-      <tr><td>10 июля 2026</td><td>Париж — годовщина свадьбы</td><td class="num">€2 000</td><td><span class="badge amber">копим</span></td></tr>
+      <tr><td>13 мая 2026</td><td>Зарплата Fishok — пришла USDT на Bybit</td><td class="num">4 100 USDT ≈€3 500</td><td><span class="badge green">получена · ждёт конвертации</span></td></tr>
+      <tr style="background: #fdf8eb;"><td><strong>30-31 мая 2026</strong></td><td><strong>Аренда июня</strong> — отложить до конца мая</td><td class="num"><strong>€1 000</strong></td><td><span class="badge amber">отложить с зарплаты</span></td></tr>
+      <tr><td>1 июня 2026</td><td>Octo фикс</td><td class="num">€1 000</td><td><span class="badge muted">плановое</span></td></tr>
+      <tr><td>2 июня 2026</td><td>Кредит РФ — из рублей</td><td class="num">170 000 ₽</td><td><span class="badge blue">замкнутый контур</span></td></tr>
+      <tr><td>Июнь 2026</td><td>Налоговый резерв — включить в евро-план</td><td class="num">€220 / мес</td><td><span class="badge muted">плановое</span></td></tr>
+      <tr><td>2 июля 2026</td><td>Кредит РФ — из рублей</td><td class="num">170 000 ₽</td><td><span class="badge blue">замкнутый контур</span></td></tr>
+      <tr><td>10 июля 2026</td><td>Париж — годовщина свадьбы</td><td class="num">€2 000</td><td><span class="badge amber">копим · 53 дня</span></td></tr>
       <tr><td>1 августа 2026</td><td>Стабильный доход €8К-10К/мес</td><td class="num">€6 000+ накоплено</td><td><span class="badge muted">цель 90 дней</span></td></tr>
+      <tr style="background: #faf2dd;"><td><strong>2 августа 2026</strong></td><td><strong>Кредит РФ — переход на евро-доход</strong></td><td class="num"><strong>€1 700 / мес</strong></td><td><span class="badge red">переключение источника</span></td></tr>
       <tr><td>Сентябрь 2026</td><td>Поездка в США (3 нед)</td><td class="num">€9 000</td><td><span class="badge muted">плановое</span></td></tr>
       <tr><td>1 января 2027</td><td>Стабильный доход €10К/мес</td><td class="num">—</td><td><span class="badge muted">цель 12 мес</span></td></tr>
       <tr><td>~2028</td><td>Переезд семьи в США</td><td class="num">—</td><td><span class="badge muted">стратегическая</span></td></tr>
@@ -343,18 +489,18 @@
 </div>
 
 <!-- ===== БЛОК 8: ИСТОЧНИКИ ДОХОДА ===== -->
-<h2>📈 Источники дохода <span class="sub">структура фикса</span></h2>
+<h2>Источники дохода <span class="sub">структура фикса</span></h2>
 <div class="grid-2">
   <div class="card">
-    <h3>🐟 Fishok</h3>
+    <h3>Fishok</h3>
     <div class="stat">
       <div class="stat-value">€3 500 / мес</div>
-      <div class="stat-sub">14-го числа · доля 78% от фикса</div>
+      <div class="stat-sub">~13-14 числа · доля 78% от фикса · приходит в USDT на Bybit</div>
     </div>
-    <p style="font-size: 14px; margin-top: 12px;"><span class="badge amber">риск</span> зарплата идёт с личного кармана В.В. Кузакова, не из бюджета компании.</p>
+    <p style="font-size: 14px; margin-top: 12px;"><span class="badge amber">риск</span> зарплата идёт с личного кармана В.В. Кузакова, не из бюджета компании. Новый канал — крипта (USDT), требует стратегии конвертации.</p>
   </div>
   <div class="card">
-    <h3>🐙 Octo Relocate</h3>
+    <h3>Octo Relocate</h3>
     <div class="stat">
       <div class="stat-value">€1 000 / мес</div>
       <div class="stat-sub">1-го числа · доля 22% от фикса · + бонус до €3К при выручке &gt;€50К/мес</div>
@@ -364,16 +510,68 @@
 </div>
 <p class="note"><strong>Третьего клиента нет.</strong> Главная цель 90 дней №1. Pipeline пуст. Основная активность — через канал Сергея.</p>
 
-<!-- ===== БЛОК 9: ЧТО ДАЛЬШЕ ===== -->
-<h2>⚙️ Как пополнять этот дашборд</h2>
+<!-- ===== БЛОК 9: ЗАМКНУТЫЙ КОНТУР: КРЕДИТ РФ ===== -->
+<h2>Замкнутый контур: кредит РФ <span class="sub">обслуживается из рублей в России · не вмешивается в евро-план</span></h2>
+<div class="card" style="background: #f4f0e8;">
+  <p style="margin-top: 0; font-size: 14px; color: var(--muted);">
+    Эта зона отделена от основной картины. Рубли в РФ сложно вывести — стратегически ими гасим кредит. В евро-план не считаются.
+  </p>
+  <div class="grid-3" style="margin-bottom: 18px;">
+    <div>
+      <div class="stat-label">Платёж</div>
+      <div class="stat-value" style="font-size: 22px;">170 000 ₽</div>
+      <div class="stat-sub">2-го числа каждого месяца · ≈ €1 700</div>
+    </div>
+    <div>
+      <div class="stat-label">Май 2026 — статус</div>
+      <div class="stat-value green" style="font-size: 22px;">✓ оплачен</div>
+      <div class="stat-sub">из рублей РФ, 02.05</div>
+    </div>
+    <div>
+      <div class="stat-label">Переход на евро</div>
+      <div class="stat-value red" style="font-size: 22px;">2 авг 2026</div>
+      <div class="stat-sub">−€1 700/мес из европейских доходов</div>
+    </div>
+  </div>
+  <h3>Источники погашения в России</h3>
+  <table>
+    <thead><tr><th>Источник</th><th>Валюта</th><th class="num">Остаток</th><th class="num">≈ EUR</th><th>Покрывает платежей</th></tr></thead>
+    <tbody>
+      <tr><td>Банк РФ</td><td>RUB</td><td class="num">250 000 ₽</td><td class="num">€2 500</td><td>~1.5</td></tr>
+      <tr><td>Товарные остатки РФ <span class="muted" style="font-size: 11px;">(заморожено на складе)</span></td><td>RUB</td><td class="num">500 000 ₽</td><td class="num">€5 000</td><td>~3 (если распродать)</td></tr>
+      <tr style="font-weight: 600; background: #ffffff;">
+        <td colspan="4">Итого в РФ-контуре</td>
+        <td>~4.5 платежа потенциально · фактически на счёте 1.5</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">Товары сейчас не приоритет на распродажу — это резерв. Покрытие до 2026-08-02 из счёта банка РФ (250К ₽ на 1.5 платежа) — на июль потребуется частичная продажа товаров. <strong>Тело кредита и ставка — уточнить позже.</strong></p>
+</div>
+
+<!-- ===== БЛОК 10: РЕГЛАМЕНТ ===== -->
+<h2>Регламент — как пополняется этот дашборд</h2>
 <div class="card">
-  <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
-    <li><strong>Транзакции (расход / доход / перевод)</strong> — пиши в чат: «обед 18 евро картой», «зарплата Fishok 3500 пришла», «переведу 500 с BBVA на наличку». Skill <code>/finance</code>.</li>
-    <li><strong>Остатки по счетам</strong> — раз в неделю минимум. «BBVA 2400, Santander 800, Wise 150».</li>
-    <li><strong>Финансовые решения</strong> — фиксирую в <code>decisions.md</code> с тегом <code>finance</code>.</li>
-    <li><strong>Закрытие месяца</strong> — 1-го числа: <code>/finance close</code>. Снимок капитала + перенос ledger в архив.</li>
-    <li><strong>Этот раздел</strong> — отдельно от <code>/dashboard/</code>. Веду его только я (финдиректор-агент). Не редактируется руками в общем дашборде.</li>
+  <h3>Что инициирую я (финдиректор)</h3>
+  <ul style="margin: 0 0 18px; padding-left: 20px; font-size: 14px;">
+    <li><strong>Раз в неделю (вс / пн)</strong> — спрашиваю плановые поступления и расходы на ближайшие 2 недели + точные даты. Из ответа собирается платёжный календарь и подсвечиваются кассовые разрывы.</li>
+    <li><strong>За 5-7 дней до конца месяца</strong> (25-26 числа) — спрашиваю крупный план на следующий месяц: что покупаем, когда, на что копим, какие отдельные события (поездки, врачи, подарки).</li>
+    <li><strong>После каждой транзакции</strong> — обновляю остатки, статьи расходов, чистый поток. Подсвечиваю если близко к разрыву.</li>
+    <li><strong>1-го числа</strong> — закрытие месяца (<code>/finance close</code>): перенос ledger в архив, снимок капитала.</li>
   </ul>
+  <h3>Что инициируешь ты</h3>
+  <ul style="margin: 0 0 18px; padding-left: 20px; font-size: 14px;">
+    <li><strong>Транзакции</strong> — свободным текстом в чат: «обед 18 евро картой», «зарплата Fishok 3500 пришла», «переведу 500 с BBVA на наличку».</li>
+    <li><strong>Чеки с детализацией (опционально)</strong> — фото из магазина после общей записи «100 евро еда». Я свяжу с уже существующей транзакцией, не задвою, сохраню детализацию для аналитики.</li>
+    <li><strong>Остатки счетов</strong> — раз в неделю минимум: «BBVA 2400, Santander 800, Wise 150».</li>
+    <li><strong>Финансовые решения</strong> — фиксирую в <code>decisions.md</code> с тегом <code>finance</code>.</li>
+  </ul>
+  <h3>Чеки и аналитика расходов</h3>
+  <p style="font-size: 14px; margin: 0 0 8px;">
+    Когда присылаешь фото чека после общей записи (например «100 евро еда» → потом фото чека на €98.30) — это <strong>одна транзакция</strong>, не две. Я прицепляю детализацию (что куплено, по какой цене) к существующей записи и складываю в <code>finance/receipts/YYYY-MM/</code>.
+  </p>
+  <p style="font-size: 14px; margin: 0;">
+    Раз в месяц на основе этих данных делаем разбор: какие категории продуктов дорогие, что покупать больше, что меньше, где оптимизировать. Чеки опциональны — без них остаётся общая сумма без разбивки.
+  </p>
 </div>
 
 <footer>
@@ -381,7 +579,7 @@
     <strong>Принцип раздела:</strong> картина без углубления. Цифры, риски, прогресс. Детальные разборы (распределение зарплаты, equity-сделки, налоги, инвестиции) — в чате с финдиректором.
   </p>
   <p>
-    <strong>Источники данных:</strong> <code>finance/state.md</code>, <code>finance/budget.md</code>, <code>finance/ledger.md</code>, <code>money.md</code>, <code>decisions.md</code>.
+    <strong>Источники данных:</strong> <code>finance/state.md</code>, <code>finance/budget.md</code>, <code>finance/ledger.md</code>, <code>finance/receipts/</code>, <code>money.md</code>, <code>decisions.md</code>.
   </p>
   <p><a href="/">← Главная</a> · <a href="/dashboard/">Дашборд проектов →</a></p>
 </footer>
