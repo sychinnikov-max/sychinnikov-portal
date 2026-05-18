@@ -110,7 +110,7 @@
 
 <nav>
   <span><a href="/">← главная</a> · <a href="/dashboard/">дашборд проектов</a> · <a href="/health/">здоровье системы</a> · <a href="/system/">карта</a></span>
-  <span class="updated">обновлено: 2026-05-18 · полная разноска по скриншотам · балансы подтверждены</span>
+  <span class="updated">обновлено: 2026-05-18 · реструктура категорий (Еда+быт / Заведения / Здоровье) с подкатегориями</span>
 </nav>
 
 <h1>Финансы</h1>
@@ -124,10 +124,13 @@
     <strong>Аренда €1 000 платится 30-31.05 — нужно отложить.</strong> Сейчас нал €2 305 — формально хватит. После платежа останется €1 305 на нал + Bybit €3 506. Лучший вариант — вывести часть USDT в евро до конца месяца.
   </div>
   <div class="alert-item">
-    <strong>Перерасход еды €170 при 13 днях до конца.</strong> Факт €870 / план €700. Драйверы: рестораны на выходных (€95 нал) + ежедневные Manolo Bakes / Starbucks. До конца мая — только продукты домой.
+    <strong>Перерасход Еды и быта €117 (план €550 / факт €667).</strong> Основной драйвер — Supercor 04.05 €245 одним чеком + Amazon щётки €46. Фоновое потребление продуктов в норме (~€22/день).
   </div>
   <div class="alert-item">
-    <strong>Перерасход здоровья €80.</strong> Факт €200 / план €120. Физиотерапевт ×2 + Amazon зубные щётки и паста.
+    <strong>Перерасход Заведений €64 (план €200 / факт €264).</strong> Уикенд 16-17.05 нал €95 (ужин + завтрак) съел половину плана ресторанов за 2 дня. До конца мая — только кафе мелочью.
+  </div>
+  <div class="alert-item">
+    <strong>Перерасход Здоровья €70 (план €70 / факт €140).</strong> 2 визита к физио по разной цене (€80 и €60 — уточнить). План мая был на 1 визит. Решить: ужесточить до 1/мес или поднять план до €140.
   </div>
   <div class="alert-item">
     <strong>3 банковских счёта (BBVA €26 + Santander €64 + Wise €10) ниже буфера €500.</strong> Основной ликвид — нал €2 305 + Bybit USDT €3 506. Нужна конвертация Bybit → евро для регулярных платежей.
@@ -267,11 +270,24 @@
       <tr><td><strong>Аренда</strong> <span class="muted" style="font-size: 11px;">(на 30-31.05 за июнь)</span></td><td class="num">€1 000</td><td class="num">€0</td><td class="num">€1 000</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge amber">отложить к концу месяца</span></td></tr>
       <tr><td>Коммуналка <span class="muted" style="font-size: 11px;">(Comunidad Adosinda)</span></td><td class="num">€145</td><td class="num">€145.00</td><td class="num">€0</td><td><div class="envbar"><div class="envbar-fill" style="width: 100%"></div></div></td><td><span class="badge green">✓ оплачено</span></td></tr>
       <tr><td>Электричество <span class="muted" style="font-size: 11px;">(BASER)</span></td><td class="num">€35</td><td class="num">€31.59</td><td class="num">€3</td><td><div class="envbar"><div class="envbar-fill" style="width: 90%"></div></div></td><td><span class="badge green">✓ оплачено</span></td></tr>
-      <tr><td>Еда и быт <span class="muted" style="font-size: 11px;">(продукты+кафе+доставка)</span></td><td class="num">€700</td><td class="num" style="color: var(--red);">€870.31</td><td class="num" style="color: var(--red);">−€170</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">перерасход €170</span></td></tr>
+
+      <tr style="background: #faf6ee; font-weight: 600;"><td>🛒 Еда и быт <span class="muted" style="font-size: 11px; font-weight: 400;">(продукты + быт + доставка)</span></td><td class="num">€550</td><td class="num" style="color: var(--red);">€666.57</td><td class="num" style="color: var(--red);">−€117</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">перерасход €117</span></td></tr>
+      <tr><td style="padding-left: 28px;" class="muted">↳ Продукты <span style="font-size: 11px;">(супермаркеты)</span></td><td class="num">€450</td><td class="num" style="color: var(--red);">€570.20</td><td class="num" style="color: var(--red);">−€120</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">Supercor €245 — драйвер</span></td></tr>
+      <tr><td style="padding-left: 28px;" class="muted">↳ Быт <span style="font-size: 11px;">(паста, щётки, химия)</span></td><td class="num">€50</td><td class="num" style="color: var(--red);">€60.17</td><td class="num" style="color: var(--red);">−€10</td><td><div class="envbar"><div class="envbar-fill amber" style="width: 100%"></div></div></td><td><span class="badge amber">Amazon щётки €46</span></td></tr>
+      <tr><td style="padding-left: 28px;" class="muted">↳ Доставка <span style="font-size: 11px;">(Glovo — еда)</span></td><td class="num">€50</td><td class="num">€36.20</td><td class="num">€14</td><td><div class="envbar"><div class="envbar-fill" style="width: 72%"></div></div></td><td><span class="badge green">✓ в плане</span></td></tr>
+
+      <tr style="background: #faf6ee; font-weight: 600;"><td>🍽 Заведения <span class="muted" style="font-size: 11px; font-weight: 400;">(рестораны + кафе)</span></td><td class="num">€200</td><td class="num" style="color: var(--red);">€263.91</td><td class="num" style="color: var(--red);">−€64</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">перерасход €64</span></td></tr>
+      <tr><td style="padding-left: 28px;" class="muted">↳ Рестораны <span style="font-size: 11px;">(дорогой поход)</span></td><td class="num">€140</td><td class="num" style="color: var(--red);">€203.76</td><td class="num" style="color: var(--red);">−€64</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">уикенд нал €95</span></td></tr>
+      <tr><td style="padding-left: 28px;" class="muted">↳ Кафе <span style="font-size: 11px;">(булочки/десерты/напиток)</span></td><td class="num">€60</td><td class="num">€60.15</td><td class="num">€0</td><td><div class="envbar"><div class="envbar-fill" style="width: 100%"></div></div></td><td><span class="badge green">✓ ровно по плану</span></td></tr>
+
       <tr><td>Няня и дети</td><td class="num">€700</td><td class="num">€0</td><td class="num">€700</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">пусто</span></td></tr>
       <tr><td>Транспорт</td><td class="num">€100</td><td class="num">€13.20</td><td class="num">€87</td><td><div class="envbar"><div class="envbar-fill" style="width: 13%"></div></div></td><td><span class="badge muted">в плане</span></td></tr>
       <tr><td>Связь и подписки</td><td class="num">€80</td><td class="num">€21.23</td><td class="num">€59</td><td><div class="envbar"><div class="envbar-fill" style="width: 27%"></div></div></td><td><span class="badge muted">в плане</span></td></tr>
-      <tr><td>Здоровье <span class="muted" style="font-size: 11px;">(врачи+аптека)</span></td><td class="num">€120</td><td class="num" style="color: var(--red);">€200.17</td><td class="num" style="color: var(--red);">−€80</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">перерасход €80</span></td></tr>
+
+      <tr style="background: #faf6ee; font-weight: 600;"><td>🩺 Здоровье <span class="muted" style="font-size: 11px; font-weight: 400;">(только врачи + лекарства)</span></td><td class="num">€70</td><td class="num" style="color: var(--red);">€140.00</td><td class="num" style="color: var(--red);">−€70</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">перерасход €70</span></td></tr>
+      <tr><td style="padding-left: 28px;" class="muted">↳ Врачи <span style="font-size: 11px;">(физио, специалисты, анализы)</span></td><td class="num">€60</td><td class="num" style="color: var(--red);">€140.00</td><td class="num" style="color: var(--red);">−€80</td><td><div class="envbar"><div class="envbar-fill red" style="width: 100%"></div></div></td><td><span class="badge red">2 физио (€80+€60)</span></td></tr>
+      <tr><td style="padding-left: 28px;" class="muted">↳ Лекарства <span style="font-size: 11px;">(аптека, рецепты)</span></td><td class="num">€10</td><td class="num">€0</td><td class="num">€10</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">пусто</span></td></tr>
+
       <tr><td>Жена-карманные</td><td class="num">€150</td><td class="num">€70.00</td><td class="num">€80</td><td><div class="envbar"><div class="envbar-fill" style="width: 47%"></div></div></td><td><span class="badge muted">нал (20+40+10)</span></td></tr>
       <tr><td>Коворкинг <span class="muted" style="font-size: 11px;">(150→160)</span></td><td class="num">€160</td><td class="num">€0</td><td class="num">€160</td><td><div class="envbar"><div class="envbar-fill empty" style="width: 0%"></div></div></td><td><span class="badge muted">—</span></td></tr>
       <tr style="background: #fdf8eb;">
