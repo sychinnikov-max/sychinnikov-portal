@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Advisor для founders — Андрей Сычинников</title>
+<meta name="description" content="Strategic Advisor для основателей. Hand of the King для founder-CEO: weekly 1:1, перевод операционного хаоса в систему действий, формализация институциональной структуры компании.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Strategic Advisor для founders — Андрей Сычинников">
+<meta property="og:description" content="Hand of the King для founder-CEO. Operational entry → Advisor tier. Diagnostic, Retainer, долгосрочный формат.">
+<meta property="og:url" content="https://sychinnikov.com/practice/strategic-advisor.html">
+<meta property="og:locale" content="ru_RU">
+
+<link rel="canonical" href="https://sychinnikov.com/practice/strategic-advisor.html">
+
+<style>
+  :root { --bg: #f7f3ec; --card: #ffffff; --ink: #2a2a2a; --muted: #6b6b6b; --accent: #c25c2c; --green: #4a7c59; --blue: #3a5a8c; --purple: #6b4a8c; --red: #b04c4c; --amber: #c89a3c; --shadow: 0 2px 12px rgba(0,0,0,0.06); --line: #e5dfd3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; font-size: 16px; }
+  .container { max-width: 860px; margin: 0 auto; padding: 50px 24px; }
+  nav.top { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  nav.top a { color: var(--blue); text-decoration: none; }
+  h1 { font-size: 38px; line-height: 1.2; margin: 0 0 12px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 18px; color: var(--muted); margin: 0 0 16px; }
+  .meta { font-size: 13px; color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 24px; margin: 50px 0 16px; font-weight: 700; color: var(--accent); }
+  h3 { font-size: 18px; margin: 24px 0 10px; font-weight: 600; }
+  p { margin: 0 0 14px; }
+  .lede { background: #faf6ee; border-left: 4px solid var(--accent); padding: 20px 24px; margin: 0 0 32px; border-radius: 0 6px 6px 0; font-size: 17px; }
+  .lede strong { color: var(--accent); }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .card.purple { border-left: 4px solid var(--purple); }
+  .card.green { border-left: 4px solid var(--green); }
+  .card.blue { border-left: 4px solid var(--blue); }
+  .card.amber { border-left: 4px solid var(--amber); }
+  .card.red { border-left: 4px solid var(--red); }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 15px; }
+  table th, table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table th { background: #faf6ee; font-weight: 600; color: var(--accent); font-size: 14px; }
+  table td:first-child { font-weight: 600; }
+
+  .formula { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: stretch; margin: 24px 0; }
+  .formula .phase { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; box-shadow: var(--shadow); }
+  .formula .phase.entry { border-top: 4px solid var(--blue); }
+  .formula .phase.tier { border-top: 4px solid var(--purple); }
+  .formula .phase h4 { margin: 0 0 8px; font-size: 16px; }
+  .formula .phase p { margin: 0; font-size: 14px; color: var(--muted); }
+  .formula .arrow { display: flex; align-items: center; justify-content: center; font-size: 30px; color: var(--accent); font-weight: 700; }
+
+  .tiers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 24px 0; }
+  .tier { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px; box-shadow: var(--shadow); border-top: 4px solid var(--blue); }
+  .tier:nth-child(2) { border-top-color: var(--purple); }
+  .tier:nth-child(3) { border-top-color: var(--accent); }
+  .tier .tier-name { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 600; }
+  .tier h4 { margin: 0 0 10px; font-size: 19px; font-weight: 700; }
+  .tier .price { font-size: 22px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+  .tier ul { margin: 8px 0 0; padding-left: 20px; font-size: 14px; }
+  .tier ul li { margin-bottom: 4px; }
+
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+  .fit-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; box-shadow: var(--shadow); }
+  .fit-card.yes { border-left: 4px solid var(--green); }
+  .fit-card.no { border-left: 4px solid var(--red); }
+  .fit-card h3 { margin: 0 0 8px; }
+  .fit-card ul { margin: 6px 0 0; padding-left: 20px; font-size: 14px; }
+  .fit-card ul li { margin-bottom: 4px; }
+
+  .cta { background: var(--card); border: 2px solid var(--accent); border-radius: 14px; padding: 30px; margin: 40px 0; text-align: center; box-shadow: var(--shadow); }
+  .cta h2 { color: var(--accent); margin: 0 0 12px; }
+  .cta p { font-size: 16px; margin: 0 0 18px; }
+  .cta a.btn { display: inline-block; background: var(--accent); color: white; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; transition: opacity 0.15s; }
+  .cta a.btn:hover { opacity: 0.85; }
+  .cta .small { font-size: 13px; color: var(--muted); margin-top: 12px; margin-bottom: 0; }
+
+  ul { margin: 8px 0; padding-left: 22px; }
+  ul li { margin-bottom: 6px; }
+
+  blockquote { margin: 18px 0; padding: 14px 20px; border-left: 4px solid var(--blue); background: #f0ecdf; font-style: italic; font-size: 15px; color: var(--ink); border-radius: 0 6px 6px 0; }
+
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer a { color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 700px) {
+    h1 { font-size: 30px; }
+    .tiers { grid-template-columns: 1fr; }
+    .fit-grid { grid-template-columns: 1fr; }
+    .formula { grid-template-columns: 1fr; }
+    .formula .arrow { transform: rotate(90deg); padding: 8px 0; }
+    table { font-size: 14px; }
+    table th, table td { padding: 10px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav class="top">
+  <a href="/">← главная</a> ·
+  <a href="/practice/">методология</a> ·
+  <a href="/practice/cases.html">кейсы</a> ·
+  <a href="/practice/pricing-ladder.html">прайс</a>
+</nav>
+
+<h1>Strategic Advisor для founders</h1>
+<p class="subtitle">Operational entry → Advisor tier. Формула пути от первого diagnostic до долгосрочной роли Hand of the King.</p>
+<p class="meta">Обновлено 2026-05-19. Версия v1.</p>
+
+<div class="lede">
+  <strong>Короткий ответ.</strong> Я работаю с founder-CEO компаний от 5 до 50 человек. Захожу через operational delivery, через 1-2 месяца перехожу в advisor-формат — weekly 1:1, где помогаю переводить операционный хаос в последовательность действий и формализую институциональную структуру там, где founder сам сделать это не может.
+</div>
+
+<h2>Что я делаю на пределе уникальности</h2>
+
+<p>В рынке много «операционных консультантов» — людей которые внедряют CRM, пишут регламенты, помогают с наймом. Это полезно, но это не то, в чём я уникален. Это <strong>excellence-зона</strong> — я в ней работаю хорошо, но это не центр.</p>
+
+<p>Центр моей работы — другой. Это <strong>роль Hand of the King для founder-CEO</strong>:</p>
+
+<ul>
+  <li>Сесть рядом с CEO в формате <strong>weekly 1:1</strong>.</li>
+  <li>Переводить <strong>хаос операционки в последовательность действий</strong> — что делать, в каком порядке, кто кому к когда.</li>
+  <li>Формализовать <strong>институциональную структуру</strong> там, где founder сам этого вытащить не может (матрицы ответственности, policy-документы, оргструктура с подписями директоров).</li>
+  <li>Возвращать <strong>владение задачей</strong> founder-у — с уже размеченными дедлайнами. Не «я сделаю», а «вот что делать».</li>
+  <li>Говорить founder-у <strong>«нет»</strong> когда тот хочет обойти дисфункцию — и не быть уволенным.</li>
+</ul>
+
+<h3>Чем это отличается от operational architect</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operational architect</th>
+      <th>Hand of the King</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Делает руками</td>
+      <td>Помогает founder-у решать</td>
+    </tr>
+    <tr>
+      <td>Внедряет процессы</td>
+      <td>Возвращает способность видеть всю картину</td>
+    </tr>
+    <tr>
+      <td>Работает с командой</td>
+      <td>Работает через founder-а</td>
+    </tr>
+    <tr>
+      <td>Цикл: 2-8 недель</td>
+      <td>Цикл: 6-24 месяца</td>
+    </tr>
+    <tr>
+      <td>Канал: outbound, кейсы</td>
+      <td>Канал: weekly 1:1 с founder-уровнем</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Это не «или/или». Это две роли на одной траектории — operational открывает дверь, advisor строит долгосрочную работу.</p>
+
+<h2>Формула работы — две фазы</h2>
+
+<div class="formula">
+  <div class="phase entry">
+    <h4>Фаза 1 — Operational entry</h4>
+    <p>Месяцы 1-2. Видимые результаты руками: настройка процессов, починка операционных дыр, аудит, конкретные артефакты для команды.</p>
+  </div>
+  <div class="arrow">→</div>
+  <div class="phase tier">
+    <h4>Фаза 2 — Advisor tier</h4>
+    <p>Месяцы 3+. Weekly 1:1 с founder-ом. Стратегическая работа: куда движется компания, что в фокусе, какой следующий шаг. ИЛИ — корректное расставание если апгрейд не нужен.</p>
+  </div>
+</div>
+
+<p>Это не теория. Это <strong>дважды отработанный паттерн</strong>, который ложится на реальные проекты — и который позволяет правильно выстроить ожидания с обеих сторон ещё на старте.</p>
+
+<h2>Кому это подходит</h2>
+
+<div class="fit-grid">
+  <div class="fit-card yes">
+    <h3>✅ Подходит</h3>
+    <ul>
+      <li>Founder-CEO бизнеса <strong>5-50 человек</strong></li>
+      <li>Есть <strong>команда внутри</strong> (директора, отделы) — не «всё руками самому»</li>
+      <li>Founder сам принимает решение и сам платит</li>
+      <li>Есть конкретная операционная боль — рост уперся в хаос</li>
+      <li>Хочет систему которая работает без него, а не «правую руку которая всё сделает за него»</li>
+      <li>Готов слушать «нет» и менять подход, если оно обосновано</li>
+    </ul>
+  </div>
+  <div class="fit-card no">
+    <h3>❌ Не подходит</h3>
+    <ul>
+      <li>Соло-фаундер без команды — некем оперировать</li>
+      <li>Бизнес где «нужно сделать руками за нас» — это найм, не advisory</li>
+      <li>Pre-revenue без продукта — слишком рано для системы</li>
+      <li>Founder не платит сам («посмотрим», «потом»)</li>
+      <li>Только % от продаж / no-win-no-fee</li>
+      <li>Корпоративные клиенты — не моя стадия</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Форматы работы</h2>
+
+<div class="tiers">
+  <div class="tier">
+    <div class="tier-name">L1 · точка входа</div>
+    <h4>Diagnostic</h4>
+    <div class="price">€3-5К</div>
+    <p style="font-size: 14px; color: var(--muted); margin: 0 0 10px;">2-3 недели</p>
+    <ul>
+      <li>Глубокий аудит: люди, процессы, метрики, sales-воронка</li>
+      <li>Дорожная карта изменений на 3-6 месяцев</li>
+      <li>Конкретные первые 3-5 шагов с дедлайнами</li>
+      <li>По итогу — решение нужна ли Foundation</li>
+    </ul>
+  </div>
+  <div class="tier">
+    <div class="tier-name">L2 · operational + переход</div>
+    <h4>Foundation</h4>
+    <div class="price">€8-15К</div>
+    <p style="font-size: 14px; color: var(--muted); margin: 0 0 10px;">2-3 месяца</p>
+    <ul>
+      <li>Внедрение ключевых процессов и метрик</li>
+      <li>Оргструктура с зонами ответственности</li>
+      <li>Sales / marketing / AI-операции (по приоритету)</li>
+      <li>Переход к weekly 1:1 с founder-ом во второй половине</li>
+    </ul>
+  </div>
+  <div class="tier">
+    <div class="tier-name">L3 · advisor tier</div>
+    <h4>Hand of the King</h4>
+    <div class="price">€1.5-3К/мес</div>
+    <p style="font-size: 14px; color: var(--muted); margin: 0 0 10px;">retainer, от 6 месяцев</p>
+    <ul>
+      <li>Weekly 1:1 с founder-CEO</li>
+      <li>Стратегические решения и приоритеты</li>
+      <li>Институциональная структура (matrices, policy)</li>
+      <li>Альтернатива — equity-deal 0.5-2% при подходящей юрструктуре</li>
+    </ul>
+  </div>
+</div>
+
+<p style="font-size: 14px; color: var(--muted);">Точка входа — Diagnostic или короткий звонок. Прыгнуть сразу в L3 без L1 в реальной жизни не работает: founder и я должны увидеть друг друга в деле.</p>
+
+<h2>Кейс — что это выглядит на практике</h2>
+
+<div class="card blue">
+  <h3 style="margin-top: 0;">Saverfish (бренд Fishok) — производство в Прибалтике</h3>
+  <p style="font-size: 14px; color: var(--muted); margin: 0 0 14px;">Внешний operational architect / advisor с февраля 2026.</p>
+
+  <p><strong>Фаза 1 (operational entry, мес 1-2):</strong> аудит производственных и коммерческих процессов, починка CRM/email-меток, согласование рассылок на выставочных лидах, разговор с командой продаж.</p>
+
+  <p><strong>Фаза 2 (advisor tier, с мес 3):</strong> weekly 1:1 с гендиректором. Конкретные артефакты с последних встреч — решение об отказе от 1С с дорожной картой альтернатив, матрица ответственности по производству на 18 точек + контроль качества, policy-документ с распределением accountability по должностям (не именам), повторяемый шаблон для финансовой функции.</p>
+
+  <p><strong>Что отличает от классического «навёл порядок»:</strong> founder приходит с проблемой без решения — уходит с принятым решением, дорожной картой и раздачей задач по людям с дедлайнами. Владение задачей возвращается founder-у в структурированном виде.</p>
+
+  <p style="margin-bottom: 0;"><a href="/clients/fishok.html" style="color: var(--blue);">→ Подробнее про кейс Saverfish/Fishok</a></p>
+</div>
+
+<h2>Что я НЕ делаю</h2>
+<div class="card red">
+  <ul style="margin: 0;">
+    <li>Не делаю «всё за вас» — это путь к concentration risk на одном человеке</li>
+    <li>Не закрываю продажи руками — настраиваю воронку, продают ваши люди</li>
+    <li>Не пишу прод-код — могу спроектировать AI-операции, не разрабатываю</li>
+    <li>Не работаю на голую success-fee / процент от продаж</li>
+    <li>Не вхожу в проекты где нет команды — некем оперировать (правило Octo)</li>
+  </ul>
+</div>
+
+<div class="cta">
+  <h2 style="margin-top: 0;">Если откликается — давайте поговорим</h2>
+  <p>30 минут разговора по делу. Без презентаций. Расскажете что у вас сейчас, посмотрим есть ли пересечение.</p>
+  <a href="mailto:sychinnikov@gmail.com?subject=Strategic%20Advisor%20%E2%80%94%2030%20%D0%BC%D0%B8%D0%BD%D1%83%D1%82%20%D0%B7%D0%B2%D0%BE%D0%BD%D0%BE%D0%BA" class="btn">Написать на email</a>
+  <p class="small">sychinnikov@gmail.com · Хихон, Испания · работаю на русском</p>
+</div>
+
+<h2>Связанное</h2>
+<div class="card amber">
+  <ul style="margin: 0;">
+    <li><a href="/practice/" style="color: var(--blue);">Operational Foundation — методология полностью</a></li>
+    <li><a href="/practice/cases.html" style="color: var(--blue);">Кейсы (Silver Spa, Fishok, Octo)</a></li>
+    <li><a href="/practice/pricing-ladder.html" style="color: var(--blue);">Pricing ladder — все 4 уровня</a></li>
+    <li><a href="/system/" style="color: var(--blue);">AndreiOS — операционная система, которую использую сам</a></li>
+  </ul>
+</div>
+
+<footer>
+  <p>📁 Источник в AndreiOS: <code>practice/positioning.md</code> § «Точка гения — Hand of the King». Эта страница — публичная упаковка по итогам сессии mentor → practice-director от 19.05.2026.</p>
+  <p><a href="/">← Главная</a> · <a href="/practice/">Методология</a></p>
+</footer>
+
+</div>
+</body>
+</html>
