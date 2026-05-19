@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лендинги · Андрей Сычинников</title>
+<meta name="description" content="Три версии продающего лендинга на услугу Operational Architect — для рекомендателей и партнёров.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://sychinnikov.com/landing/">
+
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #2a2a2a;
+    --muted: #6b6b6b;
+    --accent: #c25c2c;
+    --line: #e5dfd3;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 60px 24px; }
+
+  header { margin-bottom: 40px; }
+  .back {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: color 0.2s;
+  }
+  .back:hover { color: var(--accent); }
+  h1 { font-size: 38px; line-height: 1.2; margin: 0 0 12px; font-weight: 700; letter-spacing: -0.5px; }
+  .tagline { font-size: 18px; color: var(--muted); margin: 0; }
+
+  .intro {
+    background: #faf6ee;
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 6px 6px 0;
+    font-size: 15px;
+    margin: 32px 0 40px;
+  }
+  .intro strong { color: var(--accent); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 24px;
+  }
+  @media (min-width: 720px) {
+    .grid { grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px 26px;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    border-color: var(--accent);
+  }
+  .card-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .card-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+  }
+  .card-angle {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    background: rgba(194,92,44,0.08);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .card-cta {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card-cta::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+  .card:hover .card-cta::after { transform: translateX(3px); }
+
+  .note {
+    margin-top: 48px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <a href="/" class="back">← на главную портала</a>
+  <h1>Сайт — три версии лендинга</h1>
+  <p class="tagline">Продающая страница на услугу Operational Architect. Три позиционирования.</p>
+</header>
+
+<div class="intro">
+  <strong>Зачем три.</strong> Каждая версия — отдельный угол для разной аудитории. Один и тот же продукт, разный язык: для строгого B2B-разговора, для founder-уровня, для tech-аудитории. Эти страницы — визитка для тёплых лидов и рекомендателей: «вот кто я, вот что я делаю, вот как меня продавать своим контактам».
+</div>
+
+<div class="grid">
+
+  <a href="/landing/architect/" class="card">
+    <div class="card-num">01 · The Architect</div>
+    <div class="card-title">Operational Architect</div>
+    <p class="card-angle">Строгий B2B-консалтинг. Точные определения, метрики, кейсы как case studies. Для рациональных founders и CFO.</p>
+    <div class="card-tags">
+      <span class="tag">Светлый минимализм</span>
+      <span class="tag">B2B</span>
+      <span class="tag">Структурный</span>
+    </div>
+    <div class="card-cta">Открыть версию</div>
+  </a>
+
+  <a href="/landing/hand/" class="card">
+    <div class="card-num">02 · Hand of the King</div>
+    <div class="card-title">Strategic Advisor</div>
+    <p class="card-angle">Премиум-эссе для founder-уровня. Союзник за плечом CEO, не консультант. Кинематографичная подача.</p>
+    <div class="card-tags">
+      <span class="tag">Тёмная премиум</span>
+      <span class="tag">Founder-уровень</span>
+      <span class="tag">Эссеистика</span>
+    </div>
+    <div class="card-cta">Открыть версию</div>
+  </a>
+
+  <a href="/landing/system/" class="card">
+    <div class="card-num">03 · Operating System</div>
+    <div class="card-title">Operating System</div>
+    <p class="card-angle">Tech-эстетика. Услуга как product — Finance/KPI/Process/Team/Growth. Для tech-founders и builders.</p>
+    <div class="card-tags">
+      <span class="tag">Modern tech</span>
+      <span class="tag">Product-vibe</span>
+      <span class="tag">Метрики</span>
+    </div>
+    <div class="card-cta">Открыть версию</div>
+  </a>
+
+</div>
+
+<p class="note">
+  Все три страницы — самодостаточные standalone HTML без зависимостей. Один и тот же оффер (диагностика / проект / ретейнер), одни и те же кейсы (Silver Thai, Fishok, Octo Relocate), один email <a href="mailto:sychinnikov@gmail.com" style="color:var(--accent);">sychinnikov@gmail.com</a>. Разные слой смыслов под разную аудиторию.
+</p>
+
+<footer>
+  <p>sychinnikov.com · <a href="mailto:sychinnikov@gmail.com">sychinnikov@gmail.com</a></p>
+</footer>
+
+</div>
+</body>
+</html>

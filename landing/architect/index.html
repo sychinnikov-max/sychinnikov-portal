@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Operational Architect для founder-led компаний. Превращаю операционный хаос в управляемую систему за 1-3 месяца. Андрей Сычинников.">
+<title>Андрей Сычинников - Operational Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f7f7f5;
+  --bg-card: #fbfbfa;
+  --ink: #0d0f14;
+  --ink-2: #2b2f3a;
+  --ink-3: #5b6271;
+  --ink-4: #8a909d;
+  --line: #e7e8ec;
+  --line-2: #d8dae0;
+  --accent: #1e3a8a;
+  --accent-soft: #eef1fa;
+  --accent-ink: #15296b;
+  --ok: #166534;
+  --warn: #7c2d12;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --maxw: 1120px;
+  --shadow: 0 1px 2px rgba(13,15,20,0.04), 0 8px 24px rgba(13,15,20,0.04);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 16px;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: "tnum", "zero"; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ---------- NAV ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 600; font-size: 15px; letter-spacing: -0.01em;
+}
+.brand-mark {
+  width: 22px; height: 22px;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 11px; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  border-radius: 3px;
+}
+.nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-3); }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--ink);
+  background: var(--ink); color: #fff;
+  font-size: 13px; font-weight: 500;
+  border-radius: var(--radius-sm);
+  transition: all .15s ease;
+}
+.nav-cta:hover { background: transparent; color: var(--ink); }
+
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  padding: 96px 0 72px;
+  border-bottom: 1px solid var(--line);
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border-radius: 999px;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 28px;
+}
+.hero-badge .dot {
+  width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+}
+h1.hero-h {
+  font-size: clamp(36px, 5.2vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  max-width: 940px;
+  margin-bottom: 28px;
+}
+h1.hero-h .accent { color: var(--accent); }
+.hero-sub {
+  font-size: clamp(17px, 1.6vw, 19px);
+  color: var(--ink-3);
+  max-width: 720px;
+  margin-bottom: 40px;
+  line-height: 1.55;
+}
+.hero-ctas {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 64px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px;
+  font-size: 15px; font-weight: 500;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.btn-primary {
+  background: var(--ink); color: #fff;
+  border-color: var(--ink);
+}
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+.btn-secondary {
+  background: transparent; color: var(--ink);
+  border-color: var(--line-2);
+}
+.btn-secondary:hover { border-color: var(--ink); }
+.btn .arrow { transition: transform .15s ease; }
+.btn:hover .arrow { transform: translateX(2px); }
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 32px;
+}
+.stat {
+  padding-right: 24px;
+}
+.stat + .stat { border-left: 1px solid var(--line); padding-left: 24px; }
+.stat-val {
+  font-size: 32px; font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.stat-lbl {
+  font-size: 13px; color: var(--ink-3);
+  line-height: 1.4;
+}
+
+@media (max-width: 760px) {
+  .hero { padding: 56px 0 48px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 0; padding-top: 24px; }
+  .stat { padding: 0 16px; }
+  .stat + .stat { border-left: none; padding-left: 16px; }
+  .stat:nth-child(3) { border-top: 1px solid var(--line); padding-top: 24px; }
+  .stat:nth-child(4) { border-top: 1px solid var(--line); padding-top: 24px; border-left: 1px solid var(--line); }
+}
+
+/* ---------- SECTION ---------- */
+.section { padding: 96px 0; border-bottom: 1px solid var(--line); }
+.section.alt { background: var(--bg-alt); }
+.eyebrow {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before {
+  content: ""; display: inline-block;
+  width: 16px; height: 1px; background: var(--ink-4);
+}
+.section-h {
+  font-size: clamp(28px, 3.4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  max-width: 760px;
+  margin-bottom: 20px;
+}
+.section-lead {
+  font-size: 17px; color: var(--ink-3);
+  max-width: 680px;
+  margin-bottom: 56px;
+}
+
+@media (max-width: 760px) {
+  .section { padding: 64px 0; }
+  .section-lead { margin-bottom: 40px; }
+}
+
+/* ---------- PROBLEM ---------- */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.problem-card {
+  background: var(--bg);
+  padding: 32px;
+}
+.problem-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-4);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+.problem-card h3 {
+  font-size: 18px; font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.problem-card p {
+  font-size: 15px; color: var(--ink-3); line-height: 1.55;
+}
+@media (max-width: 720px) { .problem-grid { grid-template-columns: 1fr; } }
+
+/* ---------- WHAT-I-DO ---------- */
+.what-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.def-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+.def-card .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.def-card h3 {
+  font-size: 22px; font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 14px;
+}
+.def-card p { font-size: 15px; color: var(--ink-2); line-height: 1.65; }
+.def-card p + p { margin-top: 12px; }
+
+.role-list { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.role-row {
+  display: grid; grid-template-columns: 160px 1fr;
+  gap: 24px;
+  padding: 18px 22px;
+  background: var(--bg);
+  font-size: 14px;
+}
+.role-row .who { font-weight: 500; color: var(--ink); }
+.role-row .vs { color: var(--ink-3); }
+.role-row.head {
+  background: var(--bg-alt);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .what-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 560px) {
+  .role-row { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* ---------- CASES ---------- */
+.cases { display: flex; flex-direction: column; gap: 24px; }
+.case {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  padding: 36px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color .15s ease;
+}
+.case:hover { border-color: var(--line-2); }
+.case-meta .tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.08em;
+  color: var(--accent);
+  padding: 4px 8px;
+  background: var(--accent-soft);
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.case-meta h3 {
+  font-size: 22px; font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+.case-meta .geo {
+  font-size: 13px; color: var(--ink-3);
+  margin-bottom: 16px;
+}
+.case-meta .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: var(--ink-2);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.case-body { display: flex; flex-direction: column; gap: 18px; }
+.case-block {
+  display: grid; grid-template-columns: 120px 1fr; gap: 24px;
+}
+.case-block .k {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+  font-weight: 500;
+  padding-top: 2px;
+}
+.case-block .v { font-size: 15px; color: var(--ink-2); line-height: 1.6; }
+.case-block .v.result { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 760px) {
+  .case { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+  .case-block { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* ---------- FORMATS ---------- */
+.formats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.format {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex; flex-direction: column;
+  position: relative;
+}
+.format.featured {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+.format.featured .format-name,
+.format.featured .format-dur,
+.format.featured .format-list li { color: rgba(255,255,255,0.9); }
+.format.featured .format-list li::before { background: rgba(255,255,255,0.5); }
+.format.featured .format-divider { background: rgba(255,255,255,0.18); }
+.format-tag {
+  position: absolute; top: 16px; right: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: var(--accent);
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+.format-name {
+  font-size: 18px; font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.format-dur {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: var(--ink-3);
+  margin-bottom: 24px;
+}
+.format-divider {
+  height: 1px; background: var(--line);
+  margin-bottom: 20px;
+}
+.format-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+  font-size: 14px;
+}
+.format-list li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.format-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 9px;
+  width: 8px; height: 1px;
+  background: var(--ink-3);
+}
+
+@media (max-width: 900px) {
+  .formats { grid-template-columns: 1fr; }
+}
+
+/* ---------- METHOD ---------- */
+.method {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.step {
+  background: var(--bg);
+  padding: 32px;
+  position: relative;
+}
+.step-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+.step h3 {
+  font-size: 17px; font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.step p { font-size: 14px; color: var(--ink-3); line-height: 1.55; }
+
+@media (max-width: 900px) {
+  .method { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .method { grid-template-columns: 1fr; }
+}
+
+/* ---------- ICP ---------- */
+.icp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.icp-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+.icp-card .head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.icp-card.yes .head { color: var(--ok); }
+.icp-card.no .head { color: var(--warn); }
+.icp-card .head .ic {
+  width: 22px; height: 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.icp-card.yes .head .ic { background: #dcfce7; color: var(--ok); }
+.icp-card.no .head .ic { background: #fee2e2; color: var(--warn); }
+.icp-list { list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 15px; color: var(--ink-2); }
+.icp-list li {
+  position: relative; padding-left: 22px;
+  line-height: 1.55;
+}
+.icp-list li::before {
+  position: absolute; left: 0; top: 1px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
+.icp-card.yes .icp-list li::before { content: "✓"; color: var(--ok); }
+.icp-card.no .icp-list li::before { content: "×"; color: var(--warn); }
+
+@media (max-width: 760px) {
+  .icp-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- FAQ ---------- */
+.faq { display: flex; flex-direction: column; gap: 0; max-width: 820px; border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-q {
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 24px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px;
+  font-family: inherit;
+  font-size: 17px; font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.faq-q .toggle {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  position: relative;
+}
+.faq-q .toggle::before,
+.faq-q .toggle::after {
+  content: "";
+  position: absolute;
+  background: var(--ink);
+  transition: transform .2s ease;
+}
+.faq-q .toggle::before { top: 50%; left: 4px; right: 4px; height: 1.5px; transform: translateY(-50%); }
+.faq-q .toggle::after { left: 50%; top: 4px; bottom: 4px; width: 1.5px; transform: translateX(-50%); }
+.faq-item.open .faq-q .toggle::after { transform: translateX(-50%) rotate(90deg); }
+.faq-a {
+  display: none;
+  padding: 0 0 24px;
+  font-size: 15px; color: var(--ink-3); line-height: 1.65;
+  max-width: 720px;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-a p + p { margin-top: 10px; }
+
+/* ---------- CTA ---------- */
+.cta-final {
+  padding: 112px 0;
+  background: var(--ink);
+  color: #fff;
+  border-bottom: none;
+}
+.cta-final h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  max-width: 780px;
+}
+.cta-final p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  max-width: 620px;
+  margin-bottom: 40px;
+}
+.cta-final .btn-primary {
+  background: #fff; color: var(--ink); border-color: #fff;
+}
+.cta-final .btn-primary:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cta-final .btn-secondary {
+  color: #fff; border-color: rgba(255,255,255,0.25);
+}
+.cta-final .btn-secondary:hover { border-color: #fff; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 56px; }
+.cta-meta {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  max-width: 780px;
+}
+.cta-meta .k {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+.cta-meta .v { font-size: 15px; color: #fff; }
+.cta-meta .v a:hover { color: var(--accent-soft); }
+
+@media (max-width: 720px) {
+  .cta-final { padding: 72px 0; }
+  .cta-meta { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  padding: 32px 0;
+  background: var(--ink);
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark">AS</span>
+      <span>Андрей Сычинников</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#service">Услуга</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#formats">Форматы</a>
+      <a href="#method">Метод</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-cta" href="mailto:sychinnikov@gmail.com?subject=Запрос%20на%20диагностику">
+      Написать <span class="arrow">↗</span>
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span>Operational Architect - Хихон, Испания</span>
+    </div>
+    <h1 class="hero-h">
+      Превращаю операционный хаос в&nbsp;<span class="accent">управляемую систему</span> для founder-led компаний&nbsp;за 1-3&nbsp;месяца.
+    </h1>
+    <p class="hero-sub">
+      Работаю рядом с CEO русскоязычных стартапов pre-seed → Series A в Европе. Строю финмодель, KPI по ролям, CRM-процессы и регламенты, на которых компания управляется через цифры, а не через интуицию основателя.
+    </p>
+    <div class="hero-ctas">
+      <a href="mailto:sychinnikov@gmail.com?subject=Запрос%20на%20диагностику" class="btn btn-primary">
+        Обсудить диагностику <span class="arrow">↗</span>
+      </a>
+      <a href="#cases" class="btn btn-secondary">
+        Посмотреть кейсы
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-val mono">3</div>
+        <div class="stat-lbl">внедрённых операционных&nbsp;системы в&nbsp;разных юрисдикциях</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val mono">€500K+</div>
+        <div class="stat-lbl">минимальный годовой оборот клиента, с&nbsp;которым работаю</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val mono">1-3 мес</div>
+        <div class="stat-lbl">средний цикл внедрения управленческого&nbsp;слоя</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val mono">70-130%</div>
+        <div class="stat-lbl">точность плана чистой прибыли после&nbsp;handover</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow">Диагноз</div>
+    <h2 class="section-h">Четыре дисфункции, из-за которых founder-led компания&nbsp;не&nbsp;управляется как актив.</h2>
+    <p class="section-lead">
+      Это не «проблемы роста». Это структурные пробелы, которые невозможно закрыть наймом ещё одного менеджера или внедрением ещё одного инструмента.
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-num mono">01</div>
+        <h3>Нет культуры непрерывного улучшения</h3>
+        <p>Действия делаются, но не разбираются. Команда повторяет ошибки, потому что нет регулярного цикла рефлексии: что сработало, что нет, что меняем на следующей неделе.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num mono">02</div>
+        <h3>Нет контроля главных показателей</h3>
+        <p>Либо результат не выражен в цифре, либо цифра есть, но никто её регулярно не смотрит. Решения принимаются по ощущению, а финансовый результат - сюрприз в конце квартала.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num mono">03</div>
+        <h3>Нет привязки людей к показателям</h3>
+        <p>Сотрудник не понимает, за что именно он отвечает в цифре. Поэтому ответственность размывается на «команду» и сходится в одной точке - на основателе.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num mono">04</div>
+        <h3>Расфокус</h3>
+        <p>Люди делают то, что просто или интересно, а не то, что движет показатели. Приоритеты меняются на лету, накапливается операционный долг, время уходит, выручка стоит.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I DO -->
+<section class="section alt" id="service">
+  <div class="container">
+    <div class="eyebrow">Что это за услуга</div>
+    <h2 class="section-h">Operational Architect - не консультант, не COO в&nbsp;штате, не&nbsp;тренер.</h2>
+    <p class="section-lead">
+      Я сажусь рядом с CEO в формате weekly 1:1, перевожу операционный хаос в последовательность действий, формализую институциональную структуру там, где основатель сам этого сделать не может, и возвращаю задачи владельцу - уже с разметкой дедлайнов и ответственных.
+    </p>
+
+    <div class="what-grid">
+      <div class="def-card">
+        <div class="label">Определение услуги</div>
+        <h3>Архитектор операционной системы компании.</h3>
+        <p>
+          Я строю управленческий слой между основателем и командой: финансовая модель, KPI по ролям, CRM/процессы, матрицы ответственности, регламенты, дашборды. Цель - чтобы CEO мог планировать чистую прибыль с точностью 70-130% и видеть, где система отклоняется, до того как это превратится в проблему.
+        </p>
+        <p>
+          Это не разовая стратегическая сессия и не аутсорс-операционка. Это 1-3 месяца плотной работы рядом с founder-ом до момента, когда система стоит сама и не разваливается без меня.
+        </p>
+      </div>
+
+      <div class="role-list">
+        <div class="role-row head">
+          <div>Роль</div>
+          <div>Чем отличается</div>
+        </div>
+        <div class="role-row">
+          <div class="who">Консультант</div>
+          <div class="vs">Пишет рекомендации и уходит. Я внедряю до работающего состояния.</div>
+        </div>
+        <div class="role-row">
+          <div class="who">COO в штате</div>
+          <div class="vs">Управляет операцией каждый день. Я строю систему так, чтобы COO не был нужен или появился позже на дешёвой роли.</div>
+        </div>
+        <div class="role-row">
+          <div class="who">Бизнес-коуч</div>
+          <div class="vs">Работает с состоянием основателя. Я работаю со структурой компании через цифры и процессы.</div>
+        </div>
+        <div class="role-row">
+          <div class="who">Финдиректор</div>
+          <div class="vs">Ведёт учёт и отчётность. Я ставлю методологию учёта, но первичку и проводки не делаю.</div>
+        </div>
+        <div class="role-row">
+          <div class="who">Интегратор CRM</div>
+          <div class="vs">Настраивает инструмент. Я проектирую коммерческую логику, под которую инструмент потом конфигурируется.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section" id="cases">
+  <div class="container">
+    <div class="eyebrow">Кейсы</div>
+    <h2 class="section-h">Три внедрённые системы в&nbsp;трёх разных индустриях и&nbsp;юрисдикциях.</h2>
+    <p class="section-lead">
+      Каждый кейс описан в одной структуре: что было сломано, что было сделано, что осталось у клиента после.
+    </p>
+
+    <div class="cases">
+      <!-- CASE 1 -->
+      <article class="case">
+        <div class="case-meta">
+          <div class="tag mono">SPA / WELLNESS</div>
+          <h3>Silver Thai</h3>
+          <div class="geo">Россия · инвестиции 32+ млн ₽</div>
+          <div class="num mono">3 месяца</div>
+        </div>
+        <div class="case-body">
+          <div class="case-block">
+            <div class="k">Проблема</div>
+            <div class="v">Бизнес не управлялся как актив. Экономика мастер-часа отрицательная, чистая прибыль считалась некорректно, инвестор не видел реальной финансовой картины.</div>
+          </div>
+          <div class="case-block">
+            <div class="k">Действия</div>
+            <div class="v">Разбор финансов с нуля. Перестроена логика управления. Внедрена KPI-система по ролям: загрузка мастер-часов, средний чек, LTV клиента, чистая прибыль на смену.</div>
+          </div>
+          <div class="case-block">
+            <div class="k">Результат</div>
+            <div class="v result">Открыта реальная финансовая картина. Построена дорожная карта к управляемой прибыли с понятными точками контроля для собственника и операционной команды.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 2 -->
+      <article class="case">
+        <div class="case-meta">
+          <div class="tag mono">B2B EXPORT / PET FOOD</div>
+          <h3>Fishok</h3>
+          <div class="geo">Латвия · экспорт ЕС + США</div>
+          <div class="num mono">retainer</div>
+        </div>
+        <div class="case-body">
+          <div class="case-block">
+            <div class="k">Проблема</div>
+            <div class="v">Сильное производство, но нет коммерческой системы для международных продаж. CRM Pipedrive использовалась как архив контактов, не как инструмент прогнозирования.</div>
+          </div>
+          <div class="case-block">
+            <div class="k">Действия</div>
+            <div class="v">Построена B2B-воронка международного уровня. CRM переведена в режим прогнозирования. Подготовка к выставкам Iberzoo + Orlando: квалификация лидов, follow-up архитектура, логика white label.</div>
+          </div>
+          <div class="case-block">
+            <div class="k">Результат</div>
+            <div class="v result">Масштабируемая коммерческая модель, которая работает на двух континентах и не зависит от персональной включённости основателя в каждую сделку.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 3 -->
+      <article class="case">
+        <div class="case-meta">
+          <div class="tag mono">RELOCATION / STARTUP</div>
+          <h3>Octo Relocate</h3>
+          <div class="geo">Испания · резидентство для основателей</div>
+          <div class="num mono">2 месяца</div>
+        </div>
+        <div class="case-body">
+          <div class="case-block">
+            <div class="k">Проблема</div>
+            <div class="v">Нет системной модели партнёрского привлечения. Продукт воспринимался рынком как «визовая услуга», а не как инструмент проф. интеграции в ЕС.</div>
+          </div>
+          <div class="case-block">
+            <div class="k">Действия</div>
+            <div class="v">Спроектирована партнёрская экосистема из 6 типов партнёров: юристы, налоговые консультанты, relocation-агентства, брокеры. Продукт перепакован под язык интеграции, а не миграции.</div>
+          </div>
+          <div class="case-block">
+            <div class="k">Результат</div>
+            <div class="v result">Масштабируемая модель партнёрского канала с понятной экономикой каждого типа партнёра и логикой их активации.</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section class="section alt" id="formats">
+  <div class="container">
+    <div class="eyebrow">Форматы</div>
+    <h2 class="section-h">Три формата работы. Один вход через диагностику.</h2>
+    <p class="section-lead">
+      Любой проект начинается с двухнедельной диагностики. После неё вместе решаем, есть ли смысл идти в проект или retainer и в каком объёме.
+    </p>
+
+    <div class="formats">
+      <div class="format">
+        <div class="format-name">Диагностика</div>
+        <div class="format-dur mono">2 недели</div>
+        <div class="format-divider"></div>
+        <ul class="format-list">
+          <li>Операционный аудит ключевых процессов</li>
+          <li>Карта ограничений и узких мест</li>
+          <li>Финансовый срез: где компания зарабатывает, где теряет</li>
+          <li>План действий на 90 дней</li>
+          <li>Решение «делаем дальше или нет» по фактам, а не вслепую</li>
+        </ul>
+      </div>
+
+      <div class="format featured">
+        <div class="format-tag mono">FLAGSHIP</div>
+        <div class="format-name">Проект</div>
+        <div class="format-dur mono">1-3 месяца</div>
+        <div class="format-divider"></div>
+        <ul class="format-list">
+          <li>Финмодель с управленческим P&amp;L</li>
+          <li>KPI по ролям с привязкой к показателям компании</li>
+          <li>CRM и процессы продаж под архитектуру воронки</li>
+          <li>Регламенты ключевых операций</li>
+          <li>Дашборды для CEO и команды</li>
+          <li>Handover: система работает без меня</li>
+        </ul>
+      </div>
+
+      <div class="format">
+        <div class="format-name">Retainer</div>
+        <div class="format-dur mono">от 3 месяцев · COO на аутсорсе</div>
+        <div class="format-divider"></div>
+        <ul class="format-list">
+          <li>Операционный директор в команде без оформления в штат</li>
+          <li>Weekly 1:1 с CEO, ревью показателей</li>
+          <li>Поддержание системы в рабочем состоянии</li>
+          <li>Разбор отклонений и точечные корректировки</li>
+          <li>Подходит на стадии масштабирования внедрённого решения</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="section" id="method">
+  <div class="container">
+    <div class="eyebrow">Метод</div>
+    <h2 class="section-h">Четыре фазы. От первого разговора до момента, когда&nbsp;система стоит сама.</h2>
+    <p class="section-lead">
+      Я не сажаю компанию на свою постоянную поддержку. Цель каждого проекта - чтобы основатель управлял через цифры без меня после handover.
+    </p>
+
+    <div class="method">
+      <div class="step">
+        <div class="step-n mono">01 · DIAGNOSE</div>
+        <h3>Диагностика</h3>
+        <p>Интервью с CEO и ключевыми ролями, разбор финансов, карта процессов и узких мест. На выходе - один документ, по которому видно реальное состояние.</p>
+      </div>
+      <div class="step">
+        <div class="step-n mono">02 · ARCHITECT</div>
+        <h3>Архитектура</h3>
+        <p>Проектирую целевой управленческий слой: что измеряем, кто отвечает, в каком ритме принимаем решения. Согласовываю с CEO до начала внедрения.</p>
+      </div>
+      <div class="step">
+        <div class="step-n mono">03 · BUILD</div>
+        <h3>Внедрение</h3>
+        <p>Финмодель, KPI, CRM, процессы, регламенты, дашборды. Делаем не на бумаге, а до состояния «команда пользуется этим каждый день».</p>
+      </div>
+      <div class="step">
+        <div class="step-n mono">04 · HANDOVER</div>
+        <h3>Передача</h3>
+        <p>Обучаю CEO и команду пользоваться системой. Закрываю проект, когда основатель умеет планировать чистую прибыль с точностью 70-130%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ICP -->
+<section class="section alt">
+  <div class="container">
+    <div class="eyebrow">Соответствие</div>
+    <h2 class="section-h">Я работаю только с теми, кому это действительно подходит.</h2>
+    <p class="section-lead">
+      Жёсткий фильтр на входе - часть методологии. Без правильного типа основателя система не закрепится после моего ухода.
+    </p>
+
+    <div class="icp-grid">
+      <div class="icp-card yes">
+        <div class="head"><span class="ic">✓</span> Подходит</div>
+        <ul class="icp-list">
+          <li>Русскоязычный founder в Европе, оборот от €500K в год</li>
+          <li>Системно-мыслящий, готов работать через цифры</li>
+          <li>Лично вовлечён в компанию, есть стратегия и горизонт</li>
+          <li>Pre-seed / seed с командой 5-30 человек, нужен управленческий слой</li>
+          <li>Действующий бизнес, где «всё на собственнике» и пора это переломить</li>
+        </ul>
+      </div>
+      <div class="icp-card no">
+        <div class="head"><span class="ic">×</span> Не подходит</div>
+        <ul class="icp-list">
+          <li>Не интересуется управлением через цифры</li>
+          <li>Только владеет компанией, не вовлечён в принятие решений</li>
+          <li>Токсичен с командой или партнёрами</li>
+          <li>Ждёт «волшебной кнопки» вместо внедрения системы</li>
+          <li>Ищет перформанс-маркетинг, продуктовую разработку, найм или бухгалтерию</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="section-h">Часто задаваемые вопросы.</h2>
+    <p class="section-lead">
+      Если ваш вопрос не закрыт ниже - напишите на почту, я отвечу одним сообщением.
+    </p>
+
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>С какого размера компании имеет смысл начинать?</span>
+          <span class="toggle"></span>
+        </button>
+        <div class="faq-a">
+          <p>Нижняя граница - €500K годового оборота или активный pre-seed/seed-раунд с командой от 5 человек. Ниже этого порога внедрение управленческого слоя обычно преждевременно: компания ещё ищет product-market fit, а не структуру.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Сколько стоит работа?</span>
+          <span class="toggle"></span>
+        </button>
+        <div class="faq-a">
+          <p>Цена зависит от формата и сложности. Диагностика - фиксированная стоимость за 2 недели. Проект - индивидуально по итогам диагностики. Retainer - месячный фикс. Все цифры обсуждаем после первого разговора, без удивлений в счёте.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Чем это отличается от COO в штате?</span>
+          <span class="toggle"></span>
+        </button>
+        <div class="faq-a">
+          <p>COO управляет операцией каждый день. Я строю систему так, чтобы операцией можно было управлять либо силами CEO + команда, либо силами младшего операционного менеджера на гораздо меньшей зарплате. Часто проект окупается тем, что вы не нанимаете дорогого COO, который ещё и не приживётся в раннем стартапе.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Вы делаете учёт и работаете с первичкой?</span>
+          <span class="toggle"></span>
+        </button>
+        <div class="faq-a">
+          <p>Нет. Я ставлю методологию управленческого учёта: какие категории, какие отчёты, в каком ритме. Саму первичку и проводки делает бухгалтер или финансист клиента. Найм и операционные обязанности (HR, перформанс-маркетинг, продуктовая разработка) - тоже не моя зона.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Как порекомендовать вас знакомому founder-у? Что именно я ему продаю?</span>
+          <span class="toggle"></span>
+        </button>
+        <div class="faq-a">
+          <p>Если коротко - «Андрей строит управленческий слой между основателем и компанией за 1-3 месяца, чтобы CEO видел бизнес в цифрах и мог планировать прибыль, а не реагировать на пожары».</p>
+          <p>Кому это в точку: founder-led компания с оборотом от €500K, команда 5-30 человек, всё держится на собственнике, цифры есть, но не управляют, нужен оперативный слой на 1-3 месяца, не COO в штат. Первый шаг для них - двухнедельная диагностика, дальше решаем по фактам. Просто дайте мою почту: sychinnikov@gmail.com.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Работаете удалённо или нужны личные встречи?</span>
+          <span class="toggle"></span>
+        </button>
+        <div class="faq-a">
+          <p>База - Хихон, Испания. Большая часть работы удалённо: weekly 1:1 с CEO, разбор показателей, документы в общем рабочем пространстве. Личные встречи возможны точечно под ключевые сессии (стратегическая постановка, handover) при покрытии командировочных.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final">
+  <div class="container">
+    <h2>Начнём с диагностики. Через две недели вы&nbsp;будете видеть свою компанию в&nbsp;цифрах.</h2>
+    <p>Напишите на почту одно сообщение: чем занимается компания, оборот, где сейчас застряли. Я отвечу в течение рабочего дня и предложу формат первого разговора.</p>
+    <div class="cta-row">
+      <a href="mailto:sychinnikov@gmail.com?subject=Запрос%20на%20диагностику" class="btn btn-primary">
+        sychinnikov@gmail.com <span class="arrow">↗</span>
+      </a>
+      <a href="https://t.me/sychinnikov_a" class="btn btn-secondary" target="_blank" rel="noopener">
+        Telegram <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="cta-meta">
+      <div>
+        <div class="k">Email</div>
+        <div class="v"><a href="mailto:sychinnikov@gmail.com">sychinnikov@gmail.com</a></div>
+      </div>
+      <div>
+        <div class="k">Telegram</div>
+        <div class="v"><a href="https://t.me/sychinnikov_a" target="_blank" rel="noopener">@sychinnikov_a</a></div>
+      </div>
+      <div>
+        <div class="k">База</div>
+        <div class="v">Хихон, Испания · работа удалённо</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>© <span class="mono">2026</span> Андрей Сычинников · Operational Architect</div>
+    <div><a href="https://sychinnikov.com">sychinnikov.com</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var items = document.querySelectorAll('.faq-item');
+  items.forEach(function(it){
+    var q = it.querySelector('.faq-q');
+    q.addEventListener('click', function(){
+      var isOpen = it.classList.contains('open');
+      items.forEach(function(x){ x.classList.remove('open'); });
+      if (!isOpen) it.classList.add('open');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

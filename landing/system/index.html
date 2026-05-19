@@ -1,0 +1,1339 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Sychinnikov — Operating System для founder-led бизнеса</title>
+<meta name="description" content="Operating System для founder-led бизнеса. Финансы, KPI, команда, процессы — собрано в один связный контур, который работает без вас. Андрей Сычинников, operational consulting для русскоязычных founders в Европе." />
+<meta name="theme-color" content="#0f172a" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f8fafc;
+    --bg-mute:#f1f5f9;
+    --line:#e2e8f0;
+    --line-strong:#cbd5e1;
+    --ink:#0f172a;
+    --ink-2:#1e293b;
+    --ink-3:#334155;
+    --ink-4:#475569;
+    --ink-5:#64748b;
+    --ink-6:#94a3b8;
+    --accent:#2563eb;
+    --accent-2:#1e40af;
+    --accent-soft:#eff6ff;
+    --accent-ring:rgba(37,99,235,.18);
+    --ok:#059669;
+    --warn:#b45309;
+    --bad:#b91c1c;
+    --dark:#0f172a;
+    --dark-2:#111827;
+    --radius:14px;
+    --radius-sm:10px;
+    --radius-pill:100px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.04), 0 1px 1px rgba(15,23,42,.03);
+    --shadow:0 4px 24px -8px rgba(15,23,42,.10), 0 2px 6px -2px rgba(15,23,42,.06);
+    --shadow-lg:0 24px 60px -20px rgba(15,23,42,.25);
+    --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    font-feature-settings:"cv11","ss01","ss03";
+  }
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  img,svg{display:block;max-width:100%}
+  ::selection{background:#dbeafe;color:#0f172a}
+
+  /* ---------- containers ---------- */
+  .wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
+  .wrap-sm{width:100%;max-width:880px;margin:0 auto;padding:0 24px}
+  section{padding:96px 0;position:relative}
+  @media (max-width:760px){
+    section{padding:64px 0}
+    .wrap,.wrap-sm{padding:0 18px}
+  }
+
+  /* ---------- typography ---------- */
+  h1,h2,h3,h4{font-family:var(--sans);font-weight:700;letter-spacing:-0.02em;margin:0;color:var(--ink)}
+  h1{font-size:clamp(36px, 5.6vw, 64px);line-height:1.05;letter-spacing:-0.03em;font-weight:800}
+  h2{font-size:clamp(28px, 3.6vw, 44px);line-height:1.12;letter-spacing:-0.025em}
+  h3{font-size:clamp(20px, 2vw, 24px);line-height:1.25;font-weight:600;letter-spacing:-0.015em}
+  h4{font-size:16px;line-height:1.3;font-weight:600;letter-spacing:-0.01em}
+  p{margin:0;color:var(--ink-3)}
+  .lead{font-size:clamp(16px, 1.6vw, 19px);line-height:1.6;color:var(--ink-4);font-weight:400}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-5);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:100px;background:var(--accent);box-shadow:0 0 0 4px var(--accent-ring)}
+  .mono{font-family:var(--mono)}
+  .muted{color:var(--ink-5)}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.78);
+    backdrop-filter:saturate(180%) blur(12px);
+    -webkit-backdrop-filter:saturate(180%) blur(12px);
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .nav.scrolled{border-bottom-color:var(--line);background:rgba(255,255,255,.92)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-0.01em;font-size:15px}
+  .brand-mark{
+    width:28px;height:28px;border-radius:8px;
+    background:linear-gradient(135deg,#2563eb 0%, #1e40af 100%);
+    display:grid;place-items:center;color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;
+    box-shadow:0 1px 2px rgba(37,99,235,.3), inset 0 -1px 0 rgba(0,0,0,.15);
+  }
+  .brand-name{display:flex;align-items:center;gap:8px}
+  .brand-name .dot{width:4px;height:4px;border-radius:100px;background:var(--ink-6)}
+  .brand-name .sub{color:var(--ink-5);font-weight:500;font-size:14px}
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links a{color:var(--ink-4);font-size:14px;font-weight:500;transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:var(--radius-pill);font-size:13.5px;font-weight:500;transition:transform .15s, background .15s}
+  .nav-cta:hover{background:var(--ink-2);transform:translateY(-1px)}
+  @media (max-width:880px){
+    .nav-links a:not(.nav-cta){display:none}
+  }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 22px;border-radius:var(--radius-pill);
+    font-size:15px;font-weight:500;letter-spacing:-0.005em;
+    transition:transform .15s ease, background .15s, box-shadow .15s, border-color .15s;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:var(--ink);color:#fff;box-shadow:0 1px 2px rgba(15,23,42,.2), inset 0 -1px 0 rgba(0,0,0,.2)}
+  .btn-primary:hover{background:var(--ink-2);transform:translateY(-1px);box-shadow:0 6px 16px -4px rgba(15,23,42,.4)}
+  .btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong)}
+  .btn-secondary:hover{border-color:var(--ink-3);transform:translateY(-1px)}
+  .btn-accent{background:var(--accent);color:#fff;box-shadow:0 1px 2px rgba(37,99,235,.3), inset 0 -1px 0 rgba(0,0,0,.18)}
+  .btn-accent:hover{background:var(--accent-2);transform:translateY(-1px)}
+  .btn .arr{display:inline-block;transition:transform .15s}
+  .btn:hover .arr{transform:translate(2px,-2px)}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(60% 80% at 80% 0%, rgba(37,99,235,.10) 0%, rgba(37,99,235,0) 60%),
+      radial-gradient(50% 80% at 0% 20%, rgba(99,102,241,.07) 0%, rgba(99,102,241,0) 55%),
+      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    padding-top:72px;
+    padding-bottom:96px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(to right, rgba(15,23,42,.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15,23,42,.04) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
+  }
+  .hero-inner{position:relative;z-index:1}
+  .hero-eyebrow-row{display:flex;align-items:center;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);background:#fff;
+    border-radius:var(--radius-pill);padding:6px 12px;
+    font-size:12.5px;color:var(--ink-4);font-weight:500;
+    box-shadow:var(--shadow-sm);
+  }
+  .pill .dot{width:6px;height:6px;border-radius:100px;background:var(--ok)}
+  .pill-mono{font-family:var(--mono);font-size:11.5px;letter-spacing:0.02em;color:var(--ink-5)}
+  .hero h1{max-width:920px;margin-bottom:24px}
+  .hero h1 .accent{
+    background:linear-gradient(180deg, #2563eb 0%, #1e40af 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    position:relative;
+  }
+  .hero .lead{max-width:680px;margin-bottom:36px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:64px}
+  .hero-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;color:var(--ink-5);font-size:13.5px}
+  .hero-meta .sep{width:4px;height:4px;border-radius:100px;background:var(--line-strong)}
+
+  /* ---------- hero stats ---------- */
+  .hero-stats{
+    margin-top:64px;
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:0;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .hero-stats > div{padding:22px 26px;border-right:1px solid var(--line)}
+  .hero-stats > div:last-child{border-right:none}
+  .stat-label{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-5);margin-bottom:8px}
+  .stat-value{font-size:30px;font-weight:700;letter-spacing:-0.02em;color:var(--ink);font-feature-settings:"tnum";line-height:1.1}
+  .stat-value .unit{font-size:18px;color:var(--ink-5);font-weight:500;margin-left:2px}
+  .stat-sub{margin-top:6px;font-size:12.5px;color:var(--ink-5)}
+  @media (max-width:760px){
+    .hero-stats{grid-template-columns:repeat(2,1fr)}
+    .hero-stats > div{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .hero-stats > div:nth-child(2n){border-right:none}
+    .hero-stats > div:nth-last-child(-n+2){border-bottom:none}
+  }
+
+  /* ---------- pain chips ---------- */
+  .pains{padding:48px 0;background:#fff;border-bottom:1px solid var(--line)}
+  .pains-inner{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center}
+  .pains-label{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--ink-5);margin-right:8px;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);background:var(--bg-soft);
+    border-radius:var(--radius-pill);padding:7px 14px;
+    font-size:13.5px;color:var(--ink-3);font-weight:500;
+  }
+  .chip .dot{width:6px;height:6px;border-radius:100px;background:var(--bad);opacity:.7}
+
+  /* ---------- section header ---------- */
+  .sec-head{margin-bottom:48px;max-width:760px}
+  .sec-head .eyebrow{margin-bottom:16px}
+  .sec-head h2{margin-bottom:14px}
+  .sec-head p{font-size:17px;color:var(--ink-4);line-height:1.55}
+
+  /* ---------- the system (5 blocks) ---------- */
+  .system{background:var(--bg-soft);border-bottom:1px solid var(--line)}
+  .blocks{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:16px;
+  }
+  .block{
+    grid-column:span 2;
+    background:#fff;border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    position:relative;
+  }
+  .block:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+  .block.large{grid-column:span 3}
+  .block-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .block-num{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:var(--ink-5);text-transform:uppercase}
+  .block-icon{
+    width:36px;height:36px;border-radius:10px;
+    background:var(--accent-soft);color:var(--accent);
+    display:grid;place-items:center;
+    border:1px solid #dbeafe;
+  }
+  .block h3{margin-bottom:10px}
+  .block p{font-size:14.5px;color:var(--ink-4);margin-bottom:16px;line-height:1.55}
+  .block ul{margin:0;padding:0;list-style:none}
+  .block li{
+    font-size:13.5px;color:var(--ink-3);
+    padding:8px 0;border-top:1px dashed var(--line);
+    display:flex;align-items:flex-start;gap:10px;
+  }
+  .block li:first-child{border-top:1px solid var(--line);margin-top:4px}
+  .block li::before{
+    content:"";flex-shrink:0;width:6px;height:6px;border-radius:2px;
+    background:var(--accent);margin-top:8px;
+  }
+  @media (max-width:1000px){
+    .blocks{grid-template-columns:repeat(2, 1fr)}
+    .block, .block.large{grid-column:span 1}
+  }
+  @media (max-width:560px){
+    .blocks{grid-template-columns:1fr}
+    .block, .block.large{grid-column:span 1}
+  }
+
+  /* ---------- method (pipeline) ---------- */
+  .method{background:#fff;border-bottom:1px solid var(--line)}
+  .pipeline{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+    position:relative;
+  }
+  .step{
+    background:#fff;border:1px solid var(--line);
+    border-radius:var(--radius);padding:24px;
+    position:relative;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .step:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+  .step-num{
+    font-family:var(--mono);font-size:11px;color:var(--ink-5);
+    letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .step-num .n{
+    display:inline-grid;place-items:center;
+    width:22px;height:22px;border-radius:100px;
+    background:var(--ink);color:#fff;font-size:11px;font-weight:600;
+  }
+  .step h4{font-size:17px;font-weight:600;margin-bottom:8px}
+  .step p{font-size:14px;color:var(--ink-4);line-height:1.5;margin-bottom:14px}
+  .step-out{
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-5);
+    padding-top:12px;border-top:1px dashed var(--line);
+    line-height:1.5;
+  }
+  .step-out .k{color:var(--ink-5)}
+  .step-out .v{color:var(--ink-2);font-weight:500}
+  @media (max-width:900px){
+    .pipeline{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:520px){
+    .pipeline{grid-template-columns:1fr}
+  }
+
+  /* ---------- cases ---------- */
+  .cases{background:var(--bg-soft);border-bottom:1px solid var(--line)}
+  .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media (max-width:980px){.case-grid{grid-template-columns:1fr}}
+  .case{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;display:flex;flex-direction:column;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .case:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+  .case-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .case-tag{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--ink-5);
+  }
+  .case-flag{
+    font-family:var(--mono);font-size:11px;
+    background:var(--bg-mute);border:1px solid var(--line);
+    border-radius:var(--radius-pill);padding:4px 10px;color:var(--ink-4);
+  }
+  .case h3{margin-bottom:6px;font-size:20px}
+  .case-meta{font-size:13.5px;color:var(--ink-5);margin-bottom:20px}
+  .case-row{margin-bottom:16px}
+  .case-row:last-of-type{margin-bottom:0}
+  .case-row .label{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--ink-5);margin-bottom:6px;display:flex;align-items:center;gap:8px;
+  }
+  .case-row .label::before{content:"";width:8px;height:1px;background:var(--line-strong)}
+  .case-row.problem .label::before{background:#fca5a5}
+  .case-row.actions .label::before{background:#93c5fd}
+  .case-row.result .label::before{background:#86efac}
+  .case-row p{font-size:14px;color:var(--ink-3);line-height:1.55}
+  .case-row.result p{color:var(--ink-2);font-weight:500}
+
+  /* ---------- formats / pricing tiers ---------- */
+  .formats{background:#fff;border-bottom:1px solid var(--line)}
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:900px){.tiers{grid-template-columns:1fr}}
+  .tier{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px 28px;display:flex;flex-direction:column;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+    position:relative;
+  }
+  .tier:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+  .tier.featured{
+    border-color:var(--ink);
+    background:var(--ink);color:#fff;
+    box-shadow:var(--shadow-lg);
+  }
+  .tier.featured h3, .tier.featured .tier-name{color:#fff}
+  .tier.featured .tier-duration{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.16)}
+  .tier.featured p{color:#cbd5e1}
+  .tier.featured li{color:#cbd5e1;border-color:rgba(255,255,255,.1)}
+  .tier.featured li::before{background:#60a5fa}
+  .tier.featured .tier-for{color:#e2e8f0;border-color:rgba(255,255,255,.12)}
+  .tier-head{margin-bottom:24px}
+  .tier-name-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .tier-name{font-size:13px;font-family:var(--mono);letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-5);font-weight:500}
+  .tier-badge{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.04em;
+    background:#fbbf24;color:#78350f;
+    padding:3px 8px;border-radius:var(--radius-pill);font-weight:600;
+  }
+  .tier h3{font-size:24px;margin-bottom:8px}
+  .tier-duration{
+    display:inline-block;
+    font-family:var(--mono);font-size:12px;
+    background:var(--bg-mute);border:1px solid var(--line);
+    border-radius:var(--radius-pill);padding:4px 12px;color:var(--ink-3);
+  }
+  .tier > p{font-size:14.5px;line-height:1.55;color:var(--ink-4);margin-bottom:20px}
+  .tier ul{list-style:none;margin:0 0 24px;padding:0;flex-grow:1}
+  .tier li{
+    font-size:14px;color:var(--ink-3);padding:10px 0;
+    border-top:1px solid var(--line);
+    display:flex;align-items:flex-start;gap:10px;
+  }
+  .tier li::before{
+    content:"";flex-shrink:0;width:14px;height:14px;border-radius:100px;
+    background:var(--accent-soft);margin-top:3px;position:relative;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M3 7l3 3 5-6' stroke='%232563eb' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-position:center;background-repeat:no-repeat;
+  }
+  .tier.featured li::before{
+    background-color:rgba(96,165,250,.15);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M3 7l3 3 5-6' stroke='%2393c5fd' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  }
+  .tier-for{
+    font-size:13px;color:var(--ink-5);
+    padding-top:16px;border-top:1px dashed var(--line);
+    line-height:1.5;
+  }
+  .tier-for b{color:var(--ink-3);font-weight:600;display:block;margin-bottom:4px;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase}
+  .tier.featured .tier-for b{color:#cbd5e1}
+
+  /* ---------- icp grid ---------- */
+  .icp{background:var(--bg-soft);border-bottom:1px solid var(--line)}
+  .icp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:760px){.icp-grid{grid-template-columns:1fr}}
+  .icp-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;
+  }
+  .icp-card.yes{border-left:3px solid var(--ok)}
+  .icp-card.no{border-left:3px solid var(--bad)}
+  .icp-card h3{font-size:18px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .icp-card .marker{
+    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:0.06em;
+    padding:3px 8px;border-radius:var(--radius-pill);
+  }
+  .icp-card.yes .marker{background:#d1fae5;color:#065f46}
+  .icp-card.no .marker{background:#fee2e2;color:#991b1b}
+  .icp-card ul{list-style:none;margin:0;padding:0}
+  .icp-card li{
+    font-size:14px;color:var(--ink-3);
+    padding:11px 0;border-top:1px dashed var(--line);
+    display:flex;align-items:flex-start;gap:10px;line-height:1.5;
+  }
+  .icp-card li:first-child{border-top:none;padding-top:0}
+  .icp-card.yes li::before{content:"✓";color:var(--ok);font-weight:700;flex-shrink:0;font-family:var(--mono)}
+  .icp-card.no li::before{content:"×";color:var(--bad);font-weight:700;flex-shrink:0;font-family:var(--mono);font-size:18px;line-height:1}
+
+  /* ---------- credibility / stats ---------- */
+  .creds{background:var(--dark);color:#fff;border-bottom:1px solid #1e293b}
+  .creds .eyebrow{color:#94a3b8}
+  .creds h2{color:#fff}
+  .creds .lead{color:#cbd5e1}
+  .cred-grid{
+    margin-top:48px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid #1e293b;border-radius:var(--radius);overflow:hidden;
+    background:#0b1220;
+  }
+  .cred-grid > div{padding:28px;border-right:1px solid #1e293b}
+  .cred-grid > div:last-child{border-right:none}
+  .cred-label{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#64748b;margin-bottom:10px}
+  .cred-value{font-size:34px;font-weight:700;letter-spacing:-0.02em;color:#fff;font-feature-settings:"tnum";line-height:1.1}
+  .cred-value .unit{font-size:18px;color:#94a3b8;font-weight:500;margin-left:2px}
+  .cred-sub{margin-top:8px;font-size:13px;color:#94a3b8;line-height:1.5}
+  @media (max-width:900px){
+    .cred-grid{grid-template-columns:repeat(2,1fr)}
+    .cred-grid > div{border-right:1px solid #1e293b;border-bottom:1px solid #1e293b}
+    .cred-grid > div:nth-child(2n){border-right:none}
+    .cred-grid > div:nth-last-child(-n+2){border-bottom:none}
+  }
+
+  /* ---------- about strip ---------- */
+  .about{background:#fff;border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:start}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr;gap:32px}}
+  .about-card{
+    background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:var(--radius);padding:28px;position:sticky;top:96px;
+  }
+  .about-card h4{font-size:14px;color:var(--ink-5);font-family:var(--mono);letter-spacing:0.06em;text-transform:uppercase;font-weight:500;margin-bottom:18px}
+  .about-card dl{margin:0;display:grid;gap:14px}
+  .about-card .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:1px dashed var(--line)}
+  .about-card .row:last-child{border-bottom:none;padding-bottom:0}
+  .about-card dt{font-family:var(--mono);font-size:11.5px;color:var(--ink-5);letter-spacing:0.04em;text-transform:uppercase;flex-shrink:0}
+  .about-card dd{margin:0;font-size:14px;color:var(--ink-2);font-weight:500;text-align:right}
+  .about-body p{font-size:16px;line-height:1.65;color:var(--ink-3);margin-bottom:18px}
+  .about-body p:last-child{margin-bottom:0}
+  .about-body strong{color:var(--ink-2);font-weight:600}
+  .about-quote{
+    border-left:3px solid var(--accent);padding:14px 0 14px 20px;
+    font-size:16px;color:var(--ink-2);line-height:1.55;font-weight:500;
+    margin:24px 0;
+  }
+  .about-quote .src{
+    display:block;margin-top:10px;font-size:12px;color:var(--ink-5);font-family:var(--mono);
+    letter-spacing:0.04em;font-weight:400;text-transform:uppercase;
+  }
+
+  /* ---------- faq ---------- */
+  .faq{background:var(--bg-soft);border-bottom:1px solid var(--line)}
+  .faq-list{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+  .faq-item{border-top:1px solid var(--line)}
+  .faq-item:first-child{border-top:none}
+  .faq-q{
+    width:100%;text-align:left;padding:22px 26px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    font-size:16px;font-weight:500;color:var(--ink);
+    transition:background .15s;
+  }
+  .faq-q:hover{background:var(--bg-soft)}
+  .faq-q .icon{
+    flex-shrink:0;width:24px;height:24px;border-radius:100px;
+    border:1px solid var(--line-strong);
+    display:grid;place-items:center;color:var(--ink-4);
+    transition:transform .25s ease, background .15s, border-color .15s, color .15s;
+    font-family:var(--mono);font-size:14px;
+  }
+  .faq-item[aria-expanded="true"] .faq-q .icon{
+    transform:rotate(45deg);background:var(--ink);border-color:var(--ink);color:#fff;
+  }
+  .faq-a{
+    max-height:0;overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .faq-a-inner{padding:0 26px 24px;font-size:15px;line-height:1.65;color:var(--ink-4)}
+
+  /* ---------- cta final ---------- */
+  .cta-final{
+    background:var(--dark);color:#fff;
+    position:relative;overflow:hidden;
+    border-bottom:1px solid #1e293b;
+  }
+  .cta-final::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(50% 70% at 80% 20%, rgba(37,99,235,.28) 0%, rgba(37,99,235,0) 60%),
+      radial-gradient(40% 60% at 10% 80%, rgba(99,102,241,.18) 0%, rgba(99,102,241,0) 55%);
+    pointer-events:none;
+  }
+  .cta-final::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 80%);
+    -webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 80%);
+  }
+  .cta-final .wrap{position:relative;z-index:1}
+  .cta-final h2{color:#fff;max-width:760px;margin-bottom:18px}
+  .cta-final .lead{color:#cbd5e1;max-width:600px;margin-bottom:32px}
+  .cta-final .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.2)}
+  .cta-final .btn-secondary:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+  .cta-final .eyebrow{color:#94a3b8}
+  .cta-final .eyebrow::before{background:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.2)}
+  .cta-channels{
+    margin-top:48px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:720px;
+  }
+  @media (max-width:680px){.cta-channels{grid-template-columns:1fr}}
+  .channel{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+    border-radius:var(--radius);padding:20px 22px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    transition:background .15s, border-color .15s, transform .15s;
+  }
+  .channel:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);transform:translateY(-1px)}
+  .channel-l{display:flex;align-items:center;gap:14px}
+  .channel-ico{
+    width:36px;height:36px;border-radius:10px;
+    background:rgba(96,165,250,.15);
+    display:grid;place-items:center;color:#93c5fd;
+    border:1px solid rgba(96,165,250,.2);
+  }
+  .channel-text .k{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:#94a3b8;text-transform:uppercase}
+  .channel-text .v{font-size:15px;color:#fff;font-weight:500;margin-top:2px}
+  .channel .arr{color:#94a3b8;font-size:18px;transition:transform .15s, color .15s}
+  .channel:hover .arr{color:#fff;transform:translate(2px,-2px)}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--dark);color:#94a3b8;padding:36px 0;font-size:13px}
+  .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .foot-l{display:flex;align-items:center;gap:12px}
+  .foot-l .brand-mark{width:24px;height:24px;font-size:11px;border-radius:6px}
+  .foot-l span{color:#cbd5e1;font-weight:500}
+  .foot-r{display:flex;gap:24px;font-family:var(--mono);font-size:12px;letter-spacing:0.04em}
+  .foot-r a{color:#94a3b8;transition:color .15s}
+  .foot-r a:hover{color:#fff}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    *{animation-duration:0.001s !important;transition-duration:0.001s !important}
+  }
+
+  /* ---------- subtle in-line icons ---------- */
+  .ico{display:inline-block;line-height:0}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Sychinnikov OS">
+      <span class="brand-mark">S</span>
+      <span class="brand-name">
+        <span>Sychinnikov</span>
+        <span class="dot"></span>
+        <span class="sub mono">OS</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#system">System</a>
+      <a href="#method">Method</a>
+      <a href="#cases">Cases</a>
+      <a href="#formats">Formats</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="mailto:sychinnikov@gmail.com">Связаться <span class="arr">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow-row reveal">
+      <span class="pill"><span class="dot"></span><span>Принимаю проекты — Q2/Q3 2026</span></span>
+      <span class="pill"><span class="pill-mono">v.2026 · pre-seed → Series A</span></span>
+    </div>
+
+    <h1 class="reveal">
+      Operating System<br/>
+      для <span class="accent">founder-led</span> бизнеса.
+    </h1>
+    <p class="lead reveal">
+      Финансы, KPI, команда, процессы — собрано в один связный контур, который работает без вас. Не консалтинг и не операционка. Архитектура, которую можно увидеть, измерить и передать.
+    </p>
+
+    <div class="hero-ctas reveal">
+      <a class="btn btn-primary" href="mailto:sychinnikov@gmail.com?subject=Diagnostic%20—%20запрос%20на%20аудит">
+        Запросить Diagnostic <span class="arr">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="#system">
+        Что внутри системы
+      </a>
+    </div>
+
+    <div class="hero-meta reveal">
+      <span>Базируюсь в Хихоне, Испания</span>
+      <span class="sep"></span>
+      <span>Работаю на русском и английском</span>
+      <span class="sep"></span>
+      <span>Founders pre-seed → Series A</span>
+    </div>
+
+    <div class="hero-stats reveal" aria-label="Ключевые показатели">
+      <div>
+        <div class="stat-label">Опыт в operations</div>
+        <div class="stat-value" data-count="9">0<span class="unit">лет</span></div>
+        <div class="stat-sub">e-commerce → consulting</div>
+      </div>
+      <div>
+        <div class="stat-label">Активные клиенты</div>
+        <div class="stat-value" data-count="3">0</div>
+        <div class="stat-sub">SPA · B2B-экспорт · стартап</div>
+      </div>
+      <div>
+        <div class="stat-label">Под управлением</div>
+        <div class="stat-value" data-count="32">0<span class="unit">млн ₽</span></div>
+        <div class="stat-sub">инвестиций клиента</div>
+      </div>
+      <div>
+        <div class="stat-label">Юрисдикции</div>
+        <div class="stat-value" data-count="4">0</div>
+        <div class="stat-sub">ЕС · UK · США · СНГ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PAIN CHIPS ==================== -->
+<section class="pains" aria-label="Симптомы">
+  <div class="wrap">
+    <div class="pains-inner">
+      <span class="pains-label">SYMPTOMS</span>
+      <span class="chip"><span class="dot"></span>выручка растёт — прибыль нет</span>
+      <span class="chip"><span class="dot"></span>всё замыкается на founder-а</span>
+      <span class="chip"><span class="dot"></span>не видно деньги</span>
+      <span class="chip"><span class="dot"></span>KPI декоративные</span>
+      <span class="chip"><span class="dot"></span>команда без приоритетов</span>
+      <span class="chip"><span class="dot"></span>CRM как блокнот</span>
+      <span class="chip"><span class="dot"></span>выход в новый рынок буксует</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THE SYSTEM ==================== -->
+<section class="system" id="system">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The System · 5 blocks</span>
+      <h2>Пять блоков, собранных под ваш бизнес как один контур.</h2>
+      <p>Метафора простая: на компьютере OS работает в фоне, вы её не замечаете. В бизнесе то же самое — пока она есть. Когда нет — каждое решение требует ручного вмешательства, и весь день уходит на это.</p>
+    </div>
+
+    <div class="blocks">
+      <article class="block large reveal">
+        <div class="block-head">
+          <span class="block-num">01 / Finance Block</span>
+          <span class="block-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-4v4"/></svg>
+          </span>
+        </div>
+        <h3>Деньги. Прозрачные и управляемые.</h3>
+        <p>Финансовая модель, которая показывает где утечки и где экономика держится.</p>
+        <ul>
+          <li>ДДС — отчёт о движении денег по неделям</li>
+          <li>ОПиУ — отчёт о прибылях и убытках по направлениям</li>
+          <li>Платёжный календарь и кассовые разрывы за 4 недели вперёд</li>
+          <li>Управленческий баланс и юнит-экономика</li>
+        </ul>
+      </article>
+
+      <article class="block reveal">
+        <div class="block-head">
+          <span class="block-num">02 / KPI Block</span>
+          <span class="block-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="4" height="8" rx="1"/><rect x="10" y="8" width="4" height="13" rx="1"/><rect x="17" y="4" width="4" height="17" rx="1"/></svg>
+          </span>
+        </div>
+        <h3>Метрики, которые двигают деньги.</h3>
+        <p>Не дашборд ради дашборда — связка KPI ↔ финрезультат.</p>
+        <ul>
+          <li>Метрики по ролям, не по отделам</li>
+          <li>Дашборды управления</li>
+          <li>Связь KPI с прибылью</li>
+        </ul>
+      </article>
+
+      <article class="block reveal">
+        <div class="block-head">
+          <span class="block-num">03 / Process Block</span>
+          <span class="block-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 6h8M6 8v8M18 8v8M8 18h8"/></svg>
+          </span>
+        </div>
+        <h3>Процессы. Без бюрократии.</h3>
+        <p>Регламент — там, где он сокращает время. Не там, где модно.</p>
+        <ul>
+          <li>Регламенты ключевых операций</li>
+          <li>CRM и воронки B2B-продаж</li>
+          <li>Архитектура follow-up</li>
+        </ul>
+      </article>
+
+      <article class="block reveal">
+        <div class="block-head">
+          <span class="block-num">04 / Team Block</span>
+          <span class="block-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M2.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M14 17c.5-2 2-3 3.5-3s3 1 3.5 3"/></svg>
+          </span>
+        </div>
+        <h3>Команда. Структура и решения.</h3>
+        <p>Чтобы вопросы перестали замыкаться на founder-е.</p>
+        <ul>
+          <li>Структура и зоны ответственности</li>
+          <li>Делегирование решений, не задач</li>
+          <li>Мотивация, привязанная к KPI</li>
+        </ul>
+      </article>
+
+      <article class="block large reveal">
+        <div class="block-head">
+          <span class="block-num">05 / Growth Block</span>
+          <span class="block-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 10l7-7 7 7"/><path d="M5 17h14"/></svg>
+          </span>
+        </div>
+        <h3>Рост. Логика, а не интуиция.</h3>
+        <p>Как масштабироваться без потери управляемости и без сжигания денег.</p>
+        <ul>
+          <li>Инвестиционная логика, готовность к раунду</li>
+          <li>Партнёрские экосистемы и каналы</li>
+          <li>Масштабирование модели и международный выход</li>
+          <li>Структура подготовки к найму на ключевые роли</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== METHOD / PIPELINE ==================== -->
+<section class="method" id="method">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Method · 4 steps</span>
+      <h2>Один цикл. Четыре шага. Передача в руки команды.</h2>
+      <p>Я не делаю «вечный консалтинг». Сценарий — войти, собрать систему, передать. Если вы не можете показать систему новому сотруднику за час — она не сделана.</p>
+    </div>
+
+    <div class="pipeline">
+      <article class="step reveal">
+        <div class="step-num"><span class="n">1</span> Diagnose</div>
+        <h4>Где утечки и почему</h4>
+        <p>Аудит финансов, команды, процессов. Карта ограничений роста. Без догадок — только цифры.</p>
+        <div class="step-out">
+          <span class="k">→ output:</span> <span class="v">карта ограничений + финсрез</span>
+        </div>
+      </article>
+      <article class="step reveal">
+        <div class="step-num"><span class="n">2</span> Architect</div>
+        <h4>Как должно быть собрано</h4>
+        <p>Архитектура 5 блоков под вашу модель. Согласование с CEO. Приоритеты по влиянию на деньги.</p>
+        <div class="step-out">
+          <span class="k">→ output:</span> <span class="v">blueprint системы + roadmap</span>
+        </div>
+      </article>
+      <article class="step reveal">
+        <div class="step-num"><span class="n">3</span> Build</div>
+        <h4>Собираем по блокам</h4>
+        <p>Финмодель, KPI, CRM, регламенты, дашборды. Включаем в работу пошагово, не «большим взрывом».</p>
+        <div class="step-out">
+          <span class="k">→ output:</span> <span class="v">работающие артефакты + команда внутри</span>
+        </div>
+      </article>
+      <article class="step reveal">
+        <div class="step-num"><span class="n">4</span> Handover</div>
+        <h4>Передача команде</h4>
+        <p>Команда умеет вести систему. Founder возвращается в стратега. Возможен advisor-tier weekly 1:1.</p>
+        <div class="step-out">
+          <span class="k">→ output:</span> <span class="v">независимость от меня</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CASES ==================== -->
+<section class="cases" id="cases">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Selected work · 3 cases</span>
+      <h2>Что я уже собирал в реальных бизнесах.</h2>
+      <p>Три проекта в трёх юрисдикциях. Разные модели, одно ядро — собрать управляемую систему там, где была интуиция и героизм founder-а.</p>
+    </div>
+
+    <div class="case-grid">
+      <article class="case reveal">
+        <div class="case-head">
+          <span class="case-tag">Case 01 · SPA / Россия</span>
+          <span class="case-flag">RU</span>
+        </div>
+        <h3>Silver Thai</h3>
+        <div class="case-meta mono">32+ млн ₽ инвестиций · 7 локаций модели</div>
+
+        <div class="case-row problem">
+          <div class="label">Problem</div>
+          <p>Выручка росла — прибыль нет. Экономика мастер-часа — отрицательная. Управленческий учёт искажал реальность.</p>
+        </div>
+        <div class="case-row actions">
+          <div class="label">Actions</div>
+          <p>Управленческая диагностика. Перестройка финансовой модели с нуля. KPI-система по ролям. Юнит-экономика по локациям.</p>
+        </div>
+        <div class="case-row result">
+          <div class="label">Result</div>
+          <p>Выявлены реальные ограничения роста. Построена управляемая финансовая архитектура. Дорожная карта к прибыльной модели.</p>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div class="case-head">
+          <span class="case-tag">Case 02 · B2B-экспорт</span>
+          <span class="case-flag">LV · ЕС/US</span>
+        </div>
+        <h3>Fishok</h3>
+        <div class="case-meta mono">B2B зоокорм · Iberzoo + Orlando · ЕС / США</div>
+
+        <div class="case-row problem">
+          <div class="label">Problem</div>
+          <p>Сильное производство и полное отсутствие системы международных продаж. CRM существовал, но не был инструментом управления.</p>
+        </div>
+        <div class="case-row actions">
+          <div class="label">Actions</div>
+          <p>Трансформация Pipedrive под экспортную логику. Архитектура B2B-воронки. Система квалификации лидов и follow-up. Подготовка к выставкам Iberzoo и Orlando.</p>
+        </div>
+        <div class="case-row result">
+          <div class="label">Result</div>
+          <p>Построена масштабируемая экспортная коммерческая архитектура. Команда работает в системе, а не в почте.</p>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div class="case-head">
+          <span class="case-tag">Case 03 · Startup / ЕС</span>
+          <span class="case-flag">ES · ЕС</span>
+        </div>
+        <h3>Octo Relocate</h3>
+        <div class="case-meta mono">Стартап-резидентство · партнёрский канал</div>
+
+        <div class="case-row problem">
+          <div class="label">Problem</div>
+          <p>Нет системной модели привлечения. Продукт читался как «визовая услуга» — конверсия низкая, ценность непрозрачна.</p>
+        </div>
+        <div class="case-row actions">
+          <div class="label">Actions</div>
+          <p>Архитектура партнёрской экосистемы из 6 типов партнёров. Перепаковка продукта. Единый коммуникационный стандарт. Логика передачи лидов.</p>
+        </div>
+        <div class="case-row result">
+          <div class="label">Result</div>
+          <p>Получена масштабируемая модель партнёрского канала с понятной воронкой и единым языком коммуникации.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FORMATS (PRICING TIERS) ==================== -->
+<section class="formats" id="formats">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Formats · 3 tiers</span>
+      <h2>Три формата работы. Подбираются под состояние бизнеса.</h2>
+      <p>Все три — один и тот же набор инструментов, разная глубина и длительность присутствия. Переход между tier-ами возможен в любую сторону.</p>
+    </div>
+
+    <div class="tiers">
+      <article class="tier reveal">
+        <div class="tier-head">
+          <div class="tier-name-row">
+            <span class="tier-name">Tier 01</span>
+          </div>
+          <h3>Diagnostic</h3>
+          <span class="tier-duration">2 недели</span>
+        </div>
+        <p>Быстрый срез: где деньги, где команда, где ограничения. Решение «лечить или не лечить» — на основании фактов, а не ощущений.</p>
+        <ul>
+          <li>Операционный аудит по 5 блокам</li>
+          <li>Карта ограничений роста</li>
+          <li>Финансовый срез: ДДС + юнит-экономика</li>
+          <li>План действий на 90 дней</li>
+        </ul>
+        <div class="tier-for">
+          <b>Best for</b>
+          Не понимаете где утечка денег или почему команда не тянет. Хотите факты до принятия решения.
+        </div>
+      </article>
+
+      <article class="tier featured reveal">
+        <div class="tier-head">
+          <div class="tier-name-row">
+            <span class="tier-name">Tier 02</span>
+            <span class="tier-badge">most chosen</span>
+          </div>
+          <h3>Build</h3>
+          <span class="tier-duration">1–3 месяца</span>
+        </div>
+        <p>Архитектура и сборка работающей системы. Я внутри проекта — но рядом с командой, а не вместо неё. На выходе — артефакты, которыми пользуются без меня.</p>
+        <ul>
+          <li>Финансовая модель и платёжный календарь</li>
+          <li>KPI-система по ролям + дашборды</li>
+          <li>CRM, воронка, регламенты ключевых операций</li>
+          <li>Команда обучена вести систему</li>
+        </ul>
+        <div class="tier-for">
+          <b>Best for</b>
+          Хотите выйти из операционки и навести порядок в финансах, команде и процессах.
+        </div>
+      </article>
+
+      <article class="tier reveal">
+        <div class="tier-head">
+          <div class="tier-name-row">
+            <span class="tier-name">Tier 03</span>
+          </div>
+          <h3>Operate</h3>
+          <span class="tier-duration">от 3 месяцев</span>
+        </div>
+        <p>COO на аутсорсе. Стратегия и исполнение, weekly 1:1 с CEO. Без оформления в штат и без перехода в операционный шум.</p>
+        <ul>
+          <li>Сильный операционный партнёр без найма</li>
+          <li>Стратегия + исполнение в одном лице</li>
+          <li>Weekly 1:1 с CEO + еженедельный срез по блокам</li>
+          <li>Подготовка к раунду / международному выходу</li>
+        </ul>
+        <div class="tier-for">
+          <b>Best for</b>
+          Нужен сильный операционный партнёр, а штатного COO рано брать.
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ICP ==================== -->
+<section class="icp">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Fit check · who is this for</span>
+      <h2>Подхожу не всем. И это сразу честно.</h2>
+      <p>Чем точнее совпадение — тем быстрее результат и тем меньше потерь времени с обеих сторон.</p>
+    </div>
+
+    <div class="icp-grid">
+      <div class="icp-card yes reveal">
+        <h3><span class="marker">FIT</span> Подходит, если</h3>
+        <ul>
+          <li>Русскоязычный founder в Европе, оборот от €500K/год</li>
+          <li>Стадия pre-seed / seed / Series A</li>
+          <li>Системно мыслите, готовы работать через цифры</li>
+          <li>Хотите вернуться в стратега, а не оставаться операционистом</li>
+          <li>Готовы дать доступ к финансам и команде</li>
+        </ul>
+      </div>
+      <div class="icp-card no reveal">
+        <h3><span class="marker">NOT FIT</span> Не подходит, если</h3>
+        <ul>
+          <li>Оборот меньше €500K — экономика не сходится с обеих сторон</li>
+          <li>Не интересуетесь управлением через метрики</li>
+          <li>Владеете, но не вовлечены — без CEO внутри системы не работает</li>
+          <li>Нужен бухучёт, перфоманс-маркетинг, продуктовая разработка или найм — это не я</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT STRIP ==================== -->
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">About · Андрей Сычинников</span>
+      <h2>Я не теоретик. Я строил это сам — потом перенёс в чужие бизнесы.</h2>
+    </div>
+
+    <div class="about-grid">
+      <aside class="about-card reveal">
+        <h4>Profile</h4>
+        <dl>
+          <div class="row"><dt>Age</dt><dd>33</dd></div>
+          <div class="row"><dt>Base</dt><dd>Хихон, Испания</dd></div>
+          <div class="row"><dt>Стадия клиента</dt><dd>pre-seed → Series A</dd></div>
+          <div class="row"><dt>Языки</dt><dd>RU · EN</dd></div>
+          <div class="row"><dt>Формат</dt><dd>remote · weekly 1:1</dd></div>
+          <div class="row"><dt>Юрисдикции</dt><dd>ЕС · UK · US · СНГ</dd></div>
+        </dl>
+      </aside>
+      <div class="about-body reveal">
+        <p>Я начинал электрослесарем в Метрострое в Петербурге. Дальше — собственный e-commerce-бренд умных товаров для дома на WB и Ozon, который вышел на прибыль <strong>3+ млн ₽/мес</strong>. Я строил эту систему с нуля: финмодель, юнит-экономику, команду, процессы — и понял, что это можно повторить в любом бизнесе с похожей конфигурацией.</p>
+        <p>Сейчас я делаю это в формате operational consulting: вхожу в бизнес, собираю под него <strong>Operating System</strong> из 5 блоков и передаю команде. Параллельно — формат advisor-tier weekly 1:1, где founder получает место, где можно подумать без шума.</p>
+        <div class="about-quote">
+          Точка моего гения — это <strong>strategic advisor</strong> рядом с CEO. Не консультант с презентацией и не операционщик с тысячей задач. Тот, кто переводит хаос в последовательность действий и возвращает founder-у владение задачей.
+          <span class="src">— self-positioning · 2026</span>
+        </div>
+        <p>Моя задача — не быть нужным вечно. Моя задача — собрать систему так, чтобы вы могли передать её команде и вернуться к стратегии. Дальше я остаюсь по запросу, не по умолчанию.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CREDIBILITY / STATS ==================== -->
+<section class="creds">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Credibility · numbers</span>
+      <h2>Цифры, по которым меня можно проверить.</h2>
+      <p class="lead">Я не показываю чужие логотипы и не клянусь именем. Только то, что прошло через мои руки лично.</p>
+    </div>
+    <div class="cred-grid reveal">
+      <div>
+        <div class="cred-label">Прибыль собственного e-commerce</div>
+        <div class="cred-value" data-count="3" data-suffix="+">0<span class="unit">млн ₽/мес</span></div>
+        <div class="cred-sub">бренд умных товаров для дома · WB/Ozon</div>
+      </div>
+      <div>
+        <div class="cred-label">Инвестиций под управлением (Silver Thai)</div>
+        <div class="cred-value" data-count="32" data-suffix="+">0<span class="unit">млн ₽</span></div>
+        <div class="cred-sub">диагностика + финмодель + KPI</div>
+      </div>
+      <div>
+        <div class="cred-label">Типов партнёров в архитектуре (Octo)</div>
+        <div class="cred-value" data-count="6">0</div>
+        <div class="cred-sub">собранная партнёрская экосистема</div>
+      </div>
+      <div>
+        <div class="cred-label">Лет в operations</div>
+        <div class="cred-value" data-count="9">0</div>
+        <div class="cred-sub">e-commerce → operational consulting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="faq" id="faq">
+  <div class="wrap-sm">
+    <div class="sec-head reveal">
+      <span class="eyebrow">FAQ · что обычно спрашивают</span>
+      <h2>Короткие ответы на честные вопросы.</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-q" type="button">
+          <span>Чем это отличается от обычного консалтинга?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Консультант приходит с презентацией и уходит. Я остаюсь внутри проекта на этапе сборки и довожу систему до того состояния, когда команда умеет её вести. Если после моего ухода всё разваливается — работа не сделана.
+        </div></div>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-q" type="button">
+          <span>Вы заходите в операционку?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Нет. Я не выполняю чужие операционные задачи. Я собираю систему рядом с CEO и с командой внутри проекта. Если внутри нет минимальной команды — это первый разговор: либо нанимаем, либо мы не подходим друг другу.
+        </div></div>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-q" type="button">
+          <span>Сколько это стоит?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Цена зависит от формата и состояния бизнеса. Diagnostic — фиксированная стоимость за 2 недели. Build — фикс на 1–3 месяца. Operate — месячный retainer. Конкретные цифры обсуждаем на установочном звонке после первичной квалификации.
+        </div></div>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-q" type="button">
+          <span>Что я получаю на выходе физически?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Артефакты: финансовая модель (ДДС/ОПиУ/баланс), KPI-карта по ролям, настроенный CRM, регламенты ключевых операций, дашборды управления. И команда, которая всё это ведёт без меня.
+        </div></div>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-q" type="button">
+          <span>Работаете ли с не-русскоязычными founders?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Да, на английском. Но мой основной фокус — русскоязычные founders в Европе, потому что я лучше всего понимаю их контекст: пересборка после переезда, юрисдикции, менталитет команды.
+        </div></div>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-q" type="button">
+          <span>С чего начать, если интересно?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Письмо на sychinnikov@gmail.com или Telegram @sychinnikov_a. В 2–3 предложениях: что за бизнес, оборот, главный болевой узел. Дальше — 30-минутный звонок-квалификация. Если подходим друг другу — начинаем с Diagnostic.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA FINAL ==================== -->
+<section class="cta-final" id="contact">
+  <div class="wrap">
+    <span class="eyebrow reveal">Next step</span>
+    <h2 class="reveal">Если ваш бизнес держится на вас — это тема для разговора.</h2>
+    <p class="lead reveal">Без долгих форм и квиза. Напишите в 2–3 предложениях: что за бизнес, оборот, главный болевой узел. Дальше — 30-минутный звонок и решение, начинаем ли с Diagnostic.</p>
+    <div class="hero-ctas reveal" style="margin-top:0">
+      <a class="btn btn-accent" href="mailto:sychinnikov@gmail.com?subject=Diagnostic%20—%20запрос%20на%20аудит">
+        Написать на email <span class="arr">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="https://t.me/sychinnikov_a" target="_blank" rel="noopener">
+        Telegram
+      </a>
+    </div>
+
+    <div class="cta-channels reveal">
+      <a class="channel" href="mailto:sychinnikov@gmail.com">
+        <div class="channel-l">
+          <div class="channel-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </div>
+          <div class="channel-text">
+            <div class="k">Email — primary</div>
+            <div class="v">sychinnikov@gmail.com</div>
+          </div>
+        </div>
+        <span class="arr">↗</span>
+      </a>
+      <a class="channel" href="https://t.me/sychinnikov_a" target="_blank" rel="noopener">
+        <div class="channel-l">
+          <div class="channel-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5L2.5 12.5l6 2 2 6L21 5z"/><path d="M8.5 14.5L21 5"/></svg>
+          </div>
+          <div class="channel-text">
+            <div class="k">Telegram — secondary</div>
+            <div class="v">@sychinnikov_a</div>
+          </div>
+        </div>
+        <span class="arr">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="wrap foot">
+    <div class="foot-l">
+      <span class="brand-mark">S</span>
+      <span>Sychinnikov</span>
+      <span style="opacity:.6">·</span>
+      <span class="mono" style="font-size:12px;letter-spacing:0.04em">Operating System for founder-led business</span>
+    </div>
+    <div class="foot-r">
+      <a href="mailto:sychinnikov@gmail.com">EMAIL</a>
+      <a href="https://t.me/sychinnikov_a" target="_blank" rel="noopener">TELEGRAM</a>
+      <span style="opacity:.7">© 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- nav scroll state ----
+  var nav = document.getElementById('nav');
+  function onScroll(){
+    if(window.scrollY > 8){ nav.classList.add('scrolled'); }
+    else{ nav.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // ---- reveal on scroll ----
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  if(prefersReduced || !('IntersectionObserver' in window)){
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  // ---- animated counters ----
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count')) || 0;
+    var suffix = el.getAttribute('data-suffix') || '';
+    var unitEl = el.querySelector('.unit');
+    var unitHtml = unitEl ? unitEl.outerHTML : '';
+    var duration = 1100;
+    var start = performance.now();
+    function tick(now){
+      var p = Math.min((now - start) / duration, 1);
+      // easeOutCubic
+      var eased = 1 - Math.pow(1 - p, 3);
+      var val = Math.round(target * eased);
+      el.firstChild.nodeValue = val + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+      else { el.firstChild.nodeValue = target + suffix; }
+    }
+    if(unitEl){
+      // restructure so that first child is text node
+      el.innerHTML = '0' + suffix + unitHtml;
+    } else {
+      el.textContent = '0' + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+  var counters = document.querySelectorAll('[data-count]');
+  if(prefersReduced || !('IntersectionObserver' in window)){
+    counters.forEach(function(el){
+      var t = el.getAttribute('data-count');
+      var s = el.getAttribute('data-suffix') || '';
+      var unitEl = el.querySelector('.unit');
+      if(unitEl){ el.innerHTML = t + s + unitEl.outerHTML; }
+      else { el.textContent = t + s; }
+    });
+  } else {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          animateCount(e.target);
+          cio.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.4});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+
+  // ---- FAQ accordion ----
+  var items = document.querySelectorAll('.faq-item');
+  items.forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var open = item.getAttribute('aria-expanded') === 'true';
+      // close others
+      items.forEach(function(other){
+        if(other !== item){
+          other.setAttribute('aria-expanded','false');
+          var oa = other.querySelector('.faq-a');
+          oa.style.maxHeight = '0px';
+        }
+      });
+      if(open){
+        item.setAttribute('aria-expanded','false');
+        a.style.maxHeight = '0px';
+      } else {
+        item.setAttribute('aria-expanded','true');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ---- smooth scroll fix for sticky nav ----
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var href = a.getAttribute('href');
+      if(href.length > 1){
+        var el = document.querySelector(href);
+        if(el){
+          e.preventDefault();
+          var top = el.getBoundingClientRect().top + window.scrollY - 64;
+          window.scrollTo({top: top, behavior: 'smooth'});
+          history.replaceState(null, '', href);
+        }
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
