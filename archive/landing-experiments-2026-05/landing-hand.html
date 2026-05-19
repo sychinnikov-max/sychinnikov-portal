@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Андрей Сычинников - Hand of the King для founder-CEO</title>
+<meta name="description" content="Я сажусь рядом с тобой и помогаю принимать решения, которые меняют траекторию компании. Не консультант, не коуч - второй пилот в кабине.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0d1310;
+  --bg-soft: #121a16;
+  --bg-elev: #161f1a;
+  --cream: #f0ece0;
+  --cream-dim: #c8c3b3;
+  --cream-mute: #8a8678;
+  --bronze: #b8955a;
+  --bronze-bright: #c9a668;
+  --bronze-deep: #8a6e3f;
+  --line: rgba(184, 149, 90, 0.18);
+  --line-soft: rgba(240, 236, 224, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle noise overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Vignette */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+}
+
+main {
+  position: relative;
+  z-index: 3;
+}
+
+::selection {
+  background: var(--bronze);
+  color: var(--bg);
+}
+
+/* ============ TYPOGRAPHY ============ */
+
+.serif {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.italic {
+  font-style: italic;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--cream);
+}
+
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  display: inline-block;
+}
+
+.eyebrow::before {
+  content: "—";
+  margin-right: 14px;
+  color: var(--bronze);
+}
+
+/* ============ LAYOUT ============ */
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.narrow {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+section {
+  padding: 140px 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  section { padding: 90px 0; }
+  .container, .narrow { padding: 0 24px; }
+  body { font-size: 16px; }
+}
+
+/* ============ NAV ============ */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+nav.scrolled {
+  background: rgba(13, 19, 16, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line-soft);
+  padding: 16px 40px;
+}
+
+nav > * { pointer-events: auto; }
+
+.nav-mark {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.nav-mark span {
+  color: var(--bronze);
+}
+
+.nav-cta {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-cta:hover {
+  color: var(--bronze-bright);
+  border-color: var(--bronze-bright);
+}
+
+@media (max-width: 600px) {
+  nav { padding: 20px 24px; }
+  nav.scrolled { padding: 14px 24px; }
+  .nav-cta { font-size: 11px; letter-spacing: 0.18em; }
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 160px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(184, 149, 90, 0.08), transparent 70%),
+              radial-gradient(ellipse 60% 40% at 20% 80%, rgba(184, 149, 90, 0.04), transparent 60%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeUp 1.2s ease 0.2s forwards;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6.2vw, 84px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin-bottom: 56px;
+  max-width: 1050px;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 0.5s forwards;
+}
+
+.hero h1 .accent {
+  font-style: italic;
+  color: var(--bronze-bright);
+  font-weight: 400;
+}
+
+.hero h1 .pause {
+  display: block;
+  height: 0.2em;
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  max-width: 640px;
+  margin-bottom: 90px;
+  letter-spacing: 0.005em;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 0.9s forwards;
+}
+
+.hero-sub em {
+  font-style: italic;
+  color: var(--cream);
+}
+
+.hero-anchor {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--cream-dim);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 1.3s forwards;
+}
+
+.hero-anchor:hover {
+  color: var(--bronze-bright);
+}
+
+.hero-anchor .line {
+  width: 56px;
+  height: 1px;
+  background: var(--bronze);
+  transition: width 0.4s ease;
+}
+
+.hero-anchor:hover .line {
+  width: 96px;
+}
+
+.hero-meta {
+  position: absolute;
+  bottom: 50px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 1.4s ease 1.6s forwards;
+}
+
+.hero-meta .right {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 130px 0 80px; min-height: auto; }
+  .hero-eyebrow { margin-bottom: 40px; }
+  .hero h1 { margin-bottom: 40px; }
+  .hero-sub { margin-bottom: 60px; }
+  .hero-meta {
+    position: static;
+    margin-top: 70px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 0 24px;
+  }
+  .hero-meta .right { text-align: left; }
+}
+
+/* ============ ESSAY (the plane metaphor) ============ */
+
+.essay {
+  border-top: 1px solid var(--line-soft);
+}
+
+.essay h2 {
+  font-size: clamp(30px, 4.4vw, 52px);
+  font-style: italic;
+  margin-bottom: 60px;
+  font-weight: 400;
+}
+
+.essay h2 .nowrap { white-space: nowrap; }
+
+.essay p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(19px, 1.6vw, 22px);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cream);
+  margin-bottom: 32px;
+  letter-spacing: 0.005em;
+}
+
+.essay p em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.essay p strong {
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.essay .drop {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 4.4em;
+  float: left;
+  line-height: 0.85;
+  padding: 8px 14px 0 0;
+  color: var(--bronze-bright);
+  font-weight: 400;
+}
+
+.dashboard {
+  margin: 70px 0 20px;
+  padding: 50px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.dashboard .gauge {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dashboard .label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+
+.dashboard .meaning {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--cream-dim);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    padding: 36px 0;
+  }
+}
+
+/* ============ WHO I AM ============ */
+
+.who {
+  border-top: 1px solid var(--line-soft);
+}
+
+.who-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 100px;
+  align-items: flex-start;
+}
+
+.who h2 {
+  font-size: clamp(32px, 4.4vw, 52px);
+  font-weight: 400;
+  position: sticky;
+  top: 120px;
+}
+
+.who h2 .italic {
+  display: block;
+  color: var(--bronze-bright);
+}
+
+.who-text p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 1.5vw, 21px);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cream);
+  margin-bottom: 28px;
+}
+
+.who-text p:last-child { margin-bottom: 0; }
+
+.who-text em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.who-text .signature {
+  margin-top: 50px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 26px;
+  color: var(--cream);
+}
+
+.who-text .signature::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: var(--bronze);
+  margin-bottom: 18px;
+}
+
+@media (max-width: 900px) {
+  .who-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .who h2 { position: static; }
+}
+
+/* ============ HAND DEFINITION ============ */
+
+.hand-def {
+  border-top: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 50%, var(--bg) 100%);
+}
+
+.hand-def .eyebrow { margin-bottom: 40px; }
+
+.hand-def h2 {
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 400;
+  margin-bottom: 50px;
+  max-width: 900px;
+}
+
+.hand-def h2 em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.hand-def-lede {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cream);
+  max-width: 760px;
+  margin-bottom: 90px;
+}
+
+.hand-def-lede em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.compare-col {
+  padding: 40px 0;
+}
+
+.compare-col:first-child {
+  padding-right: 40px;
+  border-right: 1px solid var(--line);
+}
+
+.compare-col:last-child {
+  padding-left: 40px;
+  background: linear-gradient(90deg, transparent, rgba(184, 149, 90, 0.03));
+}
+
+.compare-col h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+  margin-bottom: 36px;
+}
+
+.compare-col:last-child h4 {
+  color: var(--bronze);
+}
+
+.compare-col ul {
+  list-style: none;
+}
+
+.compare-col li {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.compare-col:last-child li {
+  color: var(--cream);
+  font-style: italic;
+}
+
+.compare-col li:last-child { border-bottom: none; }
+
+@media (max-width: 768px) {
+  .compare { grid-template-columns: 1fr; }
+  .compare-col:first-child {
+    padding: 30px 0;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .compare-col:last-child { padding: 30px 0; }
+}
+
+/* ============ SHIFT (what changes) ============ */
+
+.shift {
+  border-top: 1px solid var(--line-soft);
+}
+
+.shift h2 {
+  font-size: clamp(30px, 4.4vw, 52px);
+  font-style: italic;
+  margin-bottom: 80px;
+  max-width: 820px;
+}
+
+.shifts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px 80px;
+}
+
+.shift-item {
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+}
+
+.shift-item .from {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+  margin-bottom: 16px;
+}
+
+.shift-item .to {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--cream);
+}
+
+.shift-item .to .gold {
+  color: var(--bronze-bright);
+}
+
+@media (max-width: 768px) {
+  .shifts { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ============ STORIES ============ */
+
+.stories {
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg-soft);
+}
+
+.stories .eyebrow { margin-bottom: 40px; }
+
+.stories h2 {
+  font-size: clamp(32px, 4.6vw, 56px);
+  font-weight: 400;
+  margin-bottom: 100px;
+  max-width: 800px;
+}
+
+.stories h2 em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.story {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 80px;
+  padding: 70px 0;
+  border-top: 1px solid var(--line);
+}
+
+.story:last-child { border-bottom: 1px solid var(--line); }
+
+.story-meta .name {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 32px;
+  color: var(--bronze-bright);
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+
+.story-meta .kind {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.story-meta .tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--cream-dim);
+  line-height: 1.4;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.story-body p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 1.5vw, 21px);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cream);
+  margin-bottom: 22px;
+}
+
+.story-body p:last-child { margin-bottom: 0; }
+
+.story-body em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.story-body strong {
+  color: var(--cream);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .story {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 50px 0;
+  }
+  .story-meta .tag { padding-top: 0; border-top: none; }
+}
+
+/* ============ FORMATS ============ */
+
+.formats {
+  border-top: 1px solid var(--line-soft);
+}
+
+.formats .eyebrow { margin-bottom: 40px; }
+
+.formats h2 {
+  font-size: clamp(32px, 4.6vw, 56px);
+  font-weight: 400;
+  margin-bottom: 90px;
+  max-width: 720px;
+}
+
+.formats h2 em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.format {
+  display: grid;
+  grid-template-columns: 80px 220px 1fr;
+  gap: 60px;
+  padding: 50px 0;
+  border-top: 1px solid var(--line);
+  align-items: flex-start;
+}
+
+.format:last-child { border-bottom: 1px solid var(--line); }
+
+.format-num {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 48px;
+  font-weight: 400;
+  color: var(--bronze);
+  line-height: 1;
+}
+
+.format-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.format-duration {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+
+.format-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 1.5vw, 21px);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cream);
+}
+
+.format-desc em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+@media (max-width: 900px) {
+  .format {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 40px 0;
+  }
+  .format-num { font-size: 36px; }
+}
+
+/* ============ YES / NO ============ */
+
+.yesno {
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg-soft);
+}
+
+.yesno .eyebrow { margin-bottom: 40px; }
+
+.yesno h2 {
+  font-size: clamp(32px, 4.6vw, 56px);
+  font-weight: 400;
+  margin-bottom: 90px;
+  max-width: 820px;
+}
+
+.yesno h2 em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.yesno-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.yesno-col {
+  padding: 50px 0;
+}
+
+.yesno-col:first-child {
+  padding-right: 50px;
+  border-right: 1px solid var(--line);
+}
+
+.yesno-col:last-child {
+  padding-left: 50px;
+}
+
+.yesno-col .title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 36px;
+  line-height: 1;
+}
+
+.yesno-col:first-child .title { color: var(--bronze-bright); }
+.yesno-col:last-child .title { color: var(--cream-mute); }
+
+.yesno-col ul {
+  list-style: none;
+}
+
+.yesno-col li {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.45;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line-soft);
+  position: relative;
+  padding-left: 22px;
+}
+
+.yesno-col:first-child li {
+  color: var(--cream);
+}
+
+.yesno-col:first-child li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  color: var(--bronze-bright);
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+}
+
+.yesno-col:last-child li {
+  color: var(--cream-dim);
+  font-style: italic;
+}
+
+.yesno-col:last-child li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  color: var(--cream-mute);
+}
+
+.yesno-col li:last-child { border-bottom: none; }
+
+.yesno-note {
+  margin-top: 60px;
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: var(--cream-dim);
+  text-align: center;
+  letter-spacing: 0.005em;
+}
+
+@media (max-width: 768px) {
+  .yesno-grid { grid-template-columns: 1fr; }
+  .yesno-col:first-child {
+    padding: 40px 0;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .yesno-col:last-child { padding: 40px 0; }
+}
+
+/* ============ FINAL CTA ============ */
+
+.invite {
+  border-top: 1px solid var(--line-soft);
+  padding: 180px 0 140px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.invite-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at center 40%, rgba(184, 149, 90, 0.07), transparent 70%);
+  pointer-events: none;
+}
+
+.invite-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.invite .eyebrow { margin-bottom: 60px; }
+
+.invite h2 {
+  font-size: clamp(36px, 5.6vw, 72px);
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 50px;
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.invite h2 em {
+  font-style: italic;
+  color: var(--bronze-bright);
+}
+
+.invite-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cream-dim);
+  max-width: 620px;
+  margin: 0 auto 80px;
+}
+
+.invite-sub em {
+  font-style: italic;
+  color: var(--cream);
+}
+
+.invite-cta {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+}
+
+.invite-cta .email {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-style: italic;
+  color: var(--bronze-bright);
+  border-bottom: 1px solid var(--bronze-deep);
+  padding-bottom: 8px;
+  transition: all 0.4s ease;
+  letter-spacing: -0.01em;
+}
+
+.invite-cta:hover .email {
+  color: var(--cream);
+  border-bottom-color: var(--cream);
+}
+
+.invite-cta .label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+}
+
+.invite-alt {
+  margin-top: 70px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--cream-mute);
+  letter-spacing: 0.04em;
+}
+
+.invite-alt a {
+  color: var(--cream-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+  margin-left: 8px;
+}
+
+.invite-alt a:hover {
+  color: var(--bronze-bright);
+  border-color: var(--bronze-bright);
+}
+
+/* ============ FOOTER ============ */
+
+footer {
+  padding: 50px 0 60px;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+}
+
+footer .mark {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 15px;
+  color: var(--cream-dim);
+}
+
+footer .mark span { color: var(--bronze); }
+
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
+
+/* ============ SCROLL REVEAL ============ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.delay-1 { transition-delay: 0.15s; }
+.reveal.delay-2 { transition-delay: 0.3s; }
+.reveal.delay-3 { transition-delay: 0.45s; }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ornamental separator */
+.ornament {
+  display: block;
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(180deg, transparent, var(--bronze), transparent);
+  margin: 0 auto;
+  opacity: 0.4;
+}
+
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#top" class="nav-mark">Андрей <span>Сычинников</span></a>
+  <a href="#invite" class="nav-cta">Написать</a>
+</nav>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-inner">
+      <div class="hero-eyebrow eyebrow">Operational Architect · Strategic Advisor</div>
+
+      <h1>
+        <span class="accent">Hand of the King</span> для&nbsp;founder-CEO.
+        <span class="pause"></span>
+        Я сажусь рядом с&nbsp;тобой и&nbsp;помогаю принимать решения, которые меняют траекторию&nbsp;компании.
+      </h1>
+
+      <p class="hero-sub">
+        Не консультант. Не коуч. Не наёмный CEO. <em>Второй пилот в&nbsp;кабине</em>, который смотрит на&nbsp;приборы, пока ты пилотируешь.
+      </p>
+
+      <a href="#essay" class="hero-anchor">
+        <span class="line"></span>
+        <span>Что это значит</span>
+      </a>
+    </div>
+
+    <div class="hero-meta">
+      <div class="left">Хихон · Испания · 2026</div>
+      <div class="right">Pre-seed → Series A · €500K+/год оборота</div>
+    </div>
+  </section>
+
+  <!-- ============ ESSAY: PLANE METAPHOR ============ -->
+  <section class="essay" id="essay">
+    <div class="narrow">
+      <div class="reveal"><div class="eyebrow">Манифест</div></div>
+      <h2 class="reveal delay-1">
+        Бизнес - это <em class="italic">самолёт.</em>
+      </h2>
+
+      <p class="reveal delay-2">
+        <span class="drop">К</span>огда я смотрю на компанию глазами founder-а, я вижу не таблицу с KPI и не оргструктуру в Notion. Я вижу самолёт в воздухе. Высота - чистая прибыль. Скорость - темп роста. Курс - твоя стратегия. Двигатель - капитал и кэшфлоу. Руль - твои решения.
+      </p>
+
+      <p class="reveal delay-2">
+        Тормоз - неумение сфокусироваться на главном рычаге. Датчики - цифры по каждому KPI, которым ты <em>веришь</em>. Автопилот - зрелая операционная система. Это то, к чему мы идём.
+      </p>
+
+      <p class="reveal delay-3">
+        Founder - <strong>пилот</strong>. Это его место. Никто другой не имеет права за этим штурвалом сидеть - ни инвестор, ни наёмный CEO, ни консультант. Только тот, кто рискует.
+      </p>
+
+      <p class="reveal delay-3">
+        Я - <em>второй пилот</em>. Я смотрю на приборы, пока ты пилотируешь. Я говорю «высота падает», когда ты увлёкся виражом. Я держу карту, пока ты ведёшь машину. И когда нужно сказать «нет, мы туда не поворачиваем» - я скажу. Это моя работа.
+      </p>
+
+      <div class="dashboard reveal delay-3">
+        <div class="gauge">
+          <span class="label">Высота</span>
+          <span class="meaning">Чистая прибыль</span>
+        </div>
+        <div class="gauge">
+          <span class="label">Скорость</span>
+          <span class="meaning">Темп роста</span>
+        </div>
+        <div class="gauge">
+          <span class="label">Курс</span>
+          <span class="meaning">Стратегия собственника</span>
+        </div>
+        <div class="gauge">
+          <span class="label">Автопилот</span>
+          <span class="meaning">Зрелая операционная система</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHO I AM ============ -->
+  <section class="who">
+    <div class="container">
+      <div class="who-grid">
+        <h2 class="reveal">
+          Кто <span class="italic">я.</span>
+        </h2>
+
+        <div class="who-text reveal delay-1">
+          <p>
+            33 года. Базируюсь в Хихоне, на севере Испании. Работаю с русскоязычными founder-ами в Европе - pre-seed, seed, Series A.
+          </p>
+          <p>
+            Я прошёл через позицию собственника <em>лично.</em> Свой e-commerce-бренд на WB и Ozon - выручка в пике 120 млн ₽ в год, прибыль 3+ млн ₽/мес. До этого - электрослесарь в Метрострое в Петербурге. Это не CV. Это про то, что я знаю, как чувствует себя founder в три часа ночи, когда телефон не замолкает.
+          </p>
+          <p>
+            Я не пришёл в консалтинг из MBA. Я пришёл в него из <em>кабины пилота.</em> И поэтому, когда я сажусь рядом с тобой, я понимаю не теорию управления, а конкретную тяжесть того кресла, в котором ты сидишь.
+          </p>
+          <p>
+            Сегодня я не управляю своим бизнесом. Я помогаю управлять чужими. Это та точка, в которой я работаю на пределе своей уникальности.
+          </p>
+          <div class="signature">Андрей Сычинников</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HAND DEFINITION ============ -->
+  <section class="hand-def">
+    <div class="narrow">
+      <div class="reveal"><div class="eyebrow">Роль</div></div>
+      <h2 class="reveal delay-1">
+        Что значит быть <em>Hand of the King.</em>
+      </h2>
+
+      <p class="hand-def-lede reveal delay-2">
+        В «Игре престолов» Hand - второй человек в королевстве. Не король. Не слуга. <em>Тот, кто формулирует решения вместе с королём, помогает ему видеть, и говорит «нет», когда король хочет дурного.</em> Это и есть точная метафора того, что я делаю.
+      </p>
+
+      <p class="hand-def-lede reveal delay-2">
+        Я сажусь с founder-ом в формате weekly 1:1 - час в неделю, иногда дольше. Перевожу хаос операционки в последовательность действий: что делать, в каком порядке, кто кому и к когда. Формализую структуру там, где founder сам не может: матрицы ответственности, регламенты, оргструктура с подписями. Возвращаю задачу <em>founder-у</em> - с уже размеченными дедлайнами. Не «я сделаю» - а «вот что тебе делать».
+      </p>
+
+      <p class="hand-def-lede reveal delay-3">
+        И - самое главное - я говорю «нет», когда ты хочешь обойти дисфункцию, вместо того чтобы её решить. И не быть за это уволенным.
+      </p>
+
+      <div class="compare reveal delay-3">
+        <div class="compare-col">
+          <h4>Operational Architect</h4>
+          <ul>
+            <li>Делает руками</li>
+            <li>Внедряет процессы</li>
+            <li>Работает с командой</li>
+            <li>Цикл: 2-8 недель</li>
+          </ul>
+        </div>
+        <div class="compare-col">
+          <h4>Hand of the King</h4>
+          <ul>
+            <li>Помогает founder-у решать</li>
+            <li>Возвращает способность видеть</li>
+            <li>Работает через founder-а</li>
+            <li>Цикл: 6-24 месяца</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHIFT ============ -->
+  <section class="shift">
+    <div class="container">
+      <div class="reveal"><div class="eyebrow">Что меняется</div></div>
+      <h2 class="reveal delay-1">
+        Это не про <em>оптимизацию.</em> Это про то, что меняется в голове у founder-а.
+      </h2>
+
+      <div class="shifts">
+        <div class="shift-item reveal delay-1">
+          <div class="from">Было</div>
+          <div class="to">«Я тону в операционке, не вижу куда мы идём»<br><span class="gold">→ ты снова видишь свою компанию как актив, а не как ежедневный пожар.</span></div>
+        </div>
+        <div class="shift-item reveal delay-1">
+          <div class="from">Было</div>
+          <div class="to">«Команда делает что-то, но я не понимаю что именно»<br><span class="gold">→ у каждой роли есть KPI, который ты сам сформулировал и которому веришь.</span></div>
+        </div>
+        <div class="shift-item reveal delay-2">
+          <div class="from">Было</div>
+          <div class="to">«Я не знаю, прибыльны мы или нет - цифры противоречат»<br><span class="gold">→ у тебя финансовая модель, в которой каждая строка имеет источник.</span></div>
+        </div>
+        <div class="shift-item reveal delay-2">
+          <div class="from">Было</div>
+          <div class="to">«Каждое решение принимаю в одиночку и в три ночи»<br><span class="gold">→ у тебя есть человек, с которым можно проверить решение до того, как ты его примешь.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STORIES ============ -->
+  <section class="stories">
+    <div class="container">
+      <div class="reveal"><div class="eyebrow">Три истории</div></div>
+      <h2 class="reveal delay-1">
+        Не <em>кейсы.</em> Истории компаний, в которых я сидел рядом с founder-ом.
+      </h2>
+
+      <div class="story reveal">
+        <div class="story-meta">
+          <div class="name">Silver Thai</div>
+          <div class="kind">Сеть SPA · Россия<br>32+ млн ₽ инвестиций</div>
+          <div class="tag">Бизнес выглядел успешным. Внутри - убыточным.</div>
+        </div>
+        <div class="story-body">
+          <p>
+            Российский SPA-бизнес. Заведения работают, выручка идёт, инвесторы довольны. Я зашёл внутрь и обнаружил: <strong>экономика мастер-часа отрицательная.</strong> Компания зарабатывала меньше, чем тратила на каждую единицу услуги. Чистая прибыль считалась некорректно - управленческий учёт показывал одно, реальность другое.
+          </p>
+          <p>
+            Мы переразобрали финансовую модель с нуля. Выстроили KPI по ролям. Описали путь к управляемой прибыли. <em>Я не «оптимизировал».</em> Я сделал так, чтобы собственник впервые увидел свой бизнес как актив - со своей экономикой, рычагами, ограничениями - а не как ежедневную операционку, в которой непонятно, что происходит.
+          </p>
+        </div>
+      </div>
+
+      <div class="story reveal">
+        <div class="story-meta">
+          <div class="name">Fishok</div>
+          <div class="kind">Производство зоокорма · Латвия<br>Выход на ЕС и США</div>
+          <div class="tag">Сильный продукт. Слабая коммерческая система.</div>
+        </div>
+        <div class="story-body">
+          <p>
+            Латвийский производитель зоокорма. Сильное производство, лояльные локальные клиенты. Но при попытке выйти на ЕС и США <em>всё рассыпалось.</em> Не потому что продукт плохой. Потому что под международные продажи не было коммерческой системы. CRM был архивом контактов, а не инструментом.
+          </p>
+          <p>
+            Я перестроил Pipedrive в инструмент прогнозирования продаж. Выстроил B2B-воронку. Подготовил выход на Iberzoo в Испании и Orlando в США. Описал follow-up-архитектуру и логику white label. <em>Теперь это система масштабирования</em>, а не «база контактов из последней выставки».
+          </p>
+        </div>
+      </div>
+
+      <div class="story reveal">
+        <div class="story-meta">
+          <div class="name">Octo Relocate</div>
+          <div class="kind">Резидентство в ЕС · Испания<br>Партнёрская экосистема</div>
+          <div class="tag">Продукт был глубже, чем его умели продавать.</div>
+        </div>
+        <div class="story-body">
+          <p>
+            Испанский стартап в зоне резидентства. Продукт был <em>глубже и ценнее</em>, чем его воспринимали. Клиенты видели «визовую услугу», партнёры не понимали, что именно продавать. На рынке, где все продают одно и то же, это означало невидимость.
+          </p>
+          <p>
+            Я разработал архитектуру партнёрской экосистемы из шести типов партнёров - юристы, налоговые консультанты, relocation-агентства, брокеры. Перепаковал продукт как инструмент <strong>профессиональной интеграции в ЕС</strong>. Создал единый язык, на котором партнёр объясняет клиенту - что именно он продаёт.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORMATS ============ -->
+  <section class="formats">
+    <div class="container">
+      <div class="reveal"><div class="eyebrow">Форматы</div></div>
+      <h2 class="reveal delay-1">
+        Три способа <em>сесть рядом.</em>
+      </h2>
+
+      <div class="format reveal">
+        <div class="format-num">I.</div>
+        <div>
+          <div class="format-name">Диагностика</div>
+          <div class="format-duration">Две недели</div>
+        </div>
+        <div class="format-desc">
+          Я захожу как внешний наблюдатель. Смотрю финансы, команду, процессы, решения. Возвращаюсь с <em>картой ограничений</em> и одним вопросом: где конкретно ты теряешь больше всего энергии и денег. Дальше - твоё решение, идём ли дальше.
+        </div>
+      </div>
+
+      <div class="format reveal">
+        <div class="format-num">II.</div>
+        <div>
+          <div class="format-name">Архитектура</div>
+          <div class="format-duration">От одного до трёх месяцев</div>
+        </div>
+        <div class="format-desc">
+          Мы вместе строим систему: финансовую модель, KPI-карту по ролям, регламенты, CRM. Не «консультирую, как сделать» - <em>делаю вместе с тобой и твоей командой</em> до момента, когда это работает на практике, а не только в документе.
+        </div>
+      </div>
+
+      <div class="format reveal">
+        <div class="format-num">III.</div>
+        <div>
+          <div class="format-name">Партнёрство</div>
+          <div class="format-duration">От трёх месяцев</div>
+        </div>
+        <div class="format-desc">
+          Weekly 1:1, личное участие в стратегических решениях. <em>Я - твой Hand.</em> Не оформляюсь в штат. Не беру долю в команде. Работаю как второй пилот в кабине - до тех пор, пока я тебе действительно нужен.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ YES / NO ============ -->
+  <section class="yesno">
+    <div class="container">
+      <div class="reveal"><div class="eyebrow">Подбор</div></div>
+      <h2 class="reveal delay-1">
+        Кому я говорю <em>да.</em> Кому говорю нет.
+      </h2>
+
+      <div class="yesno-grid reveal delay-2">
+        <div class="yesno-col">
+          <div class="title">Да</div>
+          <ul>
+            <li>Founder-CEO русскоязычной компании в&nbsp;Европе, оборот от&nbsp;€500K/год</li>
+            <li>Системно мыслящий - готов работать через цифры и архитектуру, а не через ощущения</li>
+            <li>Хочет вернуть способность видеть стратегически. Сейчас закопан в операционку</li>
+            <li>Готов к&nbsp;weekly 1:1 формату. Это инвестиция времени, не только денег</li>
+          </ul>
+        </div>
+        <div class="yesno-col">
+          <div class="title">Нет</div>
+          <ul>
+            <li>Ищет «волшебную кнопку» вместо работы</li>
+            <li>Не&nbsp;вовлечён в свою компанию - только владеет</li>
+            <li>Токсичен с командой</li>
+            <li>Нет стратегии. Даже черновой</li>
+            <li>Нужен бухучёт, перфоманс-маркетинг, найм. Это не я</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="yesno-note reveal delay-2">
+        Я не делаю бюрократию, не делаю микроменеджмент, не веду финансовый учёт - только методологию. Не нанимаю и не увольняю. Не делаю перформанс-маркетинг и продуктовую разработку. Если тебе нужно это - я подскажу, к&nbsp;кому идти.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INVITE ============ -->
+  <section class="invite" id="invite">
+    <div class="invite-bg"></div>
+    <div class="narrow invite-inner">
+      <div class="reveal"><div class="eyebrow">Если резонирует</div></div>
+
+      <h2 class="reveal delay-1">
+        Напиши мне. Расскажи, <em>что у тебя за&nbsp;самолёт</em> и&nbsp;где ты сейчас в воздухе.
+      </h2>
+
+      <p class="invite-sub reveal delay-2">
+        Без формы, без анкеты, без «оставьте заявку». <em>Просто письмо.</em> Я отвечаю каждому лично - и если мы подходим друг другу, дальше будет разговор. Если нет - честно скажу.
+      </p>
+
+      <a href="mailto:sychinnikov@gmail.com?subject=Hand%20of%20the%20King%20-%20запрос%20на%20разговор" class="invite-cta reveal delay-2">
+        <span class="email">sychinnikov@gmail.com</span>
+        <span class="label">Написать лично</span>
+      </a>
+
+      <div class="invite-alt reveal delay-3">
+        Или в Telegram: <a href="https://t.me/sychinnikov_a" target="_blank" rel="noopener">@sychinnikov_a</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%; max-width:1180px;">
+      <div class="mark">Андрей <span>Сычинников</span></div>
+      <div>Хихон · Испания · MMXXVI</div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+// Nav scroll
+(function() {
+  const nav = document.getElementById('nav');
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        if (window.scrollY > 60) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+// Scroll reveal
+(function() {
+  const reveals = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(el => io.observe(el));
+})();
+</script>
+
+</body>
+</html>

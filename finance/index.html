@@ -110,7 +110,7 @@
 
 <nav>
   <span><a href="/">← главная</a> · <a href="/dashboard/">дашборд проектов</a> · <a href="/health/">здоровье системы</a> · <a href="/system/">карта</a></span>
-  <span class="updated">обновлено: 2026-05-18 · реструктура категорий (Еда+быт / Заведения / Здоровье) с подкатегориями</span>
+  <span class="updated">обновлено: 2026-05-19 · Ether card и Vault USDC объединены в один счёт; итоговый баланс скорректирован до €5 798</span>
 </nav>
 
 <h1>Финансы</h1>
@@ -121,7 +121,7 @@
 <h2>Что под наблюдением прямо сейчас</h2>
 <div class="card alert-card">
   <div class="alert-item">
-    <strong>Аренда €1 000 платится 30-31.05 — нужно отложить.</strong> Сейчас нал €2 305 — формально хватит. После платежа останется €1 305 на нал + Bybit €3 506. Лучший вариант — вывести часть USDT в евро до конца месяца.
+    <strong>Аренда €1 000 платится 30-31.05 — нужно отложить.</strong> Сейчас нал €2 305 — формально хватит. После платежа останется €1 305 на нал + Bybit €3 018. Лучший вариант — вывести часть USDT в евро до конца месяца.
   </div>
   <div class="alert-item">
     <strong>Перерасход Еды и быта €117 (план €550 / факт €667).</strong> Основной драйвер — Supercor 04.05 €245 одним чеком + Amazon щётки €46. Фоновое потребление продуктов в норме (~€22/день).
@@ -136,7 +136,7 @@
     <strong>3 банковских счёта (BBVA €26 + Santander €64 + Wise €10) ниже буфера €500.</strong> Основной ликвид — нал €2 305 + Bybit USDT €3 506. Нужна конвертация Bybit → евро для регулярных платежей.
   </div>
   <div class="alert-item">
-    <strong>Зарплата Fishok пришла криптой 4 100 USDT на Bybit (13.05).</strong> Стратегия конвертации в евро — отложена до проработки фондов.
+    <strong>Зарплата Fishok 4 100 USDT пришла 13.05.</strong> После операций 19.05 (−500 Ether card, −70 врач Вики) остаток Bybit = 3 534 USDT. Стратегия конвертации в евро — отложена до решения Андрея.
   </div>
   <div class="alert-item">
     <strong>Через 3 платежа кредит РФ ляжет на евро-доход.</strong> Контрольная дата: <strong>2026-08-02</strong>. На счёте РФ 250К ₽ (хватит на 1.5 платежа) + 500К ₽ заморожено в товарах.
@@ -178,53 +178,55 @@
 <p class="note"><strong>Май — первый плюсовой месяц по учёту.</strong> +€1 865 к распределению по фондам. Решение по распределению откладываем до следующих сессий (фонды, цели). До 2026-08-02 кредит РФ не вычитается из евро-прибыли — гасится из РФ-контура.</p>
 
 <!-- ===== БЛОК 1.5: ЛИКВИД ===== -->
-<h2>Ликвид <span class="sub">сколько денег и где · на 2026-05-18</span></h2>
+<h2>Ликвид <span class="sub">сколько денег и где · на 2026-05-19</span></h2>
 <div class="grid-3">
   <div class="card">
     <div class="stat">
       <div class="stat-label">Банки + нал</div>
-      <div class="stat-value amber">€2 405</div>
-      <div class="stat-sub">нал €2 305 + BBVA €26 + Santander €64 + Wise €10</div>
+      <div class="stat-value amber">€2 400</div>
+      <div class="stat-sub">нал €2 300 + BBVA €26 + Santander €64 + Wise €10</div>
     </div>
   </div>
   <div class="card">
     <div class="stat">
       <div class="stat-label">Bybit (USDT)</div>
-      <div class="stat-value">€3 506</div>
-      <div class="stat-sub">4 105.98 USDT · зарплата Fishok · не сконвертирована</div>
+      <div class="stat-value">€3 018</div>
+      <div class="stat-sub">3 534 USDT · факт 19.05 вечер · после вывода 500 USDT → Vault USDC + 70 USDT врач Вики</div>
     </div>
   </div>
   <div class="card">
     <div class="stat">
-      <div class="stat-label">Итого евро-ликвид</div>
-      <div class="stat-value">€5 911</div>
-      <div class="stat-sub">runway ~1.5 мес при расходах €4 000/мес</div>
+      <div class="stat-label">Итого все активы</div>
+      <div class="stat-value">€5 798</div>
+      <div class="stat-sub">нал+банки €2 400 + Bybit €3 018 + Vault USDC €380 · runway ~1.5 мес</div>
     </div>
   </div>
 </div>
 
 <!-- ===== БЛОК 2: СЧЕТА И БАЛАНС ===== -->
-<h2>Счета и баланс <span class="sub">евровый контур — основной · все данные на 2026-05-18</span></h2>
+<h2>Счета и баланс <span class="sub">евровый контур — основной · обновлено 2026-05-19 (Ether card = Vault USDC)</span></h2>
 <div class="card">
   <table>
     <thead>
       <tr><th>Счёт</th><th>Тип</th><th>Валюта</th><th class="num">Остаток</th><th class="num">≈ EUR</th><th>Источник / Примечание</th></tr>
     </thead>
     <tbody>
-      <tr><td>Наличные дома</td><td>кэш</td><td>EUR</td><td class="num"><strong>€2 305</strong></td><td class="num"><strong>€2 305</strong></td><td>Факт от Андрея · разрыв +€1 100 vs расчёт — уточнить</td></tr>
+      <tr><td>Наличные дома</td><td>кэш</td><td>EUR</td><td class="num"><strong>€2 300</strong></td><td class="num"><strong>€2 300</strong></td><td>Факт от Андрея · −€5 Вике 19.05</td></tr>
       <tr><td>BBVA</td><td>банк</td><td>EUR</td><td class="num" style="color: var(--red);"><strong>€26.18</strong></td><td class="num"><strong>€26</strong></td><td>Скриншот · ещё ~€49 ушло после выписки — уточнить</td></tr>
       <tr><td>Santander</td><td>банк</td><td>EUR</td><td class="num">€63.90</td><td class="num">€64</td><td>Скриншот · карта 9281</td></tr>
       <tr><td>Wise EUR</td><td>банк</td><td>EUR</td><td class="num">€9.80</td><td class="num">€10</td><td>Скриншот · почти пуст — не в оперативном ликвиде</td></tr>
       <tr><td>Wise USD</td><td>банк</td><td>USD</td><td class="num muted">уточнить</td><td class="num muted">—</td><td class="muted">нет данных</td></tr>
-      <tr><td><strong>Bybit</strong></td><td>крипто</td><td>USDT</td><td class="num"><strong>4 105.98</strong></td><td class="num"><strong>€3 506</strong></td><td>Скриншот · зарплата Fishok 13.05 · курс 0.854 EUR/USDT · не сконвертирована</td></tr>
+      <tr><td><strong>Bybit</strong></td><td>крипто</td><td>USDT</td><td class="num"><strong>3 534</strong></td><td class="num"><strong>€3 018</strong></td><td>Факт от Андрея 19.05 вечер · после −500 USDT → Vault USDC + −70 USDT врач Вики · курс 0.854 EUR/USDT</td></tr>
+      <tr><td><strong>Vault USDC</strong> <span class="muted" style="font-size: 11px;">(Ether card = Cash card = этот счёт)</span></td><td>крипто-карта</td><td>USD</td><td class="num"><strong>$416.81</strong></td><td class="num"><strong>€380</strong></td><td>USDC $412.77 @ 4.46% APY + WETH $4.03 · 500 USDT пришли с Bybit 18.05 · DIA €21.21 и ENTERTICKET €53.84 списаны · курс 0.913</td></tr>
       <tr style="font-weight: 600; background: #faf6ee;">
-        <td colspan="3">Итого евровый ликвид (банки + нал)</td>
-        <td class="num" colspan="2">€2 405</td>
-        <td>+ Bybit USDT €3 506 отдельно · + Wise USD (?)</td>
+        <td colspan="3">Итого все активы</td>
+        <td class="num" colspan="2">€5 798</td>
+        <td>банки+нал €2 400 + Bybit €3 018 + Vault USDC €380</td>
       </tr>
     </tbody>
   </table>
   <p class="note"><strong>Дебиторка:</strong> возврат Amazon ~€70 ожидаем на BBVA (отправлено через почту Gijón 11.05).</p>
+  <p class="note">Ether card, Cash card и Vault USDC — один счёт (Coinbase Vault). Подтверждено Андреем 19.05. Расходы по виртуальной карте (DIA, ENTERTICKET) списываются напрямую из Vault.</p>
 </div>
 
 <!-- ===== БЛОК 3: ДВИЖЕНИЕ СРЕДСТВ МЕСЯЦА ===== -->
@@ -351,7 +353,7 @@
   <table>
     <thead><tr><th>Фонд</th><th class="num">Цель</th><th class="num">Накоплено</th><th class="num">Май отложено</th><th>Статус</th></tr></thead>
     <tbody>
-      <tr><td>Подушка безопасности (3 мес)</td><td class="num">€16 800</td><td class="num">€3 506</td><td class="num muted">— (USDT в Bybit, не сконвертирован)</td><td><span class="badge amber">де-факто в Bybit · решение по выводу ожидается</span></td></tr>
+      <tr><td>Подушка безопасности (3 мес)</td><td class="num">€16 800</td><td class="num">€3 018</td><td class="num muted">— (USDT в Bybit, не сконвертирован)</td><td><span class="badge amber">де-факто в Bybit 3 534 USDT · решение по выводу ожидается</span></td></tr>
       <tr><td>Париж 10.07</td><td class="num">€2 000</td><td class="num">€0</td><td class="num">€0</td><td><span class="badge muted">отложено до проработки фондов</span></td></tr>
       <tr><td>США сентябрь</td><td class="num">€9 000</td><td class="num">€0</td><td class="num">€0</td><td><span class="badge muted">цель 90 дней</span></td></tr>
       <tr><td>Подушка 12 мес</td><td class="num">€60 000</td><td class="num">€0</td><td class="num">€0</td><td><span class="badge muted">после фазы 1</span></td></tr>

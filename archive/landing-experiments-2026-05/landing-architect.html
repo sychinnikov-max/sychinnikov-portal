@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Andrei Sychinnikov — Operational Architect для founder-led компаний</title>
+<meta name="description" content="Operational Architect для founder-led компаний pre-seed → Series A. Перевожу операционный хаос в управляемую систему за 1–3 месяца. Диагностика, проект внедрения, ретейнер COO.">
+<meta name="theme-color" content="#0b1220">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andrei Sychinnikov — Operational Architect">
+<meta property="og:description" content="Перевожу операционный хаос founder-led компаний в управляемую систему. Финансовая модель, KPI по ролям, регулярный контроль ЧП.">
+<meta property="og:url" content="https://sychinnikov.com/landing/architect/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- reset ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:400;line-height:1.55;color:#0b1220;background:#fafaf9;font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+/* ---------- design tokens ---------- */
+:root{
+  --ink:#0b1220;
+  --ink-2:#1c2434;
+  --muted:#5a6478;
+  --muted-2:#8a93a3;
+  --line:#e6e3dc;
+  --line-2:#d8d4c8;
+  --paper:#fafaf9;
+  --paper-2:#f3f1ea;
+  --paper-3:#edeae0;
+  --accent:#1e3a8a;
+  --accent-ink:#172b66;
+  --danger:#7a1d1d;
+  --ok:#1a4731;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1180px;
+  --gutter:clamp(20px,4vw,40px);
+}
+
+/* ---------- shell ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+section{border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";display:inline-block;width:24px;height:1px;background:var(--ink)}
+.section-num{font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.1em}
+.section-title{font-size:clamp(28px,3.6vw,44px);line-height:1.1;font-weight:600;letter-spacing:-.02em;margin-top:14px;max-width:880px}
+.section-lede{margin-top:18px;color:var(--muted);font-size:clamp(15px,1.5vw,17px);max-width:680px;line-height:1.6}
+.section-head{padding-top:clamp(64px,9vw,112px);padding-bottom:clamp(36px,5vw,56px)}
+.section-body{padding-bottom:clamp(64px,9vw,112px)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(250,250,249,.85);backdrop-filter:saturate(140%) blur(10px);-webkit-backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em}
+.brand-mark{width:22px;height:22px;border:1.5px solid var(--ink);display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:600}
+.nav-links{display:none;gap:28px;font-size:14px;color:var(--muted)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:9px 14px;border:1px solid var(--ink);border-radius:2px;font-weight:500;transition:background .15s,color .15s}
+.nav-cta:hover{background:var(--ink);color:#fff}
+@media(min-width:860px){.nav-links{display:flex}}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(72px,11vw,140px) 0 clamp(48px,8vw,96px);position:relative}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:980px){.hero-grid{grid-template-columns:1.4fr 1fr;gap:80px;align-items:end}}
+.hero h1{font-size:clamp(36px,5.6vw,68px);line-height:1.04;font-weight:600;letter-spacing:-.025em;margin-top:24px}
+.hero h1 .em{color:var(--accent)}
+.hero-sub{margin-top:28px;font-size:clamp(16px,1.7vw,19px);line-height:1.55;color:var(--muted);max-width:600px}
+.hero-ctas{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font-size:15px;font-weight:500;border-radius:2px;transition:all .15s ease;border:1px solid transparent;line-height:1}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:var(--accent-ink)}
+.btn-ghost{border-color:var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.btn .arrow{display:inline-block;transition:transform .2s}
+.btn:hover .arrow{transform:translateX(3px)}
+
+.hero-meta{border-left:1px solid var(--line-2);padding-left:28px;display:grid;gap:28px;align-content:end}
+.meta-row{display:grid;gap:6px}
+.meta-k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.meta-v{font-size:15px;color:var(--ink);font-weight:500}
+
+.hero-numbers{margin-top:clamp(64px,9vw,96px);display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+@media(min-width:760px){.hero-numbers{grid-template-columns:repeat(4,1fr)}}
+.num-cell{padding:28px 24px;border-right:1px solid var(--line);position:relative}
+.num-cell:nth-child(2n){border-right:0}
+@media(min-width:760px){.num-cell:nth-child(2n){border-right:1px solid var(--line)}.num-cell:last-child{border-right:0}}
+.num-cell:nth-child(-n+2){border-bottom:1px solid var(--line)}
+@media(min-width:760px){.num-cell:nth-child(-n+2){border-bottom:0}}
+.num-v{font-family:var(--mono);font-size:clamp(28px,3.4vw,40px);font-weight:500;letter-spacing:-.02em;color:var(--ink);line-height:1}
+.num-k{margin-top:10px;font-size:13px;color:var(--muted);line-height:1.4}
+
+/* ---------- problem section ---------- */
+.problem-grid{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+@media(min-width:780px){.problem-grid{grid-template-columns:1fr 1fr}}
+.problem-item{padding:32px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:start}
+@media(min-width:780px){
+  .problem-item{padding:36px 32px 36px 0}
+  .problem-item:nth-child(odd){border-right:1px solid var(--line);padding-right:48px}
+  .problem-item:nth-child(even){padding-left:48px}
+}
+.problem-n{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500;padding-top:4px}
+.problem-h{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:8px;color:var(--ink)}
+.problem-p{font-size:15px;color:var(--muted);line-height:1.6}
+
+/* ---------- what i do (definition card) ---------- */
+.def{display:grid;grid-template-columns:1fr;gap:36px}
+@media(min-width:920px){.def{grid-template-columns:1fr 1fr;gap:64px;align-items:start}}
+.def-card{background:#fff;border:1px solid var(--line);padding:clamp(28px,4vw,44px);border-radius:2px}
+.def-card h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px;font-family:var(--mono)}
+.def-card p{color:var(--ink-2);font-size:16px;line-height:1.65}
+.def-card p + p{margin-top:14px}
+.def-card .lede{font-size:18px;color:var(--ink);line-height:1.5;font-weight:500;letter-spacing:-.005em}
+
+.role-table{width:100%;border-collapse:collapse;font-size:14px}
+.role-table caption{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-bottom:14px}
+.role-table th,.role-table td{padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.role-table th{font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.role-table td:first-child{color:var(--ink);font-weight:500;padding-right:24px;width:42%}
+.role-table td.mark-no{color:var(--muted)}
+.role-table td .x{color:var(--muted-2);font-family:var(--mono);margin-right:8px}
+.role-table td .v{color:var(--accent);font-family:var(--mono);margin-right:8px;font-weight:600}
+
+/* ---------- cases ---------- */
+.case{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+.case-row{display:grid;grid-template-columns:1fr;gap:24px;padding:clamp(36px,6vw,56px) 0;border-bottom:1px solid var(--line)}
+@media(min-width:920px){.case-row{grid-template-columns:280px 1fr;gap:64px}}
+.case-meta .case-name{font-size:clamp(22px,2.4vw,28px);font-weight:600;letter-spacing:-.015em;color:var(--ink)}
+.case-meta .case-tag{margin-top:10px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.case-meta .case-num{font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.12em;margin-bottom:18px}
+.case-body{display:grid;gap:22px}
+.case-block{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:start;padding-bottom:18px;border-bottom:1px dashed var(--line)}
+.case-block:last-child{border-bottom:0;padding-bottom:0}
+.case-block-k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.case-block-v{font-size:15px;color:var(--ink-2);line-height:1.6}
+@media(max-width:600px){.case-block{grid-template-columns:1fr;gap:6px}}
+
+/* ---------- formats ---------- */
+.formats{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line);background:#fff}
+@media(min-width:920px){.formats{grid-template-columns:repeat(3,1fr)}}
+.format{padding:clamp(28px,3.4vw,40px);border-bottom:1px solid var(--line);position:relative;display:flex;flex-direction:column;gap:18px;min-height:100%}
+@media(min-width:920px){
+  .format{border-bottom:0;border-right:1px solid var(--line)}
+  .format:last-child{border-right:0}
+}
+.format:last-child{border-bottom:0}
+.format-n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted-2)}
+.format-name{font-size:22px;font-weight:600;letter-spacing:-.015em;color:var(--ink)}
+.format-len{font-family:var(--mono);font-size:13px;color:var(--accent);margin-top:-8px}
+.format-desc{font-size:14.5px;color:var(--muted);line-height:1.6;flex:1}
+.format-list{margin-top:6px;display:grid;gap:8px;font-size:14px;color:var(--ink-2)}
+.format-list li{list-style:none;padding-left:18px;position:relative;line-height:1.5}
+.format-list li::before{content:"→";position:absolute;left:0;color:var(--accent);font-family:var(--mono)}
+.format-foot{margin-top:auto;padding-top:18px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+
+/* ---------- method ---------- */
+.method{display:grid;grid-template-columns:1fr;gap:0;counter-reset:step}
+@media(min-width:780px){.method{grid-template-columns:repeat(4,1fr)}}
+.step{padding:32px 28px 32px 0;border-top:1px solid var(--line);position:relative;counter-increment:step}
+@media(min-width:780px){.step{padding:36px 28px 8px 0;border-top:0}}
+.step::before{content:"0" counter(step);font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:600;display:block;margin-bottom:14px}
+.step h3{font-size:19px;font-weight:600;letter-spacing:-.01em;color:var(--ink);margin-bottom:10px}
+.step p{font-size:14.5px;color:var(--muted);line-height:1.6}
+.method-rail{display:none}
+@media(min-width:780px){
+  .method{position:relative;padding-top:24px}
+  .method-rail{display:block;position:absolute;top:24px;left:0;right:0;height:1px;background:var(--line)}
+  .step::after{content:"";position:absolute;top:18px;left:0;width:9px;height:9px;border:1px solid var(--ink);background:var(--paper);border-radius:50%}
+}
+
+/* ---------- fit ---------- */
+.fit{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:860px){.fit{grid-template-columns:1fr 1fr;gap:40px}}
+.fit-col{border:1px solid var(--line);padding:clamp(28px,3.4vw,40px);background:#fff;border-radius:2px}
+.fit-col h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.fit-col.yes h3{color:var(--ok)}
+.fit-col.no h3{color:var(--danger)}
+.fit-col p.sub{font-size:13px;color:var(--muted);margin-bottom:22px;letter-spacing:.01em}
+.fit-list{display:grid;gap:14px}
+.fit-list li{list-style:none;display:grid;grid-template-columns:20px 1fr;gap:12px;font-size:15px;color:var(--ink-2);line-height:1.5}
+.fit-list .ic{font-family:var(--mono);font-weight:600;font-size:13px;padding-top:3px}
+.fit-col.yes .ic{color:var(--ok)}
+.fit-col.no .ic{color:var(--danger)}
+
+.not-doing{margin-top:36px;background:var(--paper-2);border:1px solid var(--line);padding:clamp(24px,3vw,32px);border-radius:2px}
+.not-doing h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:600}
+.not-doing-tags{display:flex;flex-wrap:wrap;gap:8px}
+.not-doing-tags span{font-size:13px;padding:7px 12px;background:#fff;border:1px solid var(--line-2);color:var(--ink-2);border-radius:2px;font-family:var(--mono)}
+
+/* ---------- faq ---------- */
+.faq{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;display:grid;grid-template-columns:32px 1fr 24px;gap:18px;align-items:center;padding:24px 0;text-align:left}
+.faq-q .qn{font-family:var(--mono);font-size:12px;color:var(--muted-2);letter-spacing:.1em}
+.faq-q .qt{font-size:17px;font-weight:500;color:var(--ink);letter-spacing:-.005em}
+.faq-q .qi{font-family:var(--mono);font-size:18px;color:var(--ink);transition:transform .2s;justify-self:end;font-weight:300}
+.faq-item[open] .qi{transform:rotate(45deg)}
+.faq-a{padding:0 0 28px 50px;color:var(--muted);font-size:15px;line-height:1.65;max-width:780px}
+.faq-a p+p{margin-top:10px}
+.faq-q::-webkit-details-marker{display:none}
+@media(max-width:600px){.faq-a{padding-left:0}}
+
+/* ---------- final cta ---------- */
+.cta-final{background:var(--ink);color:#fff;border-top:0}
+.cta-final .eyebrow{color:#7b88a7}
+.cta-final .eyebrow::before{background:#7b88a7}
+.cta-final .section-title{color:#fff;max-width:760px}
+.cta-final .section-lede{color:#a8b1c4;max-width:620px}
+.cta-final .btn-primary{background:#fff;color:var(--ink)}
+.cta-final .btn-primary:hover{background:#e9eef9}
+.cta-final .btn-ghost{border-color:#5a6890;color:#fff}
+.cta-final .btn-ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
+.cta-final .hero-numbers{border-top-color:#1c2742;border-bottom-color:#1c2742;margin-top:64px}
+.cta-final .num-cell{border-right-color:#1c2742}
+.cta-final .num-cell:nth-child(-n+2){border-bottom-color:#1c2742}
+.cta-final .num-v{color:#fff}
+.cta-final .num-k{color:#7b88a7}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:40px 0;font-size:13px;color:var(--muted)}
+.foot-row{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+.foot-links{display:flex;gap:24px;flex-wrap:wrap}
+.foot-links a:hover{color:var(--ink)}
+
+/* ---------- a11y / focus ---------- */
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Andrei Sychinnikov">
+      <span class="brand-mark">AS</span>
+      <span>Andrei&nbsp;Sychinnikov</span>
+    </a>
+    <nav class="nav-links" aria-label="Основная навигация">
+      <a href="#problem">Проблема</a>
+      <a href="#service">Услуга</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#formats">Форматы</a>
+      <a href="#fit">Кому подходит</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-cta" href="mailto:sychinnikov@gmail.com?subject=Operational%20diagnostic%20—%20запрос">
+      Связаться <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Operational Architecture · pre-seed → Series A</div>
+        <h1>
+          Operational Architect для founder-led компаний.
+          <br>
+          <span class="em">Перевожу операционный хаос в управляемую систему за 1–3 месяца.</span>
+        </h1>
+        <p class="hero-sub">
+          Работаю с русскоязычными основателями бизнесов в Европе. Сажусь рядом с CEO и собираю операционную архитектуру: финансовая модель, KPI по ролям, контур регулярного контроля чистой прибыли. На выходе — управляемая компания, а не зависимость от ручного режима собственника.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="mailto:sychinnikov@gmail.com?subject=Operational%20diagnostic%20—%20запрос%20на%20звонок&body=Коротко%20о%20компании%3A%0A-%20Что%20делаете%3A%0A-%20Команда%3A%0A-%20Оборот%3A%0A-%20Главная%20боль%3A%0A">
+            Записаться на диагностический звонок <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn-ghost" href="#cases">
+            Посмотреть кейсы <span class="arrow" aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+      <aside class="hero-meta" aria-label="Профиль">
+        <div class="meta-row">
+          <span class="meta-k">База</span>
+          <span class="meta-v">Хихон, Испания · ЕС-таймзоны</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-k">Сегмент</span>
+          <span class="meta-v">Founder-led компании, €0.5–10M ARR</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-k">Языки</span>
+          <span class="meta-v">Русский · English</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-k">Доступность</span>
+          <span class="meta-v">2 активных проекта одновременно</span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="hero-numbers" role="list" aria-label="Ключевые показатели практики">
+      <div class="num-cell" role="listitem">
+        <div class="num-v">32M ₽</div>
+        <div class="num-k">инвестиций под управлением в кейсе SPA-сети</div>
+      </div>
+      <div class="num-cell" role="listitem">
+        <div class="num-v">2 рынка</div>
+        <div class="num-k">B2B-воронка на ЕС&nbsp;+ США в кейсе экспорта</div>
+      </div>
+      <div class="num-cell" role="listitem">
+        <div class="num-v">6 типов</div>
+        <div class="num-k">партнёрских каналов в архитектуре экосистемы</div>
+      </div>
+      <div class="num-cell" role="listitem">
+        <div class="num-v">70–130%</div>
+        <div class="num-k">точность планирования ЧП после внедрения</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section id="problem">
+  <div class="wrap section-head">
+    <div class="eyebrow"><span class="section-num">01</span> Контекст</div>
+    <h2 class="section-title">Что обычно сломано у founder-led компании на этапе €0.5–5M</h2>
+    <p class="section-lede">Это не «плохая команда» и не «слабый продукт». Это отсутствие операционного контура, который превращает деятельность в управляемый результат.</p>
+  </div>
+
+  <div class="wrap section-body">
+    <div class="problem-grid">
+      <div class="problem-item">
+        <div class="problem-n">01</div>
+        <div>
+          <div class="problem-h">Нет культуры непрерывного улучшения</div>
+          <div class="problem-p">Действия делаются, но не разбираются. Каждая неделя — повторение предыдущей с теми же ошибками. Решения не превращаются в институциональное знание.</div>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-n">02</div>
+        <div>
+          <div class="problem-h">Нет контроля главных показателей</div>
+          <div class="problem-p">Либо результат не оцифрован вообще, либо цифра есть, но никто её не смотрит регулярно. Решения принимаются по ощущениям и последнему разговору.</div>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-n">03</div>
+        <div>
+          <div class="problem-h">Нет привязки людей к показателям</div>
+          <div class="problem-p">Сотрудник не понимает, за что именно отвечает в цифрах и как его работа влияет на чистую прибыль. Ответственность размыта между ролями.</div>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-n">04</div>
+        <div>
+          <div class="problem-h">Расфокус команды</div>
+          <div class="problem-p">Люди делают то, что проще и интереснее, а не то, что движет бизнес. Приоритеты подменяются активностью. Собственник тащит всё, что не сделали.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICE DEFINITION ============ -->
+<section id="service">
+  <div class="wrap section-head">
+    <div class="eyebrow"><span class="section-num">02</span> Услуга</div>
+    <h2 class="section-title">Operational Architect — это не коуч, не менеджер и не маркетолог</h2>
+    <p class="section-lede">Я строю операционную архитектуру вместе с собственником, а не вместо него. Моя задача — оставить после себя систему, которая работает без меня.</p>
+  </div>
+
+  <div class="wrap section-body">
+    <div class="def">
+      <div class="def-card">
+        <h3>Определение</h3>
+        <p class="lede">Operational Architect — это партнёр CEO, который превращает хаос операционки в последовательность действий: что делать, в каком порядке, кто и к какому сроку.</p>
+        <p>Сажусь рядом в формате weekly 1:1. Формализую институциональную структуру там, где собственник сам это сделать не может: матрицы ответственности, политики, дашборды управления.</p>
+        <p>Возвращаю задачу founder-у с уже размеченными сроками и зависимостями. Говорю «нет», когда CEO пытается обойти дисфункцию вместо того, чтобы её решить.</p>
+        <p>Главное обещание: после работы собственник умеет планировать чистую прибыль с точностью <span style="font-family:var(--mono);color:var(--accent);font-weight:500">70–130%</span>. Бизнес отцифрован. Каждый сотрудник работает на конкретный KPI, влияющий на ЧП.</p>
+      </div>
+
+      <div>
+        <table class="role-table">
+          <caption>Как я отличаюсь от смежных ролей</caption>
+          <thead>
+            <tr><th>Роль</th><th>Я делаю это?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Архитектура операционки и контур контроля</td><td><span class="v">✓</span>Да, ядро услуги</td></tr>
+            <tr><td>Финансовая модель и KPI по ролям</td><td><span class="v">✓</span>Да, всегда</td></tr>
+            <tr><td>Регламенты и матрицы ответственности</td><td><span class="v">✓</span>Да, минимально необходимые</td></tr>
+            <tr><td>Weekly-режим с CEO</td><td><span class="v">✓</span>Да, основной формат</td></tr>
+            <tr><td>Мотивационный коучинг</td><td class="mark-no"><span class="x">×</span>Нет — это не моя работа</td></tr>
+            <tr><td>Операционный менеджмент задач команды</td><td class="mark-no"><span class="x">×</span>Нет — это работа COO/PM</td></tr>
+            <tr><td>Performance-маркетинг, продукт, найм</td><td class="mark-no"><span class="x">×</span>Нет — другие специалисты</td></tr>
+            <tr><td>Первичный учёт и бухгалтерия</td><td class="mark-no"><span class="x">×</span>Нет — только методология</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASES ============ -->
+<section id="cases">
+  <div class="wrap section-head">
+    <div class="eyebrow"><span class="section-num">03</span> Кейсы</div>
+    <h2 class="section-title">Три проекта, на которых видно метод</h2>
+    <p class="section-lede">Разные рынки, разные стадии, одна логика: оцифровать, выстроить контур контроля, передать собственнику в управляемом виде.</p>
+  </div>
+
+  <div class="wrap section-body">
+    <div class="case">
+      <!-- CASE 1 -->
+      <div class="case-row">
+        <div class="case-meta">
+          <div class="case-num">CASE / 01</div>
+          <div class="case-name">Silver Thai</div>
+          <div class="case-tag">Россия · SPA-сеть · 32M ₽ AUM</div>
+        </div>
+        <div class="case-body">
+          <div class="case-block">
+            <div class="case-block-k">Контекст</div>
+            <div class="case-block-v">Бизнес с серьёзным капиталом и активами, но управлялся как самозанятость собственника, а не как актив. Экономика мастер-часа отрицательная. Чистая прибыль считалась некорректно — реальный результат отличался от управленческого отчёта в разы.</div>
+          </div>
+          <div class="case-block">
+            <div class="case-block-k">Что сделано</div>
+            <div class="case-block-v">Полный разбор финансов с нуля: разнесение прямых и косвенных затрат, восстановление маржинальности по услугам. Перестроена логика управления. Введена KPI-система по ролям: загрузка мастер-часов, средний чек, LTV клиента, чистая прибыль администратора-смены.</div>
+          </div>
+          <div class="case-block">
+            <div class="case-block-k">Результат</div>
+            <div class="case-block-v">Открыта реальная финансовая картина бизнеса. Сформирована дорожная карта к управляемой прибыли. Собственник получил инструмент для планирования, а не только для констатации.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 2 -->
+      <div class="case-row">
+        <div class="case-meta">
+          <div class="case-num">CASE / 02</div>
+          <div class="case-name">Fishok</div>
+          <div class="case-tag">Латвия · B2B-экспорт зоокорма · ЕС + США</div>
+        </div>
+        <div class="case-body">
+          <div class="case-block">
+            <div class="case-block-k">Контекст</div>
+            <div class="case-block-v">Сильное производство и качественный продукт, но отсутствует коммерческая система для международных продаж. CRM (Pipedrive) использовался как архив контактов, а не как инструмент управления воронкой.</div>
+          </div>
+          <div class="case-block">
+            <div class="case-block-k">Что сделано</div>
+            <div class="case-block-v">Построена B2B-воронка международного уровня. CRM трансформирован в инструмент прогнозирования выручки: стадии, критерии перехода, SLA по follow-up. Подготовка к выставкам Iberzoo и Orlando: квалификация лидов, follow-up архитектура, white-label логика по сегментам.</div>
+          </div>
+          <div class="case-block">
+            <div class="case-block-k">Результат</div>
+            <div class="case-block-v">Построена масштабируемая коммерческая модель. CRM стал инструментом управления продажами, а не свалкой контактов. Команда работает по единой методике на двух рынках.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 3 -->
+      <div class="case-row">
+        <div class="case-meta">
+          <div class="case-num">CASE / 03</div>
+          <div class="case-name">Octo Relocate</div>
+          <div class="case-tag">Испания · Стартап-резидентство · ЕС-рынок</div>
+        </div>
+        <div class="case-body">
+          <div class="case-block">
+            <div class="case-block-k">Контекст</div>
+            <div class="case-block-v">Отсутствует системная модель партнёрского привлечения. Продукт воспринимался рынком как «визовая услуга» — категория низкой ценовой эластичности, конкурирующая с десятками агентств.</div>
+          </div>
+          <div class="case-block">
+            <div class="case-block-k">Что сделано</div>
+            <div class="case-block-v">Разработана архитектура партнёрской экосистемы из 6 типов партнёров: юристы, налоговые консультанты, relocation-агентства, брокеры недвижимости, корпоративные сервисы, бизнес-инкубаторы. Продукт перепакован как инструмент профессиональной интеграции в ЕС, а не как разовая услуга.</div>
+          </div>
+          <div class="case-block">
+            <div class="case-block-k">Результат</div>
+            <div class="case-block-v">Сформирована масштабируемая модель партнёрского канала. У компании появилась логика входа в рынок, не зависящая от перформанс-бюджета.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMATS ============ -->
+<section id="formats">
+  <div class="wrap section-head">
+    <div class="eyebrow"><span class="section-num">04</span> Форматы работы</div>
+    <h2 class="section-title">Три формата под разную стадию готовности</h2>
+    <p class="section-lede">Не существует универсального engagement. Любой проект начинается с диагностики — дальше выбираем формат под реальную задачу и темп.</p>
+  </div>
+
+  <div class="wrap section-body">
+    <div class="formats">
+      <article class="format">
+        <div>
+          <div class="format-n">FORMAT / 01</div>
+          <div class="format-name">Диагностика</div>
+          <div class="format-len">2 недели</div>
+        </div>
+        <p class="format-desc">Глубокий операционный аудит. Карта ограничений компании, бьющая в больные точки. Финансовый срез. Конкретный план действий на 90 дней.</p>
+        <ul class="format-list">
+          <li>Структурированные интервью с CEO и ключевыми ролями</li>
+          <li>Разбор финансов и текущих метрик</li>
+          <li>Карта дисфункций с приоритизацией</li>
+          <li>План действий: что делать первым, чем рискуем</li>
+        </ul>
+        <div class="format-foot">Fixed scope · Fixed price</div>
+      </article>
+
+      <article class="format">
+        <div>
+          <div class="format-n">FORMAT / 02</div>
+          <div class="format-name">Проект внедрения</div>
+          <div class="format-len">1–3 месяца</div>
+        </div>
+        <p class="format-desc">Внедрённая операционная система: финансовая модель, KPI-карта по ролям, CRM и процессы, минимально необходимые регламенты, дашборды управления.</p>
+        <ul class="format-list">
+          <li>Финансовая модель и контур планирования ЧП</li>
+          <li>KPI-карта по ролям с привязкой к чистой прибыли</li>
+          <li>Архитектура CRM и ключевых процессов</li>
+          <li>Дашборды для еженедельного управления</li>
+        </ul>
+        <div class="format-foot">Фикс + milestones</div>
+      </article>
+
+      <article class="format">
+        <div>
+          <div class="format-n">FORMAT / 03</div>
+          <div class="format-name">Ретейнер · COO на аутсорсе</div>
+          <div class="format-len">от 3 месяцев</div>
+        </div>
+        <p class="format-desc">Операционный директор в команде без оформления в штат. Еженедельная работа внутри компании. Стратегия и исполнение в одном контуре.</p>
+        <ul class="format-list">
+          <li>Weekly 1:1 с CEO + рабочие сессии с командой</li>
+          <li>Управление операционным контуром и KPI</li>
+          <li>Регулярная разборка отклонений и решений</li>
+          <li>Ограниченное окно — 2 ретейнера одновременно</li>
+        </ul>
+        <div class="format-foot">Monthly retainer · 3+ месяца</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METHOD ============ -->
+<section id="method">
+  <div class="wrap section-head">
+    <div class="eyebrow"><span class="section-num">05</span> Метод</div>
+    <h2 class="section-title">Четыре шага от хаоса к управляемой системе</h2>
+    <p class="section-lede">Один и тот же контур для любого формата. Меняются только глубина и срок исполнения каждого шага.</p>
+  </div>
+
+  <div class="wrap section-body">
+    <div class="method">
+      <div class="method-rail" aria-hidden="true"></div>
+      <div class="step">
+        <h3>Diagnose</h3>
+        <p>Снимаю текущее состояние: финансы, метрики, роли, процессы. Нахожу точки, где компания теряет деньги или время. Готовлю карту ограничений.</p>
+      </div>
+      <div class="step">
+        <h3>Architect</h3>
+        <p>Проектирую целевую архитектуру: финансовая модель, KPI по ролям, контур контроля. Согласовываю с собственником, что именно строим — без иллюзий.</p>
+      </div>
+      <div class="step">
+        <h3>Build</h3>
+        <p>Внедряем вместе с командой. Регламенты — только минимально необходимые. CRM, дашборды, ритм 1:1 и weekly. Никакой бюрократии для бюрократии.</p>
+      </div>
+      <div class="step">
+        <h3>Handover</h3>
+        <p>Передаю систему собственнику и команде. Несколько недель сопровождения. Цель — компания работает без меня и не разваливается на третьей неделе.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIT ============ -->
+<section id="fit">
+  <div class="wrap section-head">
+    <div class="eyebrow"><span class="section-num">06</span> Кому подходит</div>
+    <h2 class="section-title">Жёсткие критерии входа — это в интересах обеих сторон</h2>
+    <p class="section-lede">Если рекомендуете меня кому-то — посмотрите эти фильтры. Они экономят время всем. Я работаю не со всеми.</p>
+  </div>
+
+  <div class="wrap section-body">
+    <div class="fit">
+      <div class="fit-col yes">
+        <h3>Подходит</h3>
+        <p class="sub">Профиль клиента, где я приношу максимальную ценность</p>
+        <ul class="fit-list">
+          <li><span class="ic">✓</span>Русскоязычный founder в Европе, оборот компании от €500K/год</li>
+          <li><span class="ic">✓</span>Системно мыслящий собственник, готов работать через цифры, а не через ощущения</li>
+          <li><span class="ic">✓</span>Вовлечён в компанию операционно, не пассивный инвестор</li>
+          <li><span class="ic">✓</span>Есть стратегия, даже черновая — понятно, куда идём</li>
+          <li><span class="ic">✓</span>Pre-seed/seed стартап с командой 5–30 человек ИЛИ действующий бизнес, где «всё на собственнике»</li>
+        </ul>
+      </div>
+      <div class="fit-col no">
+        <h3>Не подходит</h3>
+        <p class="sub">Случаи, когда я отказываюсь от проекта</p>
+        <ul class="fit-list">
+          <li><span class="ic">×</span>Не интересно управлять через цифры — «давайте по ощущениям»</li>
+          <li><span class="ic">×</span>Только владеет бизнесом, не вовлечён в операционку</li>
+          <li><span class="ic">×</span>Токсичные отношения с командой или партнёрами</li>
+          <li><span class="ic">×</span>Нет цели и плана на 12+ месяцев</li>
+          <li><span class="ic">×</span>Ждёт «волшебной кнопки» вместо работы над собой и системой</li>
+          <li><span class="ic">×</span>Нужен performance-маркетинг, продукт, найм или бухгалтерия — это другие специалисты</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="not-doing">
+      <h3>Чего я не делаю — даже за деньги</h3>
+      <div class="not-doing-tags">
+        <span>× бюрократия</span>
+        <span>× микроменеджмент</span>
+        <span>× endless meetings</span>
+        <span>× огромные регламенты</span>
+        <span>× первичка</span>
+        <span>× ведение бухгалтерии</span>
+        <span>× найм / увольнение</span>
+        <span>× performance-маркетинг</span>
+        <span>× продуктовая разработка</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap section-head">
+    <div class="eyebrow"><span class="section-num">07</span> FAQ</div>
+    <h2 class="section-title">Что обычно спрашивают до старта</h2>
+  </div>
+
+  <div class="wrap section-body">
+    <div class="faq">
+      <details class="faq-item" open>
+        <summary class="faq-q">
+          <span class="qn">Q1</span>
+          <span class="qt">Чем вы отличаетесь от бизнес-коуча и от management-консультанта типа Big-4?</span>
+          <span class="qi" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          <p>Бизнес-коуч работает с состоянием собственника. Я работаю с архитектурой компании. Big-4 поставляет отчёт и уходит — я остаюсь до момента, когда система работает руками вашей команды без меня.</p>
+          <p>Формально я ближе к роли fractional COO с уклоном в финансовую модель и KPI-контур, чем к стратегическому консалтингу.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="qn">Q2</span>
+          <span class="qt">Сколько это стоит? Можно ли получить вилку до звонка?</span>
+          <span class="qi" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          <p>Диагностика — фиксированная стоимость, обсуждается в первом звонке после короткого квалификационного описания компании. Проект и ретейнер — зависят от сложности и темпа.</p>
+          <p>На звонке-знакомстве (30–45 минут) даю ориентир по стоимости и формату. Без сюрпризов в счёте.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="qn">Q3</span>
+          <span class="qt">Работаете удалённо или нужно ехать к нам в офис?</span>
+          <span class="qi" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          <p>В основном работаю удалённо: weekly 1:1 с CEO, рабочие сессии с командой по Zoom, асинхронная переписка в Slack/Telegram. По крупным milestone-сессиям могу прилететь — обсуждается отдельно.</p>
+          <p>Базируюсь в Хихоне (Испания), работаю в европейских таймзонах, по запросу — с разумным сдвигом на восток или запад.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="qn">Q4</span>
+          <span class="qt">Берёте ли equity вместо фикса?</span>
+          <span class="qi" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          <p>Equity-формат возможен, но не как замена фиксу. Только как дополнение для проектов, где я вижу долгосрочную ценность и где соблюдены жёсткие критерии: оформленное юрлицо, конкретная стратегия выхода, обсуждение условий до старта работы.</p>
+          <p>Любой equity-разговор начинается после диагностики, не до.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="qn">Q5</span>
+          <span class="qt">Что произойдёт, если после диагностики я не захочу продолжать?</span>
+          <span class="qi" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          <p>Это нормальный и допустимый исход. Диагностика — самостоятельный продукт: вы получаете карту ограничений, финансовый срез и план действий, которые остаются у вас. Дальше двигаетесь сами или с другим исполнителем — это ваше решение.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <span class="qn">Q6</span>
+          <span class="qt">Можно ли передать вашу страницу другому founder-у?</span>
+          <span class="qi" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          <p>Да, рекомендация — основной канал входа в практику. Если у вас в окружении есть founder, который попадает в профиль из раздела «Кому подходит» — перешлите ссылку или познакомьте напрямую через email. Реферальная благодарность обсуждается персонально.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="cta-final">
+  <div class="wrap section-head">
+    <div class="eyebrow"><span class="section-num">08</span> Следующий шаг</div>
+    <h2 class="section-title">Начнём с диагностического звонка</h2>
+    <p class="section-lede">30–45 минут. Без презентаций. Вы рассказываете контекст — я задаю вопросы и говорю, есть ли смысл работать дальше. Никаких обязательств с обеих сторон до письменного scope.</p>
+  </div>
+  <div class="wrap section-body">
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="mailto:sychinnikov@gmail.com?subject=Operational%20diagnostic%20—%20запрос%20на%20звонок&body=Коротко%20о%20компании%3A%0A-%20Что%20делаете%3A%0A-%20Команда%3A%0A-%20Оборот%3A%0A-%20Главная%20боль%3A%0A">
+        sychinnikov@gmail.com <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn-ghost" href="https://t.me/sychinnikov_a" rel="noopener" target="_blank">
+        Telegram · @sychinnikov_a <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="hero-numbers" role="list" aria-label="Что ожидать">
+      <div class="num-cell" role="listitem">
+        <div class="num-v">30–45 мин</div>
+        <div class="num-k">длительность первого звонка</div>
+      </div>
+      <div class="num-cell" role="listitem">
+        <div class="num-v">2 раб. дня</div>
+        <div class="num-k">типичное время до подтверждения слота</div>
+      </div>
+      <div class="num-cell" role="listitem">
+        <div class="num-v">RU / EN</div>
+        <div class="num-k">язык встречи на выбор</div>
+      </div>
+      <div class="num-cell" role="listitem">
+        <div class="num-v">NDA on req</div>
+        <div class="num-k">подписываем по запросу до встречи</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© Andrei Sychinnikov · Operational Architect · Хихон, Испания</div>
+    <nav class="foot-links" aria-label="Контакты и навигация">
+      <a href="mailto:sychinnikov@gmail.com">sychinnikov@gmail.com</a>
+      <a href="https://t.me/sychinnikov_a" rel="noopener" target="_blank">Telegram</a>
+      <a href="https://sychinnikov.com">sychinnikov.com</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// progressively close other FAQ items when one is opened (one-at-a-time accordion)
+(function(){
+  var items = document.querySelectorAll('.faq-item');
+  items.forEach(function(it){
+    it.addEventListener('toggle', function(){
+      if(it.open){
+        items.forEach(function(other){
+          if(other !== it && other.open) other.open = false;
+        });
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

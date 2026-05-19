@@ -125,7 +125,7 @@
 
 <nav>
   <span><a href="/">← главная</a> · <a href="/dashboard/">дашборд</a> · <a href="/system/">карта</a> · <a href="/structure/">структура</a></span>
-  <span class="updated">снимок: 2026-05-18</span>
+  <span class="updated">снимок: 2026-05-19 (после большой очистки + майского спринта)</span>
 </nav>
 
 <h1>🩺 Здоровье системы</h1>
@@ -133,12 +133,12 @@
 
 <div class="score-hero">
   <div class="score-circle amber">
-    <div class="score-num">78</div>
+    <div class="score-num">82</div>
     <div class="score-max">из 100</div>
   </div>
   <div class="score-desc">
-    <h3 class="amber">Система живая, но циклы ещё нерегулярны</h3>
-    <p>Каркас собран, контент наполняется (Octo пересобран, финансы план-факт работают, decisions обновляется по факту). Активность за 14 дней — 5 коммитных дней, лучше прошлого снимка. Главный пробел: <code>/day-close</code> и <code>/weekly-dialogue</code> запускаются нерегулярно — система ещё в режиме «склада данных», не в режиме «работающий цикл».</p>
+    <h3 class="amber">Система живая, циклы активизируются</h3>
+    <p>Каркас собран, контент актуален. 19.05 — большая очистка (GD/Gd контекст/xlsx в archive), активирован майский спринт по 17 контактам, добавлен landing-studio skill, AI-команда пересобрана (mentor + practice-director + finance-director + octo-advisor). Активность за 14 дней — 7+ коммитных дней. Главный пробел: <code>/weekly-dialogue</code> ещё пуст, /day-close нерегулярно.</p>
   </div>
 </div>
 
@@ -151,7 +151,7 @@
       <div style="font-size: 13px; color: var(--muted);">дней до выключателя</div>
     </div>
     <div>
-      <p style="margin: 0 0 6px; font-size: 14px;">Последний коммит: <strong>2026-05-18 (сегодня)</strong>. Правило: 14 дней без коммитов → система признана мёртвой, 30 дней не строим новую.</p>
+      <p style="margin: 0 0 6px; font-size: 14px;">Последний коммит: <strong>2026-05-19 (сегодня)</strong>. Правило: 14 дней без коммитов → система признана мёртвой, 30 дней не строим новую.</p>
       <div class="killswitch-bar"><div class="killswitch-bar-fill" style="width: 100%"></div></div>
       <p style="margin: 6px 0 0; font-size: 12px; color: var(--muted);">Шкала идёт справа налево — чем меньше дней, тем ближе красная зона.</p>
     </div>
@@ -213,9 +213,9 @@
     <div class="crit-score green">95</div>
     <div>
       <p class="crit-title">6. AI-команда полная</p>
-      <p class="crit-desc">4 субагента (business-operator, finance-director, context-architect, octo-advisor), <strong>8 skills</strong> (intake, finance, day-close, weekly-dialogue, update-state, octo-intake, expert-panel, bpmn-generator). Все настроены.</p>
+      <p class="crit-desc">4 субагента (<strong>mentor, practice-director, finance-director, octo-advisor</strong>), <strong>11 skills</strong> (intake, finance, day-close, weekly-dialogue, update-state, octo-intake, expert-panel, bpmn-generator, landing-studio, system-cleanup, +). Пересобрано 19.05.</p>
     </div>
-    <div class="crit-trend"><span class="arrow up">↑↑</span><br>6 → 8 skills</div>
+    <div class="crit-trend"><span class="arrow up">↑↑</span><br>8 → 11 skills · mentor</div>
   </div>
 </div>
 
@@ -248,7 +248,6 @@
 <div class="card" style="margin-top: 14px;">
   <h3>Карта активности (последние 14 дней)</h3>
   <div class="heat-grid">
-    <div class="heat-cell" title="2026-05-05"></div>
     <div class="heat-cell" title="2026-05-06"></div>
     <div class="heat-cell" title="2026-05-07"></div>
     <div class="heat-cell" title="2026-05-08"></div>
@@ -262,9 +261,10 @@
     <div class="heat-cell low" title="2026-05-16: small commits"></div>
     <div class="heat-cell low" title="2026-05-17: weekend"></div>
     <div class="heat-cell high" title="2026-05-18: month-1 review + portal"></div>
+    <div class="heat-cell high" title="2026-05-19: cleanup + sprint + portal rebuild"></div>
   </div>
   <div class="heat-labels">
-    <span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+    <span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span>
   </div>
   <p style="font-size: 13px; color: var(--muted); margin-top: 14px;">
     Регулярность улучшается, но ещё не сплошная. Цель 30 дней: <strong>10+ из 14 дней с коммитами</strong>. Это покажет, что система прижилась как ежедневный инструмент, а не сборочный.

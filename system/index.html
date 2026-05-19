@@ -252,22 +252,23 @@ flowchart TD
   </div>
 </div>
 
-<h2>6. AI-команда <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— 4 субагента + 8 skills</span></h2>
+<h2>6. AI-команда <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— 4 субагента + 11 skills</span></h2>
 
 <div class="grid-2">
   <div class="card">
     <h3>Субагенты <code>.claude/agents/</code></h3>
-    <p style="font-size: 14px; color: var(--muted);">Специализированные «коллеги» с изолированным контекстом. Изолируют сложные задачи от основного диалога.</p>
+    <p style="font-size: 14px; color: var(--muted);">Специализированные «коллеги» с изолированным контекстом. Mentor задаёт рамку, practice-director исполняет внутри.</p>
     <ul style="margin: 8px 0; padding-left: 18px; font-size: 14px;">
-      <li><strong>business-operator</strong> — операционка по клиентам</li>
-      <li><strong>finance-director</strong> — финансовые решения</li>
-      <li><strong>context-architect</strong> — чистка системы (раз в 2-4 нед)</li>
-      <li><strong>octo-advisor</strong> — внутренний советник Octo (изолирован от других клиентов)</li>
+      <li><strong>mentor</strong> — стратег по жизненной траектории и долгосрочной цели €10М+</li>
+      <li><strong>practice-director</strong> — управляющий фриланс-практикой (продажи, упаковка, equity)</li>
+      <li><strong>finance-director</strong> — личные и проектные финансы</li>
+      <li><strong>octo-advisor</strong> — внутренний советник Octo (изолирован от других)</li>
     </ul>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">+ landing-studio (4 субагента-помощника для skill /landing-studio)</p>
   </div>
   <div class="card">
     <h3>Skills <code>.claude/skills/</code></h3>
-    <p style="font-size: 14px; color: var(--muted);">Атомарные процедуры по слэш-команде.</p>
+    <p style="font-size: 14px; color: var(--muted);">Атомарные процедуры по слэш-команде. 11 активных.</p>
     <ul style="margin: 8px 0; padding-left: 18px; font-size: 14px;">
       <li><code>/intake</code>, <code>/i</code> — десятки раз в день</li>
       <li><code>/finance</code>, <code>/f</code> — учёт транзакций</li>
@@ -277,6 +278,9 @@ flowchart TD
       <li><code>/octo-intake</code> — разбор сырья Octo</li>
       <li><code>/expert-panel</code> — 3 эксперта для больших решений</li>
       <li><code>/bpmn-generator</code> — генерация BPMN-схем процессов</li>
+      <li><code>/landing-studio</code> — multi-agent сборка лендингов (новый)</li>
+      <li><code>/system-cleanup</code> — чистка системы (раз в 2-4 нед)</li>
+      <li><code>/finance close</code> — закрытие месяца</li>
     </ul>
   </div>
 </div>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Toolbox — skills, агенты, хуки и команды AndreiOS</title>
-<meta name="description" content="Полный набор инструментов AndreiOS: 6 skills, 4 субагента, hooks и команды для повседневной работы.">
+<meta name="description" content="Полный набор инструментов AndreiOS: 11 skills, 4 субагента, hooks и команды для повседневной работы.">
 <meta name="robots" content="noindex">
 
 <style>
@@ -81,7 +81,7 @@
 </div>
 
 <!-- ==================== SKILLS ==================== -->
-<h2>🛠 Skills <span class="count">— 8 шт.</span></h2>
+<h2>🛠 Skills <span class="count">— 11 шт.</span></h2>
 <p>Атомарные процедуры. Каждый skill решает одну задачу строго по своему сценарию.</p>
 
 <div class="card skill">
@@ -138,7 +138,7 @@
   <p class="desc">Закрытие дня — главный регулярный цикл. Разбирает накопленный inbox, классифицирует записи по проектам, обновляет state-файлы, пишет свод в <code>daily/YYYY-MM-DD.md</code>, архивирует inbox.</p>
   <div class="when"><strong>Когда:</strong> один раз вечером. Перед сном или после ужина — когда поток сырья закончился.</div>
   <ul class="tight">
-    <li>Запускает субагент <strong>business-operator</strong> для классификации</li>
+    <li>Запускает субагент <strong>practice-director</strong> для классификации</li>
     <li>При денежных событиях подключает <strong>finance-director</strong></li>
     <li>Обновляет: state.md проектов, finance/state.md, decisions.md, family.md</li>
     <li>Шаг 2a проверяет проектные inbox-ы (например <code>clients/octo/inbox/</code>)</li>
@@ -167,7 +167,7 @@
     <li>Читает 7 последних daily/, all state.md, finance/state.md, money.md, decisions.md</li>
     <li>Записывает <code>weekly/YYYY-Wнн.md</code></li>
     <li>Обновляет <code>this-week.md</code> на следующую неделю</li>
-    <li>В конце предлагает запустить <strong>context-architect</strong> для health-check</li>
+    <li>В конце предлагает запустить <strong>/system-cleanup</strong> для health-check (раз в 2-4 нед)</li>
   </ul>
   <div class="meta">
     <span>📄 weekly/, this-week.md, state.md</span>
@@ -255,20 +255,36 @@
 
 <!-- ==================== AGENTS ==================== -->
 <h2>🧑‍💼 Субагенты <span class="count">— 4 шт.</span></h2>
-<p>Специализированные «коллеги» с собственным контекстом и моделью. Изолируют сложные задачи от основного диалога — экономят токены, дают чистый фокус.</p>
+<p>Специализированные «коллеги» с собственным контекстом и моделью. Изолируют сложные задачи от основного диалога. <strong>Mentor задаёт рамку, practice-director исполняет внутри.</strong></p>
 
 <div class="card agent">
   <div class="card-header">
-    <h3>🐙 business-operator</h3>
-    <span class="badge sonnet">Sonnet</span>
+    <h3>🧠 mentor</h3>
+    <span class="badge opus">Opus</span>
   </div>
-  <p class="desc">Операционный архитектор. Главный исполнитель по клиентским проектам и обработке inbox.</p>
+  <p class="desc">Главный наставник по жизненной траектории и долгосрочной цели €10М+ к 40 годам. Стратег, спарринг-партнёр, фильтр приоритетов.</p>
   <p class="when"><strong>Когда вызывается:</strong></p>
   <ul class="tight">
-    <li>В <code>/day-close</code> — классифицирует записи inbox по проектам, обновляет state-файлы</li>
-    <li>При работе с Fishok / Octo — помогает с операционкой</li>
-    <li>При создании регламентов, отчётов, оргструктур</li>
-    <li>При работе с воронками продаж и CRM</li>
+    <li>Стратегические вопросы про цели 90 дней и долгосрочку</li>
+    <li>Главные развилки, семья и эмиграция в стратегическом разрезе (США, документы детей, выбор страны)</li>
+    <li>Фильтр приоритетов «Деньги → Семья → Фокус»</li>
+    <li>Рефлексия и подсветка противоречий</li>
+  </ul>
+  <p style="font-size: 13px; color: var(--muted); margin: 8px 0;"><strong>Принцип:</strong> по дефолту задаёт вопросы, подсвечивает противоречия. Тактические рекомендации даёт ТОЛЬКО когда Андрей явно просит «что бы ты сделал». НЕ для операционки.</p>
+</div>
+
+<div class="card agent">
+  <div class="card-header">
+    <h3>🎯 practice-director</h3>
+    <span class="badge sonnet">Sonnet</span>
+  </div>
+  <p class="desc">Управляющий фриланс-практикой. Operational Architect для русскоязычных стартапов pre-seed → Series A. Упаковка продукта, ICP, гипотезы, lead-nurturing, equity-разговоры.</p>
+  <p class="when"><strong>Когда вызывается:</strong></p>
+  <ul class="tight">
+    <li>Работа с pipeline.md, новым prospect, ценовой ladder</li>
+    <li>Продуктовая упаковка, скрипт продажи, equity-структура контракта</li>
+    <li>Lead-nurturing по pipeline, закрытие сделок на €5К+</li>
+    <li>НЕ для операционки по уже подписанным клиентам</li>
   </ul>
   <div class="meta">
     <span>🔧 Read, Glob, Grep, Edit, Write, Bash</span>
@@ -296,21 +312,13 @@
   </div>
 </div>
 
-<div class="card agent">
+<div class="card agent" style="background: #faf6ee; opacity: 0.7;">
   <div class="card-header">
-    <h3>🏛 context-architect</h3>
-    <span class="badge opus">Opus</span>
+    <h3>🏛 /system-cleanup <span class="badge new" style="background: #e9f1ec; color: var(--green);">теперь skill</span></h3>
+    <span class="badge sonnet">Skill</span>
   </div>
-  <p class="desc">Архитектор контекста AndreiOS. Не операционный исполнитель — «уборщик» системы. Чистит дубли, ищет противоречия, предлагает структурные изменения.</p>
-  <p class="when"><strong>Когда вызывается:</strong> вручную, раз в неделю в <code>/weekly-dialogue</code> или когда чувствуется, что система раздувается хаотично. Также при срабатывании kill-switch — для ретроспективы.</p>
-  <p style="font-size: 13px; color: var(--muted); margin: 8px 0;"><strong>Что делает:</strong> ищет дубли фактов, противоречия state.md ↔ decisions.md, устаревшие страницы (&gt;14 дней), сиротские файлы, нарушения правила роста.</p>
-  <div class="principle" style="background: #faf6ee; margin: 10px 0;">
-    Не правит содержание файлов, только <strong>предлагает</strong>. Финальное решение всегда за Андреем.
-  </div>
-  <div class="meta">
-    <span>🔧 Read, Glob, Grep, Edit, Write</span>
-    <span>🎯 цель: система остаётся управляемой через 6/12/24 месяца</span>
-  </div>
+  <p class="desc">Раньше был агент <code>context-architect</code> — переделан в skill <code>/system-cleanup</code>. Чистит дубли, ищет противоречия state.md ↔ decisions.md, устаревшие страницы (&gt;14 дней), сиротские файлы, нарушения правила роста.</p>
+  <p style="font-size: 13px; color: var(--muted); margin: 8px 0;"><strong>Когда вызывается:</strong> раз в 2-4 недели или когда «система раздувается». Не правит содержание — только <strong>предлагает</strong>.</p>
 </div>
 
 <div class="card agent">
@@ -424,7 +432,7 @@
   <ol>
     <li>Сначала <code>/day-close</code> текущего дня (если ещё не сделан).</li>
     <li>Потом <code>/weekly-dialogue</code> — 60-90 минут разговора. Без спешки.</li>
-    <li>В конце Claude предложит <strong>context-architect</strong> — соглашайся раз в 2-4 недели.</li>
+    <li>В конце Claude предложит <strong>/system-cleanup</strong> — соглашайся раз в 2-4 недели.</li>
   </ol>
 </div>
 
@@ -458,7 +466,7 @@
   <h3>Когда чувствуется хаос в системе</h3>
   <ol>
     <li>Не создавай новые файлы / папки — это усилит хаос.</li>
-    <li>Запусти <strong>context-architect</strong> — он покажет дубли, противоречия, сиротские файлы.</li>
+    <li>Запусти <strong>/system-cleanup</strong> — покажет дубли, противоречия, сиротские файлы.</li>
     <li>По его предложениям — чистка. Только после твоего подтверждения.</li>
   </ol>
 </div>

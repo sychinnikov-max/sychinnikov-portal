@@ -111,20 +111,20 @@
 │
 ├── <span class="folder">clients/</span>                  <span class="note">клиентские проекты, изолированно</span>
 │   ├── <span class="folder">octo/</span>                  <span class="note">Octo Relocate (на паузе с 18.05, детально ниже)</span>
-│   ├── <span class="folder">fishok/</span>                <span class="note">Fishok (текущий доход €3.5К/мес)</span>
-│   ├── <span class="folder new">vitaly-textile/</span>          <span class="note">Vitaly (3-й клиент, diagnostic-offer)</span>
-│   └── <span class="file">pipeline.md</span>              <span class="note">потенциальные клиенты</span>
+│   ├── <span class="folder">fishok/</span>                <span class="note">Fishok (retainer €3.5К/мес)</span>
+│   ├── <span class="folder">vitaly-textile/</span>          <span class="note">Vitaly (3-й клиент, diagnostic-offer)</span>
+│   └── <span class="file">pipeline.md</span>              <span class="note">потенциальные клиенты (auto из state-файлов)</span>
 │
-├── <span class="folder">practice/</span>                  <span class="note">методология Operational Foundation</span>
+├── <span class="folder new">contacts/</span>                  <span class="note">картотека людей-ресурсов (Надин, Анатолий, ВВ, Сергей и др.)</span>
+│
+├── <span class="folder">practice/</span>                  <span class="note">методология + sales-sprint-2026-05.md</span>
 │
 ├── <span class="folder">.claude/</span>                   <span class="note">конфиг AI-команды</span>
-│   ├── <span class="folder">agents/</span>                 <span class="note">4 субагента</span>
-│   ├── <span class="folder">skills/</span>                 <span class="note">8 скиллов</span>
+│   ├── <span class="folder">agents/</span>                 <span class="note">4 субагента (mentor, practice-director, finance-director, octo-advisor)</span>
+│   ├── <span class="folder">skills/</span>                 <span class="note">11 скиллов</span>
 │   └── <span class="file">settings.json</span>            <span class="note">hooks, permissions</span>
 │
-├── <span class="folder">archive/</span>                  <span class="note">старые версии, исторические</span>
-│
-└── <span class="folder">Gd контекст/ + GD/</span>         <span class="note">legacy старая система (постепенно мигрируется)</span>
+└── <span class="folder">archive/</span>                  <span class="note">старые версии: GD, Gd контекст, xlsx, finance-bot, _gd-старые-версии</span>
 </div>
 
 <!-- ===== ФУНДАМЕНТ ===== -->
@@ -341,21 +341,21 @@
 <h2>6. AI-команда <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— .claude/</span></h2>
 
 <div class="card ai-team">
-  <p style="margin-top: 0;">Конфигурация AI-инструментов: 4 субагента с изолированным контекстом, 6 скиллов как атомарные процедуры, hooks для автоматизации.</p>
+  <p style="margin-top: 0;">Конфигурация AI-инструментов: 4 субагента с изолированным контекстом, 11 скиллов как атомарные процедуры, hooks для автоматизации. <strong>Mentor задаёт рамку, practice-director исполняет.</strong></p>
 
   <h3>🧑‍💼 .claude/agents/ — 4 субагента</h3>
   <ul class="file-list">
     <li>
-      <span class="file-name">business-operator.md</span>
-      <span class="file-desc">Операционный архитектор. Классифицирует inbox, обновляет state-файлы клиентов, помогает с регламентами. <small>Используется в /day-close.</small></span>
+      <span class="file-name">mentor.md</span>
+      <span class="file-desc">Главный наставник по жизненной траектории и долгосрочной цели €10М+. Стратег, спарринг-партнёр по развилкам, миграции, фильтру приоритетов. <small>По дефолту задаёт вопросы, не пишет планы.</small></span>
+    </li>
+    <li>
+      <span class="file-name">practice-director.md</span>
+      <span class="file-desc">Управляющий фриланс-практикой. Pipeline, новые проспекты, упаковка продукта, equity-разговоры. <small>НЕ для уже подписанных клиентов — для них отдельные advisor-ы.</small></span>
     </li>
     <li>
       <span class="file-name">finance-director.md</span>
       <span class="file-desc">Семейный и проектный финдиректор. Cashflow, runway, долги, equity-портфель. <small>Подключается в /day-close при денежных событиях.</small></span>
-    </li>
-    <li>
-      <span class="file-name">context-architect.md</span>
-      <span class="file-desc">Архитектор контекста AndreiOS. Чистит дубли, ищет противоречия, предлагает структурные изменения. <small>Запускается вручную ~раз в 2-4 недели.</small></span>
     </li>
     <li>
       <span class="file-name">octo-advisor.md</span>
@@ -363,7 +363,7 @@
     </li>
   </ul>
 
-  <h3 style="margin-top: 24px;">🛠 .claude/skills/ — 8 скиллов</h3>
+  <h3 style="margin-top: 24px;">🛠 .claude/skills/ — 11 скиллов</h3>
   <ul class="file-list">
     <li>
       <span class="file-name">intake/</span>
@@ -394,8 +394,20 @@
       <span class="file-desc"><code>/expert-panel</code>, <code>/panel</code> — прогнать решение/артефакт через 3+ экспертных ролей: каждый критикует мой вариант, предлагает свой. Дальше — сравнение и поэлементный выбор. <small>Для больших структурных решений до применения.</small></span>
     </li>
     <li>
-      <span class="file-name">bpmn-generator/</span> <span class="badge new">новое</span>
-      <span class="file-desc"><code>/bpmn</code>, <code>/process</code> — генерация BPMN 2.0 диаграммы процесса как валидный XML, готовый к импорту в bpmn.io / Camunda / draw.io. <small>Когда нужна схема процесса в нотации BPMN.</small></span>
+      <span class="file-name">bpmn-generator/</span>
+      <span class="file-desc"><code>/bpmn</code>, <code>/process</code> — генерация BPMN 2.0 диаграммы процесса как валидный XML, готовый к импорту в bpmn.io / Camunda / draw.io.</span>
+    </li>
+    <li>
+      <span class="file-name">landing-studio/</span> <span class="badge new">новое 19.05</span>
+      <span class="file-desc"><code>/landing-studio &lt;путь&gt;</code> — multi-agent pipeline (Researcher → Strategist → Copywriter → Critic → Assembler) с 3 human-in-the-loop точками. Для производства лендингов профессионального уровня.</span>
+    </li>
+    <li>
+      <span class="file-name">system-cleanup/</span> <span class="badge new">новое</span>
+      <span class="file-desc"><code>/system-cleanup</code> — чистка системы AndreiOS. Раньше был агент context-architect, теперь skill. Ищет дубли, противоречия, устаревшие страницы, сиротские файлы.</span>
+    </li>
+    <li>
+      <span class="file-name">update-config/, keybindings-help/, simplify/, fewer-permission-prompts/, loop/, schedule/, claude-api/, init/, review/, security-review/</span>
+      <span class="file-desc">Системные skills Claude Code — настройка конфига, keybindings, упрощение кода, расписания и др.</span>
     </li>
   </ul>
 
@@ -404,27 +416,37 @@
 </div>
 
 <!-- ===== АРХИВ ===== -->
-<h2>7. Архив и legacy</h2>
+<h2>7. Архив <span class="badge new">убран в /archive 19.05</span></h2>
 
 <div class="card archive">
   <h3>📦 archive/</h3>
-  <p style="font-size: 14px;">Старые версии файлов, исторические артефакты. <strong>Никогда не читать без явного запроса</strong> (правило корневого CLAUDE.md).</p>
+  <p style="font-size: 14px;">Старые версии файлов, исторические артефакты. <strong>Никогда не читать без явного запроса</strong> (правило корневого CLAUDE.md). Папка убрана в порядок 19.05 после большой очистки.</p>
   <ul class="file-list">
     <li>
       <span class="file-name">archive/_gd-старые-версии/</span>
-      <span class="file-desc">Распиленные старые контексты прошлой системы: <code>Контекст_GD_май_2026.md</code>, <code>Резюме_Octo.md</code>. <small>Перенесены сюда после переработки в новую структуру.</small></span>
+      <span class="file-desc">Первая итерация системы (GD-модель), агенты-предшественники: <code>Контекст_GD_май_2026.md</code>, <code>Резюме_Octo.md</code>.</span>
+    </li>
+    <li>
+      <span class="file-name">archive/finance-bot-prototype-2026-05-paused/</span>
+      <span class="file-desc">Прототип Telegram-бота для finance, поставлен на паузу 2026-05.</span>
+    </li>
+    <li>
+      <span class="file-name">archive/gd-folder-2026-05/</span>
+      <span class="file-desc">Папка <code>GD/</code> из корня (перенесена 2026-05-19). _NEW_SYSTEM v5 и старые финансовые xlsx Fishok.</span>
+    </li>
+    <li>
+      <span class="file-name">archive/gd-context-2026-05/</span>
+      <span class="file-desc">Папка <code>Gd контекст/</code> из корня (перенесена 2026-05-19). Резюме проектов и история (Испания, США, Fishok).</span>
+    </li>
+    <li>
+      <span class="file-name">archive/xlsx-legacy-2026-05/</span>
+      <span class="file-desc"><code>Family_Finance_OS.xlsx</code> и <code>Книга1.xlsx</code> из корня, заменены на <code>finance/</code> модуль.</span>
     </li>
   </ul>
-
-  <h3 style="margin-top: 24px;">📁 Gd контекст/ <span class="badge legacy">legacy</span></h3>
-  <p style="font-size: 14px;">Папка с историческими файлами прошлой версии системы. Постепенно перерабатывается: значимое — в новую структуру, остальное — в архив.</p>
-
-  <h3 style="margin-top: 24px;">📁 GD/ <span class="badge legacy">legacy</span></h3>
-  <p style="font-size: 14px;">Папка эксперимента <code>_NEW_SYSTEM/</code> прошлой версии — отложенная система 6 GPT-агентов. На паузе до стабилизации дохода €8К+/мес.</p>
 </div>
 
-<div class="principle legacy">
-  <strong>Принцип миграции:</strong> старые папки <code>Gd контекст/</code> и <code>GD/</code> намеренно не трогаем массово. Распиливаем только то, что нужно для текущей цели (как сделали с Octo). Остальное — естественно отмирает или мигрирует когда становится нужным.
+<div class="principle">
+  <strong>Принцип архивации:</strong> при наведении порядка не удалять — переносить в <code>archive/</code>. Удалять только если файл был в архиве &gt; 6 месяцев и не было ни одного обращения. См. <code>archive/README.md</code> в самом архиве.
 </div>
 
 <!-- ===== ПРИНЦИПЫ ===== -->

@@ -1,13 +1,13 @@
 # Андрей Сычинников
 
-> Operational Architect для русскоязычных стартапов pre-seed и Series A. Помогаю основателям выстраивать операционную систему компании: процессы, оргструктуру, метрики, AI-операции. Работаю в формате fractional / equity-партнёрства.
+> Strategic advisor / Hand of the King для русскоязычных founder-CEO стартапов pre-seed → Series A. Помогаю основателям через weekly 1:1 переводить хаос операционки в последовательность действий, формализовать институциональную структуру, возвращать founder-у владение задачами. Формула: operational entry → advisor tier. Cashflow-only режим (с 18.05.2026): беру платные проекты без принудительного equity-разговора до выхода на €8К/мес × 2 мес.
 
 База: Хихон, Испания. Email: sychinnikov@gmail.com
 
 ## Main pages
 
-- [Главная](https://sychinnikov.com/): Карта портала, статусы проектов
-- [Дашборд](https://sychinnikov.com/dashboard/): Оперативная картина — цели 90 дней, клиенты, pipeline
+- [Главная](https://sychinnikov.com/): Карта портала, три цели 90 дней, статусы проектов
+- [Дашборд](https://sychinnikov.com/dashboard/): Оперативная картина — цели, клиенты, sales-sprint
 - [Финансы](https://sychinnikov.com/finance/): Личный финансовый дашборд план-факт
 - [Здоровье системы](https://sychinnikov.com/health/): Метрики самой системы AndreiOS
 - [Как это работает](https://sychinnikov.com/how-it-works/): Объяснение AndreiOS простыми словами
@@ -22,26 +22,27 @@
 ## Clients
 
 - [Все клиенты](https://sychinnikov.com/clients/): Обзор всех проектов
-- [Fishok](https://sychinnikov.com/clients/fishok.html): Текущий доход €3 500/мес, Латвия
+- [Fishok](https://sychinnikov.com/clients/fishok.html): Retainer €3 500/мес от ВВ (Латвия) — не платформа роста
 - [Vitaly Textile](https://sychinnikov.com/clients/vitaly-textile.html): Третий клиент в diagnostic-offer
-- [Pipeline](https://sychinnikov.com/clients/pipeline.html): Воронка + Сергей-канал статус
-- [Octo Project](https://sychinnikov.com/octo-project/): Octo OS — Company + Personal
+- [Pipeline + майский спринт](https://sychinnikov.com/clients/pipeline.html): Воронка + 17 личных контактов, цель +€3К/мес
+- [Octo Project](https://sychinnikov.com/octo-project/): Octo OS на паузе до 17.06.2026
 
 ## Methodology
 
-- [Operational Foundation](https://sychinnikov.com/practice/): Моя публичная методология
-- [Pricing Ladder](https://sychinnikov.com/practice/pricing-ladder.html): 4 уровня продукта
+- [Strategic Advisor — Hand of the King](https://sychinnikov.com/practice/strategic-advisor.html): Точка гения. Weekly 1:1 для founder-CEO. Дважды валидировано рынком (Кристапс, Сергей)
+- [Operational Foundation](https://sychinnikov.com/practice/): Моя публичная методология. Формула operational → advisor
+- [Pricing Ladder](https://sychinnikov.com/practice/pricing-ladder.html): 5 уровней (Advisory hourly + 4 tier продукта)
 - [Кейсы](https://sychinnikov.com/practice/cases.html): Silver Spa, Fishok, Octo
 
 ## Decisions
 
-- [Журнал решений](https://sychinnikov.com/decisions/): Стратегические решения и переоценки
+- [Журнал решений](https://sychinnikov.com/decisions/): Стратегические решения и переоценки. Сверху новые.
 
 ## System architecture
 
 - [Карта системы](https://sychinnikov.com/system/): Концептуальная архитектура AndreiOS
-- [Полная структура](https://sychinnikov.com/structure/): Все папки и файлы
-- [Toolbox](https://sychinnikov.com/toolbox/): 8 skills, 4 субагента, hooks
+- [Полная структура](https://sychinnikov.com/structure/): Все папки и файлы (включая archive)
+- [Toolbox](https://sychinnikov.com/toolbox/): 11 skills, 4 субагента (mentor + practice-director + finance-director + octo-advisor), hooks
 
 ## Materials
 
@@ -49,8 +50,9 @@
 
 ## Context
 
-- Фокус: операционная архитектура, AI-driven management, equity-партнёрство в стартапах
+- Фокус: strategic advisor для founder-CEO, operational architecture, AI-driven management, equity-партнёрство в стартапах
 - Языки: русский (родной), английский (рабочий), испанский (бытовой)
-- Юрисдикции: ЕС (Испания), готовлю переезд в США
+- Юрисдикции: ЕС (Испания), готовлю переезд в США (2028, приоритет Флорида)
 - Долгосрочная цель: $10М+ к 2033 через equity-портфель из 6-10 долей в стартапах
 - Стиль работы: системное мышление, deep dive, AI-driven, без шаблонов
+- Сильный кейс: CEO с нуля до 120 млн ₽ выручки (2024) без внешних инвестиций
