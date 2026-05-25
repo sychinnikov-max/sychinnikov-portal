@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAFAF7" />
+<title>Контакты · Sychinnikov Portal</title>
+<meta name="description" content="Картотека людей-ресурсов с relationship-логикой: что им важно и что нужно сделать чтобы вывести отношения на следующий уровень." />
+<link rel="stylesheet" href="/assets/css/portal.css" />
+<style>
+/* Contacts page */
+.contacts-summary {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+.csum-card {
+  padding: 0.85rem 1rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+}
+.csum-num {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-variation-settings: "opsz" 24, "wght" 460;
+  line-height: 1;
+}
+.csum-num.accent { color: var(--color-accent); }
+.csum-num.success { color: var(--color-success); }
+.csum-num.warning { color: var(--color-warning); }
+.csum-num.muted { color: var(--color-text-soft); }
+.csum-num.danger { color: var(--color-danger); }
+.csum-label {
+  font-size: 0.72rem; color: var(--color-text-muted);
+  margin-top: 0.4rem; letter-spacing: 0.02em;
+}
+
+.contacts-group {
+  margin-bottom: 2.5rem;
+}
+.group-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.group-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-variation-settings: "opsz" 22, "wght" 460;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.group-title .stars { color: var(--color-warning); font-size: 0.85rem; }
+.group-count {
+  font-size: 0.78rem; color: var(--color-text-muted);
+  font-feature-settings: "tnum";
+}
+.group-note {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+  max-width: 60ch;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.contact-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out);
+}
+.contact-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-1px); }
+.contact-head {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.contact-avatar {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 0.9rem; font-weight: 500;
+}
+.contact-meta { flex: 1; min-width: 0; }
+.contact-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-variation-settings: "opsz" 20, "wght" 500;
+  margin-bottom: 0.15rem;
+  display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+}
+.contact-tags {
+  display: flex; gap: 0.3rem; flex-wrap: wrap;
+}
+.contact-tags .tag { font-size: 0.65rem; padding: 0.05rem 0.4rem; }
+.contact-status {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+.cs-warm { background: var(--color-success-soft); color: var(--color-success); }
+.cs-active { background: var(--color-accent-soft); color: var(--color-accent); }
+.cs-cool { background: var(--color-warning-soft); color: var(--color-warning); }
+.cs-sleep { background: var(--color-bg-alt); color: var(--color-text-muted); }
+.cs-closed { background: var(--color-danger-soft); color: var(--color-danger); }
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.5rem 0.85rem;
+  font-size: 0.83rem;
+  line-height: 1.45;
+  padding: 0.4rem 0;
+  border-top: 1px dashed var(--color-border-soft);
+}
+.contact-row:first-of-type { border-top: 0; padding-top: 0.65rem; }
+.contact-row dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  font-weight: 600;
+  padding-top: 0.15rem;
+}
+.contact-row dd { margin: 0; color: var(--color-text); }
+.contact-row.next-step dt { color: var(--color-accent); }
+.contact-row.next-step dd { color: var(--color-text); }
+
+.contact-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.5rem; margin-top: 0.7rem; padding-top: 0.65rem;
+  border-top: 1px solid var(--color-border-soft);
+  font-size: 0.72rem;
+  color: var(--color-text-soft);
+  font-feature-settings: "tnum";
+  flex-wrap: wrap;
+}
+.priv-flag {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  color: var(--color-warning);
+}
+.priv-flag::before {
+  content: "🔒"; font-size: 0.7rem;
+}
+
+@media (max-width: 1024px) {
+  .contacts-summary { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 720px) {
+  .contacts-grid { grid-template-columns: 1fr; }
+  .contacts-summary { grid-template-columns: repeat(2, 1fr); }
+  .contact-row { grid-template-columns: 1fr; gap: 0.15rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="brand">
+      <span class="brand-dot"></span>
+      Sychinnikov Portal
+      <span class="brand-sub">private</span>
+    </a>
+    <nav class="nav">
+      <a href="/" data-nav>Дашборд</a>
+      <a href="/founder-trajectory/" data-nav>Продукт</a>
+      <a href="/clients/" data-nav>Клиенты</a>
+      <a href="/contacts/" data-nav>Контакты</a>
+      <a href="/finance/" data-nav>Финансы</a>
+      <a href="/system/" data-nav>Система</a>
+      <a href="/decisions/" data-nav>Решения</a>
+      <a href="/wisdom/" data-nav>Wisdom</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <p class="page-eyebrow">Картотека · 18 активных + закрытых</p>
+    <h1 class="page-title">Контакты как капитал — кто, что им важно, что сделать чтобы поднять отношения.</h1>
+    <p class="page-sub">
+      Не CRM-pipeline и не «база лидов». Это люди, которые когда-нибудь становятся ресурсом, рекомендателем, советником или клиентом. По каждому — статус, контекст, что отдаю / что получаю и конкретное следующее действие.
+    </p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+
+    <!-- Summary strip -->
+    <div class="contacts-summary">
+      <div class="csum-card">
+        <div class="csum-num accent">2</div>
+        <div class="csum-label">Стратегические — высокий вес</div>
+      </div>
+      <div class="csum-card">
+        <div class="csum-num success">4</div>
+        <div class="csum-label">Активные — в диалоге</div>
+      </div>
+      <div class="csum-card">
+        <div class="csum-num warning">3</div>
+        <div class="csum-label">Перспективные — спринт май</div>
+      </div>
+      <div class="csum-card">
+        <div class="csum-num muted">4</div>
+        <div class="csum-label">Спящие / long-tail</div>
+      </div>
+      <div class="csum-card">
+        <div class="csum-num danger">5</div>
+        <div class="csum-label">Закрытые / архив сезона</div>
+      </div>
+    </div>
+
+    <!-- ─────── 1. STRATEGIC ─────── -->
+    <div class="contacts-group">
+      <div class="group-head">
+        <span class="group-title">Стратегические <span class="stars">★★★</span></span>
+        <span class="group-count">2 контакта</span>
+      </div>
+      <p class="group-note">Высокий вес, год+ отношений, доверие. Активировать только когда упаковка FT готова — преждевременный ask размотает кредит доверия.</p>
+
+      <div class="contacts-grid">
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">ВМ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Валентин — ментор <span class="contact-status cs-warm">тёплый</span></div>
+              <div class="contact-tags">
+                <span class="tag">ментор</span>
+                <span class="tag">advisor</span>
+                <span class="tag">founder-coaching</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Платный ментор предпринимателей (с июня 2025). Глубокий разбор личного + профессионального. Год отношений.</dd></div>
+            <div class="contact-row"><dt>Что даёт</dt><dd>Стратегические советы по траектории, доступ в сеть зрелых founder-ов, высокое качество рефов.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Когда упаковка Founder Trajectory готова — точечный ref-ask по его сети. Возможна личная встреча в Испании в июле. До этого — поддерживать диалог без ask.</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: 2026-05-20 · TG чек-ин</span>
+            <span class="priv-flag">private</span>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">МК</div>
+            <div class="contact-meta">
+              <div class="contact-name">Марк — бизнес-брокер <span class="contact-status cs-warm">тёплый</span></div>
+              <div class="contact-tags">
+                <span class="tag">founder</span>
+                <span class="tag">M&amp;A</span>
+                <span class="tag">network</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Основатель шоколадного бренда. Занимается продажей бизнесов, нетворк founder-ов. Назвал «наставником» 20.05.</dd></div>
+            <div class="contact-row"><dt>Что даёт</dt><dd>Доступ в founder-окружение, тёплые интро его клиентам перед продажей бизнеса. Главный актив майского спринта.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>🔥 Созвон W22 (26.05-01.06). Подготовить: партнёрская модель для брокерской сети + сценарий «операционный аудит ДО продажи бизнеса» как клиентская услуга. Согласовать дату до 25.05.</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: 2026-05-21 · TG, договорились созвониться</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ─────── 2. ACTIVE ─────── -->
+    <div class="contacts-group">
+      <div class="group-head">
+        <span class="group-title">Активные <span class="stars">★★</span></span>
+        <span class="group-count">4 контакта</span>
+      </div>
+      <p class="group-note">В рабочем диалоге сейчас. Регулярные касания, понятный сценарий следующего хода. Не стратеги — операционные узлы недели.</p>
+
+      <div class="contacts-grid">
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar" style="background: #6B5E2F;">КК</div>
+            <div class="contact-meta">
+              <div class="contact-name">Кристапс — Fishok / Saverfish <span class="contact-status cs-active">в работе</span></div>
+              <div class="contact-tags">
+                <span class="tag tag-fishok">клиент</span>
+                <span class="tag">B2B-продажи</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Коммерческий директор Saverfish, мажоритарий. Платит €3 500/мес за advisor-работу (через личный карман ВВ).</dd></div>
+            <div class="contact-row"><dt>Что важно</dt><dd>Структура регламентов производства, финтаблица, CRM. Конфиденциальность full-time-фрейма (с 21.05 — открыто требует не передавать через Татьяну/Оскара).</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>One-pager «модератор + аутсорс-ФД» к вс 24.05. Не давить с финдиром-консультантом — он на нервах. Держать рамку: структуру даю, исполнение остаётся командой.</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: 2026-05-21 · synch call</span>
+            <span class="priv-flag">private — не упоминать Оскара/Татьяну</span>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar" style="background: #5B3D5B;">СС</div>
+            <div class="contact-meta">
+              <div class="contact-name">Сергей Сокта — Octo <span class="contact-status cs-cool">пауза</span></div>
+              <div class="contact-tags">
+                <span class="tag tag-octo">клиент</span>
+                <span class="tag">equity-кандидат</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Founder Octo Relocate. Проект работался на no-win/no-fee без письменной фиксации скоупа — расширился в COO+CMO+Sales одновременно.</dd></div>
+            <div class="contact-row"><dt>Что важно</dt><dd>Дедлайн 17.06 — точка решения. Долг €1К не зафиксирован. Корп.почта отключена Еленой (Сергей не в курсе).</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Синхрон 26.05. НЕ отправлять резюме заранее — ждать его повестку. Долг не поднимать в моменте (cashflow-only). Если 17.06 без письменной модели — выход.</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: 2026-05-21 · synch call</span>
+            <span class="priv-flag">private — фон конфликта</span>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">НМ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Надин — мастермайнд Испания <span class="contact-status cs-warm">тёплый</span></div>
+              <div class="contact-tags">
+                <span class="tag">peer</span>
+                <span class="tag">advisor</span>
+                <span class="tag">network</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Модератор еженедельного мастермайнда. B2B-маркетинг, импорт из Китая, испанские связи. Высокое доверие.</dd></div>
+            <div class="contact-row"><dt>Что даёт</dt><dd>Совет по маркетингу/US-трафику, тёплые интро в испанскую сеть, обмен лидами peer-level. Реферальная схема 15% за интро отправлена 19.05.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Мастермайнд 27.05. Начать с «как поездка?», не напоминать про оффер. ⚠️ Если Сергей в группе — ask не делать. НЕ продавать ей напрямую (она solo, не подходит под фильтр).</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: 2026-05-21 · прочитала, лайк, текста нет</span>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">ВК</div>
+            <div class="contact-meta">
+              <div class="contact-name">Влад К. — сын ВВ <span class="contact-status cs-warm">союзник</span></div>
+              <div class="contact-tags">
+                <span class="tag">peer</span>
+                <span class="tag">мост к ВВ</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Сын Владимира Кузакова (ВВ). Отключён от Фишка вместе с отцом, без проектов сейчас. Я — его неформальный наставник.</dd></div>
+            <div class="contact-row"><dt>Что важно</dt><dd>Поиск своего проекта. Хочет быть нужным. Лёгкий путь к финансированию ВВ через «своего человека».</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Подключать как представителя к моим новым идеям → амплифицирует к ВВ дословно. Не раскрывать содержание других проектов (правило конфиденциальности Fishok).</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: регулярные голосовые</span>
+            <span class="priv-flag">private — full-time-фрейм</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ─────── 3. PROSPECTIVE ─────── -->
+    <div class="contacts-group">
+      <div class="group-head">
+        <span class="group-title">Перспективные <span class="stars">★</span></span>
+        <span class="group-count">3 контакта</span>
+      </div>
+      <p class="group-note">Sales-спринт мая. Запросы ещё актуальны, требуют реанимации или развития диалога. Не стратеги — потенциальные платящие.</p>
+
+      <div class="contacts-grid">
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">ЕБ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Евгений Б. — Красный Треугольник <span class="contact-status cs-warm">тёплый</span></div>
+              <div class="contact-tags">
+                <span class="tag">founder</span>
+                <span class="tag">промышленность</span>
+                <span class="tag">семья</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Гендир завода конвейерных лент (28 лет, 120 чел). Знакомство через брата + его жену Дашу. Семейный контекст.</dd></div>
+            <div class="contact-row"><dt>Что важно</dt><dd>Компания в трёхлетнем падении (выручка −29%, убыток −13М, штат −28%). Ищут решения. В Испании есть ВНЖ и недвижимость — мост для офлайн встреч.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>23.05 — голосовое 30 сек, повод по конвейерному рынку Казахстана. Не упоминать DD-цифры. Вопросы &gt; утверждения. Если ответит — advisory-час €150-200 → mini-diagnostic €1.5-3К.</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: 2026-05-19 · реанимационное сообщение</span>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">СК</div>
+            <div class="contact-meta">
+              <div class="contact-name">Саня Касьянов <span class="contact-status cs-active">в диалоге</span></div>
+              <div class="contact-tags">
+                <span class="tag">peer</span>
+                <span class="tag">founder</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Знакомый предприниматель. Peer-канал, не sales напрямую. Сам спросил «на чём зарабатываешь».</dd></div>
+            <div class="contact-row"><dt>Что важно</dt><dd>21.05 раскрыл AndreiOS, повторно спросил его контекст. Жду ответа.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Ждать ответа, не пинговать. Если ответит — продолжать peer-разговор, не превращать в sales. Может стать noref-источником.</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: 2026-05-21 · TG</span>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">ДК</div>
+            <div class="contact-meta">
+              <div class="contact-name">Даня Кирчанов <span class="contact-status cs-active">в работе</span></div>
+              <div class="contact-tags">
+                <span class="tag">peer</span>
+                <span class="tag tag-ft">FT input</span>
+              </div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Кто</dt><dd>Founder, peer. Созвонились 21.05 — разбор differences для Founder Trajectory.</dd></div>
+            <div class="contact-row"><dt>Что даёт</dt><dd>Внешний взгляд на упаковку. Источник для product/differences.md.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Вынести 3 маркера отстройки в differences.md. Запросить разрешение на цитату в кейс/лендинг.</dd></div>
+          </dl>
+          <div class="contact-foot">
+            <span>last touch: 2026-05-21 · video call</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ─────── 4. SLEEPING / LONG-TAIL ─────── -->
+    <div class="contacts-group">
+      <div class="group-head">
+        <span class="group-title">Спящие / long-tail</span>
+        <span class="group-count">4 контакта</span>
+      </div>
+      <p class="group-note">Тёплый фон, конкретного хода сейчас не делаю. Реагирую на их инициативу или возвращаюсь точечно через 2-3 месяца.</p>
+
+      <div class="contacts-grid">
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">СМ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Степан — Москва <span class="contact-status cs-sleep">спящий</span></div>
+              <div class="contact-tags"><span class="tag">peer</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>Ответил тёпло на спринт мая, но «никого с ходу назвать не может». Запускает юрлицо в Москве, на 1-2 года там, цель — Европа позже.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Долгосрочно peer-канал. Через 2-3 мес лёгкое касание. Не торопить.</dd></div>
+          </dl>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">АФ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Анатолий Фролов <span class="contact-status cs-sleep">long-tail</span></div>
+              <div class="contact-tags"><span class="tag">founder</span><span class="tag">SaaS</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>Founder SaaS по автоматизации продаж. Сейчас в product-mode (US, FB-трафик). Cross-referral оффер отправлен 19.05 — ответил «переделов сейчас».</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Реагировать только на его инициативу. Не пинговать.</dd></div>
+          </dl>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">СГ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Саня Гид <span class="contact-status cs-sleep">low-capacity</span></div>
+              <div class="contact-tags"><span class="tag">peer</span><span class="tag">семья</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>Поспрашивает по кругу, но родились близнецы — low-capacity. Не пушать.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Август-сентябрь — поздравить с детьми органично. Тогда возможен ref-вопрос.</dd></div>
+          </dl>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">ВФ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Вован Фисенко <span class="contact-status cs-sleep">не прочитал</span></div>
+              <div class="contact-tags"><span class="tag">знакомый</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>20.05 открыл диалог, 21.05 я дал 4-сообщенческий апдейт без ask. Не прочитал.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Не пинговать, ждать прочтения. Если ответит — продолжать peer-разговор.</dd></div>
+          </dl>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ─────── 5. CLOSED / ARCHIVED ─────── -->
+    <div class="contacts-group">
+      <div class="group-head">
+        <span class="group-title">Закрытые сезона</span>
+        <span class="group-count">5 контактов</span>
+      </div>
+      <p class="group-note">Сезонно закрыты по объективным причинам (личное, финансовое, депрессия). Не выкидываю — фиксирую почему закрыт и когда возвращаться.</p>
+
+      <div class="contacts-grid">
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">АА</div>
+            <div class="contact-meta">
+              <div class="contact-name">Альберт <span class="contact-status cs-closed">закрыт 4-6 мес</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>Развёлся, плохая ситуация. Ничего не интересно.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Не активировать. Возможный возврат — осень 2026.</dd></div>
+          </dl>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">ГА</div>
+            <div class="contact-meta">
+              <div class="contact-name">Галя Абакан <span class="contact-status cs-closed">в декрете</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>В декрете, никого предложить не может. Готова скинуть инсты девчонок без рекомендации.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Слабый полу-холодный канал. Не приоритет.</dd></div>
+          </dl>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">РФ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Рафаэль <span class="contact-status cs-closed">семейно-поверхностный</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>Нормально не отвечает. Не sales-канал. Семейно-социальный.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Не пинговать по продажам. Поздравления в персональные даты.</dd></div>
+          </dl>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">ЕМ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Евгений-младший <span class="contact-status cs-closed">депрессия</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>Не прочитал сообщение. Депрессивное состояние.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Через 1-2 мес лёгкий чек-ин — «как ты?», не sales.</dd></div>
+          </dl>
+        </article>
+
+        <article class="contact-card">
+          <header class="contact-head">
+            <div class="contact-avatar">РЗ</div>
+            <div class="contact-meta">
+              <div class="contact-name">Рустам Зарипов <span class="contact-status cs-closed">фин. проблемы</span></div>
+            </div>
+          </header>
+          <dl>
+            <div class="contact-row"><dt>Контекст</dt><dd>Read-silent. Финансовые проблемы.</dd></div>
+            <div class="contact-row next-step"><dt>Следующий шаг</dt><dd>Через 2-3 мес тёплый чек-ин, без оффера.</dd></div>
+          </dl>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Правила работы с контактами -->
+    <div class="card" style="margin-top: 2rem;">
+      <div class="card-label">Правила работы с контактами</div>
+      <ol style="margin: 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.6; color: var(--color-text);">
+        <li><strong>Pre-flight confidentiality-фильтр</strong> перед любым sales/outreach: проверять (а) full-time-фрейм Fishok, (б) Octo-паузу. Контакт в красной зоне — в «запрещённые каналы», не в outreach.</li>
+        <li><strong>Промоут контакта в свою папку</strong> — только при ≥3 артефактах или когда стал стратегическим. До этого — один файл.</li>
+        <li><strong>Семья — не контакты.</strong> Семейные люди в <code>family.md</code>, не здесь. Сервисные (няня, врач, юрист) идут сюда с тегом <code>service</code>.</li>
+        <li><strong>Контакты с тегом <code>private: true</code></strong> — не показывать сторонним. Кто? Кристапс, Влад К., некоторые сегменты Octo.</li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    Sychinnikov Portal · приватный second-brain · <a href="/">← дашборд</a>
+  </div>
+</footer>
+
+<script src="/assets/js/portal.js" defer></script>
+</body>
+</html>

@@ -1,334 +1,277 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AndreiOS — карта системы</title>
-<meta name="description" content="Архитектура операционной системы Андрея Сычинникова: фундамент, клиенты, финансы, AI-команда, циклы работы.">
-<meta name="robots" content="noindex">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAFAF7" />
+<title>Система AndreiOS · Sychinnikov Portal</title>
+<meta name="description" content="Архитектура AndreiOS: 4 субагента, slash-команды, правила контекста, ритмы работы, kill-switch." />
+<link rel="stylesheet" href="/assets/css/portal.css" />
 <style>
-  :root {
-    --bg: #f7f3ec;
-    --card: #ffffff;
-    --ink: #2a2a2a;
-    --muted: #6b6b6b;
-    --accent: #c25c2c;
-    --green: #4a7c59;
-    --blue: #3a5a8c;
-    --purple: #6b4a8c;
-    --red: #b04c4c;
-    --amber: #c89a3c;
-    --shadow: 0 2px 12px rgba(0,0,0,0.06);
-    --line: #e5dfd3;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.6;
-    font-size: 16px;
-  }
-  .container { max-width: 1080px; margin: 0 auto; padding: 50px 24px; }
-  nav { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
-  nav a { color: var(--blue); text-decoration: none; }
-  nav a:hover { text-decoration: underline; }
-  h1 { font-size: 38px; line-height: 1.2; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.5px; }
-  .subtitle { font-size: 18px; color: var(--muted); margin: 0 0 50px; }
-  h2 { font-size: 24px; margin: 50px 0 18px; font-weight: 600; color: var(--accent); border-bottom: 2px solid var(--line); padding-bottom: 8px; }
-  h3 { font-size: 18px; margin: 24px 0 10px; font-weight: 600; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 24px 28px; box-shadow: var(--shadow); margin-bottom: 16px; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  .file-list { list-style: none; padding: 0; margin: 0; }
-  .file-list li { padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 12px; }
-  .file-list li:last-child { border-bottom: none; }
-  .file-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; color: var(--purple); flex-shrink: 0; min-width: 200px; }
-  .file-desc { font-size: 14px; color: var(--ink); }
-  .principle { background: #faf6ee; border-left: 3px solid var(--accent); padding: 14px 18px; margin: 12px 0; font-size: 15px; border-radius: 0 6px 6px 0; }
-  .mermaid-wrap { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 16px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-  th { font-weight: 600; color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.4px; }
-  code { background: #f0ebe1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
-  .tag { display: inline-block; background: var(--card); border: 1px solid var(--line); padding: 2px 8px; border-radius: 4px; font-size: 12px; color: var(--muted); margin-right: 4px; }
-  footer { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
-  @media (max-width: 700px) {
-    h1 { font-size: 30px; }
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
-    .file-list li { flex-direction: column; gap: 4px; }
-    .file-name { min-width: auto; }
-  }
+.agents-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.agent {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  padding: 1.2rem 1.35rem;
+  position: relative;
+}
+.agent::before {
+  content: "";
+  position: absolute; left: 0; top: 1.2rem; bottom: 1.2rem;
+  width: 3px; background: var(--color-accent); border-radius: 0 3px 3px 0;
+}
+.agent-name {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--color-accent); font-weight: 600;
+  letter-spacing: 0.04em; margin-bottom: 0.55rem;
+}
+.agent-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-variation-settings: "opsz" 20, "wght" 500;
+  margin-bottom: 0.6rem;
+}
+.agent-row {
+  display: grid; grid-template-columns: 7.5rem 1fr;
+  gap: 0.4rem 0.85rem; font-size: 0.83rem;
+  padding: 0.35rem 0; line-height: 1.45;
+}
+.agent-row dt {
+  font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-text-soft); font-weight: 600; padding-top: 0.15rem;
+}
+.agent-row dd { margin: 0; color: var(--color-text-muted); }
+.agent-row.bad dt { color: var(--color-danger); }
+
+.ritm { display: grid; grid-template-columns: 8rem 1fr 8rem; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border-soft); gap: 1rem; font-size: 0.88rem; }
+.ritm:last-child { border-bottom: 0; }
+.ritm-when { font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-text-soft); }
+.ritm-what { color: var(--color-text); }
+.ritm-cmd {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  background: var(--color-accent-soft); color: var(--color-accent);
+  padding: 0.2rem 0.55rem; border-radius: 4px; text-align: center;
+  justify-self: end;
+}
+
+.rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.rule {
+  padding: 1rem 1.15rem; background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft); border-radius: 8px;
+}
+.rule-head {
+  font-family: var(--font-serif); font-size: 1rem;
+  font-variation-settings: "opsz" 18, "wght" 500;
+  margin-bottom: 0.4rem;
+}
+.rule-body { font-size: 0.83rem; color: var(--color-text-muted); line-height: 1.5; }
+
+.kill-switch {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-danger-soft);
+  border: 1px solid #E5C8C8;
+  border-left: 3px solid var(--color-danger);
+  border-radius: 8px;
+  font-size: 0.88rem; color: var(--color-text);
+}
+.kill-switch-icon { font-size: 1.5rem; }
+
+@media (max-width: 1024px) {
+  .agents-grid, .rules { grid-template-columns: 1fr; }
+  .ritm { grid-template-columns: 6rem 1fr; }
+  .ritm-cmd { grid-column: 2; justify-self: start; margin-top: 0.25rem; }
+}
 </style>
 </head>
 <body>
-<div class="container">
 
-<nav><a href="/">← главная</a> · <a href="/dashboard/">дашборд</a> · <a href="/structure/">полная структура</a> · <a href="/how-it-works/">простыми словами</a></nav>
-
-<h1>AndreiOS — карта системы</h1>
-<p class="subtitle">Концептуальная архитектура: фундамент, финансы, клиенты, AI-команда, циклы работы и правила.</p>
-
-<div class="principle">
-  <strong>Главный принцип:</strong> AndreiOS — это не «инструмент управления задачами». Это <strong>контекстная база</strong>, в которую раз в день стекаются события, а AI-команда помогает разложить их по проектам, обновить состояние и поставить приоритеты на завтра.
-</div>
-
-<h2>1. Карта зависимостей</h2>
-
-<div class="mermaid-wrap">
-<pre class="mermaid">
-flowchart TD
-    A[Андрей] -->|/intake| INBOX[inbox/today.md]
-    A -->|деньги| FIN[/finance]
-    A -->|вечером /day-close| DC{day-close}
-    A -->|пятница /weekly-dialogue| WD{weekly-dialogue}
-
-    DC --> INBOX
-    DC --> STATE
-    DC --> DAILY[daily/YYYY-MM-DD.md]
-    DC --> DECISIONS[decisions.md]
-    DC --> FINSYS
-
-    FIN --> FINSYS
-    WD --> WEEK[weekly/YYYY-Wnn.md]
-    WD --> TW[this-week.md]
-    WD --> STATE
-
-    subgraph FUND[Фундамент]
-        ME[me.md]
-        FAM[family.md]
-        DECISIONS
-        TW
-    end
-
-    subgraph FINSYS[Финансы]
-        FSTATE[finance/state.md]
-        BUDGET[finance/budget.md]
-        LEDGER[finance/ledger.md]
-        MONEY[money.md]
-    end
-
-    subgraph CLIENTS[Клиенты]
-        FISHOK[fishok/state.md]
-        OCTO[octo/command/state.md]
-        PIPE[pipeline.md]
-    end
-
-    STATE[state-файлы] -.-> FISHOK
-    STATE -.-> OCTO
-    STATE -.-> PIPE
-
-    FUND --> A
-    FINSYS --> A
-    CLIENTS --> A
-
-    classDef foundation fill:#faf6ee,stroke:#c25c2c,stroke-width:2px
-    classDef clients fill:#eef4f0,stroke:#4a7c59,stroke-width:2px
-    classDef finance fill:#f5edee,stroke:#b04c4c,stroke-width:2px
-    classDef cycle fill:#eaeef7,stroke:#3a5a8c,stroke-width:2px
-    class FUND foundation
-    class CLIENTS clients
-    class FINSYS finance
-    class DC,WD,FIN cycle
-</pre>
-</div>
-
-<p style="font-size: 14px; color: var(--muted);">
-  <strong>Чтение схемы:</strong> Андрей кидает сырьё в <code>inbox</code> в течение дня, любые денежные события — сразу в <code>/finance</code>. Вечером <code>/day-close</code> разбирает inbox и обновляет нужные файлы. Раз в неделю <code>/weekly-dialogue</code> переосмысляет состояние и обновляет план.
-</p>
-
-<h2>2. Фундамент <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— 5 файлов в корне</span></h2>
-<p>База. Меняется редко, но влияет на каждое решение.</p>
-
-<ul class="file-list">
-  <li class="card" style="padding: 14px 18px;">
-    <span class="file-name">CLAUDE.md</span>
-    <span class="file-desc">Главная конституция-роутер. Читается перед каждым сообщением. Три цели 90 дней, правила контекста, что НЕ делать.</span>
-  </li>
-  <li class="card" style="padding: 14px 18px;">
-    <span class="file-name">me.md</span>
-    <span class="file-desc">Кто я, ценности, антицели, главная цель, двухтактная стратегия, фильтры решений</span>
-  </li>
-  <li class="card" style="padding: 14px 18px;">
-    <span class="file-name">family.md</span>
-    <span class="file-desc">Семейный снимок: миграция, дети, документы, договорённости с Викой</span>
-  </li>
-  <li class="card" style="padding: 14px 18px;">
-    <span class="file-name">decisions.md</span>
-    <span class="file-desc">Журнал стратегических решений с YAML-тегами scope (strategic/finance/family/fishok/octo/pipeline)</span>
-  </li>
-  <li class="card" style="padding: 14px 18px;">
-    <span class="file-name">this-week.md</span>
-    <span class="file-desc">Недельный план: P1/P2/P3 задачи, блоки по проектам, гипотеза недели</span>
-  </li>
-</ul>
-
-<h2>3. Финансы <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— отдельный слой</span></h2>
-<p>В мае 2026 финансы выделены в отдельную папку с системой план-факт. Раньше всё жило в <code>money.md</code>, теперь — три файла + skill для записи транзакций.</p>
-
-<div class="card">
-  <ul class="file-list">
-    <li>
-      <span class="file-name">finance/state.md</span>
-      <span class="file-desc">Живая картина месяца: план-факт по конвертам, остатки счетов, прогресс к подушке, сигналы. Обновляется при каждой записи транзакции.</span>
-    </li>
-    <li>
-      <span class="file-name">finance/budget.md</span>
-      <span class="file-desc">Структура 12 конвертов, шаблоны распределения зарплаты, правила фондов. Меняется редко (раз в месяц).</span>
-    </li>
-    <li>
-      <span class="file-name">finance/ledger.md</span>
-      <span class="file-desc">Append-only журнал транзакций текущего месяца. Архивируется в <code>finance/archive/</code> при закрытии месяца.</span>
-    </li>
-    <li>
-      <span class="file-name">finance/archive/</span>
-      <span class="file-desc">Закрытые месяцы: снимок плана-факта + полный ledger.</span>
-    </li>
-    <li>
-      <span class="file-name">money.md (корень)</span>
-      <span class="file-desc">Стратегический слой: cashflow по горизонтам (6/12 мес, 10 лет), долги, equity-портфель, фонды. Не оперативка.</span>
-    </li>
-  </ul>
-  <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">
-    <strong>Как записывать:</strong> просто «обед 18 евро картой» в чате — skill <code>/finance</code> разберёт сумму, категорию, счёт, дополнит state и ledger.
-  </p>
-</div>
-
-<h2>4. Клиенты <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— изолированные проекты</span></h2>
-<p>Каждый клиент — отдельная папка с собственной структурой. Никакого «общего» state — изоляция предотвращает утечки контекста.</p>
-
-<div class="grid-2">
-  <div class="card">
-    <h3>🐟 Fishok <span class="tag">текущий доход</span></h3>
-    <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Латвия. €3 500/мес. Производство натуральных рыбных лакомств, B2B. Стандартная структура: CLAUDE.md, state.md, private/shared, meetings, raw, work.</p>
-    <p style="font-size: 13px; color: var(--muted);">Тег: <span class="tag">fishok</span> · <a href="/clients/fishok.html" style="color: var(--blue);">детали →</a></p>
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="brand"><span class="brand-dot"></span>Sychinnikov Portal<span class="brand-sub">private</span></a>
+    <nav class="nav">
+      <a href="/" data-nav>Дашборд</a>
+      <a href="/founder-trajectory/" data-nav>Продукт</a>
+      <a href="/clients/" data-nav>Клиенты</a>
+      <a href="/contacts/" data-nav>Контакты</a>
+      <a href="/finance/" data-nav>Финансы</a>
+      <a href="/system/" data-nav>Система</a>
+      <a href="/decisions/" data-nav>Решения</a>
+      <a href="/wisdom/" data-nav>Wisdom</a>
+    </nav>
   </div>
-  <div class="card">
-    <h3>🐙 Octo Relocate <span class="tag" style="background: #f9e9e9; color: #b04c4c;">на паузе 18.05</span></h3>
-    <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Испания. Релокационно-визовая компания + стартап-инкубатор. <strong>Расширенная структура из 7 верхних папок</strong> (см. <a href="/structure/" style="color: var(--blue);">полную карту</a>): acquisition, funnel, handover, expertise, ops, command, private + work. После month-1 review — пауза до 17.06.</p>
-    <p style="font-size: 13px; color: var(--muted);">Тег: <span class="tag">octo</span> · <a href="/octo-project/" style="color: var(--blue);">Octo OS →</a></p>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <p class="page-eyebrow">05 · Система · AndreiOS</p>
+    <h1 class="page-title">Операционная система моей жизни и практики.</h1>
+    <p class="page-sub">
+      4 субагента, slash-команды, правила контекста, ритм работы день-неделя-месяц, kill-switch. Это не блог про продуктивность — это рабочая инфраструктура.
+    </p>
   </div>
-  <div class="card">
-    <h3>🧵 Vitaly Textile <span class="tag" style="background: #faf2dd; color: #c89a3c;">diagnostic-offer</span></h3>
-    <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Москва. RFID smart-textile для отелей, франшиза Raccoon. Через канал Сергея, на паузе вместе с ним. Стандартная структура клиента-проспекта: state.md (YAML), touches.md, private.md, raw/.</p>
-    <p style="font-size: 13px; color: var(--muted);">Тег: <span class="tag">pipeline</span> · <a href="/clients/vitaly-textile.html" style="color: var(--blue);">детали →</a></p>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+
+    <div class="section-head">
+      <h2 class="section-title"><span class="section-num">01</span> AI-команда — 4 субагента</h2>
+      <p class="section-meta">пересобрана 2026-05-18 · trajectory-architect добавлен 2026-05-21</p>
+    </div>
+
+    <div class="agents-grid">
+      <article class="agent">
+        <div class="agent-name">mentor</div>
+        <h3 class="agent-title">Главный наставник по жизненной траектории</h3>
+        <dl>
+          <div class="agent-row"><dt>Зачем</dt><dd>Стратегический советчик по долгосрочным целям $10М+ к 40. Задаёт вопросы и подсвечивает противоречия.</dd></div>
+          <div class="agent-row"><dt>Когда</dt><dd>Цели 90 дней, главные развилки, семья и эмиграция в стратегическом разрезе.</dd></div>
+          <div class="agent-row bad"><dt>Не для</dt><dd>Операционка, продажи, финрасчёты — есть специализированные.</dd></div>
+        </dl>
+      </article>
+
+      <article class="agent">
+        <div class="agent-name">trajectory-architect</div>
+        <h3 class="agent-title">Жёсткий наставник по упаковке Founder Trajectory</h3>
+        <dl>
+          <div class="agent-row"><dt>Зачем</dt><dd>Гибридный путь 6 недель — методология → продуктизация → позиционирование. Школа Бейкера + Эннса + Вайс.</dd></div>
+          <div class="agent-row"><dt>Когда</dt><dd>Упаковка продукта, методология, цены, отстройка, фильтр клиента, мета-блок «импостер в комфорте оператора».</dd></div>
+          <div class="agent-row bad"><dt>Не для</dt><dd>Жизненная стратегия (это mentor), продажа, контент.</dd></div>
+        </dl>
+      </article>
+
+      <article class="agent">
+        <div class="agent-name">finance-director</div>
+        <h3 class="agent-title">Семейный и проектный финдиректор</h3>
+        <dl>
+          <div class="agent-row"><dt>Зачем</dt><dd>Cashflow, runway, долги, инвестиции, equity-портфель.</dd></div>
+          <div class="agent-row"><dt>Когда</dt><dd>Работа с деньгами — личными или клиентскими. Расчёты, бюджетирование, проверки.</dd></div>
+          <div class="agent-row bad"><dt>Не для</dt><dd>Жизненная стратегия. Финансовые цели уровня «зачем» — это mentor.</dd></div>
+        </dl>
+      </article>
+
+      <article class="agent">
+        <div class="agent-name">octo-advisor</div>
+        <h3 class="agent-title">Внутренний советник проекта Octo</h3>
+        <dl>
+          <div class="agent-row"><dt>Зачем</dt><dd>Изолирован от остальной AndreiOS. Паттерн advisor — при долгосрочном клиенте создаётся свой <code>&lt;name&gt;-advisor</code>.</dd></div>
+          <div class="agent-row"><dt>Когда</dt><dd>Стратегические разборы Octo, аудит проекта, помощь со скоупом.</dd></div>
+          <div class="agent-row bad"><dt>Не для</dt><dd>Другие клиенты — у них свои advisor или общий контекст.</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Правило вызова</div>
+      <p style="font-size: 0.9rem; line-height: 1.55; color: var(--color-text);">
+        <strong>Mentor задаёт рамку.</strong> Trajectory-architect исполняет внутри (упаковка продукта). Finance-director — деньги отдельным контуром. Octo-advisor — изолирован к одному проекту. Не путать функции.
+      </p>
+    </div>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">02</span> Ритм работы — день, неделя, месяц</h2>
+      <p class="section-meta">slash-команды через Claude Code</p>
+    </div>
+
+    <div class="card">
+      <div class="ritm"><div class="ritm-when">Утро</div><div class="ritm-what">Активный pull Granola + inbox + state-файлы → рабочий лист дня с источниками</div><div class="ritm-cmd">/day-open</div></div>
+      <div class="ritm"><div class="ritm-when">После звонка</div><div class="ritm-what">Pull транскрипта → задачи / решения / открытые → разнос по проектам</div><div class="ritm-cmd">/call</div></div>
+      <div class="ritm"><div class="ritm-when">В течение дня</div><div class="ritm-what">Любое сырьё → inbox/today.md с таймстампом</div><div class="ritm-cmd">/intake</div></div>
+      <div class="ritm"><div class="ritm-when">В течение дня</div><div class="ritm-what">Трата / доход / перевод — финансовый учёт</div><div class="ritm-cmd">/finance</div></div>
+      <div class="ritm"><div class="ritm-when">Вечер</div><div class="ritm-what">Свод дня, классификация записей, обновление state-файлов</div><div class="ritm-cmd">/day-close</div></div>
+      <div class="ritm"><div class="ritm-when">Пятница / сб</div><div class="ritm-what">Недельная рефлексия в формате диалога</div><div class="ritm-cmd">/weekly-dialogue</div></div>
+      <div class="ritm"><div class="ritm-when">1-е число</div><div class="ritm-what">Закрытие месяца, снимок капитала</div><div class="ritm-cmd">/finance close</div></div>
+      <div class="ritm"><div class="ritm-when">Каждые 2-4 нед</div><div class="ritm-what">Аудит структуры AndreiOS, поиск дублей и сиротских файлов</div><div class="ritm-cmd">/system-cleanup</div></div>
+      <div class="ritm"><div class="ritm-when">По запросу</div><div class="ritm-what">Прогнать решение через 3+ экспертных ролей с опросом</div><div class="ritm-cmd">/expert-panel</div></div>
+    </div>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">03</span> Правила контекста и роста</h2>
+      <p class="section-meta">экономия токенов · защита от раздувания</p>
+    </div>
+
+    <div class="rules">
+      <div class="rule">
+        <div class="rule-head">Правило роста</div>
+        <div class="rule-body">Новая папка/файл создаётся <strong>только</strong> когда: (а) действующий файл &gt;200 строк, или (б) ≥3 однотипных артефакта шумят в общем, или (в) явно решено «нужно для одной из трёх целей 90 дней». <em>Запрещено</em> создавать «на всякий случай» или «для красоты».</div>
+      </div>
+      <div class="rule">
+        <div class="rule-head">Не читать archive/</div>
+        <div class="rule-body">Никогда не читать архив без явного запроса. Старые raw-файлы не переписывать, только архивировать.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-head">Inbox только в /day-close</div>
+        <div class="rule-body"><code>inbox/today.md</code> — живой накопитель сырья. Читается только при разборе дня. При обычной работе — не загружать в контекст.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-head">Contacts только по запросу</div>
+        <div class="rule-body">Картотека читается только при «порекомендуй человека для X», «кто у меня есть по теме Y». При обычной работе — не сканировать. <code>contacts/_private/</code> исключается из автоматических рекомендаций.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-head">Granola — отдельный источник</div>
+        <div class="rule-body">Pull только при <code>/day-open</code> и <code>/call</code>. В обычной работе не вытягивать — съедает токены. MCP подключён локально.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-head">Pre-flight confidentiality</div>
+        <div class="rule-body">Перед любым sales/outreach: фильтр (а) Fishok-full-time-фрейм, (б) Octo-пауза. Контакт в красной зоне — в «запрещённые каналы», не в outreach.</div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">04</span> Kill-switch</h2>
+    </div>
+
+    <div class="kill-switch">
+      <span class="kill-switch-icon">⚠</span>
+      <span>Если <strong>14 дней подряд нет коммитов</strong> в репозитории — система признана мёртвой. Не строим следующую итерацию ещё 30 дней. Сначала ретроспектива «почему не работало», потом решение.</span>
+    </div>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">05</span> Активные режимы</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Cashflow-only — с 2026-05-18</div>
+      <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.85rem;">
+        До момента когда чистый доход стабильно держится €8К/мес 2 месяца подряд — <strong>equity-обсуждение НЕ обязательный фильтр</strong> при входе в проект. Беру платные проекты без принудительного equity-разговора.
+      </p>
+      <p style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5;">
+        Equity обсуждаю только если: (а) клиент сам поднимает, (б) проект явно проходит все 4 жёстких критерия. После €8К/мес × 2 — обязательный equity-фильтр возвращается на любой проект &gt;€2К/мес.
+      </p>
+    </div>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">06</span> Что НЕ делать</h2>
+      <p class="section-meta">накопленные уроки</p>
+    </div>
+
+    <div class="card">
+      <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.7;">
+        <li>Не предлагать LinkedIn-каналы привлечения до июня</li>
+        <li>Не холодные продажи через РФ-нетворки</li>
+        <li>Не упоминать Оскара / Маддеру / Татьяну в сообщениях Кристапсу</li>
+        <li>Не работать «no win / no fee» без письменной фиксации скоупа и фикса (урок Octo)</li>
+        <li>Не подписывать с founder-каналами модель «агент платит процент»</li>
+        <li>Не покупать технику и необязательные вещи до стабильного €8К+/мес</li>
+        <li>Не ставить задачи на выходные (договорённость с Викой)</li>
+        <li>Не создавать новых файлов/папок без триггера правила роста</li>
+        <li>Не делать утренних 30-минутных ритуалов — есть вечерний /day-close</li>
+        <li>Не показывать кассовый разрыв при асимметрии силы (урок Сергей-21.05)</li>
+      </ul>
+    </div>
+
   </div>
-</div>
+</section>
 
-<div class="card" style="margin-top: 16px;">
-  <h3>Стандартная структура папки клиента</h3>
-  <ul class="file-list">
-    <li><span class="file-name">CLAUDE.md</span><span class="file-desc">Контекст проекта, читается автоматически</span></li>
-    <li><span class="file-name">state.md</span><span class="file-desc">Оперативная память, обновляется в /day-close</span></li>
-    <li><span class="file-name">private.md / private/</span><span class="file-desc">Моя разведка, риски, equity-трек — <strong>не передаётся при экзите</strong></span></li>
-    <li><span class="file-name">shared.md</span><span class="file-desc">То, что ОК показать команде клиента</span></li>
-    <li><span class="file-name">meetings/</span><span class="file-desc">Транскрипты созвонов</span></li>
-    <li><span class="file-name">work/</span><span class="file-desc">Мини-проекты внутри клиента (сайт, презентации, разовые задачи)</span></li>
-  </ul>
-  <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Octo — продвинутый вариант: вместо плоского state.md — папка <code>command/</code> с разделёнными state, decisions, issues, weekly, roadmap. Это шаблон для будущих клиентов с большим объёмом.</p>
-</div>
-
-<h2>5. Циклы <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— где живёт время</span></h2>
-
-<div class="grid-3">
-  <div class="card">
-    <h3>День</h3>
-    <p style="font-size: 14px;"><code>/intake</code> → <code>inbox/today.md</code></p>
-    <p style="font-size: 14px;"><code>/finance</code> → запись транзакции</p>
-    <p style="font-size: 14px;"><code>/day-close</code> → разбор inbox → <code>daily/</code></p>
+<footer class="foot">
+  <div class="container">
+    <a href="/">← дашборд</a> · <a href="/founder-trajectory/">продукт</a> · <a href="/decisions/">журнал решений</a>
   </div>
-  <div class="card">
-    <h3>Неделя</h3>
-    <p style="font-size: 14px;"><code>/weekly-dialogue</code> → диалог-рефлексия 60-90 мин → <code>weekly/</code></p>
-    <p style="font-size: 14px;">Обновляет <code>this-week.md</code></p>
-  </div>
-  <div class="card">
-    <h3>По запросу</h3>
-    <p style="font-size: 14px;"><code>/update-state &lt;path&gt;</code></p>
-    <p style="font-size: 14px;"><code>/octo-intake</code> — разбор сырья Octo</p>
-    <p style="font-size: 14px;"><code>/finance close</code> — закрытие месяца</p>
-  </div>
-</div>
-
-<h2>6. AI-команда <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— 4 субагента + 11 skills</span></h2>
-
-<div class="grid-2">
-  <div class="card">
-    <h3>Субагенты <code>.claude/agents/</code></h3>
-    <p style="font-size: 14px; color: var(--muted);">Специализированные «коллеги» с изолированным контекстом. Mentor задаёт рамку, practice-director исполняет внутри.</p>
-    <ul style="margin: 8px 0; padding-left: 18px; font-size: 14px;">
-      <li><strong>mentor</strong> — стратег по жизненной траектории и долгосрочной цели €10М+</li>
-      <li><strong>practice-director</strong> — управляющий фриланс-практикой (продажи, упаковка, equity)</li>
-      <li><strong>finance-director</strong> — личные и проектные финансы</li>
-      <li><strong>octo-advisor</strong> — внутренний советник Octo (изолирован от других)</li>
-    </ul>
-    <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">+ landing-studio (4 субагента-помощника для skill /landing-studio)</p>
-  </div>
-  <div class="card">
-    <h3>Skills <code>.claude/skills/</code></h3>
-    <p style="font-size: 14px; color: var(--muted);">Атомарные процедуры по слэш-команде. 11 активных.</p>
-    <ul style="margin: 8px 0; padding-left: 18px; font-size: 14px;">
-      <li><code>/intake</code>, <code>/i</code> — десятки раз в день</li>
-      <li><code>/finance</code>, <code>/f</code> — учёт транзакций</li>
-      <li><code>/day-close</code> — 1 раз вечером</li>
-      <li><code>/weekly-dialogue</code> — пятница вечером</li>
-      <li><code>/update-state</code> — по запросу</li>
-      <li><code>/octo-intake</code> — разбор сырья Octo</li>
-      <li><code>/expert-panel</code> — 3 эксперта для больших решений</li>
-      <li><code>/bpmn-generator</code> — генерация BPMN-схем процессов</li>
-      <li><code>/landing-studio</code> — multi-agent сборка лендингов (новый)</li>
-      <li><code>/system-cleanup</code> — чистка системы (раз в 2-4 нед)</li>
-      <li><code>/finance close</code> — закрытие месяца</li>
-    </ul>
-  </div>
-</div>
-
-<p style="font-size: 14px; color: var(--muted);">Полный справочник — <a href="/toolbox/" style="color: var(--blue);">в toolbox →</a></p>
-
-<h2>7. Правила <span style="font-weight: 400; font-size: 14px; color: var(--muted);">— что держит систему от деградации</span></h2>
-
-<div class="principle">
-  <strong>Правило роста:</strong> новая папка или файл создаётся только когда (а) действующий перерос 200 строк, (б) появилось ≥3 однотипных артефакта, или (в) явное решение «нужно для одной из трёх целей 90 дней». Запрещено «на всякий случай».
-</div>
-
-<div class="principle">
-  <strong>Kill-switch:</strong> если 14 дней нет коммитов в репозитории — система признана мёртвой. 30 дней не строим следующую итерацию. Сначала ретроспектива «почему не работало». <a href="/health/" style="color: var(--blue);">Текущее состояние таймера →</a>
-</div>
-
-<div class="principle">
-  <strong>Изоляция контекста:</strong> при работе с проектом — только его файлы. При работе с мини-проектом внутри клиента (<code>clients/octo/work/website/</code>) — только локальные файлы, не весь клиент. Экономия токенов и фокус. <strong>octo-advisor физически не видит fishok/.</strong>
-</div>
-
-<div class="principle">
-  <strong>Не читать без явного запроса:</strong> <code>archive/</code> (старые версии), <code>inbox/today.md</code> вне <code>/day-close</code>, <code>private/</code> клиентов в публичных артефактах.
-</div>
-
-<div class="principle">
-  <strong>Append-only для decisions:</strong> ADR никогда не редактируются. Если решение изменилось — пишется новый ADR со ссылкой на старый. История мышления сохраняется.
-</div>
-
-<h2>8. Как улучшать систему</h2>
-
-<p>Три направления роста, в порядке приоритета:</p>
-
-<ol>
-  <li><strong>Наполнение state-файлов клиентов.</strong> Сейчас Fishok ещё частично пуст — наполнится через первые <code>/day-close</code> и <code>/weekly-dialogue</code>.</li>
-  <li><strong>Новые skills под повторяющиеся операции.</strong> Если задача делается ≥3 раз — превращать в skill. Кандидаты сейчас: <code>/dashboard-update</code>, <code>/client-onboarding</code>, <code>/decision-add</code>.</li>
-  <li><strong>Новые субагенты под равные задачи.</strong> Когда новый клиент потребует своего advisor — добавится. Кандидат: agent для анализа звонков из <code>meetings/</code>.</li>
-</ol>
-
-<footer>
-  <p>Это живая страница. Обновляется по мере эволюции системы. <a href="/" style="color: var(--blue);">← Главная</a> · <a href="/dashboard/" style="color: var(--blue);">Дашборд</a> · <a href="/health/" style="color: var(--blue);">Здоровье системы →</a></p>
 </footer>
 
-</div>
-
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true, theme: 'neutral', themeVariables: { fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif', primaryColor: '#faf6ee', primaryBorderColor: '#c25c2c', lineColor: '#6b6b6b', fontSize: '14px' } });
-</script>
-
+<script src="/assets/js/portal.js" defer></script>
 </body>
 </html>

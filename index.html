@@ -1,300 +1,1083 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Андрей Сычинников — Strategic Advisor для founder-CEO</title>
-<meta name="description" content="Strategic advisor / Hand of the King для русскоязычных founder-CEO стартапов pre-seed → Series A. Operational entry → advisor tier. Точка гения, кейсы, методология.">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Андрей Сычинников — Strategic Advisor для founders">
-<meta property="og:description" content="Operational entry → advisor tier. Hand of the King для founder-CEO.">
-<meta property="og:url" content="https://sychinnikov.com/">
-<meta property="og:locale" content="ru_RU">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Андрей Сычинников — Strategic Advisor для founders">
-<meta name="twitter:description" content="Operational entry → advisor tier. Hand of the King для founder-CEO.">
-
-<link rel="canonical" href="https://sychinnikov.com/">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Андрей Сычинников",
-  "alternateName": "Andrei Sychinnikov",
-  "jobTitle": "Strategic Advisor / Operational Architect",
-  "description": "Strategic advisor для русскоязычных founder-CEO стартапов pre-seed → Series A",
-  "url": "https://sychinnikov.com",
-  "sameAs": []
-}
-</script>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAFAF7" />
+<meta name="color-scheme" content="light" />
+<title>Sychinnikov Portal — главная</title>
+<meta name="description" content="Приватная рабочая поверхность Андрея Сычинникова. Дашборд: задачи, прогресс Founder Trajectory, финансы, звонки, решения." />
+<link rel="canonical" href="https://sychinnikov.com" />
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+<link rel="stylesheet" href="/assets/css/portal.css" />
 <style>
-  :root {
-    --bg: #f7f3ec;
-    --card: #ffffff;
-    --ink: #2a2a2a;
-    --muted: #6b6b6b;
-    --accent: #c25c2c;
-    --green: #4a7c59;
-    --blue: #3a5a8c;
-    --purple: #6b4a8c;
-    --red: #b04c4c;
-    --amber: #c89a3c;
-    --shadow: 0 2px 12px rgba(0,0,0,0.06);
-    --line: #e5dfd3;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.6;
-    font-size: 17px;
-  }
-  .container { max-width: 920px; margin: 0 auto; padding: 60px 24px; }
-  header { margin-bottom: 40px; }
-  h1 { font-size: 42px; line-height: 1.2; margin: 0 0 12px; font-weight: 700; letter-spacing: -0.5px; }
-  .tagline { font-size: 19px; color: var(--muted); margin: 0 0 8px; }
-  .location { font-size: 15px; color: var(--muted); }
+/* ─────── Главная страница: специфические стили дашборда ─────── */
 
-  h2 { font-size: 22px; margin: 44px 0 14px; font-weight: 600; color: var(--accent); }
-  h2 .sub { font-size: 14px; color: var(--muted); font-weight: 400; margin-left: 8px; }
-  h3 { font-size: 17px; margin: 0 0 8px; font-weight: 600; }
+/* HERO */
+.hero {
+  position: relative;
+  padding: clamp(2rem, 4vw, 3rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+  overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(31,58,95,0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 60% 80% at 30% 40%, black, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 80% at 30% 40%, black, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-size: 0.78rem; color: var(--color-text-muted);
+  letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500;
+  margin-bottom: 1rem;
+}
+.hero-title {
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  font-variation-settings: "opsz" 30, "wght" 420;
+  max-width: 32ch; margin-bottom: 0.7rem;
+}
+.hero-sub {
+  font-size: 0.95rem; color: var(--color-text-muted); max-width: 60ch; line-height: 1.55;
+}
 
-  .article-list { list-style: none; padding: 0; margin: 0; }
-  .article-list li {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 18px 22px;
-    margin-bottom: 12px;
-    box-shadow: var(--shadow);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    border-left: 4px solid var(--line);
-  }
-  .article-list li.dashboard { border-left-color: var(--accent); }
-  .article-list li.goals { border-left-color: var(--amber); }
-  .article-list li.clients { border-left-color: var(--blue); }
-  .article-list li.finance { border-left-color: var(--green); }
-  .article-list li.health { border-left-color: var(--green); }
-  .article-list li.system { border-left-color: var(--blue); }
-  .article-list li.decisions { border-left-color: var(--purple); }
-  .article-list li.practice { border-left-color: var(--purple); }
-  .article-list li.octo { border-left-color: var(--red); }
-  .article-list li.landing { border-left-color: var(--accent); }
-  .article-list li:hover { transform: translateY(-2px); box-shadow: 0 4px 18px rgba(0,0,0,0.08); }
-  .article-list a { color: var(--ink); text-decoration: none; display: block; }
-  .article-title { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
-  .article-desc { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.5; }
+/* GOALS 90D STRIP */
+.goals { padding-block: 1.25rem 0; }
+.goals-inner {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  box-shadow: var(--shadow-card);
+}
+.goals-label {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-variation-settings: "opsz" 18, "wght" 480;
+  color: var(--color-text);
+  line-height: 1.2;
+  border-right: 1px solid var(--color-border-soft);
+  padding-right: 1.5rem;
+}
+.goals-label-sub {
+  display: block; font-family: var(--font-sans);
+  font-size: 0.7rem; color: var(--color-text-soft);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  margin-top: 0.25rem; font-weight: 500;
+}
+.goal {
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.goal-title {
+  font-size: 0.82rem; color: var(--color-text); font-weight: 500; line-height: 1.3;
+  display: flex; align-items: baseline; gap: 0.4rem;
+}
+.goal-num {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--color-text-soft); font-weight: 500;
+}
+.goal-bar {
+  height: 3px; background: var(--color-border);
+  border-radius: 999px; overflow: hidden;
+}
+.goal-bar-fill { height: 100%; background: var(--color-accent); border-radius: 999px; }
+.goal-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 0.72rem; color: var(--color-text-muted); font-feature-settings: "tnum";
+}
+.goal-meta strong { color: var(--color-text); font-weight: 600; }
 
-  .pill { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; vertical-align: middle; margin-left: 6px; letter-spacing: 0.3px; }
-  .pill.new { background: #e9f1ec; color: var(--green); }
-  .pill.updated { background: #eaeef7; color: var(--blue); }
-  .pill.paused { background: #f9e9e9; color: var(--red); }
-  .pill.focus { background: #faf2dd; color: var(--amber); }
+/* DAY BANNER */
+.day-banner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 0.65rem 1rem;
+  background: var(--color-accent-soft);
+  border: 1px solid #D9E2EE;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+}
+.day-banner-left { display: flex; align-items: center; gap: 0.65rem; color: var(--color-accent); }
+.day-banner-pulse {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent);
+  position: relative;
+}
+.day-banner-pulse::before {
+  content: ""; position: absolute; inset: -3px;
+  border-radius: 50%; border: 2px solid var(--color-accent);
+  opacity: 0.4; animation: pulse 2s ease-out infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.day-banner-action {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  background: var(--color-card);
+  border: 1px solid #D9E2EE;
+  color: var(--color-accent);
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.day-banner-action:hover { background: white; }
 
-  .intro { background: #faf6ee; border-left: 3px solid var(--accent); padding: 14px 18px; border-radius: 0 6px 6px 0; font-size: 15px; margin: 0 0 26px; }
-  .intro strong { color: var(--accent); }
+/* KANBAN */
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.kan-col {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 320px;
+}
+.kan-col-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.85rem; padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.kan-col-title {
+  font-family: var(--font-sans); font-size: 0.76rem;
+  font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.kan-col-dot { width: 7px; height: 7px; border-radius: 50%; }
+.kan-col-todo .kan-col-dot { background: var(--color-text-soft); }
+.kan-col-progress .kan-col-dot { background: var(--color-accent); }
+.kan-col-blocked .kan-col-dot { background: var(--color-danger); }
+.kan-col-done .kan-col-dot { background: var(--color-success); }
+.kan-count {
+  font-size: 0.72rem; color: var(--color-text-muted);
+  background: var(--color-card); padding: 0.1rem 0.5rem;
+  border-radius: 999px; border: 1px solid var(--color-border); font-weight: 500;
+}
+.task {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+  padding: 0.7rem 0.8rem;
+  margin-bottom: 0.6rem;
+  box-shadow: var(--shadow-card);
+}
+.task:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-1px); }
+.task-title { font-size: 0.9rem; font-weight: 500; line-height: 1.35; margin-bottom: 0.35rem; }
+.task-meta {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.7rem; color: var(--color-text-muted); flex-wrap: wrap;
+}
+.task-deadline { color: var(--color-warning); font-weight: 500; }
+.task-checklist {
+  margin-top: 0.5rem; padding-top: 0.5rem;
+  border-top: 1px dashed var(--color-border);
+  font-size: 0.76rem;
+}
+.check {
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  color: var(--color-text-muted); line-height: 1.4; margin-bottom: 0.22rem;
+}
+.check:last-child { margin-bottom: 0; }
+.check-box {
+  flex-shrink: 0; width: 12px; height: 12px;
+  border: 1.5px solid var(--color-border); border-radius: 3px;
+  margin-top: 2px; position: relative;
+}
+.check.done .check-box { background: var(--color-accent); border-color: var(--color-accent); }
+.check.done .check-box::after {
+  content: ""; position: absolute; left: 2px; top: 0px;
+  width: 4px; height: 7px; border: solid white;
+  border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
+}
+.check.done { color: var(--color-text-soft); text-decoration: line-through; }
 
-  .status-strip { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; margin: 16px 0 30px; box-shadow: var(--shadow); }
-  .status-strip strong { color: var(--accent); }
-  .status-line { font-size: 14px; color: var(--ink); margin: 5px 0; }
-  .status-line .tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 6px; }
-  .status-line .tag.green { background: #e9f1ec; color: var(--green); }
-  .status-line .tag.amber { background: #faf2dd; color: var(--amber); }
-  .status-line .tag.red { background: #f9e9e9; color: var(--red); }
-  .status-line .tag.blue { background: #e5ecf5; color: var(--blue); }
+/* FT */
+.ft-summary {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 1.5rem;
+  padding: 1.1rem 1.5rem;
+  background: linear-gradient(135deg, #1F3A5F 0%, #16304F 100%);
+  border-radius: 10px; margin-bottom: 1.5rem; color: #F4F2EC;
+}
+.ft-summary-pct { font-family: var(--font-serif); font-size: 2.3rem; font-variation-settings: "opsz" 36, "wght" 380; line-height: 1; color: white; }
+.ft-summary-label { font-size: 0.82rem; opacity: 0.85; }
+.ft-summary-bar { height: 4px; background: rgba(255,255,255,0.15); border-radius: 999px; overflow: hidden; margin-top: 0.4rem; max-width: 320px; }
+.ft-summary-bar-fill { height: 100%; width: 22%; background: rgba(255,255,255,0.85); border-radius: 999px; }
+.ft-summary-stage { font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.7; text-align: right; }
 
-  .three-goals { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
-  .three-goals .goal { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; box-shadow: var(--shadow); }
-  .three-goals .goal .num { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; }
-  .three-goals .goal .title { font-size: 15px; font-weight: 600; margin: 4px 0 6px; }
-  .three-goals .goal .meta { font-size: 13px; color: var(--muted); line-height: 1.4; }
-  .three-goals .bar { background: var(--line); border-radius: 100px; height: 6px; overflow: hidden; margin-top: 8px; }
-  .three-goals .bar-fill { height: 100%; border-radius: 100px; }
-  .bar-fill.green { background: var(--green); }
-  .bar-fill.amber { background: var(--amber); }
-  .bar-fill.red { background: var(--red); }
+.gantt {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  padding: 1.25rem 1rem 1rem;
+  overflow-x: auto;
+}
+.gantt-inner { min-width: 900px; }
+.gantt-header {
+  display: grid; grid-template-columns: 200px repeat(14, 1fr);
+  align-items: end; border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem; margin-bottom: 0.6rem;
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-soft);
+}
+.gantt-header-cell { text-align: center; padding-bottom: 0.2rem; }
+.gantt-header-cell.month {
+  text-transform: uppercase; letter-spacing: 0.08em;
+  font-weight: 600; color: var(--color-text-muted);
+}
+.gantt-header-cell.now { color: var(--color-accent); font-weight: 700; }
+.gantt-row {
+  display: grid; grid-template-columns: 200px repeat(14, 1fr);
+  align-items: center; padding: 0.35rem 0;
+  border-bottom: 1px dashed var(--color-border-soft);
+}
+.gantt-row:last-child { border-bottom: 0; }
+.gantt-label {
+  font-size: 0.82rem; color: var(--color-text);
+  font-weight: 500; padding-right: 0.75rem;
+}
+.gantt-label small {
+  display: block; font-family: var(--font-mono);
+  font-size: 0.68rem; color: var(--color-text-soft);
+  font-weight: 400; margin-top: 0.1rem;
+}
+.gantt-bar-cell {
+  grid-column: var(--start) / span var(--span);
+  height: 18px; background: var(--color-accent);
+  border-radius: 4px; margin: 0 2px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-sans); font-size: 0.68rem;
+  color: white; font-weight: 500;
+}
+.gantt-bar-cell.priority-2 { background: #4A6B91; }
+.gantt-bar-cell.priority-3 { background: #8AA0BC; }
+.gantt-legend {
+  display: flex; gap: 1.25rem; margin-top: 1rem; flex-wrap: wrap;
+  font-size: 0.74rem; color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border-soft);
+  padding-top: 0.85rem;
+}
+.gantt-legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.gantt-legend-swatch { width: 12px; height: 10px; border-radius: 2px; }
 
-  footer { margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
-  footer a { color: var(--blue); text-decoration: none; }
+/* FINANCE */
+.fin-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
+}
+.wallets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.wallet {
+  display: flex; flex-direction: column; gap: 0.1rem;
+  padding: 0.5rem 0.6rem;
+  background: var(--color-bg-alt);
+  border-radius: 6px;
+}
+.wallet-name { font-size: 0.7rem; color: var(--color-text-muted); }
+.wallet-balance {
+  font-family: var(--font-serif); font-size: 1.05rem;
+  font-variation-settings: "opsz" 20, "wght" 460;
+  font-feature-settings: "tnum";
+}
+.wallet-low .wallet-balance { color: var(--color-danger); }
 
-  @media (max-width: 700px) {
-    h1 { font-size: 32px; }
-    .container { padding: 40px 18px; }
-    .three-goals { grid-template-columns: 1fr; }
-  }
+.fin-month-row { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
+.fin-month-key { font-size: 0.8rem; color: var(--color-text-muted); flex: 1; }
+.fin-month-val {
+  font-family: var(--font-serif); font-size: 1.05rem;
+  font-variation-settings: "opsz" 20, "wght" 460; font-feature-settings: "tnum";
+}
+.fin-topcat { margin-top: 0.85rem; padding-top: 0.85rem; border-top: 1px solid var(--color-border); }
+.fin-topcat-title {
+  font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-text-soft); font-weight: 500; margin-bottom: 0.6rem;
+}
+.fin-topcat-item {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; margin-bottom: 0.45rem;
+}
+.fin-topcat-bar {
+  grid-column: 1 / -1; height: 4px;
+  background: var(--color-bg-alt); border-radius: 999px; overflow: hidden;
+}
+.fin-topcat-bar-fill { height: 100%; background: var(--color-danger); border-radius: 999px; }
+.fin-topcat-name { color: var(--color-text); font-weight: 500; }
+.fin-topcat-val { color: var(--color-text-muted); font-feature-settings: "tnum"; }
+.fin-topcat-over { color: var(--color-danger); font-weight: 500; }
+.fin-profit {
+  margin-top: 0.85rem; padding-top: 0.85rem;
+  border-top: 1px solid var(--color-border);
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.fin-profit-label { font-size: 0.82rem; color: var(--color-text-muted); }
+.fin-profit-val {
+  font-family: var(--font-serif); font-size: 1.55rem;
+  font-variation-settings: "opsz" 24, "wght" 440;
+  color: var(--color-success); font-feature-settings: "tnum";
+}
+.signals { display: flex; flex-direction: column; gap: 0.5rem; }
+.signal {
+  display: flex; align-items: flex-start; gap: 0.55rem;
+  font-size: 0.78rem; line-height: 1.4;
+}
+.signal-dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; }
+.signal-ok .signal-dot { background: var(--color-success); }
+.signal-warn .signal-dot { background: var(--color-warning); }
+.signal-bad .signal-dot { background: var(--color-danger); }
+.signal-key { color: var(--color-text); font-weight: 500; }
+.signal-note { color: var(--color-text-muted); }
+
+.runway {
+  margin-top: 0.85rem; padding: 0.7rem 0.85rem;
+  background: var(--color-bg-alt); border-radius: 6px; font-size: 0.78rem;
+}
+.runway-row { display: flex; align-items: baseline; justify-content: space-between; }
+.runway-label { color: var(--color-text-muted); }
+.runway-val {
+  font-family: var(--font-serif); font-size: 1rem;
+  font-variation-settings: "opsz" 20, "wght" 460; font-feature-settings: "tnum";
+}
+.runway-meta { font-size: 0.72rem; color: var(--color-text-soft); margin-top: 0.3rem; line-height: 1.4; }
+.next-payment {
+  margin-top: 1rem; padding: 0.7rem 0.85rem;
+  background: var(--color-bg-alt); border-radius: 6px;
+  font-size: 0.78rem; color: var(--color-text-muted); line-height: 1.4;
+}
+.next-payment strong { color: var(--color-text); font-weight: 600; }
+
+/* CALLS */
+.calls-section { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1rem; align-items: start; }
+.calls-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.call {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px; padding: 0.95rem 1rem;
+  display: flex; flex-direction: column; gap: 0.55rem;
+}
+.call:hover { box-shadow: var(--shadow-card-hover); }
+.call-head { display: flex; align-items: center; gap: 0.6rem; }
+.avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%; background: var(--color-accent);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 0.85rem; font-weight: 500;
+  flex-shrink: 0;
+}
+.avatar-fishok { background: #6B5E2F; }
+.avatar-octo { background: #5B3D5B; }
+.avatar-ft { background: var(--color-accent); }
+.call-who { display: flex; flex-direction: column; flex: 1; }
+.call-name { font-size: 0.87rem; font-weight: 500; line-height: 1.2; }
+.call-when { font-size: 0.7rem; color: var(--color-text-soft); font-feature-settings: "tnum"; }
+.call-topic { font-size: 0.78rem; color: var(--color-text-muted); line-height: 1.4; }
+.call-tasks-title {
+  font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--color-text-soft); font-weight: 500;
+  margin-top: 0.2rem; padding-top: 0.55rem;
+  border-top: 1px solid var(--color-border-soft);
+}
+.call-tasks-list { font-size: 0.78rem; padding-left: 0; list-style: none; margin: 0; }
+.call-tasks-list li {
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  color: var(--color-text); line-height: 1.4; padding-block: 0.2rem;
+}
+.call-tasks-list li::before {
+  content: ""; flex-shrink: 0;
+  width: 10px; height: 10px;
+  border: 1.5px solid var(--color-border); border-radius: 3px; margin-top: 4px;
+}
+.call-link { font-size: 0.7rem; color: var(--color-text-soft); margin-top: 0.3rem; }
+.upcoming-panel {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px; padding: 1rem;
+}
+.upcoming-title {
+  font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-text-soft); font-weight: 500; margin-bottom: 0.85rem;
+}
+.upcoming-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.upcoming-item {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 7px; padding: 0.65rem 0.8rem;
+}
+.upcoming-head {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;
+}
+.upcoming-who { font-size: 0.85rem; font-weight: 500; }
+.upcoming-when {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--color-accent); background: var(--color-accent-soft);
+  padding: 0.1rem 0.45rem; border-radius: 4px;
+}
+.upcoming-prep { font-size: 0.74rem; color: var(--color-text-muted); line-height: 1.4; }
+
+/* DECISIONS */
+.decisions-list { display: flex; flex-direction: column; }
+.decision {
+  display: grid;
+  grid-template-columns: 6rem 1fr 8rem;
+  align-items: center; gap: 1.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+.decision:last-child { border-bottom: 0; }
+.decision-date {
+  font-family: var(--font-mono); font-size: 0.76rem;
+  color: var(--color-text-soft); font-feature-settings: "tnum";
+}
+.decision-title { font-size: 0.9rem; line-height: 1.4; }
+.decision-scope {
+  justify-self: end;
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--color-text-muted);
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px; background: var(--color-bg-alt);
+}
+
+/* SECTIONS Cards Grid (Navigation to internal pages) */
+.sections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.section-card {
+  display: flex; flex-direction: column;
+  padding: 1.1rem 1.2rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out), border-color 200ms var(--ease-out);
+}
+.section-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+  border-color: var(--color-border);
+}
+.section-card-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; color: var(--color-text-soft);
+  letter-spacing: 0.06em; font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.section-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-variation-settings: "opsz" 20, "wght" 460;
+  margin-bottom: 0.35rem;
+  color: var(--color-text);
+}
+.section-card-desc {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+.section-card-arrow {
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
+  color: var(--color-accent);
+}
+
+@media (max-width: 1280px) {
+  .goals-inner { grid-template-columns: 1fr 1fr 1fr; }
+  .goals-label { grid-column: 1 / -1; border-right: 0; padding-right: 0; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-border-soft); }
+}
+@media (max-width: 1024px) {
+  .kanban { grid-template-columns: repeat(2, 1fr); }
+  .fin-grid { grid-template-columns: 1fr; }
+  .calls-section { grid-template-columns: 1fr; }
+  .wallets { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .kanban { grid-template-columns: 1fr; }
+  .calls-strip { grid-template-columns: 1fr; }
+  .goals-inner { grid-template-columns: 1fr; }
+  .decision { grid-template-columns: 5rem 1fr; }
+  .decision-scope { grid-column: 2; justify-self: start; margin-top: 0.25rem; }
+}
 </style>
 </head>
 <body>
-<div class="container">
 
-<header>
-  <h1>Андрей Сычинников</h1>
-  <p class="tagline">Strategic advisor / Hand of the King для founder-CEO</p>
-  <p class="location">Pre-seed → Series A · русскоязычные стартапы · Хихон, Испания · план США 2028</p>
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="brand">
+      <span class="brand-dot"></span>
+      Sychinnikov Portal
+      <span class="brand-sub">private</span>
+    </a>
+    <nav class="nav">
+      <a href="/" data-nav>Дашборд</a>
+      <a href="/tasks/" data-nav>Матрица</a>
+      <a href="/founder-trajectory/" data-nav>Продукт</a>
+      <a href="/clients/" data-nav>Клиенты</a>
+      <a href="/contacts/" data-nav>Контакты</a>
+      <a href="/finance/" data-nav>Финансы</a>
+      <a href="/system/" data-nav>Система</a>
+      <a href="/decisions/" data-nav>Решения</a>
+      <a href="/wisdom/" data-nav>Wisdom</a>
+      <span class="date">21 мая 2026 · чт · W21</span>
+    </nav>
+  </div>
 </header>
 
-<div class="intro">
-  <strong>Что это.</strong> Внешний интерфейс к моей операционной системе <strong>AndreiOS</strong> — где живут проекты, финансы, решения, AI-команда. Здесь — карта, состояние, методология. Сама система — локально в git, не в облаке.
-</div>
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="container hero-inner">
+    <p class="hero-eyebrow">Главная · обновлено только что</p>
+    <h1 class="hero-title">Рабочая поверхность к second-brain.</h1>
+    <p class="hero-sub">
+      Что я решаю сейчас, что упаковываю, что с деньгами, кто звонил, какие правила менял. Один-два экрана — остальное в навигации.
+    </p>
+  </div>
+</section>
 
-<div class="status-strip">
-  <div style="margin-bottom: 10px;"><strong>Где я сейчас (на 2026-05-19)</strong></div>
-  <div class="status-line"><span class="tag green">актив</span>Fishok — €3 500/мес фикс (retainer от ВВ, не платформа роста)</div>
-  <div class="status-line"><span class="tag red">пауза</span>Octo — после month-1 review, дедлайн 17.06. Долг €1К не зафиксирован письменно</div>
-  <div class="status-line"><span class="tag amber">фокус</span>Майский спринт продаж — 17 личных контактов, цель +€3000/мес. Касания пошли с 19.05 (Надин, Евгений, Анатолий)</div>
-  <div class="status-line"><span class="tag blue">режим</span>Cashflow-only до €8К/мес × 2 мес — equity-фильтр временно снят</div>
-</div>
-
-<main>
-
-  <h2>🎯 Три цели 90 дней <span class="sub">фильтр любого решения</span></h2>
-  <div class="three-goals">
-    <div class="goal">
-      <div class="num">№1</div>
-      <div class="title">Третий клиент</div>
-      <div class="meta">vitaly-textile под угрозой (через Сергея). Параллельно — спринт по личным контактам (Надин, Евгений ст., Анатолий).</div>
-      <div class="bar"><div class="bar-fill amber" style="width: 30%"></div></div>
-    </div>
-    <div class="goal">
-      <div class="num">№2</div>
-      <div class="title">Первая equity-позиция</div>
-      <div class="meta">Гипотеза «через Сергея» переоценена. Новые критерии: юрлицо + ≥€30К/мес + defensibility + договор ДО работы.</div>
-      <div class="bar"><div class="bar-fill red" style="width: 10%"></div></div>
-    </div>
-    <div class="goal">
-      <div class="num">№3</div>
-      <div class="title">€8-10К/мес к 1 августа</div>
-      <div class="meta">Сейчас фикс €3 500. Дефицит €4-6К. Закрывать через спринт + потенциальный upside Fishok. Май +€1 865 опер. прибыль.</div>
-      <div class="bar"><div class="bar-fill red" style="width: 22%"></div></div>
+<!-- ─────────── ЦЕЛИ 90 ДНЕЙ ─────────── -->
+<section class="goals">
+  <div class="container">
+    <div class="goals-inner">
+      <div class="goals-label">
+        Цели 90 дней
+        <span class="goals-label-sub">фильтр любого решения</span>
+      </div>
+      <div class="goal">
+        <div class="goal-title"><span class="goal-num">01</span> Третий клиент</div>
+        <div class="goal-bar"><div class="goal-bar-fill" style="width: 33%;"></div></div>
+        <div class="goal-meta"><span>2 из 3 · Марк W22 🔥</span><strong>до 20.08</strong></div>
+      </div>
+      <div class="goal">
+        <div class="goal-title"><span class="goal-num">02</span> Первая equity-позиция</div>
+        <div class="goal-bar"><div class="goal-bar-fill" style="width: 8%;"></div></div>
+        <div class="goal-meta"><span>cashflow-only режим</span><strong>до 31.08</strong></div>
+      </div>
+      <div class="goal">
+        <div class="goal-title"><span class="goal-num">03</span> €8-10К/мес чистыми</div>
+        <div class="goal-bar"><div class="goal-bar-fill" style="width: 38%;"></div></div>
+        <div class="goal-meta"><span>+€3 506 май · разрыв −€4 494</span><strong>к 01.08</strong></div>
+      </div>
     </div>
   </div>
+</section>
 
-  <h2>📊 Оперативная картина<span class="sub">что происходит прямо сейчас</span></h2>
-  <ul class="article-list">
-    <li class="dashboard">
-      <a href="/dashboard/">
-        <p class="article-title">Дашборд проектов<span class="pill updated">обновлено 19.05</span></p>
-        <p class="article-desc">Цели 90 дней, клиенты, pipeline, недельные приоритеты, sales-sprint. Источник правды для оперативной картины.</p>
-      </a>
-    </li>
-    <li class="finance">
-      <a href="/finance/">
-        <p class="article-title">Финансы — личный дашборд<span class="pill updated">19.05</span></p>
-        <p class="article-desc">Баланс по счетам, P&L мая (+€1 865), план-факт по конвертам, накопления, долги. Картина в одном окне.</p>
-      </a>
-    </li>
-    <li class="health">
-      <a href="/health/">
-        <p class="article-title">Здоровье системы</p>
-        <p class="article-desc">Индекс здоровья, активность за 14 дней, kill-switch таймер. Метрики самой системы AndreiOS.</p>
-      </a>
-    </li>
-  </ul>
+<!-- ─────────── 1. ЗАДАЧИ ─────────── -->
+<section class="section reveal" id="tasks">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">
+        <span class="section-num">01</span>
+        Задачи дня
+      </h2>
+      <p class="section-meta">источник: <code>this-week.md</code> · обновить: <code>/task</code></p>
+    </div>
 
-  <h2>👥 Клиенты и pipeline<span class="sub">активные и потенциальные</span></h2>
-  <ul class="article-list">
-    <li class="clients">
-      <a href="/clients/">
-        <p class="article-title">Клиенты и pipeline<span class="pill updated">19.05</span></p>
-        <p class="article-desc">Fishok (retainer €3.5К/мес) · Octo (пауза) · Vitaly Textile (diagnostic-offer) · Майский спринт по 17 контактам.</p>
-      </a>
-    </li>
-    <li class="octo">
-      <a href="/octo-project/">
-        <p class="article-title">🐙 Octo Relocate<span class="pill paused">пауза до 17.06</span></p>
-        <p class="article-desc">Отдельная операционная зона: Company и Personal. Дедлайн решения по партнёрству — 17 июня.</p>
-      </a>
-    </li>
-  </ul>
+    <div class="day-banner">
+      <div class="day-banner-left">
+        <span class="day-banner-pulse"></span>
+        <span>День открыт · 09:14 · <code>/day-open</code> добавил 4 новые задачи · из Granola подтянуты 2 звонка</span>
+      </div>
+      <button class="day-banner-action">Обновить вместе → /day-open</button>
+    </div>
 
-  <h2>🌐 Сайт<span class="sub">продающие лендинги — три версии</span></h2>
-  <ul class="article-list">
-    <li class="landing">
-      <a href="/landing/">
-        <p class="article-title">Три версии лендинга на услугу Operational Architect<span class="pill new">новое</span></p>
-        <p class="article-desc">Один оффер, три позиционирования: <strong>The Architect</strong> (строгий B2B-консалтинг), <strong>Hand of the King</strong> (премиум strategic advisor), <strong>Operating System</strong> (tech/product-эстетика). Визитка для рекомендателей и тёплых лидов.</p>
-      </a>
-    </li>
-  </ul>
+    <div class="kanban">
+      <div class="kan-col kan-col-todo">
+        <div class="kan-col-head">
+          <span class="kan-col-title"><span class="kan-col-dot"></span> К сделать</span>
+          <span class="kan-count">4</span>
+        </div>
+        <div class="task">
+          <div class="task-title">Подготовиться к созвону с Марком</div>
+          <div class="task-meta">
+            <span class="tag tag-ft">Founder Trajectory</span>
+            <span class="task-deadline">до 25.05</span>
+          </div>
+          <div class="task-checklist">
+            <div class="check"><span class="check-box"></span><span>Партнёрская модель для брокерской сети</span></div>
+            <div class="check"><span class="check-box"></span><span>Операционный аудит ДО продажи бизнеса</span></div>
+            <div class="check"><span class="check-box"></span><span>Согласовать дату/время</span></div>
+          </div>
+        </div>
+        <div class="task">
+          <div class="task-title">One-pager «модератор + аутсорс-ФД» для Кристапса</div>
+          <div class="task-meta">
+            <span class="tag tag-fishok">Fishok</span>
+            <span class="task-deadline">К вс 24.05</span>
+          </div>
+        </div>
+        <div class="task">
+          <div class="task-title">US-visa: срок 4 арг. паспортов</div>
+          <div class="task-meta">
+            <span class="tag tag-personal">Семья</span>
+            <span class="task-deadline">дедлайн 22.05</span>
+          </div>
+        </div>
+        <div class="task">
+          <div class="task-title">Telegram-бот: шаги 5-7 (bash + launchd)</div>
+          <div class="task-meta"><span class="tag tag-system">AndreiOS</span></div>
+        </div>
+      </div>
 
-  <h2>📓 Что и зачем я делаю<span class="sub">позиционирование и методология</span></h2>
-  <ul class="article-list">
-    <li class="practice">
-      <a href="/practice/strategic-advisor.html">
-        <p class="article-title">Strategic Advisor для founders — Hand of the King<span class="pill new">точка гения</span></p>
-        <p class="article-desc">Что я делаю на пределе уникальности: weekly 1:1 с founder-CEO, перевод хаоса в последовательность, возврат founder-у владения через дедлайны. Дважды валидировано рынком (Кристапс, Сергей).</p>
-      </a>
-    </li>
-    <li class="practice">
-      <a href="/practice/">
-        <p class="article-title">Operational Foundation — методология<span class="pill updated">19.05</span></p>
-        <p class="article-desc">4 уровня продуктовой лестницы: Diagnostic → Foundation → Full OS → Retainer. Формула operational entry → advisor tier upgrade.</p>
-      </a>
-    </li>
-    <li class="decisions">
-      <a href="/decisions/">
-        <p class="article-title">Журнал стратегических решений<span class="pill updated">19.05</span></p>
-        <p class="article-desc">Хронология решений и переосмыслений. Сверху новые. Append-only — старые версии не редактируются.</p>
-      </a>
-    </li>
-    <li class="goals">
-      <a href="/goals/">
-        <p class="article-title">Цели — 90 дней / долгосрочные / ценности</p>
-        <p class="article-desc">Три цели 90 дней с актуальным статусом. Долгосрочная цель — equity-портфель $10М+ к 2033. Ценности и антицели.</p>
-      </a>
-    </li>
-  </ul>
+      <div class="kan-col kan-col-progress">
+        <div class="kan-col-head">
+          <span class="kan-col-title"><span class="kan-col-dot"></span> В работе</span>
+          <span class="kan-count">3</span>
+        </div>
+        <div class="task">
+          <div class="task-title">Упаковка Founder Trajectory</div>
+          <div class="task-meta"><span class="tag tag-ft">FT</span><span>Priority 1</span></div>
+          <div class="task-checklist">
+            <div class="check"><span class="check-box"></span><span>methodology.md — 8 контуров</span></div>
+            <div class="check"><span class="check-box"></span><span>positioning.md — UVP + cockpit</span></div>
+            <div class="check"><span class="check-box"></span><span>pricing-ladder.md — 5 ступеней</span></div>
+            <div class="check"><span class="check-box"></span><span>playbook.md — 3 фазы Reset</span></div>
+          </div>
+        </div>
+        <div class="task">
+          <div class="task-title">Спринт продаж — обработка ответов</div>
+          <div class="task-meta"><span class="tag tag-ft">FT</span><span>13+ касаний</span></div>
+          <div class="task-checklist">
+            <div class="check done"><span class="check-box"></span><span>Альберт — закрыт (развод)</span></div>
+            <div class="check done"><span class="check-box"></span><span>Степан — тёпло, без рефералов</span></div>
+            <div class="check"><span class="check-box"></span><span>Марк — созвон W22 🔥</span></div>
+            <div class="check"><span class="check-box"></span><span>Касьянов — ждать ответ</span></div>
+          </div>
+        </div>
+        <div class="task">
+          <div class="task-title">Конвертация Bybit USDT → Wise EUR</div>
+          <div class="task-meta"><span class="tag tag-personal">Финансы</span><span>~€2 000</span></div>
+        </div>
+      </div>
 
-  <h2>🗺 Как устроена система<span class="sub">архитектура AndreiOS</span></h2>
-  <ul class="article-list">
-    <li class="system">
-      <a href="/system/">
-        <p class="article-title">AndreiOS — карта системы<span class="pill updated">19.05</span></p>
-        <p class="article-desc">Концептуальная архитектура: фундамент, клиенты, финансы, AI-команда (4 субагента), 11 skills, циклы работы.</p>
-      </a>
-    </li>
-    <li class="system">
-      <a href="/how-it-works/">
-        <p class="article-title">🧒 Как это работает — простыми словами</p>
-        <p class="article-desc">Объяснение системы без терминов. Если впервые видишь — начни отсюда.</p>
-      </a>
-    </li>
-    <li class="system">
-      <a href="/toolbox/">
-        <p class="article-title">🛠 Toolbox — skills, агенты, хуки<span class="pill updated">19.05</span></p>
-        <p class="article-desc">Полный набор инструментов: <strong>11 skills</strong>, <strong>4 субагента</strong>, hooks, типичные паттерны.</p>
-      </a>
-    </li>
-    <li class="system">
-      <a href="/structure/">
-        <p class="article-title">AI-структура — карта файлов</p>
-        <p class="article-desc">Дерево всех папок и файлов по проектам: фундамент, клиенты, финансы, contacts, archive.</p>
-      </a>
-    </li>
-  </ul>
+      <div class="kan-col kan-col-blocked">
+        <div class="kan-col-head">
+          <span class="kan-col-title"><span class="kan-col-dot"></span> Заблокировано</span>
+          <span class="kan-count">3</span>
+        </div>
+        <div class="task">
+          <div class="task-title">Octo — следующий синхрон</div>
+          <div class="task-meta"><span class="tag tag-octo">Octo</span><span>вт 26.05</span></div>
+          <div class="task-checklist">
+            <div class="check"><span class="check-box"></span><span>Ждём повестку Сергея, резюме не отправлять</span></div>
+          </div>
+        </div>
+        <div class="task">
+          <div class="task-title">Кристапс — итоги с Александром по Odoo</div>
+          <div class="task-meta"><span class="tag tag-fishok">Fishok</span><span>ждём пт 22.05</span></div>
+        </div>
+        <div class="task">
+          <div class="task-title">Вован Фисенко — не прочитал</div>
+          <div class="task-meta"><span class="tag tag-ft">FT</span><span>не пинговать</span></div>
+        </div>
+      </div>
 
-  <h2>📰 Материалы</h2>
-  <ul class="article-list" style="border-left: none;">
-    <li style="border-left-color: var(--muted);">
-      <a href="/articles/andreios-guide.html">
-        <p class="article-title">AndreiOS — гайд по системе управления</p>
-        <p class="article-desc">Подробный текст про операционную архитектуру: как устроена работа с клиентами, AI-агентами и контекстом проектов.</p>
-      </a>
-    </li>
-  </ul>
-</main>
+      <div class="kan-col kan-col-done">
+        <div class="kan-col-head">
+          <span class="kan-col-title"><span class="kan-col-dot"></span> Сделано сегодня</span>
+          <span class="kan-count">4</span>
+        </div>
+        <div class="task">
+          <div class="task-title">Octo / синхрон с Сергеем</div>
+          <div class="task-meta"><span class="tag tag-octo">Octo</span><span>21.05</span></div>
+        </div>
+        <div class="task">
+          <div class="task-title">Fishok / Кристапс — синхрон продаж</div>
+          <div class="task-meta"><span class="tag tag-fishok">Fishok</span><span>21.05</span></div>
+        </div>
+        <div class="task">
+          <div class="task-title">Переименование sychinnikov/ → founder-trajectory/</div>
+          <div class="task-meta"><span class="tag tag-system">AndreiOS</span></div>
+        </div>
+        <div class="task">
+          <div class="task-title">Пересборка sychinnikov.com (новый портал)</div>
+          <div class="task-meta"><span class="tag tag-system">AndreiOS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<footer>
-  <p>sychinnikov.com · <a href="mailto:sychinnikov@gmail.com">sychinnikov@gmail.com</a></p>
-  <p style="margin-top: 6px; font-size: 12px;">Обновлено 2026-05-19. Каждая страница помечает себя датой последнего изменения.</p>
+<!-- ─────────── 2. FT GANTT ─────────── -->
+<section class="section reveal" id="ft">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">
+        <span class="section-num">02</span>
+        Прогресс Founder Trajectory
+      </h2>
+      <p class="section-meta">источник: <code>founder-trajectory/command/roadmap.md</code> · <a href="/founder-trajectory/" class="underline-link">открыть полностью</a></p>
+    </div>
+
+    <div class="ft-summary">
+      <div><div class="ft-summary-pct">22<span style="font-size:1.2rem;opacity:.7;">%</span></div></div>
+      <div>
+        <div style="font-family:var(--font-serif);font-size:1.05rem;margin-bottom:0.15rem;">Упаковка продукта</div>
+        <div class="ft-summary-label">Этап 7 — наполнение контента · приоритет 1 на 30 дней</div>
+        <div class="ft-summary-bar"><div class="ft-summary-bar-fill"></div></div>
+      </div>
+      <div class="ft-summary-stage">До 2026-06-20</div>
+    </div>
+
+    <div class="gantt">
+      <div class="gantt-inner">
+        <div class="gantt-header">
+          <div></div>
+          <div class="gantt-header-cell month" style="grid-column: 2 / span 2;">МАЙ</div>
+          <div class="gantt-header-cell month" style="grid-column: 4 / span 4;">ИЮНЬ</div>
+          <div class="gantt-header-cell month" style="grid-column: 8 / span 4;">ИЮЛЬ</div>
+          <div class="gantt-header-cell month" style="grid-column: 12 / span 4;">АВГУСТ</div>
+        </div>
+        <div class="gantt-header" style="margin-top: -0.45rem;">
+          <div></div>
+          <div class="gantt-header-cell now">W21</div>
+          <div class="gantt-header-cell">W22</div>
+          <div class="gantt-header-cell">W23</div>
+          <div class="gantt-header-cell">W24</div>
+          <div class="gantt-header-cell">W25</div>
+          <div class="gantt-header-cell">W26</div>
+          <div class="gantt-header-cell">W27</div>
+          <div class="gantt-header-cell">W28</div>
+          <div class="gantt-header-cell">W29</div>
+          <div class="gantt-header-cell">W30</div>
+          <div class="gantt-header-cell">W31</div>
+          <div class="gantt-header-cell">W32</div>
+          <div class="gantt-header-cell">W33</div>
+          <div class="gantt-header-cell">W34</div>
+        </div>
+
+        <div class="gantt-row"><div class="gantt-label">Методология (8 контуров)<small>product/methodology.md</small></div><div class="gantt-bar-cell" style="--start: 2; --span: 3;">21.05 → 04.06</div></div>
+        <div class="gantt-row"><div class="gantt-label">Позиционирование (UVP)<small>product/positioning.md</small></div><div class="gantt-bar-cell" style="--start: 2; --span: 3;">21.05 → 04.06</div></div>
+        <div class="gantt-row"><div class="gantt-label">Pricing ladder (5 ступеней)<small>product/pricing-ladder.md</small></div><div class="gantt-bar-cell" style="--start: 2; --span: 3;">21.05 → 04.06</div></div>
+        <div class="gantt-row"><div class="gantt-label">Playbook (3 фазы)<small>product/playbook.md</small></div><div class="gantt-bar-cell priority-2" style="--start: 5; --span: 3;">05.06 → 18.06</div></div>
+        <div class="gantt-row"><div class="gantt-label">Отличия<small>product/differences.md</small></div><div class="gantt-bar-cell priority-2" style="--start: 5; --span: 3;">05.06 → 18.06</div></div>
+        <div class="gantt-row"><div class="gantt-label">Trajectory Map черновик<small>публичный 12 модулей</small></div><div class="gantt-bar-cell priority-2" style="--start: 5; --span: 4;">05.06 → 25.06</div></div>
+        <div class="gantt-row"><div class="gantt-label">Кейсы (3 шт, стандарт v2)<small>cases/*.md</small></div><div class="gantt-bar-cell priority-2" style="--start: 5; --span: 9;">05.06 → 20.07</div></div>
+        <div class="gantt-row"><div class="gantt-label">Лендинг (cockpit, hard floor)<small>sychinnikov.com</small></div><div class="gantt-bar-cell priority-2" style="--start: 8; --span: 4;">21.06 → 10.07</div></div>
+        <div class="gantt-row"><div class="gantt-label">Sales scripts<small>sales/scripts.md</small></div><div class="gantt-bar-cell priority-2" style="--start: 8; --span: 4;">21.06 → 20.07</div></div>
+        <div class="gantt-row"><div class="gantt-label">Возврат к тёплой базе<small>с переупаковкой</small></div><div class="gantt-bar-cell priority-3" style="--start: 9; --span: 5;">01.07 → 25.07</div></div>
+        <div class="gantt-row"><div class="gantt-label">Контент-план (3-5 постов)<small>inbound/plan.md</small></div><div class="gantt-bar-cell priority-3" style="--start: 10; --span: 5;">10.07 → 20.08</div></div>
+        <div class="gantt-row"><div class="gantt-label">Telegram-канал<small>voice по Балахнину</small></div><div class="gantt-bar-cell priority-3" style="--start: 11; --span: 4;">15.07 → 20.08</div></div>
+        <div class="gantt-row"><div class="gantt-label">Templates onboarding<small>templates/*.md</small></div><div class="gantt-bar-cell priority-3" style="--start: 12; --span: 3;">22.07 → 20.08</div></div>
+      </div>
+      <div class="gantt-legend">
+        <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background: var(--color-accent);"></span>Priority 1 — блокирующее (2 недели)</div>
+        <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background: #4A6B91;"></span>Priority 2 — сильное (2-4 недели)</div>
+        <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background: #8AA0BC;"></span>60-90 дней</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 3. FINANCE ─────────── -->
+<section class="section reveal" id="finance">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title"><span class="section-num">03</span> Финансы — снимок</h2>
+      <p class="section-meta">май 2026 · <a href="/finance/" class="underline-link">открыть полностью</a></p>
+    </div>
+    <div class="fin-grid">
+      <div class="card">
+        <div class="card-label">Кошельки · ликвид ~€2 401 + крипта ~€3 092</div>
+        <div class="wallets">
+          <div class="wallet"><span class="wallet-name">Наличные</span><span class="wallet-balance">€2 300</span></div>
+          <div class="wallet wallet-low"><span class="wallet-name">BBVA</span><span class="wallet-balance">€27</span></div>
+          <div class="wallet wallet-low"><span class="wallet-name">Wise EUR</span><span class="wallet-balance">€10</span></div>
+          <div class="wallet wallet-low"><span class="wallet-name">Santander</span><span class="wallet-balance">€64</span></div>
+          <div class="wallet"><span class="wallet-name">Bybit</span><span class="wallet-balance">€2 913</span></div>
+          <div class="wallet"><span class="wallet-name">Ether (Coinbase)</span><span class="wallet-balance">€179</span></div>
+        </div>
+        <div class="runway">
+          <div class="runway-row"><span class="runway-label">Runway при текущих расходах</span><span class="runway-val">2.7 мес</span></div>
+          <div class="runway-meta">€5 582 ликвид + крипта · €2 067/мес. После 02.08 кредит РФ в евро — runway ~1.5 мес.</div>
+        </div>
+        <div class="next-payment">
+          Ближайший платёж — <strong>30.05 · аренда €1 000</strong> · Wise → хозяин. Карты пусты, нужна конвертация Bybit USDT → Wise.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Месяц май</div>
+        <div class="fin-month-row"><span class="fin-month-key">Доход</span><span class="fin-month-val">+€3 506</span></div>
+        <div class="fin-month-row"><span class="fin-month-key">Операц. расходы</span><span class="fin-month-val">−€2 067</span></div>
+        <div class="fin-month-row"><span class="fin-month-key">Кредит РФ</span><span class="fin-month-val" style="font-size:0.9rem;color:var(--color-text-muted);">из рублей</span></div>
+
+        <div class="fin-topcat">
+          <div class="fin-topcat-title">Топ-3 статьи расходов</div>
+          <div class="fin-topcat-item">
+            <span class="fin-topcat-name">🛒 Еда и быт</span>
+            <span class="fin-topcat-val">€802 <span class="fin-topcat-over">/ план 550</span></span>
+            <div class="fin-topcat-bar"><div class="fin-topcat-bar-fill" style="width: 100%;"></div></div>
+          </div>
+          <div class="fin-topcat-item">
+            <span class="fin-topcat-name">🍽 Заведения</span>
+            <span class="fin-topcat-val">€300 <span class="fin-topcat-over">/ план 200</span></span>
+            <div class="fin-topcat-bar"><div class="fin-topcat-bar-fill" style="width: 100%;"></div></div>
+          </div>
+          <div class="fin-topcat-item">
+            <span class="fin-topcat-name">🩺 Здоровье</span>
+            <span class="fin-topcat-val">€200 <span class="fin-topcat-over">/ план 70</span></span>
+            <div class="fin-topcat-bar"><div class="fin-topcat-bar-fill" style="width: 100%;"></div></div>
+          </div>
+        </div>
+
+        <div class="fin-profit">
+          <span class="fin-profit-label">Чистая прибыль</span>
+          <span class="fin-profit-val">+€1 439</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Светофор + цели</div>
+        <div class="signals">
+          <div class="signal signal-ok"><span class="signal-dot"></span><span><span class="signal-key">В плюсе</span> <span class="signal-note">— месяц закрывается прибылью</span></span></div>
+          <div class="signal signal-bad"><span class="signal-dot"></span><span><span class="signal-key">До €8К/мес не дотягиваю</span> <span class="signal-note">— разрыв €4 561</span></span></div>
+          <div class="signal signal-bad"><span class="signal-dot"></span><span><span class="signal-key">3 карты ниже буфера €500</span> <span class="signal-note">— BBVA, Wise, Santander</span></span></div>
+          <div class="signal signal-warn"><span class="signal-dot"></span><span><span class="signal-key">Перерасход 3 категории</span> <span class="signal-note">— Еда, Заведения, Здоровье</span></span></div>
+        </div>
+        <div class="runway" style="margin-top: 1rem;">
+          <div class="runway-row"><span class="runway-label">США сентябрь — фонд</span><span class="runway-val">€0 / €9 000</span></div>
+          <div class="runway-meta">Точка решения 15.07. Срок 4 арг. паспортов — 22.05.</div>
+        </div>
+        <div class="runway">
+          <div class="runway-row"><span class="runway-label">Долги внешние</span><span class="runway-val">~€136</span></div>
+          <div class="runway-meta">Сесилия $158 USDT (через Ирину BA) — ~30.05.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 4. CALLS ─────────── -->
+<section class="section reveal" id="calls">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title"><span class="section-num">04</span> Звонки</h2>
+      <p class="section-meta">источник: Granola + meetings/*.md · обновить: <code>/call</code></p>
+    </div>
+    <div class="calls-section">
+      <div class="calls-strip">
+        <div class="call">
+          <div class="call-head">
+            <div class="avatar avatar-octo">СО</div>
+            <div class="call-who"><span class="call-name">Сергей · Octo</span><span class="call-when">21.05 · чт</span></div>
+          </div>
+          <div class="call-topic">Синхрон без прогресса. Долг €1К не упомянут. Предложил «подработку как Виталик» — понижение. Корп.почта отключена Еленой.</div>
+          <div class="call-tasks-title">Задачи · 3</div>
+          <ul class="call-tasks-list">
+            <li>Резюме до синхрона 26.05 НЕ отправлять, ждать его повестку</li>
+            <li>Долг €1К не поднимать в моменте (cashflow-only)</li>
+            <li>Дедлайн решения 17.06 — фиксировать в state.md</li>
+          </ul>
+          <span class="call-link">Granola · <code>21.05-sergey-call</code></span>
+        </div>
+
+        <div class="call">
+          <div class="call-head">
+            <div class="avatar avatar-fishok">КК</div>
+            <div class="call-who"><span class="call-name">Кристапс · Fishok</span><span class="call-when">21.05 · чт</span></div>
+          </div>
+          <div class="call-topic">Впервые открыто раздражён. Слой конфиденциальности. Калькулятор: стикеры €850 vs полная печать €4 750.</div>
+          <div class="call-tasks-title">Задачи · 6</div>
+          <ul class="call-tasks-list">
+            <li>Письмо с финальными цифрами упаковки</li>
+            <li>Латыш-китаец по 30К пакетов → ориентир цен</li>
+            <li>One-pager «модератор + аутсорс-ФД» — к вс 24.05</li>
+            <li>Подсветить Кристапсу скидку 6 центов Исландику</li>
+            <li>Уточнить с Daniel: образец треугольной формы</li>
+            <li>Дизайнер задней стороны пачки + новые вкусы</li>
+          </ul>
+          <span class="call-link">Granola · <code>21.05-sales-team-kristaps</code></span>
+        </div>
+
+        <div class="call">
+          <div class="call-head">
+            <div class="avatar avatar-ft">ДК</div>
+            <div class="call-who"><span class="call-name">Даня Кирчанов</span><span class="call-when">21.05 · чт</span></div>
+          </div>
+          <div class="call-topic">Разбор differences для Founder Trajectory. Источник для product/differences.md.</div>
+          <div class="call-tasks-title">Задачи · 2</div>
+          <ul class="call-tasks-list">
+            <li>Вынести 3 маркера отстройки в differences.md</li>
+            <li>Цитата Дани в кейс / лендинг (с разрешения)</li>
+          </ul>
+          <span class="call-link">Granola · <code>6bbf7336…</code></span>
+        </div>
+
+        <div class="call">
+          <div class="call-head">
+            <div class="avatar avatar-ft">МК</div>
+            <div class="call-who"><span class="call-name">Марк · брокер</span><span class="call-when">20.05 · ср</span></div>
+          </div>
+          <div class="call-topic">Назвал «наставником». Жёсткий совет по упаковке. Главный актив спринта — созвон на W22.</div>
+          <div class="call-tasks-title">Задачи · 4</div>
+          <ul class="call-tasks-list">
+            <li>Партнёрская модель для брокерской сети</li>
+            <li>Сценарий «операционный аудит ДО продажи бизнеса»</li>
+            <li>Согласовать дату созвона до 25.05</li>
+            <li>Инсайты по упаковке в positioning.md</li>
+          </ul>
+          <span class="call-link">Granola · <code>497e448a…</code></span>
+        </div>
+      </div>
+
+      <aside class="upcoming-panel">
+        <div class="upcoming-title">Предстоящие звонки · W22</div>
+        <div class="upcoming-list">
+          <div class="upcoming-item">
+            <div class="upcoming-head"><span class="upcoming-who">Марк · брокер</span><span class="upcoming-when">W22 · TBD</span></div>
+            <div class="upcoming-prep">Партнёрская модель + аудит до продажи. 🔥 главный актив спринта.</div>
+          </div>
+          <div class="upcoming-item">
+            <div class="upcoming-head"><span class="upcoming-who">Сергей · Octo</span><span class="upcoming-when">26.05 · вт</span></div>
+            <div class="upcoming-prep">Ждать его повестку. Не отправлять резюме заранее.</div>
+          </div>
+          <div class="upcoming-item">
+            <div class="upcoming-head"><span class="upcoming-who">Кристапс · Fishok</span><span class="upcoming-when">22.05 · пт</span></div>
+            <div class="upcoming-prep">Ждать итоги по Александру/Odoo + Татьяне/финтаблице.</div>
+          </div>
+          <div class="upcoming-item">
+            <div class="upcoming-head"><span class="upcoming-who">Надин · мастермайнд</span><span class="upcoming-when">27.05 · ср</span></div>
+            <div class="upcoming-prep">«Как поездка?» ⚠️ Если Сергей в группе — ask не делать.</div>
+          </div>
+          <div class="upcoming-item">
+            <div class="upcoming-head"><span class="upcoming-who">Евгений-старший</span><span class="upcoming-when">23.05 · сб</span></div>
+            <div class="upcoming-prep">Голосовое 30 сек, повод по конвейерному рынку Казахстана.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 5. ВНУТРЕННИЕ РАЗДЕЛЫ ─────────── -->
+<section class="section reveal" id="sections">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title"><span class="section-num">05</span> Разделы портала</h2>
+      <p class="section-meta">9 рабочих поверхностей</p>
+    </div>
+    <div class="sections-grid">
+      <a href="/tasks/" class="section-card">
+        <span class="section-card-num">00 · ЗАДАЧИ</span>
+        <h3 class="section-card-title">Матрица Эйзенхауэра</h3>
+        <p class="section-card-desc">Единый бэклог по 4 квадрантам, недельный таймлайн, бюджет часов, контексты. Источник: <code>tasks/backlog.md</code>.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+      <a href="/founder-trajectory/" class="section-card">
+        <span class="section-card-num">01 · ПРОДУКТ</span>
+        <h3 class="section-card-title">Founder Trajectory</h3>
+        <p class="section-card-desc">Управляемая траектория для founder-CEO. 5 ступеней цен, методология 8 контуров, 3-фазный Reset.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+      <a href="/clients/" class="section-card">
+        <span class="section-card-num">02 · КЛИЕНТЫ</span>
+        <h3 class="section-card-title">Клиенты</h3>
+        <p class="section-card-desc">Fishok (retainer €3.5K/мес) и Octo (пауза до 17.06). Статусы, что сейчас, риски.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+      <a href="/contacts/" class="section-card">
+        <span class="section-card-num">03 · КОНТАКТЫ</span>
+        <h3 class="section-card-title">Картотека людей</h3>
+        <p class="section-card-desc">Стратегические + активные + перспективные. Что им важно, что нужно сделать чтобы вывести отношения на следующий уровень.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+      <a href="/finance/" class="section-card">
+        <span class="section-card-num">04 · ФИНАНСЫ</span>
+        <h3 class="section-card-title">Полный план-факт</h3>
+        <p class="section-card-desc">Кошельки, конверты, фонды, кредит РФ, поездка США. Май 2026 закрывается +€1 439.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+      <a href="/system/" class="section-card">
+        <span class="section-card-num">05 · СИСТЕМА</span>
+        <h3 class="section-card-title">AndreiOS</h3>
+        <p class="section-card-desc">4 субагента, правила контекста, kill-switch, ритм работы день-неделя-месяц, slash-команды.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+      <a href="/decisions/" class="section-card">
+        <span class="section-card-num">06 · РЕШЕНИЯ</span>
+        <h3 class="section-card-title">Журнал ADR</h3>
+        <p class="section-card-desc">Стратегические решения и переоценки. Cashflow-only, переименование папки FT, стандарт кейса v2.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+      <a href="/wisdom/" class="section-card">
+        <span class="section-card-num">07 · WISDOM</span>
+        <h3 class="section-card-title">Что думают эксперты</h3>
+        <p class="section-card-desc">Маргулан Сейсембаев, Сергей Колесников и др. Инсайты с применением к практике.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+      <a href="/landing/" class="section-card">
+        <span class="section-card-num">08 · ЛЕНДИНГИ</span>
+        <h3 class="section-card-title">3 варианта оффера</h3>
+        <p class="section-card-desc">Hand of the King (premium), Operational Architect (B2B), Operating System (tech). Не путать с продуктом — это упаковка одного.</p>
+        <span class="section-card-arrow">Открыть →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 6. РЕШЕНИЯ (внизу) ─────────── -->
+<section class="section reveal" id="decisions">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title"><span class="section-num">06</span> Журнал стратегических решений</h2>
+      <p class="section-meta">последние 7 · <a href="/decisions/" class="underline-link">все решения</a></p>
+    </div>
+    <div class="decisions-list">
+      <div class="decision">
+        <span class="decision-date">2026-05-21</span>
+        <span class="decision-title">Пересборка sychinnikov.com — главная как дашборд, разделы переработаны</span>
+        <span class="decision-scope">portal</span>
+      </div>
+      <div class="decision">
+        <span class="decision-date">2026-05-21</span>
+        <span class="decision-title">Переименование sychinnikov/ → founder-trajectory/ + контракт публичности</span>
+        <span class="decision-scope">root</span>
+      </div>
+      <div class="decision">
+        <span class="decision-date">2026-05-21</span>
+        <span class="decision-title">Имя продукта = Founder Trajectory (ADR-004)</span>
+        <span class="decision-scope">founder-trajectory</span>
+      </div>
+      <div class="decision">
+        <span class="decision-date">2026-05-21</span>
+        <span class="decision-title">Стандарт кейса v2 — 8 разделов, обязательная актив-система</span>
+        <span class="decision-scope">founder-trajectory</span>
+      </div>
+      <div class="decision">
+        <span class="decision-date">2026-05-20</span>
+        <span class="decision-title">Contacts v2 — tags, _private/, _activities/, промоут в папку при ≥3 артефакта</span>
+        <span class="decision-scope">root</span>
+      </div>
+      <div class="decision">
+        <span class="decision-date">2026-05-20</span>
+        <span class="decision-title">Finance DDS-структура — wallets/ как источник истины</span>
+        <span class="decision-scope">finance</span>
+      </div>
+      <div class="decision">
+        <span class="decision-date">2026-05-18</span>
+        <span class="decision-title">Cashflow-only режим до €8К/мес × 2 месяца</span>
+        <span class="decision-scope">root</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    Sychinnikov Portal · приватный second-brain · сборка из <code>Claude-Context/</code> · <a href="/system/">архитектура</a>
+  </div>
 </footer>
 
-</div>
+<script src="/assets/js/portal.js" defer></script>
 </body>
 </html>

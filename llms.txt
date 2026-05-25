@@ -1,58 +1,65 @@
-# Андрей Сычинников
+# Андрей Сычинников — sychinnikov.com
 
-> Strategic advisor / Hand of the King для русскоязычных founder-CEO стартапов pre-seed → Series A. Помогаю основателям через weekly 1:1 переводить хаос операционки в последовательность действий, формализовать институциональную структуру, возвращать founder-у владение задачами. Формула: operational entry → advisor tier. Cashflow-only режим (с 18.05.2026): беру платные проекты без принудительного equity-разговора до выхода на €8К/мес × 2 мес.
+> Приватный портал-дашборд Андрея Сычинникова. Не публичный сайт продукта. Operational Architect для русскоязычных стартапов pre-seed → Series A. Strategic Advisor / Hand of the King для founder-CEO (двукратно валидировано рынком — Кристапс/Fishok, Сергей/Octo). Бывший CEO, выручка 120 млн ₽ в 2024 без внешних инвестиций. База: Хихон, Испания. Cashflow-only режим активен с 2026-05-18 — беру платные проекты без принудительного equity-разговора до €8К/мес × 2 мес.
 
-База: Хихон, Испания. Email: sychinnikov@gmail.com
+Email: sychinnikov@gmail.com
 
-## Main pages
+## Главная
 
-- [Главная](https://sychinnikov.com/): Карта портала, три цели 90 дней, статусы проектов
-- [Дашборд](https://sychinnikov.com/dashboard/): Оперативная картина — цели, клиенты, sales-sprint
-- [Финансы](https://sychinnikov.com/finance/): Личный финансовый дашборд план-факт
-- [Здоровье системы](https://sychinnikov.com/health/): Метрики самой системы AndreiOS
-- [Как это работает](https://sychinnikov.com/how-it-works/): Объяснение AndreiOS простыми словами
+- [Дашборд](https://sychinnikov.com/): задачи дня (канбан), прогресс Founder Trajectory (Гантт), финансы-снимок, звонки прошедшие + предстоящие, журнал решений
 
-## Goals
+## Задачи
 
-- [Все цели](https://sychinnikov.com/goals/): Три горизонта — 90 дней, 10 лет, ценности
-- [Цели 90 дней](https://sychinnikov.com/goals/90-days.html): Три цели с актуальным прогрессом
-- [Долгосрочная цель](https://sychinnikov.com/goals/long-term.html): $10М+ к 2033, двухтактная стратегия
-- [Ценности и антицели](https://sychinnikov.com/goals/values.html): Фильтры решений
+- [Матрица Эйзенхауэра](https://sychinnikov.com/tasks/): единый бэклог всех задач Андрея по 4 квадрантам (Q1-Q4). Оси «важно × срочно» через цели 90 дней и дедлайн ≤72ч. 5 вкладок: Сегодня · Неделя · Матрица · По контексту · Все. Бюджет часов недели, подсветка просрочек и старых задач. Источник: `tasks/backlog.md` в Claude-Context. Регенерация через `/triage` и `/tasks`.
 
-## Clients
+## Продукт
 
-- [Все клиенты](https://sychinnikov.com/clients/): Обзор всех проектов
-- [Fishok](https://sychinnikov.com/clients/fishok.html): Retainer €3 500/мес от ВВ (Латвия) — не платформа роста
-- [Vitaly Textile](https://sychinnikov.com/clients/vitaly-textile.html): Третий клиент в diagnostic-offer
-- [Pipeline + майский спринт](https://sychinnikov.com/clients/pipeline.html): Воронка + 17 личных контактов, цель +€3К/мес
-- [Octo Project](https://sychinnikov.com/octo-project/): Octo OS на паузе до 17.06.2026
+- [Founder Trajectory](https://sychinnikov.com/founder-trajectory/): управляемая траектория для founder-CEO. 5 ступеней (Map → Audit → Reset → Advisor → Partner). Методология 8 контуров. 3-фазный Reset (Discovery → Architecture → Handover). Hard floor 3 мес на flagship.
 
-## Methodology
+## Клиенты
 
-- [Strategic Advisor — Hand of the King](https://sychinnikov.com/practice/strategic-advisor.html): Точка гения. Weekly 1:1 для founder-CEO. Дважды валидировано рынком (Кристапс, Сергей)
-- [Operational Foundation](https://sychinnikov.com/practice/): Моя публичная методология. Формула operational → advisor
-- [Pricing Ladder](https://sychinnikov.com/practice/pricing-ladder.html): 5 уровней (Advisory hourly + 4 tier продукта)
-- [Кейсы](https://sychinnikov.com/practice/cases.html): Silver Spa, Fishok, Octo
+- [Активные клиенты](https://sychinnikov.com/clients/): Fishok (retainer €3.5К/мес, Латвия) и Octo Relocate (пауза до 17.06.2026, дедлайн решения по выходу)
 
-## Decisions
+## Контакты
 
-- [Журнал решений](https://sychinnikov.com/decisions/): Стратегические решения и переоценки. Сверху новые.
+- [Картотека](https://sychinnikov.com/contacts/): 18 контактов с relationship-логикой — кто, что им важно, что нужно сделать чтобы вывести отношения на следующий уровень. Группы: стратегические / активные / перспективные / спящие / закрытые сезона.
 
-## System architecture
+## Финансы
 
-- [Карта системы](https://sychinnikov.com/system/): Концептуальная архитектура AndreiOS
-- [Полная структура](https://sychinnikov.com/structure/): Все папки и файлы (включая archive)
-- [Toolbox](https://sychinnikov.com/toolbox/): 11 skills, 4 субагента (mentor + practice-director + finance-director + octo-advisor), hooks
+- [Финансовый дашборд](https://sychinnikov.com/finance/): план-факт май 2026 (+€1 439 прибыль), кошельки (6 счетов + крипта), фонды (подушка / США / equity-портфель), кредит РФ (переход на евро 02.08.2026)
 
-## Materials
+## Система
 
-- [AndreiOS guide](https://sychinnikov.com/articles/andreios-guide.html): Подробный гайд по системе управления
+- [AndreiOS](https://sychinnikov.com/system/): 4 субагента (mentor, trajectory-architect, finance-director, octo-advisor), slash-команды (/day-open, /day-close, /call, /intake, /finance), правила контекста, kill-switch, режим cashflow-only
 
-## Context
+## Решения
 
-- Фокус: strategic advisor для founder-CEO, operational architecture, AI-driven management, equity-партнёрство в стартапах
+- [ADR-журнал](https://sychinnikov.com/decisions/): стратегические решения сверху-новые. Последние: пересборка портала, переименование sychinnikov→founder-trajectory, стандарт кейса v2, contacts v2, DDS-структура финансов, cashflow-only
+
+## Wisdom
+
+- [Источники мышления](https://sychinnikov.com/wisdom/): Маргулан Сейсембаев, Сергей Колесников, школа продуктовых архитекторов (Бейкер + Эннс + Вайс), Илья Балахнин (voice). Не путать с contacts — здесь те, кто формирует мышление, не те с кем общаюсь.
+
+## Лендинги (3 варианта оффера)
+
+- [Hand of the King — premium](https://sychinnikov.com/landing/hand/): dark mode, премиум-позиционирование
+- [Operational Architect — B2B](https://sychinnikov.com/landing/architect/): light mode, B2B-консалтинг
+- [Operating System — tech](https://sychinnikov.com/landing/system/): tech-эстетика, продуктовый угол
+
+## Три цели 90 дней (до 2026-08-20)
+
+1. Третий клиент (желательно через инкубатор Сергея — equity-кейс)
+2. Первая equity-позиция (Partnership Framework)
+3. €8 000-10 000/мес чистыми к 1 августа
+
+## Контекст
+
 - Языки: русский (родной), английский (рабочий), испанский (бытовой)
 - Юрисдикции: ЕС (Испания), готовлю переезд в США (2028, приоритет Флорида)
+- Семья: жена Вика, дочь Сара, сын, golden retriever
 - Долгосрочная цель: $10М+ к 2033 через equity-портфель из 6-10 долей в стартапах
 - Стиль работы: системное мышление, deep dive, AI-driven, без шаблонов
-- Сильный кейс: CEO с нуля до 120 млн ₽ выручки (2024) без внешних инвестиций
+
+## Контракт публичности
+
+Весь портал — приватный second-brain. Если что-то предназначено наружу — отдельный деплой на отдельном домене (например, будущий публичный лендинг Founder Trajectory из source-layer `founder-trajectory/website/`). Контент этого сайта — рабочая поверхность только для Андрея.

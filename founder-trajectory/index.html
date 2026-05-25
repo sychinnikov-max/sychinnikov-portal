@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAFAF7" />
+<title>Founder Trajectory · Sychinnikov Portal</title>
+<meta name="description" content="Управляемая траектория бизнеса для founder-CEO pre-seed → Series A. Методология 8 контуров, 5 ступеней pricing, 3-фазный Reset." />
+<link rel="stylesheet" href="/assets/css/portal.css" />
+<style>
+.ft-intro-card {
+  background: linear-gradient(135deg, #1F3A5F 0%, #16304F 100%);
+  color: #F4F2EC;
+  padding: 1.75rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+.ft-intro-eyebrow {
+  font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
+  opacity: 0.7; font-weight: 500; margin-bottom: 0.6rem;
+}
+.ft-intro-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-variation-settings: "opsz" 30, "wght" 400;
+  color: white;
+  margin-bottom: 0.85rem;
+  line-height: 1.2;
+}
+.ft-intro-sub {
+  font-size: 0.92rem; line-height: 1.55; opacity: 0.85; max-width: 56ch;
+}
+
+/* Ladder */
+.ladder {
+  display: grid; gap: 0.75rem; margin-bottom: 2rem;
+}
+.ladder-step {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  align-items: center; gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  border-left: 3px solid var(--color-accent);
+}
+.ladder-step-num {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-variation-settings: "opsz" 24, "wght" 380;
+  color: var(--color-accent);
+}
+.ladder-step-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-variation-settings: "opsz" 20, "wght" 500;
+  margin-bottom: 0.2rem;
+}
+.ladder-step-desc { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.4; }
+.ladder-step-price {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  color: var(--color-text); font-weight: 500;
+  text-align: right; min-width: 8rem;
+}
+.ladder-step-price small { display: block; font-family: var(--font-sans); font-size: 0.7rem; color: var(--color-text-soft); margin-top: 0.2rem; font-weight: 400; }
+
+/* Methodology contours */
+.contours { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
+.contour {
+  padding: 1rem 1.1rem;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+}
+.contour-num {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--color-text-soft); letter-spacing: 0.06em; margin-bottom: 0.4rem;
+}
+.contour-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-variation-settings: "opsz" 18, "wght" 500;
+  margin-bottom: 0.35rem;
+}
+.contour-desc { font-size: 0.78rem; color: var(--color-text-muted); line-height: 1.4; }
+
+/* Phases */
+.phases {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.phase {
+  position: relative;
+  padding: 1.25rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+}
+.phase-label {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--color-accent); letter-spacing: 0.06em; font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.phase-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-variation-settings: "opsz" 20, "wght" 460;
+  margin-bottom: 0.5rem;
+}
+.phase-body { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; }
+
+/* Diff */
+.diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.diff-card {
+  padding: 1rem 1.15rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+}
+.diff-vs {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--color-text-soft); margin-bottom: 0.5rem;
+}
+.diff-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-variation-settings: "opsz" 18, "wght" 500;
+  margin-bottom: 0.45rem;
+}
+.diff-desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5; }
+
+@media (max-width: 1024px) {
+  .contours { grid-template-columns: repeat(2, 1fr); }
+  .phases, .diff-grid { grid-template-columns: 1fr; }
+  .ladder-step { grid-template-columns: 2.5rem 1fr; }
+  .ladder-step-price { grid-column: 1 / -1; margin-left: 3.5rem; text-align: left; min-width: 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="brand"><span class="brand-dot"></span>Sychinnikov Portal<span class="brand-sub">private</span></a>
+    <nav class="nav">
+      <a href="/" data-nav>Дашборд</a>
+      <a href="/founder-trajectory/" data-nav>Продукт</a>
+      <a href="/clients/" data-nav>Клиенты</a>
+      <a href="/contacts/" data-nav>Контакты</a>
+      <a href="/finance/" data-nav>Финансы</a>
+      <a href="/system/" data-nav>Система</a>
+      <a href="/decisions/" data-nav>Решения</a>
+      <a href="/wisdom/" data-nav>Wisdom</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <p class="page-eyebrow">01 · Продукт · ADR-004</p>
+    <h1 class="page-title">Founder Trajectory — управляемая траектория бизнеса для founder-CEO.</h1>
+    <p class="page-sub">
+      Не школа, не курсы, не группа. 1:1 с собственником в pre-seed → Series A. Метафора cockpit: пилот в кабине, приборы работают, курс задан. Hard floor — 3 месяца.
+    </p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+
+    <div class="ft-intro-card">
+      <div class="ft-intro-eyebrow">ЭТАП 7 · НАПОЛНЕНИЕ КОНТЕНТА · ПРИОРИТЕТ 1</div>
+      <h2 class="ft-intro-title">Сейчас собираю упаковку. До 20.06.2026.</h2>
+      <p class="ft-intro-sub">
+        Инфраструктура проекта закрыта (этапы 1-6). В фокусе: <code>positioning.md</code>, <code>methodology.md</code>, <code>pricing-ladder.md</code>, <code>playbook.md</code>, <code>differences.md</code>. После — кейсы и лендинг.
+      </p>
+    </div>
+
+    <!-- 5 ступеней -->
+    <div class="section-head">
+      <h2 class="section-title"><span class="section-num">01</span> 5 ступеней pricing ladder</h2>
+      <p class="section-meta">от free lead-magnet до equity-партнёрства</p>
+    </div>
+
+    <div class="ladder">
+      <div class="ladder-step">
+        <div class="ladder-step-num">01</div>
+        <div>
+          <div class="ladder-step-name">Trajectory Map</div>
+          <div class="ladder-step-desc">Free lead-magnet. Публичный Notion-документ или Substack-серия из 8-12 модулей по 8 контурам методологии. Без email-капчи.</div>
+        </div>
+        <div class="ladder-step-price">free<small>лидген</small></div>
+      </div>
+
+      <div class="ladder-step">
+        <div class="ladder-step-num">02</div>
+        <div>
+          <div class="ladder-step-name">Trajectory Audit</div>
+          <div class="ladder-step-desc">Точечная диагностика бизнеса. 2-3 недели интервью + анализ + рабочий документ 15-20 страниц с дорожной картой. Самостоятельный продукт, даже если не идём дальше.</div>
+        </div>
+        <div class="ladder-step-price">€2-3К<small>2-3 недели</small></div>
+      </div>
+
+      <div class="ladder-step" style="border-left-color: var(--color-warning);">
+        <div class="ladder-step-num">03</div>
+        <div>
+          <div class="ladder-step-name">Trajectory Reset 🎯 flagship</div>
+          <div class="ladder-step-desc">3-фазная работа M1 Discovery → M2 Architecture → M3 Handover. Hard floor — 3 месяца. Передача актив-системы команде.</div>
+        </div>
+        <div class="ladder-step-price">€18-20К fix<small>или €5-7К/мес</small></div>
+      </div>
+
+      <div class="ladder-step">
+        <div class="ladder-step-num">04</div>
+        <div>
+          <div class="ladder-step-name">Trajectory Advisor</div>
+          <div class="ladder-step-desc">Post-Reset retainer. Еженедельный 1:1 с founder-CEO + точечная архитектурная работа. Только после Reset, не как точка входа.</div>
+        </div>
+        <div class="ladder-step-price">€2-4К/мес<small>retainer</small></div>
+      </div>
+
+      <div class="ladder-step">
+        <div class="ladder-step-num">05</div>
+        <div>
+          <div class="ladder-step-name">Trajectory Partner</div>
+          <div class="ladder-step-desc">Equity-формат. Структура описана, не активно продвигается. Условия: юрлицо + ≥€30К/мес выручки + defensibility + обсуждение ДО работы.</div>
+        </div>
+        <div class="ladder-step-price">equity<small>cashflow-only пауза</small></div>
+      </div>
+    </div>
+
+    <!-- Методология -->
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">02</span> Методология — 8 контуров</h2>
+      <p class="section-meta">источник: raw/expert-product-architect-2026-05-18</p>
+    </div>
+
+    <div class="contours">
+      <div class="contour"><div class="contour-num">01</div><div class="contour-name">Управляемость</div><div class="contour-desc">Кто принимает решения, как делегировано, где собственник = единая точка отказа.</div></div>
+      <div class="contour"><div class="contour-num">02</div><div class="contour-name">Показатели</div><div class="contour-desc">Какие цифры существуют, кому они принадлежат, что они говорят о траектории.</div></div>
+      <div class="contour"><div class="contour-num">03</div><div class="contour-name">Исполнение</div><div class="contour-desc">Как декомпозируются и трекаются обязательства, рутина vs проекты.</div></div>
+      <div class="contour"><div class="contour-num">04</div><div class="contour-name">Фокус</div><div class="contour-desc">Где собственник тратит время и где должен. Что в его руках по необходимости, что — по привычке.</div></div>
+      <div class="contour"><div class="contour-num">05</div><div class="contour-name">Улучшения</div><div class="contour-desc">Откуда берутся изменения процессов, кто их вносит, как тестируются.</div></div>
+      <div class="contour"><div class="contour-num">06</div><div class="contour-name">Изменения</div><div class="contour-desc">Как компания справляется с шоками рынка, людьми, технологиями. Антихрупкость.</div></div>
+      <div class="contour"><div class="contour-num">07</div><div class="contour-name">Философия</div><div class="contour-desc">Зачем компания существует. На каком принципе принимаются «нестандартные» решения.</div></div>
+      <div class="contour"><div class="contour-num">08</div><div class="contour-name">Ядро</div><div class="contour-desc">Что в этой компании уникально и почему её нельзя заменить аналогом. Корень defensibility.</div></div>
+    </div>
+
+    <!-- 3 фазы -->
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">03</span> Trajectory Reset — 3 фазы M1-M2-M3</h2>
+      <p class="section-meta">90 дней flagship-работы · артефакты на выходе каждой фазы</p>
+    </div>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-label">M1 · ПЕРВЫЙ МЕСЯЦ</div>
+        <h3 class="phase-title">Discovery + Reframing</h3>
+        <div class="phase-body">
+          Полная диагностика: финансы, продажи, команда, процессы. Интервью с собственником и ключевыми людьми. <strong>Главное здесь не запрос клиента, а истинная проблема.</strong> На выходе — рабочий документ 15-20 страниц + переопределение задачи.
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-label">M2 · ВТОРОЙ МЕСЯЦ</div>
+        <h3 class="phase-title">Architecture</h3>
+        <div class="phase-body">
+          Работа руками в выбранной зоне рычага. Управленческая отчётность, дашборды, CRM-воронка, оргструктура — что реально используется в работе с завтра. Еженедельный синк с собственником.
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-label">M3 · ТРЕТИЙ МЕСЯЦ</div>
+        <h3 class="phase-title">Handover</h3>
+        <div class="phase-body">
+          <strong>Актив-система остаётся работать после выхода.</strong> Передача команде, обучение, документирование. План на следующие 90 дней. Дальше — либо Trajectory Advisor, либо собственник держит сам.
+        </div>
+      </div>
+    </div>
+
+    <!-- Отличия -->
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">04</span> Чем отличаюсь</h2>
+      <p class="section-meta">маркеры отстройки · стандарт differences.md</p>
+    </div>
+
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-vs">vs инфоцыгане</div>
+        <div class="diff-title">Актив-система остаётся работать</div>
+        <div class="diff-desc">Не курсы, не группы, не «знание». На выходе — рабочие дашборды и регламенты, которые продолжают работать после того, как я ушёл. Главный маркер.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-vs">vs агентства</div>
+        <div class="diff-title">1:1 с founder-CEO</div>
+        <div class="diff-desc">Не команда исполнителей. Один человек, который сидит рядом с собственником и разбирает хаос. Strategic Advisor / Hand of the King — это операционная позиция, не методическая.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-vs">vs менторы</div>
+        <div class="diff-title">Истинная проблема ≠ запрос клиента</div>
+        <div class="diff-desc">Переоткрытие проблемы — главная компетенция. Менторы помогают с тем, о чём вы их спросили. Я переопределяю задачу до того, как начнём работать.</div>
+      </div>
+    </div>
+
+    <!-- Bottom card -->
+    <div class="card" style="margin-top: 3rem;">
+      <div class="card-label">Кто я в этом продукте</div>
+      <p style="font-size: 0.95rem; line-height: 1.6;">
+        <strong>Operational Architect</strong> для русскоязычных стартапов pre-seed → Series A.
+        <strong>Strategic Advisor / Hand of the King</strong> для founder-CEO — это моя точка гения, двукратно валидирована рынком (Кристапс, Сергей).
+      </p>
+      <p style="font-size: 0.95rem; line-height: 1.6; margin-top: 1rem;">
+        Бывший CEO с выручкой 120 млн ₽ в 2024 без внешних инвестиций. Перенял и встроил методологию Нескучных Финансов — сильный сигнал доверия для русскоязычных founder-ов.
+      </p>
+      <p class="pull-quote" style="margin-top: 1.5rem;">
+        Сесть рядом с собственником, разобрать хаос и превратить его в последовательность конкретных действий. Не написать рекомендацию. Сделать так, чтобы система работала.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <a href="/">← дашборд</a> · <a href="/landing/">3 варианта лендинга</a> · <a href="/clients/">кейсы клиентов</a>
+  </div>
+</footer>
+
+<script src="/assets/js/portal.js" defer></script>
+</body>
+</html>

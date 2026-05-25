@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+<title>Матрица · понедельник · 25 мая</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='6' y='6' width='40' height='40' rx='6' fill='%23E5868A'/%3E%3Crect x='54' y='6' width='40' height='40' rx='6' fill='%23B4B0E8'/%3E%3Crect x='6' y='54' width='40' height='40' rx='6' fill='%23A6D89F'/%3E%3Crect x='54' y='54' width='40' height='40' rx='6' fill='%23F0CE7A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://rsms.me">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<script>
+  // Pre-paint theme — без flash. Default = light.
+  (function() {
+    try {
+      var saved = localStorage.getItem("sychinnikov-matrix-theme");
+      if (saved === "dark") document.documentElement.classList.add("dark");
+      else if (saved === "light") document.documentElement.classList.remove("dark");
+      // если ничего не сохранено — остаёмся в light (новый дефолт)
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* ─── Variables ─── */
+  :root {
+    --bg: #fafaf8;
+    --panel: #ffffff;
+    --panel-2: #f5f4f1;
+    --text: #0e0e0e;
+    --text-2: #3c3c3c;
+    --muted: #767670;
+    --muted-2: #a8a8a3;
+    --border: #e8e7e2;
+    --border-2: #d8d7d2;
+    --accent: #0e0e0e;
+
+    --q1: 6 78% 52%;
+    --q2: 217 80% 56%;
+    --q3: 38 92% 48%;
+    --q4: 220 9% 46%;
+    --ok: 142 71% 42%;
+    --warn: 38 92% 50%;
+    --crit: 6 78% 52%;
+
+    --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+    --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+
+    --r-sm: 6px; --r: 10px; --r-lg: 14px; --r-pill: 999px;
+
+    --shadow-sm: 0 1px 2px rgba(15,15,15,0.04);
+    --shadow: 0 1px 3px rgba(15,15,15,0.06), 0 1px 2px rgba(15,15,15,0.04);
+    --shadow-lg: 0 8px 24px rgba(15,15,15,0.08), 0 2px 6px rgba(15,15,15,0.04);
+
+    --font: 'Inter var', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  /* Тёмная тема — активируется когда html.dark */
+  html.dark {
+    --bg: #0a0a0a;
+    --panel: #141414;
+    --panel-2: #1c1c1c;
+    --text: #f2f2f0;
+    --text-2: #d0d0cd;
+    --muted: #8c8c87;
+    --muted-2: #5a5a55;
+    --border: #242422;
+    --border-2: #2e2e2c;
+    --accent: #f2f2f0;
+
+    --q1: 6 84% 64%;
+    --q2: 217 91% 68%;
+    --q3: 38 96% 60%;
+    --q4: 220 9% 60%;
+    --ok: 142 71% 55%;
+    --warn: 38 96% 60%;
+    --crit: 6 84% 64%;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+    --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5), 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  /* Чипы контекста в тёмной теме читаются лучше через ghost-style */
+  html.dark .chip.context { color: var(--muted); border-color: var(--border-2); }
+  html.dark .chip.age { background: hsl(var(--warn) / 0.18); color: hsl(var(--warn)); }
+
+  /* ─── Reset ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font);
+    font-feature-settings: 'cv11', 'ss01', 'ss03', 'cv02';
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: -0.006em;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ul { list-style: none; }
+  button, input, select { font-family: inherit; font-size: inherit; color: inherit; }
+  button { cursor: pointer; background: transparent; border: none; }
+  a { color: inherit; text-decoration: none; }
+
+  main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: var(--s-6) var(--s-5) var(--s-8);
+  }
+
+  /* ─── Header ─── */
+  header.page {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-bottom: var(--s-5);
+    flex-wrap: wrap;
+  }
+  header.page h1 {
+    font-size: 26px;
+    font-weight: 680;
+    letter-spacing: -0.022em;
+    line-height: 1.15;
+  }
+  header.page .meta {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  header.page .meta strong { color: var(--text-2); font-weight: 600; }
+
+  /* ─── Theme toggle ─── */
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.15s;
+    min-height: 32px;
+  }
+  .theme-toggle:hover { color: var(--text); border-color: var(--border-2); background: var(--panel); }
+  .theme-toggle svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .theme-toggle .icon-sun { display: inline; }
+  .theme-toggle .icon-moon { display: none; }
+  html.dark .theme-toggle .icon-sun { display: none; }
+  html.dark .theme-toggle .icon-moon { display: inline; }
+  .theme-toggle .lbl-light { display: none; }
+  .theme-toggle .lbl-dark { display: inline; }
+  html.dark .theme-toggle .lbl-light { display: inline; }
+  html.dark .theme-toggle .lbl-dark { display: none; }
+
+  /* ─── Alert strip ─── */
+  .alert-strip {
+    display: flex;
+    gap: var(--s-2);
+    margin-bottom: var(--s-5);
+    flex-wrap: wrap;
+  }
+  .alert {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 10px 14px;
+    font-size: 13px;
+    transition: border-color 0.15s, background 0.15s;
+    cursor: pointer;
+  }
+  .alert:hover { border-color: var(--border-2); background: var(--panel-2); }
+  .alert .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: hsl(var(--muted-2));
+    flex-shrink: 0;
+  }
+  .alert.overdue .dot { background: hsl(var(--crit)); animation: pulse 2.5s ease-in-out infinite; }
+  .alert.today .dot { background: hsl(var(--q1)); }
+  .alert.soon .dot { background: hsl(var(--warn)); }
+  .alert.nodue .dot { background: hsl(var(--q4)); opacity: 0.6; }
+  .alert.zero { opacity: 0.45; }
+  .alert .num { font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+  .alert .lbl { color: var(--muted); }
+  .alert .hrs { color: var(--muted-2); font-size: 12px; }
+  @keyframes pulse { 50% { opacity: 0.4; } }
+
+  /* ─── Tabs ─── */
+  .tabs {
+    display: inline-flex;
+    gap: 2px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    padding: 4px;
+    margin-bottom: var(--s-5);
+  }
+  .tab {
+    color: var(--muted);
+    padding: 8px 16px;
+    border-radius: var(--r-pill);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { background: var(--accent); color: var(--bg); }
+  .tab .count {
+    font-variant-numeric: tabular-nums;
+    background: var(--panel-2);
+    color: var(--muted);
+    padding: 1px 6px;
+    border-radius: var(--r-sm);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tab.active .count { background: rgba(255,255,255,0.15); color: inherit; }
+
+  /* ─── Filters drawer ─── */
+  details.filters {
+    margin-bottom: var(--s-5);
+  }
+  details.filters summary {
+    list-style: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    transition: all 0.15s;
+  }
+  details.filters summary:hover { color: var(--text); border-color: var(--border-2); }
+  details.filters summary::-webkit-details-marker { display: none; }
+  details.filters summary::after {
+    content: "▸";
+    font-size: 10px;
+    transition: transform 0.2s;
+    opacity: 0.6;
+  }
+  details.filters[open] summary::after { transform: rotate(90deg); }
+  details.filters .filters-row {
+    display: flex; gap: var(--s-2); margin-top: var(--s-3); flex-wrap: wrap;
+  }
+  .filter, .search {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    padding: 8px 14px;
+    font-size: 13px;
+    outline: none;
+    min-height: 36px;
+    color: var(--text);
+  }
+  .filter:focus, .search:focus { border-color: var(--text-2); }
+  .search { min-width: 200px; flex: 1; max-width: 320px; }
+  .reset-btn {
+    color: var(--muted);
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: var(--r-pill);
+    border: 1px dashed var(--border-2);
+  }
+  .reset-btn:hover { color: var(--text); border-color: var(--text-2); }
+
+  /* ─── Views ─── */
+  .view { display: none; animation: fadeIn 0.25s ease-out; }
+  .view.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* Stagger карточек при появлении */
+  .view.active .task { animation: cardIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+  .view.active .task:nth-child(1) { animation-delay: 0ms; }
+  .view.active .task:nth-child(2) { animation-delay: 25ms; }
+  .view.active .task:nth-child(3) { animation-delay: 50ms; }
+  .view.active .task:nth-child(4) { animation-delay: 75ms; }
+  .view.active .task:nth-child(5) { animation-delay: 100ms; }
+  .view.active .task:nth-child(6) { animation-delay: 125ms; }
+  .view.active .task:nth-child(n+7) { animation-delay: 150ms; }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .view, .task { animation: none !important; }
+  }
+
+  /* Тонкий scrollbar */
+  * { scrollbar-width: thin; scrollbar-color: var(--border-2) transparent; }
+  *::-webkit-scrollbar { width: 8px; height: 8px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
+  *::-webkit-scrollbar-thumb:hover { background: var(--muted-2); }
+
+  html { scroll-behavior: smooth; }
+
+  /* ─── Task card ─── */
+  .task {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: var(--s-3) var(--s-4);
+    margin-bottom: var(--s-2);
+    transition: background 0.12s, border-color 0.12s;
+    position: relative;
+  }
+  .task[data-q="Q1"] { border-left-color: hsl(var(--q1) / 0.9); }
+  .task[data-q="Q2"] { border-left-color: hsl(var(--q2) / 0.9); }
+  .task[data-q="Q3"] { border-left-color: hsl(var(--q3) / 0.9); }
+  .task[data-q="Q4"] { border-left-color: hsl(var(--q4) / 0.6); }
+  .task:hover { background: var(--panel-2); border-color: var(--border-2); }
+  .task.done { opacity: 0.4; }
+  .task.done .task-title { text-decoration: line-through; text-decoration-thickness: 1px; }
+  .task.overdue { border-left-color: hsl(var(--crit)) !important; border-left-width: 3px; }
+  .task.overdue::before {
+    content: ""; position: absolute; left: -3px; top: 8px; bottom: 8px; width: 3px;
+    background: hsl(var(--crit)); animation: pulse 2s ease-in-out infinite;
+  }
+  .task-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    color: var(--text);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+  .task-meta {
+    display: flex;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 11px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 3px 8px;
+    border-radius: var(--r-sm);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .chip.project {
+    background: var(--text);
+    color: var(--bg);
+    font-weight: 600;
+  }
+  .chip.context {
+    background: transparent;
+    border: 1px solid var(--border-2);
+    color: var(--muted);
+  }
+  .chip.deadline {
+    background: transparent;
+    color: var(--muted);
+    padding-left: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .chip.deadline::before {
+    content: "●";
+    color: hsl(var(--q4) / 0.6);
+    font-size: 7px;
+    margin-right: 2px;
+  }
+  .chip.deadline.soon::before { color: hsl(var(--warn)); }
+  .chip.deadline.overdue::before { color: hsl(var(--crit)); }
+  .chip.deadline.overdue { color: hsl(var(--crit)); font-weight: 600; }
+  .chip.deadline.today { color: var(--text); font-weight: 600; }
+  .chip.deadline.today::before { color: hsl(var(--q1)); }
+  .chip.hours {
+    background: transparent;
+    color: var(--muted);
+    padding-left: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .chip.hours::after { content: "ч"; opacity: 0.6; margin-left: 1px; }
+  .chip.age {
+    background: hsl(var(--warn) / 0.15);
+    color: hsl(var(--warn));
+    font-weight: 600;
+  }
+  .chip.id {
+    background: transparent;
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 0.15s;
+    margin-left: auto;
+  }
+  .task:hover .chip.id { opacity: 0.7; }
+
+  /* ─── View: Today ─── */
+  .today-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--s-4);
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+  .today-header h2 {
+    font-size: 18px;
+    font-weight: 640;
+    letter-spacing: -0.015em;
+  }
+  .today-header .stats {
+    color: var(--muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ─── View: Week timeline ─── */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--s-2);
+    margin-bottom: var(--s-5);
+  }
+  .day-col {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: var(--s-3);
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+  }
+  .day-col.today { border-color: var(--text-2); box-shadow: var(--shadow); }
+  .day-col.past { opacity: 0.55; }
+  .day-col.weekend { background: var(--panel-2); }
+  .day-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: var(--s-2);
+    padding-bottom: var(--s-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .day-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .day-col.today .day-label { color: hsl(var(--q1)); }
+  .day-num {
+    font-size: 20px;
+    font-weight: 640;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .day-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: var(--s-2);
+  }
+  .day-bar-fill {
+    height: 100%;
+    background: hsl(var(--ok));
+    transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .day-bar-fill.warn { background: hsl(var(--warn)); }
+  .day-bar-fill.crit { background: hsl(var(--crit)); }
+  .day-hours {
+    color: var(--muted);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: var(--s-2);
+  }
+  .day-tasks {
+    display: flex; flex-direction: column; gap: 4px;
+    flex: 1;
+  }
+  .day-task {
+    background: var(--panel-2);
+    border-left: 2px solid var(--border-2);
+    border-radius: var(--r-sm);
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.3;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .day-task[data-q="Q1"] { border-left-color: hsl(var(--q1)); }
+  .day-task[data-q="Q2"] { border-left-color: hsl(var(--q2)); }
+  .day-task[data-q="Q3"] { border-left-color: hsl(var(--q3)); }
+  .day-task .t-hrs { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 10px; flex-shrink: 0; }
+  .day-task .t-ttl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .day-empty {
+    color: var(--muted-2);
+    font-size: 11px;
+    font-style: italic;
+    padding: var(--s-2) 0;
+  }
+
+  /* ─── Week budget ─── */
+  .budget-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: var(--s-4);
+  }
+  .budget-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: var(--s-3);
+    flex-wrap: wrap; gap: var(--s-2);
+  }
+  .budget-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .budget-value { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .budget-value strong { color: var(--text); font-weight: 640; font-size: 16px; }
+  .budget-track {
+    position: relative;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: visible;
+  }
+  .budget-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: hsl(var(--ok));
+    transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .budget-fill.warn { background: hsl(var(--warn)); }
+  .budget-fill.crit { background: hsl(var(--crit)); }
+  .budget-marker {
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    width: 2px;
+    background: var(--text-2);
+    opacity: 0.35;
+  }
+  .budget-marker-label {
+    position: absolute;
+    top: 12px;
+    font-size: 10px;
+    color: var(--muted-2);
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  /* ─── View: Matrix ─── */
+  .matrix {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    grid-template-rows: 34px auto auto;
+    gap: var(--s-3);
+  }
+  .axis {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--text); color: var(--bg);
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0 18px;
+    min-height: 34px;
+  }
+  /* axis-side не растягивается на всю высоту строки */
+  .matrix > .axis:nth-of-type(n+4) { align-self: start; height: 34px; margin-top: var(--s-3); }
+  .axis-corner { background: transparent; }
+  .quadrant {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: var(--s-4);
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+  }
+  .quadrant-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: var(--s-3);
+    margin-bottom: var(--s-3);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--border);
+  }
+  .quadrant-name { display: flex; flex-direction: column; gap: 4px; }
+  .quadrant-title {
+    font-size: 15px; font-weight: 620; letter-spacing: -0.01em;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .quadrant-title::before {
+    content: ""; display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; flex-shrink: 0;
+  }
+  .quadrant[data-q="Q1"] .quadrant-title::before { background: hsl(var(--q1) / 0.9); }
+  .quadrant[data-q="Q2"] .quadrant-title::before { background: hsl(var(--q2) / 0.9); }
+  .quadrant[data-q="Q3"] .quadrant-title::before { background: hsl(var(--q3) / 0.9); }
+  .quadrant[data-q="Q4"] .quadrant-title::before { background: hsl(var(--q4) / 0.6); }
+  .quadrant-subtitle { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .quadrant-stats { text-align: right; }
+  .quadrant-count {
+    font-size: 20px;
+    font-weight: 640;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .quadrant-count-sub { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .quadrant-health {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: hsl(var(--ok));
+    margin-left: 6px;
+    vertical-align: 1px;
+  }
+  .quadrant-health.warn { background: hsl(var(--warn)); }
+  .quadrant-health.crit { background: hsl(var(--crit)); animation: pulse 2s ease-in-out infinite; }
+  .quadrant-list { flex: 1; }
+
+  /* ─── View: Context ─── */
+  .context-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--s-3);
+  }
+  .context-col {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: var(--s-4);
+  }
+  .context-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: var(--s-3);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--border);
+  }
+  .context-title { font-size: 13px; font-weight: 620; letter-spacing: -0.005em; }
+  .context-stats { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  /* ─── View: All (flat table) ─── */
+  .flat-table-wrap {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+  }
+  table.flat { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.flat th {
+    text-align: left;
+    padding: 10px var(--s-3);
+    color: var(--muted);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--border);
+  }
+  table.flat td {
+    padding: 10px var(--s-3);
+    border-bottom: 1px solid var(--border);
+    font-variant-numeric: tabular-nums;
+  }
+  table.flat tr:last-child td { border-bottom: none; }
+  table.flat tr:hover td { background: var(--panel-2); }
+  td.q-cell { font-weight: 620; color: var(--muted); width: 36px; }
+  td.q-cell[data-q="Q1"] { color: hsl(var(--q1)); }
+  td.q-cell[data-q="Q2"] { color: hsl(var(--q2)); }
+  td.q-cell[data-q="Q3"] { color: hsl(var(--q3)); }
+  td.q-cell[data-q="Q4"] { color: hsl(var(--q4)); }
+  td.id-cell { color: var(--muted-2); width: 50px; font-family: var(--font-mono); font-size: 11px; }
+  td.project-cell, td.where-cell { color: var(--muted); width: 130px; }
+  td.deadline-cell, td.hours-cell { color: var(--muted); width: 90px; }
+
+  .empty {
+    color: var(--muted-2);
+    font-size: 13px;
+    font-style: italic;
+    padding: var(--s-4) 0;
+    text-align: center;
+  }
+  .empty-state {
+    background: var(--panel);
+    border: 1px dashed var(--border-2);
+    border-radius: var(--r);
+    padding: var(--s-6);
+    text-align: center;
+    color: var(--muted);
+  }
+  .empty-state.ok { color: hsl(var(--ok)); border-color: hsl(var(--ok) / 0.3); background: hsl(var(--ok) / 0.04); }
+  .empty-state.warn { color: hsl(var(--warn)); border-color: hsl(var(--warn) / 0.4); background: hsl(var(--warn) / 0.06); }
+
+  /* ─── Footer ─── */
+  footer.page {
+    margin-top: var(--s-7);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--border);
+  }
+  .projects-bar {
+    margin-bottom: var(--s-4);
+  }
+  .projects-bar-title {
+    font-size: 11px; font-weight: 600; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: var(--s-2);
+  }
+  .projects-track {
+    display: flex;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--border);
+    gap: 1px;
+  }
+  .projects-seg {
+    background: var(--text-2);
+    transition: opacity 0.15s;
+  }
+  .projects-seg:hover { opacity: 0.75; }
+  .projects-legend {
+    display: flex; flex-wrap: wrap; gap: var(--s-3);
+    margin-top: var(--s-2);
+    font-size: 11px;
+  }
+  .projects-legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--muted);
+  }
+  .projects-legend-item .swatch {
+    width: 8px; height: 8px; border-radius: 2px; background: var(--text-2);
+  }
+  .projects-legend-item strong { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .footer-meta {
+    color: var(--muted-2);
+    font-size: 11px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .footer-meta code {
+    background: var(--panel);
+    padding: 2px 6px;
+    border-radius: var(--r-sm);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* ─── Средние экраны (узкий браузер на десктопе) ─── */
+  @media (max-width: 1100px) and (min-width: 761px) {
+    .matrix { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+    .matrix .axis { display: none; }
+  }
+
+  /* ─── Mobile ─── */
+  @media (max-width: 760px) {
+    body { font-size: 13.5px; }
+    main { padding: var(--s-4) var(--s-3) var(--s-7); }
+    header.page h1 { font-size: 22px; }
+    .tabs { width: 100%; display: flex; gap: 0; }
+    .tab { flex: 1; padding: 10px 8px; min-height: 44px; font-size: 12px; justify-content: center; }
+    .tab .count { display: none; }
+    .alert-strip { gap: 6px; }
+    .alert { padding: 8px 10px; font-size: 12px; min-height: 40px; }
+    .matrix { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .matrix .axis { display: none; }
+    .quadrant { min-height: auto; }
+    .week-grid { grid-template-columns: 1fr; gap: var(--s-2); }
+    .day-col { min-height: auto; padding: var(--s-3); }
+    .day-col.past { display: none; }
+    .day-col.weekend.past { display: none; }
+    .context-grid { grid-template-columns: 1fr; }
+    table.flat td.project-cell, table.flat td.where-cell,
+    table.flat td.deadline-cell, table.flat td.hours-cell { display: none; }
+    table.flat th.project-th, table.flat th.where-th,
+    table.flat th.deadline-th, table.flat th.hours-th { display: none; }
+    .filter, .search { width: 100%; max-width: none; }
+    details.filters .filters-row { flex-direction: column; }
+  }
+
+  /* ─── Print ─── */
+  @media print {
+    body { background: white; color: black; }
+    .tabs, .alert-strip, details.filters, .budget-card,
+    .view:not(.active) { display: none !important; }
+    .view { display: block !important; }
+    main { padding: 20px; max-width: none; }
+    .task { break-inside: avoid; box-shadow: none; }
+    .day-col { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header class="page">
+    <div>
+      <h1>Матрица задач</h1>
+      <div class="meta">
+        Андрей Сычинников · <strong>понедельник · 25 мая</strong> · W22 · до конца недели 6д
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:var(--s-3);flex-wrap:wrap">
+      <div class="meta" id="last-updated">обновлено 2026-05-25</div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="переключить тему" title="переключить тему (T)">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <span class="lbl-dark">тёмная</span>
+        <span class="lbl-light">светлая</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="alert-strip" id="alert-strip"></div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-view="today" role="tab">Сегодня <span class="count" id="cnt-today">0</span></button>
+    <button class="tab" data-view="week" role="tab">Неделя <span class="count" id="cnt-week">0</span></button>
+    <button class="tab" data-view="matrix" role="tab">Матрица <span class="count" id="cnt-matrix">0</span></button>
+    <button class="tab" data-view="context" role="tab">Контекст <span class="count" id="cnt-context">0</span></button>
+    <button class="tab" data-view="all" role="tab">Всё <span class="count" id="cnt-all">0</span></button>
+  </div>
+
+  <details class="filters" id="filters-drawer">
+    <summary>Фильтры <span id="active-filter-count"></span></summary>
+    <div class="filters-row">
+      <select class="filter" id="project-filter">
+        <option value="">все проекты</option>
+        <option value="family">family</option><option value="finance">finance</option><option value="fishok">fishok</option><option value="founder-trajectory">founder-trajectory</option><option value="octo">octo</option><option value="us-trip">us-trip</option><option value="личное">личное</option><option value="система">система</option>
+      </select>
+      <select class="filter" id="context-filter">
+        <option value="">все контексты</option>
+        <option value="вне-дома">вне-дома</option><option value="ждать-ответа">ждать-ответа</option><option value="звонок">звонок</option><option value="комп-быстро">комп-быстро</option><option value="комп-глубокая">комп-глубокая</option><option value="комп-крупное">комп-крупное</option><option value="семья">семья</option>
+      </select>
+      <input type="search" class="search" id="search" placeholder="поиск по тексту..." autocomplete="off">
+      <button class="reset-btn" id="reset-filters">сбросить</button>
+    </div>
+  </details>
+
+  <!-- ─── VIEW: Today ─── -->
+  <section class="view" data-view="today" id="view-today">
+    <div class="today-header">
+      <h2 id="today-h2">Сегодня · понедельник · 25 мая</h2>
+      <div class="stats" id="today-stats"></div>
+    </div>
+    <div id="today-list"></div>
+  </section>
+
+  <!-- ─── VIEW: Week ─── -->
+  <section class="view" data-view="week" id="view-week">
+    <div class="week-grid" id="week-grid"></div>
+    <div class="budget-card">
+      <div class="budget-header">
+        <div class="budget-title">Бюджет недели · Q1+Q2 с дедлайном до воскресенья</div>
+        <div class="budget-value"><strong id="budget-hrs">0ч</strong> <span id="budget-pct">из ~35ч</span></div>
+      </div>
+      <div class="budget-track">
+        <div class="budget-fill" id="budget-fill" style="width: 0%"></div>
+        <div class="budget-marker" style="left: 80%"></div>
+        <div class="budget-marker-label" style="left: 80%">оптимум 28ч</div>
+        <div class="budget-marker" style="left: 100%"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── VIEW: Matrix ─── -->
+  <section class="view active" data-view="matrix" id="view-matrix">
+    <div class="matrix" id="matrix">
+      <div class="axis axis-corner"></div>
+      <div class="axis">Срочно</div>
+      <div class="axis">Не срочно</div>
+      <div class="axis">Важно</div>
+      <div class="quadrant" data-q="Q1"></div>
+      <div class="quadrant" data-q="Q2"></div>
+      <div class="axis">Не важно</div>
+      <div class="quadrant" data-q="Q3"></div>
+      <div class="quadrant" data-q="Q4"></div>
+    </div>
+  </section>
+
+  <!-- ─── VIEW: Context ─── -->
+  <section class="view" data-view="context" id="view-context">
+    <div class="context-grid" id="context-grid"></div>
+  </section>
+
+  <!-- ─── VIEW: All ─── -->
+  <section class="view" data-view="all" id="view-all">
+    <div class="flat-table-wrap">
+      <table class="flat">
+        <thead>
+          <tr>
+            <th>Кв.</th><th>#</th><th>Задача</th>
+            <th class="project-th">Проект</th>
+            <th class="where-th">Где</th>
+            <th class="deadline-th">Дедлайн</th>
+            <th class="hours-th">Часы</th>
+          </tr>
+        </thead>
+        <tbody id="flat-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page">
+    <div class="projects-bar" id="projects-bar"></div>
+    <div class="footer-meta">
+      <div>
+        Источник: <code>tasks/backlog.md</code> ·
+        Триаж: <code>/triage</code> ·
+        Обновить: <code>python3 tasks/render.py</code>
+      </div>
+      <div>Закрытый портал Sychinnikov.com</div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+const TASKS = [{"q": "Q1", "id": "001", "title": "Созвон с Марком ВТ 26.05 15:00 — главный конверсионный шанс недели", "project": "founder-trajectory", "deadline": "2026-05-26", "deadlineDelta": 1, "where": "звонок", "hours": "1", "hoursNum": 1.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q1", "id": "002", "title": "Подготовка к Марку: партнёрская модель + операционный аудит ДО продажи", "project": "founder-trajectory", "deadline": "2026-05-26", "deadlineDelta": 1, "where": "комп-глубокая", "hours": "2.5", "hoursNum": 2.5, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q1", "id": "003", "title": "Octo синхрон с Сергеем ВТ 26.05 — финальный сигнал (модель оплаты + €1К)", "project": "octo", "deadline": "2026-05-26", "deadlineDelta": 1, "where": "звонок", "hours": "1", "hoursNum": 1.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q1", "id": "004", "title": "Fishok синхрон с Кристапсом ВТ 26.05 — пассивная позиция", "project": "fishok", "deadline": "2026-05-26", "deadlineDelta": 1, "where": "звонок", "hours": "1", "hoursNum": 1.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q1", "id": "005", "title": "Пинг Сергею по Виталию (next_touch_due сегодня, ПН 14:30)", "project": "founder-trajectory", "deadline": "2026-05-25", "deadlineDelta": 0, "where": "комп-быстро", "hours": "0.25", "hoursNum": 0.25, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": true, "done": false}, {"q": "Q1", "id": "006", "title": "Упаковка Founder Trajectory часть-1 ПН 09:50-12:00 (метафора-метод «врач системы»)", "project": "founder-trajectory", "deadline": "2026-05-25", "deadlineDelta": 0, "where": "комп-глубокая", "hours": "2.5", "hoursNum": 2.5, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": true, "done": false}, {"q": "Q1", "id": "007", "title": "План июня по финансам ПН 16:30-17:30", "project": "finance", "deadline": "2026-05-25", "deadlineDelta": 0, "where": "комп-глубокая", "hours": "1", "hoursNum": 1.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": true, "done": false}, {"q": "Q1", "id": "008", "title": "Mentor понедельничный диалог ПН 15:45-16:30", "project": "личное", "deadline": "2026-05-25", "deadlineDelta": 0, "where": "комп-глубокая", "hours": "0.75", "hoursNum": 0.75, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": true, "done": false}, {"q": "Q2", "id": "010", "title": "Упаковка Founder Trajectory часть-2 СР 11:30-13:00 — лестница 5 ступеней", "project": "founder-trajectory", "deadline": "2026-05-27", "deadlineDelta": 2, "where": "комп-глубокая", "hours": "1.5", "hoursNum": 1.5, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "011", "title": "Упаковка Founder Trajectory часть-3 ЧТ 09:30-13:30 — Reset с двумя форматами", "project": "founder-trajectory", "deadline": "2026-05-28", "deadlineDelta": 3, "where": "комп-глубокая", "hours": "4", "hoursNum": 4.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "012", "title": "Упаковка-финал ПТ 09:30-12:30 — что отдаём первому холодному, страница", "project": "founder-trajectory", "deadline": "2026-05-29", "deadlineDelta": 4, "where": "комп-глубокая", "hours": "3", "hoursNum": 3.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "013", "title": "Авторский инструмент «Проблемы в системе» — добить до состояния «продаваемо»", "project": "founder-trajectory", "deadline": "2026-05-29", "deadlineDelta": 4, "where": "комп-глубокая", "hours": "3", "hoursNum": 3.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "014", "title": "Лендинг / страничка Founder Trajectory к ПТ", "project": "founder-trajectory", "deadline": "2026-05-29", "deadlineDelta": 4, "where": "комп-глубокая", "hours": "4", "hoursNum": 4.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "015", "title": "Q-005 research fractional COO (459 источников) — читать в процессе упаковки", "project": "founder-trajectory", "deadline": "—", "deadlineDelta": null, "where": "комп-быстро", "hours": "—", "hoursNum": 0.0, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q2", "id": "016", "title": "Аренда €1 000 СБ 30.05 — из Wise → хозяин", "project": "finance", "deadline": "2026-05-30", "deadlineDelta": 5, "where": "комп-быстро", "hours": "0.25", "hoursNum": 0.25, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "017", "title": "Сесилия $158 СБ 30.05 — Bybit P2P → ARS", "project": "finance", "deadline": "2026-05-30", "deadlineDelta": 5, "where": "комп-быстро", "hours": "0.25", "hoursNum": 0.25, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "018", "title": "Mentor пятничная сверка по трём целям 90 дней 17:00-17:45", "project": "личное", "deadline": "2026-05-29", "deadlineDelta": 4, "where": "комп-глубокая", "hours": "0.75", "hoursNum": 0.75, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "019", "title": "`/weekly-dialogue` пятничная рефлексия 17:45-18:30", "project": "система", "deadline": "2026-05-29", "deadlineDelta": 4, "where": "комп-глубокая", "hours": "0.75", "hoursNum": 0.75, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "020", "title": "Закрытие мая `/finance close` 1.06 + бюджет июня", "project": "finance", "deadline": "2026-06-01", "deadlineDelta": 7, "where": "комп-глубокая", "hours": "1.5", "hoursNum": 1.5, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q2", "id": "021", "title": "Кредит РФ 02.06 — из рублей", "project": "finance", "deadline": "2026-06-02", "deadlineDelta": 8, "where": "комп-быстро", "hours": "0.25", "hoursNum": 0.25, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q2", "id": "022", "title": "Документы Аргентина → BBVA (юрист + выписка)", "project": "личное", "deadline": "—", "deadlineDelta": null, "where": "вне-дома", "hours": "3", "hoursNum": 3.0, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q2", "id": "023", "title": "Документы права (справка + перевод)", "project": "личное", "deadline": "—", "deadlineDelta": null, "where": "вне-дома", "hours": "2", "hoursNum": 2.0, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q2", "id": "024", "title": "US-visa: проверка 4 паспортов (статус?)", "project": "us-trip", "deadline": "—", "deadlineDelta": null, "where": "комп-быстро", "hours": "0.5", "hoursNum": 0.5, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q2", "id": "025", "title": "Свидание с Викой СБ 30.05 — иллюзионист (уточнить время на билетах)", "project": "family", "deadline": "2026-05-30", "deadlineDelta": 5, "where": "семья", "hours": "3", "hoursNum": 3.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q2", "id": "026", "title": "Дизайнер задней стороны (€1К + 2 нед) — после утверждения варианта", "project": "fishok", "deadline": "—", "deadlineDelta": null, "where": "ждать-ответа", "hours": "0.5", "hoursNum": 0.5, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q2", "id": "027", "title": "Пакеты Исландика €100К — ждать движения от Кристапса", "project": "fishok", "deadline": "—", "deadlineDelta": null, "where": "ждать-ответа", "hours": "—", "hoursNum": 0.0, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q3", "id": "028", "title": "One-pager «модератор + аутсорс-ФД» УСЛОВНО (только если Кристапс сам поднимет тему Татьяны 26.05)", "project": "fishok", "deadline": "2026-05-26", "deadlineDelta": 1, "where": "ждать-ответа", "hours": "1", "hoursNum": 1.0, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": false, "done": false}, {"q": "Q3", "id": "029", "title": "Возврат Amazon €70 (если не пришёл)", "project": "личное", "deadline": "—", "deadlineDelta": null, "where": "комп-быстро", "hours": "0.25", "hoursNum": 0.25, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}, {"q": "Q3", "id": "030", "title": "Хвост `/day-close` за 22.05 (ПН 09:30-09:50)", "project": "система", "deadline": "2026-05-25", "deadlineDelta": 0, "where": "комп-быстро", "hours": "0.5", "hoursNum": 0.5, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": true, "done": false}, {"q": "Q3", "id": "009", "title": "Уточнить времена событий 26.05 (Octo / Fishok / Марк) + обновить календарь", "project": "система", "deadline": "2026-05-25", "deadlineDelta": 0, "where": "комп-быстро", "hours": "0.25", "hoursNum": 0.25, "entered": "2026-05-25", "age": 0, "thisWeek": true, "isToday": true, "done": false}, {"q": "Q4", "id": "031", "title": "Авто-обновляемый sychinnikov-portal (4 фазы инфры: read-only авто-рендер → Telegram write-back → веб write-back через Worker → real-time)", "project": "система", "deadline": "—", "deadlineDelta": null, "where": "комп-крупное", "hours": "5", "hoursNum": 5.0, "entered": "2026-05-25", "age": 0, "thisWeek": false, "isToday": false, "done": false}];
+const QMETA = {"Q1": {"title": "Делать немедленно", "subtitle": "критически важные и срочные"}, "Q2": {"title": "Планировать", "subtitle": "развитие, стратегия, оптимизация"}, "Q3": {"title": "Быстро закрыть", "subtitle": "короткие реактивные задачи"}, "Q4": {"title": "Отложить или удалить", "subtitle": "рутинные или отвлекающие"}};
+const WEEK_DAYS = [{"date": "2026-05-25", "day_num": 25, "month": "мая", "label": "ПН", "is_today": true, "is_past": false, "is_weekend": false, "hours": 5.25, "tasks_count": 6}, {"date": "2026-05-26", "day_num": 26, "month": "мая", "label": "ВТ", "is_today": false, "is_past": false, "is_weekend": false, "hours": 6.5, "tasks_count": 5}, {"date": "2026-05-27", "day_num": 27, "month": "мая", "label": "СР", "is_today": false, "is_past": false, "is_weekend": false, "hours": 1.5, "tasks_count": 1}, {"date": "2026-05-28", "day_num": 28, "month": "мая", "label": "ЧТ", "is_today": false, "is_past": false, "is_weekend": false, "hours": 4.0, "tasks_count": 1}, {"date": "2026-05-29", "day_num": 29, "month": "мая", "label": "ПТ", "is_today": false, "is_past": false, "is_weekend": false, "hours": 11.5, "tasks_count": 5}, {"date": "2026-05-30", "day_num": 30, "month": "мая", "label": "СБ", "is_today": false, "is_past": false, "is_weekend": true, "hours": 3.5, "tasks_count": 3}, {"date": "2026-05-31", "day_num": 31, "month": "мая", "label": "ВС", "is_today": false, "is_past": false, "is_weekend": true, "hours": 0, "tasks_count": 0}];
+const PROJECT_STATS = [{"name": "founder-trajectory", "count": 10, "hours": 21.75}, {"name": "finance", "count": 5, "hours": 3.25}, {"name": "личное", "count": 5, "hours": 6.75}, {"name": "fishok", "count": 4, "hours": 2.5}, {"name": "система", "count": 4, "hours": 6.5}, {"name": "octo", "count": 1, "hours": 1.0}, {"name": "us-trip", "count": 1, "hours": 0.5}, {"name": "family", "count": 1, "hours": 3.0}];
+const TODAY = "2026-05-25";
+const STORAGE_KEY = "sychinnikov-matrix-state";
+
+// ─────────────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────────────
+function parseHours(h) {
+  if (!h || h === "—") return 0;
+  const n = parseFloat(String(h).replace(",", "."));
+  return isNaN(n) ? 0 : n;
+}
+
+function fmtHours(h) {
+  if (!h) return "0";
+  return h.toFixed(h % 1 === 0 ? 0 : 1).replace(".", ",");
+}
+
+function deadlineClass(t) {
+  if (t.deadlineDelta === null || t.deadlineDelta === undefined) return "";
+  if (t.deadlineDelta < 0) return "overdue";
+  if (t.deadlineDelta === 0) return "today";
+  if (t.deadlineDelta <= 2) return "soon";
+  return "";
+}
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[c]);
+}
+
+// ─────────────────────────────────────────────────────
+// State (URL + localStorage)
+// ─────────────────────────────────────────────────────
+function loadState() {
+  const hash = location.hash.slice(1);
+  if (hash) {
+    const p = new URLSearchParams(hash);
+    return {
+      view: p.get("v") || "matrix",
+      project: p.get("p") || "",
+      context: p.get("c") || "",
+      search: p.get("q") || "",
+    };
+  }
+  try {
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    return {
+      view: s.view || "matrix",
+      project: s.project || "",
+      context: s.context || "",
+      search: "",
+    };
+  } catch { return { view: "matrix", project: "", context: "", search: "" }; }
+}
+
+function saveState(s) {
+  const p = new URLSearchParams();
+  if (s.view !== "matrix") p.set("v", s.view);
+  if (s.project) p.set("p", s.project);
+  if (s.context) p.set("c", s.context);
+  if (s.search) p.set("q", s.search);
+  const hash = p.toString();
+  history.replaceState(null, "", hash ? "#" + hash : location.pathname);
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ view: s.view, project: s.project, context: s.context }));
+  } catch {}
+}
+
+// ─────────────────────────────────────────────────────
+// Task card render
+// ─────────────────────────────────────────────────────
+function taskCard(t) {
+  const cls = deadlineClass(t);
+  const stale = (t.q === "Q2" && t.age && t.age > 14) ? " stale" : "";
+  const chips = [];
+  if (t.project) chips.push(`<span class="chip project">${escapeHTML(t.project)}</span>`);
+  if (t.where && t.where !== "—") chips.push(`<span class="chip context">${escapeHTML(t.where)}</span>`);
+  if (t.deadline && t.deadline !== "—")
+    chips.push(`<span class="chip deadline ${cls}">${escapeHTML(t.deadline)}</span>`);
+  if (t.hours && t.hours !== "—" && t.hoursNum > 0)
+    chips.push(`<span class="chip hours">${fmtHours(t.hoursNum)}</span>`);
+  if (t.age && t.age > 14) chips.push(`<span class="chip age">${t.age}д в Q</span>`);
+  if (t.id) chips.push(`<span class="chip id">#${escapeHTML(t.id)}</span>`);
+  const doneCls = t.done ? " done" : "";
+  return `<div class="task ${cls}${doneCls}${stale}" data-q="${t.q}">
+    <div class="task-title">${escapeHTML(t.title)}</div>
+    <div class="task-meta">${chips.join("")}</div>
+  </div>`;
+}
+
+function dayTaskInline(t) {
+  const hrs = t.hoursNum > 0 ? `<span class="t-hrs">${fmtHours(t.hoursNum)}ч</span>` : "";
+  return `<div class="day-task" data-q="${t.q}">
+    <span class="t-ttl">${escapeHTML(t.title)}</span>
+    ${hrs}
+  </div>`;
+}
+
+// ─────────────────────────────────────────────────────
+// Filters
+// ─────────────────────────────────────────────────────
+function matchesFilters(t, filterProject, filterContext, search) {
+  if (filterProject && t.project !== filterProject) return false;
+  if (filterContext && t.where !== filterContext) return false;
+  if (search) {
+    const hay = (t.title + " " + t.project + " " + (t.where || "")).toLowerCase();
+    if (!hay.includes(search)) return false;
+  }
+  return true;
+}
+
+// ─────────────────────────────────────────────────────
+// Alert strip
+// ─────────────────────────────────────────────────────
+function renderAlerts(filtered) {
+  const overdue = filtered.filter(t => t.deadlineDelta !== null && t.deadlineDelta < 0);
+  const today = filtered.filter(t => t.deadlineDelta === 0);
+  const soonW = filtered.filter(t => t.deadlineDelta !== null && t.deadlineDelta > 0 && t.deadlineDelta <= 7 && (t.q === "Q1" || t.q === "Q2"));
+  const nodue = filtered.filter(t => (t.deadlineDelta === null || t.deadlineDelta === undefined) && (t.q === "Q1" || t.q === "Q2"));
+  const overdueH = overdue.reduce((s, t) => s + t.hoursNum, 0);
+  const todayH = today.reduce((s, t) => s + t.hoursNum, 0);
+  const soonH = soonW.reduce((s, t) => s + t.hoursNum, 0);
+
+  const html = `
+    <button class="alert overdue ${overdue.length === 0 ? 'zero' : ''}" data-jump="overdue">
+      <span class="dot"></span>
+      <span class="num">${overdue.length}</span>
+      <span class="lbl">просрочено</span>
+      ${overdue.length > 0 ? `<span class="hrs">· ${fmtHours(overdueH)}ч</span>` : ''}
+    </button>
+    <button class="alert today ${today.length === 0 ? 'zero' : ''}" data-jump="today">
+      <span class="dot"></span>
+      <span class="num">${today.length}</span>
+      <span class="lbl">сегодня</span>
+      ${today.length > 0 ? `<span class="hrs">· ${fmtHours(todayH)}ч</span>` : ''}
+    </button>
+    <button class="alert soon ${soonW.length === 0 ? 'zero' : ''}" data-jump="week">
+      <span class="dot"></span>
+      <span class="num">${soonW.length}</span>
+      <span class="lbl">эта неделя</span>
+      ${soonW.length > 0 ? `<span class="hrs">· ${fmtHours(soonH)}ч</span>` : ''}
+    </button>
+    <button class="alert nodue ${nodue.length === 0 ? 'zero' : ''}" data-jump="all">
+      <span class="dot"></span>
+      <span class="num">${nodue.length}</span>
+      <span class="lbl">без дедлайна</span>
+    </button>`;
+  document.getElementById("alert-strip").innerHTML = html;
+  document.querySelectorAll(".alert[data-jump]").forEach(el => {
+    el.addEventListener("click", () => {
+      const target = el.dataset.jump;
+      if (target === "overdue" || target === "today") setView("today");
+      else if (target === "week") {
+        setView("week");
+        requestAnimationFrame(() => {
+          const todayCol = document.querySelector(".day-col.today");
+          if (todayCol) todayCol.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        });
+      }
+      else if (target === "all") setView("all");
+    });
+  });
+}
+
+// ─────────────────────────────────────────────────────
+// Today view
+// ─────────────────────────────────────────────────────
+function renderToday(filtered) {
+  const overdue = filtered.filter(t => t.deadlineDelta !== null && t.deadlineDelta < 0).sort((a, b) => a.deadlineDelta - b.deadlineDelta);
+  const today = filtered.filter(t => t.deadlineDelta === 0).sort((a, b) => {
+    const order = { Q1: 0, Q3: 1, Q2: 2, Q4: 3 };
+    return order[a.q] - order[b.q];
+  });
+  const cnt = overdue.length + today.length;
+  document.getElementById("cnt-today").textContent = cnt;
+
+  const totalHrs = [...overdue, ...today].reduce((s, t) => s + t.hoursNum, 0);
+  document.getElementById("today-stats").innerHTML =
+    cnt > 0 ? `<strong>${cnt}</strong> задач · <strong>${fmtHours(totalHrs)}ч</strong>` : "";
+
+  let html = "";
+  if (overdue.length > 0) {
+    html += `<h3 style="font-size:13px;color:hsl(var(--crit));margin:var(--s-3) 0 var(--s-2);text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Просрочено</h3>`;
+    html += overdue.map(taskCard).join("");
+  }
+  if (today.length > 0) {
+    if (overdue.length > 0) html += `<h3 style="font-size:13px;color:var(--muted);margin:var(--s-4) 0 var(--s-2);text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Сегодня</h3>`;
+    html += today.map(taskCard).join("");
+  }
+  if (cnt === 0) {
+    html = `<div class="empty-state ok">✓ На сегодня ничего срочного. Хорошее время для глубокой работы из Q2.</div>`;
+  }
+  document.getElementById("today-list").innerHTML = html;
+}
+
+// ─────────────────────────────────────────────────────
+// Week view
+// ─────────────────────────────────────────────────────
+function renderWeek(filtered) {
+  const byDate = {};
+  for (const d of WEEK_DAYS) byDate[d.date] = { ...d, tasks: [] };
+  filtered.forEach(t => {
+    if (t.deadline && byDate[t.deadline]) byDate[t.deadline].tasks.push(t);
+  });
+
+  let totalCount = 0, totalHrs = 0;
+  const html = WEEK_DAYS.map(d => {
+    const data = byDate[d.date];
+    const hrs = data.tasks.reduce((s, t) => s + t.hoursNum, 0);
+    totalCount += data.tasks.length;
+    if (!d.is_past) totalHrs += hrs;
+    const pct = Math.min(hrs / 8 * 100, 100);
+    const barCls = hrs > 8 ? "crit" : hrs > 6 ? "warn" : "";
+    const colCls = [d.is_today ? "today" : "", d.is_past ? "past" : "", d.is_weekend ? "weekend" : ""].filter(Boolean).join(" ");
+    const tasksHtml = data.tasks.length > 0
+      ? data.tasks.sort((a,b) => { const o = {Q1:0,Q3:1,Q2:2,Q4:3}; return o[a.q]-o[b.q]; }).map(dayTaskInline).join("")
+      : `<div class="day-empty">—</div>`;
+    return `<div class="day-col ${colCls}">
+      <div class="day-header">
+        <div class="day-label">${d.label}</div>
+        <div class="day-num">${d.day_num}</div>
+      </div>
+      <div class="day-bar"><div class="day-bar-fill ${barCls}" style="width: ${pct}%"></div></div>
+      <div class="day-hours">${hrs > 0 ? fmtHours(hrs) + 'ч' : '—'}</div>
+      <div class="day-tasks">${tasksHtml}</div>
+    </div>`;
+  }).join("");
+  document.getElementById("week-grid").innerHTML = html;
+  document.getElementById("cnt-week").textContent = totalCount;
+
+  // Budget
+  const budgetHrs = filtered
+    .filter(t => (t.q === "Q1" || t.q === "Q2") && t.thisWeek)
+    .reduce((s, t) => s + t.hoursNum, 0);
+  document.getElementById("budget-hrs").textContent = fmtHours(budgetHrs) + "ч";
+  const pct = Math.min(budgetHrs / 35 * 100, 110);
+  const fill = document.getElementById("budget-fill");
+  fill.style.width = Math.min(pct, 100) + "%";
+  fill.classList.remove("warn", "crit");
+  if (budgetHrs > 35) fill.classList.add("crit");
+  else if (budgetHrs > 28) fill.classList.add("warn");
+}
+
+// ─────────────────────────────────────────────────────
+// Matrix view
+// ─────────────────────────────────────────────────────
+function renderMatrix(filtered) {
+  let totalCount = 0;
+  for (const q of ["Q1","Q2","Q3","Q4"]) {
+    const tasks = filtered.filter(t => t.q === q);
+    totalCount += tasks.length;
+    const meta = QMETA[q];
+    const hours = tasks.reduce((s, t) => s + t.hoursNum, 0);
+    const hoursLabel = hours > 0 ? `${fmtHours(hours)}ч` : "";
+
+    // Health
+    let health = "ok";
+    if (q === "Q1" && tasks.length > 5) health = "warn";
+    if (q === "Q1" && tasks.length > 8) health = "crit";
+    if (q === "Q2" && tasks.length > 25) health = "warn";
+
+    let items = "";
+    if (tasks.length === 0) {
+      if (q === "Q1") items = `<div class="empty-state ok">Сегодня свободно для глубокой работы</div>`;
+      else if (q === "Q4") items = `<div class="empty-state ok">✓ ничего не отложено</div>`;
+      else items = `<div class="empty">— пусто —</div>`;
+    } else {
+      items = tasks.map(taskCard).join("");
+    }
+
+    const quadEl = document.querySelector(`.quadrant[data-q="${q}"]`);
+    quadEl.innerHTML = `
+      <div class="quadrant-header">
+        <div class="quadrant-name">
+          <div class="quadrant-title">${meta.title}<span class="quadrant-health ${health === 'ok' ? '' : health}"></span></div>
+          <div class="quadrant-subtitle">${meta.subtitle}</div>
+        </div>
+        <div class="quadrant-stats">
+          <div class="quadrant-count">${tasks.length}</div>
+          <div class="quadrant-count-sub">${hoursLabel}</div>
+        </div>
+      </div>
+      <div class="quadrant-list">${items}</div>`;
+  }
+  document.getElementById("cnt-matrix").textContent = totalCount;
+}
+
+// ─────────────────────────────────────────────────────
+// Context view
+// ─────────────────────────────────────────────────────
+function renderContext(filtered) {
+  const byCtx = {};
+  filtered.forEach(t => {
+    const c = t.where && t.where !== "—" ? t.where : "—";
+    if (!byCtx[c]) byCtx[c] = [];
+    byCtx[c].push(t);
+  });
+  const order = ["звонок", "комп-глубокая", "комп-быстро", "вне-дома", "ждать-ответа", "семья", "—"];
+  const keys = Object.keys(byCtx).sort((a, b) => {
+    const ai = order.indexOf(a), bi = order.indexOf(b);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
+
+  let total = 0;
+  const html = keys.map(ctx => {
+    const tasks = byCtx[ctx];
+    total += tasks.length;
+    const hrs = tasks.reduce((s, t) => s + t.hoursNum, 0);
+    const sorted = tasks.sort((a, b) => {
+      const o = { Q1: 0, Q2: 1, Q3: 2, Q4: 3 };
+      return o[a.q] - o[b.q];
+    });
+    return `<div class="context-col">
+      <div class="context-header">
+        <div class="context-title">${escapeHTML(ctx)}</div>
+        <div class="context-stats">${tasks.length} · ${hrs > 0 ? fmtHours(hrs) + 'ч' : ''}</div>
+      </div>
+      ${sorted.map(taskCard).join("")}
+    </div>`;
+  }).join("");
+  document.getElementById("context-grid").innerHTML = html || `<div class="empty-state">— ничего не найдено —</div>`;
+  document.getElementById("cnt-context").textContent = total;
+}
+
+// ─────────────────────────────────────────────────────
+// All view (flat table)
+// ─────────────────────────────────────────────────────
+function renderAll(filtered) {
+  const sorted = [...filtered].sort((a, b) => {
+    const o = { Q1: 0, Q2: 1, Q3: 2, Q4: 3 };
+    if (o[a.q] !== o[b.q]) return o[a.q] - o[b.q];
+    const ad = a.deadlineDelta ?? 99, bd = b.deadlineDelta ?? 99;
+    return ad - bd;
+  });
+  const rows = sorted.map(t => `<tr>
+    <td class="q-cell" data-q="${t.q}">${t.q}</td>
+    <td class="id-cell">#${escapeHTML(t.id)}</td>
+    <td>${escapeHTML(t.title)}</td>
+    <td class="project-cell">${escapeHTML(t.project)}</td>
+    <td class="where-cell">${escapeHTML(t.where)}</td>
+    <td class="deadline-cell">${escapeHTML(t.deadline)}</td>
+    <td class="hours-cell">${t.hours && t.hours !== "—" ? fmtHours(t.hoursNum) + "ч" : "—"}</td>
+  </tr>`).join("");
+  document.getElementById("flat-body").innerHTML = rows || `<tr><td colspan="7" class="empty">— ничего не найдено —</td></tr>`;
+  document.getElementById("cnt-all").textContent = filtered.length;
+}
+
+// ─────────────────────────────────────────────────────
+// Projects footer
+// ─────────────────────────────────────────────────────
+function renderProjectsBar() {
+  const total = PROJECT_STATS.reduce((s, p) => s + p.count, 0);
+  if (total === 0) { document.getElementById("projects-bar").innerHTML = ""; return; }
+  const palette = [
+    "hsl(217 80% 56%)", "hsl(38 92% 48%)", "hsl(142 71% 42%)",
+    "hsl(6 78% 52%)", "hsl(280 60% 55%)", "hsl(180 50% 40%)",
+    "hsl(30 60% 50%)", "hsl(220 9% 46%)",
+  ];
+  const segs = PROJECT_STATS.map((p, i) => {
+    const pct = (p.count / total * 100).toFixed(1);
+    return `<div class="projects-seg" title="${escapeHTML(p.name)}: ${p.count}" style="flex: ${p.count}; background: ${palette[i % palette.length]};"></div>`;
+  }).join("");
+  const legend = PROJECT_STATS.map((p, i) => `
+    <span class="projects-legend-item">
+      <span class="swatch" style="background: ${palette[i % palette.length]};"></span>
+      ${escapeHTML(p.name)} <strong>${p.count}</strong>
+    </span>`).join("");
+  document.getElementById("projects-bar").innerHTML = `
+    <div class="projects-bar-title">Распределение по проектам · всего ${total}</div>
+    <div class="projects-track">${segs}</div>
+    <div class="projects-legend">${legend}</div>
+  `;
+}
+
+// ─────────────────────────────────────────────────────
+// Main render
+// ─────────────────────────────────────────────────────
+function rerender() {
+  const state = {
+    view: document.querySelector(".tab.active").dataset.view,
+    project: document.getElementById("project-filter").value,
+    context: document.getElementById("context-filter").value,
+    search: document.getElementById("search").value.trim().toLowerCase(),
+  };
+  saveState(state);
+
+  const filtered = TASKS.filter(t => matchesFilters(t, state.project, state.context, state.search));
+
+  renderAlerts(filtered);
+  renderToday(filtered);
+  renderWeek(filtered);
+  renderMatrix(filtered);
+  renderContext(filtered);
+  renderAll(filtered);
+
+  // Active filter indicator
+  const activeCount = [state.project, state.context, state.search].filter(Boolean).length;
+  document.getElementById("active-filter-count").textContent = activeCount > 0 ? `· активно ${activeCount}` : "";
+}
+
+function setView(view) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.view === view));
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.dataset.view === view));
+  rerender();
+}
+
+// ─────────────────────────────────────────────────────
+// Init
+// ─────────────────────────────────────────────────────
+function init() {
+  const state = loadState();
+  document.getElementById("project-filter").value = state.project;
+  document.getElementById("context-filter").value = state.context;
+  document.getElementById("search").value = state.search;
+  setView(state.view);
+
+  document.querySelectorAll(".tab").forEach(t => {
+    t.addEventListener("click", () => setView(t.dataset.view));
+  });
+  document.getElementById("project-filter").addEventListener("change", rerender);
+  document.getElementById("context-filter").addEventListener("change", rerender);
+  document.getElementById("search").addEventListener("input", rerender);
+  document.getElementById("reset-filters").addEventListener("click", () => {
+    document.getElementById("project-filter").value = "";
+    document.getElementById("context-filter").value = "";
+    document.getElementById("search").value = "";
+    rerender();
+  });
+
+  renderProjectsBar();
+
+  // Theme toggle
+  const themeBtn = document.getElementById("theme-toggle");
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.toggle("dark");
+    try { localStorage.setItem("sychinnikov-matrix-theme", isDark ? "dark" : "light"); } catch (e) {}
+    // обновить theme-color meta
+    const tc = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (tc) tc.setAttribute("content", isDark ? "#0a0a0a" : "#fafaf8");
+  }
+  themeBtn.addEventListener("click", toggleTheme);
+
+  // Keyboard shortcuts
+  document.addEventListener("keydown", (e) => {
+    if (e.target.matches("input, textarea, select")) return;
+    if (e.key === "1") setView("today");
+    else if (e.key === "2") setView("week");
+    else if (e.key === "3") setView("matrix");
+    else if (e.key === "4") setView("context");
+    else if (e.key === "5") setView("all");
+    else if (e.key === "/") { e.preventDefault(); document.getElementById("search").focus(); }
+    else if (e.key === "t" || e.key === "T") toggleTheme();
+  });
+}
+
+init();
+</script>
+</body>
+</html>
