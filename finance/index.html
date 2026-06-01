@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#FAFAF7" />
 <title>Финансы · Sychinnikov Portal</title>
-<meta name="description" content="План-факт мая 2026, кошельки, фонды, кредит РФ, поездка в США, долгосрочные цели." />
+<meta name="description" content="План июня 2026, платёжный календарь, кошельки на 01.06, фонды, кредит РФ, autonomo Вики." />
 <link rel="stylesheet" href="/assets/css/portal.css" />
 <style>
 .fin-summary {
@@ -29,6 +29,7 @@
 }
 .fin-summary-val.profit { color: var(--color-success); }
 .fin-summary-val.danger { color: var(--color-danger); }
+.fin-summary-val.warn { color: #B85C00; }
 .fin-summary-sub { font-size: 0.74rem; color: var(--color-text-muted); margin-top: 0.5rem; }
 
 .plfact-table {
@@ -65,6 +66,7 @@
   border-radius: 8px;
 }
 .wallet-card.low { border-color: #E5C8C8; background: #FBF1F1; }
+.wallet-card.ok { border-color: #C8E0C8; background: #F2F8F2; }
 .wallet-card-name { font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.25rem; }
 .wallet-card-bal {
   font-family: var(--font-serif); font-size: 1.2rem;
@@ -95,9 +97,77 @@
 }
 .fond-bar-fill { height: 100%; background: var(--color-accent); border-radius: 999px; }
 
+.calendar {
+  display: grid; gap: 0.6rem;
+}
+.cal-row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 1rem; align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+.cal-row.urgent { background: #FBF1F1; border-color: #E5C8C8; }
+.cal-row.done { background: #F2F8F2; border-color: #C8E0C8; opacity: 0.85; }
+.cal-row.upcoming { background: #FFF6E8; border-color: #E8D5A8; }
+.cal-date {
+  font-family: var(--font-mono); font-weight: 600;
+  font-size: 0.84rem;
+}
+.cal-date small { display: block; color: var(--color-text-soft); font-weight: 400; }
+.cal-name { line-height: 1.4; }
+.cal-name small { display: block; color: var(--color-text-soft); margin-top: 0.2rem; font-size: 0.76rem; }
+.cal-sum {
+  font-family: var(--font-mono); font-weight: 600;
+  font-feature-settings: "tnum";
+}
+
+.report-link {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--color-text);
+  transition: all 0.15s;
+}
+.report-link:hover { background: var(--color-bg-alt); border-color: var(--color-text); }
+.report-link-arrow { margin-left: auto; color: var(--color-text-soft); }
+
+.callout {
+  padding: 0.85rem 1.1rem; border-radius: 8px;
+  font-size: 0.9rem; line-height: 1.55;
+  margin-top: 0.85rem;
+}
+.callout.warn { background: #FFF6E8; border: 1px solid #E8D5A8; color: #6B4500; }
+.callout.danger { background: #FBF1F1; border: 1px solid #E5C8C8; color: #8B2020; }
+.callout.success { background: #F0F7F0; border: 1px solid #C8E0C8; color: #1E5520; }
+
+.reports-nav {
+  display: flex; gap: 0.7rem; flex-wrap: wrap;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+.reports-nav a {
+  padding: 0.35rem 0.7rem;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--color-text-soft);
+}
+.reports-nav a:hover { background: var(--color-card); color: var(--color-text); }
+.reports-nav a.current { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+
 @media (max-width: 1024px) {
   .fin-summary { grid-template-columns: repeat(2, 1fr); }
   .wallet-grid { grid-template-columns: repeat(2, 1fr); }
+  .cal-row { grid-template-columns: 80px 1fr auto; }
 }
 @media (max-width: 640px) {
   .fin-summary { grid-template-columns: 1fr; }
@@ -115,7 +185,7 @@
       <a href="/founder-trajectory/" data-nav>Продукт</a>
       <a href="/clients/" data-nav>Клиенты</a>
       <a href="/contacts/" data-nav>Контакты</a>
-      <a href="/finance/" data-nav>Финансы</a>
+      <a href="/finance/" data-nav class="current">Финансы</a>
       <a href="/system/" data-nav>Система</a>
       <a href="/decisions/" data-nav>Решения</a>
       <a href="/wisdom/" data-nav>Wisdom</a>
@@ -126,10 +196,10 @@
 <section class="page-hero">
   <div class="page-hero-grid"></div>
   <div class="container page-hero-inner">
-    <p class="page-eyebrow">04 · Финансы · план-факт май 2026 · план июня обновлён 26.05</p>
-    <h1 class="page-title">Деньги — операционка, кошельки, фонды, кредит РФ, autonomo Вики, поездка США.</h1>
+    <p class="page-eyebrow">04 · Финансы · план июня 2026 · обновлено 01.06.2026</p>
+    <h1 class="page-title">Главная цель июня — запустить канал второго клиента. Без него runway сжимается до 2 мес.</h1>
     <p class="page-sub">
-      Зона 1 (Испания) + Зона 2 (обязательства + autonomo через Юрия) + Зона 3 (фонды). DDS-структура по кошелькам — источник истины. Источник: <code>finance/state.md</code> в Claude-Context.
+      Зона 1 (операционка Испания) €4 289 + Зона 2 (autonomo Вики + гестор) €1 151 + кредит РФ из рублей €1 700. Дефицит −€1 940 при Fishok €3 500. DDS-структура по 6 кошелькам — источник истины. <code>finance/state.md</code> в Claude-Context.
     </p>
   </div>
 </section>
@@ -137,185 +207,239 @@
 <section class="section reveal">
   <div class="container">
 
+    <!-- Reports nav -->
+    <div class="reports-nav">
+      <a href="/finance/" class="current">Главная (июнь 2026)</a>
+      <a href="/finance/reports/2026-05/">Закрытие · май 2026</a>
+    </div>
+
     <!-- Summary -->
     <div class="fin-summary">
       <div class="fin-summary-card">
-        <div class="fin-summary-label">Доход май</div>
-        <div class="fin-summary-val profit">+€3 506</div>
-        <div class="fin-summary-sub">Fishok 4 100 USDT (13.05) ≈ €3 500 + кэшбэк</div>
+        <div class="fin-summary-label">План доход июнь</div>
+        <div class="fin-summary-val profit">+€3 500</div>
+        <div class="fin-summary-sub">Fishok 4 100 USDT (~13.06)</div>
       </div>
       <div class="fin-summary-card">
-        <div class="fin-summary-label">Расходы май</div>
-        <div class="fin-summary-val">−€2 067</div>
-        <div class="fin-summary-sub">Зона 1 + документы. Вне плана €469</div>
+        <div class="fin-summary-label">План расход июнь</div>
+        <div class="fin-summary-val">−€5 440</div>
+        <div class="fin-summary-sub">Зона 1 €4 289 + Зона 2 €1 151</div>
       </div>
       <div class="fin-summary-card">
-        <div class="fin-summary-label">Чистая прибыль</div>
-        <div class="fin-summary-val profit">+€1 439</div>
-        <div class="fin-summary-sub">Кредит РФ €1 700 — из рублей</div>
+        <div class="fin-summary-label">Дефицит план</div>
+        <div class="fin-summary-val danger">−€1 940</div>
+        <div class="fin-summary-sub">Рычаг: второй клиент €2-3К</div>
       </div>
       <div class="fin-summary-card">
-        <div class="fin-summary-label">До цели €8К</div>
-        <div class="fin-summary-val danger">−€4 494</div>
-        <div class="fin-summary-sub">Разрыв до 1 августа</div>
+        <div class="fin-summary-label">Runway без дохода</div>
+        <div class="fin-summary-val danger">0.6 мес</div>
+        <div class="fin-summary-sub">Активы €2 620 / расход €4 605</div>
       </div>
     </div>
 
-    <!-- Autonomo через Юрия -->
-    <div class="card" style="background: #FAF8F0; border-color: #E8DFC2;">
-      <div class="card-label">🆕 Autonomo через Юрия — фиксация 26.05.2026</div>
-      <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.7rem;">
-        Гестор <strong>Юрий</strong> (рекомендация Юли Спаче). Открытие <strong>€242</strong> (€200 + €42 IVA) — разбито на 2 части по €121. Ведение <strong>€60-65/мес</strong> (план €62.5). Renta <strong>+€50/год</strong> (апрель-июнь 2027). Cuota Вики (tarifa plana) — <strong>€88.56/мес</strong>.
-      </p>
-      <p style="font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.4rem;">
-        <strong>IRPF логика:</strong> 20% от показанного дохода. При декларации €5 000/мес (минимум для семьи 2+2) → <strong>€1 000/мес резерва</strong>. Первый платёж <strong>20.07.2026</strong> (modelo 130 за июнь, 1 месяц = €1 000). Дальше квартальные.
-      </p>
-      <p style="font-size: 0.85rem; color: var(--color-text-soft);">
-        Alta autonomo Вики после ВНЖ 27.05. Контракт Fishok €3 500/мес переоформляется на Вику до конца июня. Источник: <code>finance/autonomo/meetings/2026-05-26-gestor-yuriy-call.md</code>.
-      </p>
+    <!-- Закрытие мая ссылка -->
+    <a href="/finance/reports/2026-05/" class="report-link">
+      <div>
+        <strong>📊 Закрытие периода — Май 2026</strong>
+        <div style="font-size: 0.78rem; color: var(--color-text-soft); margin-top: 0.2rem;">Управленческая отчётность · ЦКП · ДДС · ОДР · Личный баланс · обзор покупок · SWOT</div>
+      </div>
+      <div class="report-link-arrow">→</div>
+    </a>
+
+    <!-- Платёжный календарь -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">01</span> Платёжный календарь</h2>
+      <p class="section-meta">обязательства июнь–июль · контрольные точки</p>
     </div>
 
-    <!-- Plan-fact -->
-    <div class="section-head">
-      <h2 class="section-title"><span class="section-num">01</span> Зона 1 — план-факт мая</h2>
-      <p class="section-meta">перерасход 3 категории: Еда+быт −€252 · Заведения −€100 · Здоровье −€130</p>
+    <div class="calendar">
+      <div class="cal-row urgent">
+        <div class="cal-date">02.06<small>завтра</small></div>
+        <div class="cal-name">Кредит РФ — платёж<small>Банк РФ → кредитор · из рублей · НЕ из евро</small></div>
+        <div class="cal-sum">170 000 ₽<br><small style="color: var(--color-text-soft); font-weight: 400;">~€1 700</small></div>
+      </div>
+      <div class="cal-row upcoming">
+        <div class="cal-date">~05.06<small>на неделе</small></div>
+        <div class="cal-name">Сесилия (через Ирину BA) — сверить статус<small>230 000 ARS ≈ $158 USDT · дедлайн был 30.05 · статус не подтверждён</small></div>
+        <div class="cal-sum">$158<br><small style="color: var(--color-text-soft); font-weight: 400;">долг</small></div>
+      </div>
+      <div class="cal-row upcoming">
+        <div class="cal-date">до 15.06<small>середина</small></div>
+        <div class="cal-name">Autonomo Вики — alta + вторая ½ Юрию<small>€121 (вторая половина оплаты) + alta autonomo</small></div>
+        <div class="cal-sum">€121</div>
+      </div>
+      <div class="cal-row upcoming">
+        <div class="cal-date">~13.06<small>зарплата</small></div>
+        <div class="cal-name">Fishok — зарплата<small>4 100 USDT на Bybit → конвертация P2P → Wise</small></div>
+        <div class="cal-sum">+€3 500</div>
+      </div>
+      <div class="cal-row upcoming">
+        <div class="cal-date">~15.06<small>автосписание</small></div>
+        <div class="cal-name">Коммуналка Adosinda (Wise)<small>€145 · автосписание</small></div>
+        <div class="cal-sum">€145</div>
+      </div>
+      <div class="cal-row upcoming">
+        <div class="cal-date">~30.06<small>конец</small></div>
+        <div class="cal-name">Аренда июля (Wise → хозяин)<small>€855 если хозяин компенсирует горячую воду €145 / иначе €1 000</small></div>
+        <div class="cal-sum">€855–1 000</div>
+      </div>
+      <div class="cal-row upcoming">
+        <div class="cal-date">конец 06<small>фактура</small></div>
+        <div class="cal-name">Гестор Юрий — ведение<small>€60-65/мес (план €62.5)</small></div>
+        <div class="cal-sum">€62.5</div>
+      </div>
+      <div class="cal-row upcoming">
+        <div class="cal-date">конец 06<small>автосписание</small></div>
+        <div class="cal-name">Cuota autonomo Вики<small>tarifa plana · €88.56 · с её банковского счёта</small></div>
+        <div class="cal-sum">€88.56</div>
+      </div>
+      <div class="cal-row urgent">
+        <div class="cal-date">02.07<small>через мес</small></div>
+        <div class="cal-name">Кредит РФ — июль<small>170 000 ₽ из рублей · последняя точка перед переключением на евро</small></div>
+        <div class="cal-sum">170 000 ₽</div>
+      </div>
+      <div class="cal-row urgent">
+        <div class="cal-date">20.07<small>важно</small></div>
+        <div class="cal-name">IRPF — первый платёж (modelo 130 за июнь)<small>20% × €5 000 минимум · резерв обязан копиться с июня</small></div>
+        <div class="cal-sum">€1 000</div>
+      </div>
     </div>
 
-    <div class="card">
-      <table class="plfact-table">
-        <thead>
-          <tr><th>Статья</th><th class="num">План</th><th class="num">Факт</th><th class="num">Δ</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Аренда (за июнь, 30-31.05)</td><td class="num">1 000</td><td class="num">0</td><td class="num">отложить</td></tr>
-          <tr><td>Коммуналка (Adosinda)</td><td class="num">145</td><td class="num">145</td><td class="num ok">✓</td></tr>
-          <tr><td>Электричество (BASER)</td><td class="num">35</td><td class="num">32</td><td class="num ok">+3</td></tr>
-          <tr><td>🛒 Еда и быт</td><td class="num">550</td><td class="num">802</td><td class="num over">−252</td></tr>
-          <tr><td>🍽 Заведения</td><td class="num">200</td><td class="num">300</td><td class="num over">−100</td></tr>
-          <tr><td>Няня и дети</td><td class="num">700</td><td class="num">0</td><td class="num">пусто</td></tr>
-          <tr><td>Транспорт</td><td class="num">100</td><td class="num">13</td><td class="num">87</td></tr>
-          <tr><td>Связь и подписки</td><td class="num">80</td><td class="num">30</td><td class="num">50</td></tr>
-          <tr><td>🩺 Здоровье</td><td class="num">70</td><td class="num">200</td><td class="num over">−130</td></tr>
-          <tr><td>Жена-карманные</td><td class="num">150</td><td class="num">75</td><td class="num">75</td></tr>
-          <tr><td>Коворкинг (12.05 задним числом 25.05)</td><td class="num">160</td><td class="num">160</td><td class="num ok">✓</td></tr>
-          <tr class="total"><td>Плановые конверты</td><td class="num">3 190</td><td class="num">1 597</td><td class="num">1 593</td></tr>
-          <tr><td>Вне плана (Ирина, ENTERTICKET, IKEA, Sephora)</td><td class="num">—</td><td class="num">469</td><td class="num">—</td></tr>
-          <tr class="total"><td>ИТОГО Зона 1</td><td class="num">—</td><td class="num">2 067</td><td class="num">—</td></tr>
-        </tbody>
-      </table>
+    <div class="callout warn">
+      ⚠ <strong>02.08.2026 — точка переключения кредита РФ на евро.</strong> С этого момента 170 000 ₽ (~€1 700) уходят из евро-runway. Runway сжимается с 2.4 до 1.5 мес. Решение по покрытию должно быть готово к 15.07.
     </div>
 
     <!-- Кошельки -->
     <div class="section-head" style="margin-top: 2.5rem;">
-      <h2 class="section-title"><span class="section-num">02</span> Кошельки на 2026-05-25</h2>
-      <p class="section-meta">источник истины: wallets/*.md (DDS-структура)</p>
+      <h2 class="section-title"><span class="section-num">02</span> Кошельки на 01.06.2026</h2>
+      <p class="section-meta">источник истины: wallets/*.md (DDS) · сверка завершена</p>
     </div>
 
     <div class="wallet-grid">
-      <div class="wallet-card">
+      <div class="wallet-card ok">
         <div class="wallet-card-name">Наличные дома</div>
-        <div class="wallet-card-bal">€1 590</div>
-        <div class="wallet-card-note">после коворкинга 12.05 (зад. числом 25.05) · требует физ.сверки (план €1 750)</div>
+        <div class="wallet-card-bal">€1 405</div>
+        <div class="wallet-card-note">✓ полевая инвентаризация 01.06</div>
       </div>
       <div class="wallet-card low">
-        <div class="wallet-card-name">BBVA</div>
-        <div class="wallet-card-bal">€27</div>
-        <div class="wallet-card-note">⚠ ниже буфера €500</div>
+        <div class="wallet-card-name">BBVA *2395</div>
+        <div class="wallet-card-bal">€156</div>
+        <div class="wallet-card-note">Current. Available €135.36 (Withholdings €20.52). ⚠ ниже буфера</div>
       </div>
-      <div class="wallet-card">
+      <div class="wallet-card low">
         <div class="wallet-card-name">Wise EUR</div>
-        <div class="wallet-card-bal">€2 032</div>
-        <div class="wallet-card-note">P2P конвертация 22.05 · аренда €1К на 30-31.05</div>
+        <div class="wallet-card-bal">€71</div>
+        <div class="wallet-card-note">⚠ резко низко · нужно пополнение из Bybit на €500-700</div>
       </div>
       <div class="wallet-card low">
-        <div class="wallet-card-name">Santander</div>
-        <div class="wallet-card-bal">€64</div>
-        <div class="wallet-card-note">⚠ ниже буфера €500</div>
+        <div class="wallet-card-name">Santander *1644</div>
+        <div class="wallet-card-bal">€3</div>
+        <div class="wallet-card-note">фон, не активен</div>
       </div>
       <div class="wallet-card">
-        <div class="wallet-card-name">Bybit Funding (USDT)</div>
-        <div class="wallet-card-bal">€450</div>
-        <div class="wallet-card-note">524 USDT · после P2P вывода 2 351 USDT (22.05)</div>
+        <div class="wallet-card-name">Bybit USDT</div>
+        <div class="wallet-card-bal">€484</div>
+        <div class="wallet-card-note">530 USDT · аккаунт финансирования</div>
       </div>
       <div class="wallet-card">
-        <div class="wallet-card-name">Bybit Trade (USDC)</div>
-        <div class="wallet-card-bal">€457</div>
-        <div class="wallet-card-note">~500 USDC</div>
+        <div class="wallet-card-name">Bybit USDC</div>
+        <div class="wallet-card-bal">€455</div>
+        <div class="wallet-card-note">498 USDC · единый торговый</div>
       </div>
       <div class="wallet-card">
         <div class="wallet-card-name">Ether (мой)</div>
-        <div class="wallet-card-bal">€140</div>
-        <div class="wallet-card-note">Coinbase Vault $164.96 · USDC $156.21 + WETH $8.74</div>
+        <div class="wallet-card-bal">€16</div>
+        <div class="wallet-card-note">$17.66 · WETH $12.52 + USDC $5.14</div>
       </div>
       <div class="wallet-card">
         <div class="wallet-card-name">Ether (Вика)</div>
-        <div class="wallet-card-bal">€87</div>
-        <div class="wallet-card-note">$95.60 · её Cash card · фикс по чекам</div>
+        <div class="wallet-card-bal">не учитываю</div>
+        <div class="wallet-card-note">переводы = жена-карманные (решение 01.06)</div>
       </div>
       <div class="wallet-card">
         <div class="wallet-card-name">Итого активы</div>
-        <div class="wallet-card-bal">€5 234</div>
-        <div class="wallet-card-note">евро €3 873 + крипта €907 + Ether $260 (~€227)</div>
+        <div class="wallet-card-bal">€2 620</div>
+        <div class="wallet-card-note">евро €1 635 + крипто-резерв €955 (Bybit + Ether)</div>
       </div>
+    </div>
+
+    <div class="callout danger" style="margin-top: 1rem;">
+      🔴 <strong>Wise €71 — критично низко.</strong> Wise = платёжный хаб для евро-операций (аренда / коммуналка / переводы на BBVA). Нужно срочно пополнить через Bybit USDT → Wise (P2P €500-700). До 5-7 июня — иначе кассовый разрыв на автосписаниях.
     </div>
 
     <!-- План июня -->
     <div class="section-head" style="margin-top: 2.5rem;">
-      <h2 class="section-title"><span class="section-num">02b</span> План июня 2026</h2>
-      <p class="section-meta">обновлён 26.05 после Юрия · источник: finance/plans/2026-06.md · план-минимум €5 440/мес</p>
+      <h2 class="section-title"><span class="section-num">03</span> План июня — Зона 1 (операционка)</h2>
+      <p class="section-meta">источник: finance/plans/2026-06.md · план-минимум €5 440/мес</p>
     </div>
 
     <div class="card">
       <table class="plfact-table">
         <thead>
-          <tr><th>Статья</th><th class="num">План июнь</th><th>Комментарий</th></tr>
+          <tr><th>Статья</th><th class="num">План</th><th>Комментарий</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Доход (Fishok)</strong></td><td class="num">+3 500</td><td>USDT 4 100 × 0.86</td></tr>
-          <tr><td>Аренда + коммуналка</td><td class="num">1 180</td><td>аренда из Wise</td></tr>
-          <tr><td>🛒 Еда и быт</td><td class="num">1 200</td><td>продукты + бытовая химия + доставка</td></tr>
-          <tr><td>🍽 Рестораны</td><td class="num">400</td><td>—</td></tr>
+          <tr><td><strong>Доход (Fishok)</strong></td><td class="num">+3 500</td><td>USDT 4 100 × 0.86 · ~13.06</td></tr>
+          <tr><td>Аренда + коммуналка</td><td class="num">1 180</td><td>аренда €1 000 из Wise + коммуналка €145 + электричество €35</td></tr>
+          <tr><td>🛒 Еда и быт</td><td class="num">1 200</td><td>продукты + памперсы + детский быт · план повышен (был €550)</td></tr>
+          <tr><td>🍽 Рестораны</td><td class="num">400</td><td>4 уикенда × €100 · жёсткий лимит</td></tr>
           <tr><td>☕ Кафе</td><td class="num">200</td><td>—</td></tr>
-          <tr><td>🛵 Glovo</td><td class="num">50</td><td>—</td></tr>
+          <tr><td>🛵 Glovo</td><td class="num">50</td><td>только планово</td></tr>
           <tr><td>Няня</td><td class="num">600</td><td>—</td></tr>
           <tr><td>Дети + семья</td><td class="num">498</td><td>включая юристы Аргентина €136 (разово)</td></tr>
           <tr><td>🩺 Здоровье</td><td class="num">400</td><td>Андрей €220 (УЗИ+анализы+педиатр) · Вика €180 (физио)</td></tr>
-          <tr><td>Вика-ЗП (карманные)</td><td class="num">300</td><td>—</td></tr>
+          <tr><td>Вика-ЗП (карманные)</td><td class="num">300</td><td>€140 кафе + €160 нал</td></tr>
           <tr><td>Транспорт</td><td class="num">100</td><td>—</td></tr>
           <tr><td>Связь</td><td class="num">80</td><td>—</td></tr>
           <tr><td>Коворкинг</td><td class="num">160</td><td>—</td></tr>
-          <tr><td>🆕 Открытие autonomo (½)</td><td class="num">121</td><td>половина оплаты Юрию · разово · вторая ½ позже</td></tr>
-          <tr class="total"><td>Зона 1 (опер.)</td><td class="num">4 289</td><td>+€121 vs план до Юрия</td></tr>
-          <tr><td>Cuota Вика (tarifa plana)</td><td class="num">88.56</td><td>уточнено Юрием 26.05 (было €87)</td></tr>
-          <tr><td>🆕 Ведение Юрия</td><td class="num">62.5</td><td>€60-65/мес · фактура в конце месяца</td></tr>
-          <tr><td>IRPF резерв</td><td class="num">1 000</td><td>20% × €5 000 · копится с июня · первый платёж 20.07</td></tr>
-          <tr class="total"><td>Зона 2 (налоги + гестор)</td><td class="num">1 151</td><td>−€216 vs план до Юрия</td></tr>
-          <tr class="total"><td>ИТОГО расход</td><td class="num">5 440</td><td>−€95 vs план до Юрия</td></tr>
-          <tr class="total"><td>Дефицит</td><td class="num over">−1 940</td><td>главный рычаг — второй клиент. Улучшение €95 vs −€2 035</td></tr>
+          <tr><td>🆕 Открытие autonomo (½)</td><td class="num">121</td><td>вторая половина оплаты Юрию · разово</td></tr>
+          <tr class="total"><td>Зона 1 (опер.)</td><td class="num">4 289</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Зона 2 -->
+    <div class="section-head" style="margin-top: 2rem;">
+      <h2 class="section-title"><span class="section-num">04</span> План июня — Зона 2 (autonomo + налоги)</h2>
+      <p class="section-meta">Вика-autonomo · гестор Юрий · IRPF-резерв</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead>
+          <tr><th>Статья</th><th class="num">План</th><th>Комментарий</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cuota autonomo Вики</td><td class="num">88.56</td><td>tarifa plana первого года · автосписание</td></tr>
+          <tr><td>Ведение Юрия</td><td class="num">62.5</td><td>середина €60-65 · фактура в конце месяца</td></tr>
+          <tr><td><strong>IRPF резерв (на Вику)</strong></td><td class="num">1 000</td><td>20% × €5 000 показанного дохода · первый платёж 20.07 (modelo 130 за июнь)</td></tr>
+          <tr class="total"><td>Зона 2</td><td class="num">1 151</td><td>—</td></tr>
+          <tr class="total"><td>ИТОГО расход (Зона 1 + Зона 2)</td><td class="num">5 440</td><td>—</td></tr>
+          <tr class="total"><td>Дефицит</td><td class="num over">−1 940</td><td>главный рычаг — второй клиент</td></tr>
         </tbody>
       </table>
     </div>
 
     <!-- Фонды -->
     <div class="section-head" style="margin-top: 2.5rem;">
-      <h2 class="section-title"><span class="section-num">03</span> Фонды — Зона 3</h2>
-      <p class="section-meta">распределение чистой прибыли</p>
+      <h2 class="section-title"><span class="section-num">05</span> Фонды — Зона 3</h2>
+      <p class="section-meta">в июне не пополняются (cashflow-only режим до €8К/мес × 2 мес)</p>
     </div>
 
     <div class="fonds-list">
       <div class="fond">
-        <div class="fond-name">Подушка безопасности (3 мес)<small>USDT не сконвертирован · решение по конвертации ожидается</small></div>
+        <div class="fond-name">Подушка безопасности (6 мес расходов)<small>Заморожено до выхода на €8К/мес × 2 мес</small></div>
         <div class="fond-val">€3 018 / €16 800</div>
         <div class="fond-bar"><div class="fond-bar-fill" style="width: 18%;"></div></div>
       </div>
       <div class="fond">
-        <div class="fond-name">США — поездка сентябрь 2026<small>Точка решения 15.07 · DS-160 бесплатный, $740 при бронировании · паспорта 4 чел.</small></div>
-        <div class="fond-val">€0 / €9 000</div>
+        <div class="fond-name">IRPF-резерв (на Вику)<small>Первый платёж modelo 130 — 20.07.2026 · €1 000</small></div>
+        <div class="fond-val">€0 / €1 000</div>
         <div class="fond-bar"><div class="fond-bar-fill" style="width: 0%;"></div></div>
       </div>
       <div class="fond">
-        <div class="fond-name">Подушка 12 месяцев<small>После фазы 1 ($8К/мес × 2 стабильно)</small></div>
-        <div class="fond-val">€0 / €60 000</div>
+        <div class="fond-name">США — поездка сентябрь 2026<small>Точка решения 15.07 · DS-160 бесплатный, $740 при бронировании · паспорта 4 чел.</small></div>
+        <div class="fond-val">€0 / €9 000</div>
         <div class="fond-bar"><div class="fond-bar-fill" style="width: 0%;"></div></div>
       </div>
       <div class="fond">
@@ -324,8 +448,8 @@
         <div class="fond-bar"><div class="fond-bar-fill" style="width: 0%;"></div></div>
       </div>
       <div class="fond">
-        <div class="fond-name">Долгосрочный капитал<small>К 40 годам (2033)</small></div>
-        <div class="fond-val">— / $10М+</div>
+        <div class="fond-name">Долгосрочный капитал<small>К 40 годам (2033) · €10М+</small></div>
+        <div class="fond-val">— / €10М+</div>
         <div class="fond-bar"><div class="fond-bar-fill" style="width: 1%;"></div></div>
       </div>
     </div>
@@ -334,28 +458,27 @@
     <div class="card" style="margin-top: 2.5rem;">
       <div class="card-label">Замкнутый контур — кредит РФ</div>
       <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.85rem;">
-        Платёж <strong>170 000 ₽ ≈ €1 700</strong> ежемесячно 2-го числа. <strong>Май оплачен 02.05</strong> из рублей. Покрытие: июнь и июль из рублей (остаток банка РФ 250 000 ₽ + товарные остатки 500 000 ₽).
+        Платёж <strong>170 000 ₽ ≈ €1 700</strong> ежемесячно 2-го числа. Покрытие из рублей: июнь, июль (остаток банка РФ ~250 000 ₽ + товарные остатки 500 000 ₽).
       </p>
-      <p style="font-size: 0.85rem; color: var(--color-warning); margin-top: 0.85rem;">
-        ⚠ <strong>Переход на евро — 02.08.2026.</strong> С этого момента кредит съедает евро-runway. Runway сжимается с 2.7 мес до ~1.5 мес. Контрольная точка.
+      <p style="font-size: 0.85rem; color: #B85C00; margin-top: 0.85rem;">
+        ⚠ <strong>Переход на евро — 02.08.2026.</strong> С этого момента кредит съедает евро-runway. Runway сжимается с 2.4 мес до ~1.5 мес. Контрольная точка стратегии — решение по покрытию должно быть готово к 15.07.
       </p>
     </div>
 
-    <!-- Запланированные операции -->
-    <div class="card" style="margin-top: 1.5rem;">
-      <div class="card-label">Запланированные операции (25.05-20.07)</div>
-      <table class="plfact-table" style="margin-top: 0.5rem;">
-        <thead><tr><th>Дата</th><th>Операция</th><th class="num">Сумма</th></tr></thead>
-        <tbody>
-          <tr><td>22.05 ✅</td><td>Конвертация Bybit USDT → Wise EUR · 2 351 USDT → €2 022 P2P</td><td class="num">€2 022</td></tr>
-          <tr><td>~30.05</td><td>Выплата Сесилии через Ирину BA (Bybit P2P → ARS) — внешний долг</td><td class="num">$158</td></tr>
-          <tr><td>30.05</td><td>Свидание с Викой — иллюзионист (билеты €54 куплены 19.05)</td><td class="num">—</td></tr>
-          <tr><td>30-31.05</td><td>Аренда за июнь хозяину (Wise → хозяин) ✅ оплачено 23.05</td><td class="num">€1 000</td></tr>
-          <tr><td>🆕 28-30.05</td><td>Открытие autonomo (½) → Юрий — ждём реквизиты</td><td class="num">€121</td></tr>
-          <tr><td>02.06</td><td>Кредит РФ (банк РФ → кредитор, из рублей)</td><td class="num">170 000 ₽</td></tr>
-          <tr><td>🆕 20.07</td><td>IRPF Вика — первый платёж (modelo 130 за июнь)</td><td class="num">€1 000</td></tr>
-        </tbody>
-      </table>
+    <!-- Главная цель июня -->
+    <div class="card" style="margin-top: 1.5rem; background: #FAF8F0; border-color: #E8DFC2;">
+      <div class="card-label">🎯 Главная цель июня — запустить канал второго клиента</div>
+      <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.85rem;">
+        Текущий дефицит <strong>−€1 940/мес</strong> = убыток €23 280/год. Оптимизация трат закрывает максимум €700/мес. Единственный реальный рычаг — <strong>новый источник дохода</strong>.
+      </p>
+      <p style="font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.7rem;">
+        Тёплая база лидов отработана (0/14 коммерческих сигналов). Переход на холодные каналы и inbound:
+      </p>
+      <ul style="padding-left: 1.1rem; margin: 0; font-size: 0.88rem; line-height: 1.7;">
+        <li>Лендинг Founder Trajectory v2 — вёрстка до <strong>15.06</strong></li>
+        <li>Первые 3 inbound-поста до <strong>20.06</strong></li>
+        <li>2 холодных канала привлечения до <strong>30.06</strong> → минимум 2 диалога</li>
+      </ul>
     </div>
 
   </div>
@@ -363,7 +486,7 @@
 
 <footer class="foot">
   <div class="container">
-    <a href="/">← дашборд</a> · <a href="/decisions/">решения по деньгам</a>
+    <a href="/">← дашборд</a> · <a href="/finance/reports/2026-05/">закрытие мая 2026</a> · <a href="/decisions/">решения по деньгам</a>
   </div>
 </footer>
 

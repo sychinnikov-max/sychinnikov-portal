@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAFAF7" />
+<title>Закрытие периода — Май 2026 · Sychinnikov Portal</title>
+<meta name="description" content="Управленческая отчётность личных финансов за май 2026. Адаптация методологии Нескучных Финансов." />
+<link rel="stylesheet" href="/assets/css/portal.css" />
+<style>
+.fin-summary {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1rem; margin-bottom: 2rem;
+}
+.fin-summary-card {
+  padding: 1rem 1.15rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+}
+.fin-summary-label {
+  font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-text-soft); font-weight: 500; margin-bottom: 0.5rem;
+}
+.fin-summary-val {
+  font-family: var(--font-serif); font-size: 1.65rem;
+  font-variation-settings: "opsz" 24, "wght" 440;
+  line-height: 1; font-feature-settings: "tnum";
+}
+.fin-summary-val.profit { color: var(--color-success); }
+.fin-summary-val.danger { color: var(--color-danger); }
+.fin-summary-val.warn { color: #B85C00; }
+.fin-summary-sub { font-size: 0.74rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+
+.plfact-table {
+  width: 100%; border-collapse: collapse; font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+.plfact-table th, .plfact-table td {
+  text-align: left; padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid var(--color-border-soft);
+  font-feature-settings: "tnum";
+}
+.plfact-table th {
+  font-family: var(--font-sans); font-size: 0.7rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-text-soft); font-weight: 600;
+}
+.plfact-table td.num { text-align: right; font-family: var(--font-mono); }
+.plfact-table tr.total td {
+  border-top: 2px solid var(--color-text);
+  border-bottom: 0; padding-top: 0.85rem;
+  font-weight: 600; font-family: var(--font-serif);
+  font-size: 1rem;
+}
+.plfact-table .over { color: var(--color-danger); font-weight: 500; }
+.plfact-table .ok { color: var(--color-success); }
+.plfact-table .warn { color: #B85C00; }
+
+.tkp-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+.tkp {
+  display: grid; grid-template-columns: 1fr auto auto;
+  align-items: center; gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+.tkp-name { line-height: 1.35; }
+.tkp-val { font-family: var(--font-mono); font-weight: 600; }
+.tkp-status { font-size: 1rem; }
+
+.swot-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem;
+}
+.swot-card {
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  background: var(--color-card);
+}
+.swot-card h4 {
+  font-family: var(--font-sans); font-size: 0.78rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-text-soft); font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+.swot-card.green h4 { color: var(--color-success); }
+.swot-card.red h4 { color: var(--color-danger); }
+.swot-card.yellow h4 { color: #B85C00; }
+.swot-card.gray h4 { color: var(--color-text-soft); }
+.swot-card ul { list-style: none; padding: 0; margin: 0; }
+.swot-card ul li { font-size: 0.86rem; line-height: 1.5; margin-bottom: 0.4rem; padding-left: 0.85rem; position: relative; }
+.swot-card ul li::before { content: "·"; position: absolute; left: 0; color: var(--color-text-soft); font-weight: 700; }
+
+.donut-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.5rem;
+  align-items: center;
+}
+.donut-legend { font-size: 0.86rem; }
+.donut-legend-item {
+  display: grid; grid-template-columns: 14px 1fr auto;
+  align-items: center; gap: 0.7rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--color-border-soft);
+  font-feature-settings: "tnum";
+}
+.donut-legend-item:last-child { border-bottom: 0; }
+.donut-legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+.donut-legend-val { font-family: var(--font-mono); font-weight: 600; color: var(--color-text-soft); }
+
+.tbu-chart-wrap {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.purchase-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+}
+.purchase-bloc h4 {
+  font-family: var(--font-sans); font-size: 0.82rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--color-text-soft); font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.purchase-bloc.red h4 { color: var(--color-danger); }
+.purchase-bloc.green h4 { color: var(--color-success); }
+
+.kpi-table { width: 100%; font-size: 0.88rem; border-collapse: collapse; }
+.kpi-table td, .kpi-table th { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--color-border-soft); }
+.kpi-table th { font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-soft); font-weight: 600; text-align: left; }
+.kpi-table td.num { font-family: var(--font-mono); text-align: right; font-feature-settings: "tnum"; }
+
+.callout {
+  padding: 0.85rem 1.1rem; border-radius: 8px;
+  font-size: 0.9rem; line-height: 1.55;
+  margin-top: 0.85rem;
+}
+.callout.warn { background: #FFF6E8; border: 1px solid #E8D5A8; color: #6B4500; }
+.callout.danger { background: #FBF1F1; border: 1px solid #E5C8C8; color: #8B2020; }
+.callout.success { background: #F0F7F0; border: 1px solid #C8E0C8; color: #1E5520; }
+
+.reports-nav {
+  display: flex; gap: 0.7rem; flex-wrap: wrap;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+.reports-nav a {
+  padding: 0.35rem 0.7rem;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--color-text-soft);
+}
+.reports-nav a:hover { background: var(--color-card); color: var(--color-text); }
+.reports-nav a.current { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+
+@media (max-width: 1024px) {
+  .fin-summary { grid-template-columns: repeat(2, 1fr); }
+  .tkp-grid, .swot-grid, .purchase-grid { grid-template-columns: 1fr; }
+  .donut-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .fin-summary { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="brand"><span class="brand-dot"></span>Sychinnikov Portal<span class="brand-sub">private</span></a>
+    <nav class="nav">
+      <a href="/" data-nav>Дашборд</a>
+      <a href="/founder-trajectory/" data-nav>Продукт</a>
+      <a href="/clients/" data-nav>Клиенты</a>
+      <a href="/contacts/" data-nav>Контакты</a>
+      <a href="/finance/" data-nav class="current">Финансы</a>
+      <a href="/system/" data-nav>Система</a>
+      <a href="/decisions/" data-nav>Решения</a>
+      <a href="/wisdom/" data-nav>Wisdom</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <p class="page-eyebrow">04 · Финансы · закрытие периода · май 2026</p>
+    <h1 class="page-title">Управленческая отчётность за май 2026. Подведение итогов, фиксация решений на июнь.</h1>
+    <p class="page-sub">
+      Адаптация методологии Нескучных Финансов (формат EasyTech, октябрь 2024) под личные финансы. 9 разделов: цель → ЦКП → ДДС → ОДР → Баланс → обзор покупок → SWOT → решения июня → итоги. Источник: <code>finance/reports/2026-05/report.md</code>.
+    </p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+
+    <!-- Reports nav -->
+    <div class="reports-nav">
+      <a href="/finance/">← Главная финансов (июнь 2026)</a>
+      <a href="/finance/reports/2026-05/" class="current">Закрытие · май 2026</a>
+    </div>
+
+    <!-- Summary -->
+    <div class="fin-summary">
+      <div class="fin-summary-card">
+        <div class="fin-summary-label">Доход май</div>
+        <div class="fin-summary-val profit">+€3 506</div>
+        <div class="fin-summary-sub">Fishok 4 100 USDT (13.05) · 99.8% концентрация</div>
+      </div>
+      <div class="fin-summary-card">
+        <div class="fin-summary-label">Расходы май</div>
+        <div class="fin-summary-val">−€4 605</div>
+        <div class="fin-summary-sub">Зона 1 опер. + вне плана €600</div>
+      </div>
+      <div class="fin-summary-card">
+        <div class="fin-summary-label">Сальдо (личная EBITDA)</div>
+        <div class="fin-summary-val danger">−€1 099</div>
+        <div class="fin-summary-sub">Структурный дефицит, факт = план</div>
+      </div>
+      <div class="fin-summary-card">
+        <div class="fin-summary-label">Рентабельность жизни</div>
+        <div class="fin-summary-val danger">−31.4%</div>
+        <div class="fin-summary-sub">Сальдо / Доход</div>
+      </div>
+    </div>
+
+    <!-- 1. Над чем работали -->
+    <div class="section-head">
+      <h2 class="section-title"><span class="section-num">01</span> Над чем работали в мае</h2>
+      <p class="section-meta">финансовая инфраструктура и принятые решения</p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Финансовая инфраструктура</h4>
+      <ul style="padding-left: 1.1rem; margin: 0 0 1.2rem; font-size: 0.9rem; line-height: 1.7;">
+        <li>Внедрена DDS-структура по 6 кошелькам с running balance (источник истины)</li>
+        <li>Переход на пожизненный аудит-трейл по каждой транзакции</li>
+        <li>BBVA-выписка xlsx сверена с системой — нулевое расхождение (Current balance €155.88 = расчёт)</li>
+      </ul>
+
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Управленческие решения</h4>
+      <ul style="padding-left: 1.1rem; margin: 0; font-size: 0.9rem; line-height: 1.7;">
+        <li>✅ Конвертация Bybit USDT → Wise EUR (22.05, €2 022 P2P) — закрыт кассовый риск аренды</li>
+        <li>✅ Аренда июня оплачена досрочно 23.05 (Wise → хозяин €1 000)</li>
+        <li>✅ Выбран гестор Юрий для autonomo Вики (26.05, рекомендация Юли Спаче)</li>
+        <li>✅ Открытие autonomo Вики начато (½ оплаты €121, 27.05)</li>
+        <li>✅ Учёт Ether Вики упрощён: весь перевод $99.95 = «жена-карманные», детальный разбор её трат прекращён</li>
+        <li>⏳ Поездка США сентябрь 2026 — точка решения 15.07</li>
+      </ul>
+    </div>
+
+    <!-- 2. ЦКП -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">02</span> ЦКП личного финдиректора</h2>
+      <p class="section-meta">адаптация ЦКП ФД EasyTech под личные финансы</p>
+    </div>
+
+    <div class="tkp-grid">
+      <div class="tkp">
+        <div class="tkp-name">Управляемый денежный поток<br><small style="color: var(--color-text-soft);">DDS, балансы сверены</small></div>
+        <div class="tkp-val">100%</div>
+        <div class="tkp-status">✅</div>
+      </div>
+      <div class="tkp">
+        <div class="tkp-name">Своевременная оплата фикс-обязательств<br><small style="color: var(--color-text-soft);">аренда / кредит / коммуналка</small></div>
+        <div class="tkp-val">100%</div>
+        <div class="tkp-status">✅</div>
+      </div>
+      <div class="tkp">
+        <div class="tkp-name">Управляемый личный капитал<br><small style="color: var(--color-text-soft);">евро-ликвид + крипто-резерв</small></div>
+        <div class="tkp-val">60%</div>
+        <div class="tkp-status">⚠</div>
+      </div>
+      <div class="tkp">
+        <div class="tkp-name">Финансовая безопасность<br><small style="color: var(--color-text-soft);">runway ≥ 3 мес, подушка ≥ 6 мес</small></div>
+        <div class="tkp-val">20%</div>
+        <div class="tkp-status">🔴</div>
+      </div>
+      <div class="tkp">
+        <div class="tkp-name">Точность планирования<br><small style="color: var(--color-text-soft);">факт/план < 10%</small></div>
+        <div class="tkp-val">73%</div>
+        <div class="tkp-status">⚠</div>
+      </div>
+      <div class="tkp">
+        <div class="tkp-name">Решения на основе цифр<br><small style="color: var(--color-text-soft);">decisions.md актуален</small></div>
+        <div class="tkp-val">100%</div>
+        <div class="tkp-status">✅</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Итог:</strong> 4 из 6 ЦКП в зелёной зоне. Проседают финансовая безопасность (runway 2 мес вместо ≥3) и точность планирования (перерасход в 3 категориях из 10).
+    </div>
+
+    <!-- 3. Анализ ДДС -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">03</span> Анализ ДДС</h2>
+      <p class="section-meta">движение денежных средств · точность планирования = 100%</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead>
+          <tr><th>Показатель</th><th class="num">План</th><th class="num">Факт</th><th class="num">Выполнение</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Денег на начало месяца</td><td class="num">5 234</td><td class="num">5 234</td><td class="num ok">100%</td></tr>
+          <tr><td>Поступления операционные</td><td class="num">3 500</td><td class="num">3 506</td><td class="num ok">100.2%</td></tr>
+          <tr><td>Выбытия операционные</td><td class="num">4 600</td><td class="num">4 605</td><td class="num ok">100.1%</td></tr>
+          <tr class="total"><td>Денег на конец месяца</td><td class="num">4 134</td><td class="num">4 135</td><td class="num ok">100%</td></tr>
+          <tr><td>Сальдо по операционной деятельности</td><td class="num">−1 100</td><td class="num over">−1 099</td><td class="num">−</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success">
+        📌 <strong>ДДС попал в план ровно — расхождение €5 из €4 600.</strong> По верхним цифрам всё в порядке, проблема в структуре расходов (см. ниже детализацию).
+      </div>
+    </div>
+
+    <!-- Структура поступлений -->
+    <div style="margin-top: 1.5rem;">
+      <h3 style="font-size: 1.05rem; margin-bottom: 0.7rem;">Структура поступлений</h3>
+      <div class="card">
+        <div class="donut-grid">
+          <div style="text-align: center;">
+            <svg viewBox="0 0 200 200" width="200" height="200" style="margin: 0 auto; display: block;">
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#E8E5E0" stroke-width="40"></circle>
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#5B8A3A" stroke-width="40"
+                stroke-dasharray="502 503" stroke-dashoffset="0" transform="rotate(-90 100 100)"></circle>
+              <text x="100" y="95" text-anchor="middle" font-family="serif" font-size="22" font-weight="500" fill="#1A1A1A">99.8%</text>
+              <text x="100" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">из 1 источника</text>
+            </svg>
+            <p style="font-size: 0.78rem; color: var(--color-text-soft); margin-top: 0.5rem;">Концентрационный риск</p>
+          </div>
+          <div class="donut-legend">
+            <div class="donut-legend-item">
+              <div class="donut-legend-dot" style="background: #5B8A3A;"></div>
+              <div>Fishok (В.В. Кузаков, retainer)</div>
+              <div class="donut-legend-val">€3 500</div>
+            </div>
+            <div class="donut-legend-item">
+              <div class="donut-legend-dot" style="background: #E8E5E0;"></div>
+              <div>Кэшбэк BBVA + WETH прирост</div>
+              <div class="donut-legend-val">€6</div>
+            </div>
+            <div class="donut-legend-item" style="font-weight: 600; margin-top: 0.3rem;">
+              <div></div>
+              <div>Итого</div>
+              <div class="donut-legend-val">€3 506</div>
+            </div>
+          </div>
+        </div>
+        <div class="callout danger" style="margin-top: 1rem;">
+          🔴 <strong>99.8% дохода из одного источника.</strong> При прекращении Fishok runway падает с 2.4 мес до 0.6 мес — критическая уязвимость. Главный стратегический риск месяца.
+        </div>
+      </div>
+    </div>
+
+    <!-- Структура выбытий -->
+    <div style="margin-top: 1.5rem;">
+      <h3 style="font-size: 1.05rem; margin-bottom: 0.7rem;">Структура выбытий по операционной деятельности</h3>
+      <div class="card">
+        <table class="plfact-table">
+          <thead>
+            <tr><th>Категория</th><th class="num">План</th><th class="num">Факт</th><th class="num">Доля</th><th class="num">Δ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Аренда + коммуналка</td><td class="num">1 180</td><td class="num">1 256</td><td class="num">27.3%</td><td class="num warn">−76</td></tr>
+            <tr><td>🛒 Еда и быт</td><td class="num">550</td><td class="num">915</td><td class="num">19.9%</td><td class="num over">−365</td></tr>
+            <tr><td>Няня + дети</td><td class="num">700</td><td class="num">550</td><td class="num">11.9%</td><td class="num ok">+150</td></tr>
+            <tr><td>🍽 Заведения</td><td class="num">200</td><td class="num">506</td><td class="num">11.0%</td><td class="num over">−306</td></tr>
+            <tr><td>🩺 Здоровье</td><td class="num">70</td><td class="num">200</td><td class="num">4.3%</td><td class="num over">−130</td></tr>
+            <tr><td>Жена-карманные (нал + Ether)</td><td class="num">150</td><td class="num">160</td><td class="num">3.5%</td><td class="num warn">−10</td></tr>
+            <tr><td>Транспорт</td><td class="num">100</td><td class="num">168</td><td class="num">3.7%</td><td class="num warn">−68</td></tr>
+            <tr><td>Связь и подписки</td><td class="num">80</td><td class="num">90</td><td class="num">2.0%</td><td class="num">−10</td></tr>
+            <tr><td>Коворкинг</td><td class="num">160</td><td class="num">160</td><td class="num">3.5%</td><td class="num ok">0</td></tr>
+            <tr><td>Вне плана (юристы / разовые)</td><td class="num">—</td><td class="num">600</td><td class="num">13.0%</td><td class="num">—</td></tr>
+            <tr class="total"><td>Итого</td><td class="num">4 600</td><td class="num">4 605</td><td class="num">100%</td><td class="num">−5</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4. ОДР -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">04</span> Анализ ОДР</h2>
+      <p class="section-meta">отчёт о доходах и расходах · рентабельность жизни −31.4%</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead>
+          <tr><th>Тип</th><th class="num">Сумма</th><th class="num">Доля</th><th>Комментарий</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Фикс-расходы</strong></td><td class="num">2 193</td><td class="num">47.6%</td><td>аренда+коммуналка+няня+коворкинг+подписки+собака</td></tr>
+          <tr><td><strong>Переменные</strong></td><td class="num">1 812</td><td class="num">39.4%</td><td>еда+рестораны+здоровье+транспорт+семья</td></tr>
+          <tr><td><strong>Разовые</strong></td><td class="num">600</td><td class="num">13.0%</td><td>юристы / Zara / IKEA / Sephora / autonomo</td></tr>
+          <tr class="total"><td>Итого расходов</td><td class="num">4 605</td><td class="num">100%</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size: 0.88rem; color: var(--color-text-soft); margin-top: 0.5rem; line-height: 1.5;">
+        Доля фикс-расходов 47.6% — высокая база. Это значит каждый месяц «гарантированно» уходит €2 193, ниже которого личная EBITDA не упадёт.
+      </p>
+    </div>
+
+    <!-- TBU chart -->
+    <div class="tbu-chart-wrap">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Точка безубыточности (ТБУ)</h4>
+      <svg viewBox="0 0 600 220" width="100%" style="max-width: 600px; display: block;">
+        <!-- Axes -->
+        <line x1="50" y1="180" x2="580" y2="180" stroke="#999" stroke-width="1"></line>
+        <line x1="50" y1="20" x2="50" y2="180" stroke="#999" stroke-width="1"></line>
+        <!-- Bars: TBU vs Доход -->
+        <g>
+          <!-- TBU bar -->
+          <rect x="120" y="40" width="100" height="140" fill="#E8B850" rx="3"></rect>
+          <text x="170" y="32" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">€4 605</text>
+          <text x="170" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">ТБУ май</text>
+
+          <!-- Доход bar -->
+          <rect x="280" y="74" width="100" height="106" fill="#5B8A3A" rx="3"></rect>
+          <text x="330" y="66" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">€3 506</text>
+          <text x="330" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">Доход май</text>
+
+          <!-- Разрыв -->
+          <rect x="440" y="146" width="100" height="34" fill="#C0392B" rx="3"></rect>
+          <text x="490" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#C0392B">€1 099</text>
+          <text x="490" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">Разрыв до ТБУ</text>
+        </g>
+      </svg>
+      <p style="font-size: 0.88rem; color: var(--color-text-soft); margin-top: 0.7rem; line-height: 1.5;">
+        Чтобы выйти в ноль, нужен второй источник на €1 100+/мес или оптимизация переменных на €1 100 (что почти невозможно без потери качества жизни).
+      </p>
+    </div>
+
+    <!-- Сценарии -->
+    <div class="card">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Сценарии закрытия разрыва</h4>
+      <table class="plfact-table">
+        <thead>
+          <tr><th>Сценарий</th><th>Действия</th><th class="num">Эффект</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Оптимизация еды/заведений до плана</td><td>−€365 еда, −€306 заведения</td><td class="num warn">+€671</td></tr>
+          <tr><td>Урезание здоровья до плана</td><td>−€130 (рискованно)</td><td class="num warn">+€130</td></tr>
+          <tr><td><strong>Второй клиент €2 000/мес</strong></td><td>новый канал дохода</td><td class="num ok"><strong>+€2 000</strong></td></tr>
+          <tr><td>Возврат Amazon</td><td>разовое</td><td class="num">+€70</td></tr>
+          <tr class="total"><td>Все вместе</td><td>—</td><td class="num ok">+€2 871</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success">
+        💡 <strong>Самый эффективный рычаг — второй клиент.</strong> Оптимизация трат даёт €670-800, новый доход — в 3-4 раза больше. Это и есть фокус июня.
+      </div>
+    </div>
+
+    <!-- 5. Баланс -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">05</span> Анализ Личного Баланса</h2>
+      <p class="section-meta">структура активов и обязательств, финансовая устойчивость</p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Где деньги — структура активов</h4>
+      <table class="plfact-table">
+        <thead>
+          <tr><th>Кошелёк</th><th class="num">Сумма EUR</th><th class="num">Доля</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Наличные дома</td><td class="num">1 405</td><td class="num">53.6%</td></tr>
+          <tr><td>Wise EUR</td><td class="num">71</td><td class="num">2.7%</td></tr>
+          <tr><td>BBVA (Current)</td><td class="num">156</td><td class="num">5.9%</td></tr>
+          <tr><td>Santander</td><td class="num">3</td><td class="num">0.1%</td></tr>
+          <tr class="total"><td>Евро-ликвид</td><td class="num">1 635</td><td class="num">62.4%</td></tr>
+          <tr><td>Bybit USDT (530)</td><td class="num">484</td><td class="num">18.5%</td></tr>
+          <tr><td>Bybit USDC (498)</td><td class="num">455</td><td class="num">17.4%</td></tr>
+          <tr><td>Ether (мой) WETH + USDC</td><td class="num">16</td><td class="num">0.6%</td></tr>
+          <tr class="total"><td>Крипто-резерв</td><td class="num">955</td><td class="num">36.4%</td></tr>
+          <tr class="total"><td>Все активы</td><td class="num">2 620</td><td class="num">100%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top: 1rem;">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Финансовая устойчивость</h4>
+      <table class="kpi-table">
+        <thead>
+          <tr><th>Коэффициент</th><th class="num">Значение</th><th>Норма</th><th>Статус</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Подушка безопасности</td><td class="num">18%</td><td>≥ 100% (6 мес расходов)</td><td>🔴</td></tr>
+          <tr><td>Runway без дохода</td><td class="num">0.6 мес</td><td>≥ 3 мес</td><td>🔴🔴</td></tr>
+          <tr><td>Runway с Fishok</td><td class="num">2.4 мес</td><td>≥ 6 мес</td><td>🔴</td></tr>
+          <tr><td>Концентрация дохода</td><td class="num">99.8%</td><td>< 70%</td><td>🔴</td></tr>
+          <tr><td>Доля фикс-расходов</td><td class="num">47.6%</td><td>< 50%</td><td>✅</td></tr>
+          <tr><td>Соотношение крипто/евро</td><td class="num">36/64</td><td>30/70</td><td>⚠</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top: 1rem;">
+        ⚠ <strong>Переход кредита РФ на евро 02.08.2026.</strong> После этого runway сожмётся с 2.4 до 1.5 мес. Контрольная точка стратегии.
+      </div>
+    </div>
+
+    <!-- 6. Обзор покупок -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">06</span> Обзор покупок мая</h2>
+      <p class="section-meta">где переплатили · где экономили · рекомендации по корзине</p>
+    </div>
+
+    <div class="purchase-grid">
+      <div class="purchase-bloc red">
+        <h4>🔴 Где переплачиваем</h4>
+        <div class="card">
+          <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.7rem;">
+            <strong>Рестораны и кафе — €506 (план €200, −€306)</strong><br>
+            22 ресторанных эпизода в месяц = почти каждый день. Средний чек €23. Топ: Duall ×3 (€87), Buga Ramen (€40), Celemin ×2 (€46), Boccalino (€22), Starbucks ×5 (€27).
+          </p>
+          <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.7rem;">
+            <strong>Продукты — €915 (план €450, −€465)</strong><br>
+            16 походов в магазин = почти каждые 2 дня. Топ: Supercor ×7 (€299), Mercadona (€134), DIA ×4 (€123), Carrefour ×2 (€74). Нет плановой недельной закупки.
+          </p>
+          <p style="font-size: 0.9rem; line-height: 1.55;">
+            <strong>Здоровье — €200 (план €70, −€130)</strong><br>
+            3 физио × €60-80. План был занижен — реальный бюджет €200/мес.
+          </p>
+        </div>
+      </div>
+
+      <div class="purchase-bloc green">
+        <h4>🟢 Где экономили</h4>
+        <div class="card">
+          <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.7rem;">
+            <strong>Транспорт — €33 по карте (план €100, +€67)</strong><br>
+            Только Renfe ×4 + Guppy + полёт €120 нал (компенсация не запрошена). Работаем удалённо.
+          </p>
+          <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.7rem;">
+            <strong>Связь — €30 (план €80, +€50)</strong><br>
+            Mi Orange recargas ×3 + yollacalls + Cloudflare. Без подписок-импульсов.
+          </p>
+          <p style="font-size: 0.9rem; line-height: 1.55;">
+            <strong>Подписки Apple/Amazon — €39</strong><br>
+            iCloud €30 + Prime €5 + Cloudflare €9. Контроль есть.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 1.5rem;">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Рекомендации по корзине</h4>
+      <ul style="padding-left: 1.1rem; margin: 0; font-size: 0.9rem; line-height: 1.7;">
+        <li><strong>Плановая недельная закупка</strong> — 1 раз Mercadona на €100-120 + 1 «дозакупка» €30. Цель: 8-10 чеков/мес вместо 16.</li>
+        <li><strong>Лимит ресторанов: 4 эпизода/мес</strong> (1 в неделю). Кафе — €5 на эпизод, бранчи только в субботу.</li>
+        <li><strong>Пересмотреть план «Здоровье» с €70 до €200</strong> — реальный уровень с УЗИ + анализами + педиатром (июнь).</li>
+        <li><strong>Glovo только планово</strong> (праздники, гости).</li>
+        <li><strong>Викины траты → карманные €85-100/мес без детализации</strong> (решение 01.06). Снимает 30% операционной работы по чекам.</li>
+      </ul>
+    </div>
+
+    <!-- 7. SWOT -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">07</span> SWOT — фокус внимания</h2>
+      <p class="section-meta">сильные/слабые стороны, возможности, угрозы</p>
+    </div>
+
+    <div class="swot-grid">
+      <div class="swot-card green">
+        <h4>🟢 Сильные стороны</h4>
+        <ul>
+          <li>Учёт построен (DDS, балансы сверены)</li>
+          <li>Контроль фикс-расходов (47.6%)</li>
+          <li>Дисциплина по аренде / коммуналке / кредиту</li>
+          <li>Команда учёта (Telegram-бот + Claude)</li>
+          <li>Лестница Founder Trajectory готова к продаже</li>
+        </ul>
+      </div>
+      <div class="swot-card red">
+        <h4>🔴 Слабые стороны</h4>
+        <ul>
+          <li>Концентрационный риск 99.8% Fishok</li>
+          <li>Runway 0.6 мес без дохода</li>
+          <li>Подушка 18% от цели — заморожена</li>
+          <li>Перерасход в 3 категориях из 10</li>
+          <li>Тёплая база лидов выжжена (0/14)</li>
+        </ul>
+      </div>
+      <div class="swot-card yellow">
+        <h4>🟡 Возможности</h4>
+        <ul>
+          <li>Второй клиент €2-3К/мес закрывает дефицит</li>
+          <li>Inbound-канал (сайт + контент) — задел на 6-9 мес</li>
+          <li>Возврат Amazon €70 + потенциальные бонусы</li>
+          <li>Оптимизация корзины на €300-400/мес</li>
+          <li>Лестница FT: Map → Audit → Reset → Advisor → Partner</li>
+        </ul>
+      </div>
+      <div class="swot-card gray">
+        <h4>⚠ Угрозы</h4>
+        <ul>
+          <li>Кредит РФ на евро 02.08 → runway 1.5 мес</li>
+          <li>Прекращение Fishok = катастрофа за 3 недели</li>
+          <li>IRPF €1 000 со 20.07 — резерв обязан накапливаться</li>
+          <li>Здоровье — реальные потребности могут уйти за €400</li>
+          <li>Долг Сесилии $158 — статус оплаты не подтверждён</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8. Над чем работаем в июне -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">08</span> Над чем работаем в июне</h2>
+      <p class="section-meta">главная цель — запустить канал второго клиента</p>
+    </div>
+
+    <div class="callout danger" style="margin-bottom: 1rem;">
+      <strong>Главная цель июня:</strong> запустить канал второго клиента. Текущий дефицит −€1 940/мес = убыток €23 280/год. Оптимизация трат закрывает максимум €700/мес. Единственный реальный рычаг — новый источник дохода.
+    </div>
+
+    <div class="card">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Управленческие решения</h4>
+      <table class="plfact-table">
+        <thead>
+          <tr><th>Решение</th><th>Срок</th><th>Метрика</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Запустить лендинг Founder Trajectory v2 (вёрстка)</td><td>до 15.06</td><td>страница на домене</td></tr>
+          <tr><td>Подготовить первые 3 inbound-поста</td><td>до 20.06</td><td>публикация</td></tr>
+          <tr><td>Активировать 2 холодных канала привлечения</td><td>до 30.06</td><td>1-2 диалога</td></tr>
+          <tr><td>Закрыть autonomo Вики (вторая ½ €121 + alta)</td><td>до 15.06</td><td>alta autonomo</td></tr>
+          <tr><td>Накопить IRPF-резерв €1 000 в евро-ликвиде</td><td>до 20.07</td><td>евро ≥ €2 600</td></tr>
+          <tr><td>Сверить статус долга Сесилии</td><td>до 05.06</td><td>подтверждение</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top: 1rem;">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Финансовые KPI июня</h4>
+      <table class="kpi-table">
+        <thead>
+          <tr><th>KPI</th><th class="num">План</th><th>Триггер</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Доход</td><td class="num">€3 500 + бонусы</td><td>< €3 500 → красный</td></tr>
+          <tr><td>Расход Зона 1</td><td class="num">€4 289</td><td>> €4 500 → красный</td></tr>
+          <tr><td>Расход Зона 2 (autonomo)</td><td class="num">€1 151</td><td>> €1 200 → жёлтый</td></tr>
+          <tr><td>Денег на конец июня</td><td class="num">~€2 200</td><td>< €1 800 → красный</td></tr>
+          <tr><td>Сигналов нового клиента</td><td class="num">≥ 2</td><td>< 1 → пересборка</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Тактические задачи -->
+    <div class="card" style="margin-top: 1rem;">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Тактические задачи на 2-3 месяца</h4>
+      <ul style="padding-left: 1.1rem; margin: 0; font-size: 0.9rem; line-height: 1.7;">
+        <li><strong>20.07.2026</strong> — первый IRPF-платёж €1 000 (modelo 130 за июнь)</li>
+        <li><strong>02.08.2026</strong> — переключение кредита РФ на евро. Нужен план дополнительного дохода €1 700/мес</li>
+        <li><strong>15.07.2026</strong> — решение по поездке в США сентябрь</li>
+        <li><strong>Конец августа</strong> — €8К/мес × 2 мес стабильно → снятие cashflow-only режима, возврат equity-фильтра</li>
+        <li><strong>Конец 2026</strong> — inbound: посты, кейсы приводят 1-2 тёплых лида в месяц</li>
+      </ul>
+    </div>
+
+    <!-- 9. Итоги -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">09</span> Итоги мая 2026</h2>
+      <p class="section-meta">главный вывод и переходящие в июнь вопросы</p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-success); letter-spacing: 0.05em; text-transform: uppercase;">Что сработало</h4>
+      <ul style="padding-left: 1.1rem; margin: 0 0 1.2rem; font-size: 0.9rem; line-height: 1.7;">
+        <li>ДДС попал в план на 100% (расхождение €5 из €4 600)</li>
+        <li>Все 6 кошельков сверены с фактом (BBVA по xlsx, остальные по скринам)</li>
+        <li>Аренда июня оплачена досрочно — кассовый риск закрыт</li>
+        <li>Конвертация Bybit → Wise (€2 022 P2P) — операционная подушка пополнена</li>
+        <li>Autonomo Вики запущен через Юрия — главный налоговый трек открыт</li>
+      </ul>
+
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-danger); letter-spacing: 0.05em; text-transform: uppercase;">Что не сработало</h4>
+      <ul style="padding-left: 1.1rem; margin: 0 0 1.2rem; font-size: 0.9rem; line-height: 1.7;">
+        <li>Перерасход еда +€465 / заведения +€306 / здоровье +€130</li>
+        <li>Второй клиент не появился (warm-outreach пайплайн выжжен — 14 контактов, 0 коммерческих сигналов)</li>
+        <li>Подушка не пополнялась (Зона 3 = €0)</li>
+        <li>Долг Сесилии — статус оплаты не подтверждён</li>
+      </ul>
+
+      <div class="callout warn">
+        <strong>Главный вывод месяца:</strong> май показал что текущая структура убыточна на €1 100/мес. Оптимизация трат закрывает 60-70% разрыва, но фундаментальное решение — <strong>второй источник дохода</strong>. Тёплая база отработана — переход на холодные каналы и inbound — главная стратегическая задача июня.
+      </div>
+    </div>
+
+    <p style="font-size: 0.8rem; color: var(--color-text-soft); margin-top: 2rem; text-align: center;">
+      Отчёт сформирован 2026-06-01. Источник данных: <code>finance/archive/2026-05.md</code> + <code>finance/wallets/*.md</code> + <code>finance/receipts/2026-05/</code> + BBVA xlsx-выписка.<br>
+      Методология: адаптация управленческой отчётности Нескучных Финансов (формат EasyTech, октябрь 2024).
+    </p>
+
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <a href="/finance/">← главная финансов</a> · <a href="/decisions/">решения по деньгам</a> · <a href="/">дашборд</a>
+  </div>
+</footer>
+
+<script src="/assets/js/portal.js" defer></script>
+</body>
+</html>
