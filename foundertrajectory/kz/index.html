@@ -112,7 +112,7 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .fitcol .mk{flex:none;font-weight:700;font-size:17px}.yes .mk{color:var(--ok)}.no .mk{color:var(--no)}
 
 /* team big photos */
-.team{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
 @media(max-width:880px){.team{grid-template-columns:1fr}}
 .tm{background:var(--card);border:1px solid var(--hair);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
 .tm.lead{border-color:var(--hair-gold)}
@@ -124,7 +124,7 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .tm li::before{content:"";position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .tm .foot{font-size:15px;margin-top:12px;padding-top:12px;border-top:1px solid var(--hair);color:#fff;line-height:1.45}
 /* credentials in team card */
-.tm .certlabel{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);margin:13px 0 9px;margin-top:auto}
+.tm .certlabel{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);margin:13px 0 9px}
 .tm .certs{display:flex;gap:10px;flex-wrap:wrap}
 .certthumb{position:relative;width:88px;height:60px;border-radius:9px;overflow:hidden;border:1px solid var(--hair-gold);background:#fff;cursor:pointer;flex:none;transition:transform .25s ease,box-shadow .25s ease}
 .certthumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
