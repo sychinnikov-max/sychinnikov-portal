@@ -269,11 +269,14 @@ textarea.finput{resize:vertical;min-height:48px;line-height:1.5}
 .chip:has(:checked){background:var(--gold);color:var(--gold-ink);border-color:transparent;font-weight:600}
 .formcard .err{display:none;color:var(--no);font-size:13.5px;margin-top:10px;text-align:center}
 form.sending .cta{opacity:.55;pointer-events:none}
-.formok{display:none;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:34px 12px}
+.formok{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:24px;background:color-mix(in oklab,#000 78%,transparent);backdrop-filter:blur(6px)}
 .formok.show{display:flex}
-.formok .ok-i{width:58px;height:58px;border-radius:50%;background:color-mix(in oklab,var(--ok) 20%,transparent);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700}
-.formok .ok-t{font-family:var(--fd);font-weight:600;font-size:25px}
-.formok .ok-d{font-size:16px;color:var(--ink-muted);line-height:1.55;max-width:36ch}
+.formok .okcard{background:var(--card);border:1px solid var(--hair-gold);border-radius:22px;padding:clamp(30px,5vw,42px) clamp(24px,4vw,34px);max-width:430px;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:15px;box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.formok .ok-i{width:62px;height:62px;border-radius:50%;background:color-mix(in oklab,var(--ok) 20%,transparent);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700}
+.formok .ok-t{font-family:var(--fd);font-weight:600;font-size:27px}
+.formok .ok-d{font-size:16px;color:var(--ink-muted);line-height:1.55}
+.formok .ok-close{margin-top:6px;background:transparent;border:1px solid var(--hair-gold);color:var(--gold);font-weight:600;font-size:15px;padding:12px 28px;border-radius:10px;cursor:pointer}
+.formok .ok-close:hover{background:color-mix(in oklab,var(--gold) 12%,transparent)}
 .final{background-image:radial-gradient(70% 120% at 50% 0%,rgba(194,166,106,.13),transparent 60%)}
 /* final CTA — компактно, в один экран */
 #cta .inner{padding:clamp(38px,4.5vw,58px) clamp(24px,4vw,60px)}
@@ -299,6 +302,27 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* === мобильная компоновка артефактов: список + превью в один экран === */
+@media(max-width:880px){
+  .artpin{height:560vh}
+  .artstage{height:100svh}
+  .artstage-inner{grid-template-columns:1fr;grid-template-rows:auto auto;height:100svh;gap:8px;padding-top:80px;padding-bottom:16px;align-content:center}
+  .artleft{justify-content:flex-start}
+  .arttitle{font-size:18px;margin-bottom:8px;max-width:none}
+  .artcount{font-size:17px}.artcount #ac-cur{font-size:28px}
+  .artgroup-live{margin:6px 0 0}
+  .artlist{height:26vh;margin-top:6px}
+  .artitem{height:46px}
+  .artitem .ai-t{font-size:15.5px}
+  .artitem.on .ai-t{font-size:19px}
+  .artright{align-items:flex-start}
+  .artframe{aspect-ratio:16/10;max-width:100%}
+  .artslide{padding:18px}
+  .artslide .bt{font-size:21px}
+  .artslide .bd{font-size:13.5px;margin-top:2px}
+  .artcap{position:static;margin-top:9px;min-height:0;font-size:13px}
+}
 </style>
 </head>
 <body>
@@ -598,36 +622,28 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     </div>
     <div class="formcard rv">
       <form id="leadform" novalidate>
-        <input type="hidden" name="access_key" value="24d71a36-877d-46e1-9956-566f0dbb8d50">
-        <input type="hidden" name="subject" value="Заявка на разбор точек роста — Founder Trajectory">
-        <input type="hidden" name="from_name" value="Сайт Founder Trajectory">
-        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="checkbox" name="botcheck" id="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="fq"><div class="fl">1 · Сколько человек в команде?</div><div class="chips">
-          <label class="chip"><input type="radio" name="Команда" value="1-2">1-2</label>
-          <label class="chip"><input type="radio" name="Команда" value="3-10">3-10</label>
-          <label class="chip"><input type="radio" name="Команда" value="11-30">11-30</label>
-          <label class="chip"><input type="radio" name="Команда" value="больше 30">больше 30</label>
+          <label class="chip"><input type="radio" name="team" value="1-2">1-2</label>
+          <label class="chip"><input type="radio" name="team" value="3-10">3-10</label>
+          <label class="chip"><input type="radio" name="team" value="11-30">11-30</label>
+          <label class="chip"><input type="radio" name="team" value="больше 30">больше 30</label>
         </div></div>
         <div class="fq"><div class="fl">2 · На какой стадии компания?</div><div class="chips">
-          <label class="chip"><input type="radio" name="Стадия" value="запуск">запуск</label>
-          <label class="chip"><input type="radio" name="Стадия" value="первые клиенты">первые клиенты</label>
-          <label class="chip"><input type="radio" name="Стадия" value="устойчивый доход">устойчивый доход</label>
-          <label class="chip"><input type="radio" name="Стадия" value="масштабирование">масштабирование</label>
+          <label class="chip"><input type="radio" name="stage" value="запуск">запуск</label>
+          <label class="chip"><input type="radio" name="stage" value="первые клиенты">первые клиенты</label>
+          <label class="chip"><input type="radio" name="stage" value="устойчивый доход">устойчивый доход</label>
+          <label class="chip"><input type="radio" name="stage" value="масштабирование">масштабирование</label>
         </div></div>
         <div class="fq"><div class="fl">3 · Что сейчас самое острое?</div>
-          <textarea class="finput" name="Запрос" rows="2" placeholder="Например: нанял трёх менеджеров, решения всё равно на мне"></textarea></div>
+          <textarea class="finput" name="problem" rows="2" placeholder="Например: нанял трёх менеджеров, решения всё равно на мне"></textarea></div>
         <div class="fq"><div class="fl">4 · Ваше имя и как связаться</div>
-          <input class="finput" name="Имя" type="text" placeholder="Имя" style="margin-bottom:9px">
-          <input class="finput" name="Контакт" type="text" placeholder="Telegram, почта или телефон — куда вам ответить"></div>
+          <input class="finput" name="uname" type="text" placeholder="Имя" style="margin-bottom:9px">
+          <input class="finput" name="contact" type="text" placeholder="Telegram, почта или телефон — куда вам ответить"></div>
         <button type="submit" class="cta">Отправить заявку на разбор</button>
         <p class="err" id="formerr">Не отправилось. Напишите напрямую в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a></p>
         <p class="note" style="text-align:center">60 минут. Устный диагноз. Без обязательств.</p>
       </form>
-      <div class="formok" id="formok">
-        <div class="ok-i">✓</div>
-        <div class="ok-t">Заявка у меня</div>
-        <div class="ok-d">Читаю каждую лично и отвечаю в течение 24 часов. Если удобнее — пишите сразу в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</div>
-      </div>
     </div>
   </div>
 </div></section>
@@ -657,6 +673,16 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 <div class="lb" id="lb" aria-hidden="true">
   <button class="close" id="lb-close" aria-label="Закрыть">×</button>
   <figure><img id="lb-img" src="" alt=""><figcaption id="lb-cap"></figcaption></figure>
+</div>
+
+<!-- success modal (по центру экрана) -->
+<div class="formok" id="formok" aria-hidden="true">
+  <div class="okcard">
+    <div class="ok-i">✓</div>
+    <div class="ok-t">Заявка у меня</div>
+    <div class="ok-d">Читаю каждую лично и отвечаю в течение 24 часов. Если удобнее — пишите сразу в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</div>
+    <button class="ok-close" id="okclose" type="button">Закрыть</button>
+  </div>
 </div>
 
 <script>
@@ -727,20 +753,36 @@ onScroll();
 const priceEl=document.querySelector('.price-anim');
 if(priceEl){const po=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){priceEl.classList.add('go');po.disconnect();}})},{threshold:.4});po.observe(priceEl);}
 
-/* lead form → Web3Forms (заявка падает на почту) */
+/* lead form → Web3Forms (заявка падает на почту, единым русским текстом) */
 const lf=document.getElementById('leadform');
+const okModal=document.getElementById('formok');
+function closeOk(){okModal.classList.remove('show');okModal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+if(okModal){
+  document.getElementById('okclose').addEventListener('click',closeOk);
+  okModal.addEventListener('click',e=>{if(e.target===okModal)closeOk();});
+  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&okModal.classList.contains('show'))closeOk();});
+}
 if(lf){lf.addEventListener('submit',async(e)=>{
   e.preventDefault();
   const err=document.getElementById('formerr');
-  const contact=lf.querySelector('[name="Контакт"]');
-  if(!contact.value.trim()){contact.focus();contact.style.borderColor='var(--no)';return;}
-  contact.style.borderColor='';err.style.display='none';lf.classList.add('sending');
+  const val=n=>{const c=lf.querySelector('[name="'+n+'"]:checked');if(c)return c.value;const el=lf.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
+  const contactEl=lf.querySelector('[name="contact"]');
+  if(!contactEl.value.trim()){contactEl.focus();contactEl.style.borderColor='var(--no)';return;}
+  contactEl.style.borderColor='';err.style.display='none';lf.classList.add('sending');
+  const msg='Команда: '+(val('team')||'—')+'\nСтадия: '+(val('stage')||'—')+'\nЧто острое: '+(val('problem')||'—')+'\nИмя: '+(val('uname')||'—')+'\nКонтакт: '+contactEl.value.trim();
+  const fd=new FormData();
+  fd.append('access_key','24d71a36-877d-46e1-9956-566f0dbb8d50');
+  fd.append('subject','Заявка на разбор точек роста — Founder Trajectory');
+  fd.append('from_name','Сайт Founder Trajectory');
+  fd.append('name',val('uname')||'Заявка с сайта');
+  fd.append('message',msg);
+  if(document.getElementById('botcheck').checked)fd.append('botcheck','1');
   try{
-    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(lf)});
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:fd});
     const data=await res.json();
     if(data.success){
-      lf.style.display='none';
-      document.getElementById('formok').classList.add('show');
+      lf.reset();lf.classList.remove('sending');
+      okModal.classList.add('show');okModal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
       if(window.dataLayer)window.dataLayer.push({event:'lead_submit'});
     }else{throw new Error(data.message||'fail');}
   }catch(_){err.style.display='block';lf.classList.remove('sending');}
