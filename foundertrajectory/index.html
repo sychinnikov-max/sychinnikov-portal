@@ -3,7 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Founder Trajectory</title>
+<title>Founder Trajectory — наставник собственника по управленческим решениям</title>
+<meta name="description" content="Команда закрывает задачи каждый день, а компания стоит на месте? Выстраиваем систему, где по цифрам видно, какое решение принесло деньги. Бесплатный разбор точек роста — 60 минут.">
+<link rel="canonical" href="https://sychinnikov.com/foundertrajectory/">
+<meta name="robots" content="index,follow">
+<!-- Open Graph / Telegram / соцсети -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Founder Trajectory">
+<meta property="og:url" content="https://sychinnikov.com/foundertrajectory/">
+<meta property="og:title" content="Команда закрывает задачи — а компания стоит на месте.">
+<meta property="og:description" content="Наставник собственника по управленческим решениям. Бесплатный разбор точек роста компании — 60 минут, без презентаций и продаж.">
+<!-- TODO: заменить на обложку 1200×630; пока временно портрет -->
+<meta property="og:image" content="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Команда закрывает задачи — а компания стоит на месте.">
+<meta name="twitter:description" content="Наставник собственника по управленческим решениям. Бесплатный разбор точек роста — 60 минут.">
+<meta name="twitter:image" content="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131210'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23C2A66A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -241,8 +258,22 @@ details p{font-size:16.5px;color:var(--ink-muted);line-height:1.6;padding:0 0 26
 .fq .fl{font-size:15px;color:var(--ink-muted);margin-bottom:10px}
 .chips{display:flex;gap:9px;flex-wrap:wrap}
 .chip{font-size:14.5px;border:1px solid var(--hair);border-radius:999px;padding:10px 16px;color:var(--ink)}
-.finput{width:100%;background:var(--surface-2);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;color:var(--ink-dim);font-size:15px;font-family:var(--fb)}
+.finput{width:100%;background:var(--surface-2);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;color:var(--ink);font-size:15px;font-family:var(--fb)}
+input.finput::placeholder,textarea.finput::placeholder{color:var(--ink-dim)}
+input.finput:focus,textarea.finput:focus{outline:none;border-color:var(--gold)}
+textarea.finput{resize:vertical;min-height:48px;line-height:1.5}
 .formcard .cta{width:100%;text-align:center;margin-top:8px}
+.chip{cursor:pointer;user-select:none;transition:background .15s ease,color .15s ease,border-color .15s ease;position:relative}
+.chip input{position:absolute;opacity:0;width:0;height:0}
+.chip:hover{border-color:var(--hair-gold)}
+.chip:has(:checked){background:var(--gold);color:var(--gold-ink);border-color:transparent;font-weight:600}
+.formcard .err{display:none;color:var(--no);font-size:13.5px;margin-top:10px;text-align:center}
+form.sending .cta{opacity:.55;pointer-events:none}
+.formok{display:none;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:34px 12px}
+.formok.show{display:flex}
+.formok .ok-i{width:58px;height:58px;border-radius:50%;background:color-mix(in oklab,var(--ok) 20%,transparent);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700}
+.formok .ok-t{font-family:var(--fd);font-weight:600;font-size:25px}
+.formok .ok-d{font-size:16px;color:var(--ink-muted);line-height:1.55;max-width:36ch}
 .final{background-image:radial-gradient(70% 120% at 50% 0%,rgba(194,166,106,.13),transparent 60%)}
 /* final CTA — компактно, в один экран */
 #cta .inner{padding:clamp(38px,4.5vw,58px) clamp(24px,4vw,60px)}
@@ -566,12 +597,37 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       <p class="note">На выходе <span class="dash">—</span> устный диагноз: где в системе управления разрыв. Я лично читаю каждую заявку и отвечаю в течение 24 часов. Удобнее написать <span class="dash">—</span> Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
     </div>
     <div class="formcard rv">
-      <div class="fq"><div class="fl">1 · Сколько человек в команде?</div><div class="chips"><span class="chip">1-2</span><span class="chip">3-10</span><span class="chip">11-30</span><span class="chip">больше 30</span></div></div>
-      <div class="fq"><div class="fl">2 · На какой стадии компания?</div><div class="chips"><span class="chip">запуск</span><span class="chip">первые клиенты</span><span class="chip">устойчивый доход</span><span class="chip">масштабирование</span></div></div>
-      <div class="fq"><div class="fl">3 · Что сейчас самое острое?</div><div class="finput">Например: нанял трёх менеджеров, решения всё равно на мне</div></div>
-      <div class="fq"><div class="fl">4 · Когда удобно поговорить?</div><div class="finput">Выбрать время</div></div>
-      <a href="#" class="cta">Разобрать точки роста компании</a>
-      <p class="note" style="text-align:center">60 минут. Устный диагноз. Без обязательств.</p>
+      <form id="leadform" novalidate>
+        <input type="hidden" name="access_key" value="24d71a36-877d-46e1-9956-566f0dbb8d50">
+        <input type="hidden" name="subject" value="Заявка на разбор точек роста — Founder Trajectory">
+        <input type="hidden" name="from_name" value="Сайт Founder Trajectory">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="fq"><div class="fl">1 · Сколько человек в команде?</div><div class="chips">
+          <label class="chip"><input type="radio" name="Команда" value="1-2">1-2</label>
+          <label class="chip"><input type="radio" name="Команда" value="3-10">3-10</label>
+          <label class="chip"><input type="radio" name="Команда" value="11-30">11-30</label>
+          <label class="chip"><input type="radio" name="Команда" value="больше 30">больше 30</label>
+        </div></div>
+        <div class="fq"><div class="fl">2 · На какой стадии компания?</div><div class="chips">
+          <label class="chip"><input type="radio" name="Стадия" value="запуск">запуск</label>
+          <label class="chip"><input type="radio" name="Стадия" value="первые клиенты">первые клиенты</label>
+          <label class="chip"><input type="radio" name="Стадия" value="устойчивый доход">устойчивый доход</label>
+          <label class="chip"><input type="radio" name="Стадия" value="масштабирование">масштабирование</label>
+        </div></div>
+        <div class="fq"><div class="fl">3 · Что сейчас самое острое?</div>
+          <textarea class="finput" name="Запрос" rows="2" placeholder="Например: нанял трёх менеджеров, решения всё равно на мне"></textarea></div>
+        <div class="fq"><div class="fl">4 · Ваше имя и как связаться</div>
+          <input class="finput" name="Имя" type="text" placeholder="Имя" style="margin-bottom:9px">
+          <input class="finput" name="Контакт" type="text" placeholder="Telegram, почта или телефон — куда вам ответить"></div>
+        <button type="submit" class="cta">Отправить заявку на разбор</button>
+        <p class="err" id="formerr">Не отправилось. Напишите напрямую в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a></p>
+        <p class="note" style="text-align:center">60 минут. Устный диагноз. Без обязательств.</p>
+      </form>
+      <div class="formok" id="formok">
+        <div class="ok-i">✓</div>
+        <div class="ok-t">Заявка у меня</div>
+        <div class="ok-d">Читаю каждую лично и отвечаю в течение 24 часов. Если удобнее — пишите сразу в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</div>
+      </div>
     </div>
   </div>
 </div></section>
@@ -587,8 +643,8 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       <p>Telegram: <a href="https://t.me/Sychinnikov">@Sychinnikov</a><br>Почта: <a href="mailto:Sychinnikov@gmail.com">Sychinnikov@gmail.com</a><br><span class="dim">Отвечаю лично.</span></p>
     </div>
     <div>
-      <div style="font-weight:600;font-size:15px;margin-bottom:10px">Пока не готовы говорить</div>
-      <p>В канале разбираю реальные ситуации собственников: где система буксует и как вернуть контроль.<br><a href="#">Подписаться на канал →</a></p>
+      <div style="font-weight:600;font-size:15px;margin-bottom:10px">Не готовы к разбору?</div>
+      <p>Напишите в Telegram — отвечу на вопросы лично, без обязательств и продаж.<br><a href="https://t.me/Sychinnikov">Написать в Telegram →</a></p>
     </div>
   </div>
   <div class="inner fbar" style="padding-left:0;padding-right:0">
@@ -670,6 +726,30 @@ onScroll();
 /* price reveal trigger */
 const priceEl=document.querySelector('.price-anim');
 if(priceEl){const po=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){priceEl.classList.add('go');po.disconnect();}})},{threshold:.4});po.observe(priceEl);}
+
+/* lead form → Web3Forms (заявка падает на почту) */
+const lf=document.getElementById('leadform');
+if(lf){lf.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const err=document.getElementById('formerr');
+  const contact=lf.querySelector('[name="Контакт"]');
+  if(!contact.value.trim()){contact.focus();contact.style.borderColor='var(--no)';return;}
+  contact.style.borderColor='';err.style.display='none';lf.classList.add('sending');
+  try{
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(lf)});
+    const data=await res.json();
+    if(data.success){
+      lf.style.display='none';
+      document.getElementById('formok').classList.add('show');
+      if(window.dataLayer)window.dataLayer.push({event:'lead_submit'});
+    }else{throw new Error(data.message||'fail');}
+  }catch(_){err.style.display='block';lf.classList.remove('sending');}
+});}
+
+/* трекинг кликов по CTA (для будущей аналитики через dataLayer) */
+document.querySelectorAll('a.cta,a.ncta').forEach(a=>a.addEventListener('click',()=>{
+  if(window.dataLayer)window.dataLayer.push({event:'cta_click',cta_text:(a.textContent||'').trim().slice(0,60)});
+}));
 </script>
 </body>
 </html>
