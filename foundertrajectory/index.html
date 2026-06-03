@@ -324,6 +324,14 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   .artcap{position:static;margin-top:9px;min-height:0;font-size:13px}
 }
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NJQF1P3DJ2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NJQF1P3DJ2');
+</script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -796,6 +804,7 @@ if(lf){lf.addEventListener('submit',async(e)=>{
       okModal.classList.add('show');okModal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
       if(window.dataLayer)window.dataLayer.push({event:'lead_submit'});
       if(window.ym)ym(109611431,'reachGoal','lead_submit');
+      if(window.gtag)gtag('event','lead_submit');
     }else{throw new Error(data.message||'fail');}
   }catch(_){err.style.display='block';lf.classList.remove('sending');}
 });}
@@ -804,6 +813,7 @@ if(lf){lf.addEventListener('submit',async(e)=>{
 document.querySelectorAll('a.cta,a.ncta').forEach(a=>a.addEventListener('click',()=>{
   if(window.dataLayer)window.dataLayer.push({event:'cta_click',cta_text:(a.textContent||'').trim().slice(0,60)});
   if(window.ym)ym(109611431,'reachGoal','cta_click');
+  if(window.gtag)gtag('event','cta_click');
 }));
 </script>
 </body>
