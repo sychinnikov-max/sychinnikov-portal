@@ -127,6 +127,20 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3.2re
 .certthumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .certthumb:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.45)}
 .certthumb .zoom{position:absolute;right:6px;bottom:6px;width:21px;height:21px;border-radius:50%;background:color-mix(in oklab,var(--gold-ink) 72%,transparent);color:var(--gold);font-size:12px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+/* выравнивание карточек команды по одной линии (имя/пункты/подпись/документы/сертификаты) */
+@supports(grid-template-rows:subgrid){
+  @media(min-width:881px){
+    .team{grid-template-rows:repeat(7,auto);row-gap:0}
+    .tm{display:grid;grid-template-rows:subgrid;grid-row:span 7;row-gap:0}
+    .tm .body{display:contents}
+    .tm .nm{padding:20px 24px 0}
+    .tm .rl{margin:0;padding:5px 24px 0}
+    .tm ul{margin:0;padding:13px 24px 0}
+    .tm .foot{margin:0;padding:12px 24px 0}
+    .tm .certlabel{margin:0;padding:13px 24px 0}
+    .tm .certs{padding:0 24px 22px}
+  }
+}
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:clamp(20px,5vw,56px);background:color-mix(in oklab,#000 80%,transparent);backdrop-filter:blur(6px)}
 .lb.open{display:flex}
