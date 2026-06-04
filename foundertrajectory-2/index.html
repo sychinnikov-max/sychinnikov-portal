@@ -73,9 +73,8 @@ a{color:inherit}.fd{font-family:var(--fd)}
 /* hero */
 .hero{background-image:radial-gradient(70% 60% at 78% 16%,rgba(194,166,106,.12),transparent 58%)}
 .hero .inner{min-height:calc(100vh - 74px);display:flex;flex-direction:column;justify-content:center;padding-top:20px;padding-bottom:20px}
-.herorow{flex:1;display:grid;grid-template-columns:1.32fr .68fr;gap:54px;align-items:center}
-@media(max-width:960px){.herorow{grid-template-columns:1fr;gap:34px}}
-h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8rem);line-height:1.07;letter-spacing:-.012em;margin:14px 0 16px;max-width:20ch}
+.herocontent{max-width:64ch}
+h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8rem);line-height:1.07;letter-spacing:-.012em;margin:14px 0 16px;max-width:22ch}
 .lead{font-size:clamp(16px,1.25vw,19px);color:var(--ink-muted);max-width:58ch;line-height:1.55;margin-bottom:12px}
 .actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:22px 0 12px}
 .microhint{font-size:17px;color:var(--ink);max-width:52ch;line-height:1.5;margin-bottom:4px}
@@ -271,49 +270,33 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   <a href="#cta" class="ncta">Разобрать точки роста</a>
 </div></header>
 
-<!-- БЛОК 1 — HERO -->
+<!-- БЛОК 1 — ПЕРВЫЙ ЭКРАН (без фото, по final-v4) -->
 <section class="hero"><div class="inner">
-  <div class="herorow">
-    <div>
-      <div class="eyebrow">Для собственника, у которого есть команда <span class="dash">—</span> но все ключевые решения замкнуты на нём</div>
-      <h1>Команда закрывает задачи каждый день <span class="dash">—</span> а чистая прибыль стоит на месте.</h1>
-      <p class="lead">Не консультант с презентацией и не очередной курс. Веду собственника к решениям, которые растят прибыль, и выстраиваю систему, которая работает без меня.</p>
-      <div class="actions">
-        <a href="#cta" class="cta">Разобрать точки роста за 45 минут</a>
-      </div>
-      <p class="microhint">Бесплатно · 45 минут · уйдёте с 2<span class="dash">–</span>3 гипотезами роста.</p>
+  <div class="herocontent">
+    <div class="eyebrow">Для собственника, у которого есть команда <span class="dash">—</span> но все ключевые решения всё равно замкнуты на нём</div>
+    <h1>Команда закрывает задачи каждый день <span class="dash">—</span> а чистая прибыль стоит на месте</h1>
+    <p class="lead">Не консультант с презентацией и не очередной курс. Веду собственника к решениям, которые растят прибыль, и выстраиваю систему, которая работает без меня.</p>
+    <div class="actions">
+      <a href="#cta" class="cta">Разобрать точки роста за 45 минут</a>
     </div>
-    <div class="heroportrait">
-      <img src="/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg" alt="Андрей Сычинников">
-      <div class="cap">
-        <div class="c1">Андрей Сычинников</div>
-        <div class="c2">Веду проект и отвечаю за результат лично. Финансы и регламенты <span class="dash">—</span> на дипломированных специалистах команды.</div>
-      </div>
-    </div>
+    <p class="microhint">Бесплатно · 45 минут · уйдёте с 2<span class="dash">–</span>3 гипотезами роста.</p>
   </div>
-  <div class="scrollcue"><a href="#trust">Почему мне можно доверить прибыль <span class="ar">↓</span></a></div>
 </div></section>
 
-<!-- БЛОК 2 — ПОЧЕМУ МОЖНО ДОВЕРИТЬ ПРИБЫЛЬ -->
-<section class="band alt" id="trust"><div class="inner pad">
+<!-- БЛОК 2 — ПОЧЕМУ МНЕ МОЖНО ДОВЕРИТЬ ВАШУ ПРИБЫЛЬ (текст + команда, единый блок) -->
+<section class="band alt" id="team"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="eyebrow">Почему мне можно доверить вашу прибыль</div>
-    <div class="h2" style="margin-top:16px">За словами <span class="dash">—</span> мой собственный результат</div>
+    <div class="h2">Почему мне можно доверить вашу прибыль</div>
   </div>
   <div class="rv">
     <p class="lead-in">Я выстраиваю систему, в которой вы по цифрам видите, какое решение принесло деньги, а какое только отняло время команды и вас. И это не просто слова <span class="dash">—</span> за ними мой собственный результат.</p>
     <p class="lead-in">Эти инструменты и систему я внедрил в свой бизнес: за 2024 год команда из 10 человек сделала <b>120 млн ₽ выручки</b>. Теперь я ставлю эту систему собственникам как наставник.</p>
     <p class="lead-in muted">За плечами <span class="dash">—</span> более 10 лет управления собственными проектами, <b style="color:var(--ink)">MBA по управлению компанией</b> (Русская Школа Управления) и методология управленческого учёта <b style="color:var(--ink)">«Нескучных финансов»</b>.</p>
   </div>
-</div></section>
 
-<!-- БЛОК 2 (продолжение) — КОМАНДА -->
-<section class="band" id="team"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="h2">Я веду и отвечаю лично. Со мной <span class="dash">—</span> двое дипломированных специалистов.</div>
-    <p class="sub">Один человек не закроет финансы и регламенты одинаково глубоко <span class="dash">—</span> именно поэтому к каждому проекту подключается полная команда.</p>
-  </div>
-  <div class="team">
+  <p class="lead-in rv" style="margin-top:38px;max-width:78ch">Я веду проект и отвечаю за результат лично. На каждом этапе работы со мной <span class="dash">—</span> двое дипломированных специалистов:</p>
+
+  <div class="team" style="margin-top:26px">
     <div class="tm lead rv">
       <img src="/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg" alt="Андрей Сычинников">
       <div class="body">
@@ -321,8 +304,8 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
         <div class="rl">Лидер проекта · наставник собственника</div>
         <ul>
           <li>Более 10 лет управления собственными проектами</li>
-          <li>MBA «Управление компанией», Русская Школа Управления (2023)</li>
-          <li>Внедрил полный управленческий учёт в своём бизнесе: бюджеты, баланс, платёжный календарь, финмодель</li>
+          <li>MBA по управлению компанией, Русская Школа Управления</li>
+          <li>Методология управленческого учёта «Нескучных финансов»</li>
         </ul>
         <div class="foot">Веду проект и отвечаю за результат перед вами лично.</div>
         <div class="certlabel">Подтверждающие документы</div>
@@ -338,10 +321,9 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       <img src="/foundertrajectory/assets/people/maria-gorbunova/maria-photo-portrait.jpeg" alt="Мария Горбунова">
       <div class="body">
         <div class="nm">Мария Горбунова</div>
-        <div class="rl">Финансы и управленческий учёт</div>
+        <div class="rl">Финансы</div>
         <ul>
           <li>7 лет в «Нескучных финансах»</li>
-          <li>Дипломированный финансовый специалист</li>
         </ul>
         <div class="foot">Проверяет, как решения скажутся на прибыли, ещё до того, как вы их примете.</div>
         <div class="certlabel">Подтверждающие документы</div>
@@ -363,10 +345,9 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
         <div class="nm">Катя Харламова</div>
         <div class="rl">Регламенты и бизнес-процессы</div>
         <ul>
-          <li>Дипломированный специалист по бизнес-процессам</li>
-          <li>Сертифицирована по нотации BPMN 2.0</li>
+          <li>Сертификация BPMN 2.0</li>
         </ul>
-        <div class="foot">Описывает процессы так, что система работает автономно <span class="dash">—</span> без вашего ежедневного управления.</div>
+        <div class="foot">Описывает процессы так, что система работает автономно.</div>
         <div class="certlabel">Подтверждающие документы</div>
         <div class="certs">
           <div class="certthumb" data-cert="/foundertrajectory/assets/people/katya-harlamova/katya-cert-business-processes.jpg" data-cap="Сертификат «Менеджер бизнес-процессов» — Нетология, 2024">
@@ -381,6 +362,8 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       </div>
     </div>
   </div>
+
+  <p class="note rv" style="margin-top:24px;font-size:16.5px">Один человек не закроет это одинаково глубоко <span class="dash">—</span> именно поэтому к каждому проекту подключается полная команда.</p>
 </div></section>
 
 <!-- БЛОК 3 — ОТ РАЗБОРА ДО СИСТЕМЫ -->
@@ -529,17 +512,10 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   <div class="formwrap">
     <div class="rv">
       <div class="h2">Разберём точки роста вашей компании</div>
-      <p class="sub" style="margin-bottom:6px">Бесплатно, без презентаций и обязательств. 45 минут.</p>
-      <div class="h3" style="margin-top:26px">Что происходит на разборе</div>
-      <ul class="fitems">
-        <li>Вы рассказываете, что происходит в бизнесе <span class="dash">—</span> я смотрю на ваши цифры как есть</li>
-        <li>Показываю, где самая дорогая просадка, и даю 2<span class="dash">–</span>3 гипотезы роста</li>
-        <li>Вместе решаем, подходим ли мы друг другу и есть ли смысл идти в аудит</li>
-        <li>Уходите с Картой точек роста <span class="dash">—</span> рабочим документом, даже если дальше не работаем</li>
-      </ul>
-      <p class="note">Читаю каждую заявку лично и отвечаю в течение 24 часов. Удобнее написать <span class="dash">—</span> Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
+      <p class="sub">Бесплатно, без презентаций и обязательств. 45 минут.</p>
       <div class="orsep" style="max-width:none">или</div>
-      <p class="note" style="margin-top:0"><b style="color:var(--ink)">Ещё не готовы к разговору?</b> Пройдите самопроверку «7 вопросов собственника» <span class="dash">—</span> за 10 минут увидите свою главную просадку. Напишите «самопроверка» в <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a> <span class="dash">—</span> пришлю.</p>
+      <p class="note" style="margin-top:0"><b style="color:var(--ink)">Ещё не готовы к разговору?</b> Пройдите самопроверку «7 вопросов собственника» <span class="dash">—</span> за 10 минут увидите свою главную просадку.</p>
+      <p class="note">Или напишите напрямую <span class="dash">—</span> Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
     </div>
     <div class="formcard rv">
       <form id="leadform" novalidate>
@@ -568,7 +544,7 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
           <input class="finput" name="contact" type="text" placeholder="Telegram, почта или телефон — куда вам ответить"></div>
         <button type="submit" class="cta">Отправить заявку на разбор</button>
         <p class="err" id="formerr">Не отправилось. Напишите напрямую в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a></p>
-        <p class="note" style="text-align:center">45 минут. Бесплатно. Без обязательств.</p>
+        <p class="note" style="text-align:center">Читаю каждую заявку лично. Отвечаю в течение 24 часов.</p>
       </form>
     </div>
   </div>
