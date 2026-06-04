@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Founder Trajectory — наставник собственника по управленческим решениям</title>
 <meta name="description" content="Для собственника, у которого есть команда, но все ключевые решения замкнуты на нём. Веду к решениям, которые растят прибыль, и выстраиваю систему, которая работает без меня. Бесплатный разбор — 45 минут.">
-<link rel="canonical" href="https://sychinnikov.com/foundertrajectory-3/">
+<link rel="canonical" href="https://sychinnikov.com/foundertrajectory-4/">
 <meta name="robots" content="noindex,nofollow">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Founder Trajectory">
-<meta property="og:url" content="https://sychinnikov.com/foundertrajectory-3/">
+<meta property="og:url" content="https://sychinnikov.com/foundertrajectory-4/">
 <meta property="og:title" content="Для собственника, у которого есть команда — но все решения на нём.">
 <meta property="og:description" content="Наставник собственника по управленческим решениям. Бесплатный разбор точек роста — 45 минут, без презентаций и продаж.">
 <meta property="og:image" content="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg">
@@ -854,12 +854,12 @@ if(lf){lf.addEventListener('submit',async(e)=>{
   const contactEl=lf.querySelector('[name="contact"]');
   if(!contactEl.value.trim()){contactEl.focus();contactEl.style.borderColor='var(--no)';return;}
   contactEl.style.borderColor='';err.style.display='none';lf.classList.add('sending');
-  const msg='[ЗАЯВКА С v3]\nКоманда: '+(val('team')||'—')+'\nСтадия: '+(val('stage')||'—')+'\nЧто ближе: '+(val('want')||'—')+'\nЧто острое: '+(val('problem')||'—')+'\nИмя: '+(val('uname')||'—')+'\nКонтакт: '+contactEl.value.trim();
+  const msg='[ЗАЯВКА С v4]\nКоманда: '+(val('team')||'—')+'\nСтадия: '+(val('stage')||'—')+'\nЧто ближе: '+(val('want')||'—')+'\nЧто острое: '+(val('problem')||'—')+'\nИмя: '+(val('uname')||'—')+'\nКонтакт: '+contactEl.value.trim();
   const fd=new FormData();
   fd.append('access_key','24d71a36-877d-46e1-9956-566f0dbb8d50');
-  fd.append('subject','Заявка на разбор (v3) — Founder Trajectory');
-  fd.append('from_name','Сайт Founder Trajectory v3');
-  fd.append('name',val('uname')||'Заявка с сайта v3');
+  fd.append('subject','Заявка на разбор (v4) — Founder Trajectory');
+  fd.append('from_name','Сайт Founder Trajectory v4');
+  fd.append('name',val('uname')||'Заявка с сайта v4');
   fd.append('message',msg);
   if(document.getElementById('botcheck').checked)fd.append('botcheck','1');
   try{
@@ -868,18 +868,18 @@ if(lf){lf.addEventListener('submit',async(e)=>{
     if(data.success){
       lf.reset();lf.classList.remove('sending');
       okModal.classList.add('show');okModal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
-      if(window.dataLayer)window.dataLayer.push({event:'lead_submit',page_variant:'v3'});
+      if(window.dataLayer)window.dataLayer.push({event:'lead_submit',page_variant:'v4'});
       if(window.ym)ym(109611431,'reachGoal','lead_submit');
-      if(window.gtag)gtag('event','lead_submit',{page_variant:'v3'});
+      if(window.gtag)gtag('event','lead_submit',{page_variant:'v4'});
     }else{throw new Error(data.message||'fail');}
   }catch(_){err.style.display='block';lf.classList.remove('sending');}
 });}
 
 /* трекинг кликов по CTA */
 document.querySelectorAll('a.cta,a.ncta').forEach(a=>a.addEventListener('click',()=>{
-  if(window.dataLayer)window.dataLayer.push({event:'cta_click',cta_text:(a.textContent||'').trim().slice(0,60),page_variant:'v3'});
+  if(window.dataLayer)window.dataLayer.push({event:'cta_click',cta_text:(a.textContent||'').trim().slice(0,60),page_variant:'v4'});
   if(window.ym)ym(109611431,'reachGoal','cta_click');
-  if(window.gtag)gtag('event','cta_click',{page_variant:'v3'});
+  if(window.gtag)gtag('event','cta_click',{page_variant:'v4'});
 }));
 </script>
 </body>
