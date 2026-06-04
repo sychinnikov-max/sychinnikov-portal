@@ -104,9 +104,10 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3.2re
 .resultstat .rs-big small{font-size:.42em;font-weight:600}
 .resultstat .rs-sub{font-size:15px;color:var(--ink-muted);margin-top:14px;line-height:1.5}
 .resultright p{font-size:17.5px;line-height:1.6;color:var(--ink)}
-.creds{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-.cred{background:var(--surface-2);border:1px solid var(--hair);border-radius:12px;padding:14px 18px;font-size:14.5px;color:var(--ink);line-height:1.4;max-width:30ch}
-.cred b{color:var(--gold);font-family:var(--fd);font-weight:600;display:block;font-size:16px;margin-bottom:2px}
+.creds{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+@media(max-width:760px){.creds{grid-template-columns:1fr}}
+.cred{background:var(--card);border:1px solid var(--hair-gold);border-radius:16px;padding:28px 26px;font-size:16px;color:var(--ink-muted);line-height:1.5}
+.cred b{color:var(--gold);font-family:var(--fd);font-weight:600;display:block;font-size:23px;margin-bottom:8px;line-height:1.18}
 
 /* team big photos */
 .team{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -200,6 +201,24 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3.2re
 .zone .zn{font-family:var(--fm);color:var(--gold);font-size:14px}
 .zone .zt{font-family:var(--fd);font-weight:600;font-size:21px;margin:12px 0 10px}
 .zone .zd{font-size:16px;color:var(--ink-muted);line-height:1.55}
+
+/* tripwire cards (разбор) */
+.tw{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.tw{grid-template-columns:1fr}}
+.twc{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:38px 34px}
+.twc .n{font-family:var(--fm);color:var(--gold);font-size:15px}
+.twc .t{font-family:var(--fd);font-weight:600;font-size:25px;margin:16px 0 12px;line-height:1.15}
+.twc .d{font-size:17px;color:var(--ink-muted);line-height:1.55}
+
+/* fit table (с кем я работаю) */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:760px){.fit{grid-template-columns:1fr}}
+.fitcol{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:10px 28px 22px}
+.fitcol h4{font-size:16px;font-weight:700;padding:22px 0 12px;border-bottom:1px solid var(--hair)}
+.fitcol.yes h4{color:var(--ok)}.fitcol.no h4{color:var(--no)}
+.fitcol li{list-style:none;display:flex;gap:13px;padding:16px 0;border-bottom:1px solid var(--hair);font-size:16.5px;line-height:1.45}
+.fitcol li:last-child{border-bottom:none}
+.fitcol .mk{flex:none;font-weight:700;font-size:17px}.yes .mk{color:var(--ok)}.no .mk{color:var(--no)}
 
 /* artifacts pinned moving list (10 инструментов) */
 .artpin{position:relative;height:760vh}
@@ -375,12 +394,12 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     </div>
     <div class="resultright">
       <p>Эти инструменты и систему я сначала внедрил в собственный бизнес. Теперь ставлю эту же систему собственникам <span class="dash">—</span> как наставник.</p>
-      <div class="creds">
-        <div class="cred"><b>10+ лет</b> управления собственными проектами</div>
-        <div class="cred"><b>MBA</b> по управлению компанией</div>
-        <div class="cred"><b>«Нескучные финансы»</b> методология управленческого учёта</div>
-      </div>
     </div>
+  </div>
+  <div class="creds rv">
+    <div class="cred"><b>10+ лет</b> управления собственными проектами</div>
+    <div class="cred"><b>MBA по управлению компанией</b> Русская Школа Управления</div>
+    <div class="cred"><b>«Нескучные финансы»</b> методология управленческого учёта</div>
   </div>
 
   <div class="sect-head rv" style="margin-top:66px;margin-bottom:28px">
@@ -412,11 +431,12 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       <img src="/foundertrajectory/assets/people/maria-gorbunova/maria-photo-portrait.jpeg" alt="Мария Горбунова">
       <div class="body">
         <div class="nm">Мария Горбунова</div>
-        <div class="rl">Финансы</div>
+        <div class="rl">Финансы и управленческий учёт</div>
         <ul>
-          <li>7 лет в «Нескучных финансах»</li>
+          <li>Финансовый директор с 7+ годами практики в «Нескучных финансах»</li>
+          <li>Дипломированный финансовый специалист</li>
         </ul>
-        <div class="foot">Проверяет, как решения скажутся на прибыли, ещё до того, как вы их примете.</div>
+        <div class="foot">На встречах проверяет, как решения скажутся на прибыли <span class="dash">—</span> до того как вы их примете.</div>
         <div class="certlabel">Подтверждающие документы</div>
         <div class="certs">
           <div class="certthumb" data-cert="/foundertrajectory/assets/people/maria-gorbunova/maria-cert-fd-strategic.png" data-cap="Аттестация финансового директора стратегического уровня — Высшая школа финансового директора">
@@ -436,9 +456,10 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
         <div class="nm">Катя Харламова</div>
         <div class="rl">Регламенты и бизнес-процессы</div>
         <ul>
-          <li>Сертификация BPMN 2.0</li>
+          <li>Дипломированный специалист по бизнес-процессам</li>
+          <li>Сертифицирована по нотации BPMN 2.0</li>
         </ul>
-        <div class="foot">Описывает процессы так, что система работает автономно.</div>
+        <div class="foot">Описывает процессы так, что система работает автономно <span class="dash">—</span> без вашего ежедневного управления.</div>
         <div class="certlabel">Подтверждающие документы</div>
         <div class="certs">
           <div class="certthumb" data-cert="/foundertrajectory/assets/people/katya-harlamova/katya-cert-business-processes.jpg" data-cap="Сертификат «Менеджер бизнес-процессов» — Нетология, 2024">
@@ -461,7 +482,7 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <div class="eyebrow">Система</div>
     <div class="ft-name">Founder<b>·</b>Trajectory</div>
   </div>
-  <div class="rv" style="max-width:80ch;margin:0 auto 60px;text-align:center">
+  <div class="rv" style="margin:0 auto 60px">
     <p class="lead-in" style="max-width:none">Founder Trajectory <span class="dash">—</span> это не программа и не один инструмент. Это способ принимать управленческие решения на основе цифр <span class="dash">—</span> и доводить их до результата руками команды. Через внедряемые инструменты чётко видно, что двигает прибыль, что её увеличивает, а что съедает.</p>
     <p class="lead-in muted" style="max-width:none">Внедряются регламенты и ритм регулярных встреч, усиливается ответственность по основным задачам <span class="dash">—</span> и это работает без вашего ежедневного контроля. Вы выходите из режима «всё на мне» и перестаёте решать по ощущениям. После завершения работы команды механизм остаётся работать внутри вашего бизнеса <span class="dash">—</span> без нашего участия.</p>
   </div>
@@ -491,22 +512,48 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   </div>
 </div></section>
 
-<!-- БЛОК 4 — РАЗБОР -->
+<!-- БЛОК 3б — С КЕМ Я РАБОТАЮ (из v1, перед разбором) -->
 <section class="band"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="h2">Разбор за 45 минут. Без презентаций и без продаж.</div>
-    <p class="sub">За 45 минут на звонке разберём вашу ситуацию по сути:</p>
+    <div class="eyebrow">С кем я работаю</div>
+    <p class="sub" style="font-size:20px;color:var(--ink)">Я веду одновременно не больше четырёх собственников. Беру в работу <span class="dash">—</span> значит вижу, что система реально приживётся. Если не вижу <span class="dash">—</span> скажу на бесплатном разборе, чтобы не тратить ни деньги клиента, ни время команды впустую.</p>
   </div>
-  <ul class="blist rv">
-    <li>Вы рассказываете, что происходит в бизнесе <span class="dash">—</span> я смотрю на ваши цифры как есть. Готовиться заранее не нужно.</li>
-    <li>Показываю, где самая дорогая просадка, и даю 2<span class="dash">–</span>3 гипотезы роста.</li>
-    <li>Вместе решаем, подходим ли мы друг другу и есть ли смысл идти в аудит.</li>
-  </ul>
-  <p class="lead-in muted rv" style="margin-top:24px">Это не замаскированная продажа. Если увижу, что справитесь сами, <span class="dash">—</span> скажу прямо.</p>
-  <div class="takeaway rv"><b>Что останется у вас:</b> Карта точек роста <span class="dash">—</span> где система теряет деньги и какие 2<span class="dash">–</span>3 шага дадут результат быстрее всего. Даже если дальше мы не работаем, это уже рабочий документ.</div>
-  <div class="rv" style="margin-top:30px">
+  <div class="fit">
+    <div class="fitcol yes rv"><h4>Подходим, если:</h4>
+      <ul>
+        <li><span class="mk">✓</span> У вас уже есть команда <span class="dash">—</span> 3<span class="dash">–</span>30 человек</li>
+        <li><span class="mk">✓</span> Бизнес работает в онлайн-контуре: Зум, Google-таблицы или аналоги</li>
+        <li><span class="mk">✓</span> Готовы менять решения, если цифры говорят что-то новое</li>
+        <li><span class="mk">✓</span> Готовы зафиксировать договорённости письменно до старта</li>
+      </ul>
+    </div>
+    <div class="fitcol no rv"><h4>Не подходим, если:</h4>
+      <ul>
+        <li><span class="mk">✕</span> Один основатель = вся работа, команды нет</li>
+        <li><span class="mk">✕</span> Работа полностью на месте: телефон, оффлайн-клиенты, без цифрового контура</li>
+        <li><span class="mk">✕</span> «Давайте начнём <span class="dash">—</span> по ходу разберёмся»</li>
+        <li><span class="mk">✕</span> Несколько собственников с разными взглядами на цель компании</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- БЛОК 4 — РАЗБОР -->
+<section class="band alt"><div class="inner pad">
+  <div class="sect-head rv">
+    <div class="h2">Разбор за 45 минут. Без презентаций и без продаж.</div>
+    <p class="sub">За 45 минут на звонке разберём вашу ситуацию по сути.</p>
+  </div>
+  <div class="tw">
+    <div class="twc rv"><div class="n">01</div><div class="t">Смотрю ваши цифры как есть</div><div class="d">Вы рассказываете, что происходит в бизнесе. Готовиться заранее не нужно.</div></div>
+    <div class="twc rv"><div class="n">02</div><div class="t">Нахожу дорогую просадку</div><div class="d">Показываю, где система теряет деньги, и даю 2–3 гипотезы роста с быстрым эффектом.</div></div>
+    <div class="twc rv"><div class="n">03</div><div class="t">Даю честный ответ</div><div class="d">Вместе решаем, подходим ли мы друг другу и есть ли смысл идти в аудит.</div></div>
+  </div>
+  <div class="takeaway rv" style="margin-top:34px"><b>Что останется у вас:</b> Карта точек роста — где система теряет деньги и какие 2–3 шага дадут результат быстрее всего. Даже если дальше мы не работаем, это уже рабочий документ.</div>
+  <p class="note rv">Это не замаскированная продажа. Если увижу, что справитесь сами, — скажу прямо.</p>
+  <div class="rv" style="margin-top:28px;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
     <a href="#cta" class="cta">Разобрать точки роста за 45 минут</a>
-    <p class="note">Бесплатно · 45 минут · ни к чему не обязывает</p>
+    <span class="note" style="margin-top:0">Бесплатно · 45 минут · ни к чему не обязывает</span>
   </div>
   <div class="orsep rv">или</div>
   <div class="magnet rv">
