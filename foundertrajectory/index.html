@@ -4,21 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Founder Trajectory — наставник собственника по управленческим решениям</title>
-<meta name="description" content="Команда закрывает задачи каждый день, а компания стоит на месте? Выстраиваем систему, где по цифрам видно, какое решение принесло деньги. Бесплатный разбор точек роста — 60 минут.">
+<meta name="description" content="Для собственника, у которого есть команда, но все ключевые решения замкнуты на нём. Веду к решениям, которые растят прибыль, и выстраиваю систему, которая работает без меня. Бесплатный разбор — 45 минут.">
 <link rel="canonical" href="https://sychinnikov.com/foundertrajectory/">
 <meta name="robots" content="index,follow">
-<!-- Open Graph / Telegram / соцсети -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Founder Trajectory">
 <meta property="og:url" content="https://sychinnikov.com/foundertrajectory/">
-<meta property="og:title" content="Команда закрывает задачи — а компания стоит на месте.">
-<meta property="og:description" content="Наставник собственника по управленческим решениям. Бесплатный разбор точек роста компании — 60 минут, без презентаций и продаж.">
-<!-- TODO: заменить на обложку 1200×630; пока временно портрет -->
+<meta property="og:title" content="Для собственника, у которого есть команда — но все решения на нём.">
+<meta property="og:description" content="Наставник собственника по управленческим решениям. Бесплатный разбор точек роста — 45 минут, без презентаций и продаж.">
 <meta property="og:image" content="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Команда закрывает задачи — а компания стоит на месте.">
-<meta name="twitter:description" content="Наставник собственника по управленческим решениям. Бесплатный разбор точек роста — 60 минут.">
+<meta name="twitter:title" content="Для собственника, у которого есть команда — но все решения на нём.">
+<meta name="twitter:description" content="Наставник собственника по управленческим решениям. Бесплатный разбор точек роста — 45 минут.">
 <meta name="twitter:image" content="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131210'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23C2A66A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,15 +49,21 @@ a{color:inherit}.fd{font-family:var(--fd)}
 .sect-head{margin-bottom:48px;max-width:70ch}
 .note{font-size:15px;color:var(--ink-muted);margin-top:18px}
 .dash{display:inline-block;transform:scaleX(.62);transform-origin:center;margin:0 -.04em}
+.lead-in{font-size:clamp(17px,1.45vw,20px);color:var(--ink);line-height:1.6;max-width:70ch}
+.lead-in + .lead-in{margin-top:18px}
+.lead-in.muted{color:var(--ink-muted)}
 
 /* nav */
 .nav{position:sticky;top:0;z-index:60;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
 .nav .inner{display:flex;align-items:center;justify-content:space-between;height:74px;gap:24px}
 .brand{font-family:var(--fd);font-weight:600;font-size:21px}.brand b{color:var(--gold)}
+.brand .v2{font-family:var(--fm);font-size:12px;color:var(--ink-dim);letter-spacing:.1em;margin-left:8px;vertical-align:middle}
 .nlinks{display:flex;gap:30px;margin-left:auto}
 .nlinks a{color:var(--ink-muted);text-decoration:none;font-size:15px;font-weight:500}.nlinks a:hover{color:var(--ink)}
-.cta{display:inline-block;background:var(--gold);color:var(--gold-ink);font-weight:700;font-size:18px;padding:17px 32px;border-radius:10px;text-decoration:none;box-shadow:0 14px 36px rgba(194,166,106,.22)}
+.cta{display:inline-block;background:var(--gold);color:var(--gold-ink);font-weight:700;font-size:18px;padding:17px 32px;border-radius:10px;text-decoration:none;box-shadow:0 14px 36px rgba(194,166,106,.22);cursor:pointer;border:none;font-family:var(--fb)}
 .cta:hover{background:var(--gold-deep)}.cta.sm{padding:12px 22px;font-size:15px;box-shadow:none}
+.cta.ghost{background:transparent;color:var(--gold);border:1px solid var(--hair-gold);box-shadow:none}
+.cta.ghost:hover{background:color-mix(in oklab,var(--gold) 12%,transparent)}
 .ncta{font-size:14px;font-weight:600;color:var(--gold);border:1px solid var(--hair-gold);padding:10px 18px;border-radius:8px;text-decoration:none}
 .ncta:hover{background:color-mix(in oklab,var(--gold) 12%,transparent)}
 @media(max-width:920px){.nlinks{display:none}}
@@ -69,10 +73,8 @@ a{color:inherit}.fd{font-family:var(--fd)}
 .hero .inner{min-height:calc(100vh - 74px);display:flex;flex-direction:column;justify-content:center;padding-top:20px;padding-bottom:20px}
 .herorow{flex:1;display:grid;grid-template-columns:1.32fr .68fr;gap:54px;align-items:center}
 @media(max-width:960px){.herorow{grid-template-columns:1fr;gap:34px}}
-h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8rem);line-height:1.07;letter-spacing:-.012em;margin:14px 0 16px;max-width:18ch}
-.lead{font-size:clamp(16px,1.25vw,19px);color:var(--ink-muted);max-width:58ch;line-height:1.5;margin-bottom:12px}
-.lead .l2{display:block;margin-top:12px}
-.lead .l3{display:block;margin-top:6px;color:var(--ink)}
+h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3.2rem);line-height:1.08;letter-spacing:-.012em;margin:14px 0 18px;max-width:24ch}
+.lead{font-size:clamp(16px,1.25vw,19px);color:var(--ink-muted);max-width:58ch;line-height:1.55;margin-bottom:12px}
 .actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:22px 0 12px}
 .microhint{font-size:17px;color:var(--ink);max-width:52ch;line-height:1.5;margin-bottom:4px}
 .heroportrait{position:relative}
@@ -80,36 +82,32 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .heroportrait .cap{max-width:420px;margin:20px 0 0 auto}
 .heroportrait .c1{font-weight:600;font-size:16.5px;line-height:1.4}
 .heroportrait .c2{font-size:14px;color:var(--ink-muted);margin-top:8px;line-height:1.5}
-.scrollcue{text-align:center;padding-top:30px}
-.scrollcue a{color:var(--ink-muted);text-decoration:none;font-size:16px}
-.scrollcue a:hover{color:var(--gold)}
-.scrollcue .ar{display:inline-block;color:var(--gold);animation:bob 1.8s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 
-/* pains as wide rows */
-.painrows{display:flex;flex-direction:column;gap:16px}
-.painrow{display:flex;gap:26px;align-items:flex-start;background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:30px 34px}
-.painrow .pn{flex:none;font-family:var(--fd);font-weight:600;font-size:34px;color:var(--gold);line-height:1;width:50px}
-.painrow p{font-size:19px;line-height:1.55;color:var(--ink)}
-@media(max-width:680px){.painrow{padding:24px;gap:18px}.painrow p{font-size:17px}}
+/* bullet list (block разбор) */
+.blist{list-style:none;display:flex;flex-direction:column;gap:16px;max-width:78ch}
+.blist li{display:flex;gap:15px;font-size:18px;line-height:1.55;color:var(--ink)}
+.blist li::before{content:"→";color:var(--gold);flex:none;font-weight:600}
+.takeaway{background:var(--card);border:1px solid var(--hair-gold);border-radius:16px;padding:26px 30px;margin-top:30px;max-width:78ch;font-size:17px;line-height:1.6;color:var(--ink)}
+.takeaway b{color:var(--gold)}
+.orsep{display:flex;align-items:center;gap:16px;margin:40px 0;color:var(--ink-dim);font-family:var(--fm);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.orsep::before,.orsep::after{content:"";flex:1;height:1px;background:var(--hair)}
+.magnet{background:var(--surface-2);border:1px solid var(--hair);border-radius:16px;padding:28px 30px;max-width:78ch}
+.magnet .mt{font-family:var(--fd);font-weight:600;font-size:21px;margin-bottom:8px}
+.magnet p{font-size:16px;color:var(--ink-muted);line-height:1.55;margin-bottom:18px}
 
-/* tripwire big */
-.tw{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-@media(max-width:900px){.tw{grid-template-columns:1fr}}
-.twc{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:38px 34px}
-.twc .n{font-family:var(--fm);color:var(--gold);font-size:15px}
-.twc .t{font-family:var(--fd);font-weight:600;font-size:25px;margin:16px 0 12px;line-height:1.15}
-.twc .d{font-size:17px;color:var(--ink-muted);line-height:1.55}
-
-/* fit table */
-.fit{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-@media(max-width:760px){.fit{grid-template-columns:1fr}}
-.fitcol{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:10px 28px 22px}
-.fitcol h4{font-size:16px;font-weight:700;padding:22px 0 12px;border-bottom:1px solid var(--hair)}
-.fitcol.yes h4{color:var(--ok)}.fitcol.no h4{color:var(--no)}
-.fitcol li{list-style:none;display:flex;gap:13px;padding:16px 0;border-bottom:1px solid var(--hair);font-size:16.5px;line-height:1.45}
-.fitcol li:last-child{border-bottom:none}
-.fitcol .mk{flex:none;font-weight:700;font-size:17px}.yes .mk{color:var(--ok)}.no .mk{color:var(--no)}
+/* result block (доверие) */
+.resultwrap{display:grid;grid-template-columns:.82fr 1.18fr;gap:42px;align-items:center;background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 8%,var(--card)),var(--card));border:1px solid var(--hair-gold);border-radius:22px;padding:clamp(30px,3.6vw,48px);margin-top:32px}
+@media(max-width:820px){.resultwrap{grid-template-columns:1fr;gap:28px}}
+.resultstat{text-align:center;border-right:1px solid var(--hair);padding-right:20px}
+@media(max-width:820px){.resultstat{border-right:none;border-bottom:1px solid var(--hair);padding-right:0;padding-bottom:24px}}
+.resultstat .rs-big{font-family:var(--fd);font-weight:700;font-size:clamp(52px,6.5vw,86px);color:var(--gold);line-height:.95}
+.resultstat .rs-big small{font-size:.42em;font-weight:600}
+.resultstat .rs-sub{font-size:15px;color:var(--ink-muted);margin-top:14px;line-height:1.5}
+.resultright p{font-size:17.5px;line-height:1.6;color:var(--ink)}
+.creds{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+@media(max-width:760px){.creds{grid-template-columns:1fr}}
+.cred{background:var(--card);border:1px solid var(--hair-gold);border-radius:16px;padding:28px 26px;font-size:16px;color:var(--ink-muted);line-height:1.5}
+.cred b{color:var(--gold);font-family:var(--fd);font-weight:600;display:block;font-size:23px;margin-bottom:8px;line-height:1.18}
 
 /* team big photos */
 .team{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -123,20 +121,26 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .tm li{list-style:none;font-size:15px;color:var(--ink-muted);padding:5px 0 5px 18px;position:relative;line-height:1.45}
 .tm li::before{content:"";position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .tm .foot{font-size:15px;margin-top:12px;padding-top:12px;border-top:1px solid var(--hair);color:#fff;line-height:1.45}
-/* credentials in team card */
 .tm .certlabel{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);margin:13px 0 9px;margin-top:auto}
 .tm .certs{display:flex;gap:10px;flex-wrap:wrap}
 .certthumb{position:relative;width:88px;height:60px;border-radius:9px;overflow:hidden;border:1px solid var(--hair-gold);background:#fff;cursor:pointer;flex:none;transition:transform .25s ease,box-shadow .25s ease}
 .certthumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .certthumb:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.45)}
 .certthumb .zoom{position:absolute;right:6px;bottom:6px;width:21px;height:21px;border-radius:50%;background:color-mix(in oklab,var(--gold-ink) 72%,transparent);color:var(--gold);font-size:12px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
-.certthumb.ph{display:flex;align-items:center;justify-content:center;background:var(--surface-2);border-style:dashed;color:var(--ink-dim);font-size:11px;line-height:1.35;text-align:center;padding:6px;cursor:default}
-.certthumb.ph:hover{transform:none;box-shadow:none}
-/* team section — в один экран */
-#team .inner.pad{padding-top:clamp(40px,4.5vw,68px);padding-bottom:clamp(40px,4.5vw,68px)}
-#team .sect-head{margin-bottom:clamp(22px,3vw,34px)}
-#team .h2{font-size:clamp(27px,3.1vw,42px)}
-#team .team{gap:20px}
+/* выравнивание карточек команды по одной линии (имя/пункты/подпись/документы/сертификаты) */
+@supports(grid-template-rows:subgrid){
+  @media(min-width:881px){
+    .team{grid-template-rows:repeat(7,auto);row-gap:0}
+    .tm{display:grid;grid-template-rows:subgrid;grid-row:span 7;row-gap:0}
+    .tm .body{display:contents}
+    .tm .nm{padding:20px 24px 0}
+    .tm .rl{margin:0;padding:5px 24px 0}
+    .tm ul{margin:0;padding:13px 24px 0}
+    .tm .foot{margin:0;padding:12px 24px 0}
+    .tm .certlabel{margin:0;padding:13px 24px 0}
+    .tm .certs{padding:0 24px 22px}
+  }
+}
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:clamp(20px,5vw,56px);background:color-mix(in oklab,#000 80%,transparent);backdrop-filter:blur(6px)}
 .lb.open{display:flex}
@@ -146,15 +150,28 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .lb .close{position:absolute;top:22px;right:28px;width:46px;height:46px;border-radius:50%;border:1px solid var(--hair-gold);background:color-mix(in oklab,var(--bg) 72%,transparent);color:var(--gold);font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .lb .close:hover{background:color-mix(in oklab,var(--gold) 16%,transparent)}
 
-/* metrics: big titles, no numbers */
+/* FT system — big title */
+.ftbig{text-align:center;max-width:none;margin-bottom:34px}
+.ftbig .ft-name{font-family:var(--fd);font-weight:700;font-size:clamp(42px,7vw,84px);line-height:1;letter-spacing:-.02em;color:var(--ink)}
+.ftbig .ft-name b{color:var(--gold)}
+
+/* metrics (3 столпа) */
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 @media(max-width:760px){.metrics{grid-template-columns:1fr}}
 .metric{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:36px 32px}
-.metric .ml{font-family:var(--fd);font-weight:600;font-size:26px;margin:0 0 12px;line-height:1.18}
+.metric .ml{font-family:var(--fd);font-weight:600;font-size:24px;margin:0 0 12px;line-height:1.18}
 .hicon{width:.92em;height:.92em;display:inline-block;vertical-align:-.09em;margin-right:.42em;color:var(--gold);flex:none}
 .metric .md{font-size:16.5px;color:var(--ink-muted);line-height:1.55}
 
-/* audit weeks big */
+/* steps (этапы) */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+@media(max-width:900px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:34px 30px;display:flex;flex-direction:column}
+.step .sn{font-family:var(--fm);font-size:14px;color:var(--gold);letter-spacing:.05em}
+.step .st{font-family:var(--fd);font-weight:600;font-size:24px;margin:12px 0 14px;line-height:1.15}
+.step p{font-size:16px;color:var(--ink-muted);line-height:1.55}
+
+/* audit weeks */
 .weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 @media(max-width:900px){.weeks{grid-template-columns:1fr}}
 .week{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:34px 30px;display:flex;flex-direction:column}
@@ -173,8 +190,8 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .priceleft .pl-old{position:relative;display:inline-block;font-family:var(--fd);font-size:32px;color:var(--ink-dim);margin:0 auto 8px;line-height:1}
 .priceleft .pl-old::after{content:"";position:absolute;left:-5px;right:-5px;top:52%;height:2px;background:var(--no);transform:scaleX(0);transform-origin:left center;border-radius:2px}
 .priceleft .pl-big{font-family:var(--fd);font-weight:700;font-size:clamp(64px,8vw,104px);color:var(--gold);line-height:.92}
-.priceleft .pl-cond{font-size:16px;color:var(--ink);margin:28px auto 0;font-weight:600;max-width:34ch;line-height:1.5}
-/* price reveal animation */
+.priceleft .pl-rub{font-family:var(--fm);font-size:16px;color:var(--ink-muted);margin-top:10px}
+.priceleft .pl-cond{font-size:16px;color:var(--ink);margin:22px auto 0;font-weight:600;max-width:34ch;line-height:1.5}
 .price-anim .pl-old::after{transition:transform .55s cubic-bezier(.6,0,.2,1)}
 .price-anim .pl-big{opacity:0;transform:translateY(16px) scale(.9);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
 .price-anim .pl-cond{opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
@@ -187,6 +204,9 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .priceright li::before{content:"✓";color:var(--gold);font-weight:700;flex:none}
 .priceright .compare{font-size:15px;color:var(--ink-muted);margin:16px 0 22px;line-height:1.5}
 @media(max-width:880px){.pricewrap .cta{width:100%;text-align:center}}
+.entrance{margin-top:34px;background:var(--surface-2);border:1px solid var(--hair);border-radius:16px;padding:30px 32px}
+.entrance .et{font-family:var(--fd);font-weight:600;font-size:22px;margin-bottom:10px}
+.entrance p{font-size:16.5px;color:var(--ink-muted);line-height:1.6}
 
 /* why-it-works zones */
 .zones{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -196,7 +216,34 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .zone .zt{font-family:var(--fd);font-weight:600;font-size:21px;margin:12px 0 10px}
 .zone .zd{font-size:16px;color:var(--ink-muted);line-height:1.55}
 
-/* artifacts pinned moving list */
+/* pain rows (Б1а — 3 строки на весь экран) */
+.painrows{margin-top:4px}
+.painrow{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,3vw,42px);align-items:start;padding:clamp(24px,3vw,38px) 0;border-top:1px solid var(--hair)}
+.painrow:last-child{border-bottom:1px solid var(--hair)}
+.painrow .pn{font-family:var(--fd);font-size:clamp(28px,3.4vw,46px);font-weight:700;color:var(--gold);line-height:.9}
+.painrow p{font-size:clamp(18px,1.8vw,24px);line-height:1.5;color:var(--ink-muted);max-width:none}
+.painrow p b{color:var(--ink);font-weight:600}
+@media(max-width:760px){.painrow{gap:16px}.painrow .pn{font-size:26px}}
+
+/* tripwire cards (разбор) */
+.tw{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.tw{grid-template-columns:1fr}}
+.twc{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:38px 34px}
+.twc .n{font-family:var(--fm);color:var(--gold);font-size:15px}
+.twc .t{font-family:var(--fd);font-weight:600;font-size:25px;margin:16px 0 12px;line-height:1.15}
+.twc .d{font-size:17px;color:var(--ink-muted);line-height:1.55}
+
+/* fit table (с кем я работаю) */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:760px){.fit{grid-template-columns:1fr}}
+.fitcol{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:10px 28px 22px}
+.fitcol h4{font-size:18px;font-weight:700;padding:22px 0 12px;border-bottom:1px solid var(--hair)}
+.fitcol.yes h4{color:var(--ok)}.fitcol.no h4{color:var(--no)}
+.fitcol li{list-style:none;display:flex;gap:13px;padding:17px 0;border-bottom:1px solid var(--hair);font-size:17.5px;line-height:1.45}
+.fitcol li:last-child{border-bottom:none}
+.fitcol .mk{flex:none;font-weight:700;font-size:17px}.yes .mk{color:var(--ok)}.no .mk{color:var(--no)}
+
+/* artifacts pinned moving list (10 инструментов) */
 .artpin{position:relative;height:760vh}
 @media(max-width:880px){.artpin{height:720vh}}
 .artstage{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
@@ -227,20 +274,12 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,3.2vw + 1rem,3.8
 .artslide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:44px}
 .artslide .bg{font-family:var(--fm);font-size:13px;color:var(--bronze);letter-spacing:.14em;text-transform:uppercase}
 .artslide .bt{font-family:var(--fd);font-weight:600;font-size:clamp(24px,2.6vw,36px);color:var(--ink);line-height:1.12}
-.artslide .bd{font-size:15.5px;color:var(--ink-muted);line-height:1.5;max-width:40ch;margin-top:4px}
 .artslide .bc{font-size:12.5px;color:var(--ink-dim);margin-top:10px}
 @media(max-width:880px){.artframe{max-width:100%;aspect-ratio:16/12}.artslide{padding:28px}}
 
-/* next steps */
-.nextcards{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-@media(max-width:760px){.nextcards{grid-template-columns:1fr}}
-.nc{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:34px 32px}
-.nc .nt{font-family:var(--fd);font-weight:600;font-size:27px}
-.nc .nd{font-size:17px;color:var(--ink-muted);margin-top:12px;line-height:1.55}
-
 /* faq */
-.faq{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;column-gap:56px;max-width:none}
-@media(max-width:760px){.faq{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}}
+.faq{display:grid;grid-template-columns:1fr 1fr;column-gap:56px;max-width:none}
+@media(max-width:760px){.faq{grid-template-columns:1fr}}
 details{border-bottom:1px solid var(--hair)}
 summary{cursor:pointer;list-style:none;padding:27px 0;font-family:var(--fd);font-weight:600;font-size:clamp(20px,2vw,24px);line-height:1.25;color:var(--ink);display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
 summary::-webkit-details-marker{display:none}
@@ -249,20 +288,18 @@ details[open] summary::after{content:"–"}
 details p{font-size:16.5px;color:var(--ink-muted);line-height:1.6;padding:0 0 26px;max-width:78ch}
 
 /* form */
-.formwrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+.formwrap{display:grid;grid-template-columns:.74fr 1.26fr;gap:44px;align-items:start}
 @media(max-width:880px){.formwrap{grid-template-columns:1fr;gap:30px}}
-.fitems li{list-style:none;display:flex;gap:14px;padding:13px 0;font-size:17px;color:var(--ink-muted);line-height:1.45}
-.fitems li::before{content:"→";color:var(--gold)}
-.formcard{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:34px 32px}
-.fq{margin-bottom:22px}
-.fq .fl{font-size:15px;color:var(--ink-muted);margin-bottom:10px}
-.chips{display:flex;gap:9px;flex-wrap:wrap}
-.chip{font-size:14.5px;border:1px solid var(--hair);border-radius:999px;padding:10px 16px;color:var(--ink)}
-.finput{width:100%;background:var(--surface-2);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;color:var(--ink);font-size:15px;font-family:var(--fb)}
+.formcard{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:24px 24px}
+.fq{margin-bottom:13px}
+.fq .fl{font-size:13.5px;color:var(--ink-muted);margin-bottom:7px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{font-size:13.5px;border:1px solid var(--hair);border-radius:999px;padding:7px 13px;color:var(--ink)}
+.finput{width:100%;background:var(--surface-2);border:1px solid var(--hair);border-radius:9px;padding:10px 13px;color:var(--ink);font-size:14px;font-family:var(--fb)}
 input.finput::placeholder,textarea.finput::placeholder{color:var(--ink-dim)}
 input.finput:focus,textarea.finput:focus{outline:none;border-color:var(--gold)}
-textarea.finput{resize:vertical;min-height:48px;line-height:1.5}
-.formcard .cta{width:100%;text-align:center;margin-top:8px}
+textarea.finput{resize:vertical;min-height:38px;line-height:1.45}
+.formcard .cta{width:100%;text-align:center;margin-top:6px;padding:13px 24px;font-size:16px;box-shadow:none}
 .chip{cursor:pointer;user-select:none;transition:background .15s ease,color .15s ease,border-color .15s ease;position:relative}
 .chip input{position:absolute;opacity:0;width:0;height:0}
 .chip:hover{border-color:var(--hair-gold)}
@@ -278,18 +315,6 @@ form.sending .cta{opacity:.55;pointer-events:none}
 .formok .ok-close{margin-top:6px;background:transparent;border:1px solid var(--hair-gold);color:var(--gold);font-weight:600;font-size:15px;padding:12px 28px;border-radius:10px;cursor:pointer}
 .formok .ok-close:hover{background:color-mix(in oklab,var(--gold) 12%,transparent)}
 .final{background-image:radial-gradient(70% 120% at 50% 0%,rgba(194,166,106,.13),transparent 60%)}
-/* final CTA — компактно, в один экран */
-#cta .inner{padding:clamp(38px,4.5vw,58px) clamp(24px,4vw,60px)}
-#cta .sect-head{margin-bottom:26px;max-width:none}
-#cta .h2{font-size:clamp(26px,2.9vw,38px)}
-#cta .sub{margin-top:11px;font-size:clamp(15.5px,1.3vw,18px)}
-#cta .formwrap{gap:48px;align-items:start}
-#cta .h3{font-size:23px;margin-bottom:14px}
-#cta .fitems li{padding:8px 0;font-size:15.5px}
-#cta .formcard{padding:24px 26px}
-#cta .fq{margin-bottom:14px}
-#cta .formcard .cta{margin-top:4px}
-@media(max-height:900px){#cta .inner{padding-top:36px;padding-bottom:36px}#cta .sect-head{margin-bottom:18px}#cta .fitems li{padding:6.5px 0}#cta .formcard{padding:20px 24px}#cta .fq{margin-bottom:11px}}
 
 footer{border-top:1px solid var(--hair);background:var(--surface)}
 .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding:58px 0 32px}
@@ -303,7 +328,11 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
-/* === мобильная компоновка артефактов: список + превью в один экран === */
+.ribbon{position:fixed;left:14px;bottom:14px;z-index:120;background:color-mix(in oklab,var(--bg) 85%,transparent);border:1px solid var(--hair-gold);border-radius:10px;padding:9px 14px;font-family:var(--fm);font-size:12px;color:var(--ink-muted);backdrop-filter:blur(8px);line-height:1.5}
+.ribbon b{color:var(--gold)}
+.ribbon a{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--hair-gold)}
+
+/* мобильная компоновка артефактов */
 @media(max-width:880px){
   .artpin{height:560vh}
   .artstage{height:100svh}
@@ -320,7 +349,6 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   .artframe{aspect-ratio:16/10;max-width:100%}
   .artslide{padding:18px}
   .artslide .bt{font-size:21px}
-  .artslide .bd{font-size:13.5px;margin-top:2px}
   .artcap{position:static;margin-top:9px;min-height:0;font-size:13px}
 }
 </style>
@@ -348,77 +376,188 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 
 <header class="nav"><div class="inner">
   <div class="brand">Founder<b>·</b>Trajectory</div>
-  <nav class="nlinks"><a href="#audit">Аудит</a><a href="#how">Как работает</a><a href="#team">Команда</a><a href="#faq">Вопросы</a></nav>
+  <nav class="nlinks"><a href="#team">Команда</a><a href="#how">Система</a><a href="#audit">Аудит</a><a href="#faq">Вопросы</a></nav>
   <a href="#cta" class="ncta">Разобрать точки роста</a>
 </div></header>
 
-<!-- I. HERO -->
+<!-- БЛОК 1 — ПЕРВЫЙ ЭКРАН -->
 <section class="hero"><div class="inner">
   <div class="herorow">
     <div>
-      <div class="eyebrow">Наставник собственника по управленческим решениям</div>
-      <h1>Команда закрывает задачи каждый день <span class="dash">—</span> а компания стоит на месте.</h1>
-      <p class="lead">
-        Проблема не в нехватке действий, а в том, что они не связаны с результатом.
-        <span class="l2">Мы выстраиваем систему, в которой вы видите по цифрам, какое решение принесло деньги, а какое только отняло время команды.</span>
-        <span class="l3">И она работает без меня.</span>
-      </p>
+      <div class="eyebrow" style="font-family:var(--fb);text-transform:none;letter-spacing:.005em;font-weight:600;font-size:clamp(16.5px,1.5vw,20px);line-height:1.4;max-width:56ch">Для собственника, у которого есть команда <span class="dash">—</span> но все ключевые решения всё равно замкнуты на нём</div>
+      <h1>Команда работает на полную <span class="dash">—</span> а компания не растёт быстрее</h1>
+      <p class="lead">Я наставник собственника: ставлю систему, в которой вы принимаете больше сильных управленческих решений по цифрам <span class="dash">—</span> и довожу их до результата руками команды. После меня система остаётся работать сама.</p>
       <div class="actions">
-        <a href="#cta" class="cta">Разобрать точки роста компании</a>
+        <a href="#cta" class="cta">Разобрать точки роста за 45 минут</a>
       </div>
-      <p class="microhint">60 минут, бесплатно. Определим, что тормозит рост, и смогу ли я помочь вашей компании.</p>
+      <p class="microhint">Бесплатно · 45 минут · уйдёте с Картой точек роста <span class="dash">—</span> даже если дальше не работаем.</p>
     </div>
     <div class="heroportrait">
-      <img src="assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg" alt="Андрей Сычинников">
+      <img src="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg" alt="Андрей Сычинников">
       <div class="cap">
-        <div class="c1">Бывший CEO. Выручка собственного бизнеса <span class="dash">—</span> более €1,3 млн в 2024.</div>
-        <div class="c2">Я веду проект и отвечаю за результат. Регламенты и финансы <span class="dash">—</span> на дипломированных специалистах команды.</div>
+        <div class="c1">Андрей Сычинников</div>
+        <div class="c2" style="color:var(--ink)">Провёл собственный бизнес до 120 млн ₽ выручки. Веду проект лично и отвечаю за результат.</div>
+        <div class="c2" style="margin-top:10px">Финансы и регламенты <span class="dash">—</span> на дипломированных специалистах команды.</div>
       </div>
     </div>
   </div>
-  <div class="scrollcue"><a href="#how">Сначала <span class="dash">—</span> как это работает <span class="ar">↓</span></a></div>
 </div></section>
 
-<!-- II. MAIN PAIN -->
-<section class="band alt" id="problem"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="eyebrow">Главная боль наших клиентов</div>
-    <div class="h2" style="margin-top:16px">Команда есть. Решения всё равно на вас.</div>
+<!-- БЛОК 1а — РАЗВЁРТКА БОЛИ (3 строки на весь экран) -->
+<section class="band"><div class="inner pad">
+  <div class="sect-head rv" style="margin-bottom:clamp(28px,3.5vw,44px)">
+    <div class="h2">Команда есть. Решения <span class="dash">—</span> всё равно на вас.</div>
   </div>
   <div class="painrows">
-    <div class="painrow rv"><div class="pn">1</div><p>В начале периода вы вместе с командой определили конкретный план <span class="dash">—</span> выручка, маржа, число клиентов. По итогам цифры другие, а где именно не доработали, не дожали или начался спад <span class="dash">—</span> неизвестно.</p></div>
-    <div class="painrow rv"><div class="pn">2</div><p>Делегировали направление <span class="dash">—</span> но без вашего ежедневного контроля темп проседает, важные решения зависают. Через 2 недели возвращаетесь в операционку чинить. Через месяц снова пробуете выйти <span class="dash">—</span> тот же круг.</p></div>
-    <div class="painrow rv"><div class="pn">3</div><p>Решения принимаете по ощущению <span class="dash">—</span> цифры либо запаздывают на месяц, либо не сходятся между источниками.</p></div>
+    <div class="painrow rv"><span class="pn">01</span><p>В начале периода вы вместе с командой определили план <span class="dash">—</span> выручка, маржа, число клиентов. По итогам цифры другие, <b>а где именно не доработали, не дожали или начался спад <span class="dash">—</span> неизвестно.</b></p></div>
+    <div class="painrow rv"><span class="pn">02</span><p>Делегировали направление <span class="dash">—</span> но без вашего ежедневного контроля темп проседает, важные решения зависают. Возвращаетесь в операционку чинить. <b>Через месяц снова пробуете выйти <span class="dash">—</span> тот же круг.</b></p></div>
+    <div class="painrow rv"><span class="pn">03</span><p>Решения принимаете по ощущению <span class="dash">—</span> <b>цифры либо запаздывают на месяц, либо не сходятся между источниками.</b></p></div>
   </div>
 </div></section>
 
-<!-- III. THE HOUR -->
+<!-- БЛОК 2 — ПОЧЕМУ МНЕ МОЖНО ДОВЕРИТЬ ВАШИ РЕШЕНИЯ -->
+<section class="band alt" id="team"><div class="inner pad">
+  <div class="sect-head rv">
+    <div class="h2">Почему мне можно доверить ваши решения</div>
+  </div>
+  <p class="lead-in rv">Я не консультант, который отдаёт презентацию и уходит. Я встаю рядом с собственником как партнёр <span class="dash">—</span> и качаю главное: качество и количество ваших управленческих решений.</p>
+  <p class="lead-in rv">Каждый месяц вы видите в цифрах, сколько решений приняли, сколько довели до конца и сколько из них дали измеримый результат <span class="dash">—</span> какое принесло деньги, а какое только отняло время команды. За этим стоит не теория, а мой собственный результат.</p>
+
+  <div class="resultwrap rv">
+    <div class="resultstat">
+      <div class="rs-big">120<small> млн ₽</small></div>
+      <div class="rs-sub">выручка за 2024 · рентабельность по чистой прибыли ~15% · команда 14 человек</div>
+    </div>
+    <div class="resultright">
+      <p>Эти инструменты и систему я сначала внедрил в собственный бизнес. Теперь ставлю эту же систему собственникам <span class="dash">—</span> как наставник.</p>
+    </div>
+  </div>
+  <div class="creds rv">
+    <div class="cred"><b>10+ лет</b> управления собственными проектами</div>
+    <div class="cred"><b>MBA по управлению компанией</b> Русская Школа Управления</div>
+    <div class="cred"><b>«Нескучные финансы»</b> методология управленческого учёта</div>
+  </div>
+
+  <div class="sect-head rv" style="margin-top:66px;margin-bottom:28px">
+    <div class="h3">Команда состоит из профессионалов и дипломированных специалистов</div>
+    <p class="sub">Один человек не закроет финансы и регламенты одинаково глубоко <span class="dash">—</span> именно поэтому к каждому проекту подключается полная команда.</p>
+  </div>
+  <div class="team">
+    <div class="tm lead rv">
+      <img src="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg" alt="Андрей Сычинников">
+      <div class="body">
+        <div class="nm">Андрей Сычинников</div>
+        <div class="rl">Лидер проекта · наставник собственника</div>
+        <ul>
+          <li>Более 10 лет управления собственными проектами</li>
+          <li>MBA по управлению компанией, Русская Школа Управления</li>
+          <li>Методология управленческого учёта «Нескучных финансов»</li>
+        </ul>
+        <div class="foot">Веду проект и отвечаю за результат перед вами лично.</div>
+        <div class="certlabel">Подтверждающие документы</div>
+        <div class="certs">
+          <div class="certthumb" data-cert="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-mba-diploma.png" data-cap="Диплом «МВА-Эксперт: Управление компанией» — Русская Школа Управления, 2023">
+            <img src="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-mba-diploma.png" alt="Диплом МВА Андрея Сычинникова">
+            <div class="zoom">⤢</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tm rv">
+      <img src="https://sychinnikov.com/foundertrajectory/assets/people/maria-gorbunova/maria-photo-portrait.jpeg" alt="Мария Горбунова">
+      <div class="body">
+        <div class="nm">Мария Горбунова</div>
+        <div class="rl">Финансы и управленческий учёт</div>
+        <ul>
+          <li>Финансовый директор с 7+ годами практики в «Нескучных финансах»</li>
+          <li>Дипломированный финансовый специалист</li>
+        </ul>
+        <div class="foot">На встречах проверяет, как решения скажутся на прибыли <span class="dash">—</span> до того как вы их примете.</div>
+        <div class="certlabel">Подтверждающие документы</div>
+        <div class="certs">
+          <div class="certthumb" data-cert="https://sychinnikov.com/foundertrajectory/assets/people/maria-gorbunova/maria-cert-fd-strategic.png" data-cap="Аттестация финансового директора стратегического уровня — Высшая школа финансового директора">
+            <img src="https://sychinnikov.com/foundertrajectory/assets/people/maria-gorbunova/maria-cert-fd-strategic.png" alt="Сертификат ФД стратегического уровня">
+            <div class="zoom">⤢</div>
+          </div>
+          <div class="certthumb" data-cert="https://sychinnikov.com/foundertrajectory/assets/people/maria-gorbunova/maria-cert-fd-management.png" data-cap="Аттестация финансового директора управленческого уровня — Высшая школа финансового директора">
+            <img src="https://sychinnikov.com/foundertrajectory/assets/people/maria-gorbunova/maria-cert-fd-management.png" alt="Сертификат ФД управленческого уровня">
+            <div class="zoom">⤢</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tm rv">
+      <img src="https://sychinnikov.com/foundertrajectory/assets/people/katya-harlamova/katya-photo-portrait.jpeg" alt="Катя Харламова">
+      <div class="body">
+        <div class="nm">Катя Харламова</div>
+        <div class="rl">Регламенты и бизнес-процессы</div>
+        <ul>
+          <li>Дипломированный специалист по бизнес-процессам</li>
+          <li>Сертифицирована по нотации BPMN 2.0</li>
+        </ul>
+        <div class="foot">Описывает процессы так, что система работает автономно <span class="dash">—</span> без вашего ежедневного управления.</div>
+        <div class="certlabel">Подтверждающие документы</div>
+        <div class="certs">
+          <div class="certthumb" data-cert="https://sychinnikov.com/foundertrajectory/assets/people/katya-harlamova/katya-cert-business-processes.jpg" data-cap="Сертификат «Менеджер бизнес-процессов» — Нетология, 2024">
+            <img src="https://sychinnikov.com/foundertrajectory/assets/people/katya-harlamova/katya-cert-business-processes.jpg" alt="Сертификат «Менеджер бизнес-процессов»">
+            <div class="zoom">⤢</div>
+          </div>
+          <div class="certthumb" data-cert="https://sychinnikov.com/foundertrajectory/assets/people/katya-harlamova/katya-cert-operations-manager.jpg" data-cap="Свидетельство «Операционный менеджер» — Нетология, 2024">
+            <img src="https://sychinnikov.com/foundertrajectory/assets/people/katya-harlamova/katya-cert-operations-manager.jpg" alt="Свидетельство «Операционный менеджер»">
+            <div class="zoom">⤢</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- БЛОК 3 — СИСТЕМА FOUNDER TRAJECTORY -->
+<section class="band deep" id="how"><div class="inner pad">
+  <div class="ftbig rv">
+    <div class="eyebrow">Система</div>
+    <div class="ft-name">Founder<b>·</b>Trajectory</div>
+  </div>
+  <div class="rv" style="margin:0 auto 60px">
+    <p class="lead-in" style="max-width:none">Founder Trajectory <span class="dash">—</span> это не программа и не один инструмент. Это способ принимать управленческие решения на основе цифр <span class="dash">—</span> и доводить их до результата руками команды. Через внедряемые инструменты чётко видно, что двигает прибыль, что её увеличивает, а что съедает.</p>
+    <p class="lead-in muted" style="max-width:none">Внедряются регламенты и ритм регулярных встреч, усиливается ответственность по основным задачам <span class="dash">—</span> и это работает без вашего ежедневного контроля. Вы выходите из режима «всё на мне» и перестаёте решать по ощущениям. После завершения работы команды механизм остаётся работать внутри вашего бизнеса <span class="dash">—</span> без нашего участия.</p>
+  </div>
+
+  <div class="sect-head rv" style="margin-bottom:24px"><div class="eyebrow">Что меняется у собственника</div></div>
+  <div class="metrics">
+    <div class="metric rv"><div class="ml"><svg class="hicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.2 5-5 2.2 2.2-5z"/></svg>Рост управленческих решений</div><div class="md">Собственник работает на стратегию, а не разбирает каждое утро задачи команды.</div></div>
+    <div class="metric rv"><div class="ml"><svg class="hicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.6 2.6 5.4-5.8"/></svg>Доводимость решений до исполнения</div><div class="md">У каждого решения есть ответственный, дедлайн и метрика результата. Решение не зависает.</div></div>
+    <div class="metric rv"><div class="ml"><svg class="hicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="6.4" rx="6.4" ry="2.7"/><path d="M5.6 6.4v5.1c0 1.5 2.9 2.7 6.4 2.7s6.4-1.2 6.4-2.7V6.4"/><path d="M5.6 11.5v5.1c0 1.5 2.9 2.7 6.4 2.7s6.4-1.2 6.4-2.7v-5.1"/></svg>Решения с эффектом на прибыль</div><div class="md">Фокус <span class="dash">—</span> на решениях, что увеличивают чистую прибыль и собственный капитал компании.</div></div>
+  </div>
+
+  <div class="sect-head rv" style="margin-top:66px;margin-bottom:24px"><div class="eyebrow">Этапы системы Founder Trajectory</div></div>
+  <div class="steps">
+    <div class="step rv"><div class="sn">Этап 1 · 45 минут · бесплатно</div><div class="st">Разбор</div>
+      <p>Знакомлюсь с вами и вашими цифрами, анализирую ситуацию. Уходите с <b style="color:var(--ink)">Картой точек роста</b>: где самая дорогая просадка и 2<span class="dash">–</span>3 гипотезы, что делать. Вместе решаем, подходим ли друг другу.</p>
+    </div>
+    <div class="step rv"><div class="sn">Этап 2 · 3 недели</div><div class="st">Аудит траектории</div>
+      <p>Диагноз системе <span class="dash">—</span> команда, финансы, стратегия. Получаете дорожную карту к росту прибыли и 10 рабочих инструментов, которые остаются у вас.</p>
+    </div>
+    <div class="step rv"><div class="sn">Этап 3 · 3 месяца и далее</div><div class="st">Перезагрузка</div>
+      <p>Внедряю систему вместе с вашим преемником и довожу до результата. Я ухожу <span class="dash">—</span> система работает без меня, столько, сколько нужно вам.</p>
+    </div>
+  </div>
+  <div class="rv" style="margin-top:38px;display:flex;gap:26px;align-items:center;flex-wrap:wrap">
+    <a href="#cta" class="cta">Разобрать точки роста за 45 минут</a>
+    <span class="sub" style="margin-top:0;max-width:42ch">Большинству достаточно начать с разбора. Дальше <span class="dash">—</span> по результату.</span>
+  </div>
+</div></section>
+
+<!-- БЛОК 3б — С КЕМ Я РАБОТАЮ (из v1, перед разбором) -->
 <section class="band"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="h2">Час разбора. Без презентаций и без продаж.</div>
-    <p class="sub">За этот час у вас будет «Карта точек роста» вашей компании:</p>
-  </div>
-  <div class="tw">
-    <div class="twc rv"><div class="n">01</div><div class="t">Где самая дорогая просадка</div><div class="d">Конкретное место в компании, где звено каждый месяц съедает деньги и время команды без отдачи.</div></div>
-    <div class="twc rv"><div class="n">02</div><div class="t">2-3 рабочие гипотезы</div><div class="d">С эффектом быстрой отдачи — что реально сдвинуть в ближайшее время.</div></div>
-    <div class="twc rv"><div class="n">03</div><div class="t">Чёткий ответ</div><div class="d">Стоит ли работать со мной дальше — или эти проблемы способна решить ваша команда сама.</div></div>
-  </div>
-  <div class="rv" style="margin-top:40px;display:flex;gap:26px;align-items:center;flex-wrap:wrap">
-    <a href="#cta" class="cta">Разобрать точки роста компании</a>
-    <span class="sub" style="margin-top:0;max-width:48ch">Зум, 60 минут. Достаточно ваших цифр в том виде, как вы их ведёте. Подготовка не требуется.</span>
-  </div>
-</div></section>
-
-<!-- IV. WHO I WORK WITH -->
-<section class="band deep"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="eyebrow">С кем я работаю</div>
-    <p class="sub" style="font-size:20px;color:var(--ink)">Я веду одновременно не больше четырёх founder-CEO. Беру в работу <span class="dash">—</span> значит вижу, что система реально приживётся. Если не вижу <span class="dash">—</span> скажу на бесплатном разговоре, чтобы не тратить ни деньги клиента, ни время команды впустую.</p>
+    <div class="h2">С кем я работаю</div>
+    <p class="sub" style="font-size:20px;color:var(--ink)">Я веду одновременно не больше четырёх собственников. Беру в работу <span class="dash">—</span> значит вижу, что система реально приживётся. Если не вижу <span class="dash">—</span> скажу на бесплатном разборе, чтобы не тратить ни деньги клиента, ни время команды впустую.</p>
   </div>
   <div class="fit">
     <div class="fitcol yes rv"><h4>Подходим, если:</h4>
       <ul>
-        <li><span class="mk">✓</span> У вас уже есть команда — 3-30 человек</li>
+        <li><span class="mk">✓</span> У вас уже есть команда <span class="dash">—</span> 3<span class="dash">–</span>30 человек</li>
         <li><span class="mk">✓</span> Бизнес работает в онлайн-контуре: Зум, Google-таблицы или аналоги</li>
         <li><span class="mk">✓</span> Готовы менять решения, если цифры говорят что-то новое</li>
         <li><span class="mk">✓</span> Готовы зафиксировать договорённости письменно до старта</li>
@@ -428,110 +567,44 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       <ul>
         <li><span class="mk">✕</span> Один основатель = вся работа, команды нет</li>
         <li><span class="mk">✕</span> Работа полностью на месте: телефон, оффлайн-клиенты, без цифрового контура</li>
-        <li><span class="mk">✕</span> «Давайте начнём — по ходу разберёмся»</li>
+        <li><span class="mk">✕</span> «Давайте начнём <span class="dash">—</span> по ходу разберёмся»</li>
         <li><span class="mk">✕</span> Несколько собственников с разными взглядами на цель компании</li>
       </ul>
     </div>
   </div>
 </div></section>
 
-<!-- V. TEAM with photos -->
-<section class="band" id="team"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="h2">Я веду. Со мной <span class="dash">—</span> двое дипломированных специалистов.</div>
-    <p class="sub">Систему, регламенты и финансы один человек не закроет одинаково глубоко. Поэтому со мной в каждом проекте работают двое специалистов с профильными дипломами.</p>
-  </div>
-  <div class="team">
-    <div class="tm lead rv">
-      <img src="assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg" alt="Андрей Сычинников">
-      <div class="body">
-        <div class="nm">Андрей Сычинников</div>
-        <div class="rl">Лидер проекта · наставник собственника</div>
-        <ul>
-          <li>CEO, выручка более €1,3 млн в 2024 году</li>
-          <li>MBA «Управление компанией», Русская Школа Управления (2023)</li>
-          <li>Внедрил полный управленческий учёт в своём бизнесе: бюджеты, баланс, платёжный календарь, финмодель</li>
-        </ul>
-        <div class="foot">Веду проект, отвечаю за результат перед вами лично.</div>
-        <div class="certlabel">Подтверждающие документы</div>
-        <div class="certs">
-          <div class="certthumb" data-cert="assets/people/andrei-sychinnikov/andrei-mba-diploma.png" data-cap="Диплом «МВА-Эксперт: Управление компанией» — Русская Школа Управления, 2023">
-            <img src="assets/people/andrei-sychinnikov/andrei-mba-diploma.png" alt="Диплом МВА Андрея Сычинникова">
-            <div class="zoom">⤢</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="tm rv">
-      <img src="assets/people/katya-harlamova/katya-photo-portrait.jpeg" alt="Катя Харламова">
-      <div class="body">
-        <div class="nm">Катя Харламова</div>
-        <div class="rl">Регламенты и бизнес-процессы</div>
-        <ul>
-          <li>Дипломированный специалист по бизнес-процессам</li>
-          <li>Сертифицирована по нотации BPMN 2.0</li>
-        </ul>
-        <div class="foot">Описывает процессы так, что система работает автономно — без вашего ежедневного управления.</div>
-        <div class="certlabel">Подтверждающие документы</div>
-        <div class="certs">
-          <div class="certthumb" data-cert="assets/people/katya-harlamova/katya-cert-business-processes.jpg" data-cap="Сертификат «Менеджер бизнес-процессов» — Нетология, 2024">
-            <img src="assets/people/katya-harlamova/katya-cert-business-processes.jpg" alt="Сертификат «Менеджер бизнес-процессов»">
-            <div class="zoom">⤢</div>
-          </div>
-          <div class="certthumb" data-cert="assets/people/katya-harlamova/katya-cert-operations-manager.jpg" data-cap="Свидетельство «Операционный менеджер» — Нетология, 2024">
-            <img src="assets/people/katya-harlamova/katya-cert-operations-manager.jpg" alt="Свидетельство «Операционный менеджер»">
-            <div class="zoom">⤢</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="tm rv">
-      <img src="assets/people/maria-gorbunova/maria-photo-portrait.jpeg" alt="Мария Горбунова">
-      <div class="body">
-        <div class="nm">Мария Горбунова</div>
-        <div class="rl">Финансы и управленческий учёт</div>
-        <ul>
-          <li>Финансовый директор с 7+ годами практики в «Нескучных финансах»</li>
-          <li>Дипломированный финансовый специалист</li>
-        </ul>
-        <div class="foot">На встречах проверяет, как решения скажутся на прибыли — до того как вы их примете.</div>
-        <div class="certlabel">Подтверждающие документы</div>
-        <div class="certs">
-          <div class="certthumb" data-cert="assets/people/maria-gorbunova/maria-cert-fd-strategic.png" data-cap="Аттестация финансового директора стратегического уровня — Высшая школа финансового директора">
-            <img src="assets/people/maria-gorbunova/maria-cert-fd-strategic.png" alt="Сертификат ФД стратегического уровня">
-            <div class="zoom">⤢</div>
-          </div>
-          <div class="certthumb" data-cert="assets/people/maria-gorbunova/maria-cert-fd-management.png" data-cap="Аттестация финансового директора управленческого уровня — Высшая школа финансового директора">
-            <img src="assets/people/maria-gorbunova/maria-cert-fd-management.png" alt="Сертификат ФД управленческого уровня">
-            <div class="zoom">⤢</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-<!-- VI. WHAT CHANGES -->
+<!-- БЛОК 4 — РАЗБОР -->
 <section class="band alt"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="eyebrow">Цель работы</div>
-    <div class="h2" style="margin-top:16px">Не «стало лучше», а <span class="dash">—</span> что именно изменилось</div>
-    <p class="sub">По этим трём вещам я определяю качество своей работы. Собственник видит результат не на словах, а в собственных цифрах компании.</p>
+    <div class="h2">Разбор за 45 минут. Без презентаций и без продаж.</div>
+    <p class="sub">За 45 минут на звонке разберём вашу ситуацию по сути.</p>
   </div>
-  <div class="metrics">
-    <div class="metric rv"><div class="ml"><svg class="hicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.2 5-5 2.2 2.2-5z"/></svg>Рост управленческих решений</div><div class="md">Собственник работает на стратегию, а не разбирает каждое утро задачи команды.</div></div>
-    <div class="metric rv"><div class="ml"><svg class="hicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.6 2.6 5.4-5.8"/></svg>Доводимость решений до исполнения</div><div class="md">У каждого решения есть ответственный, дедлайн и метрика результата. Решение не зависает.</div></div>
-    <div class="metric rv"><div class="ml"><svg class="hicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="6.4" rx="6.4" ry="2.7"/><path d="M5.6 6.4v5.1c0 1.5 2.9 2.7 6.4 2.7s6.4-1.2 6.4-2.7V6.4"/><path d="M5.6 11.5v5.1c0 1.5 2.9 2.7 6.4 2.7s6.4-1.2 6.4-2.7v-5.1"/></svg>Решения с эффектом на прибыль</div><div class="md">Фокус — на решениях, что увеличивают чистую прибыль и собственный капитал компании.</div></div>
+  <div class="tw">
+    <div class="twc rv"><div class="n">01</div><div class="t">Смотрю ваши цифры как есть</div><div class="d">Вы рассказываете, что происходит в бизнесе. Готовиться заранее не нужно.</div></div>
+    <div class="twc rv"><div class="n">02</div><div class="t">Нахожу дорогую просадку</div><div class="d">Показываю, где система теряет деньги, и даю 2–3 гипотезы роста с быстрым эффектом.</div></div>
+    <div class="twc rv"><div class="n">03</div><div class="t">Даю честный ответ</div><div class="d">Вместе решаем, подходим ли мы друг другу и есть ли смысл идти в аудит.</div></div>
   </div>
-  <p class="note rv">Динамика по итогам пилотных проектов.</p>
+  <div class="takeaway rv" style="margin-top:34px"><b>Что останется у вас:</b> Карта точек роста — где система теряет деньги и какие 2–3 шага дадут результат быстрее всего. Даже если дальше мы не работаем, это уже рабочий документ.</div>
+  <p class="note rv">Это не замаскированная продажа. Если увижу, что справитесь сами, — скажу прямо.</p>
+  <div class="rv" style="margin-top:28px;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+    <a href="#cta" class="cta">Разобрать точки роста за 45 минут</a>
+    <span class="note" style="margin-top:0">Бесплатно · 45 минут · ни к чему не обязывает</span>
+  </div>
+  <div class="orsep rv">или</div>
+  <div class="magnet rv">
+    <div class="mt">Ещё не готовы к разговору?</div>
+    <p>Пройдите самопроверку «7 вопросов собственника» <span class="dash">—</span> за 10 минут увидите, где ваша система управления даёт сбой. Пришлю разбор ваших ответов лично.</p>
+    <a href="#cta" class="cta ghost sm">Пройти самопроверку</a>
+  </div>
 </div></section>
 
-<!-- VII. AUDIT -->
+<!-- БЛОК 5 — АУДИТ ТРАЕКТОРИИ (недели + цена) -->
 <section class="band deep" id="audit"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="eyebrow">Аудит траектории</div>
-    <div class="h2" style="margin-top:16px">Диагноз системы за три недели</div>
-    <p class="sub">Вы покупаете не «диагностику» <span class="dash">—</span> вы покупаете 10 работающих артефактов, которые остаются в вашей компании и решают конкретные проблемы. Даже если дальше со мной не идёте.</p>
+    <div class="eyebrow">После разбора</div>
+    <div class="h2" style="margin-top:16px;font-size:clamp(36px,4.6vw,60px)">Аудит траектории</div>
+    <p class="sub" style="font-size:clamp(18px,1.6vw,22px);color:var(--ink)">Полный диагноз вашей системы за три недели: команда, финансы, стратегия <span class="dash">—</span> и дорожная карта к росту прибыли.</p>
   </div>
   <div class="weeks">
     <div class="week rv"><div class="wn">Неделя 1</div><div class="wt">Диагностика команды</div>
@@ -539,52 +612,49 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       <div class="itog"><div class="il">Итог недели</div><div class="it">Впервые видите реальную картину команды и точку, где именно сломана управленческая система.</div></div>
     </div>
     <div class="week rv"><div class="wn">Неделя 2</div><div class="wt">Финансовый аудит</div>
-      <p>Управленческий P&L по уровням маржи: маржинальная → валовая → операционная → чистая. Юнит-экономика, калькулятор сценариев на 2-3 месяца. Финдиректор из команды (Мария) подключается, если своего у вас нет.</p>
-      <div class="itog"><div class="il">Итог недели</div><div class="it">Видите реальную чистую прибыль и три сценария на ваших цифрах — где теряете и чем растёте.</div></div>
+      <p>Управленческий P&L по уровням маржи, юнит-экономика, калькулятор сценариев на 2<span class="dash">–</span>3 месяца. Финдиректор из команды (Мария) подключается, если своего у вас нет.</p>
+      <div class="itog"><div class="il">Итог недели</div><div class="it">Видите реальную чистую прибыль и три сценария на ваших цифрах <span class="dash">—</span> где теряете и чем растёте.</div></div>
     </div>
     <div class="week rv"><div class="wn">Неделя 3</div><div class="wt">Стратегическая сессия</div>
-      <p>Сводим всё воедино. На сессии оцениваем каждую гипотезу по трём осям: сколько прибыли даст, как быстро внедряется, сколько ресурсов потребует. Наверх всплывают 3-5 рычагов.</p>
-      <div class="itog"><div class="il">Итог недели</div><div class="it">Дорожная карта на 3 месяца, где каждый шаг привязан к росту прибыли — и утверждён лично вами.</div></div>
+      <p>Сводим всё воедино. Оцениваем каждую гипотезу по трём осям: сколько прибыли даст, как быстро внедряется, сколько ресурсов потребует. Наверх всплывают 3<span class="dash">–</span>5 рычагов.</p>
+      <div class="itog"><div class="il">Итог недели</div><div class="it">Дорожная карта на 3 месяца, где каждый шаг привязан к росту прибыли <span class="dash">—</span> и утверждён лично вами.</div></div>
     </div>
   </div>
-</div></section>
 
-<!-- VII-b. PRICE SELLING BLOCK -->
-<section class="band"><div class="inner pad">
-  <div class="pricewrap rv">
+  <div class="pricewrap rv" style="margin-top:32px">
     <div class="priceleft price-anim">
       <div class="pl-name">Аудит траектории · полный пакет</div>
       <div class="pl-old">€1 200</div>
       <div class="pl-big">€990</div>
-      <div class="pl-cond">при прохождении бесплатного разбора точек роста</div>
+      <div class="pl-rub">≈ 69 000 ₽</div>
+      <div class="pl-cond">для тех, кто прошёл бесплатный разбор</div>
     </div>
     <div class="priceright">
       <ul>
-        <li>Полный аудит траектории: команда + деньги + стратегия</li>
-        <li>Три недели, до 10 ключевых сотрудников</li>
-        <li>10 рабочих артефактов остаются у вас</li>
-        <li>Финдиректор из команды (7+ лет в «Нескучных финансах») — входит в стоимость</li>
-        <li>Оплата на европейский счёт, по договору</li>
+        <li>Диагностика команды <span class="dash">—</span> где именно ломается управление</li>
+        <li>Финансовый аудит <span class="dash">—</span> финмодель и сценарии прибыли</li>
+        <li>Стратегическая сессия и дорожная карта к росту прибыли</li>
+        <li>Разбираем до 10 ключевых сотрудников</li>
+        <li>Финдиректор подключается лично <span class="dash">—</span> входит в стоимость</li>
+        <li>10 рабочих инструментов остаются у вас навсегда</li>
+        <li>Договор, счёт на европейский счёт</li>
       </ul>
-      <div class="compare">Для сравнения: только финансовая модель у подрядчиков — от €450, а это лишь один из трёх контуров. Аудит начинается не с оплаты, а с разговора.</div>
-      <a href="#cta" class="cta">Разобрать точки роста и получить цену €990</a>
+      <div class="compare">Только финансовая модель у подрядчиков стоит от €450. Здесь <span class="dash">—</span> вся система целиком.</div>
+      <a href="#cta" class="cta">Разобрать точки роста за 45 минут</a>
     </div>
+  </div>
+  <div class="entrance rv">
+    <div class="et">Аудит <span class="dash">—</span> это вход, а не потолок.</div>
+    <p>Если нужен не только диагноз, а внедрение <span class="dash">—</span> после аудита идём в <b style="color:var(--ink)">Перезагрузку</b>: 3 месяца я ставлю систему вместе с вашим преемником, пока она не заработает без меня. Объём и цену обсуждаем индивидуально. На разборе зафиксируем цену €990 на аудит.</p>
   </div>
 </div></section>
 
-<!-- VIII. WHY IT WORKS + ARTIFACTS SCROLL -->
-<section class="band alt" id="how"><div class="inner pad">
-  <div class="sect-head rv"><div class="h2">Почему это работает</div></div>
-  <div class="zones" style="margin-bottom:64px">
-    <div class="zone rv"><div class="zn">01</div><div class="zt">Правило 20 / 80</div><div class="zd">В любой компании 20% действий дают 80% результата. Методология — про то, чтобы найти эти 20% и направить команду именно на них.</div></div>
-    <div class="zone rv"><div class="zn">02</div><div class="zt">Сила в повторении</div><div class="zd">Аудит находит рычаги один раз. Раз в месяц обновляете матрицу, сверяетесь с цифрами и снова бьёте по самому эффективному.</div></div>
-    <div class="zone rv"><div class="zn">03</div><div class="zt">Рост без героизма</div><div class="zd">Компания растёт не рывками и не на вашем личном усилии, а потому что команда всё время занята только тем, что двигает прибыль.</div></div>
-  </div>
-
+<!-- БЛОК 6 — 10 РАБОЧИХ ИНСТРУМЕНТОВ (формат v1) -->
+<section class="band"><div class="inner pad">
   <div class="artpin">
     <div class="artstage"><div class="artstage-inner">
       <div class="artleft">
-        <div class="arttitle">Что остаётся у вас <span class="dash">—</span> 10 рабочих артефактов</div>
+        <div class="arttitle">Что остаётся у вас <span class="dash">—</span> 10 рабочих инструментов</div>
         <div class="artcount"><span id="ac-cur">01</span><span class="acsep">/</span><span class="actot">10</span></div>
         <div class="artgroup-live" id="ac-g">Контур команды</div>
         <div class="artlist" id="ac-list"><div class="arttrack" id="ac-track"></div></div>
@@ -595,7 +665,6 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
             <div class="artslide" id="ac-slide">
               <div class="bg" id="ac-tg">Контур команды</div>
               <div class="bt" id="ac-tt">Аудит управленческой зрелости</div>
-              <div class="bc">превью артефакта — реальный скриншот добавим перед публикацией</div>
             </div>
           </div>
           <p class="artcap" id="ac-cap">Срез вашего управленческого видения: насколько ясно вы видите продукт, факторы успеха должностей, систему подчинения и стратегию.</p>
@@ -603,57 +672,50 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       </div>
     </div></div>
   </div>
+  <div class="rv" style="margin-top:46px"><a href="#cta" class="cta">Разобрать точки роста за 45 минут</a></div>
 </div></section>
 
-<!-- IX. ENTRANCE NOT CEILING -->
-<section class="band"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="h2">Аудит <span class="dash">—</span> это вход, а не потолок</div>
-    <p class="sub">Аудит даёт диагноз и план на три месяца. Захотите внедрять не в одиночку <span class="dash">—</span> у траектории есть продолжение.</p>
+<!-- БЛОК 7 — ПОЧЕМУ ЭТО РАБОТАЕТ -->
+<section class="band deep"><div class="inner pad">
+  <div class="sect-head rv"><div class="h2">Почему это работает</div></div>
+  <div class="zones">
+    <div class="zone rv"><div class="zn">01</div><div class="zt">Правило 20 / 80</div><div class="zd">В любой компании 20% действий дают 80% результата. Методология <span class="dash">—</span> про то, чтобы найти эти 20% и направить команду именно на них.</div></div>
+    <div class="zone rv"><div class="zn">02</div><div class="zt">Сила в повторении</div><div class="zd">Аудит находит рычаги один раз. Раз в месяц обновляете матрицу, сверяетесь с цифрами и снова бьёте по самому эффективному.</div></div>
+    <div class="zone rv"><div class="zn">03</div><div class="zt">Рост без героизма</div><div class="zd">Компания растёт не рывками и не на вашем личном усилии, а потому что команда всё время занята только тем, что двигает прибыль.</div></div>
   </div>
-  <div class="nextcards">
-    <div class="nc rv"><div class="nt">Перезагрузка</div><div class="nd">Три месяца, за которые мы вместе с вашим преемником внутри команды строим систему управления <span class="dash">—</span> и она остаётся работать без меня.</div></div>
-    <div class="nc rv"><div class="nt">Советник</div><div class="nd">Когда система уже работает, я остаюсь рядом как внешний стратегический взгляд: держим вектор, сверяем решения с цифрами, не даём скатиться обратно в ручное управление.</div></div>
-  </div>
-  <p class="note rv">Цены этих шагов мы не вешаем на сайт <span class="dash">—</span> они зависят от вашей ситуации. Обсуждаем только после аудита, когда обоим понятно, что именно и зачем делать.</p>
 </div></section>
 
-<!-- X. FAQ -->
-<section class="band deep" id="faq"><div class="inner pad">
-  <div class="sect-head rv"><div class="h2">Вопросы, которые возникают раньше, чем вы их задаёте</div></div>
+<!-- БЛОК 8 — FAQ -->
+<section class="band alt" id="faq"><div class="inner pad">
+  <div class="sect-head rv"><div class="h2">Вопросы, которые возникают раньше всего</div></div>
   <div class="faq rv">
-    <details><summary>Уже пробовали консультантов. Презентации потом лежат в столе.</summary><p>Именно поэтому у меня нет «рекомендаций к рассмотрению». Аудит заканчивается дорожной картой с конкретными действиями, ответственными и финансовыми следствиями. Перезагрузка — работающим регламентом, шаблоном фиксации решений и обученным преемником. Если на выходе этапа нет ничего применимого — разбираем до закрытия этапа, а не после.</p></details>
-    <details><summary>Система уйдёт вместе с консультантом.</summary><p>Именно это я строю в обратную сторону: моя задача — стать ненужным. Система передаётся через регламент, шаблон управленческого решения и обученного преемника. На последней неделе преемник проводит встречу сам — я в комнате, но молчу. Система либо работает без меня, либо нет.</p></details>
-    <details><summary>Это дорого.</summary><p>Аудит — €990 за полный командный и финансовый диагноз с дорожной картой и сессией финдиректора. Если аудит покажет, что нужна Перезагрузка — значит цена удержания ситуации как есть уже больше, чем стоит работа. Цены старших шагов обсуждаем после аудита.</p></details>
-    <details><summary>Вы увидите наши реальные цифры и слабые места.</summary><p>NDA — стандартная часть контракта, подписываю без вопросов. Работаю с одним клиентом в нише одновременно. Информация о компании, финансах, команде и стратегии не выходит за пределы нашей работы.</p></details>
-    <details><summary>Сколько времени это займёт у меня лично?</summary><p>Аудит: 3-4 часа за три недели — установочная сессия плюс короткие уточнения, остальное делаю я. Перезагрузка: еженедельный час со мной плюс решения по приоритетам и время с преемником. Цель — не загрузить вас, а разгрузить.</p></details>
-    <details><summary>Чем вы отличаетесь от трекера или коуча?</summary><p>Трекер фокусирует на метриках. Коуч работает с мышлением. Я строю систему — регламенты, шаблоны, обученный преемник — и она остаётся работать после того как я ушёл. После коуча лучше становитесь вы; после меня в компании остаётся механизм.</p></details>
+    <details><summary>Я уже пробовал консультантов — остались красивые презентации и ноль изменений.</summary><p>Понимаю. Поэтому я не отдаю презентацию и не исчезаю. Внедряю рабочие инструменты вместе с вашей командой и остаюсь, пока система не заработает. Если на разборе увижу, что вам это не нужно, — скажу прямо.</p></details>
+    <details><summary>Не уйдёт ли система вместе с вами?</summary><p>Это главное, что я проверяю на выходе. Внутри вашей команды готовлю преемника, который ведёт систему сам. Финальная встреча — это его экзамен, не мой. Не тянет без меня — работа не закончена.</p></details>
+    <details><summary>€990 — это дорого?</summary><p>Сравните со стоимостью проблемы: сколько команда уже месяцами работает вхолостую, пока прибыль стоит. Штатный операционный директор — €90–160К в год. Аудит — €990 разово, и вы уносите 10 рабочих инструментов.</p></details>
+    <details><summary>Придётся открыть вам реальные цифры и слабые места.</summary><p>Да — без этого диагноз невозможен. Всё под NDA. Моя задача не оценить вас, а показать, где система теряет деньги и как это починить. Я на вашей стороне стола.</p></details>
+    <details><summary>Чем вы отличаетесь от трекеров и коучей?</summary><p>Трекер задаёт вопросы, коуч работает с вашим состоянием. Я внедряю управленческую систему руками — регламенты, финмодель, дорожную карту к прибыли — и оставляю её работать без меня.</p></details>
   </div>
+  <div class="rv" style="margin-top:40px"><a href="#cta" class="cta">Разобрать точки роста за 45 минут</a></div>
 </div></section>
 
-<!-- XI. FINAL CTA + FORM -->
-<section class="band final" id="cta"><div class="inner pad">
+<!-- БЛОК 9 — ФОРМА -->
+<section class="band final" id="cta"><div class="inner pad" style="padding-top:clamp(44px,5vw,72px);padding-bottom:clamp(44px,5vw,72px)">
   <div class="formwrap">
     <div class="rv">
-      <div class="h2">Разберём точки роста вашей компании. Бесплатно, без обязательств.</div>
-      <p class="sub" style="margin-bottom:6px">«Нанял менеджеров <span class="dash">—</span> а решения всё равно на мне»? Это архитектура управления, а не случайность. Следующий шаг <span class="dash">—</span> 60 минут разговора, без решения про деньги.</p>
-      <div class="h3" style="margin-top:26px">Что происходит на разговоре</div>
-      <ul class="fitems">
-        <li>Кто в команде, кто за что отвечает, как сейчас принимаются решения</li>
-        <li>Где вы сегодня — в операционке или в стратегии</li>
-        <li>Есть ли кому передать ответственность за ключевые процессы</li>
-        <li>Что именно держит компанию на вашем постоянном присутствии</li>
-      </ul>
-      <p class="note">На выходе <span class="dash">—</span> устный диагноз: где в системе управления разрыв. Я лично читаю каждую заявку и отвечаю в течение 24 часов. Удобнее написать <span class="dash">—</span> Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
+      <div class="h2">Разберём точки роста вашей компании</div>
+      <p class="sub">Бесплатно, без презентаций и обязательств. 45 минут.</p>
+      <div class="orsep" style="max-width:none">или</div>
+      <p class="note" style="margin-top:0"><b style="color:var(--ink)">Ещё не готовы к разговору?</b> Пройдите самопроверку «7 вопросов собственника» <span class="dash">—</span> за 10 минут увидите свою главную просадку.</p>
+      <p class="note">Или напишите напрямую <span class="dash">—</span> Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
     </div>
     <div class="formcard rv">
       <form id="leadform" novalidate>
         <input type="checkbox" name="botcheck" id="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="fq"><div class="fl">1 · Сколько человек в команде?</div><div class="chips">
-          <label class="chip"><input type="radio" name="team" value="1-2">1-2</label>
-          <label class="chip"><input type="radio" name="team" value="3-10">3-10</label>
-          <label class="chip"><input type="radio" name="team" value="11-30">11-30</label>
-          <label class="chip"><input type="radio" name="team" value="больше 30">больше 30</label>
+          <label class="chip"><input type="radio" name="team" value="1-2">1<span class="dash">–</span>2</label>
+          <label class="chip"><input type="radio" name="team" value="3-10">3<span class="dash">–</span>10</label>
+          <label class="chip"><input type="radio" name="team" value="11-30">11<span class="dash">–</span>30</label>
+          <label class="chip"><input type="radio" name="team" value="больше 30">30+</label>
         </div></div>
         <div class="fq"><div class="fl">2 · На какой стадии компания?</div><div class="chips">
           <label class="chip"><input type="radio" name="stage" value="запуск">запуск</label>
@@ -661,14 +723,19 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
           <label class="chip"><input type="radio" name="stage" value="устойчивый доход">устойчивый доход</label>
           <label class="chip"><input type="radio" name="stage" value="масштабирование">масштабирование</label>
         </div></div>
-        <div class="fq"><div class="fl">3 · Что сейчас самое острое?</div>
+        <div class="fq"><div class="fl">3 · Что вам ближе сейчас?</div><div class="chips">
+          <label class="chip"><input type="radio" name="want" value="разовый разбор">разовый разбор</label>
+          <label class="chip"><input type="radio" name="want" value="аудит">аудит</label>
+          <label class="chip"><input type="radio" name="want" value="полноценное ведение">полноценное ведение</label>
+        </div></div>
+        <div class="fq"><div class="fl">4 · Самая острая проблема прямо сейчас</div>
           <textarea class="finput" name="problem" rows="2" placeholder="Например: нанял трёх менеджеров, решения всё равно на мне"></textarea></div>
-        <div class="fq"><div class="fl">4 · Ваше имя и как связаться</div>
+        <div class="fq"><div class="fl">5 · Ваше имя и как с вами связаться</div>
           <input class="finput" name="uname" type="text" placeholder="Имя" style="margin-bottom:9px">
           <input class="finput" name="contact" type="text" placeholder="Telegram, почта или телефон — куда вам ответить"></div>
         <button type="submit" class="cta">Отправить заявку на разбор</button>
         <p class="err" id="formerr">Не отправилось. Напишите напрямую в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a></p>
-        <p class="note" style="text-align:center">60 минут. Устный диагноз. Без обязательств.</p>
+        <p class="note" style="text-align:center">Читаю каждую заявку лично. Отвечаю в течение 24 часов.</p>
       </form>
     </div>
   </div>
@@ -682,7 +749,7 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     </div>
     <div>
       <div style="font-weight:600;font-size:15px;margin-bottom:10px">Написать напрямую</div>
-      <p>Telegram: <a href="https://t.me/Sychinnikov">@Sychinnikov</a><br>Почта: <a href="mailto:Sychinnikov@gmail.com">Sychinnikov@gmail.com</a><br><span class="dim">Отвечаю лично.</span></p>
+      <p>Telegram: <a href="https://t.me/Sychinnikov">@Sychinnikov</a><br><span class="dim">Отвечаю лично, в течение 24 часов.</span></p>
     </div>
     <div>
       <div style="font-weight:600;font-size:15px;margin-bottom:10px">Не готовы к разбору?</div>
@@ -695,13 +762,13 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   </div>
 </div></footer>
 
-<!-- lightbox for certificates -->
+<!-- lightbox -->
 <div class="lb" id="lb" aria-hidden="true">
   <button class="close" id="lb-close" aria-label="Закрыть">×</button>
   <figure><img id="lb-img" src="" alt=""><figcaption id="lb-cap"></figcaption></figure>
 </div>
 
-<!-- success modal (по центру экрана) -->
+<!-- success modal -->
 <div class="formok" id="formok" aria-hidden="true">
   <div class="okcard">
     <div class="ok-i">✓</div>
@@ -710,6 +777,7 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <button class="ok-close" id="okclose" type="button">Закрыть</button>
   </div>
 </div>
+
 
 <script>
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
@@ -724,6 +792,7 @@ document.getElementById('lb-close').addEventListener('click',closeLb);
 lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
 
+/* 10 инструментов — pinned scroll */
 const ART=[
   ["Аудит управленческой зрелости","Контур команды","Срез вашего управленческого видения: насколько ясно вы видите продукт, факторы успеха должностей, систему подчинения и стратегию."],
   ["Оргструктура «как по факту»","Контур команды","Реальная карта ответственности: кто за что отвечает не на бумаге, а в ежедневной работе. Расхождения с вашим представлением видны сразу."],
@@ -734,7 +803,7 @@ const ART=[
   ["Калькулятор сценариев","Контур денег","Что произойдёт с компанией при пессимистичном, реалистичном и оптимистичном сценарии — на ваших же цифрах."],
   ["Стратегическая сессия с финдиректором","Контур денег","ФД с 7+ годами практики лично делает обзор: что выглядит здорово, на что обратить внимание сейчас."],
   ["Матрица приоритизации гипотез","Контур стратегии","Каждая гипотеза по трём осям. Сразу видно, за какие 3-5 рычагов браться первыми — больше денег в меньший срок."],
-  ["Дорожная карта 3 месяца (Ганта)","Контур стратегии","Что делаем, кто отвечает за каждый результат, к какому сроку и какой прогноз по чистой прибыли за каждым шагом."]
+  ["Дорожная карта 3 месяца (Гантт)","Контур стратегии","Что делаем, кто отвечает за каждый результат, к какому сроку и какой прогноз по чистой прибыли за каждым шагом."]
 ];
 const N=ART.length;
 const pin=document.querySelector('.artpin');
@@ -743,43 +812,42 @@ const track=document.getElementById('ac-track');
 const acCur=document.getElementById('ac-cur'),acG=document.getElementById('ac-g');
 const slide=document.getElementById('ac-slide'),slG=document.getElementById('ac-tg'),slT=document.getElementById('ac-tt'),acCap=document.getElementById('ac-cap');
 const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-ART.forEach((a,i)=>{const d=document.createElement('div');d.className='artitem';d.innerHTML='<span class="ai-n">'+String(i+1).padStart(2,'0')+'</span><span class="ai-t">'+a[0]+'</span>';d.addEventListener('click',()=>scrollToIndex(i));track.appendChild(d);});
-const items=[...track.children];
-
-function scrollToIndex(i){const total=pin.offsetHeight-window.innerHeight;const p=N>1?i/(N-1):0;const y=window.scrollY+pin.getBoundingClientRect().top+p*total;window.scrollTo({top:y,behavior:'smooth'});}
-
-let cur=-1;
-function setActive(i){
-  if(i===cur)return;cur=i;
-  items.forEach((el,j)=>el.classList.toggle('on',j===i));
-  acCur.textContent=String(i+1).padStart(2,'0');
-  acG.textContent=ART[i][1];
-  slG.textContent=ART[i][1];slT.textContent=ART[i][0];acCap.textContent=ART[i][2];
-  if(!reduce){slide.style.transition='none';slide.style.opacity='0';slide.style.transform='translateY(46px)';requestAnimationFrame(()=>{slide.style.transition='opacity .45s ease, transform .5s cubic-bezier(.2,.7,.2,1)';slide.style.opacity='1';slide.style.transform='none';});
-    acCap.style.transition='none';acCap.style.opacity='0';requestAnimationFrame(()=>{acCap.style.transition='opacity .4s ease';acCap.style.opacity='1';});}
+if(pin&&track){
+  ART.forEach((a,i)=>{const d=document.createElement('div');d.className='artitem';d.innerHTML='<span class="ai-n">'+String(i+1).padStart(2,'0')+'</span><span class="ai-t">'+a[0]+'</span>';d.addEventListener('click',()=>scrollToIndex(i));track.appendChild(d);});
+  const items=[...track.children];
+  function scrollToIndex(i){const total=pin.offsetHeight-window.innerHeight;const p=N>1?i/(N-1):0;const y=window.scrollY+pin.getBoundingClientRect().top+p*total;window.scrollTo({top:y,behavior:'smooth'});}
+  let cur=-1;
+  function setActive(i){
+    if(i===cur)return;cur=i;
+    items.forEach((el,j)=>el.classList.toggle('on',j===i));
+    acCur.textContent=String(i+1).padStart(2,'0');
+    acG.textContent=ART[i][1];
+    slG.textContent=ART[i][1];slT.textContent=ART[i][0];acCap.textContent=ART[i][2];
+    if(!reduce){slide.style.transition='none';slide.style.opacity='0';slide.style.transform='translateY(46px)';requestAnimationFrame(()=>{slide.style.transition='opacity .45s ease, transform .5s cubic-bezier(.2,.7,.2,1)';slide.style.opacity='1';slide.style.transform='none';});
+      acCap.style.transition='none';acCap.style.opacity='0';requestAnimationFrame(()=>{acCap.style.transition='opacity .4s ease';acCap.style.opacity='1';});}
+  }
+  function onScroll(){
+    const r=pin.getBoundingClientRect();
+    const total=pin.offsetHeight-window.innerHeight;
+    const sc=Math.min(Math.max(-r.top,0),total);
+    const p=total>0?sc/total:0;
+    const af=p*(N-1);
+    const ih=items[0]?items[0].offsetHeight:90;
+    const listH=listEl.clientHeight;
+    track.style.transform='translateY('+(listH/2-(af+0.5)*ih)+'px)';
+    let idx=Math.round(af);if(idx<0)idx=0;if(idx>=N)idx=N-1;
+    setActive(idx);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  onScroll();
 }
-function onScroll(){
-  const r=pin.getBoundingClientRect();
-  const total=pin.offsetHeight-window.innerHeight;
-  const sc=Math.min(Math.max(-r.top,0),total);
-  const p=total>0?sc/total:0;
-  const af=p*(N-1);
-  const ih=items[0]?items[0].offsetHeight:90;
-  const listH=listEl.clientHeight;
-  track.style.transform='translateY('+(listH/2-(af+0.5)*ih)+'px)';
-  let idx=Math.round(af);if(idx<0)idx=0;if(idx>=N)idx=N-1;
-  setActive(idx);
-}
-window.addEventListener('scroll',onScroll,{passive:true});
-window.addEventListener('resize',onScroll);
-onScroll();
 
 /* price reveal trigger */
 const priceEl=document.querySelector('.price-anim');
 if(priceEl){const po=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){priceEl.classList.add('go');po.disconnect();}})},{threshold:.4});po.observe(priceEl);}
 
-/* lead form → Web3Forms (заявка падает на почту, единым русским текстом) */
+/* lead form → Web3Forms */
 const lf=document.getElementById('leadform');
 const okModal=document.getElementById('formok');
 function closeOk(){okModal.classList.remove('show');okModal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
@@ -795,12 +863,12 @@ if(lf){lf.addEventListener('submit',async(e)=>{
   const contactEl=lf.querySelector('[name="contact"]');
   if(!contactEl.value.trim()){contactEl.focus();contactEl.style.borderColor='var(--no)';return;}
   contactEl.style.borderColor='';err.style.display='none';lf.classList.add('sending');
-  const msg='Команда: '+(val('team')||'—')+'\nСтадия: '+(val('stage')||'—')+'\nЧто острое: '+(val('problem')||'—')+'\nИмя: '+(val('uname')||'—')+'\nКонтакт: '+contactEl.value.trim();
+  const msg='[ЗАЯВКА С v4]\nКоманда: '+(val('team')||'—')+'\nСтадия: '+(val('stage')||'—')+'\nЧто ближе: '+(val('want')||'—')+'\nЧто острое: '+(val('problem')||'—')+'\nИмя: '+(val('uname')||'—')+'\nКонтакт: '+contactEl.value.trim();
   const fd=new FormData();
   fd.append('access_key','24d71a36-877d-46e1-9956-566f0dbb8d50');
-  fd.append('subject','Заявка на разбор точек роста — Founder Trajectory');
-  fd.append('from_name','Сайт Founder Trajectory');
-  fd.append('name',val('uname')||'Заявка с сайта');
+  fd.append('subject','Заявка на разбор (v4) — Founder Trajectory');
+  fd.append('from_name','Сайт Founder Trajectory v4');
+  fd.append('name',val('uname')||'Заявка с сайта v4');
   fd.append('message',msg);
   if(document.getElementById('botcheck').checked)fd.append('botcheck','1');
   try{
@@ -809,18 +877,18 @@ if(lf){lf.addEventListener('submit',async(e)=>{
     if(data.success){
       lf.reset();lf.classList.remove('sending');
       okModal.classList.add('show');okModal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
-      if(window.dataLayer)window.dataLayer.push({event:'lead_submit'});
+      if(window.dataLayer)window.dataLayer.push({event:'lead_submit',page_variant:'v4'});
       if(window.ym)ym(109611431,'reachGoal','lead_submit');
-      if(window.gtag)gtag('event','lead_submit');
+      if(window.gtag)gtag('event','lead_submit',{page_variant:'v4'});
     }else{throw new Error(data.message||'fail');}
   }catch(_){err.style.display='block';lf.classList.remove('sending');}
 });}
 
-/* трекинг кликов по CTA (для будущей аналитики через dataLayer) */
+/* трекинг кликов по CTA */
 document.querySelectorAll('a.cta,a.ncta').forEach(a=>a.addEventListener('click',()=>{
-  if(window.dataLayer)window.dataLayer.push({event:'cta_click',cta_text:(a.textContent||'').trim().slice(0,60)});
+  if(window.dataLayer)window.dataLayer.push({event:'cta_click',cta_text:(a.textContent||'').trim().slice(0,60),page_variant:'v4'});
   if(window.ym)ym(109611431,'reachGoal','cta_click');
-  if(window.gtag)gtag('event','cta_click');
+  if(window.gtag)gtag('event','cta_click',{page_variant:'v4'});
 }));
 </script>
 </body>
