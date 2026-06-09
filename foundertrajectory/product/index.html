@@ -240,13 +240,12 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3.2re
 .pricenote b{color:var(--ink)}
 
 /* pain rows */
-.painrows{margin-top:4px}
-.painrow{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,3vw,42px);align-items:start;padding:clamp(24px,3vw,38px) 0;border-top:1px solid var(--hair)}
-.painrow:last-child{border-bottom:1px solid var(--hair)}
-.painrow .pn{font-family:var(--fd);font-size:clamp(28px,3.4vw,46px);font-weight:700;color:var(--gold);line-height:.9}
-.painrow p{font-size:clamp(18px,1.8vw,24px);line-height:1.5;color:var(--ink-muted);max-width:none}
+.painrows{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;gap:0 clamp(28px,4vw,60px);margin-top:4px}
+@media(max-width:760px){.painrows{grid-template-columns:1fr;grid-auto-flow:row}}
+.painrow{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:18px 0;border-top:1px solid var(--hair)}
+.painrow .pn{font-family:var(--fd);font-size:clamp(22px,2.4vw,30px);font-weight:700;color:var(--gold);line-height:.9}
+.painrow p{font-size:clamp(15.5px,1.4vw,18px);line-height:1.45;color:var(--ink-muted)}
 .painrow p b{color:var(--ink);font-weight:600}
-@media(max-width:760px){.painrow{gap:16px}.painrow .pn{font-size:26px}}
 
 /* fit table */
 .fit{display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -374,6 +373,15 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .smtable.left th:not(:first-child),.smtable.left td:not(:first-child){text-align:left}
 .smtable td.dot{color:var(--gold);font-weight:700}
 .smtable td.warn{color:var(--gold)}
+.ckprow .cmid{display:flex;flex-direction:column;gap:7px}
+.ckprow .give{font-size:13.5px;color:var(--gold);line-height:1.45}
+.ckprow .give b{color:var(--ink);font-weight:600}
+.smtable.gantt th:not(:first-child){padding:8px 4px;font-size:11px;color:var(--ink-dim)}
+.smtable.gantt td:not(:first-child){padding:0;height:24px;min-width:34px}
+.smtable.gantt td.b{background:var(--gold)}
+.smtable.gantt td.bs{border-top-left-radius:7px;border-bottom-left-radius:7px}
+.smtable.gantt td.be{border-top-right-radius:7px;border-bottom-right-radius:7px}
+@media(min-width:821px){.resultwrap.tight{grid-template-columns:.6fr 1.4fr}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJQF1P3DJ2"></script>
@@ -434,8 +442,8 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   </div>
   <div class="painrows">
     <div class="painrow rv"><span class="pn">01</span><p>Решения принимаете по ощущению <span class="dash">—</span> <b>цифры либо запаздывают на месяц, либо не сходятся между источниками.</b></p></div>
-    <div class="painrow rv"><span class="pn">02</span><p>Решили на совещании <span class="dash">—</span> и оно повисло. <b>Через месяц возвращаетесь к тому же вопросу, будто и не обсуждали.</b></p></div>
-    <div class="painrow rv"><span class="pn">03</span><p>В начале периода определили план <span class="dash">—</span> выручка, маржа, клиенты. По итогам цифры другие, <b>а где именно недожали или пошёл спад <span class="dash">—</span> неизвестно.</b></p></div>
+    <div class="painrow rv"><span class="pn">02</span><p>Решили на совещании <span class="dash">—</span> и <b>повисло</b>. Через месяц <span class="dash">—</span> тот же вопрос, будто не обсуждали.</p></div>
+    <div class="painrow rv"><span class="pn">03</span><p>Определили план <span class="dash">—</span> выручка, маржа, клиенты. По итогам цифры другие, <b>а где недожали <span class="dash">—</span> неизвестно.</b></p></div>
     <div class="painrow rv"><span class="pn">04</span><p>Делегировали направление <span class="dash">—</span> но без ежедневного контроля темп проседает. Возвращаетесь тушить. <b>Через месяц <span class="dash">—</span> тот же круг.</b></p></div>
     <div class="painrow rv"><span class="pn">05</span><p>Всё держится в вашей голове. <b>Новый сотрудник въезжает месяцами, процессы <span class="dash">—</span> «спроси у собственника».</b></p></div>
     <div class="painrow rv"><span class="pn">06</span><p>Куда компания идёт через год <span class="dash">—</span> каждый раз формулируется по-разному. <b>Команда тянет в стороны, а не в один фокус.</b></p></div>
@@ -448,10 +456,10 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   <div class="sect-head rv">
     <div class="h2">Почему со мной ваши решения становятся сильнее</div>
   </div>
-  <p class="lead-in rv">Я не консультант, который отдаёт презентацию и уходит. Я встаю рядом с собственником как партнёр <span class="dash">—</span> и качаю главное: качество и количество ваших управленческих решений.</p>
-  <p class="lead-in rv">Каждый месяц вы видите в цифрах, сколько решений приняли, сколько довели до конца и сколько из них дали измеримый результат <span class="dash">—</span> какое принесло деньги, а какое только отняло время команды. За этим стоит не теория, а мой собственный результат.</p>
+  <p class="lead-in rv" style="max-width:none">Я не консультант с презентацией. Встаю рядом с собственником как партнёр и качаю главное <span class="dash">—</span> качество и количество ваших управленческих решений.</p>
+  <p class="lead-in rv" style="max-width:none">Каждый месяц видите в цифрах: сколько решений приняли, сколько довели до конца, сколько дали результат. За этим <span class="dash">—</span> не теория, а мой собственный результат.</p>
 
-  <div class="resultwrap rv">
+  <div class="resultwrap rv tight">
     <div class="resultstat">
       <div class="rs-big">120<small> млн ₽</small></div>
       <div class="rs-sub">выручка моего бизнеса за 2024 · команда 14 человек</div>
@@ -699,7 +707,7 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
           <tr><td>Диаграмма Ганта</td><td>Когда что внедряем</td></tr>
           <tr><td>Регулярный менеджмент</td><td>Ритм встреч проекта</td></tr>
           <tr><td>Реестр УР</td><td>Все управленческие решения со статусами</td></tr>
-          <tr><td>РБЗ</td><td>Разборы бизнес-задач: проблема → цель в цифрах</td></tr>
+          <tr><td>РБЗ — разбор бизнес-задачи</td><td>Проблема → причина → цель в цифрах → шаги</td></tr>
         </tbody>
       </table>
     </div>
@@ -733,7 +741,7 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
         <tbody>
           <tr><td>Контур решений</td><td class="ok">внедрён</td><td>неделя 1</td></tr>
           <tr><td>Реестр УР</td><td class="ok">внедрён</td><td>неделя 1</td></tr>
-          <tr><td>РБЗ</td><td class="ok">внедрён</td><td>неделя 0</td></tr>
+          <tr><td>РБЗ — разбор бизнес-задачи</td><td class="ok">внедрён</td><td>неделя 0</td></tr>
           <tr><td>Регламент решений (BPMN)</td><td class="ok">внедрён</td><td>неделя 6</td></tr>
           <tr><td>Схемы процессов BPMN 2.0</td><td class="warn">3 из 5</td><td>неделя 8</td></tr>
           <tr><td>% внедрения системы</td><td class="ok">0% → 100%</td><td>—</td></tr>
@@ -741,14 +749,15 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       </table>
     </div>
     <div class="smpane" data-p="gantt">
-      <table class="smtable">
-        <thead><tr><th>Инструмент</th><th>Мес 1</th><th>Мес 2</th><th>Мес 3</th></tr></thead>
+      <table class="smtable gantt">
+        <thead><tr><th>Инструмент</th><th>1–2</th><th>3–4</th><th>5–6</th><th>7–8</th><th>9–10</th><th>11–12</th></tr></thead>
         <tbody>
-          <tr><td>Контур решений</td><td class="dot">●</td><td class="dot">●</td><td class="dot">●</td></tr>
-          <tr><td>Реестр УР</td><td class="dot">●</td><td class="dot">●</td><td class="dot">●</td></tr>
-          <tr><td>РБЗ</td><td class="dot">●</td><td class="dot">●</td><td class="dot">●</td></tr>
-          <tr><td>Процессы BPMN 2.0</td><td></td><td class="dot">●</td><td class="dot">●</td></tr>
-          <tr><td>Передача преемнику</td><td></td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>Контур решений</td><td class="b bs"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b be"></td></tr>
+          <tr><td>Реестр УР</td><td class="b bs"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b be"></td></tr>
+          <tr><td>РБЗ — разбор бизнес-задачи</td><td class="b bs"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b be"></td></tr>
+          <tr><td>Регулярный менеджмент</td><td class="b bs"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b be"></td></tr>
+          <tr><td>Процессы BPMN 2.0</td><td class="b bs"></td><td class="b"></td><td class="b"></td><td class="b be"></td><td></td><td></td></tr>
+          <tr><td>Передача преемнику</td><td></td><td></td><td class="b bs"></td><td class="b"></td><td class="b"></td><td class="b be"></td></tr>
         </tbody>
       </table>
     </div>
@@ -767,26 +776,26 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     </div>
     <div class="smpane left" data-p="ur">
       <table class="smtable left">
-        <thead><tr><th>№</th><th>Задача</th><th>Ответственный</th><th>План / Факт</th><th>Статус</th></tr></thead>
+        <thead><tr><th>№</th><th>Задача</th><th>Ответственный</th><th>План / Факт</th><th>Статус</th><th>Влияние на показатель</th></tr></thead>
         <tbody>
-          <tr><td>UR-005</td><td>Сменить менеджера направления</td><td>рук. отдела</td><td>15.03 / 12.03</td><td class="ok">выполнена</td></tr>
-          <tr><td>UR-006</td><td>Запустить еженедельный отчёт продаж</td><td>аналитик</td><td>20.03 / 20.03</td><td class="ok">выполнена</td></tr>
-          <tr><td>UR-007</td><td>Поднять средний чек</td><td>маркетолог</td><td>30.04 / —</td><td class="warn">в работе</td></tr>
-          <tr><td>UR-008</td><td>Регламент возвратов</td><td>операционист</td><td>15.05 / —</td><td>поставлена</td></tr>
+          <tr><td>UR-005</td><td>Сменить менеджера направления</td><td>рук. отдела</td><td>15.03 / 12.03</td><td class="ok">выполнена</td><td>выручка направления</td></tr>
+          <tr><td>UR-006</td><td>Запустить еженедельный отчёт продаж</td><td>аналитик</td><td>20.03 / 20.03</td><td class="ok">выполнена</td><td>скорость реакции</td></tr>
+          <tr><td>UR-007</td><td>Поднять средний чек</td><td>маркетолог</td><td>30.04 / —</td><td class="warn">в работе</td><td>средний чек, маржа</td></tr>
+          <tr><td>UR-008</td><td>Регламент возвратов</td><td>операционист</td><td>15.05 / —</td><td>поставлена</td><td>доля возвратов</td></tr>
         </tbody>
       </table>
     </div>
     <div class="smpane left" data-p="rbz">
       <table class="smtable left">
-        <thead><tr><th>Точка А (проблема)</th><th>Причина</th><th>Цель в цифрах</th><th>Статус</th></tr></thead>
+        <thead><tr><th>Точка А (проблема)</th><th>Причина</th><th>Точка Б (цель в цифрах)</th><th>Декомпозиция задач</th><th>Статус</th></tr></thead>
         <tbody>
-          <tr><td>Нет роста выручки направления</td><td>слабый менеджер, нет отчётности</td><td>+20% к выручке к 30.06</td><td class="warn">в работе</td></tr>
-          <tr><td>Кассовые разрывы</td><td>нет планирования платежей</td><td>0 разрывов за квартал</td><td class="ok">закрыт с улучшением</td></tr>
+          <tr><td>Нет роста выручки направления</td><td>слабый менеджер, нет отчётности</td><td>+20% к выручке к 30.06</td><td>1) сменить менеджера 2) отчёт продаж 3) план по чеку</td><td class="warn">в работе</td></tr>
+          <tr><td>Кассовые разрывы</td><td>нет планирования платежей</td><td>0 разрывов за квартал</td><td>1) платёжный календарь 2) лимиты 3) резерв</td><td class="ok">закрыт с улучшением</td></tr>
         </tbody>
       </table>
     </div>
   </div>
-  <p class="note rv" style="margin-bottom:38px">Кликайте по вкладкам <span class="dash">—</span> это пример заполнения для условного проекта. «Старт» <span class="dash">—</span> точка А, диагноз на входе: по большинству ЦКП «Нет». К 3-му месяцу «Да» становится больше. Так это выглядит на вашем бизнесе.</p>
+  <p class="note rv" style="margin-bottom:38px">Кликайте по вкладкам <span class="dash">—</span> это пример заполнения для условного проекта (упрощённый формат для наглядности). «Старт» <span class="dash">—</span> точка А, диагноз на входе: по большинству ЦКП «Нет». К 3-му месяцу «Да» становится больше. Так это выглядит на вашем бизнесе.</p>
   <div class="assets">
     <div class="asset core rv"><div class="ag">Ядро системы</div><div class="at">Контур решений</div><div class="ad">4 ключевых показателя <span class="dash">—</span> рычаги блоков, из которых складывается чистая прибыль: видно, где просадка и что сильнее поднимет прибыль. Каждый × 3 контрольные точки (что сделано / что отклонилось / что корректируем). Преемник ведёт сам.</div></div>
     <div class="asset rv"><div class="ag">Показатели</div><div class="at">Контроль показателей по приоритетному блоку</div><div class="ad">Для мини-команды, которая влияет на приоритетный блок прибыли <span class="dash">—</span> еженедельный (где нужно, ежедневный) контроль ключевых показателей и планирование. Растёт точность планирования: план и факт сходятся.</div></div>
@@ -814,14 +823,14 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <p class="sub">По каждому ЦКП (ценный конечный продукт собственника) на конец месяца ставим «Да» или «Нет». Система работает <span class="dash">—</span> когда «Да» становится больше от месяца к месяцу. ЦКП 1–3 <span class="dash">—</span> ежемесячные метрики результата, 4–6 <span class="dash">—</span> состояние системы.</p>
   </div>
   <div class="ckp">
-    <div class="ckprow core rv"><div class="nn">1</div><div class="name">Собственник принимает решения по цифрам</div><div class="crit"><b>Да:</b> ≥3 управленческих решения в месяц зафиксированы в реестре и привязаны к показателям. Растёт от месяца к месяцу.</div></div>
-    <div class="ckprow core rv"><div class="nn">2</div><div class="name">Решения доводятся до исполнения</div><div class="crit"><b>Да:</b> доля принятых решений, перешедших в «выполнено» <span class="dash">—</span> здоровье исполнительского контура команды.</div></div>
-    <div class="ckprow core rv"><div class="nn">3</div><div class="name">Решения дают измеримый результат</div><div class="crit"><b>Да:</b> доля исполненных решений, у которых через 1–3 месяца виден эффект на показателях.</div></div>
-    <div class="ckprow rv"><div class="nn">4</div><div class="name">Собственник работает на стратегию, не на операционку</div><div class="crit"><b>Да:</b> текущую операционку держит команда и преемник; часы собственника в операционке ≤ 30%.</div></div>
-    <div class="ckprow rv"><div class="nn">5</div><div class="name">Система прозрачна для нового сотрудника</div><div class="crit"><b>Да:</b> по каждому ключевому процессу есть схема BPMN 2.0 + регламент + ответственный. Новый человек разбирается за ≤ 2 недели без устных пояснений.</div></div>
-    <div class="ckprow rv"><div class="nn">6</div><div class="name">Стратегическая ясность собственника</div><div class="crit"><b>Да:</b> одним предложением описывает, куда идёт компания в 6–12 месяцев; цели пересматриваются раз в квартал.</div></div>
+    <div class="ckprow core rv"><div class="nn">1</div><div class="cmid"><div class="name">Собственник принимает решения по цифрам</div><div class="give"><b>Что даёт:</b> перестаёте гадать <span class="dash">—</span> каждое решение опирается на цифру. Меньше дорогих ошибок.</div></div><div class="crit"><b>Да:</b> ≥3 управленческих решения в месяц зафиксированы в реестре и привязаны к показателям. Растёт от месяца к месяцу.</div></div>
+    <div class="ckprow core rv"><div class="nn">2</div><div class="cmid"><div class="name">Решения доводятся до исполнения</div><div class="give"><b>Что даёт:</b> решения превращаются в результат, а не в разговоры. Команда перестаёт «забывать» договорённости.</div></div><div class="crit"><b>Да:</b> доля принятых решений, перешедших в «выполнено» <span class="dash">—</span> здоровье исполнительского контура команды.</div></div>
+    <div class="ckprow core rv"><div class="nn">3</div><div class="cmid"><div class="name">Решения дают измеримый результат</div><div class="give"><b>Что даёт:</b> видно, какие решения двигают прибыль, а какие тратят время <span class="dash">—</span> усиливаете первые.</div></div><div class="crit"><b>Да:</b> доля исполненных решений, у которых через 1–3 месяца виден эффект на показателях.</div></div>
+    <div class="ckprow rv"><div class="nn">4</div><div class="cmid"><div class="name">Собственник работает на стратегию, не на операционку</div><div class="give"><b>Что даёт:</b> ваше время освобождается под стратегию и рост. Компания перестаёт упираться в вас.</div></div><div class="crit"><b>Да:</b> текущую операционку держит команда и преемник; часы собственника в операционке ≤ 30%.</div></div>
+    <div class="ckprow rv"><div class="nn">5</div><div class="cmid"><div class="name">Система прозрачна для нового сотрудника</div><div class="give"><b>Что даёт:</b> люди заменяемы без потери качества. Найм и масштабирование перестают быть риском.</div></div><div class="crit"><b>Да:</b> по каждому ключевому процессу есть схема BPMN 2.0 + регламент + ответственный. Новый человек разбирается за ≤ 2 недели без устных пояснений.</div></div>
+    <div class="ckprow rv"><div class="nn">6</div><div class="cmid"><div class="name">Стратегическая ясность собственника</div><div class="give"><b>Что даёт:</b> команда тянет в одну сторону. Легче привлекать партнёров, деньги и сильных людей под понятную цель.</div></div><div class="crit"><b>Да:</b> одним предложением описывает, куда идёт компания в 6–12 месяцев; цели пересматриваются раз в квартал.</div></div>
   </div>
-  <div class="takeaway rv" style="margin-top:30px"><b>Из моего опыта:</b> в собственном проекте выполнение действий по ЦКП прошло путь <b style="color:var(--gold)">2,4% → 96,7% за 18 месяцев</b>. Вот как «система заработала» выглядит в цифрах <span class="dash">—</span> а не «стало вроде получше».</div>
+  <div class="takeaway rv" style="margin-top:30px"><b>Из моего опыта:</b> в собственном проекте доля выполненных действий по ЦКП <span class="dash">—</span> шагов, реально доведённых до конца <span class="dash">—</span> выросла с <b style="color:var(--gold)">2,4% до 70%+ за 18 месяцев</b>. Вот как «система заработала» выглядит в цифрах, а не «стало вроде получше».</div>
 </div></section>
 
 <!-- ОТСТРОЙКА -->
