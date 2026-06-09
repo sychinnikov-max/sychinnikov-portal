@@ -367,6 +367,13 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .smtable td.ok{color:var(--ok);font-weight:600}
 .smtable td.no{color:var(--no)}
 .smtable th:not(:first-child),.smtable td:not(:first-child){text-align:center}
+.smtab{cursor:pointer}
+.smtab:hover{color:var(--ink)}
+.smpane{display:none;overflow-x:auto}
+.smpane.on{display:block}
+.smtable.left th:not(:first-child),.smtable.left td:not(:first-child){text-align:left}
+.smtable td.dot{color:var(--gold);font-weight:700}
+.smtable td.warn{color:var(--gold)}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJQF1P3DJ2"></script>
@@ -402,7 +409,7 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <div>
       <div class="eyebrow" style="font-family:var(--fb);text-transform:none;letter-spacing:.005em;font-weight:600;font-size:clamp(16.5px,1.5vw,20px);line-height:1.4;max-width:56ch">Для собственника, у которого есть команда <span class="dash">—</span> но все ключевые решения всё равно замкнуты на нём</div>
       <h1>Три месяца я веду вас как наставник <span class="dash">—</span> и оставляю систему, которая растит прибыль без меня</h1>
-      <p class="lead">Founder Trajectory <span class="dash">—</span> это не курс и не разовая консультация. Это управляемая траектория: я лично веду собственника, ставлю систему управленческих решений по цифрам и довожу её до измеримого роста прибыли руками вашей команды. На выходе система остаётся работать сама <span class="dash">—</span> с обученным преемником внутри.</p>
+      <p class="lead">Ставлю систему, в которой вы принимаете сильные решения по цифрам <span class="dash">—</span> а команда доводит их до результата. Я ухожу <span class="dash">—</span> система работает сама, с обученным преемником внутри.</p>
       <div class="actions">
         <a href="#cta" class="cta">Обсудить ведение</a>
         <a href="#vedenie" class="cta ghost">Посмотреть, как устроено</a>
@@ -426,9 +433,12 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <div class="h2">Команда есть. Решения <span class="dash">—</span> всё равно на вас.</div>
   </div>
   <div class="painrows">
-    <div class="painrow rv"><span class="pn">01</span><p>В начале периода вы вместе с командой определили план <span class="dash">—</span> выручка, маржа, число клиентов. По итогам цифры другие, <b>а где именно не доработали, не дожали или начался спад <span class="dash">—</span> неизвестно.</b></p></div>
-    <div class="painrow rv"><span class="pn">02</span><p>Делегировали направление <span class="dash">—</span> но без вашего ежедневного контроля темп проседает, важные решения зависают. Возвращаетесь в операционку чинить. <b>Через месяц снова пробуете выйти <span class="dash">—</span> тот же круг.</b></p></div>
-    <div class="painrow rv"><span class="pn">03</span><p>Решения принимаете по ощущению <span class="dash">—</span> <b>цифры либо запаздывают на месяц, либо не сходятся между источниками.</b></p></div>
+    <div class="painrow rv"><span class="pn">01</span><p>Решения принимаете по ощущению <span class="dash">—</span> <b>цифры либо запаздывают на месяц, либо не сходятся между источниками.</b></p></div>
+    <div class="painrow rv"><span class="pn">02</span><p>Решили на совещании <span class="dash">—</span> и оно повисло. <b>Через месяц возвращаетесь к тому же вопросу, будто и не обсуждали.</b></p></div>
+    <div class="painrow rv"><span class="pn">03</span><p>В начале периода определили план <span class="dash">—</span> выручка, маржа, клиенты. По итогам цифры другие, <b>а где именно недожали или пошёл спад <span class="dash">—</span> неизвестно.</b></p></div>
+    <div class="painrow rv"><span class="pn">04</span><p>Делегировали направление <span class="dash">—</span> но без ежедневного контроля темп проседает. Возвращаетесь тушить. <b>Через месяц <span class="dash">—</span> тот же круг.</b></p></div>
+    <div class="painrow rv"><span class="pn">05</span><p>Всё держится в вашей голове. <b>Новый сотрудник въезжает месяцами, процессы <span class="dash">—</span> «спроси у собственника».</b></p></div>
+    <div class="painrow rv"><span class="pn">06</span><p>Куда компания идёт через год <span class="dash">—</span> каждый раз формулируется по-разному. <b>Команда тянет в стороны, а не в один фокус.</b></p></div>
   </div>
   <div class="takeaway rv"><b>Founder Trajectory <span class="dash">—</span> как раз про это:</b> ставит систему, в которой каждое управленческое решение принимается по цифрам, доходит до исполнения и даёт измеримый результат <span class="dash">—</span> а вы выходите из режима «всё на мне».</div>
 </div></section>
@@ -572,38 +582,38 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <p class="sub" style="font-size:clamp(18px,1.6vw,22px);color:var(--ink)">Я не оставляю вас с дорожной картой наедине. Три месяца я веду внедрение лично <span class="dash">—</span> вместе с преемником из вашей команды, пока система не заработает сама.</p>
   </div>
   <div class="stepper">
-    <div class="stepn rv"><div class="wk">Неделя 0 · старт</div><div class="ti">Рамка и карта</div>
+    <div class="stepn rv"><div class="wk">Неделя 0 · старт</div><div class="ti">Точка А → точка Б</div>
       <ul>
-        <li>Установочная сессия: фиксируем точку Б <span class="dash">—</span> что должно появиться к 12-й неделе</li>
-        <li>Заводим Дорожную карту FT <span class="dash">—</span> единый файл, 8 вкладок</li>
-        <li>Назначаем преемника из вашей команды</li>
-        <li>Выбираем 4 ключевых показателя контура решений</li>
+        <li>Фиксируем точку А <span class="dash">—</span> диагноз: Да/Нет по 6 ЦКП</li>
+        <li>Ставим точку Б <span class="dash">—</span> цель на 12 недель в цифрах</li>
+        <li>Заводим Дорожную карту (8 вкладок), назначаем преемника</li>
+        <li>Открываем первый РБЗ <span class="dash">—</span> разбор бизнес-задачи: раскладываем главную проблему до измеримой цели и шагов</li>
+        <li>Запускаем регулярный менеджмент</li>
       </ul>
-      <div class="mv">ЦКП: ставим точку А <span class="dash">—</span> Да/Нет по 6 ЦКП</div>
+      <div class="mv">Ценность: ясная цель в цифрах + первая задача уже в работе</div>
     </div>
-    <div class="stepn rv"><div class="wk">Недели 1–4 · месяц 1</div><div class="ti">Ритм и первые решения</div>
+    <div class="stepn rv"><div class="wk">Недели 1–4 · месяц 1</div><div class="ti">Решения и процессы</div>
       <ul>
-        <li>Запускаем регулярный менеджмент <span class="dash">—</span> встречи в календаре</li>
-        <li>Первые 3–5 управленческих решений по цифрам, в реестр</li>
-        <li>Еженедельный контроль 4 показателей, 30 минут</li>
+        <li>Первые управленческие решения по показателям <span class="dash">—</span> в реестр</li>
+        <li>Описываем ключевые процессы в схемах BPMN 2.0</li>
+        <li>Еженедельный контроль 4 показателей</li>
       </ul>
-      <div class="mv">Метрика: пошёл поток УР</div>
+      <div class="mv">Ценность: пошёл поток решений, первые процессы описаны</div>
     </div>
-    <div class="stepn rv"><div class="wk">Недели 5–8 · месяц 2</div><div class="ti">Глубина и передача</div>
+    <div class="stepn rv"><div class="wk">Недели 5–8 · месяц 2</div><div class="ti">Передача преемнику</div>
       <ul>
-        <li>Открываем РБЗ по самой острой проблеме</li>
         <li>Преемник ведёт встречи сам, под моим контролем</li>
-        <li>Процессная схема решений в BPMN 2.0 <span class="dash">—</span> готовит Катя</li>
+        <li>Новые РБЗ по следующим проблемам</li>
+        <li>Дописываем процессы и регламенты</li>
       </ul>
-      <div class="mv">ЦКП 1–3 идут вверх</div>
+      <div class="mv">Ценность: ЦКП 1–3 растут, преемник держит ритм</div>
     </div>
     <div class="stepn hl rv"><div class="wk">Недели 9–12 · месяц 3</div><div class="ti">Ваш выход и экзамен</div>
       <ul>
-        <li>Собственник выходит из операционки, работает на стратегию</li>
-        <li>Преемник ведёт встречи сам, я наблюдаю</li>
-        <li>Неделя 12 <span class="dash">—</span> финал: преемник ведёт по вкладкам ЦКП → Реестр УР → Графики, я ставлю галочки в Аудите инструментов</li>
+        <li>Собственник на стратегии, преемник ведёт сам</li>
+        <li>Неделя 12 <span class="dash">—</span> экзамен преемника, я ставлю галочки внедрённости</li>
       </ul>
-      <div class="mv">Точка Б: «Да» по ЦКП больше, чем в неделю 0</div>
+      <div class="mv">Ценность: точка Б <span class="dash">—</span> «Да» по ЦКП больше, чем в неделю 0; система работает без меня</div>
     </div>
   </div>
 
@@ -611,10 +621,10 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   <div class="rmwrap rv">
     <div class="rmrow rmhead"><div class="rmname">Встреча</div><div class="rmper">Периодичность</div><div class="rmwhy">Зачем</div></div>
     <div class="rmrow"><div class="rmname">Установочная сессия</div><div class="rmper">однократно · неделя 0</div><div class="rmwhy">Ожидания, дорожная карта, преемник, выбор 4 показателей</div></div>
-    <div class="rmrow"><div class="rmname">Разбор решений по показателям</div><div class="rmper">1 раз / месяц</div><div class="rmwhy">Смотрим показатели → собственник принимает 3–5 решений, фиксируем</div></div>
+    <div class="rmrow"><div class="rmname">Разбор решений по показателям</div><div class="rmper">еженедельно</div><div class="rmwhy">Смотрим показатели → собственник принимает решения, фиксируем в реестре</div></div>
     <div class="rmrow"><div class="rmname">Контроль ключевых показателей</div><div class="rmper">еженедельно · 30 мин</div><div class="rmwhy">Короткая сверка по 4 показателям контура решений</div></div>
-    <div class="rmrow"><div class="rmname">РБЗ-сессия</div><div class="rmper">по триггеру</div><div class="rmwhy">Разбор новой проблемы, не закрываемой текущими решениями</div></div>
-    <div class="rmrow"><div class="rmname">Стратегическая сессия</div><div class="rmper">1 раз / квартал</div><div class="rmwhy">Сверка с целями квартала, корректировка маршрута</div></div>
+    <div class="rmrow"><div class="rmname">РБЗ-сессия</div><div class="rmper">раз в месяц</div><div class="rmwhy">Разбор бизнес-задачи: новая проблема → причина → цель в цифрах → шаги</div></div>
+    <div class="rmrow"><div class="rmname">Стратегическая сессия</div><div class="rmper">раз в месяц</div><div class="rmwhy">Сверка с целями, корректировка маршрута и приоритетов</div></div>
     <div class="rmrow"><div class="rmname">Финальная встреча</div><div class="rmper">однократно · неделя 12</div><div class="rmwhy">Экзамен преемника: ведёт сам, я ставлю галочки внедрённости</div></div>
   </div>
   <div class="rv" style="margin-top:30px;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
@@ -651,10 +661,10 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       <div class="urf"><div class="fk">Результат</div><div class="fv">Новый менеджер вышел, принял проекты</div></div>
       <div class="urf"><div class="fk">Влияние на показатели</div><div class="fv">Расчёт по выручке направления: прогноз → факт</div></div>
     </div>
-    <p class="note" style="margin-top:14px">Пример заполнения. Поля <span class="dash">—</span> реальная структура реестра; данные условные. В реестре собраны все решения проекта со статусами и фактическим влиянием на цифры.</p>
+    <p class="note" style="margin-top:14px"><b>ЦКП 2</b> <span class="dash">—</span> «решения доводятся до исполнения»; <b>РБЗ-3</b> <span class="dash">—</span> третий разбор бизнес-задачи (см. ниже). Пример заполнения: поля <span class="dash">—</span> реальная структура реестра, данные условные.</p>
   </div>
 
-  <div class="sect-head rv" style="margin-top:48px;margin-bottom:18px"><div class="eyebrow">РБЗ <span class="dash">—</span> как переоткрываем проблему</div></div>
+  <div class="sect-head rv" style="margin-top:48px;margin-bottom:18px"><div class="eyebrow">РБЗ (разбор бизнес-задачи) <span class="dash">—</span> как переоткрываем проблему</div></div>
   <div class="rv">
     <div class="flow">
       <span class="flowstep">Точка А <span class="dim">проблема</span></span><span class="flowar">→</span>
@@ -675,23 +685,108 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <p class="sub">Главное отличие от консультантов: я ухожу <span class="dash">—</span> система остаётся работать. Всё живёт в одном файле, который ведёт ваш преемник: <b style="color:var(--ink)">Дорожная карта Founder Trajectory</b>.</p>
   </div>
   <div class="sheetmock rv">
-    <div class="smbar"><span class="smdot"></span><span class="smdot"></span><span class="smdot"></span><span class="smtitle">Дорожная карта Founder Trajectory</span></div>
+    <div class="smbar"><span class="smdot"></span><span class="smdot"></span><span class="smdot"></span><span class="smtitle">Дорожная карта Founder Trajectory <span style="color:var(--ink-dim)">· кликайте по вкладкам</span></span></div>
     <div class="smtabs">
-      <span class="smtab">Содержание</span><span class="smtab">Ожидания</span><span class="smtab on">ЦКП собственника</span><span class="smtab">Аудит инструментов</span><span class="smtab">Ганта</span><span class="smtab">Регулярный менеджмент</span><span class="smtab">Реестр УР</span><span class="smtab">РБЗ</span>
+      <span class="smtab" data-p="content">Содержание</span><span class="smtab" data-p="ok">Ожидания</span><span class="smtab on" data-p="ckp">ЦКП собственника</span><span class="smtab" data-p="ai">Аудит инструментов</span><span class="smtab" data-p="gantt">Диаграмма Ганта</span><span class="smtab" data-p="rm">Регулярный менеджмент</span><span class="smtab" data-p="ur">Реестр УР</span><span class="smtab" data-p="rbz">РБЗ</span>
     </div>
-    <table class="smtable">
-      <thead><tr><th>ЦКП собственника</th><th>Старт</th><th>Мес 1</th><th>Мес 2</th><th>Мес 3</th></tr></thead>
-      <tbody>
-        <tr><td>1 · Решения по цифрам</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td><td class="ok">Да</td></tr>
-        <tr><td>2 · Доведены до исполнения</td><td class="no">Нет</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td></tr>
-        <tr><td>3 · Измеримый результат</td><td class="no">Нет</td><td class="no">Нет</td><td class="no">Нет</td><td class="ok">Да</td></tr>
-        <tr><td>4 · Выход из операционки</td><td class="no">Нет</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td></tr>
-        <tr><td>5 · Прозрачность для нового</td><td class="no">Нет</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td></tr>
-        <tr><td>6 · Стратегическая ясность</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td><td class="ok">Да</td></tr>
-      </tbody>
-    </table>
+    <div class="smpane left" data-p="content">
+      <table class="smtable left">
+        <thead><tr><th>Вкладка</th><th>Зачем нужна</th></tr></thead>
+        <tbody>
+          <tr><td>Ожидания</td><td>Точка А → точка Б и как измеряем</td></tr>
+          <tr><td>ЦКП собственника</td><td>6 ЦКП, статус Да/Нет по месяцам</td></tr>
+          <tr><td>Аудит инструментов</td><td>Какие инструменты внедрены, % системы</td></tr>
+          <tr><td>Диаграмма Ганта</td><td>Когда что внедряем</td></tr>
+          <tr><td>Регулярный менеджмент</td><td>Ритм встреч проекта</td></tr>
+          <tr><td>Реестр УР</td><td>Все управленческие решения со статусами</td></tr>
+          <tr><td>РБЗ</td><td>Разборы бизнес-задач: проблема → цель в цифрах</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="smpane left" data-p="ok">
+      <table class="smtable left">
+        <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+        <tbody>
+          <tr><td>Точка А (старт)</td><td>Решения по ощущению, собственник в операционке каждый день</td></tr>
+          <tr><td>Точка Б (12 недель)</td><td>Поток решений по цифрам, преемник держит систему</td></tr>
+          <tr><td>Что уйдёт</td><td>Ежедневное ручное управление собственника</td></tr>
+          <tr><td>Как измеряем</td><td>6 ЦКП «Да/Нет», растёт от месяца к месяцу</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="smpane on" data-p="ckp">
+      <table class="smtable">
+        <thead><tr><th>ЦКП собственника</th><th>Старт</th><th>Мес 1</th><th>Мес 2</th><th>Мес 3</th></tr></thead>
+        <tbody>
+          <tr><td>1 · Решения по цифрам</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td><td class="ok">Да</td></tr>
+          <tr><td>2 · Доведены до исполнения</td><td class="no">Нет</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td></tr>
+          <tr><td>3 · Измеримый результат</td><td class="no">Нет</td><td class="no">Нет</td><td class="no">Нет</td><td class="ok">Да</td></tr>
+          <tr><td>4 · Выход из операционки</td><td class="no">Нет</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td></tr>
+          <tr><td>5 · Прозрачность для нового</td><td class="no">Нет</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td></tr>
+          <tr><td>6 · Стратегическая ясность</td><td class="no">Нет</td><td class="ok">Да</td><td class="ok">Да</td><td class="ok">Да</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="smpane left" data-p="ai">
+      <table class="smtable left">
+        <thead><tr><th>Инструмент</th><th>Статус</th><th>Внедрён</th></tr></thead>
+        <tbody>
+          <tr><td>Контур решений</td><td class="ok">внедрён</td><td>неделя 1</td></tr>
+          <tr><td>Реестр УР</td><td class="ok">внедрён</td><td>неделя 1</td></tr>
+          <tr><td>РБЗ</td><td class="ok">внедрён</td><td>неделя 0</td></tr>
+          <tr><td>Регламент решений (BPMN)</td><td class="ok">внедрён</td><td>неделя 6</td></tr>
+          <tr><td>Схемы процессов BPMN 2.0</td><td class="warn">3 из 5</td><td>неделя 8</td></tr>
+          <tr><td>% внедрения системы</td><td class="ok">0% → 100%</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="smpane" data-p="gantt">
+      <table class="smtable">
+        <thead><tr><th>Инструмент</th><th>Мес 1</th><th>Мес 2</th><th>Мес 3</th></tr></thead>
+        <tbody>
+          <tr><td>Контур решений</td><td class="dot">●</td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>Реестр УР</td><td class="dot">●</td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>РБЗ</td><td class="dot">●</td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>Процессы BPMN 2.0</td><td></td><td class="dot">●</td><td class="dot">●</td></tr>
+          <tr><td>Передача преемнику</td><td></td><td class="dot">●</td><td class="dot">●</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="smpane left" data-p="rm">
+      <table class="smtable left">
+        <thead><tr><th>Встреча</th><th>Периодичность</th></tr></thead>
+        <tbody>
+          <tr><td>Установочная сессия</td><td>однократно · неделя 0</td></tr>
+          <tr><td>Разбор решений по показателям</td><td>еженедельно</td></tr>
+          <tr><td>Контроль ключевых показателей</td><td>еженедельно · 30 мин</td></tr>
+          <tr><td>РБЗ-сессия</td><td>раз в месяц</td></tr>
+          <tr><td>Стратегическая сессия</td><td>раз в месяц</td></tr>
+          <tr><td>Финальная встреча</td><td>однократно · неделя 12</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="smpane left" data-p="ur">
+      <table class="smtable left">
+        <thead><tr><th>№</th><th>Задача</th><th>Ответственный</th><th>План / Факт</th><th>Статус</th></tr></thead>
+        <tbody>
+          <tr><td>UR-005</td><td>Сменить менеджера направления</td><td>рук. отдела</td><td>15.03 / 12.03</td><td class="ok">выполнена</td></tr>
+          <tr><td>UR-006</td><td>Запустить еженедельный отчёт продаж</td><td>аналитик</td><td>20.03 / 20.03</td><td class="ok">выполнена</td></tr>
+          <tr><td>UR-007</td><td>Поднять средний чек</td><td>маркетолог</td><td>30.04 / —</td><td class="warn">в работе</td></tr>
+          <tr><td>UR-008</td><td>Регламент возвратов</td><td>операционист</td><td>15.05 / —</td><td>поставлена</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="smpane left" data-p="rbz">
+      <table class="smtable left">
+        <thead><tr><th>Точка А (проблема)</th><th>Причина</th><th>Цель в цифрах</th><th>Статус</th></tr></thead>
+        <tbody>
+          <tr><td>Нет роста выручки направления</td><td>слабый менеджер, нет отчётности</td><td>+20% к выручке к 30.06</td><td class="warn">в работе</td></tr>
+          <tr><td>Кассовые разрывы</td><td>нет планирования платежей</td><td>0 разрывов за квартал</td><td class="ok">закрыт с улучшением</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <p class="note rv" style="margin-bottom:38px">Так выглядит рабочая поверхность, которую к концу ведёт ваш преемник. Пример заполнения <span class="dash">—</span> «Да» по ЦКП становится больше от месяца к месяцу.</p>
+  <p class="note rv" style="margin-bottom:38px">Кликайте по вкладкам <span class="dash">—</span> это пример заполнения для условного проекта. «Старт» <span class="dash">—</span> точка А, диагноз на входе: по большинству ЦКП «Нет». К 3-му месяцу «Да» становится больше. Так это выглядит на вашем бизнесе.</p>
   <div class="assets">
     <div class="asset core rv"><div class="ag">Ядро системы</div><div class="at">Контур решений</div><div class="ad">4 ключевых показателя <span class="dash">—</span> рычаги блоков, из которых складывается чистая прибыль: видно, где просадка и что сильнее поднимет прибыль. Каждый × 3 контрольные точки (что сделано / что отклонилось / что корректируем). Преемник ведёт сам.</div></div>
     <div class="asset rv"><div class="ag">Показатели</div><div class="at">Контроль показателей по приоритетному блоку</div><div class="ad">Для мини-команды, которая влияет на приоритетный блок прибыли <span class="dash">—</span> еженедельный (где нужно, ежедневный) контроль ключевых показателей и планирование. Растёт точность планирования: план и факт сходятся.</div></div>
@@ -1023,6 +1118,16 @@ document.querySelectorAll('a.cta,a.ncta').forEach(a=>a.addEventListener('click',
   if(window.ym)ym(109611431,'reachGoal','cta_click');
   if(window.gtag)gtag('event','cta_click',{page_variant:'product'});
 }));
+
+/* интерактивные вкладки дорожной карты */
+document.querySelectorAll('.sheetmock').forEach(sm=>{
+  const tabs=sm.querySelectorAll('.smtab'),panes=sm.querySelectorAll('.smpane');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    const p=t.getAttribute('data-p');
+    tabs.forEach(x=>x.classList.toggle('on',x===t));
+    panes.forEach(x=>x.classList.toggle('on',x.getAttribute('data-p')===p));
+  }));
+});
 </script>
 </body>
 </html>
