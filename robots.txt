@@ -1,7 +1,74 @@
+# sychinnikov.com — приватный портал. По умолчанию закрыт.
+# Публично открыт ТОЛЬКО раздел /foundertrajectory/ (продукт Founder Trajectory).
+# Остальное (finance, tasks, contacts, decisions, wisdom, system) остаётся закрытым.
+
 User-agent: *
 Disallow: /
+Allow: /foundertrajectory/
 
-# Сайт пока закрыт для индексации. Когда откроем публично - заменить на:
-# User-agent: *
-# Allow: /
-# Sitemap: https://sychinnikov.com/sitemap.xml
+# --- ИИ-краулеры: разрешаем читать только /foundertrajectory/ (для AI-видимости) ---
+User-agent: GPTBot
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: OAI-SearchBot
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: ChatGPT-User
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: ClaudeBot
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: anthropic-ai
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: Claude-Web
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: PerplexityBot
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: Perplexity-User
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: Google-Extended
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: Applebot-Extended
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: Bingbot
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: YandexAdditional
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: CCBot
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: Amazonbot
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+Allow: /foundertrajectory/
+
+User-agent: cohere-ai
+Disallow: /
+Allow: /foundertrajectory/
+
+Sitemap: https://sychinnikov.com/foundertrajectory/sitemap.xml
