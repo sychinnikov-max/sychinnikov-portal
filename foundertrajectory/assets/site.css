@@ -338,6 +338,9 @@ form.sending .cta{opacity:.55;pointer-events:none}
 .formok .ok-close{margin-top:6px;background:transparent;border:1px solid var(--hair-gold);color:var(--gold);font-weight:600;font-size:15px;padding:12px 28px;border-radius:10px;cursor:pointer}
 .formok .ok-close:hover{background:color-mix(in oklab,var(--gold) 12%,transparent)}
 .final{background-image:radial-gradient(70% 120% at 50% 0%,rgba(194,166,106,.13),transparent 60%)}
+.final .h2{font-size:clamp(25px,2.8vw,36px)}
+.final .sub{font-size:clamp(16px,1.3vw,18px);margin-top:14px}
+.final .cta-list li{font-size:15.5px}
 
 footer{border-top:1px solid var(--hair);background:var(--surface)}
 .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding:58px 0 32px}
