@@ -64,9 +64,9 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3.2re
 .lead{font-size:clamp(16px,1.25vw,19px);color:var(--ink-muted);max-width:60ch;line-height:1.55;margin-bottom:12px}
 .actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:22px 0 12px}
 .microhint{font-size:17px;color:var(--ink);max-width:54ch;line-height:1.5;margin-bottom:4px}
-.herolist{list-style:none;margin:8px 0 4px;padding:0;max-width:54ch}
-.herolist li{position:relative;padding:5px 0 5px 22px;font-size:17px;color:var(--ink);line-height:1.45}
-.herolist li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.herolist{list-style:none;margin:8px 0 6px;padding:0;max-width:54ch}
+.herolist li{position:relative;padding:5px 0 5px 23px;font-size:17px;color:var(--ink);line-height:1.45}
+.herolist li::before{content:"";position:absolute;left:3px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
 .heroportrait{position:relative}
 .heroportrait img{width:100%;max-width:420px;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:16px;border:1px solid var(--hair-gold);box-shadow:0 30px 70px rgba(0,0,0,.5);display:block;margin-left:auto}
 .heroportrait .cap{max-width:420px;margin:20px 0 0 auto}
