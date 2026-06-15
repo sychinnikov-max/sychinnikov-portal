@@ -31,24 +31,23 @@
     window.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
   }
 
-  /* блок «спроси обо мне у ИИ» — копирование готового запроса */
+  /* блок «спроси обо мне у ИИ» — открываем чат с уже вставленным запросом */
   document.querySelectorAll('.askbtn[data-prompt]').forEach(function(btn){
     btn.addEventListener('click',function(e){
       var text=btn.getAttribute('data-prompt');
-      var url=btn.getAttribute('data-open');
+      var url=btn.getAttribute('data-open')||'';
       var label=btn.querySelector('.lbl');
       var orig=label?label.textContent:'';
-      function done(){
-        btn.classList.add('copied');
-        if(label)label.textContent='Запрос скопирован ✓';
-        if(window.ym)ym(109611431,'reachGoal','ask_ai_copy');
-        if(window.dataLayer)window.dataLayer.push({event:'ask_ai_copy',ai:btn.getAttribute('data-ai')||'',page_variant:variant});
-        setTimeout(function(){btn.classList.remove('copied');if(label)label.textContent=orig;},2600);
-        if(url)window.open(url,'_blank','noopener');
-      }
-      if(navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(done).catch(function(){fallbackCopy(text);done();});
-      }else{fallbackCopy(text);done();}
+      /* если ссылка заканчивается на q= — подставляем запрос прямо в адрес чата */
+      var open=/[?&]q=$/.test(url)?url+encodeURIComponent(text):url;
+      if(window.ym)ym(109611431,'reachGoal','ask_ai_copy');
+      if(window.dataLayer)window.dataLayer.push({event:'ask_ai_copy',ai:btn.getAttribute('data-ai')||'',page_variant:variant});
+      btn.classList.add('copied');
+      if(label)label.textContent='Открываю чат…';
+      setTimeout(function(){btn.classList.remove('copied');if(label)label.textContent=orig;},2600);
+      /* подстраховка: кладём запрос и в буфер обмена */
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).catch(function(){fallbackCopy(text);});}else{fallbackCopy(text);}
+      if(open)window.open(open,'_blank','noopener');
     });
   });
   function fallbackCopy(text){
