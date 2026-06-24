@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#FAFAF7" />
 <title>Финансы · Sychinnikov Portal</title>
-<meta name="description" content="Июнь 2026, платёжный календарь, кошельки на 08.06, фонды, кредит РФ, autonomo Вики." />
+<meta name="description" content="Июнь 2026, кошельки на 24.06 (скрины 07:51-07:52), runway, фонды, кредит РФ, autonomo Вики." />
 <link rel="stylesheet" href="/assets/css/portal.css" />
 <style>
 .fin-summary {
@@ -196,10 +196,10 @@
 <section class="page-hero">
   <div class="page-hero-grid"></div>
   <div class="container page-hero-inner">
-    <p class="page-eyebrow">04 · Финансы · июнь 2026 · обновлено 08.06.2026 (реконсиляция по скринам банков 15:51)</p>
-    <h1 class="page-title">Рабочие счета критически пусты: евро-ликвид €1 330, runway ~1.0 мес. Fishok ~13.06.</h1>
+    <p class="page-eyebrow">04 · Финансы · июнь 2026 · обновлено 24.06.2026 07:52 · источник: скрины приложений · ведёт финдиректор-агент</p>
+    <h1 class="page-title">Зарплата Fishok распределена. Евро-ликвид €1 160 + Bybit 2 715 USDT (~€2 335). Runway ~1.5 мес.</h1>
     <p class="page-sub">
-      Зона 1 (операционка Испания) €4 289 + Зона 2 (autonomo Вики + гестор) €1 151 + кредит РФ из рублей €1 700. Плановый дефицит июня −€1 940 при Fishok €3 500. На 08.06 потрачено по Зоне 1 ~€777 (18% бюджета). Все активы ~€1 894. DDS-структура по кошелькам — источник истины. <code>finance/state.md</code> в Claude-Context. Учёт ведётся только локально в проекте.
+      Зона 1 (операционка Испания) €4 289 + Зона 2 (autonomo Вики + гестор) €1 151. Дефицит −€1 940/мес при Fishok €3 500. Все активы ~€4 447 (24.06). Обязательство Наде €57 не отправлено. IRPF €1 000 к 20.07. Источник истины: <code>finance/state.md</code> + <code>wallets/*.md</code> в Claude-Context.
     </p>
   </div>
 </section>
@@ -232,8 +232,8 @@
       </div>
       <div class="fin-summary-card">
         <div class="fin-summary-label">Runway без дохода</div>
-        <div class="fin-summary-val danger">~1.0 мес</div>
-        <div class="fin-summary-sub">Активы €1 894 / дефицит €1 940/мес · 08.06</div>
+        <div class="fin-summary-val warn">~1.5 мес</div>
+        <div class="fin-summary-sub">Евро-ликвид €1 160 + Bybit ~€2 335 / дефицит €1 940/мес · 24.06</div>
       </div>
     </div>
 
@@ -253,59 +253,44 @@
     </div>
 
     <div class="calendar">
-      <div class="cal-row urgent">
-        <div class="cal-date">04.06<small>сегодня</small></div>
-        <div class="cal-name">Кредит РФ — платёж (просрочен с 02.06)<small>Банк РФ → кредитор · из рублей · НЕ из евро · Андрей оплачивает 04.06</small></div>
-        <div class="cal-sum">170 000 ₽<br><small style="color: var(--color-text-soft); font-weight: 400;">~€1 700</small></div>
-      </div>
-      <div class="cal-row urgent">
-        <div class="cal-date">~08.06<small>автосписание</small></div>
-        <div class="cal-name">Электричество BASER (Wise)<small>🔴 Wise €0.71 — нечем платить. Нужна конвертация Bybit → Wise до 07.06</small></div>
-        <div class="cal-sum">~€35</div>
-      </div>
-      <div class="cal-row upcoming">
-        <div class="cal-date">~05.06<small>на неделе</small></div>
-        <div class="cal-name">Сесилия (через Ирину BA) — сверить статус<small>230 000 ARS ≈ $158 USDT · дедлайн был 30.05 · НЕ оплачен (подтв. 04.06)</small></div>
-        <div class="cal-sum">$158<br><small style="color: var(--color-text-soft); font-weight: 400;">долг</small></div>
-      </div>
-      <div class="cal-row upcoming">
-        <div class="cal-date">до 15.06<small>середина</small></div>
-        <div class="cal-name">Autonomo Вики — alta + вторая ½ Юрию<small>€121 (вторая половина оплаты) + alta autonomo</small></div>
-        <div class="cal-sum">€121</div>
-      </div>
-      <div class="cal-row upcoming">
-        <div class="cal-date">~13.06<small>зарплата</small></div>
-        <div class="cal-name">Fishok — зарплата<small>4 100 USDT на Bybit → конвертация P2P → Wise</small></div>
+      <div class="cal-row done">
+        <div class="cal-date">15.06<small>выполнено</small></div>
+        <div class="cal-name">Fishok — зарплата получена<small>4 070 USDT = €3 500 на Bybit · курс 0.860 EUR/USDT</small></div>
         <div class="cal-sum">+€3 500</div>
       </div>
-      <div class="cal-row upcoming">
-        <div class="cal-date">~15.06<small>автосписание</small></div>
-        <div class="cal-name">Коммуналка Adosinda (Wise)<small>€145 · автосписание</small></div>
-        <div class="cal-sum">€145</div>
+      <div class="cal-row done">
+        <div class="cal-date">16.06<small>выполнено</small></div>
+        <div class="cal-name">Распределение зарплаты Bybit<small>-1 201 USDT (16.06) + переводы 15.06 · план распределения исполнен частично</small></div>
+        <div class="cal-sum">~€1 031</div>
       </div>
       <div class="cal-row upcoming">
-        <div class="cal-date">~30.06<small>конец</small></div>
-        <div class="cal-name">Аренда июля (Wise → хозяин)<small>€855 если хозяин компенсирует горячую воду €145 / иначе €1 000</small></div>
-        <div class="cal-sum">€855–1 000</div>
+        <div class="cal-date">25–30.06<small>ближайшее</small></div>
+        <div class="cal-name">Долг Наде — 50% консультации<small>ещё не отправлено · зафиксировано 24.06</small></div>
+        <div class="cal-sum">€57</div>
       </div>
       <div class="cal-row upcoming">
         <div class="cal-date">конец 06<small>фактура</small></div>
-        <div class="cal-name">Гестор Юрий — ведение<small>€60-65/мес (план €62.5)</small></div>
+        <div class="cal-name">Гестор Юрий — ведение<small>€62.5/мес · с autónomo счёта</small></div>
         <div class="cal-sum">€62.5</div>
       </div>
       <div class="cal-row upcoming">
-        <div class="cal-date">конец 06<small>автосписание</small></div>
-        <div class="cal-name">Cuota autonomo Вики<small>tarifa plana · €88.56 · с её банковского счёта</small></div>
-        <div class="cal-sum">€88.56</div>
+        <div class="cal-date">~30.06<small>конец</small></div>
+        <div class="cal-name">Аренда июля (Wise → хозяин)<small>€855–1 000 · нужен Wise со средствами</small></div>
+        <div class="cal-sum">€855–1 000</div>
       </div>
       <div class="cal-row urgent">
-        <div class="cal-date">02.07<small>через мес</small></div>
+        <div class="cal-date">10.07<small>Париж</small></div>
+        <div class="cal-name">Париж — поездка семьёй<small>🔴 €2 000 не отложено · 16 дней до поездки</small></div>
+        <div class="cal-sum">~€2 000</div>
+      </div>
+      <div class="cal-row urgent">
+        <div class="cal-date">02.07<small>кредит</small></div>
         <div class="cal-name">Кредит РФ — июль<small>170 000 ₽ из рублей · последняя точка перед переключением на евро</small></div>
         <div class="cal-sum">170 000 ₽</div>
       </div>
       <div class="cal-row urgent">
-        <div class="cal-date">20.07<small>важно</small></div>
-        <div class="cal-name">IRPF — первый платёж (modelo 130 за июнь)<small>20% × €5 000 минимум · резерв обязан копиться с июня</small></div>
+        <div class="cal-date">20.07<small>критично</small></div>
+        <div class="cal-name">IRPF — modelo 130 за июнь<small>€1 000 · резерв должен лежать в евро · статус уточняется</small></div>
         <div class="cal-sum">€1 000</div>
       </div>
     </div>
@@ -316,55 +301,60 @@
 
     <!-- Кошельки -->
     <div class="section-head" style="margin-top: 2.5rem;">
-      <h2 class="section-title"><span class="section-num">02</span> Кошельки на 08.06.2026</h2>
-      <p class="section-meta">источник истины: wallets/*.md (DDS) · реконсиляция по скринам 08.06 ~15:51</p>
+      <h2 class="section-title"><span class="section-num">02</span> Кошельки на 24.06.2026</h2>
+      <p class="section-meta">источник истины: wallets/*.md (DDS) · реконсиляция по скринам 24.06 07:51-07:52</p>
     </div>
 
     <div class="wallet-grid">
       <div class="wallet-card ok">
         <div class="wallet-card-name">Наличные дома</div>
-        <div class="wallet-card-bal">€1 315</div>
-        <div class="wallet-card-note">данные 04.06 (скрина нет) · единственный крупный евро-буфер</div>
+        <div class="wallet-card-bal">€850</div>
+        <div class="wallet-card-note">пересчёт Андрея 24.06 ✓ · -€420 дельта vs 18.06 (нераcшифрована)</div>
       </div>
-      <div class="wallet-card low">
+      <div class="wallet-card">
         <div class="wallet-card-name">BBVA *2395</div>
-        <div class="wallet-card-bal">€10.85</div>
-        <div class="wallet-card-note">🔴 критически мало · available €2.19 · withholdings €8.66 · скрин 08.06 ✓</div>
+        <div class="wallet-card-bal">€306.73</div>
+        <div class="wallet-card-note">скрин 23.06 ✓ · avail €253.77 · withholdings €52.96</div>
       </div>
       <div class="wallet-card low">
         <div class="wallet-card-name">Wise EUR</div>
-        <div class="wallet-card-bal">€0.71</div>
-        <div class="wallet-card-note">данные 04.06 (скрина нет) · 🔴 автосписания под угрозой</div>
+        <div class="wallet-card-bal">~€0.71</div>
+        <div class="wallet-card-note">⚠ данные 01.06 · stale · нужен скрин</div>
       </div>
       <div class="wallet-card low">
         <div class="wallet-card-name">Santander *1644</div>
         <div class="wallet-card-bal">€3.18</div>
-        <div class="wallet-card-note">скрин 08.06 ✓ · фон, не активен</div>
+        <div class="wallet-card-note">скрин 23.06 ✓ · фон, не активен</div>
       </div>
-      <div class="wallet-card">
+      <div class="wallet-card ok">
         <div class="wallet-card-name">Bybit USDT</div>
-        <div class="wallet-card-bal">€484</div>
-        <div class="wallet-card-note">530.48 USDT · скрин 08.06 ✓ · основной резерв ликвидности</div>
+        <div class="wallet-card-bal">~€2 335</div>
+        <div class="wallet-card-note">2 715.22 USDT · скрин 24.06 07:52 ✓ · курс 0.860 EUR/USDT</div>
       </div>
       <div class="wallet-card">
-        <div class="wallet-card-name">Ether (мой)</div>
-        <div class="wallet-card-bal">~€80</div>
-        <div class="wallet-card-note">$87.40 · USDC $64.20 + WETH $23.20 · скрин 08.06 ✓ · −$216 трат с 04.06</div>
+        <div class="wallet-card-name">BBVA autónomo *4780</div>
+        <div class="wallet-card-bal">€931</div>
+        <div class="wallet-card-note">скрин 24.06 07:51 ✓ · IRPF earmark · Tributos -€90 22.06 уточнить</div>
+      </div>
+      <div class="wallet-card">
+        <div class="wallet-card-name">Ether / Vault (мой)</div>
+        <div class="wallet-card-bal">€20.65</div>
+        <div class="wallet-card-note">скрин 24.06 ✓ · USDC 10.29 + WETH 7.53 + EURC 2.82 · Coinbase Vault Direct Pay</div>
       </div>
       <div class="wallet-card">
         <div class="wallet-card-name">Ether (Вика)</div>
         <div class="wallet-card-bal">~€29</div>
-        <div class="wallet-card-note">$32.21 · данные 25.05 (скрина нет) · не в основном runway</div>
+        <div class="wallet-card-note">⚠ данные 25.05 · stale · не в основном runway</div>
       </div>
-      <div class="wallet-card">
+      <div class="wallet-card ok">
         <div class="wallet-card-name">Итого активы</div>
-        <div class="wallet-card-bal">€1 894</div>
-        <div class="wallet-card-note">евро-ликвид €1 330 (нал+BBVA+Santander+Wise) + крипто €564 (Bybit+Ether) · 08.06</div>
+        <div class="wallet-card-bal">~€4 447</div>
+        <div class="wallet-card-note">евро-ликвид €1 160 + Bybit €2 335 + autónomo €931 (earmark) + Vault €21 · 24.06</div>
       </div>
     </div>
 
-    <div class="callout danger" style="margin-top: 1rem;">
-      🔴 <strong>BBVA €10.85 и Wise €0.71.</strong> Спендабельные евро на банковских картах = €14.74. Единственный буфер — нал €1 315 (не покрывает автосписания). До зарплаты Fishok ~13.06 (5 дней) — держимся на конвертации Bybit и нале. Коммуналка Comunidad €145 спишется ~15.06 — Wise должен быть пополнён к этой дате.
+    <div class="callout warn" style="margin-top: 1rem;">
+      ⚠ <strong>Открытые вопросы на 24.06:</strong> (1) IRPF €1 000 к 20.07 — где лежит резерв? (2) Tributos -€90 autónomo 22.06 — cuota или что? (3) Наличные -€420 (18–24.06) не расшифрованы — няня/коворкинг/Вика-ЗП оплачены? (4) Wise — stale, нужен скрин. (5) Долг Наде €57 не отправлен. (6) Париж 10.07 — €2 000 не отложено.
     </div>
 
     <!-- План июня -->
@@ -433,8 +423,8 @@
         <div class="fond-bar"><div class="fond-bar-fill" style="width: 5%;"></div></div>
       </div>
       <div class="fond">
-        <div class="fond-name">IRPF-резерв (на Вику)<small>Первый платёж modelo 130 — 20.07.2026 · €1 000</small></div>
-        <div class="fond-val">€0 / €1 000</div>
+        <div class="fond-name">IRPF-резерв (на Вику)<small>Первый платёж modelo 130 — 20.07.2026 · €1 000 · статус резерва уточняется (24.06)</small></div>
+        <div class="fond-val">? / €1 000</div>
         <div class="fond-bar"><div class="fond-bar-fill" style="width: 0%;"></div></div>
       </div>
       <div class="fond">
