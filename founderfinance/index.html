@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Founder Finance · управленческий учет на русском для бизнеса в Европе</title>
+<meta name="description" content="Компания в Европе, а прибыли не видно? Поставлю управленческий учет на русском: реальная прибыль, юнит-экономика, сколько можете забрать себе. Методология «Нескучных финансов», оплата в евро. Бесплатная финансовая диагностика.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Founder Finance">
+<meta property="og:title" content="Компания в Европе, а прибыли не видно?">
+<meta property="og:description" content="Управленческий учет на русском для бизнеса в Европе. Реальная прибыль, юнит-экономика, сколько можете забрать себе. Методология «Нескучных финансов», оплата в евро.">
+<meta property="og:url" content="https://sychinnikov.com/founderfinance/">
+<meta property="og:image" content="https://sychinnikov.com/founderfinance/assets/andrei-portrait.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131210'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' fill='%23C2A66A' text-anchor='middle'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     Founder Finance — быстрый тестовый лендинг (проект finansy-eu).
+     Бренд: Founder Finance (решение Андрея 30.06; сверить с naming-map.md).
+     Дизайн-система: Founder Trajectory (sychinnikov.com/foundertrajectory).
+     Стиль текстов: без ё, без тире. Одно действие: бесплатная финансовая диагностика.
+     noindex до стабилизации (бриф landing-brief.md).
+     TODO перед платным запуском:
+       1. Meta Pixel: вписать PIXEL_ID ниже + событие Lead на отправку формы.
+       2. Подключить отправку форм (FORM_ENDPOINT / FORM_KEY в скрипте).
+       3. Сверить proof с фактура-каноном (без «бывший CEO», компанию не называть).
+       4. Подтвердить домен и перенести шрифт/портрет на свой хостинг.
+     ============================================================ -->
+
+<!-- Meta Pixel (заглушка) — вписать ID и раскомментировать перед тестом
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','PIXEL_ID'); fbq('track','PageView');
+</script>
+-->
+
+<style>
+:root{
+  --bg:#131210;--surface:#1B1814;--surface-2:#221E18;--card:#1F1B16;
+  --ink:#EDE6D6;--ink-muted:#B0A48D;--ink-dim:#8A7E6B;
+  --gold:#C2A66A;--gold-ink:#141009;--gold-deep:#A98E50;--bronze:#9A875C;
+  --ok:#86AE6E;--no:#B07A66;
+  --hair:color-mix(in oklab,var(--ink) 14%,transparent);
+  --hair-gold:color-mix(in oklab,var(--gold) 32%,transparent);
+  --fd:"Playfair Display",Georgia,serif;--fb:"Manrope",system-ui,sans-serif;--fm:"IBM Plex Mono",monospace;
+  --maxw:1380px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden;font-size:17px}
+.inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(24px,4vw,60px)}
+.band{width:100%;border-top:1px solid var(--hair)}
+.band.alt{background:var(--surface)}.band.deep{background:var(--surface-2)}
+.pad{padding-top:clamp(60px,7.5vw,112px);padding-bottom:clamp(60px,7.5vw,112px)}
+.pad.sm{padding-top:clamp(44px,5vw,72px);padding-bottom:clamp(44px,5vw,72px)}
+a{color:inherit}.fd{font-family:var(--fd)}
+.eyebrow{font-family:var(--fm);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.h2{font-family:var(--fd);font-weight:600;font-size:clamp(31px,3.7vw,50px);line-height:1.08;letter-spacing:-.01em}
+.h3{font-family:var(--fd);font-weight:600;font-size:clamp(23px,2.3vw,31px);line-height:1.12}
+.sub{color:var(--ink-muted);font-size:clamp(17px,1.4vw,20px);max-width:62ch;margin-top:16px;line-height:1.6}
+.muted{color:var(--ink-muted)}.dim{color:var(--ink-dim)}
+.sect-head{margin-bottom:48px;max-width:74ch}
+.note{font-size:15px;color:var(--ink-muted);margin-top:18px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:60;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;height:74px;gap:24px}
+.brand{font-family:var(--fd);font-weight:600;font-size:21px;text-decoration:none;color:var(--ink)}.brand b{color:var(--gold);margin:0 .24em}
+.nlinks{display:flex;gap:30px;margin-left:auto;align-items:center}
+.nlinks a{color:var(--ink-muted);text-decoration:none;font-size:15px;font-weight:500}.nlinks a:hover{color:var(--ink)}
+.cta{display:inline-block;background:var(--gold);color:var(--gold-ink);font-weight:700;font-size:18px;padding:17px 32px;border-radius:10px;text-decoration:none;box-shadow:0 14px 36px rgba(194,166,106,.22);cursor:pointer;border:none;font-family:var(--fb)}
+.cta:hover{background:var(--gold-deep)}.cta.sm{padding:12px 22px;font-size:15px;box-shadow:none}
+.cta.ghost{background:transparent;color:var(--gold);border:1px solid var(--hair-gold);box-shadow:none}
+.cta.ghost:hover{background:color-mix(in oklab,var(--gold) 12%,transparent)}
+.ncta{font-size:14px;font-weight:600;color:var(--gold);border:1px solid var(--hair-gold);padding:10px 18px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.ncta:hover{background:color-mix(in oklab,var(--gold) 12%,transparent)}
+.navtoggle{display:none;margin-left:auto;background:transparent;border:1px solid var(--hair-gold);color:var(--gold);border-radius:8px;padding:9px 14px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--fb)}
+@media(max-width:920px){
+  .nlinks{display:none;position:absolute;top:74px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;background:var(--surface);border-bottom:1px solid var(--hair);padding:8px 0}
+  .nlinks.open{display:flex}
+  .nlinks a{padding:14px clamp(24px,4vw,60px);width:100%;font-size:16px}
+  .nlinks .ncta{border:none;color:var(--gold);padding:14px clamp(24px,4vw,60px)}
+  .navtoggle{display:inline-block}
+}
+
+/* hero */
+.hero{background-image:radial-gradient(70% 60% at 78% 16%,rgba(194,166,106,.12),transparent 58%)}
+.hero .inner{min-height:calc(100vh - 74px);display:flex;flex-direction:column;justify-content:center;padding-top:20px;padding-bottom:20px}
+.herorow{flex:1;display:grid;grid-template-columns:1.32fr .68fr;gap:54px;align-items:center}
+@media(max-width:960px){.herorow{grid-template-columns:1fr;gap:34px}}
+h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3.2rem);line-height:1.08;letter-spacing:-.012em;margin:14px 0 16px;max-width:20ch;overflow-wrap:break-word}
+@media(max-width:560px){h1{font-size:clamp(1.72rem,7.2vw,2rem);letter-spacing:-.008em}.herolist li{min-width:0}}
+.lead{font-size:clamp(16px,1.3vw,19px);color:var(--ink-muted);max-width:60ch;line-height:1.55;margin-bottom:6px}
+.actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:24px 0 12px}
+.herolist{list-style:none;margin:14px 0 6px;padding:0 0 0 5px;max-width:56ch}
+.herolist li{display:flex;align-items:flex-start;gap:12px;font-size:17px;color:var(--ink);line-height:1.5;padding:5px 0}
+.herolist li::before{content:"";flex:0 0 7px;height:7px;border-radius:50%;background:var(--gold);margin-top:9px}
+.microhint{font-size:16px;color:var(--ink-muted);max-width:58ch;line-height:1.55;margin-top:14px}
+.microhint b{color:var(--ink);font-weight:600}
+.heroportrait{position:relative}
+.heroportrait img{width:100%;max-width:420px;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:16px;border:1px solid var(--hair-gold);box-shadow:0 30px 70px rgba(0,0,0,.5);display:block;margin-left:auto}
+.heroportrait .cap{max-width:420px;margin:20px 0 0 auto}
+.heroportrait .c1{font-weight:600;font-size:16.5px;line-height:1.4}
+.heroportrait .c2{font-size:14px;color:var(--ink-muted);margin-top:8px;line-height:1.5}
+
+.takeaway{background:var(--card);border:1px solid var(--hair-gold);border-radius:16px;padding:26px 30px;margin-top:30px;max-width:88ch;font-size:17px;line-height:1.6;color:var(--ink)}
+.takeaway b{color:var(--gold)}
+
+/* proofbar */
+.proofbar{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--card);border:1px solid var(--hair-gold);border-radius:18px;overflow:hidden;margin-top:30px}
+@media(max-width:760px){.proofbar{grid-template-columns:1fr 1fr}}
+.pb{padding:26px 22px;text-align:center;border-right:1px solid var(--hair)}
+.pb:last-child{border-right:none}
+@media(max-width:760px){.pb{border-bottom:1px solid var(--hair)}.pb:nth-child(2n){border-right:none}}
+.pb .pbn{font-family:var(--fd);font-weight:700;font-size:clamp(26px,3.4vw,38px);color:var(--gold);line-height:1}
+.pb .pbl{font-size:14px;color:var(--ink-muted);margin-top:10px;line-height:1.4}
+
+/* pain */
+.painrows{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,60px);margin-top:4px}
+@media(max-width:760px){.painrows{grid-template-columns:1fr}}
+.painrow{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:18px 0;border-top:1px solid var(--hair)}
+.painrow .pn{font-family:var(--fd);font-size:clamp(22px,2.4vw,30px);font-weight:700;color:var(--gold);line-height:.9}
+.painrow p{font-size:clamp(15.5px,1.4vw,18px);line-height:1.45;color:var(--ink-muted)}
+.painrow p b{color:var(--ink);font-weight:600}
+
+/* metrics */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:760px){.metrics{grid-template-columns:1fr}}
+.metric{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:36px 32px;display:flex;flex-direction:column}
+.metric .ml{font-family:var(--fd);font-weight:600;font-size:24px;margin:0 0 12px;line-height:1.18}
+.metric .md{font-size:16.5px;color:var(--ink-muted);line-height:1.55}
+.metric .mtrend{margin-top:16px;padding-top:14px;border-top:1px solid var(--hair-gold);font-size:14px;color:var(--gold);font-family:var(--fm);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+
+/* deliverables / moat cards */
+.assets{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.assets{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.assets{grid-template-columns:1fr}}
+.asset{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:28px 26px;display:flex;flex-direction:column}
+.asset.core{border-color:var(--hair-gold);background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 8%,var(--card)),var(--card))}
+.asset .ag{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze)}
+.asset.core .ag{color:var(--gold)}
+.asset .at{font-family:var(--fd);font-weight:600;font-size:20px;margin:10px 0 8px;line-height:1.18}
+.asset .ad{font-size:15px;color:var(--ink-muted);line-height:1.5}
+
+/* steps */
+.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.weeks{grid-template-columns:1fr}}
+.week{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:34px 30px;display:flex;flex-direction:column}
+.week.fin{border-color:var(--hair-gold);background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 8%,var(--card)),var(--card))}
+.week .wn{font-family:var(--fm);font-size:14px;color:var(--gold);letter-spacing:.05em}
+.week .wt{font-family:var(--fd);font-weight:600;font-size:25px;margin:12px 0 16px;line-height:1.15}
+.week p{font-size:16px;color:var(--ink-muted);line-height:1.55;margin-bottom:12px}
+.week .itog{margin-top:auto;padding-top:18px;border-top:1px solid var(--hair-gold)}
+.week .itog .il{font-family:var(--fm);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.week .itog .it{font-size:16px;color:var(--ink);margin-top:8px;line-height:1.5;font-weight:500}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:980px}
+@media(max-width:760px){.team{grid-template-columns:1fr}}
+.tm{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:30px 30px 32px;display:flex;flex-direction:column}
+.tm.lead{border-color:var(--hair-gold)}
+.tm .nm{font-family:var(--fd);font-weight:600;font-size:24px;color:var(--ink)}
+.tm .rl{font-size:14.5px;color:var(--gold);margin:6px 0 16px}
+.tm ul{list-style:none;margin:0}
+.tm li{font-size:15.5px;color:var(--ink-muted);padding:6px 0 6px 18px;position:relative;line-height:1.45}
+.tm li::before{content:"";position:absolute;left:0;top:13px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.tm .foot{font-size:15px;margin-top:14px;padding-top:14px;border-top:1px solid var(--hair);color:var(--ink);line-height:1.45}
+
+/* lead magnet */
+.lmwrap{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 9%,var(--card)),var(--card));border:1.5px solid var(--hair-gold);border-radius:24px;padding:clamp(32px,4vw,52px)}
+@media(max-width:880px){.lmwrap{grid-template-columns:1fr;gap:28px}}
+.lmwrap .h3{margin:12px 0 14px}
+.lmwrap p{color:var(--ink-muted);font-size:16.5px;line-height:1.6}
+.lmcard{background:var(--surface-2);border:1px solid var(--hair);border-radius:16px;padding:28px 26px}
+.lmcard .file{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.lmcard .fic{flex:none;width:46px;height:46px;border-radius:10px;background:color-mix(in oklab,var(--gold) 18%,var(--card));color:var(--gold);font-family:var(--fm);font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center}
+.lmcard .fnm{font-weight:600;font-size:16px;line-height:1.3}
+.lmcard .fmeta{font-size:13px;color:var(--ink-dim);margin-top:3px}
+.lmrow{display:flex;flex-direction:column;gap:10px}
+.lmrow .cta{width:100%;text-align:center;padding:14px 24px;font-size:16px;box-shadow:none}
+
+/* direct contacts */
+.contacts{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:22px}
+.cbtn{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--hair-gold);color:var(--ink);font-weight:600;font-size:15px;padding:12px 20px;border-radius:12px;text-decoration:none;transition:background .2s ease,transform .15s ease}
+.cbtn:hover{background:color-mix(in oklab,var(--gold) 12%,var(--card));transform:translateY(-2px)}
+.cbtn .ico{color:var(--gold);font-family:var(--fm);font-size:13px}
+
+/* cta list + form */
+.cta-list{margin:14px 0 0;padding:0}
+.cta-list li{list-style:none;position:relative;padding:6px 0 6px 22px;color:var(--ink-muted);font-size:16px;line-height:1.5}
+.cta-list li::before{content:"";position:absolute;left:0;top:13px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.formwrap{display:grid;grid-template-columns:.74fr 1.26fr;gap:44px;align-items:start}
+@media(max-width:880px){.formwrap{grid-template-columns:1fr;gap:30px}}
+.formcard{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:24px 24px}
+.fq{margin-bottom:13px}
+.fq .fl{font-size:13.5px;color:var(--ink-muted);margin-bottom:7px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{font-size:13.5px;border:1px solid var(--hair);border-radius:999px;padding:7px 13px;color:var(--ink);cursor:pointer;user-select:none;transition:background .15s ease,color .15s ease,border-color .15s ease;position:relative}
+.chip input{position:absolute;opacity:0;width:0;height:0}
+.chip:hover{border-color:var(--hair-gold)}
+.chip:has(:checked){background:var(--gold);color:var(--gold-ink);border-color:transparent;font-weight:600}
+.finput{width:100%;background:var(--surface-2);border:1px solid var(--hair);border-radius:9px;padding:10px 13px;color:var(--ink);font-size:14px;font-family:var(--fb)}
+input.finput::placeholder,textarea.finput::placeholder{color:var(--ink-dim)}
+input.finput:focus,textarea.finput:focus{outline:none;border-color:var(--gold)}
+textarea.finput{resize:vertical;min-height:38px;line-height:1.45}
+.formcard .cta{width:100%;text-align:center;margin-top:6px;padding:13px 24px;font-size:16px;box-shadow:none}
+.formcard .err{display:none;color:var(--no);font-size:13.5px;margin-top:10px;text-align:center}
+form.sending .cta{opacity:.55;pointer-events:none}
+.final{background-image:radial-gradient(70% 120% at 50% 0%,rgba(194,166,106,.13),transparent 60%)}
+.final .h2{font-size:clamp(26px,2.6vw,38px)}
+
+/* modal */
+.formok{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:24px;background:color-mix(in oklab,#000 78%,transparent);backdrop-filter:blur(6px)}
+.formok.show{display:flex}
+.formok .okcard{background:var(--card);border:1px solid var(--hair-gold);border-radius:22px;padding:clamp(30px,5vw,42px) clamp(24px,4vw,34px);max-width:430px;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:15px;box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.formok .ok-i{width:62px;height:62px;border-radius:50%;background:color-mix(in oklab,var(--ok) 20%,transparent);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700}
+.formok .ok-t{font-family:var(--fd);font-weight:600;font-size:27px}
+.formok .ok-d{font-size:16px;color:var(--ink-muted);line-height:1.55}
+.formok .ok-close{margin-top:6px;background:transparent;border:1px solid var(--hair-gold);color:var(--gold);font-weight:600;font-size:15px;padding:12px 28px;border-radius:10px;cursor:pointer}
+
+/* footer */
+footer{border-top:1px solid var(--hair);background:var(--surface)}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding:58px 0 32px}
+@media(max-width:820px){.fgrid{grid-template-columns:1fr}}
+.fgrid .ft-brand{font-family:var(--fd);font-weight:600;font-size:22px}
+.fgrid .ft-brand b{margin:0 .24em;color:var(--gold)}
+.fgrid p{font-size:15px;color:var(--ink-muted);margin-top:12px;line-height:1.6;max-width:44ch}
+.fgrid a{color:var(--gold);text-decoration:none}
+.fgrid .fcol-h{font-weight:600;font-size:15px;margin-bottom:10px}
+.fgrid .fnav{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.fgrid .fnav a{color:var(--ink-muted)}.fgrid .fnav a:hover{color:var(--gold)}
+.fbar{border-top:1px solid var(--hair);padding:22px 0;font-size:13.5px;color:var(--ink-dim);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* sticky mobile cta */
+.stickybar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;padding:12px clamp(16px,4vw,24px);background:color-mix(in oklab,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--hair-gold)}
+.stickybar a{display:block;text-align:center}
+@media(max-width:720px){.stickybar{display:block}body{padding-bottom:76px}}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="inner">
+  <a class="brand" href="#top">Founder<b>·</b>Finance</a>
+  <button class="navtoggle" id="navtoggle" aria-label="Меню">Меню</button>
+  <nav class="nlinks" id="nlinks">
+    <a href="#pain">Проблема</a>
+    <a href="#result">Что увидите</a>
+    <a href="#how">Как работаю</a>
+    <a href="#calc">Калькулятор</a>
+    <a class="ncta" href="#cta">Бесплатная диагностика</a>
+  </nav>
+</div></header>
+
+<!-- HERO -->
+<section class="hero" id="top"><div class="inner">
+  <div class="herorow">
+    <div>
+      <div class="eyebrow">Управленческий учет на русском для бизнеса в Европе</div>
+      <h1>Компания в Европе, а прибыли не видно?</h1>
+      <p class="lead">Бухгалтер сдает отчеты в налоговую, но не показывает, сколько вы реально зарабатываете. Поставлю управленческий учет на русском.</p>
+      <ul class="herolist">
+        <li>Видите реальную прибыль, а не оборот и не остаток на счете</li>
+        <li>Понимаете юнит-экономику: что прибыльно, а что тянет вниз</li>
+        <li>Знаете, сколько можете забрать себе, без риска для бизнеса</li>
+        <li>Принимаете решения по цифрам, а не на ощущениях</li>
+      </ul>
+      <div class="actions">
+        <a class="cta" href="#cta">Записаться на бесплатную диагностику</a>
+        <a class="cta ghost" href="#calc">Скачать калькулятор прибыли →</a>
+      </div>
+      <p class="microhint">За 30-45 минут на ваших цифрах покажу, где не видно прибыль и что упускает местный бухгалтер. <b>Уйдете с дорожной картой</b>, даже если дальше не работаем.</p>
+    </div>
+    <div class="heroportrait">
+      <img src="/founderfinance/assets/andrei-portrait.jpg" alt="Андрей Сычинников">
+      <div class="cap">
+        <div class="c1">Андрей Сычинников</div>
+        <div class="c2">4 года вел бизнес онлайн и довел оборот до ~€1,4 млн. Прошел постановку управленческого учета как клиент «Нескучных финансов». Со мной финансовый директор с опытом 7+ лет в «Нескучных».</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ПОЛОСА ДОВЕРИЯ -->
+<section class="band alt"><div class="inner pad sm">
+  <div class="proofbar rv">
+    <div class="pb"><div class="pbn">€1,4 млн</div><div class="pbl">оборот бизнеса, который вел онлайн 4 года</div></div>
+    <div class="pb"><div class="pbn">7+ лет</div><div class="pbl">опыт финдиректора команды в «Нескучных финансах»</div></div>
+    <div class="pb"><div class="pbn">НФ</div><div class="pbl">методология управленческого учета «Нескучных финансов»</div></div>
+    <div class="pb"><div class="pbn">Евро</div><div class="pbl">оплата на европейский счет, по-белому</div></div>
+  </div>
+</div></section>
+
+<!-- ПРОБЛЕМА -->
+<section class="band" id="pain"><div class="inner pad">
+  <div class="sect-head rv">
+    <div class="eyebrow">С чем ко мне приходят</div>
+    <h2 class="h2" style="margin-top:14px">Оборот в евро идет, а прибыли не видно</h2>
+  </div>
+  <div class="painrows rv">
+    <div class="painrow"><div class="pn">01</div><p><b>Оборот в евро идет, а денег больше не становится.</b> Куда уходит прибыль, по цифрам непонятно. Решения принимаются на ощущениях.</p></div>
+    <div class="painrow"><div class="pn">02</div><p><b>Местный бухгалтер делает только налоги.</b> Сдает отчеты в налоговую, но управленческий учет не ведет и по-русски не объяснит.</p></div>
+    <div class="painrow"><div class="pn">03</div><p><b>Непонятно, сколько можно забрать себе.</b> Боитесь вынуть лишнее и подрезать бизнес, или наоборот годами недоплачиваете себе.</p></div>
+    <div class="painrow"><div class="pn">04</div><p><b>Привыкли видеть бизнес по цифрам, а тут летите вслепую.</b> Российские сервисы здешних реалий не знают, местные не на русском.</p></div>
+  </div>
+  <div class="takeaway rv">Дело не в вас и не в бизнесе. Между местным бухгалтером и российскими сервисами есть зазор: управленческий учет на русском под европейские реалии почти никто не делает. <b>Это я и закрываю.</b></div>
+</div></section>
+
+<!-- РЕЗУЛЬТАТ -->
+<section class="band alt" id="result"><div class="inner pad">
+  <div class="sect-head rv">
+    <div class="eyebrow">Что у вас появится</div>
+    <h2 class="h2" style="margin-top:14px">Три вещи, которые вы наконец увидите</h2>
+    <p class="sub">Управленческий учет нужен не ради красивых отчетов, а ради трех результатов. По ним его и оценивайте.</p>
+  </div>
+  <div class="metrics rv">
+    <div class="metric">
+      <div class="ml">Реальная прибыль</div>
+      <div class="md">Управленческий отчет о прибыли: маржинальный доход, операционная и чистая прибыль, и доля каждой статьи в обороте. Вы перестаете путать прибыль с оборотом и остатком на счете.</div>
+      <div class="mtrend">видно за каждый месяц</div>
+    </div>
+    <div class="metric">
+      <div class="ml">Юнит-экономика и дивиденды</div>
+      <div class="md">Видно, что прибыльно, а что тянет вниз, и сколько вы можете забирать себе, не подрезая оборотку и развитие бизнеса.</div>
+      <div class="mtrend">что прибыльно, что нет</div>
+    </div>
+    <div class="metric">
+      <div class="ml">Решения по цифрам</div>
+      <div class="md">Финмодель и три сценария: что будет с прибылью, если поднять цену, нанять человека или вложиться в рекламу. Считаете последствия заранее.</div>
+      <div class="mtrend">что если, до того как сделали</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ЧТО ВХОДИТ -->
+<section class="band"><div class="inner pad">
+  <div class="sect-head rv">
+    <div class="eyebrow">Что входит в учет</div>
+    <h2 class="h2" style="margin-top:14px">Понятная финансовая картина вашей компании в Европе</h2>
+  </div>
+  <div class="assets rv">
+    <div class="asset core"><div class="ag">Отчет</div><div class="at">Отчет о прибыли (P&amp;L)</div><div class="ad">Реальная прибыль по уровням и доля каждой статьи в обороте. Видно, где именно утекают деньги.</div></div>
+    <div class="asset"><div class="ag">Анализ</div><div class="at">Юнит-экономика</div><div class="ad">Сколько приносит и сколько съедает каждый продукт, заказ или направление. Что масштабировать, а что резать.</div></div>
+    <div class="asset"><div class="ag">Контроль</div><div class="at">Движение денег и платежный календарь</div><div class="ad">Откуда пришли и куда ушли деньги, и хватит ли на ближайшие платежи. Кассовые разрывы видны заранее.</div></div>
+    <div class="asset"><div class="ag">Доход</div><div class="at">Сколько забрать себе</div><div class="ad">Дивидендная политика: сколько можно вывести себе, не подрезая оборотку и развитие.</div></div>
+    <div class="asset"><div class="ag">Решения</div><div class="at">Финмодель и три сценария</div><div class="ad">Расчет «что будет, если». Для решений о росте, найме, рекламе и цене, до того как вложили деньги.</div></div>
+    <div class="asset" style="justify-content:center;background:transparent;border-style:dashed"><div class="ad" style="font-size:16px;color:var(--ink)">Все собирается на <b>ваших</b> данных и остается вашим. Учет ведет финансовый директор, а цифрами управляете вы.</div></div>
+  </div>
+</div></section>
+
+<!-- КАК РАБОТАЮ -->
+<section class="band alt" id="how"><div class="inner pad">
+  <div class="sect-head rv">
+    <div class="eyebrow">Как работаю</div>
+    <h2 class="h2" style="margin-top:14px">Три шага: от бесплатной диагностики до учета, который ведут за вас</h2>
+  </div>
+  <div class="weeks rv">
+    <div class="week fin">
+      <div class="wn">Шаг 1 · бесплатно</div>
+      <div class="wt">Финансовая диагностика</div>
+      <p>За 30-45 минут на ваших цифрах показываю, где вы не видите прибыль и что упускает местный бухгалтер. Без обязательств.</p>
+      <div class="itog"><div class="il">Что на выходе</div><div class="it">Дорожная карта по вашим цифрам. Даже если дальше не работаем, она остается у вас.</div></div>
+    </div>
+    <div class="week">
+      <div class="wn">Шаг 2 · несколько недель</div>
+      <div class="wt">Постановка учета</div>
+      <p>Ставим управленческий учет под европейский контур: прибыль, юнит-экономика, движение денег, сценарии. Работает финдиректор с опытом 7+ лет в «Нескучных финансах», под моим контролем.</p>
+      <div class="itog"><div class="il">Что на выходе</div><div class="it">Учет поставлен. Вы впервые видите бизнес в цифрах целиком.</div></div>
+    </div>
+    <div class="week">
+      <div class="wn">Шаг 3 · ежемесячно</div>
+      <div class="wt">Ведение и решения</div>
+      <p>Финдиректор ведет учет каждый месяц, я помогаю принимать решения по цифрам. Оплата в евро по-белому.</p>
+      <div class="itog"><div class="il">Что на выходе</div><div class="it">Каждый месяц видно прибыль и понятно, что делать дальше.</div></div>
+    </div>
+  </div>
+  <div class="takeaway rv">Точную стоимость постановки и ведения называю на диагностике, под ваш объем. Ориентир: это <b>в разы дешевле</b> штатного финансиста (в Европе это €60-120 тыс. в год), и за цифрами стоит команда с методологией, а не вы в редкие свободные вечера.</div>
+</div></section>
+
+<!-- ТРИ МИРА (МОАТ) -->
+<section class="band"><div class="inner pad">
+  <div class="sect-head rv">
+    <div class="eyebrow">Почему вы летите вслепую</div>
+    <h2 class="h2" style="margin-top:14px">Вы зажаты между тремя мирами, и ни один вас не закрывает</h2>
+  </div>
+  <div class="assets rv" style="grid-template-columns:repeat(3,1fr)">
+    <div class="asset"><div class="ag">Мир 1</div><div class="at">Местный бухгалтер</div><div class="ad">Делает только отчеты в налоговую (compliance). Управленческий учет не ведет, по-русски не объяснит, для ваших решений бесполезен.</div></div>
+    <div class="asset"><div class="ag">Мир 2</div><div class="at">Российские сервисы</div><div class="ad">Управленческий учет по-русски и понятно, но не знают европейских реалий (евро, местные налоги, структура) и сидят на российском контуре оплаты.</div></div>
+    <div class="asset core"><div class="ag">Мир 3</div><div class="at">Founder Finance</div><div class="ad">На пересечении: управленческий учет по модели «Нескучных» под европейский контур, оплата в евро по-белому, плюс мой слой решений по цифрам.</div></div>
+  </div>
+  <div class="takeaway rv">Управленческий учет на русском под европейские реалии почти никто не делает. Я единственный на этом пересечении: <b>методология «Нескучных финансов» + команда русскоязычных финдиректоров + оплата в евро по-белому.</b></div>
+</div></section>
+
+<!-- КОМАНДА -->
+<section class="band alt"><div class="inner pad">
+  <div class="sect-head rv">
+    <div class="eyebrow">Кто работает с вашими цифрами</div>
+    <h2 class="h2" style="margin-top:14px">Вас ведет не один человек</h2>
+    <p class="sub">Я отвечаю за смысл цифр и решения, а финансовый директор за сам учет. Это снимает страх «а вдруг будет задача, которую не закроют».</p>
+  </div>
+  <div class="team rv">
+    <div class="tm lead">
+      <div class="nm">Андрей Сычинников</div>
+      <div class="rl">Founder Finance · автор продукта</div>
+      <ul>
+        <li>4 года вел бизнес онлайн, довел оборот до ~€1,4 млн</li>
+        <li>Прошел постановку управленческого учета как клиент «Нескучных финансов»</li>
+        <li>MBA, Русская Школа Управления</li>
+      </ul>
+      <div class="foot">Помогаю превращать отчеты в управленческие решения и держу качество всей работы.</div>
+    </div>
+    <div class="tm">
+      <div class="nm">Мария Горбунова</div>
+      <div class="rl">Финансовый директор</div>
+      <ul>
+        <li>Более 7 лет практики в «Нескучных финансах»</li>
+        <li>Управленческий P&amp;L, юнит-экономика, финмодель</li>
+        <li>Ставит и ведет учет на ваших данных</li>
+      </ul>
+      <div class="foot">Финансовый контур под ключ. Дипломы и сертификаты по запросу.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ЛИД-МАГНИТ -->
+<section class="band" id="calc"><div class="inner pad">
+  <div class="lmwrap rv">
+    <div>
+      <div class="eyebrow">Бесплатный калькулятор</div>
+      <div class="h3">Посчитайте свою реальную прибыль за 10 минут</div>
+      <p>Excel-таблица по структуре управленческого учета. Вводите оборот и расходы, видите маржинальный доход, операционную и чистую прибыль и долю каждой статьи. Внутри блок «три сценария»: что станет с прибылью, если продажи вырастут или упадут. Та же логика, по которой мы строим финмодель на диагностике.</p>
+    </div>
+    <div class="lmcard">
+      <div class="file">
+        <div class="fic">XLSX</div>
+        <div>
+          <div class="fnm">Калькулятор управленческой прибыли</div>
+          <div class="fmeta">Excel · открывается в Excel, Numbers, Google Таблицах</div>
+        </div>
+      </div>
+      <form id="lmform" class="lmrow" novalidate>
+        <input class="finput" name="contact" type="text" placeholder="Telegram или почта, куда прислать разбор" autocomplete="off">
+        <a class="cta" id="lmget" href="/founderfinance/lead-magnet/calculator-upravlencheskaya-pribyl.xlsx" download>Получить калькулятор</a>
+        <p class="note" style="margin-top:2px;font-size:13.5px">Файл скачается сразу. Оставите контакт, пришлю короткий разбор под ваши цифры.</p>
+      </form>
+    </div>
+  </div>
+</div></section>
+
+<!-- ГДЕ И КАК -->
+<section class="band alt"><div class="inner pad sm">
+  <div class="sect-head rv" style="margin-bottom:30px">
+    <div class="eyebrow">Где и как работаю</div>
+    <h2 class="h2" style="margin-top:14px">База в Испании, на русском, оплата в евро</h2>
+    <p class="sub">Работаю с русскоязычными собственниками европейских компаний: Испания, Германия, Кипр, Португалия, Прибалтика. Язык, расчеты и юридический контур без лишнего трения.</p>
+  </div>
+  <div class="proofbar rv">
+    <div class="pb"><div class="pbn">Испания</div><div class="pbl">моя база, работаю с фаундерами по всей Европе</div></div>
+    <div class="pb"><div class="pbn">Русский</div><div class="pbl">веду и думаю на родном для вас языке</div></div>
+    <div class="pb"><div class="pbn">Евро</div><div class="pbl">оплата на европейский счет, по-белому</div></div>
+    <div class="pb"><div class="pbn">Онлайн</div><div class="pbl">встречи и ведение из любой точки</div></div>
+  </div>
+</div></section>
+
+<!-- ФОРМА -->
+<section class="band final" id="cta"><div class="inner pad">
+  <div class="formwrap">
+    <div class="rv">
+      <div class="eyebrow">Бесплатная финансовая диагностика · 30-45 минут</div>
+      <div class="h2" style="margin-top:14px">Покажу, где вы не видите прибыль</div>
+      <p class="sub">За полчаса на ваших цифрах вы:</p>
+      <ul class="cta-list">
+        <li>увидите реальную прибыль и юнит-экономику;</li>
+        <li>поймете, сколько можете забирать себе;</li>
+        <li>получите дорожную карту: что поставить в учете в первую очередь.</li>
+      </ul>
+      <p class="sub" style="margin-top:16px">Уйдете с конкретными выводами по своим цифрам, даже если дальше мы не работаем.</p>
+      <p class="note" style="margin-top:18px">Или напишите напрямую, Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
+    </div>
+    <div class="formcard rv">
+      <form id="leadform" novalidate>
+        <input type="checkbox" name="botcheck" id="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="fq"><div class="fl">1 · Где зарегистрирована компания?</div><div class="chips">
+          <label class="chip"><input type="radio" name="geo" value="Испания">Испания</label>
+          <label class="chip"><input type="radio" name="geo" value="Германия">Германия</label>
+          <label class="chip"><input type="radio" name="geo" value="Кипр">Кипр</label>
+          <label class="chip"><input type="radio" name="geo" value="другая ЕС">другая ЕС</label>
+        </div></div>
+        <div class="fq"><div class="fl">2 · Юрлицо в ЕС уже есть?</div><div class="chips">
+          <label class="chip"><input type="radio" name="entity" value="да">да</label>
+          <label class="chip"><input type="radio" name="entity" value="в процессе">в процессе</label>
+          <label class="chip"><input type="radio" name="entity" value="пока нет">пока нет</label>
+        </div></div>
+        <div class="fq"><div class="fl">3 · Оборот в месяц?</div><div class="chips">
+          <label class="chip"><input type="radio" name="turnover" value="до €10k">до €10k</label>
+          <label class="chip"><input type="radio" name="turnover" value="€10-50k">€10-50k</label>
+          <label class="chip"><input type="radio" name="turnover" value="€50-150k">€50-150k</label>
+          <label class="chip"><input type="radio" name="turnover" value="больше €150k">€150k+</label>
+        </div></div>
+        <div class="fq"><div class="fl">4 · Что сейчас с учетом</div>
+          <textarea class="finput" name="problem" rows="2" placeholder="Например: бухгалтер сдает отчетность в налоговую, но реальную прибыль я не вижу"></textarea></div>
+        <div class="fq"><div class="fl">5 · Ваше имя и как с вами связаться</div>
+          <input class="finput" name="uname" type="text" placeholder="Имя" style="margin-bottom:9px" autocomplete="off">
+          <input class="finput" name="contact" type="text" placeholder="Telegram, почта или телефон, куда вам ответить" autocomplete="off"></div>
+        <button type="submit" class="cta">Записаться на бесплатную диагностику</button>
+        <p class="err" id="formerr">Не отправилось. Напишите напрямую в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a></p>
+        <p class="note" style="text-align:center">Читаю каждую заявку лично. Отвечаю в течение 24 часов.</p>
+      </form>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="inner">
+  <div class="fgrid">
+    <div>
+      <div class="ft-brand">Founder<b>·</b>Finance</div>
+      <p>Управленческий учет на русском для бизнеса в Европе. Реальная прибыль, юнит-экономика, решения по цифрам. Методология «Нескучных финансов».</p>
+      <div class="contacts">
+        <a class="cbtn" href="https://t.me/Sychinnikov" target="_blank" rel="noopener"><span class="ico">→</span>Telegram</a>
+        <a class="cbtn" href="https://wa.me/34657306353" target="_blank" rel="noopener"><span class="ico">→</span>WhatsApp</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-h">Разделы</div>
+      <ul class="fnav">
+        <li><a href="#pain">Проблема</a></li>
+        <li><a href="#result">Что увидите</a></li>
+        <li><a href="#how">Как работаю</a></li>
+        <li><a href="#calc">Калькулятор прибыли</a></li>
+        <li><a href="#cta">Бесплатная диагностика</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fcol-h">Написать напрямую</div>
+      <p>Telegram: <a href="https://t.me/Sychinnikov">@Sychinnikov</a><br><span class="dim">Отвечаю лично, в течение 24 часов.</span></p>
+      <p style="margin-top:14px"><a href="#cta">Записаться на бесплатную диагностику →</a></p>
+    </div>
+  </div>
+  <div class="inner fbar" style="padding-left:0;padding-right:0">
+    <div>© 2026 Founder Finance</div>
+    <div>Оплата в евро · европейский счет · методология «Нескучных финансов»</div>
+  </div>
+</div></footer>
+
+<!-- sticky mobile cta -->
+<div class="stickybar"><a class="cta" href="#cta" style="box-shadow:none">Бесплатная диагностика →</a></div>
+
+<!-- success modal -->
+<div class="formok" id="formok" aria-hidden="true">
+  <div class="okcard">
+    <div class="ok-i">✓</div>
+    <div class="ok-t" id="oktitle">Заявка у меня</div>
+    <div class="ok-d" id="okdesc">Читаю каждую лично и отвечаю в течение 24 часов. Если удобнее, пишите сразу в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</div>
+    <button class="ok-close" id="okclose" type="button">Закрыть</button>
+  </div>
+</div>
+
+<script>
+// ===== Founder Finance — поведение прототипа =====
+// Отправка форм: впишите endpoint (например Web3Forms access_key). Пусто = прототип покажет окно успеха.
+const FORM_ENDPOINT = "https://api.web3forms.com/submit"; const FORM_KEY = "24d71a36-877d-46e1-9956-566f0dbb8d50";
+
+const nt=document.getElementById('navtoggle'), nl=document.getElementById('nlinks');
+nt&&nt.addEventListener('click',()=>nl.classList.toggle('open'));
+nl&&nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+const okm=document.getElementById('formok');
+function showOk(title,desc){if(title)document.getElementById('oktitle').textContent=title;if(desc)document.getElementById('okdesc').innerHTML=desc;okm.classList.add('show');}
+document.getElementById('okclose').addEventListener('click',()=>okm.classList.remove('show'));
+okm.addEventListener('click',e=>{if(e.target===okm)okm.classList.remove('show');});
+
+function track(){try{if(window.fbq)fbq('track','Lead');}catch(e){}}
+async function sendForm(data){
+  if(!FORM_ENDPOINT||!FORM_KEY)return true;
+  try{const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:FORM_KEY,...data})});return r.ok;}catch(e){return false;}
+}
+
+const lf=document.getElementById('leadform');
+const val=(n)=>{const c=lf.querySelector('[name="'+n+'"]:checked');if(c)return c.value;const el=lf.querySelector('[name="'+n+'"]');return el?(el.value||'').trim():'';};
+lf&&lf.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  if(lf.botcheck.checked)return;
+  const contactEl=lf.querySelector('[name="contact"]');
+  if(!contactEl.value.trim()){contactEl.focus();contactEl.style.borderColor='var(--no)';return;}
+  contactEl.style.borderColor='';document.getElementById('formerr').style.display='none';
+  lf.classList.add('sending');
+  const contact=contactEl.value.trim();
+  const msg='[ЗАЯВКА · Founder Finance]\nСтрана: '+(val('geo')||'—')+'\nЮрлицо в ЕС: '+(val('entity')||'—')+'\nОборот: '+(val('turnover')||'—')+'\nЧто с учетом: '+(val('problem')||'—')+'\nИмя: '+(val('uname')||'—')+'\nКонтакт: '+contact;
+  const data={subject:'Заявка на диагностику — Founder Finance',from_name:'Founder Finance · лендинг',name:val('uname')||'Заявка с лендинга',message:msg};
+  if(/@/.test(contact))data.replyto=contact;
+  const ok=await sendForm(data);
+  lf.classList.remove('sending');
+  if(ok){track();lf.reset();showOk('Заявка у меня','Читаю каждую лично и отвечаю в течение 24 часов. Если удобнее, пишите сразу в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.');}
+  else{document.getElementById('formerr').style.display='block';}
+});
+
+const lmform=document.getElementById('lmform'), lmget=document.getElementById('lmget');
+lmget&&lmget.addEventListener('click',async()=>{
+  const contact=(lmform.contact.value||'').trim();
+  if(contact){await sendForm({subject:'Калькулятор: контакт с лендинга — Founder Finance',from_name:'Founder Finance · калькулятор',name:'Запрос калькулятора',message:'Контакт оставил калькулятор на лендинге: '+contact,replyto:(/@/.test(contact)?contact:undefined)});track();
+    setTimeout(()=>showOk('Калькулятор у вас','Файл скачивается. Я получил ваш контакт и пришлю короткий разбор под ваши цифры. Можно сразу написать в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.'),400);
+    lmform.reset();}
+});
+</script>
+</body>
+</html>

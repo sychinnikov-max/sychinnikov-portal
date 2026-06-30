@@ -1,10 +1,13 @@
 # sychinnikov.com — приватный портал. По умолчанию закрыт.
-# Публично открыт ТОЛЬКО раздел /foundertrajectory/ (продукт Founder Trajectory).
+# Публично открыт раздел /foundertrajectory/ (продукт Founder Trajectory).
+# /founderfinance/ — тестовый лендинг под платный трафик: краулинг разрешён (для превью ссылок),
+#   но индексация выключена через meta noindex на самой странице.
 # Остальное (finance, tasks, contacts, decisions, wisdom, system) остаётся закрытым.
 
 User-agent: *
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /founderfinance/
 
 # --- ИИ-краулеры: разрешаем читать только /foundertrajectory/ (для AI-видимости) ---
 User-agent: GPTBot
