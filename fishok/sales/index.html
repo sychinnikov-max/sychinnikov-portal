@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Отдел продаж · Rob.EI — Fishok OS</title>
+<link rel="icon" href="/assets/fishok/logo.svg">
+<link rel="stylesheet" href="/assets/fishok/fishok.css">
+<style>
+  .robei{ background:linear-gradient(150deg,#161b22 0%,#1d2530 60%,#14324b 100%); color:#EAF2F9; border-radius:var(--fk-r-lg); overflow:hidden; position:relative; }
+  .robei .inner{ padding:1.8rem 1.9rem; position:relative; z-index:2; }
+  .robei h3{ color:#fff; }
+  .robei .robei-badge{ display:inline-flex; align-items:center; gap:.5rem; font-family:var(--fk-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:#8FD4F2; padding:.3rem .6rem; border:1px solid rgba(143,212,242,.3); border-radius:100px; }
+  .robei .cap{ display:flex; gap:.6rem; padding:.55rem 0; border-bottom:1px solid rgba(255,255,255,.08); font-size:.9rem; color:#C6D6E4; }
+  .robei .cap:last-child{ border-bottom:0; }
+  .robei .cap .m{ color:#22B4E8; flex:none; font-weight:700; }
+  .bar-row{ display:grid; grid-template-columns:150px 1fr auto; gap:.7rem; align-items:center; padding:.4rem 0; font-size:.86rem; }
+  .bar-track{ background:var(--fk-bg-2); border-radius:100px; height:16px; overflow:hidden; }
+  .bar-fill{ height:100%; background:var(--fk-grad); border-radius:100px; }
+  @media(max-width:560px){ .bar-row{ grid-template-columns:110px 1fr auto; } }
+</style>
+</head>
+<body>
+
+<header class="fk-header">
+  <div class="wrap fk-nav">
+    <a href="/fishok/" class="fk-brand"><img src="/assets/fishok/logo.svg" alt="Fishok"> Fishok <small>OS</small></a>
+    <nav class="fk-nav-links">
+      <a href="/fishok/shtab/">Генштаб</a>
+      <a href="/fishok/finance/">Финансы</a>
+      <a href="/fishok/sales/">Продажи</a>
+      <a href="/fishok/system/">Система</a>
+      <a href="/fishok/tasks/">Доска</a>
+      <a href="/" class="fk-nav-back">← Портал</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section-tight" style="padding-top:2.4rem;">
+  <div class="wrap">
+    <span class="eyebrow blue">Отдел продаж · departments/sales/</span>
+    <h1 class="mt1">Отдел продаж</h1>
+    <p class="lead muted mt2" style="max-width:78ch;">Первый контур, который разворачивается в цифровую модель компании: здесь уже есть готовое цифровое поле — общий чат, CRM Pipedrive, почты на домене fishok.lv, папка на Google Диске. Владелец контура — Андрей, роль РОП под Кристапсом закрепляется. Приоритет №1 от Кристапса (лично 01.07): навести порядок в продажах, а не финучет.</p>
+    <div class="flex gap wrap-flex mt2">
+      <span class="pill"><span class="dot r"></span>Приоритет №1 Кристапса</span>
+      <span class="pill"><span class="dot b"></span>РОП: Андрей</span>
+      <span class="pill"><span class="dot a"></span>Воронка €635К · 95% на 3 клиентах</span>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ROB.EI -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid g-2" style="align-items:stretch;gap:1.4rem;">
+      <div class="robei">
+        <div class="inner">
+          <span class="robei-badge">● AI-директор по продажам</span>
+          <h3 class="mt2" style="font-size:1.6rem;">Rob.EI</h3>
+          <p style="color:#B7C8D8;">Цифровой двойник роли руководителя отдела продаж. Скоуп строго равен папке <code style="color:#8FD4F2;">departments/sales/</code>: люди отдела, поверхности, процессы, состояние. По принципу изоляции (паттерн octo-advisor) не видит другие отделы и штаб. Первый разворачиваемый двойник — потому что у продаж уже есть живое цифровое поле.</p>
+          <div class="mt2">
+            <div class="cap"><span class="m">→</span>Читает воронку из Pipedrive живьем: снимок сделок WON/OPEN, топ-клиенты, концентрация (деньги сверять с банком).</div>
+            <div class="cap"><span class="m">→</span>Держит карту поверхностей отдела: что где живет, кто owner, готовит подключение через Google-админку.</div>
+            <div class="cap"><span class="m">→</span>Черновики первых касаний по лидам, сбор инфо, напоминания (спека двойника Владиславса, TODO).</div>
+            <div class="cap"><span class="m">→</span>Типовые отгрузки, статусы, напоминания клиентам, свод по заказам (спека двойника Даниэля, TODO).</div>
+            <div class="cap"><span class="m">→</span>Два управленческих вывода из воронки: дожать три крупных и строить второй эшелон через Владиславса.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <span class="eyebrow">Статус двойника</span>
+          <div class="flex gap items-center mt1" style="flex-wrap:wrap;">
+            <span class="tag" style="background:var(--fk-bg-2);color:var(--fk-muted);">нет</span>
+            <span class="soft">→</span>
+            <span class="tag p2">в разработке</span>
+            <span class="soft">→</span>
+            <span class="tag" style="background:var(--fk-bg-2);color:var(--fk-soft);">гибрид</span>
+            <span class="soft">→</span>
+            <span class="tag" style="background:var(--fk-bg-2);color:var(--fk-soft);">замена</span>
+          </div>
+          <p class="small muted mt2 mb0">Спека роли РОП заведена (<code>people/head-of-sales.md</code>), живой агент еще не поднят. Rob.EI как имя AI-директора продаж — новое обозначение первого двойника контура. Спеки Владиславса и Даниэля частично в TODO.</p>
+        </div>
+        <div class="card" style="background:var(--fk-grad-soft);border-color:#D3E6F7;">
+          <span class="eyebrow blue">Принцип</span>
+          <p class="small mb0 mt1">AI готовит решение, не принимает его. По мере наблюдения за живыми сотрудниками (карточки-спеки) двойник учится воспроизводить часть исполнительской работы: сначала две головы рядом с человеком, потом разделение задач, при готовности замена.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- КОМАНДА -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t"><span class="eyebrow">Команда отдела</span><h2>Кто и за что отвечает</h2></div>
+    </div>
+    <div class="grid g-4">
+      <div class="card">
+        <div class="flex between items-center"><span class="eyebrow">РОП</span><span class="tag" style="background:var(--fk-bg-2);color:var(--fk-muted);">человек</span></div>
+        <h3 class="mt1" style="font-size:1.1rem;">Андрей</h3>
+        <p class="small muted mb0">Владелец контура, точка сборки системы. Ставит задачи, дожимает три крупные, строит второй эшелон, наводит порядок в CRM. Отдельно ведет Savourfish. Прямой контракт с Кристапсом €2500/мес.</p>
+      </div>
+      <div class="card">
+        <div class="flex between items-center"><span class="eyebrow">Hunter</span><span class="tag" style="background:var(--fk-bg-2);color:var(--fk-muted);">человек</span></div>
+        <h3 class="mt1" style="font-size:1.1rem;">Владиславс</h3>
+        <p class="small muted mb0">Новые клиенты, входящие и исходящие лиды, квалификация, доведение до сделки. Ключ к диверсификации — строит второй эшелон. Не путать с Владом Кузаковым (сын ВВ, вне операционки).</p>
+      </div>
+      <div class="card">
+        <div class="flex between items-center"><span class="eyebrow">Farmer</span><span class="tag" style="background:var(--fk-bg-2);color:var(--fk-muted);">человек</span></div>
+        <h3 class="mt1" style="font-size:1.1rem;">Даниэль</h3>
+        <p class="small muted mb0">Действующие клиенты: отгрузки, текущие вопросы, удержание, повторные заказы. Держит крупных, но не структурирует CRM. Хрупкая точка: под давлением уйдет.</p>
+      </div>
+      <div class="card" style="border-color:#CFE1F1;">
+        <div class="flex between items-center"><span class="eyebrow blue">Двойник</span><span class="tag ai">AI</span></div>
+        <h3 class="mt1" style="font-size:1.1rem;">Rob.EI</h3>
+        <p class="small muted mb0">AI-директор по продажам. Читает воронку, держит карту поверхностей, готовит черновики касаний и свод по заказам. Не видит другие отделы и штаб. Статус: спека заведена.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ВОРОНКА -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow">Живой снимок Pipedrive · 03.07</span>
+        <h2>Воронка и концентрация</h2>
+        <p>Воронка «Действующие клиенты» (id 3). Оговорка обязательна: CRM ненадежен по деньгам и отгрузкам — это картина воронки, не факт денег. Реальные деньги сверять с банком.</p>
+      </div>
+    </div>
+
+    <div class="grid g-3">
+      <div class="stat"><div class="n blue">€635 143</div><div class="l">OPEN · в работе</div><div class="sub">35 сделок</div></div>
+      <div class="stat"><div class="n">€545 157</div><div class="l">WON · накоплено</div><div class="sub">24 сделки</div></div>
+      <div class="stat"><div class="n" style="color:var(--fk-red);">~95%</div><div class="l">открытого — на 3 клиентах</div><div class="sub">Doskocil + Icelandic + THK</div></div>
+    </div>
+
+    <div class="card mt3">
+      <span class="eyebrow">Топ открытых сделок (OPEN)</span>
+      <div class="mt2">
+        <div class="bar-row"><div>Doskocil / PETMATE</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="mono">€379 731</div></div>
+        <div class="bar-row"><div>Icelandic Plus</div><div class="bar-track"><div class="bar-fill" style="width:36%"></div></div><div class="mono">€136 462</div></div>
+        <div class="bar-row"><div>The Honest Kitchen</div><div class="bar-track"><div class="bar-fill" style="width:28%"></div></div><div class="mono">€108 000</div></div>
+        <div class="bar-row"><div>EliPet</div><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><div class="mono">€10 900</div></div>
+        <div class="bar-row"><div class="soft">остальные</div><div class="bar-track"><div class="bar-fill" style="width:1%;opacity:.5"></div></div><div class="mono soft">~0</div></div>
+      </div>
+      <p class="small muted mt2 mb0">Главный вывод: критическая концентрация — уход любого из троих обваливает выручку. Отсюда две задачи РОП: дожать три крупных (особенно Doskocil ~€380К) и строить второй эшелон через Владиславса. Открытый вопрос: свести CRM с банком по деньгам.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ПРИОРИТЕТЫ + ПОВЕРХНОСТИ -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid g-2" style="align-items:start;gap:1.6rem;">
+      <div class="card card-pad-lg">
+        <span class="eyebrow" style="color:var(--fk-red);">Приоритеты от Кристапса</span>
+        <ul class="list mt2">
+          <li><span class="m">1</span><div>ПРОДАЖИ, не финучет (лично 01.07). Роль РОП открыта: «руководи чем хочешь, мне результат».</div></li>
+          <li><span class="m">2</span><div>Навести порядок в тройке крупных (Doskocil, Icelandic Plus, THK).</div></li>
+          <li><span class="m">3</span><div>Стимулировать и подтянуть менеджеров (Владиславс, Даниэль).</div></li>
+          <li><span class="m">4</span><div>Разобраться с Ладо (детализация роли пока TODO).</div></li>
+          <li><span class="m">5</span><div>Финучет и платежный календарь — силами бухгалтера. Реестр образцов таблицей.</div></li>
+          <li><span class="m">6</span><div>Подстраховка по Даниэлю ДО жестких действий (держит операционку).</div></li>
+          <li><span class="m">7</span><div>Дедлайн: дорожная карта + NDA/договор к ПН 07.07. Первые реальные деньги — начало августа.</div></li>
+        </ul>
+      </div>
+
+      <div class="card card-pad-lg" style="background:var(--fk-bg-2);">
+        <span class="eyebrow">Цифровые поверхности отдела</span>
+        <div class="tbl-wrap mt2" style="border:0;background:transparent;">
+          <table class="fk" style="min-width:0;">
+            <tbody>
+              <tr><td><strong>Pipedrive</strong> <span class="tag sales">CRM</span></td><td class="small muted"><span class="status on"><span class="dot g"></span>API есть</span> — ненадежен по деньгам</td></tr>
+              <tr><td><strong>Чат отдела</strong></td><td class="small muted"><span class="status plan"><span class="dot a"></span>не подключено</span> — бот в пространство / админка</td></tr>
+              <tr><td><strong>Почты fishok.lv</strong></td><td class="small muted"><span class="status plan"><span class="dot a"></span>через админку</span></td></tr>
+              <tr><td><strong>Google Диск</strong></td><td class="small muted"><span class="status plan"><span class="dot a"></span>через админку</span></td></tr>
+              <tr><td><strong>Сайт fishok.lv</strong></td><td class="small muted"><span class="status res"><span class="dot n"></span>трек growth</span> — ниже приоритетом</td></tr>
+              <tr><td><strong>Таблицы</strong></td><td class="small muted"><span class="status res"><span class="dot n"></span>owner TODO</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted mt2 mb0"><strong>Ключевой рычаг:</strong> у Андрея доступ к админке всего Google Workspace. Доступ пуллерам и агентам выдается централизованно, один ключ равно весь домен. Инструкция — <code>_meta/google-workspace-access-setup.md</code>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- SAVOURFISH -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid g-2" style="align-items:center;gap:1.8rem;">
+      <div>
+        <span class="eyebrow blue">Ритейл-проект внутри продаж</span>
+        <h2 class="mt1">Savourfish → выставка США 12-14.08</h2>
+        <p class="muted">Розничный бренд (рыбные лакомства для собак), проект ведет только Андрей: от дизайна упаковки до готовности продукта. Это не отдельный отдел — вырастет в <code>departments/retail/</code> после первых результатов. Критический путь: на все чуть больше месяца.</p>
+        <div class="kv mt2">
+          <dt>Сделано</dt><dd>Задники сверстаны, спецификация типографии получена, эталон CJ03 финализирован, 16 штрих-кодов GS1 валидны.</dd>
+          <dt>Дизайн</dt><dd>Запущен 29.06 (Юлия Черняева, предоплата 60К₽), эталон ~5 рабочих дней, тираж со среды.</dd>
+          <dt>Объем</dt><dd>16 видов пачек, 6 языков ЕС (ядро LV+EN+ES), Net 80г, по ~300 пачек на вид.</dd>
+          <dt>Дедлайн</dt><dd>Первая пачка к 15.07, печать ~2 недели, выставка Лас-Вегас 12-14.08.</dd>
+          <dt>США</dt><dd>Разрыва в упаковке нет: показываем упаковку ЕС и что продукт продается в Европе. US-версию — только под реальных клиентов.</dd>
+        </div>
+        <div class="callout warn mt2">
+          <div class="h">Два главных риска</div>
+          <p class="mb0">(1) долгие правки дизайна — активно подбивать сроки; (2) рассинхрон упаковка/продукт — нельзя, чтобы пачки были готовы, а продукции для засыпки не было. Продукт готовить параллельно. Готовая упаковка это не только выставка, но и разморозка ~€300К заказов.</p>
+        </div>
+      </div>
+      <div class="card" style="padding:1rem;background:var(--fk-navy);">
+        <img src="/assets/fishok/savourfish-pack.png" alt="Savourfish — задник пачки" style="border-radius:10px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="fk-footer">
+  <div class="wrap">
+    <a href="/fishok/" class="fk-brand"><img src="/assets/fishok/logo.svg" alt="" style="width:24px;height:24px;"> Fishok OS</a>
+    <div>Продажи · источник: <code>departments/sales/</code> · воронка сверять с банком</div>
+    <div><a href="/fishok/">← Кабина</a></div>
+  </div>
+</footer>
+
+<script src="/assets/fishok/fishok.js"></script>
+</body>
+</html>

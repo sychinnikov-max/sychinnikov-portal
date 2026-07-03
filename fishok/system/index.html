@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Система — Fishok OS</title>
+<link rel="icon" href="/assets/fishok/logo.svg">
+<link rel="stylesheet" href="/assets/fishok/fishok.css">
+<style>
+  .layer{ display:grid; grid-template-columns:36px 1fr; gap:1rem; }
+  .layer .num{ width:36px; height:36px; border-radius:10px; background:var(--fk-grad); color:#fff; display:grid; place-items:center; font-weight:800; }
+  .orgchart{ display:flex; flex-direction:column; gap:.7rem; }
+  .org-owners{ display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem; }
+  @media(max-width:600px){ .org-owners{ grid-template-columns:1fr; } }
+  .org-box{ border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.8rem 1rem; background:var(--fk-card); }
+  .org-box .r{ font-family:var(--fk-mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--fk-soft); }
+  .org-box .n{ font-weight:700; margin-top:.15rem; }
+  .arrow-down{ text-align:center; color:var(--fk-soft); font-size:1.1rem; line-height:1; }
+</style>
+</head>
+<body>
+
+<header class="fk-header">
+  <div class="wrap fk-nav">
+    <a href="/fishok/" class="fk-brand"><img src="/assets/fishok/logo.svg" alt="Fishok"> Fishok <small>OS</small></a>
+    <nav class="fk-nav-links">
+      <a href="/fishok/shtab/">Генштаб</a>
+      <a href="/fishok/finance/">Финансы</a>
+      <a href="/fishok/sales/">Продажи</a>
+      <a href="/fishok/system/">Система</a>
+      <a href="/fishok/tasks/">Доска</a>
+      <a href="/" class="fk-nav-back">← Портал</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section-tight" style="padding-top:2.4rem;">
+  <div class="wrap">
+    <span class="eyebrow blue">Архитектура контура</span>
+    <h1 class="mt1">Система</h1>
+    <p class="lead muted mt2" style="max-width:80ch;">Fishok это не клиентская папка и не заметки советника, а цифровая модель компании: структура повторяет орг-схему, каждый отдел — изолированный контур со своими людьми, поверхностями и агентами. Дальний горизонт: каждую роль можно продублировать AI-агентом. Ниже — как все устроено внутри и как выглядит просто.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ТРИ СЛОЯ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><div class="t"><span class="eyebrow">Связь с АндрейОС</span><h2>Три слоя</h2><p>Fishok видит сам себя. АндрейОС читает только дайджест. Обратной ссылки нет.</p></div></div>
+    <div class="grid g-3">
+      <div class="card layer"><div class="num">1</div><div><h3 style="font-size:1.05rem;">Операционный слой</h3><p class="small muted mt1 mb0">Вся папка <code>fishok/</code> — цифровая модель компании. Контур автономен, ничего не знает про АндрейОС и другие проекты (держит full-time-фрейм перед компанией). Fishok видит сам себя целиком.</p></div></div>
+      <div class="card layer"><div class="num">2</div><div><h3 style="font-size:1.05rem;">Дайджест</h3><p class="small muted mt1 mb0"><code>company/digest.md</code> — единственный выход наружу. Строго односторонний: Fishok → АндрейОС, обновляется в <code>/day-close</code>. Только операционная выжимка «что с компанией».</p></div></div>
+      <div class="card layer"><div class="num">3</div><div><h3 style="font-size:1.05rem;">Личное прочтение</h3><p class="small muted mt1 mb0">Роль Андрея в компании, трудности, дилеммы, переговорная позиция живут в АндрейОС (<code>me.md</code> / <code>private/</code>), а не внутри <code>fishok/</code>. Внутрь контура личное не заносится никогда.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ПРОСТАЯ ОРГ-СТРУКТУРА -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid g-2" style="align-items:start;gap:1.8rem;">
+      <div>
+        <span class="eyebrow">Как выглядит компания сейчас</span>
+        <h2 class="mt1" style="font-size:1.5rem;">Орг-структура простыми словами</h2>
+        <p class="muted">FISH OK SIA (Латвия), доли 33/33/33. Гендиректора нет, ни у кого нет контрольного пакета — главная структурная проблема. Оперативно правят Оскар и Кристапс в постоянных разногласиях.</p>
+        <div class="orgchart mt2">
+          <div class="org-owners">
+            <div class="org-box"><div class="r">33% · производство</div><div class="n">Оскар</div></div>
+            <div class="org-box" style="border-color:#CFE1F1;"><div class="r">33% · коммерция+финансы</div><div class="n">Кристапс</div><div class="xsmall soft">де-факто частичный CEO</div></div>
+            <div class="org-box"><div class="r">33% · инвестор/кредитор</div><div class="n">Семья ВВ</div><div class="xsmall soft">вне операционки</div></div>
+          </div>
+          <div class="arrow-down">↓</div>
+          <div class="org-box" style="background:var(--fk-grad-soft);border-color:#D3E6F7;"><div class="r">системный управленец</div><div class="n">Андрей → РОП → финансы → интегратор</div></div>
+          <div class="arrow-down">↓</div>
+          <div class="org-owners" style="grid-template-columns:1fr 1fr;">
+            <div class="org-box"><div class="r">hunter · новые</div><div class="n">Владиславс</div></div>
+            <div class="org-box"><div class="r">farmer · старые+отгрузки</div><div class="n">Даниэль</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="callout">
+          <div class="h">Принцип: граница папки = граница доступа</div>
+          <p class="mb0">Доступ определяется не флагами внутри файлов, а тем, какую папку человек или агент видит. Отдать доступ отделу значит отдать поддерево <code>departments/&lt;отдел&gt;/</code> и ничего сверх. Отдел не видит внутренности других отделов, кросс-обзор только у штаба <code>company/</code>. Цель: чтобы реальные права в Google Workspace и Pipedrive совпали с этой моделью один-в-один.</p>
+        </div>
+        <div class="callout note">
+          <div class="h">Место в системе ≠ место за столом</div>
+          <p class="mb0">Место сотрудника определяется тем, кто отвечает за его результат, а не тем, где он физически сидит. Пример: бухгалтер сидит на производстве, но системно относится к финансам. Система держит целевую структуру и подтягивает к ней факт.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ИНВЕНТАРЬ ПАПОК -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><div class="t"><span class="eyebrow">Внутреннее устройство</span><h2>Инвентарь папки fishok/</h2><p>Из чего состоит контур. Каждый файл — с однострочным описанием.</p></div></div>
+    <div class="tbl-wrap">
+      <table class="fk">
+        <tbody>
+          <tr><td class="mono">CLAUDE.md</td><td class="small muted">Главный вход контура: три уровня доступа, три слоя связи с АндрейОС, карта «куда идти».</td></tr>
+          <tr><td class="mono">_meta/access-model.md</td><td class="small muted">Ядро замысла: правила доступа, принцип «граница папки = граница доступа», изоляция отделов.</td></tr>
+          <tr><td class="mono">_meta/google-workspace-access-setup.md</td><td class="small muted">Инструкция подключить Claude ко всему Workspace fishok.lv через сервисный аккаунт и делегирование на домен.</td></tr>
+          <tr><td class="mono">_secrets/</td><td class="small muted">Под JSON-ключ Workspace, закрыта gitignore, в git не попадает.</td></tr>
+          <tr><td class="mono" style="color:var(--fk-blue-deep);">company/</td><td class="small muted"><strong>Штаб</strong>: компания целиком, доступ у руководства и Андрея.</td></tr>
+          <tr><td class="mono">company/org-structure.md</td><td class="small muted">Орг-схема: целевая структура и фактический ростер, проблема «нет единого центра».</td></tr>
+          <tr><td class="mono">company/operating-model.md</td><td class="small muted">Модель управления через AI: три агента, ежедневная петля, шаблон брифа, фазы A/B/C.</td></tr>
+          <tr><td class="mono">company/operating-rhythm.md</td><td class="small muted">Недельный такт: открытие понедельника брифом, регулярные созвоны с темами и владельцем.</td></tr>
+          <tr><td class="mono">company/history.md</td><td class="small muted">Операционно-политическая история: как появился Андрей, конфликт с ВВ, сепарация, результаты.</td></tr>
+          <tr><td class="mono">company/business-model.md</td><td class="small muted">Каркас бизнес-модели: рыбопереработка, бренд Savourfish, B2B и retail, юнит-экономика TODO.</td></tr>
+          <tr><td class="mono">company/state.md · digest.md</td><td class="small muted">Снимок состояния компании + слой 2 (единственный выход наружу в АндрейОС).</td></tr>
+          <tr><td class="mono">company/roadmap.md · roadmap-for-kristaps-2026-07.md</td><td class="small muted">Внутренняя дорожная карта (фазы данных) + внешняя для Кристапса на 1:1 (без AI за кадром).</td></tr>
+          <tr><td class="mono">company/directions/retail.md</td><td class="small muted">Стратегический слой ритейл-направления Savourfish.</td></tr>
+          <tr><td class="mono" style="color:var(--fk-blue-deep);">departments/</td><td class="small muted"><strong>Отделы</strong>: каждый изолированный контур, доступ = поддерево папки.</td></tr>
+          <tr><td class="mono">departments/_template/</td><td class="small muted">Шаблон отдела для копирования: README, surfaces, state, people, processes, agents, tasks.</td></tr>
+          <tr><td class="mono">departments/sales/</td><td class="small muted">Отдел продаж: разворачивается первым (есть чат, Pipedrive, почты, Drive). people/, surfaces.md, projects/retail-savourfish.md.</td></tr>
+          <tr><td class="mono">departments/finance/</td><td class="small muted">Финансы (формируется): бухгалтер системно сюда, Андрей строит учет по запросу Кристапса.</td></tr>
+          <tr><td class="mono">departments/production/ · retail/</td><td class="small muted">Стабы: производство (домен Оскара, заблокировано доверием), ритейл (пока проект внутри продаж).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- АГЕНТЫ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><div class="t"><span class="eyebrow">AI-команда управления</span><h2>Три агента-роли</h2><p>Отражают орг-структуру. Каждый скоупится на свою зону, кроме архитектора роста со штабным кросс-обзором.</p></div></div>
+    <div class="grid g-3">
+      <div class="card card-pad-lg">
+        <span class="tag sales">departments/sales/</span>
+        <h3 class="mt2">Директор по продажам</h3>
+        <p class="small muted mt1">Усиливает B2B и B2C продажи: ведет воронку, подсвечивает застрявшие сделки, помогает Владиславсу и Даниэлю. Задачи 30 дней: свести CRM с банком, дожать три крупных, строить второй эшелон, навести порядок в CRM.</p>
+        <p class="xsmall soft mb0">Разворачивается как Rob.EI. Спека: head-of-sales.md · двойник: нет · скоуп строго sales/</p>
+      </div>
+      <div class="card card-pad-lg">
+        <span class="tag fin">departments/finance/</span>
+        <h3 class="mt2">Финансовый директор</h3>
+        <p class="small muted mt1">Контроль цифр в среде без системы: строит учет из первички, следит за деньгами, рентабельностью позиций, ценообразованием. Первый запрос Кристапса: расчет зарплат + учет расходов. Выйти на первичку у источника, а не отчеты бухгалтера.</p>
+        <p class="xsmall soft mb0">Отдел формируется · спека TODO · цифры сверять с банком</p>
+      </div>
+      <div class="card card-pad-lg" style="border-color:#CFE1F1;background:var(--fk-grad-soft);">
+        <span class="tag" style="background:#fff;color:var(--fk-blue-deep);">штаб company/ · видит все</span>
+        <h3 class="mt2">Архитектор роста</h3>
+        <p class="small muted mt1">Единственный кросс-функциональный: читает сводки всех отделов, ищет узкие места (продажи растут, но упираются в производство), указывает один главный рычаг, синтезирует бриф. AI-усиление глобальной роли Андрея-интегратора.</p>
+        <p class="xsmall soft mb0">Спека: operating-model.md · кросс-обзор — привилегия штаба · ведет открытие понедельника</p>
+      </div>
+    </div>
+    <div class="callout note mt3">
+      <div class="h">Прогрессия двойника роли</div>
+      <p class="mb0">Карточка роли <code>people/&lt;роль&gt;.md</code> = чертеж клона. Путь: спека → агент в <code>agents/</code> → <span class="tag p2">в разработке</span> → <span class="pill" style="padding:.1rem .5rem;">гибрид (две головы)</span> → разделение задач → при готовности <span class="pill" style="padding:.1rem .5rem;">замена</span>. Человек всегда в петле: AI готовит решение, решает Андрей.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- СКИЛЛЫ + ИНТЕГРАЦИИ -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid g-2" style="align-items:start;gap:1.6rem;">
+      <div>
+        <span class="eyebrow">Скиллы и сценарии</span>
+        <h2 class="mt1" style="font-size:1.5rem;">Что запускаем в связке</h2>
+        <div class="tbl-wrap mt2">
+          <table class="fk" style="min-width:0;">
+            <tbody>
+              <tr><td class="mono">/day-open</td><td class="small muted">Утренний sync: pull Granola, inbox, state. Бриф Fishok — отдельным блоком.</td></tr>
+              <tr><td class="mono">/day-close</td><td class="small muted">Закрытие дня: обновляется <code>company/digest.md</code>, выжимка наверх в АндрейОС.</td></tr>
+              <tr><td class="mono">/call</td><td class="small muted">Захват созвона через Granola в карточку meetings/: задачи, решения, обновление state и дайджеста.</td></tr>
+              <tr><td class="mono">/tasks · /triage</td><td class="small muted">Бэклог и матрица: задачи из созвонов уходят менеджерам и в бэклог.</td></tr>
+              <tr><td class="mono">/update-state</td><td class="small muted">Ручное обновление state отдела или компании вне вечернего цикла.</td></tr>
+              <tr><td class="mono">/expert-panel</td><td class="small muted">Панель из 3 экспертов для больших управленческих развилок.</td></tr>
+              <tr><td class="mono">/intake · /lead</td><td class="small muted">Intake кладет сырье в inbox, lead поднимает контекст по срочным лидам из Telegram.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <span class="eyebrow">Инструменты · MCP / API / боты</span>
+        <h2 class="mt1" style="font-size:1.5rem;">С чем взаимодействует система</h2>
+        <div class="tbl-wrap mt2">
+          <table class="fk" style="min-width:0;">
+            <thead><tr><th>Инструмент</th><th>Тип</th><th>Статус</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Pipedrive</strong><div class="xsmall muted">воронка, аналитика; не шлет сообщения; деньги сверять с банком</div></td><td class="xsmall mono">CRM · API</td><td><span class="status on"><span class="dot g"></span>работает</span></td></tr>
+              <tr><td><strong>Google Workspace</strong> fishok.lv<div class="xsmall muted">почты, Drive, Chat, Календарь; один ключ = весь домен</div></td><td class="xsmall mono">админка</td><td><span class="status plan"><span class="dot a"></span>планируется</span></td></tr>
+              <tr><td><strong>Google Chat бот</strong><div class="xsmall muted">чтение чат-пространства продаж</div></td><td class="xsmall mono">бот</td><td><span class="status plan"><span class="dot a"></span>планируется</span></td></tr>
+              <tr><td><strong>Granola</strong><div class="xsmall muted">транскрипты звонков для /call</div></td><td class="xsmall mono">MCP</td><td><span class="status on"><span class="dot g"></span>работает</span></td></tr>
+              <tr><td><strong>Telegram-боты</strong><div class="xsmall muted">захват лидов в inbox, watcher каналов</div></td><td class="xsmall mono">2 бота</td><td><span class="status on"><span class="dot g"></span>работает</span></td></tr>
+              <tr><td><strong>Банк / первичка</strong><div class="xsmall muted">достоверный источник цифр по деньгам</div></td><td class="xsmall mono">ручной ввод</td><td><span class="status plan"><span class="dot a"></span>планируется</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ФАЗЫ + СТРАТЕГИЯ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><div class="t"><span class="eyebrow">Внедрение и горизонт</span><h2>Фазы и куда идем</h2></div></div>
+    <div class="grid g-3">
+      <div class="card"><span class="eyebrow blue">Фаза A · сейчас</span><h3 class="mt1" style="font-size:1.05rem;">Полуручная</h3><p class="small muted mb0">Определить три агента как спеки. Выпускать бриф руками из того, что уже можно собрать (Pipedrive живой + чат когда подключим). Ценность в самой структуре брифа. Приоритет зон: продажи, финансы, срочный ритейл.</p></div>
+      <div class="card"><span class="eyebrow blue">Фаза B</span><h3 class="mt1" style="font-size:1.05rem;">Подключение данных</h3><p class="small muted mb0">Через админку и Pipedrive подключить пуллеры к чату, почтам, Drive, воронкам. Выйти на первичку финансов. Бриф начинает наполняться сам. Порядок: 0 Pipedrive (готово) → чат/почты → финансы → Drive → сайт → производство.</p></div>
+      <div class="card"><span class="eyebrow blue">Фаза C</span><h3 class="mt1" style="font-size:1.05rem;">Полуавтономия</h3><p class="small muted mb0">Агенты-директора работают по отделам полуавтономно, архитектор роста синтезирует, Андрей смотрит бриф и решает. Двойники запускаются там, где созрели спеки. Человек-в-петле.</p></div>
+    </div>
+
+    <div class="card card-pad-lg mt3" style="background:linear-gradient(150deg,#161b22,#14324b);color:#EAF2F9;">
+      <span class="eyebrow" style="color:#8FD4F2;">Стратегия упаковки · куда идем</span>
+      <h3 class="mt1" style="color:#fff;">Мини-сас «управление компанией через AI»</h3>
+      <p style="color:#C6D6E4;">Тезис: <code style="color:#8FD4F2;">fishok/</code> — не клиентская папка, а цифровая модель компании, где структура повторяет орг-схему и каждую роль можно продублировать AI-агентом. Прогрессия двойника: спека → агент → в разработке → гибрид → разделение задач → замена.</p>
+      <p class="mb0" style="color:#C6D6E4;"><strong style="color:#fff;">Принцип чистоты для выноса в отдельный репозиторий:</strong> <code style="color:#8FD4F2;">fishok/</code> не ссылается ни на один файл вне себя, наружу отдает только <code style="color:#8FD4F2;">company/digest.md</code>. Это делает будущий вынос дешевым, когда подтвердится сас-тезис: папка вынимается целиком, ни одна связь не рвется. Ценное из старой <code style="color:#8FD4F2;">clients/fishok/</code> мигрирует в новую структуру по мере разбора.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="fk-footer">
+  <div class="wrap">
+    <a href="/fishok/" class="fk-brand"><img src="/assets/fishok/logo.svg" alt="" style="width:24px;height:24px;"> Fishok OS</a>
+    <div>Система · источник: <code>fishok/CLAUDE.md</code> + <code>_meta/</code></div>
+    <div><a href="/fishok/">← Кабина</a></div>
+  </div>
+</footer>
+
+<script src="/assets/fishok/fishok.js"></script>
+</body>
+</html>

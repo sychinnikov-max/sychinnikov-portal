@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Финансы — Fishok OS</title>
+<link rel="icon" href="/assets/fishok/logo.svg">
+<link rel="stylesheet" href="/assets/fishok/fishok.css">
+</head>
+<body>
+
+<header class="fk-header">
+  <div class="wrap fk-nav">
+    <a href="/fishok/" class="fk-brand"><img src="/assets/fishok/logo.svg" alt="Fishok"> Fishok <small>OS</small></a>
+    <nav class="fk-nav-links">
+      <a href="/fishok/shtab/">Генштаб</a>
+      <a href="/fishok/finance/">Финансы</a>
+      <a href="/fishok/sales/">Продажи</a>
+      <a href="/fishok/system/">Система</a>
+      <a href="/fishok/tasks/">Доска</a>
+      <a href="/" class="fk-nav-back">← Портал</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section-tight" style="padding-top:2.4rem;">
+  <div class="wrap">
+    <span class="eyebrow blue">Финансы · departments/finance/</span>
+    <h1 class="mt1">Финансы</h1>
+    <p class="lead muted mt2" style="max-width:78ch;">Вторая просадка компании, которую усиливаем сразу за продажами. ФД нет (Татьяна ушла ~20.05), управленческого учета нет ни у кого, кроме головы Кристапса, при обороте ~2-3 млн евро в год и подтвержденных кассовых разрывах. Роль AI-финдиректора: дать управленческий контроль цифр внутри Fishok, подключить код напрямую к первичке, чтобы система в онлайне видела все операции, сама фиксировала и вела учет.</p>
+    <div class="flex gap wrap-flex mt2">
+      <span class="pill"><span class="dot r"></span>ФД нет · учет с нуля</span>
+      <span class="pill"><span class="dot a"></span>Приоритет 2 (30-60 дней)</span>
+      <span class="pill"><span class="dot b"></span>Деньги сверять с банком, не с CRM</span>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- РЕАЛЬНОСТЬ ВЫРУЧКИ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow">Реальность выручки</span>
+        <h2>Деньги: что видно и с каким источником</h2>
+        <p>Все цифры с источником. Банковский факт у Кристапса — истина, выписанный инвойс не равен зашедшим деньгам.</p>
+      </div>
+    </div>
+
+    <div class="grid g-4">
+      <div class="stat"><div class="n blue">~€200К+</div><div class="l">Июнь · приход</div><div class="sub">€193К на 15.06 за 8 сделок + ~€20-30К. Сверить с банком.</div></div>
+      <div class="stat"><div class="n" style="color:var(--fk-red);">€50-80К</div><div class="l">Июль · опасная касса</div><div class="sub">Против плана ~€100К+. Предупредить Кристапса заранее.</div></div>
+      <div class="stat"><div class="n">~€300К</div><div class="l">Заморожено в работе</div><div class="sub">50% при отгрузке + 50% через месяц, ждут упаковку из Китая.</div></div>
+      <div class="stat"><div class="n">~2 млн</div><div class="l">Run-rate €/год</div><div class="sub">Против плана 3+ млн: оборотка не работает, план уезжает ~30%.</div></div>
+    </div>
+
+    <div class="tbl-wrap mt3">
+      <table class="fk">
+        <thead><tr><th>Период</th><th>Значение</th><th>Заметка и источник</th></tr></thead>
+        <tbody>
+          <tr><td>Май (календарный)</td><td class="mono">~€121 500 пришло</td><td class="small muted">Банковский факт Кристапса. В счетах выписано ~€128К, разница ушла в июнь (отсрочки, факторинг). Май в минусе (расходы больше доходов). <span class="soft">state 15.06</span></td></tr>
+          <tr><td>Июнь</td><td class="mono">≈€200К+ прихода</td><td class="small muted">€193К на 15.06 за 8 сделок + ~€20-30К после. Влад дописывает суммы в Pipedrive. Сверить с банком. <span class="soft">state 29.06</span></td></tr>
+          <tr><td>Июль</td><td class="mono" style="color:var(--fk-red);">🔴 €50-80К</td><td class="small muted">Против плана ~€100К+. Вероятный кассовый разрыв. Предупредить Кристапса. <span class="soft">state 29.06</span></td></tr>
+          <tr><td>Август</td><td class="mono">~€100-130К</td><td class="small muted">Islandic Plus ~€108К контейнер до середины августа + Home is Kitchen полная оплата. <span class="soft">state 29.06</span></td></tr>
+          <tr><td>Заморожено</td><td class="mono">~€300К заказов</td><td class="small muted">Почти ничего не получено. Заморожены на 2-3 месяца (ждут упаковку: ~4-5 нед печать + ~2 нед производство). <span class="soft">state 29.06</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn mt3">
+      <div class="h">Концентрация — главный финансовый риск</div>
+      <p class="mb0">Деньги держатся на горстке клиентов. По закрытым сделкам: 17 сделок на €438 916, из них The Honest Kitchen ~€324 922 = 74% на одном клиенте (оговорка: две сделки THK по ~€108К заведены 10.03 с разницей в минуты — возможен дубль в CRM, нужна сверка с банком и накладными, тогда сумма ниже на ~€108К). По открытой воронке почти 95% (~€696К из ~€735К) тоже на трех аккаунтах: Doskocil, Icelandic Plus, THK. Сдвиг или потеря одного сразу проседает месяц. Это и есть приоритет №1 Кристапса «навести порядок в тройке». <span class="soft">pipedrive-funnel B</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ЧТО СТРОИМ -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid g-2" style="align-items:start;gap:1.6rem;">
+      <div class="card card-pad-lg">
+        <span class="eyebrow blue">Что строим</span>
+        <h3 class="mt1">Управленческий учет с нуля</h3>
+        <ul class="list check mt2">
+          <li>Первый запрос Кристапса: правильный расчет зарплат + учет расходов предприятия. Дальше — чистая прибыль, движение денег, хватает ли на зарплаты и закупки.</li>
+          <li>Карта первички: через Кристапса и бухгалтера получить доступы к банкам, кабинетам, Excel, системам бухгалтера. Стратегия — доступ к первичке, а не отчеты бухгалтера.</li>
+          <li>Код, подключенный к первичке напрямую: в онлайне видит операции, сам фиксирует в таблицу, сам считает. Финконтур перестает зависеть от ручной работы бухгалтера.</li>
+          <li>Наладить взаимодействие с бухгалтером (сидит на производстве, не говорит по-русски, общение на английском).</li>
+          <li>Метод сверки: банковский приход у Кристапса — источник истины. Даниэль пишет дату и сумму в комментарии Pipedrive, система суммирует по полям.</li>
+          <li>Платежный календарь и план приходов силами бухгалтера (не ФД на аутсорсе — денег нет). Кристапс наговорит аудио с задачами по 4 блокам.</li>
+        </ul>
+      </div>
+
+      <div class="stack">
+        <div class="card" style="background:var(--fk-red-bg);border-color:#F0D2CB;">
+          <span class="eyebrow" style="color:var(--fk-red);">Кассовые риски</span>
+          <ul class="list mt2">
+            <li><span class="dot r" style="margin-top:.5rem;"></span><div class="small">Кассовый разрыв июля: ~€50-80К против плана ~€100К+. Предупредить Кристапса заранее, а не постфактум.</div></li>
+            <li><span class="dot r" style="margin-top:.5rem;"></span><div class="small">~€300К заказов заморожены на 2-3 месяца. Оборотка не работает.</div></li>
+            <li><span class="dot a" style="margin-top:.5rem;"></span><div class="small">Заем ВВ: короткий €150К в просрочке + тело под 10% до 2027-28. Юристы ВВ требуют аудит и судебный запрет на продажу активов.</div></li>
+            <li><span class="dot a" style="margin-top:.5rem;"></span><div class="small">Финансовая видимость близка к нулю до построения учета: P&L, ДДС, баланса нет.</div></li>
+            <li><span class="dot a" style="margin-top:.5rem;"></span><div class="small">Барьер доступа к данным: производство официально отказывало Андрею. Снимается через мандат Кристапса, не через ВВ.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g-2 mt3" style="align-items:start;">
+      <div class="card">
+        <span class="eyebrow">Решения и действия недели</span>
+        <ul class="list mt2">
+          <li><span class="m">→</span><div class="small">Составить карту первички (какие банки, кабинеты, Excel, системы бухгалтера) и запросить доступы через Кристапса.</div></li>
+          <li><span class="m">→</span><div class="small">Предупредить Кристапса про разрыв июля заранее, с цифрами и планом приходов.</div></li>
+          <li><span class="m">→</span><div class="small">Дождаться аудио Кристапса с задачами по 4 блокам, разложить в платежный календарь.</div></li>
+          <li><span class="m">→</span><div class="small">Сверить, придет ли июльский транш по старой ставке ~€3500 (~14.07).</div></li>
+          <li><span class="m">→</span><div class="small">Подтвердить границу с обоймой ФД из «Нескучных финансов»: что делает та функция, что остается внутри Fishok.</div></li>
+        </ul>
+      </div>
+      <div class="card" style="background:var(--fk-bg-2);">
+        <span class="eyebrow">Открытые вопросы</span>
+        <ul class="list mt2">
+          <li><span class="m">?</span><div class="small">На чем строить учет: 1С не прижилась, Odoo отклонен (€30-40К), бухгалтер разгребает в Excel. TODO.</div></li>
+          <li><span class="m">?</span><div class="small">Реальный размер тела займа ВВ не озвучен. Доли и взаимные долги собственников не прописаны.</div></li>
+          <li><span class="m">?</span><div class="small">Разграничение с уровнем «Нескучных финансов»: где их функция, где управленческий контроль внутри Fishok.</div></li>
+          <li><span class="m">?</span><div class="small">Достоверность цифр воронки Даниэля под вопросом. Валюта части финальных платежей (евро или USD) не подтверждена.</div></li>
+          <li><span class="m">?</span><div class="small">Возможный дубль в CRM: две сделки THK по ~€108К. Сверить с банком, иначе закрытая сумма завышена.</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="fk-footer">
+  <div class="wrap">
+    <a href="/fishok/" class="fk-brand"><img src="/assets/fishok/logo.svg" alt="" style="width:24px;height:24px;"> Fishok OS</a>
+    <div>Финансы · источник: <code>departments/finance/</code> · цифры сверять с банком</div>
+    <div><a href="/fishok/">← Кабина</a></div>
+  </div>
+</footer>
+
+<script src="/assets/fishok/fishok.js"></script>
+</body>
+</html>

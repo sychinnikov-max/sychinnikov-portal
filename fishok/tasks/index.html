@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Доска задач — Fishok OS</title>
+<link rel="icon" href="/assets/fishok/logo.svg">
+<link rel="stylesheet" href="/assets/fishok/fishok.css">
+</head>
+<body>
+
+<header class="fk-header">
+  <div class="wrap fk-nav">
+    <a href="/fishok/" class="fk-brand"><img src="/assets/fishok/logo.svg" alt="Fishok"> Fishok <small>OS</small></a>
+    <nav class="fk-nav-links">
+      <a href="/fishok/shtab/">Генштаб</a>
+      <a href="/fishok/finance/">Финансы</a>
+      <a href="/fishok/sales/">Продажи</a>
+      <a href="/fishok/system/">Система</a>
+      <a href="/fishok/tasks/">Доска</a>
+      <a href="/" class="fk-nav-back">← Портал</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section-tight" style="padding-top:2rem;padding-bottom:1rem;">
+  <div class="wrap" style="max-width:100%;">
+    <div class="flex between items-center wrap-flex" style="gap:1rem;">
+      <div>
+        <span class="eyebrow blue">Рабочая доска</span>
+        <h1 class="mt1" style="font-size:1.9rem;">Доска задач</h1>
+      </div>
+      <div class="flex gap wrap-flex items-center">
+        <span class="pill" id="totalPill"><span class="dot b"></span>—</span>
+        <button class="btn btn-ghost btn-sm" id="btnReset">↺ Вернуть недельный сид</button>
+        <button class="btn btn-primary btn-sm" id="btnAddTop">+ Задача</button>
+      </div>
+    </div>
+    <p class="muted small mt2 mb0" style="max-width:80ch;">Перетаскивайте карточки между колонками, добавляйте и правьте задачи. Все сохраняется в этом браузере. Раз в неделю кабина обновляет сид: нажмите «Вернуть недельный сид», чтобы подтянуть свежий список из системы (ваши изменения при этом заменятся).</p>
+  </div>
+</section>
+
+<section style="padding-bottom:3rem;">
+  <div class="wrap" style="max-width:100%;">
+    <div class="board-toolbar">
+      <input class="search-input" id="search" type="search" placeholder="Поиск по задачам…" style="min-width:200px;">
+      <span class="soft xsmall" style="margin-left:.3rem;">Рычаг:</span>
+      <div class="flex gap wrap-flex" id="tagFilters"></div>
+      <div class="spacer"></div>
+      <div class="flex gap wrap-flex" id="prioFilters"></div>
+    </div>
+    <div class="board" id="board"></div>
+  </div>
+</section>
+
+<footer class="fk-footer">
+  <div class="wrap">
+    <a href="/fishok/" class="fk-brand"><img src="/assets/fishok/logo.svg" alt="" style="width:24px;height:24px;"> Fishok OS</a>
+    <div>Доска · сид из <code>company/state.md</code> + roadmap + issues · хранится локально</div>
+    <div><a href="/fishok/">← Кабина</a></div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-back" id="modalBack">
+  <div class="modal">
+    <div class="modal-head"><span id="modalTitle">Новая задача</span><button class="del" id="modalClose" style="opacity:1;position:static;font-size:1.3rem;">✕</button></div>
+    <div class="modal-body">
+      <div><label>Название</label><input class="text-input" id="fTitle" placeholder="Что нужно сделать"></div>
+      <div><label>Детали / следующий шаг</label><textarea class="text-input" id="fDetail" rows="3" placeholder="Контекст, источник, следующий шаг"></textarea></div>
+      <div class="field-row">
+        <div><label>Колонка</label><select class="select-input" id="fColumn"></select></div>
+        <div><label>Рычаг</label><select class="select-input" id="fTag"></select></div>
+      </div>
+      <div class="field-row">
+        <div><label>Приоритет</label><select class="select-input" id="fPrio"><option>P1</option><option>P2</option><option>P3</option></select></div>
+        <div><label>Владелец</label><input class="text-input" id="fOwner" placeholder="Андрей / Кристапс / …"></div>
+      </div>
+      <div><label>Дедлайн (текст)</label><input class="text-input" id="fDue" placeholder="2026-07-07 или пусто"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost btn-sm" id="btnDelete" style="margin-right:auto;color:var(--fk-red);border-color:#F0D2CB;">Удалить</button>
+      <button class="btn btn-ghost btn-sm" id="btnCancel">Отмена</button>
+      <button class="btn btn-primary btn-sm" id="btnSave">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORE = 'fishok_board_v2';
+  var COLUMNS = [
+    {name:'Бэклог',   color:'#8A97A6'},
+    {name:'Эта неделя',color:'#1B8FD6'},
+    {name:'В работе', color:'#1E9E6A'},
+    {name:'Ждет',     color:'#C77A1A'},
+    {name:'Готово',   color:'#5A6675'}
+  ];
+  var TAGS = {
+    'продажи':{cls:'sales', b:'b-sales'},
+    'финансы':{cls:'fin',   b:'b-fin'},
+    'ретейл': {cls:'retail',b:'b-retail'},
+    'система':{cls:'sys',   b:'b-sys'},
+    'сделка': {cls:'deal',  b:'b-deal'},
+    'производство':{cls:'prod', b:'b-prod'},
+    'собственники':{cls:'own', b:'b-own'}
+  };
+
+  var SEED = [
+    {title:'Дорожная карта Кристапсу к ПН 07.07', detail:'Финализировать roadmap-for-kristaps: подставить реальные суммы из банка (не CRM), уточнить дату выставки и приоритетную сделку. Сдать на 1:1 во ВТ.', column:'Эта неделя', tag:'система', priority:'P1', owner:'Андрей', due:'2026-07-07'},
+    {title:'NDA + договор на услуги Кристапсу', detail:'Андрей сам готовит и присылает на подпись. Условие доверия: полная сепарация от ВВ. Влад советовал нормальный договор на услуги. Дедлайн вместе с картой.', column:'Эта неделя', tag:'система', priority:'P1', owner:'Андрей', due:'2026-07-07'},
+    {title:'Первая пачка Savourfish к 15.07', detail:'Дизайн запущен 29.06 (Юлия Черняева, предоплата 60К₽, эталон ~5 раб. дней), дальше тираж. Подбивать дизайнера под срок, не допускать долгих правок.', column:'В работе', tag:'ретейл', priority:'P1', owner:'Андрей', due:'2026-07-15'},
+    {title:'Дожать Doskocil ~€380К', detail:'Doskocil (PETMATE) — €379 731, ~60% всего открытого пайплайна. Главная сделка приоритета продаж.', column:'В работе', tag:'продажи', priority:'P1', owner:'Андрей / Даниэль', due:'2026-07'},
+    {title:'Второй эшелон клиентов через Владиславса', detail:'~95% открытого на трех клиентах. Уход любого обваливает выручку. Через Владиславса (hunter) строить диверсификацию.', column:'В работе', tag:'продажи', priority:'P1', owner:'Владиславс / Андрей', due:'2026-07'},
+    {title:'Свести CRM с банком по деньгам', detail:'Pipedrive ненадежен по деньгам. Реальные цифры из банка (факт Кристапса). Метод: Даниэль пишет дату+сумму в комментарии → система суммирует.', column:'В работе', tag:'финансы', priority:'P1', owner:'Андрей / Даниэль', due:'2026-07'},
+    {title:'Управленческий учет с нуля', detail:'ФД отсутствует (Татьяна ушла ~20.05). Собрать: движение денег, зарплаты, расходы, чистая прибыль, ДДС. Силами бухгалтера. Приоритет 2 (30-60 дней).', column:'Бэклог', tag:'финансы', priority:'P1', owner:'Андрей / бухгалтер', due:'2026-08'},
+    {title:'Рентабельность позиций + рамка цен', detail:'Дать рентабельность позиций и рамку цен, чтобы быть гибкими под разных клиентов. Ценообразование сейчас в голове у Кристапса. Приоритет 2.', column:'Бэклог', tag:'финансы', priority:'P2', owner:'Андрей', due:'2026-08'},
+    {title:'Карта финансовой первички', detail:'Составить карту где формируются операции: банки, кабинеты, таблицы бухгалтера. Выйти на первичку, чтобы цифры были достоверны в реальном времени. Цель 30 дней.', column:'Бэклог', tag:'финансы', priority:'P2', owner:'Андрей', due:'2026-08'},
+    {title:'Разобраться с Ладо', detail:'Часть приоритета №1 от Кристапса по продажам. Детали роли Ладо: TODO, нет данных в state-файлах.', column:'Бэклог', tag:'продажи', priority:'P2', owner:'Андрей', due:'2026-07'},
+    {title:'Подстраховка по Даниэлю', detail:'Даниэль хрупкая точка: под давлением уйдет, а держит операционку и не структурирует CRM. Нужна подстраховка (удаленные менеджеры) ДО жестких действий.', column:'Бэклог', tag:'продажи', priority:'P1', owner:'Андрей', due:'2026-07'},
+    {title:'Японские лиды — брать или нет', detail:'6 контактов с выставки, ~€300/шт. Влад отказался обрабатывать → решение Андрея: брать на себя или настоять на менеджере.', column:'Ждет', tag:'продажи', priority:'P2', owner:'Андрей', due:'2026-07'},
+    {title:'Перепроверить штрих-код GS1 до печати', detail:'Префикс 4751036…, 16 GTIN-13 за фабрикой числятся валидными. Перепроверить регистрацию через AI ДО печати — риск напечатать нерабочие коды.', column:'Эта неделя', tag:'ретейл', priority:'P1', owner:'Андрей', due:'2026-07-07'},
+    {title:'Оплата упаковки Китай (20К шт)', detail:'Поставщик держит цену на 20 000 шт. Осталось: подтверждение количества → счет предоплаты → оплата → заказ. Разморозит ~€300К заказов.', column:'Эта неделя', tag:'производство', priority:'P1', owner:'Андрей / Кристапс', due:'2026-07-07'},
+    {title:'Языки этикетки Savourfish — список от Кристапса', detail:'Максимум 6 языков. Ядро LV+EN+ES; добор DE/FR/PT — Кристапс выберет и пришлет списком. Ждет ответа Кристапса.', column:'Ждет', tag:'ретейл', priority:'P1', owner:'Кристапс', due:'2026-07-07'},
+    {title:'Дилемма ВВ: сепарация vs рука на пульсе', detail:'НЕ закрыта, решение Андрея. Полная сепарация по слову Кристапсу vs рука на пульсе для ВВ (доплата ~+€1000). Ждет мнение Кирилла + разговор с ВВ.', column:'Ждет', tag:'собственники', priority:'P1', owner:'Андрей', due:'2026-07'},
+    {title:'Письмо ВВ по итогам переговоров', detail:'Андрей пишет письмо ВВ (Влад в копию): итог переговоров + вопрос нужна ли минимальная отчетность. Привязка к выплате ~10.07.', column:'Эта неделя', tag:'собственники', priority:'P1', owner:'Андрей', due:'2026-07-10'},
+    {title:'Предупредить Кристапса про разрыв июля', detail:'Июль опасная касса: придет ~€50-80К (vs план ~100К+). ~€300К в работе, почти ничего не получено. Предупредить заранее, на языке денег.', column:'Эта неделя', tag:'финансы', priority:'P1', owner:'Андрей', due:'2026-07-07'},
+    {title:'Подключить доступы Google Workspace fishok.lv', detail:'У Андрея доступ к админке всего Workspace. Централизованно выдать пуллерам доступ к чату, почтам, Drive. Мандат от Кристапса. Инструкция: _meta/google-workspace-access-setup.md.', column:'Эта неделя', tag:'система', priority:'P1', owner:'Андрей', due:'2026-07-07'},
+    {title:'Подключить пуллер чата отдела продаж', detail:'Чат в Workspace (пространства) не подключен — нужен бот в пространство или доступ через админку. Фаза 1 подключения данных.', column:'Ждет', tag:'система', priority:'P2', owner:'Андрей', due:'2026-07'},
+    {title:'Подключить пуллер Pipedrive в контур', detail:'Доступ по API есть (ops/pipedrive.py), живой снимок работает. Довести до регулярного пуллинга в контур продаж.', column:'В работе', tag:'система', priority:'P2', owner:'Андрей', due:'2026-07'},
+    {title:'Выставка США 12-14.08 — контроль критического пути', detail:'Ритейл Savourfish на выставку. Дизайн (~3 нед) → печать (~2 нед) → продукт под засыпку. Чуть больше месяца на все. Не допускать затягиваний.', column:'В работе', tag:'ретейл', priority:'P1', owner:'Андрей', due:'2026-08-12'},
+    {title:'Печать пачек Savourfish в типографии', detail:'После эталон-макета ~2 недели печати. Типография Latvia (Юлия). Требования: поля 10мм, кегль ≥10pt, цифра + Pantone C, 140×210×40.', column:'Бэклог', tag:'ретейл', priority:'P1', owner:'Типография / Андрей', due:'2026-08'},
+    {title:'Готовность продукта под засыпку', detail:'Риск рассинхрона: нельзя, чтобы пачки были готовы, а продукции не было. Продукт готовить параллельно через менеджеров. 16 видов, по ~300 пачек. TODO: кто отвечает за засыпку.', column:'Бэклог', tag:'производство', priority:'P1', owner:'Производство / менеджеры', due:'2026-08'},
+    {title:'Дожать Icelandic Plus', detail:'Icelandic Plus — €136 462 открытого (вторая по величине). Контейнер ~€108К до середины августа. Часть тройки крупных.', column:'В работе', tag:'продажи', priority:'P1', owner:'Андрей / Даниэль', due:'2026-08'},
+    {title:'Дожать The Honest Kitchen', detail:'THK — €108 000 открытого + €324 922 won (60% накопленного). Часть тройки крупных. Home is Kitchen полная оплата в августе.', column:'В работе', tag:'продажи', priority:'P1', owner:'Андрей / Даниэль', due:'2026-08'},
+    {title:'Сверить июльский транш ~€3500', detail:'Транш по старой ставке (~€3500, ~14.07) за предыдущую работу — сверить, придет ли. С августа ставка €3500 → €2500 (постфактум).', column:'Ждет', tag:'финансы', priority:'P2', owner:'Андрей', due:'2026-07-14'},
+    {title:'Аудио с задачами от Кристапса (4 блока)', detail:'Кристапс наговорит аудио с задачами по 4 блокам + план приходов. Вход для дорожной карты и планирования. Ждет Кристапса.', column:'Ждет', tag:'система', priority:'P2', owner:'Кристапс', due:'2026-07-07'},
+    {title:'Шкура лосося — производственное решение', detail:'Спрос ~750/мес, нашли решение по производству. Галина отправила партию после стерилизации на анализ — ждем результат.', column:'Ждет', tag:'производство', priority:'P3', owner:'Производство', due:'2026-07'},
+    {title:'Мини-кубики 1×1 — образцы для клиента', detail:'Новинка. Клиент интересуется ~20 т/год = ~€220-230К/год, потенциал до €0.5М. Пока пассивен. Образцы готовятся.', column:'Бэклог', tag:'продажи', priority:'P3', owner:'Андрей / производство', due:'2026-08'},
+    {title:'Обучать сотрудников работе в системе', detail:'Сейчас хаос. Обучать действующих (Даниэль не структурирует CRM, менеджеры вне системы). Открытый вопрос штаба.', column:'Бэклог', tag:'система', priority:'P3', owner:'Андрей', due:'2026-08'},
+    {title:'Мандат перед бухгалтером и менеджерами', detail:'Получить от Кристапса мандат, чтобы собирать данные и ставить задачи. Нужно на 1:1.', column:'Эта неделя', tag:'система', priority:'P2', owner:'Кристапс', due:'2026-07-07'},
+    {title:'Открыть неделю брифом (operating-rhythm)', detail:'ПН: открыть неделю управленческим брифом. Держать один главный рычаг в фокусе.', column:'Эта неделя', tag:'система', priority:'P2', owner:'Андрей', due:'2026-07-07'},
+    {title:'Единый центр операционных решений', detail:'Стратегическая дыра: доли 33/33/33, нет гендиректора, Кристапс перегружен. Долгий трек: Андрей → интегратор.', column:'Бэклог', tag:'система', priority:'P2', owner:'Андрей', due:'2026-09'},
+    {title:'Юр-фон: аудит юристов ВВ', detail:'В начале июля юристы ВВ придут в Fishok, потребуют полный аудит (фин + склад), добиваются судебного запрета на продажу активов. Держать нейтрально-полезную позицию.', column:'Ждет', tag:'собственники', priority:'P2', owner:'Андрей', due:'2026-07'},
+    {title:'Сепарация от ВВ — прямой контракт с Кристапсом', detail:'Кристапс согласился на €2500/мес (2-мес трайл). Условие полной сепарации принято. Роль РОП открыта. Переговоры завершены 01.07.', column:'Готово', tag:'сделка', priority:'P1', owner:'Андрей', due:'2026-07-01'},
+    {title:'Odoo сэкономлен ~€30-40К', detail:'Кристапс отказался от внедрения Odoo (€30-40К + неуверенность в интеграции с Оскаром). Оценка проведена, риск дорогой ошибки снят.', column:'Готово', tag:'система', priority:'P2', owner:'Андрей', due:'2026-06'},
+    {title:'Финансовая прозрачность по продажам дана', detail:'Собрана Pipedrive-аналитика воронки, вскрыта концентрация на трех клиентах (~95% открытого). Реальные цифры воронки.', column:'Готово', tag:'продажи', priority:'P2', owner:'Андрей', due:'2026-06'},
+    {title:'Дизайн Savourfish запущен (эталон)', detail:'29.06: Юлия Черняева, предоплата 60К₽ оплачена, эталон ~5 раб. дней. Задники сверстаны, спецификация типографии получена, эталон CJ03 финализирован.', column:'Готово', tag:'ретейл', priority:'P1', owner:'Андрей', due:'2026-06-29'},
+    {title:'Решение по упаковке ЕС/США — разрыва нет', detail:'03.07: на выставке в США показываем упаковку ЕС (6 языков, EN базовый). US-версию только при реальных клиентах. Текущий план верный.', column:'Готово', tag:'ретейл', priority:'P2', owner:'Андрей', due:'2026-07-03'}
+  ];
+
+  // ---- state ----
+  var state = load();
+  var filterTags = new Set();
+  var filterPrio = new Set();
+  var searchQ = '';
+  var editingId = null;
+
+  function uid(){ return 'c' + Date.now().toString(36) + Math.floor(Math.random()*1e4).toString(36); }
+  function load(){
+    try { var raw = localStorage.getItem(STORE); if(raw){ return JSON.parse(raw); } } catch(e){}
+    return seedState();
+  }
+  function seedState(){ return SEED.map(function(c,i){ var o=Object.assign({}, c); o.id='seed'+i; return o; }); }
+  function save(){ try { localStorage.setItem(STORE, JSON.stringify(state)); } catch(e){} }
+
+  // ---- build filters ----
+  var tagWrap = document.getElementById('tagFilters');
+  Object.keys(TAGS).forEach(function(t){
+    var b = document.createElement('button');
+    b.className='filter-chip'; b.textContent=t; b.dataset.tag=t;
+    b.onclick=function(){ if(filterTags.has(t)){filterTags.delete(t); b.classList.remove('active');} else {filterTags.add(t); b.classList.add('active');} render(); };
+    tagWrap.appendChild(b);
+  });
+  var prioWrap = document.getElementById('prioFilters');
+  ['P1','P2','P3'].forEach(function(p){
+    var b=document.createElement('button'); b.className='filter-chip'; b.textContent=p;
+    b.onclick=function(){ if(filterPrio.has(p)){filterPrio.delete(p); b.classList.remove('active');} else {filterPrio.add(p); b.classList.add('active');} render(); };
+    prioWrap.appendChild(b);
+  });
+
+  // ---- render ----
+  var board = document.getElementById('board');
+  function visible(c){
+    if(filterTags.size && !filterTags.has(c.tag)) return false;
+    if(filterPrio.size && !filterPrio.has(c.priority)) return false;
+    if(searchQ){ var q=searchQ.toLowerCase(); if((c.title+' '+(c.detail||'')+' '+(c.owner||'')).toLowerCase().indexOf(q)<0) return false; }
+    return true;
+  }
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function render(){
+    board.innerHTML='';
+    var totalVisible=0;
+    COLUMNS.forEach(function(col){
+      var cards = state.filter(function(c){ return c.column===col.name && visible(c); });
+      totalVisible += cards.length;
+      var colEl=document.createElement('div');
+      colEl.className='col'; colEl.dataset.col=col.name;
+      var allInCol = state.filter(function(c){return c.column===col.name;}).length;
+      colEl.innerHTML='<div class="col-head"><span class="cdot" style="background:'+col.color+'"></span><span class="name">'+col.name+'</span><span class="count">'+cards.length+(cards.length!==allInCol?'/'+allInCol:'')+'</span></div>';
+      var cc=document.createElement('div'); cc.className='col-cards';
+      cards.forEach(function(c){ cc.appendChild(cardEl(c)); });
+      var add=document.createElement('button'); add.className='add-card'; add.textContent='+ добавить';
+      add.onclick=function(){ openModal(null, col.name); };
+      colEl.appendChild(cc); colEl.appendChild(add);
+
+      // drop zone
+      colEl.addEventListener('dragover', function(e){ e.preventDefault(); colEl.classList.add('drag-over'); });
+      colEl.addEventListener('dragleave', function(){ colEl.classList.remove('drag-over'); });
+      colEl.addEventListener('drop', function(e){ e.preventDefault(); colEl.classList.remove('drag-over');
+        var id=e.dataTransfer.getData('text/plain'); var card=state.find(function(x){return x.id===id;});
+        if(card && card.column!==col.name){ card.column=col.name; save(); render(); }
+      });
+      board.appendChild(colEl);
+    });
+    document.getElementById('totalPill').innerHTML='<span class="dot b"></span>'+totalVisible+' из '+state.length+' задач';
+  }
+
+  function cardEl(c){
+    var t=TAGS[c.tag]||{cls:'sys',b:'b-sys'};
+    var el=document.createElement('div');
+    el.className='tcard '+t.b; el.draggable=true; el.dataset.id=c.id;
+    var due = c.due ? '<span class="due">'+esc(c.due)+'</span>' : '<span></span>';
+    var pcls = c.priority==='P1'?'p1':(c.priority==='P2'?'p2':'p3');
+    el.innerHTML =
+      '<button class="del" title="Удалить">✕</button>'+
+      '<div class="row1"><span class="tag '+t.cls+'">'+c.tag+'</span><span class="tag '+pcls+'">'+c.priority+'</span></div>'+
+      '<div class="ttl">'+esc(c.title)+'</div>'+
+      (c.detail?'<div class="dt">'+esc(c.detail)+'</div>':'')+
+      '<div class="meta"><span class="owner">◍ '+esc(c.owner||'—')+'</span>'+due+'</div>';
+    el.addEventListener('dragstart', function(e){ e.dataTransfer.setData('text/plain', c.id); e.dataTransfer.effectAllowed='move'; el.classList.add('dragging'); });
+    el.addEventListener('dragend', function(){ el.classList.remove('dragging'); });
+    el.querySelector('.del').onclick=function(ev){ ev.stopPropagation(); if(confirm('Удалить задачу?')){ state=state.filter(function(x){return x.id!==c.id;}); save(); render(); } };
+    el.addEventListener('click', function(){ openModal(c, c.column); });
+    return el;
+  }
+
+  // ---- modal ----
+  var modalBack=document.getElementById('modalBack');
+  var fTitle=document.getElementById('fTitle'), fDetail=document.getElementById('fDetail'),
+      fColumn=document.getElementById('fColumn'), fTag=document.getElementById('fTag'),
+      fPrio=document.getElementById('fPrio'), fOwner=document.getElementById('fOwner'), fDue=document.getElementById('fDue');
+  COLUMNS.forEach(function(col){ var o=document.createElement('option'); o.value=col.name; o.textContent=col.name; fColumn.appendChild(o); });
+  Object.keys(TAGS).forEach(function(t){ var o=document.createElement('option'); o.value=t; o.textContent=t; fTag.appendChild(o); });
+
+  function openModal(card, colName){
+    editingId = card ? card.id : null;
+    document.getElementById('modalTitle').textContent = card ? 'Задача' : 'Новая задача';
+    document.getElementById('btnDelete').style.display = card ? 'inline-flex' : 'none';
+    fTitle.value = card?card.title:''; fDetail.value = card?(card.detail||''):'';
+    fColumn.value = colName || (card?card.column:COLUMNS[0].name);
+    fTag.value = card?card.tag:'продажи'; fPrio.value = card?card.priority:'P2';
+    fOwner.value = card?(card.owner||''):'Андрей'; fDue.value = card?(card.due||''):'';
+    modalBack.classList.add('open'); setTimeout(function(){ fTitle.focus(); }, 40);
+  }
+  function closeModal(){ modalBack.classList.remove('open'); editingId=null; }
+
+  document.getElementById('btnSave').onclick=function(){
+    var title=fTitle.value.trim(); if(!title){ fTitle.focus(); return; }
+    var data={ title:title, detail:fDetail.value.trim(), column:fColumn.value, tag:fTag.value, priority:fPrio.value, owner:fOwner.value.trim(), due:fDue.value.trim() };
+    if(editingId){ var c=state.find(function(x){return x.id===editingId;}); if(c) Object.assign(c,data); }
+    else { data.id=uid(); state.push(data); }
+    save(); render(); closeModal();
+  };
+  document.getElementById('btnDelete').onclick=function(){ if(editingId && confirm('Удалить задачу?')){ state=state.filter(function(x){return x.id!==editingId;}); save(); render(); closeModal(); } };
+  document.getElementById('btnCancel').onclick=closeModal;
+  document.getElementById('modalClose').onclick=closeModal;
+  modalBack.addEventListener('click', function(e){ if(e.target===modalBack) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+  document.getElementById('btnAddTop').onclick=function(){ openModal(null, 'Эта неделя'); };
+  document.getElementById('btnReset').onclick=function(){ if(confirm('Вернуть недельный сид? Ваши изменения на доске будут заменены свежим списком из системы.')){ state=seedState(); save(); render(); } };
+  document.getElementById('search').addEventListener('input', function(e){ searchQ=e.target.value; render(); });
+
+  render();
+})();
+</script>
+</body>
+</html>
