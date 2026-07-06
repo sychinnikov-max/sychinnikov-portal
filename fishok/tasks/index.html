@@ -103,9 +103,10 @@
   var STORE = 'fishok_board_v2';
   var VER_STORE = 'fishok_board_seedv';
   var SEED_VERSION = '2026-07-06-2';      // Claude поднимает при пере-сиде из backlog.md
-  // Фаза 2 (автосинк через Cloudflare KV): вписать write-token, чтобы доска мирроила снимок наверх.
+  // Автосинк: доска (за Cloudflare Access) мирроит снимок в KV. Запись аутентифицирует сам Access по куке —
+  // секрета в клиентском коде нет. Claude тянет снимок на /day-close read-токеном с pages.dev.
   var SYNC_URL = '/fishok/api/board';
-  var WRITE_TOKEN = '';                    // пусто = мирроринг выключен, доска работает на localStorage
+  var SYNC_ON = true;
 
   var COLUMNS = [
     {name:'Бэклог',   color:'#8A97A6'},
@@ -230,10 +231,10 @@
   }
   // Фаза 2: дебаунснутый мирроринг снимка в KV (тихо, localStorage остается истиной)
   function mirror(){
-    if(!WRITE_TOKEN) return;
+    if(!SYNC_ON) return;
     clearTimeout(mirror._t);
     mirror._t=setTimeout(function(){
-      try{ fetch(SYNC_URL,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+WRITE_TOKEN},body:JSON.stringify(boardSnapshot())}).catch(function(){}); }catch(e){}
+      try{ fetch(SYNC_URL,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(boardSnapshot())}).catch(function(){}); }catch(e){}
     }, 5000);
   }
   // недеструктивный мерж свежего сида: сохраняем результаты и колонки пользователя по стабильному id или названию
@@ -442,6 +443,11 @@
     document.getElementById('btnSeedApply').onclick=function(){ mergeSeed(); banner.classList.remove('show'); render(); };
     document.getElementById('btnSeedLater').onclick=function(){ banner.classList.remove('show'); };
   })();
+
+  // немедленная отправка снимка при уходе со страницы — чтобы последняя правка не потерялась в дебаунсе
+  function mirrorNow(){ if(!SYNC_ON) return; try{ fetch(SYNC_URL,{method:'PUT',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify(boardSnapshot())}).catch(function(){}); }catch(e){} }
+  document.addEventListener('visibilitychange', function(){ if(document.visibilityState==='hidden') mirrorNow(); });
+  window.addEventListener('pagehide', mirrorNow);
 
   render();
 })();
