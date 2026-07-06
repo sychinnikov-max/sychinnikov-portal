@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Доска задач — Fishok OS</title>
 <link rel="icon" href="/assets/fishok/logo.svg">
-<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260706">
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260706-2">
 </head>
 <body>
 
@@ -114,6 +114,10 @@
     {name:'Ждет',     color:'#C77A1A'},
     {name:'Готово',   color:'#5A6675'}
   ];
+  // на доске рендерим 4 колонки; «Ждет» уезжает в раскрывающийся ящик внизу «Бэклога»
+  var BOARD_COLUMNS = ['Бэклог','Эта неделя','В работе','Готово'];
+  var WAIT_NAME = 'Ждет';
+  var COL_COLOR = {}; COLUMNS.forEach(function(c){ COL_COLOR[c.name]=c.color; });
 
   // подсказки при наведении на шапку колонки (что сюда попадает / фильтр)
   var COL_TIPS = {
@@ -196,6 +200,8 @@
   var filterPrio = new Set();
   var searchQ = '';
   var editingId = null;
+  var WAIT_OPEN_STORE = 'fishok_board_waitopen';
+  var waitOpen = false; try{ waitOpen = localStorage.getItem(WAIT_OPEN_STORE)==='1'; }catch(e){}
 
   function uid(){ return 'c' + Date.now().toString(36) + Math.floor(Math.random()*1e4).toString(36); }
   function stableId(title){ var h=0,s=title||''; for(var i=0;i<s.length;i++){ h=((h<<5)-h+s.charCodeAt(i))|0; } return 'ft'+(h>>>0).toString(36); }
@@ -264,30 +270,56 @@
   function render(){
     board.innerHTML='';
     var totalVisible=0;
-    COLUMNS.forEach(function(col){
-      var cards = state.filter(function(c){ return c.column===col.name && visible(c); });
+    BOARD_COLUMNS.forEach(function(name){
+      var color=COL_COLOR[name]||'#8A97A6';
+      var cards = state.filter(function(c){ return c.column===name && visible(c); });
       totalVisible += cards.length;
       var colEl=document.createElement('div');
-      colEl.className='col'; colEl.dataset.col=col.name;
-      var allInCol = state.filter(function(c){return c.column===col.name;}).length;
+      colEl.className='col'; colEl.dataset.col=name;
+      var allInCol = state.filter(function(c){return c.column===name;}).length;
       var countStr = cards.length+(cards.length!==allInCol?'/'+allInCol:'');
-      colEl.innerHTML='<div class="col-head"><span class="cdot" style="background:'+col.color+'"></span><span class="name">'+col.name+'</span><span class="ci">?</span><span class="count">'+countStr+'</span><div class="col-tip">'+(COL_TIPS[col.name]||'')+'</div></div>';
+      colEl.innerHTML='<div class="col-head"><span class="cdot" style="background:'+color+'"></span><span class="name">'+name+'</span><span class="ci">?</span><span class="count">'+countStr+'</span><div class="col-tip">'+(COL_TIPS[name]||'')+'</div></div>';
       var cc=document.createElement('div'); cc.className='col-cards';
       cards.forEach(function(c){ cc.appendChild(cardEl(c)); });
       var add=document.createElement('button'); add.className='add-card'; add.textContent='+ добавить';
-      add.onclick=function(){ openModal(null, col.name); };
+      add.onclick=function(){ openModal(null, name); };
       colEl.appendChild(cc); colEl.appendChild(add);
 
-      // drop zone
+      // «Ждет» как раскрывающийся ящик внизу колонки «Бэклог»
+      if(name==='Бэклог'){ var wd=buildWaitDrawer(); totalVisible+=wd.count; colEl.appendChild(wd.drawer); }
+
+      // drop zone → name
       colEl.addEventListener('dragover', function(e){ e.preventDefault(); colEl.classList.add('drag-over'); });
       colEl.addEventListener('dragleave', function(){ colEl.classList.remove('drag-over'); });
       colEl.addEventListener('drop', function(e){ e.preventDefault(); colEl.classList.remove('drag-over');
         var id=e.dataTransfer.getData('text/plain'); var card=state.find(function(x){return x.id===id;});
-        if(card && card.column!==col.name){ card.column=col.name; save(); render(); }
+        if(card && card.column!==name){ card.column=name; save(); render(); }
       });
       board.appendChild(colEl);
     });
     document.getElementById('totalPill').innerHTML='<span class="dot b"></span>'+totalVisible+' из '+state.length+' задач';
+  }
+
+  // ящик «Ждет»: тоггл + сворачиваемый список + отдельная зона дропа (переносит в колонку «Ждет»)
+  function buildWaitDrawer(){
+    var waitCards = state.filter(function(c){ return c.column===WAIT_NAME && visible(c); });
+    var allWait = state.filter(function(c){ return c.column===WAIT_NAME; }).length;
+    var cntStr = waitCards.length+(waitCards.length!==allWait?'/'+allWait:'');
+    var drawer=document.createElement('div');
+    drawer.className='wait-drawer'+(waitOpen?' open':'');
+    var toggle=document.createElement('button'); toggle.className='wait-toggle'; toggle.type='button';
+    toggle.innerHTML='<span class="chev">▸</span><span class="cdot" style="background:'+(COL_COLOR[WAIT_NAME]||'#C77A1A')+'"></span><span class="name">Ждет</span><span class="ci">?</span><span class="count">'+cntStr+'</span><div class="col-tip">'+(COL_TIPS[WAIT_NAME]||'')+'</div>';
+    toggle.onclick=function(){ waitOpen=!waitOpen; try{ localStorage.setItem(WAIT_OPEN_STORE, waitOpen?'1':'0'); }catch(e){} drawer.classList.toggle('open', waitOpen); };
+    var cc=document.createElement('div'); cc.className='wait-cards';
+    waitCards.forEach(function(c){ cc.appendChild(cardEl(c)); });
+    drawer.appendChild(toggle); drawer.appendChild(cc);
+    drawer.addEventListener('dragover', function(e){ e.preventDefault(); e.stopPropagation(); drawer.classList.add('drag-over'); });
+    drawer.addEventListener('dragleave', function(e){ e.stopPropagation(); drawer.classList.remove('drag-over'); });
+    drawer.addEventListener('drop', function(e){ e.preventDefault(); e.stopPropagation(); drawer.classList.remove('drag-over');
+      var id=e.dataTransfer.getData('text/plain'); var card=state.find(function(x){return x.id===id;});
+      if(card && card.column!==WAIT_NAME){ card.column=WAIT_NAME; if(!waitOpen){ waitOpen=true; try{ localStorage.setItem(WAIT_OPEN_STORE,'1'); }catch(e){} } save(); render(); }
+    });
+    return { drawer: drawer, count: waitCards.length };
   }
 
   function cardEl(c){
