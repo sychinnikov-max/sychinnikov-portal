@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Доска задач — Fishok OS</title>
 <link rel="icon" href="/assets/fishok/logo.svg">
-<link rel="stylesheet" href="/assets/fishok/fishok.css">
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260706">
 </head>
 <body>
 
@@ -33,6 +33,7 @@
       </div>
       <div class="flex gap wrap-flex items-center">
         <span class="pill" id="totalPill"><span class="dot b"></span>—</span>
+        <button class="btn btn-ghost btn-sm" id="btnExport" title="Скопировать снимок доски в буфер и скачать файл для Claude">⤓ Выгрузить для Claude</button>
         <button class="btn btn-ghost btn-sm" id="btnReset">↺ Вернуть недельный сид</button>
         <button class="btn btn-primary btn-sm" id="btnAddTop">+ Задача</button>
       </div>
@@ -43,12 +44,21 @@
 
 <section style="padding-bottom:3rem;">
   <div class="wrap" style="max-width:100%;">
+    <div class="seed-banner" id="seedBanner">
+      <span>🔄 <b>Claude обновил список задач.</b> Подтянуть свежую версию? Ваши комментарии-результаты сохранятся.</span>
+      <span class="sb-actions">
+        <button class="btn btn-ghost btn-sm" id="btnSeedLater">Позже</button>
+        <button class="btn btn-primary btn-sm" id="btnSeedApply">Обновить доску</button>
+      </span>
+    </div>
     <div class="board-toolbar">
       <input class="search-input" id="search" type="search" placeholder="Поиск по задачам…" style="min-width:200px;">
       <span class="soft xsmall" style="margin-left:.3rem;">Рычаг:</span>
       <div class="flex gap wrap-flex" id="tagFilters"></div>
       <div class="spacer"></div>
+      <span class="soft xsmall">Приоритет:</span>
       <div class="flex gap wrap-flex" id="prioFilters"></div>
+      <span class="prio-legend"><button class="pq" type="button" aria-label="Как я выбираю приоритеты">?</button><div class="prio-pop" id="prioPop"></div></span>
     </div>
     <div class="board" id="board"></div>
   </div>
@@ -78,6 +88,7 @@
         <div><label>Владелец</label><input class="text-input" id="fOwner" placeholder="Андрей / Кристапс / …"></div>
       </div>
       <div><label>Дедлайн (текст)</label><input class="text-input" id="fDue" placeholder="2026-07-07 или пусто"></div>
+      <div><label>Результат / комментарий</label><textarea class="text-input" id="fResult" rows="2" placeholder="Короткий итог: что получилось. Claude читает это на закрытии дня."></textarea></div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost btn-sm" id="btnDelete" style="margin-right:auto;color:var(--fk-red);border-color:#F0D2CB;">Удалить</button>
@@ -90,6 +101,12 @@
 <script>
 (function(){
   var STORE = 'fishok_board_v2';
+  var VER_STORE = 'fishok_board_seedv';
+  var SEED_VERSION = '2026-07-06';        // Claude поднимает при пере-сиде из backlog.md
+  // Фаза 2 (автосинк через Cloudflare KV): вписать write-token, чтобы доска мирроила снимок наверх.
+  var SYNC_URL = '/fishok/api/board';
+  var WRITE_TOKEN = '';                    // пусто = мирроринг выключен, доска работает на localStorage
+
   var COLUMNS = [
     {name:'Бэклог',   color:'#8A97A6'},
     {name:'Эта неделя',color:'#1B8FD6'},
@@ -97,6 +114,27 @@
     {name:'Ждет',     color:'#C77A1A'},
     {name:'Готово',   color:'#5A6675'}
   ];
+
+  // подсказки при наведении на шапку колонки (что сюда попадает / фильтр)
+  var COL_TIPS = {
+    'Бэклог':'<b>Пул задач вне фокуса недели.</b> Сюда падают новые задачи и то, что ждет своей очереди.<br><span class="hi">Фильтр:</span> есть ценность для компании, но на эту неделю не берем.',
+    'Эта неделя':'<b>Обязательства текущей недели.</b> Есть ответственный и дедлайн в пределах недели.<br><span class="hi">Фильтр:</span> задача реально двигает фокус недели.',
+    'В работе':'<b>Делается прямо сейчас.</b> Есть движение, задача не заблокирована.<br><span class="hi">Фильтр:</span> кто-то уже взял и ведет.',
+    'Ждет':'<b>Заблокировано, ждет внешнего.</b> Следующий шаг за другим человеком или событием: ответ Кристапса, результат анализа, решение ВВ.<br><span class="hi">Отличие от Бэклога:</span> Бэклог это еще не начато, Ждет это начато, но уперлось во внешнее.',
+    'Готово':'<b>Закрыто с понятным результатом.</b> Итог зафиксирован в комментарии-результате на карточке.<br><span class="hi">Фильтр:</span> результат достигнут и описан словами.'
+  };
+  // короткая подсказка на чипе приоритета
+  var PRIO_SHORT = {
+    'P1':'P1: двигает деньги или выживание сейчас',
+    'P2':'P2: устойчивость, горизонт 30-60 дней',
+    'P3':'P3: полезно, но терпит'
+  };
+  // полная легенда приоритетов (в поповере тулбара)
+  var PRIO_POP =
+    '<span class="pl"><span class="pk p1k">P1</span> двигает деньги или выживание сейчас: критический путь недели, крупные сделки, дедлайн выставки, отношения с Кристапсом. Пропуск бьет по выручке или доверию.</span>'+
+    '<span class="pl"><span class="pk p2k">P2</span> устойчивость, горизонт 30-60 дней: управленческий учет, диверсификация клиентов, система. Сегодня не горит, но это фундамент.</span>'+
+    '<span class="pl"><span class="pk p3k">P3</span> полезно, но терпит: улучшения, вторичные лиды. Можно отложить без потерь.</span>'+
+    '<span class="rule">Как выбираю: приоритет это влияние на деньги или выживание, умноженное на срочность дедлайна. P1 когда высоко и то, и другое.</span>';
   var TAGS = {
     'продажи':{cls:'sales', b:'b-sales'},
     'финансы':{cls:'fin',   b:'b-fin'},
@@ -151,19 +189,52 @@
   ];
 
   // ---- state ----
+  var hadStored=false;
   var state = load();
+  if(!hadStored){ try{ localStorage.setItem(VER_STORE, SEED_VERSION); }catch(e){} }
   var filterTags = new Set();
   var filterPrio = new Set();
   var searchQ = '';
   var editingId = null;
 
   function uid(){ return 'c' + Date.now().toString(36) + Math.floor(Math.random()*1e4).toString(36); }
+  function stableId(title){ var h=0,s=title||''; for(var i=0;i<s.length;i++){ h=((h<<5)-h+s.charCodeAt(i))|0; } return 'ft'+(h>>>0).toString(36); }
+  function norm(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
   function load(){
-    try { var raw = localStorage.getItem(STORE); if(raw){ return JSON.parse(raw); } } catch(e){}
+    try { var raw = localStorage.getItem(STORE); if(raw){ hadStored=true; var arr=JSON.parse(raw); arr.forEach(function(c){ if(c.result===undefined) c.result=''; }); return arr; } } catch(e){}
     return seedState();
   }
-  function seedState(){ return SEED.map(function(c,i){ var o=Object.assign({}, c); o.id='seed'+i; return o; }); }
-  function save(){ try { localStorage.setItem(STORE, JSON.stringify(state)); } catch(e){} }
+  function seedState(){ return SEED.map(function(c){ var o=Object.assign({}, c); o.id=c.id||stableId(c.title); o.result=c.result||''; return o; }); }
+  function save(){ try { localStorage.setItem(STORE, JSON.stringify(state)); } catch(e){} mirror(); }
+
+  // снимок доски для Claude (ручная выгрузка + автосинк)
+  function boardSnapshot(){
+    return { app:'fishok-board', seedVersion:SEED_VERSION, exportedAt:new Date().toISOString(),
+      cards: state.map(function(c){ return {id:c.id,title:c.title,column:c.column,tag:c.tag,priority:c.priority,owner:c.owner||'',due:c.due||'',detail:c.detail||'',result:c.result||''}; }) };
+  }
+  // Фаза 2: дебаунснутый мирроринг снимка в KV (тихо, localStorage остается истиной)
+  function mirror(){
+    if(!WRITE_TOKEN) return;
+    clearTimeout(mirror._t);
+    mirror._t=setTimeout(function(){
+      try{ fetch(SYNC_URL,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+WRITE_TOKEN},body:JSON.stringify(boardSnapshot())}).catch(function(){}); }catch(e){}
+    }, 5000);
+  }
+  // недеструктивный мерж свежего сида: сохраняем результаты и колонки пользователя по стабильному id или названию
+  function mergeSeed(){
+    var byId={}, byTitle={};
+    state.forEach(function(c){ byId[c.id]=c; byTitle[norm(c.title)]=c; });
+    var seedIds={}, seedTitles={};
+    var merged=SEED.map(function(s){
+      var o=Object.assign({}, s); o.id=s.id||stableId(s.title); o.result=s.result||'';
+      seedIds[o.id]=1; seedTitles[norm(s.title)]=1;
+      var u=byId[o.id]||byTitle[norm(s.title)];
+      if(u){ if(u.result) o.result=u.result; if(u.column) o.column=u.column; }
+      return o;
+    });
+    state.forEach(function(c){ if(!seedIds[c.id] && !seedTitles[norm(c.title)]) merged.push(c); });
+    state=merged; save(); try{ localStorage.setItem(VER_STORE, SEED_VERSION); }catch(e){}
+  }
 
   // ---- build filters ----
   var tagWrap = document.getElementById('tagFilters');
@@ -199,7 +270,8 @@
       var colEl=document.createElement('div');
       colEl.className='col'; colEl.dataset.col=col.name;
       var allInCol = state.filter(function(c){return c.column===col.name;}).length;
-      colEl.innerHTML='<div class="col-head"><span class="cdot" style="background:'+col.color+'"></span><span class="name">'+col.name+'</span><span class="count">'+cards.length+(cards.length!==allInCol?'/'+allInCol:'')+'</span></div>';
+      var countStr = cards.length+(cards.length!==allInCol?'/'+allInCol:'');
+      colEl.innerHTML='<div class="col-head"><span class="cdot" style="background:'+col.color+'"></span><span class="name">'+col.name+'</span><span class="ci">?</span><span class="count">'+countStr+'</span><div class="col-tip">'+(COL_TIPS[col.name]||'')+'</div></div>';
       var cc=document.createElement('div'); cc.className='col-cards';
       cards.forEach(function(c){ cc.appendChild(cardEl(c)); });
       var add=document.createElement('button'); add.className='add-card'; add.textContent='+ добавить';
@@ -226,22 +298,56 @@
     var pcls = c.priority==='P1'?'p1':(c.priority==='P2'?'p2':'p3');
     el.innerHTML =
       '<button class="del" title="Удалить">✕</button>'+
-      '<div class="row1"><span class="tag '+t.cls+'">'+c.tag+'</span><span class="tag '+pcls+'">'+c.priority+'</span></div>'+
+      '<div class="row1"><span class="tag '+t.cls+'">'+esc(c.tag)+'</span><span class="tag '+pcls+'" title="'+esc(PRIO_SHORT[c.priority]||'')+'">'+esc(c.priority)+'</span></div>'+
       '<div class="ttl">'+esc(c.title)+'</div>'+
       (c.detail?'<div class="dt">'+esc(c.detail)+'</div>':'')+
-      '<div class="meta"><span class="owner">◍ '+esc(c.owner||'—')+'</span>'+due+'</div>';
+      '<div class="meta"><span class="owner">◍ '+esc(c.owner||'—')+'</span>'+due+'</div>'+
+      '<div class="result-slot"></div>';
     el.addEventListener('dragstart', function(e){ e.dataTransfer.setData('text/plain', c.id); e.dataTransfer.effectAllowed='move'; el.classList.add('dragging'); });
     el.addEventListener('dragend', function(){ el.classList.remove('dragging'); });
     el.querySelector('.del').onclick=function(ev){ ev.stopPropagation(); if(confirm('Удалить задачу?')){ state=state.filter(function(x){return x.id!==c.id;}); save(); render(); } };
     el.addEventListener('click', function(){ openModal(c, c.column); });
+    renderResultSlot(el, c);
     return el;
+  }
+
+  // окошко результата на карточке: пусто — кнопка, заполнено — блок; клик = инлайн-редактирование
+  function renderResultSlot(el, c){
+    var slot=el.querySelector('.result-slot'); if(!slot) return; slot.innerHTML='';
+    if(c.result){
+      var box=document.createElement('div'); box.className='result-box'; box.title='Результат. Клик чтобы изменить';
+      var ico=document.createElement('span'); ico.className='rico'; ico.textContent='💬';
+      var txt=document.createElement('span'); txt.className='rtext'; txt.textContent=c.result;
+      box.appendChild(ico); box.appendChild(txt);
+      box.onclick=function(ev){ ev.stopPropagation(); startResultEdit(el,c,slot); };
+      slot.appendChild(box);
+    } else {
+      var add=document.createElement('button'); add.className='result-add'; add.type='button'; add.textContent='＋ результат';
+      add.onclick=function(ev){ ev.stopPropagation(); startResultEdit(el,c,slot); };
+      slot.appendChild(add);
+    }
+  }
+  function startResultEdit(el, c, slot){
+    el.draggable=false; slot.innerHTML='';
+    var ta=document.createElement('textarea'); ta.className='result-edit'; ta.value=c.result||'';
+    ta.placeholder='Короткий итог: что получилось';
+    ta.onclick=function(ev){ ev.stopPropagation(); };
+    ta.onmousedown=function(ev){ ev.stopPropagation(); };
+    var done=function(){ c.result=ta.value.trim(); save(); el.draggable=true; renderResultSlot(el,c); };
+    ta.onblur=done;
+    ta.onkeydown=function(ev){
+      if(ev.key==='Enter' && (ev.metaKey||ev.ctrlKey)){ ev.preventDefault(); ta.blur(); }
+      else if(ev.key==='Escape'){ ev.preventDefault(); ta.value=c.result||''; ta.blur(); }
+    };
+    slot.appendChild(ta); ta.focus(); try{ ta.selectionStart=ta.selectionEnd=ta.value.length; }catch(e){}
   }
 
   // ---- modal ----
   var modalBack=document.getElementById('modalBack');
   var fTitle=document.getElementById('fTitle'), fDetail=document.getElementById('fDetail'),
       fColumn=document.getElementById('fColumn'), fTag=document.getElementById('fTag'),
-      fPrio=document.getElementById('fPrio'), fOwner=document.getElementById('fOwner'), fDue=document.getElementById('fDue');
+      fPrio=document.getElementById('fPrio'), fOwner=document.getElementById('fOwner'), fDue=document.getElementById('fDue'),
+      fResult=document.getElementById('fResult');
   COLUMNS.forEach(function(col){ var o=document.createElement('option'); o.value=col.name; o.textContent=col.name; fColumn.appendChild(o); });
   Object.keys(TAGS).forEach(function(t){ var o=document.createElement('option'); o.value=t; o.textContent=t; fTag.appendChild(o); });
 
@@ -253,13 +359,14 @@
     fColumn.value = colName || (card?card.column:COLUMNS[0].name);
     fTag.value = card?card.tag:'продажи'; fPrio.value = card?card.priority:'P2';
     fOwner.value = card?(card.owner||''):'Андрей'; fDue.value = card?(card.due||''):'';
+    fResult.value = card?(card.result||''):'';
     modalBack.classList.add('open'); setTimeout(function(){ fTitle.focus(); }, 40);
   }
   function closeModal(){ modalBack.classList.remove('open'); editingId=null; }
 
   document.getElementById('btnSave').onclick=function(){
     var title=fTitle.value.trim(); if(!title){ fTitle.focus(); return; }
-    var data={ title:title, detail:fDetail.value.trim(), column:fColumn.value, tag:fTag.value, priority:fPrio.value, owner:fOwner.value.trim(), due:fDue.value.trim() };
+    var data={ title:title, detail:fDetail.value.trim(), column:fColumn.value, tag:fTag.value, priority:fPrio.value, owner:fOwner.value.trim(), due:fDue.value.trim(), result:fResult.value.trim() };
     if(editingId){ var c=state.find(function(x){return x.id===editingId;}); if(c) Object.assign(c,data); }
     else { data.id=uid(); state.push(data); }
     save(); render(); closeModal();
@@ -271,8 +378,28 @@
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
 
   document.getElementById('btnAddTop').onclick=function(){ openModal(null, 'Эта неделя'); };
-  document.getElementById('btnReset').onclick=function(){ if(confirm('Вернуть недельный сид? Ваши изменения на доске будут заменены свежим списком из системы.')){ state=seedState(); save(); render(); } };
+  document.getElementById('btnReset').onclick=function(){ if(confirm('Вернуть недельный сид? Ваши изменения на доске будут заменены свежим списком из системы.')){ state=seedState(); save(); try{ localStorage.setItem(VER_STORE, SEED_VERSION); }catch(e){} document.getElementById('seedBanner').classList.remove('show'); render(); } };
   document.getElementById('search').addEventListener('input', function(e){ searchQ=e.target.value; render(); });
+
+  // выгрузка снимка доски для Claude: буфер + файл
+  document.getElementById('btnExport').onclick=function(){
+    var snap=JSON.stringify(boardSnapshot(), null, 2);
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(snap).catch(function(){}); }
+    try{ var blob=new Blob([snap],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='fishok-board.json'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 100); }catch(e){}
+    var b=this, old=b.textContent; b.textContent='✓ Скопировано + файл'; setTimeout(function(){ b.textContent=old; }, 1800);
+  };
+
+  // легенда приоритетов
+  document.getElementById('prioPop').innerHTML = PRIO_POP;
+
+  // баннер свежего сида от Claude
+  (function(){
+    var storedV=null; try{ storedV=localStorage.getItem(VER_STORE); }catch(e){}
+    var banner=document.getElementById('seedBanner');
+    if(hadStored && storedV!==SEED_VERSION){ banner.classList.add('show'); }
+    document.getElementById('btnSeedApply').onclick=function(){ mergeSeed(); banner.classList.remove('show'); render(); };
+    document.getElementById('btnSeedLater').onclick=function(){ banner.classList.remove('show'); };
+  })();
 
   render();
 })();
