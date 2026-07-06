@@ -328,6 +328,21 @@ table.fk tr:hover td{ background:#FAFCFE; }
 .add-card{ margin-top:.55rem; width:100%; text-align:left; font-size:.82rem; color:var(--fk-soft); background:none; border:1px dashed var(--fk-line); border-radius:var(--fk-r-sm); padding:.45rem .6rem; cursor:pointer; transition:all .18s; }
 .add-card:hover{ border-color:var(--fk-blue); color:var(--fk-blue); background:var(--fk-card); }
 
+/* ящик «Ждет» внизу колонки «Бэклог» */
+.wait-drawer{ margin-top:.55rem; border-top:1px dashed var(--fk-line); padding-top:.5rem; }
+.wait-toggle{ position:relative; width:100%; display:flex; align-items:center; gap:.4rem; font-size:.8rem; font-weight:700; color:var(--fk-amber); background:var(--fk-amber-bg); border:1px solid #F0DFC0; border-radius:var(--fk-r-sm); padding:.4rem .55rem; cursor:pointer; transition:border-color .15s; }
+.wait-toggle:hover{ border-color:var(--fk-amber); }
+.wait-toggle .name{ letter-spacing:-.01em; }
+.wait-toggle .cdot{ width:8px; height:8px; border-radius:50%; flex:none; }
+.wait-toggle .chev{ font-size:.7rem; transition:transform .18s var(--fk-ease); }
+.wait-drawer.open .wait-toggle .chev{ transform:rotate(90deg); }
+.wait-toggle .ci{ font-size:.66rem; font-weight:700; color:var(--fk-amber); border:1px solid #F0DFC0; background:var(--fk-card); border-radius:50%; width:14px; height:14px; display:inline-flex; align-items:center; justify-content:center; }
+.wait-toggle .count{ margin-left:auto; font-family:var(--fk-mono); font-size:.72rem; color:var(--fk-amber); background:var(--fk-card); border:1px solid #F0DFC0; border-radius:100px; padding:.05rem .45rem; }
+.wait-toggle:hover .col-tip{ opacity:1; visibility:visible; transform:translateY(0); }
+.wait-cards{ display:none; flex-direction:column; gap:.5rem; margin-top:.5rem; }
+.wait-drawer.open .wait-cards{ display:flex; }
+.wait-drawer.drag-over{ outline:2px dashed var(--fk-amber); outline-offset:3px; border-radius:var(--fk-r-sm); }
+
 /* легенда приоритетов P1/P2/P3 */
 .prio-legend{ position:relative; display:inline-flex; align-items:center; }
 .prio-legend .pq{ width:20px; height:20px; border-radius:50%; border:1px solid var(--fk-line); background:var(--fk-card); color:var(--fk-muted); font-size:.78rem; font-weight:700; cursor:help; display:inline-flex; align-items:center; justify-content:center; transition:all .15s; }
