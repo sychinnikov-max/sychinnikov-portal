@@ -15,7 +15,7 @@
          ]}
        ]
      });
-   status: done | active | plan | risk | crit
+   status: done | active | plan | risk | crit | block
    ═══════════════════════════════════════════════════════════ */
 window.FishokGantt = (function () {
   function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -61,6 +61,7 @@ window.FishokGantt = (function () {
          '<span><i style="background:linear-gradient(135deg,#D2452F,#E8642B)"></i>критический путь</span>'+
          '<span><i style="background:#7C8A9A"></i>план</span>'+
          '<span><i style="background:var(--fk-red)"></i>риск</span>'+
+         '<span><i style="background:repeating-linear-gradient(135deg,#5A6675,#5A6675 4px,#4A5563 4px,#4A5563 8px)"></i>заблокировано</span>'+
          '</div>';
     el.innerHTML = h;
   }

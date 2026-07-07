@@ -22,6 +22,21 @@ window.FishokBoard = (function () {
 
   function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
+  // форматирование дат карточки: 2026-07-09 → 09.07 ; 2026-08 → 08.26 ; иначе как есть
+  function fmtDate(s){
+    if(!s) return '';
+    var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s); if(m) return m[3]+'.'+m[2];
+    var m2=/^(\d{4})-(\d{2})$/.exec(s);        if(m2) return m2[2]+'.'+m2[1].slice(2);
+    return s;
+  }
+  function isOverdue(due, col){
+    if(col==='Готово') return false;
+    var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(due||''); if(!m) return false;
+    var d=new Date(+m[1], +m[2]-1, +m[3]); var t=new Date(); t.setHours(0,0,0,0);
+    return d < t;
+  }
+  function todayISO(){ var d=new Date(); function p(n){return (n<10?'0':'')+n;} return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+
   // единый модал на страницу (в body), общий для любого числа досок
   function injectModal(){
     if (modalInjected || document.getElementById('fkModalBack')) { modalInjected = true; return; }
@@ -35,7 +50,7 @@ window.FishokBoard = (function () {
       '<div><label>Детали / следующий шаг</label><textarea class="text-input" id="fkDetail" rows="3" placeholder="Контекст, источник, следующий шаг"></textarea></div>'+
       '<div class="field-row"><div><label>Колонка</label><select class="select-input" id="fkColumn"></select></div><div><label>Рычаг</label><select class="select-input" id="fkTag"></select></div></div>'+
       '<div class="field-row"><div><label>Приоритет</label><select class="select-input" id="fkPrio"><option>P1</option><option>P2</option><option>P3</option></select></div><div><label>Владелец</label><input class="text-input" id="fkOwner" placeholder="Андрей / Кристапс / …"></div></div>'+
-      '<div><label>Дедлайн (текст)</label><input class="text-input" id="fkDue" placeholder="2026-07-07 или пусто"></div>'+
+      '<div class="field-row"><div><label>Поставлена</label><input class="text-input" id="fkCreated" placeholder="2026-07-06"></div><div><label>Дедлайн</label><input class="text-input" id="fkDue" placeholder="2026-07-09"></div></div>'+
       '<div><label>Результат / комментарий</label><textarea class="text-input" id="fkResult" rows="2" placeholder="Короткий итог: что получилось. Claude читает это на закрытии дня."></textarea></div>'+
       '</div>'+
       '<div class="modal-foot">'+
@@ -133,7 +148,7 @@ window.FishokBoard = (function () {
     // снимок доски для Claude — всегда ВСЯ доска (state = полный набор карточек)
     function boardSnapshot(){
       return { app:'fishok-board', seedVersion:SEED_VERSION, exportedAt:new Date().toISOString(),
-        cards: state.map(function(c){ return {id:c.id,title:c.title,column:c.column,tag:c.tag,priority:c.priority,owner:c.owner||'',due:c.due||'',detail:c.detail||'',result:c.result||''}; }) };
+        cards: state.map(function(c){ return {id:c.id,title:c.title,column:c.column,tag:c.tag,priority:c.priority,owner:c.owner||'',created:c.created||'',due:c.due||'',detail:c.detail||'',result:c.result||''}; }) };
     }
     function mirror(){
       if(!SYNC_ON) return;
@@ -241,14 +256,20 @@ window.FishokBoard = (function () {
       var t=TAGS[c.tag]||{cls:'sys',b:'b-sys'};
       var el=document.createElement('div');
       el.className='tcard '+t.b; el.draggable=true; el.dataset.id=c.id;
-      var due = c.due ? '<span class="due">'+esc(c.due)+'</span>' : '<span></span>';
+      var overdue = isOverdue(c.due, c.column);
+      var creTxt = c.created ? fmtDate(c.created) : '';
+      var dueTxt = c.due ? fmtDate(c.due) : '';
+      var dates = '<span class="dates">'+
+        (creTxt ? '<span class="cre" title="Дата постановки">пост. '+esc(creTxt)+'</span>' : '')+
+        (dueTxt ? '<span class="due'+(overdue?' overdue':'')+'" title="Дедлайн'+(overdue?' — просрочено':'')+'">'+(overdue?'⚠ ':'до ')+esc(dueTxt)+'</span>' : '')+
+        '</span>';
       var pcls = c.priority==='P1'?'p1':(c.priority==='P2'?'p2':'p3');
       el.innerHTML =
         '<button class="del" title="Удалить">✕</button>'+
         '<div class="row1"><span class="tag '+t.cls+'">'+esc(c.tag)+'</span><span class="tag '+pcls+'" title="'+esc(PRIO_SHORT[c.priority]||'')+'">'+esc(c.priority)+'</span></div>'+
         '<div class="ttl">'+esc(c.title)+'</div>'+
         (c.detail?'<div class="dt">'+esc(c.detail)+'</div>':'')+
-        '<div class="meta"><span class="owner">◍ '+esc(c.owner||'—')+'</span>'+due+'</div>'+
+        '<div class="meta"><span class="owner">◍ '+esc(c.owner||'—')+'</span>'+dates+'</div>'+
         '<div class="result-slot"></div>';
       el.addEventListener('dragstart', function(e){ e.dataTransfer.setData('text/plain', c.id); e.dataTransfer.effectAllowed='move'; el.classList.add('dragging'); });
       el.addEventListener('dragend', function(){ el.classList.remove('dragging'); });
@@ -293,7 +314,7 @@ window.FishokBoard = (function () {
     var fTitle=document.getElementById('fkTitle'), fDetail=document.getElementById('fkDetail'),
         fColumn=document.getElementById('fkColumn'), fTag=document.getElementById('fkTag'),
         fPrio=document.getElementById('fkPrio'), fOwner=document.getElementById('fkOwner'), fDue=document.getElementById('fkDue'),
-        fResult=document.getElementById('fkResult');
+        fCreated=document.getElementById('fkCreated'), fResult=document.getElementById('fkResult');
     // опции селектов (перезаполняем при каждом mount — безвредно)
     fColumn.innerHTML=''; COLUMNS.forEach(function(col){ var o=document.createElement('option'); o.value=col.name; o.textContent=col.name; fColumn.appendChild(o); });
     fTag.innerHTML=''; Object.keys(TAGS).forEach(function(t){ var o=document.createElement('option'); o.value=t; o.textContent=t; fTag.appendChild(o); });
@@ -306,6 +327,7 @@ window.FishokBoard = (function () {
       fColumn.value = colName || (card?card.column:COLUMNS[0].name);
       fTag.value = card?card.tag:defaultTag; fPrio.value = card?card.priority:'P2';
       fOwner.value = card?(card.owner||''):'Андрей'; fDue.value = card?(card.due||''):'';
+      fCreated.value = card?(card.created||''):todayISO();
       fResult.value = card?(card.result||''):'';
       // навесить обработчики на текущий mount (перезапись — ок)
       document.getElementById('fkBtnSave').onclick=saveModal;
@@ -317,7 +339,7 @@ window.FishokBoard = (function () {
     function closeModal(){ modalBack.classList.remove('open'); editingId=null; }
     function saveModal(){
       var title=fTitle.value.trim(); if(!title){ fTitle.focus(); return; }
-      var data={ title:title, detail:fDetail.value.trim(), column:fColumn.value, tag:fTag.value, priority:fPrio.value, owner:fOwner.value.trim(), due:fDue.value.trim(), result:fResult.value.trim() };
+      var data={ title:title, detail:fDetail.value.trim(), column:fColumn.value, tag:fTag.value, priority:fPrio.value, owner:fOwner.value.trim(), created:fCreated.value.trim(), due:fDue.value.trim(), result:fResult.value.trim() };
       if(editingId){ var c=state.find(function(x){return x.id===editingId;}); if(c) Object.assign(c,data); }
       else { data.id=uid(); state.push(data); }
       save(); render(); closeModal();

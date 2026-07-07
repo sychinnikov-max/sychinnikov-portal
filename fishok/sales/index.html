@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Отдел продаж · Rob.EI — Fishok OS</title>
 <link rel="icon" href="/assets/fishok/logo.svg">
-<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260707">
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260708">
 <style>
   .robei{ background:linear-gradient(150deg,#161b22 0%,#1d2530 60%,#14324b 100%); color:#EAF2F9; border-radius:var(--fk-r-lg); overflow:hidden; position:relative; }
   .robei .inner{ padding:1.8rem 1.9rem; position:relative; z-index:2; }
@@ -55,11 +55,64 @@
   <div class="wrap">
     <div class="office-tabs flex gap wrap-flex items-center">
       <span class="eyebrow" style="margin-right:.3rem;">Кабина отдела:</span>
+      <a href="#daily" class="pill office-tab"><span class="dot a"></span>Отчёт за вчера</a>
       <a href="#board" class="pill office-tab"><span class="dot b"></span>Доска</a>
       <a href="#roadmap" class="pill office-tab"><span class="dot b"></span>Дорожная карта</a>
       <a href="#plan" class="pill office-tab"><span class="dot b"></span>План недели</a>
       <a href="#report" class="pill office-tab"><span class="dot b"></span>Пятничный отчёт</a>
     </div>
+  </div>
+</section>
+
+<!-- ОТЧЁТ ЗА ВЧЕРА (обновляется на /day-open) -->
+<section class="section-tight" id="daily" style="padding-top:.6rem;padding-bottom:.4rem;scroll-margin-top:80px;">
+  <div class="wrap">
+    <details class="daily-report" open>
+      <summary>
+        <span class="dr-ico">📋</span>
+        <span class="dr-title">Отчёт за вчера</span>
+        <span class="dr-date">обновлено 07.07 · охват 06–07.07</span>
+        <span class="dr-chev">▾</span>
+      </summary>
+      <div class="dr-body">
+        <p class="small muted mb0" style="margin-bottom:1rem;">Готовит Rob.EI на каждом открытии дня (/day-open): что закрыто, что застряло, показатели воронки, фокус на сегодня. Сверни, если не нужно.</p>
+        <div class="grid g-2" style="gap:1rem;align-items:start;">
+          <div class="dr-col">
+            <span class="eyebrow" style="color:var(--fk-green);">✓ Закрыто</span>
+            <ul class="dr-list mt1">
+              <li>Образцы для выставки США отданы фабрике (через Влада).</li>
+              <li>Forecast от Даниэля получен (Petmate, 6 мес) — неполный, рождает расписание закупки.</li>
+              <li>Дорожная карта сдана и обсуждена на 1:1 с Кристапсом, приоритет — продажи.</li>
+              <li>Неделя открыта брифом; метод сведения CRM↔банк запущен.</li>
+            </ul>
+          </div>
+          <div class="dr-col">
+            <span class="eyebrow" style="color:var(--fk-red);">✕ Застряло / мяч у нас</span>
+            <ul class="dr-list mt1">
+              <li><b>THK €108К</b> — клиент ждет ответ по лаб-тестам с 24.06 (13 дней).</li>
+              <li><b>Doskocil id69 €84,7К</b> — предоплата получена, 20 дней без шага.</li>
+              <li><b>Гейт пачек Doskocil €380К</b> — ждем подтверждение китайцев + проверку Влада.</li>
+            </ul>
+          </div>
+          <div class="dr-col">
+            <span class="eyebrow blue">📊 Воронка</span>
+            <ul class="dr-list mt1">
+              <li>OPEN ≈ €593К, ~98% на тройке (Doskocil / Icelandic / THK).</li>
+              <li>Даниэль: 78 открытых сделок — перегруз, весь денежный поток на одном.</li>
+              <li>С сегодня: фиксируем каждый новый лид и бездействие в CRM.</li>
+            </ul>
+          </div>
+          <div class="dr-col">
+            <span class="eyebrow">🎯 Фокус сегодня (07.07)</span>
+            <ul class="dr-list mt1">
+              <li>Дожать THK €108К + размотать Doskocil id69.</li>
+              <li>Гейт пачек: вытянуть у поставщика дату производства (Влад).</li>
+              <li>1:1 — фокус на Даниэле и Владе; сверка денег с банком → Кристапсу.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -385,6 +438,15 @@
         {name:'Выставка США 12–14.08', start:6, end:6, status:'crit', label:'🔴 выставка'},
         {name:'Первые продажи + командировка Латвия', start:7, end:7, status:'plan'},
         {name:'Масштабирование вектора', start:8, end:8, status:'plan'}
+      ]},
+      { name:'Подготовка продаж к выставке (7 блоков)', color:'#7A4FB0', tasks:[
+        {name:'Лиды: выжать текущие + реактивация базы', start:1, end:5, status:'active', label:'все 5 недель'},
+        {name:'Образцы всех позиций фабрике', start:1, end:1, status:'plan', label:'✓ отдано'},
+        {name:'CRM и стенд готовы', start:3, end:4, status:'plan'},
+        {name:'Доступ к кабинету выставки (Влад)', start:4, end:4, status:'plan'},
+        {name:'Метод B2B: Zoom + фабрика + оффер', start:2, end:5, status:'active', note:'материалы Андрей'},
+        {name:'На выставке: лиды + Savourfish', start:6, end:6, status:'crit'},
+        {name:'Выставочные контакты → в сделки', start:7, end:7, status:'plan'}
       ]}
     ]
   });
