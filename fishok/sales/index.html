@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Отдел продаж · Rob.EI — Fishok OS</title>
 <link rel="icon" href="/assets/fishok/logo.svg">
-<link rel="stylesheet" href="/assets/fishok/fishok.css">
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260707">
 <style>
   .robei{ background:linear-gradient(150deg,#161b22 0%,#1d2530 60%,#14324b 100%); color:#EAF2F9; border-radius:var(--fk-r-lg); overflow:hidden; position:relative; }
   .robei .inner{ padding:1.8rem 1.9rem; position:relative; z-index:2; }
@@ -46,6 +46,110 @@
       <span class="pill"><span class="dot r"></span>Приоритет №1 Кристапса</span>
       <span class="pill"><span class="dot b"></span>РОП: Андрей</span>
       <span class="pill"><span class="dot a"></span>Воронка €635К · 95% на 3 клиентах</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ КАБИНА ОТДЕЛА (рабочие поверхности) ═══════════════ -->
+<section class="section-tight" style="padding-top:1.2rem;padding-bottom:.4rem;">
+  <div class="wrap">
+    <div class="office-tabs flex gap wrap-flex items-center">
+      <span class="eyebrow" style="margin-right:.3rem;">Кабина отдела:</span>
+      <a href="#board" class="pill office-tab"><span class="dot b"></span>Доска</a>
+      <a href="#roadmap" class="pill office-tab"><span class="dot b"></span>Дорожная карта</a>
+      <a href="#plan" class="pill office-tab"><span class="dot b"></span>План недели</a>
+      <a href="#report" class="pill office-tab"><span class="dot b"></span>Пятничный отчёт</a>
+    </div>
+  </div>
+</section>
+
+<!-- ДОСКА ОТДЕЛА -->
+<section class="section-tight" id="board" style="padding-top:.6rem;scroll-margin-top:80px;">
+  <div class="wrap" style="max-width:100%;">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow blue">Рабочая доска · продажи · сделки · ретейл · производство</span>
+        <h2>Доска отдела продаж</h2>
+        <p>Те же карточки, что на общей доске, отфильтрованные по тегам продаж. Перетаскивайте между колонками, добавляйте задачи, вписывайте результат — всё синхронизируется с системой (Claude читает на закрытии дня).</p>
+      </div>
+    </div>
+    <div id="fkSalesBoard"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ДОРОЖНАЯ КАРТА ОТДЕЛА -->
+<section class="section-tight" id="roadmap" style="scroll-margin-top:80px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow">8 недель · 07.07–31.08 · утверждена с Кристапсом</span>
+        <h2>Дорожная карта продаж</h2>
+        <p>Из неё следуют задачи недели. Три трека: работа с базой и метод привлечения B2B, крупные сделки и Doskocil, Savourfish к выставке США. Красный — критический путь.</p>
+      </div>
+    </div>
+    <div id="fkSalesGantt"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ПЛАН НЕДЕЛИ -->
+<section class="section-tight" id="plan" style="scroll-margin-top:80px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow blue">Неделя 06–12.07 · утверждается в ПН на синке 12:00</span>
+        <h2>План недели</h2>
+        <p>Обязательства недели по приоритету, утверждаются в понедельник с Владиславсом и Даниэлем. Дальше — выполнение; агенты фильтруют и подтягивают контекст. Полный операционный срез — на доске выше.</p>
+      </div>
+    </div>
+    <div class="grid g-2" style="align-items:start;gap:1.4rem;">
+      <div class="card card-pad-lg">
+        <span class="eyebrow" style="color:var(--fk-red);">Фокус недели (решение 07.07)</span>
+        <p class="mt1 mb0"><strong>Главный ход по продажам — Влад, не Даниэль.</strong> Зайти в его сделки и структурировать. С Даниэлем аккуратно, без давления (его действие — заполнение таблицы обращений). Дожать тройку крупных и не потерять срочный путь Savourfish к выставке.</p>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Обязательства недели</span>
+        <ul class="list mt1">
+          <li><span class="m">1</span><div><strong>Влад — зайти в его сделки и взять под контроль.</strong> Anna Kvitten, Goodleos, Petsfish, чек упаковки Doskocil. По каждой — след. шаг + дата. <span class="soft xsmall">Андрей + Владиславс · ЧТ</span></div></li>
+          <li><span class="m">2</span><div><strong>Ревизия воронки</strong> — зафиксировать статус каждого лида. <span class="soft xsmall">Андрей + Владиславс · ЧТ 09.07</span></div></li>
+          <li><span class="m">3</span><div><strong>Doskocil</strong> — вскрыть id69 €84,7К, собрать отгрузку ~€40К, дата китайцев. <span class="soft xsmall">Андрей + Даниэль</span></div></li>
+          <li><span class="m">4</span><div><strong>THK</strong> — ответить клиенту по лаб-тестам (ждёт с 24.06). <span class="soft xsmall">Андрей + Даниэль</span></div></li>
+          <li><span class="m">5</span><div><strong>Savourfish</strong> — первая пачка к 15.07, перепроверить GS1 до печати. <span class="soft xsmall">Андрей</span></div></li>
+          <li><span class="m">6</span><div><strong>Мониторинг Влада</strong> — доступ к Google-таблице обращений, ежедневный срез (Этап 1). <span class="soft xsmall">Андрей + Claude</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ПЯТНИЧНЫЙ ОТЧЁТ -->
+<section class="section-tight" id="report" style="scroll-margin-top:80px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow">Закрытие недели · ПТ · готовит Rob.EI (AI-РОП)</span>
+        <h2>Пятничный отчёт</h2>
+        <p>Каждую пятницу директор по продажам готовит отчёт о проделанной работе: что сделано, что нет, где просадка, где усилиться, где лишнее. Вход в план следующей недели.</p>
+      </div>
+    </div>
+    <div class="card card-pad-lg" style="background:var(--fk-grad-soft);border-color:#D3E6F7;">
+      <div class="flex between items-center wrap-flex" style="gap:.8rem;">
+        <span class="eyebrow blue">Первый отчёт — пятница 11.07</span>
+        <span class="pill"><span class="dot a"></span>ожидается</span>
+      </div>
+      <div class="grid g-3 mt2" style="gap:1rem;">
+        <div><span class="eyebrow">✓ Сделано</span><p class="small muted mt1 mb0">Закрытые задачи недели с результатом (из колонки «Готово»).</p></div>
+        <div><span class="eyebrow">✕ Не сделано</span><p class="small muted mt1 mb0">Что не двинулось и почему — блокер внешний или внутренний.</p></div>
+        <div><span class="eyebrow" style="color:var(--fk-red);">↓ Просадка</span><p class="small muted mt1 mb0">Где отдел проседает: скорость ответов, зависшие сделки, тишина по лидам.</p></div>
+        <div><span class="eyebrow" style="color:var(--fk-green);">↑ Усилиться</span><p class="small muted mt1 mb0">Куда добавить ресурс на следующей неделе.</p></div>
+        <div><span class="eyebrow">− Лишнее</span><p class="small muted mt1 mb0">Что отвлекает и можно убрать без потерь.</p></div>
+        <div><span class="eyebrow blue">→ В план</span><p class="small muted mt1 mb0">Выводы уходят в план следующего понедельника.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -236,6 +340,54 @@
   </div>
 </footer>
 
+<script src="/assets/fishok/board-seed.js"></script>
+<script src="/assets/fishok/board.js"></script>
+<script src="/assets/fishok/gantt.js"></script>
 <script src="/assets/fishok/fishok.js"></script>
+<script>
+  // доска отдела: тот же движок, отфильтрованный по тегам продаж
+  FishokBoard.mount(document.getElementById('fkSalesBoard'), {
+    deptTags: ['продажи','сделка','ретейл','производство'],
+    defaultTag: 'продажи',
+    fullBoardLink: '/fishok/tasks/'
+  });
+
+  // дорожная карта продаж (8 недель) — источник company/roadmap-kristaps-8w-2026-07.md
+  FishokGantt.mount(document.getElementById('fkSalesGantt'), {
+    weeks: [
+      {n:'Нед 1', label:'07–13.07'}, {n:'Нед 2', label:'14–20.07'},
+      {n:'Нед 3', label:'21–27.07'}, {n:'Нед 4', label:'28.07–03.08'},
+      {n:'Нед 5', label:'04–10.08'}, {n:'Нед 6', label:'11–17.08'},
+      {n:'Нед 7', label:'18–24.08'}, {n:'Нед 8', label:'25–31.08'}
+    ],
+    nowWeek: 1,
+    groups: [
+      { name:'База и метод привлечения (Блок 2)', color:'#1B6FB0', tasks:[
+        {name:'Аудит + чистка базы, «второй заход»', start:1, end:1, status:'active'},
+        {name:'Реестр образцов', start:1, end:2, status:'active'},
+        {name:'Норматив скорости + журнал обращений', start:2, end:8, status:'active', label:'в цикле'},
+        {name:'Маркет / конкурент-ресёрч', start:3, end:3, status:'plan'},
+        {name:'Тест метода №1 — реактивация базы', start:4, end:4, status:'plan'},
+        {name:'Тест метода №2 — холодный канал', start:5, end:5, status:'plan'},
+        {name:'Свод → воспроизводимый метод', start:8, end:8, status:'plan'}
+      ]},
+      { name:'Крупные сделки и Doskocil (действующие)', color:'#9A5A10', tasks:[
+        {name:'Ревизия воронки — зафиксировать лиды', start:1, end:2, status:'active'},
+        {name:'Дожать тройку (Doskocil / Icelandic / THK)', start:1, end:4, status:'crit'},
+        {name:'Влад — второй эшелон', start:1, end:8, status:'active', label:'диверсификация'},
+        {name:'Doskocil-Китай: предоплата → постоплата', start:1, end:8, status:'plan', note:'гейт: дата китайцев'}
+      ]},
+      { name:'Savourfish → выставка США (Блок 4)', color:'#1C4B6E', tasks:[
+        {name:'Эталон + 15 позиций + GS1', start:1, end:1, status:'active'},
+        {name:'Первый эталон → в печать', start:2, end:2, status:'active', note:'~15.07'},
+        {name:'Печать (~2 нед) + засыпка', start:3, end:4, status:'plan'},
+        {name:'Продукт под засыпку + логистика США', start:5, end:5, status:'plan'},
+        {name:'Выставка США 12–14.08', start:6, end:6, status:'crit', label:'🔴 выставка'},
+        {name:'Первые продажи + командировка Латвия', start:7, end:7, status:'plan'},
+        {name:'Масштабирование вектора', start:8, end:8, status:'plan'}
+      ]}
+    ]
+  });
+</script>
 </body>
 </html>

@@ -207,6 +207,12 @@ img{ max-width:100%; display:block; }
 .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
 .dot.g{ background:var(--fk-green); } .dot.a{ background:var(--fk-amber); } .dot.r{ background:var(--fk-red); } .dot.b{ background:var(--fk-blue); } .dot.n{ background:var(--fk-soft); }
 
+/* вкладки-якоря кабины отдела */
+.office-tabs{ position:sticky; top:64px; z-index:20; background:rgba(243,246,250,.9); backdrop-filter:blur(10px); padding:.55rem 0; border-bottom:1px solid var(--fk-line); }
+a.office-tab{ transition:all .16s var(--fk-ease); cursor:pointer; }
+a.office-tab:hover{ background:var(--fk-ink); color:#fff; }
+a.office-tab:hover .dot{ background:#fff; }
+
 .status{ display:inline-flex; align-items:center; gap:.4rem; font-size:.76rem; font-weight:600; }
 .status.on{ color:var(--fk-green); } .status.plan{ color:var(--fk-amber); } .status.res{ color:var(--fk-soft); }
 
@@ -379,6 +385,36 @@ table.fk tr:hover td{ background:#FAFCFE; }
 .flex{ display:flex; } .between{ justify-content:space-between; } .items-center{ align-items:center; } .gap{ gap:.7rem; } .wrap-flex{ flex-wrap:wrap; }
 .stack{ display:flex; flex-direction:column; gap:1.1rem; }
 .stack-sm{ display:flex; flex-direction:column; gap:.6rem; }
+
+/* ───── GANTT (дорожная карта отдела) ───── */
+.fk-gantt{ border:1px solid var(--fk-line); border-radius:var(--fk-r-md); overflow:hidden; background:var(--fk-card); box-shadow:var(--fk-shadow); }
+.fk-gantt .grow{ display:grid; grid-template-columns:200px 1fr; align-items:stretch; border-bottom:1px solid var(--fk-line-soft); }
+.fk-gantt .grow:last-child{ border-bottom:0; }
+.fk-gantt .ghead{ background:var(--fk-bg); position:sticky; top:64px; z-index:1; }
+.fk-gantt .glabel{ padding:.55rem .85rem; color:var(--fk-fg); font-size:.82rem; font-weight:500; display:flex; align-items:center; border-right:1px solid var(--fk-line-soft); }
+.fk-gantt .ghead .glabel{ color:var(--fk-soft); font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; font-weight:600; }
+.fk-gantt .gtrack{ display:grid; position:relative; background-image:linear-gradient(to right, var(--fk-line-soft) 1px, transparent 1px); background-size:calc(100% / var(--gcols)) 100%; }
+.fk-gantt .gweek{ padding:.5rem .3rem; text-align:center; font-family:var(--fk-mono); font-size:.68rem; color:var(--fk-soft); line-height:1.25; }
+.fk-gantt .gweek b{ color:var(--fk-muted); font-weight:600; display:block; font-size:.72rem; }
+.fk-gantt .gtaskrow .gtrack{ min-height:38px; align-items:center; grid-auto-rows:minmax(38px,auto); }
+.fk-gantt .gbar{ grid-row:1; align-self:center; margin:.28rem .12rem; min-height:22px; border-radius:7px; display:flex; align-items:center; gap:.35rem; padding:0 .55rem; color:#fff; font-size:.72rem; font-weight:600; line-height:1.2; box-shadow:0 1px 3px rgba(19,42,66,.18); overflow:hidden; }
+.fk-gantt .gbar .gb-note{ font-weight:400; opacity:.85; font-size:.68rem; }
+.fk-gantt .gbar.active{ background:var(--fk-grad); }
+.fk-gantt .gbar.done{ background:var(--fk-green); }
+.fk-gantt .gbar.plan{ background:#7C8A9A; }
+.fk-gantt .gbar.risk{ background:var(--fk-red); }
+.fk-gantt .gbar.crit{ background:linear-gradient(135deg,#D2452F,#E8642B); }
+.fk-gantt .ggroup{ padding:.5rem .85rem; background:var(--fk-bg-2); font-weight:700; color:var(--fk-ink); font-size:.76rem; letter-spacing:-.01em; display:flex; align-items:center; gap:.5rem; border-bottom:1px solid var(--fk-line-soft); }
+.fk-gantt .ggroup .gg-dot{ width:8px; height:8px; border-radius:50%; flex:none; }
+.fk-gantt .gnow{ position:absolute; top:0; bottom:0; width:2px; background:var(--fk-blue); opacity:.55; z-index:3; pointer-events:none; }
+.gantt-legend{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; margin-top:.7rem; font-size:.75rem; color:var(--fk-muted); }
+.gantt-legend span{ display:inline-flex; align-items:center; gap:.35rem; }
+.gantt-legend i{ width:14px; height:9px; border-radius:3px; display:inline-block; }
+@media(max-width:640px){
+  .fk-gantt{ overflow-x:auto; }
+  .fk-gantt .grow{ grid-template-columns:130px 1fr; min-width:560px; }
+  .fk-gantt .ghead{ position:static; }
+}
 
 /* reveal */
 .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s var(--fk-ease), transform .6s var(--fk-ease); }

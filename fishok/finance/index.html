@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Финансы — Fishok OS</title>
 <link rel="icon" href="/assets/fishok/logo.svg">
-<link rel="stylesheet" href="/assets/fishok/fishok.css">
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260707">
 </head>
 <body>
 
@@ -33,6 +33,109 @@
       <span class="pill"><span class="dot r"></span>ФД нет · учет с нуля</span>
       <span class="pill"><span class="dot a"></span>Приоритет 2 (30-60 дней)</span>
       <span class="pill"><span class="dot b"></span>Деньги сверять с банком, не с CRM</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ КАБИНА ОТДЕЛА (рабочие поверхности) ═══════════════ -->
+<section class="section-tight" style="padding-top:1.2rem;padding-bottom:.4rem;">
+  <div class="wrap">
+    <div class="office-tabs flex gap wrap-flex items-center">
+      <span class="eyebrow" style="margin-right:.3rem;">Кабина отдела:</span>
+      <a href="#board" class="pill office-tab"><span class="dot b"></span>Доска</a>
+      <a href="#roadmap" class="pill office-tab"><span class="dot b"></span>Дорожная карта</a>
+      <a href="#plan" class="pill office-tab"><span class="dot b"></span>План недели</a>
+      <a href="#report" class="pill office-tab"><span class="dot b"></span>Пятничный отчёт</a>
+    </div>
+  </div>
+</section>
+
+<!-- ДОСКА ОТДЕЛА -->
+<section class="section-tight" id="board" style="padding-top:.6rem;scroll-margin-top:80px;">
+  <div class="wrap" style="max-width:100%;">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow blue">Рабочая доска · финансы</span>
+        <h2>Доска отдела финансов</h2>
+        <p>Финансовые задачи с общей доски. Деньги сверяются с банком, не с CRM. Перетаскивайте, добавляйте, вписывайте результат — синхронизируется с системой.</p>
+      </div>
+    </div>
+    <div id="fkFinBoard"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ДОРОЖНАЯ КАРТА ОТДЕЛА -->
+<section class="section-tight" id="roadmap" style="scroll-margin-top:80px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow">8 недель · 07.07–31.08 · собрана с финдиректором</span>
+        <h2>Дорожная карта финансов</h2>
+        <p>Из неё следуют задачи недели. Критический путь (красный) весь на первой неделе: без доступа к банк-первичке весь финблок правее стоит. Источник: <code>departments/finance/roadmap.md</code>.</p>
+      </div>
+    </div>
+    <div id="fkFinGantt"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ПЛАН НЕДЕЛИ -->
+<section class="section-tight" id="plan" style="scroll-margin-top:80px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow blue">Неделя 06–12.07 · утверждается в СР на слоте финансов</span>
+        <h2>План недели</h2>
+        <p>Обязательства недели по приоритету. Дальше — выполнение; финдиректор фиксирует первичку и считает факт за кадром.</p>
+      </div>
+    </div>
+    <div class="grid g-2" style="align-items:start;gap:1.4rem;">
+      <div class="card card-pad-lg">
+        <span class="eyebrow" style="color:var(--fk-red);">Фокус недели (приоритет №1)</span>
+        <p class="mt1 mb0"><strong>Доступ к финансам — несущий пункт.</strong> Банк-выписки + контакт бухгалтера + план приходов с декабря + план закупок. От него зависит учёт → актуальная цена → и маркетинг (его нельзя запустить без хотя бы примерной аналитики цифр). Поднимается №1 на 1:1 с Кристапсом.</p>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Обязательства недели</span>
+        <ul class="list mt1">
+          <li><span class="m">1</span><div><strong>Доступ к банк-первичке + бухгалтер</strong> — запросить на 1:1, зафиксировать контакт. <span class="soft xsmall">Андрей + Кристапс · ВТ</span></div></li>
+          <li><span class="m">2</span><div><strong>Карта первички</strong> — где формируются операции (банки, кабинеты, таблицы бухгалтера). <span class="soft xsmall">Андрей</span></div></li>
+          <li><span class="m">3</span><div><strong>Сверка воронки с банком</strong> — won + дубли (риск THK 3×€108К). <span class="soft xsmall">Андрей</span></div></li>
+          <li><span class="m">4</span><div><strong>Предупредить Кристапса про разрыв июля</strong> — €50–80К vs план, на языке денег. <span class="soft xsmall">Андрей</span></div></li>
+          <li><span class="m">5</span><div><strong>Сверить июльский транш ~€3500</strong> (~14.07). <span class="soft xsmall">Андрей</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ПЯТНИЧНЫЙ ОТЧЁТ -->
+<section class="section-tight" id="report" style="scroll-margin-top:80px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow">Закрытие недели · ПТ · готовит AI-финдиректор</span>
+        <h2>Пятничный отчёт</h2>
+        <p>Каждую пятницу финдиректор готовит отчёт: что сделано, что нет, где просадка, где усилиться, где лишнее. Вход в план следующей недели.</p>
+      </div>
+    </div>
+    <div class="card card-pad-lg" style="background:var(--fk-grad-soft);border-color:#D3E6F7;">
+      <div class="flex between items-center wrap-flex" style="gap:.8rem;">
+        <span class="eyebrow blue">Первый отчёт — пятница 11.07</span>
+        <span class="pill"><span class="dot a"></span>ожидается</span>
+      </div>
+      <div class="grid g-3 mt2" style="gap:1rem;">
+        <div><span class="eyebrow">✓ Сделано</span><p class="small muted mt1 mb0">Что из первички получено, что сверено с банком.</p></div>
+        <div><span class="eyebrow">✕ Не сделано</span><p class="small muted mt1 mb0">Какие доступы не открыты и почему.</p></div>
+        <div><span class="eyebrow" style="color:var(--fk-red);">↓ Просадка</span><p class="small muted mt1 mb0">Где видимость нулевая: расходы, ФОТ, себестоимость.</p></div>
+        <div><span class="eyebrow" style="color:var(--fk-green);">↑ Усилиться</span><p class="small muted mt1 mb0">Куда добавить на следующей неделе.</p></div>
+        <div><span class="eyebrow">− Лишнее</span><p class="small muted mt1 mb0">Что можно упростить без потери контроля.</p></div>
+        <div><span class="eyebrow blue">→ В план</span><p class="small muted mt1 mb0">Выводы уходят в план следующей недели.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -143,6 +246,53 @@
   </div>
 </footer>
 
+<script src="/assets/fishok/board-seed.js"></script>
+<script src="/assets/fishok/board.js"></script>
+<script src="/assets/fishok/gantt.js"></script>
 <script src="/assets/fishok/fishok.js"></script>
+<script>
+  // доска отдела: фильтр по тегу финансы
+  FishokBoard.mount(document.getElementById('fkFinBoard'), {
+    deptTags: ['финансы'],
+    defaultTag: 'финансы',
+    fullBoardLink: '/fishok/tasks/'
+  });
+
+  // дорожная карта финансов (8 недель) — источник departments/finance/roadmap.md
+  FishokGantt.mount(document.getElementById('fkFinGantt'), {
+    weeks: [
+      {n:'Нед 1', label:'07–13.07'}, {n:'Нед 2', label:'14–20.07'},
+      {n:'Нед 3', label:'21–27.07'}, {n:'Нед 4', label:'28.07–03.08'},
+      {n:'Нед 5', label:'04–10.08'}, {n:'Нед 6', label:'11–17.08'},
+      {n:'Нед 7', label:'18–24.08'}, {n:'Нед 8', label:'25–31.08'}
+    ],
+    nowWeek: 1,
+    groups: [
+      { name:'Доступ и первичка', color:'#157A54', tasks:[
+        {name:'Доступ к банк-выпискам (евросчёт)', start:1, end:1, status:'crit'},
+        {name:'Контакт бухгалтера + мандат (EN)', start:1, end:2, status:'crit'},
+        {name:'План приходов с декабря + план закупок', start:1, end:1, status:'crit'},
+        {name:'Карта первички (surfaces.md)', start:1, end:2, status:'active'}
+      ]},
+      { name:'Платёжный календарь и факт', color:'#1B6FB0', tasks:[
+        {name:'Платёжный календарь v1 (4 цифры ≈90%)', start:2, end:2, status:'plan'},
+        {name:'Сверка июня по банку', start:2, end:3, status:'plan'},
+        {name:'Расходы + ФОТ по факту', start:3, end:4, status:'plan'},
+        {name:'ДДС + календарь на 4–6 недель', start:4, end:5, status:'plan'}
+      ]},
+      { name:'Себестоимость и цена', color:'#9A5A10', tasks:[
+        {name:'Пересчёт себестоимости 10 позиций', start:5, end:6, status:'plan', label:'выше перекупщика'},
+        {name:'Юнит-экономика / маржа по клиентам', start:6, end:7, status:'plan'},
+        {name:'Рамка ценообразования (пол + вилка)', start:7, end:8, status:'plan'}
+      ]},
+      { name:'Управляемость и инвест-мост', color:'#1C4B6E', tasks:[
+        {name:'Короткие разборы отчётов (еженедельно)', start:3, end:8, status:'plan', label:'еженедельно'},
+        {name:'Аналитика цифр для маркетинга', start:4, end:6, status:'plan'},
+        {name:'Отчётность под инвестора (блок 5)', start:6, end:8, status:'plan'},
+        {name:'Кассовый прогноз + цикл Doskocil', start:8, end:8, status:'risk'}
+      ]}
+    ]
+  });
+</script>
 </body>
 </html>
