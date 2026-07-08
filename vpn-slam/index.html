@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>VPN SLAM — дорожная карта</title>
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260708">
+<style>
+  :root{ --vs-accent:#1E9E8A; --vs-accent-2:#12756A; --vs-grad:linear-gradient(135deg,#12756A 0%,#1E9E8A 55%,#2BBBA5 100%); }
+  .vs-header{ position:sticky; top:0; z-index:40; background:rgba(255,255,255,.92); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--fk-line); }
+  .vs-header .wrap{ display:flex; align-items:center; justify-content:space-between; padding-block:.7rem; }
+  .vs-brand{ display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.02em; color:var(--fk-ink); font-size:1.05rem; }
+  .vs-logo{ width:26px; height:26px; border-radius:8px; background:var(--vs-grad); display:grid; place-items:center; color:#fff; font-family:var(--fk-mono); font-weight:700; font-size:.8rem; }
+  .vs-brand small{ font-weight:600; color:var(--fk-soft); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; }
+  .eyebrow.teal{ color:var(--vs-accent-2); }
+  .stat .n.teal{ background:var(--vs-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+  /* ── доска (kanban, статичный рендер из сида) ── */
+  .vb-wrap{ overflow-x:auto; padding-bottom:.5rem; }
+  .vb-cols{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(280px,1fr); gap:1rem; min-width:min-content; }
+  .vb-col{ background:var(--fk-bg-2); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.7rem; display:flex; flex-direction:column; gap:.6rem; }
+  .vb-colhead{ display:flex; align-items:center; justify-content:space-between; padding:.15rem .3rem .4rem; }
+  .vb-colhead .t{ display:flex; align-items:center; gap:.45rem; font-size:.82rem; font-weight:700; color:var(--fk-ink); }
+  .vb-colhead .cnt{ font-family:var(--fk-mono); font-size:.72rem; color:var(--fk-soft); }
+  .vb-card{ background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-sm); padding:.75rem .8rem; box-shadow:var(--fk-shadow); }
+  .vb-card .ct{ font-size:.9rem; font-weight:600; color:var(--fk-ink); line-height:1.3; }
+  .vb-card .cd{ font-size:.8rem; color:var(--fk-muted); margin-top:.4rem; line-height:1.45; }
+  .vb-meta{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.55rem; align-items:center; }
+  .own{ display:inline-flex; align-items:center; gap:.3rem; font-size:.7rem; font-weight:700; padding:.16rem .5rem; border-radius:100px; }
+  .own.a{ background:#E7F1FB; color:#1B6FB0; }   /* Андрей */
+  .own.d{ background:#E1F5F0; color:#12756A; }   /* Дима */
+  .own.o{ background:#EFE9FB; color:#6B45B0; }   /* Оба */
+  .due{ font-family:var(--fk-mono); font-size:.7rem; color:var(--fk-muted); }
+  .due.soon{ color:var(--fk-amber); } .due.crit{ color:var(--fk-red); font-weight:700; }
+  .prio{ font-family:var(--fk-mono); font-size:.66rem; font-weight:700; padding:.12rem .4rem; border-radius:5px; }
+  .prio.P1{ background:var(--fk-red-bg); color:var(--fk-red); } .prio.P2{ background:var(--fk-amber-bg); color:var(--fk-amber); } .prio.P3{ background:var(--fk-bg-2); color:var(--fk-muted); }
+  .vb-card.done .ct{ color:var(--fk-soft); } .vb-card.done{ opacity:.85; }
+  .office-tab{ cursor:pointer; }
+</style>
+</head>
+<body>
+
+<header class="vs-header">
+  <div class="wrap">
+    <a href="#top" class="vs-brand"><span class="vs-logo">VS</span> VPN SLAM <small>мост</small></a>
+    <nav class="flex gap items-center">
+      <a href="#board" class="pill"><span class="dot b"></span>Доска</a>
+      <a href="#roadmap" class="pill"><span class="dot b"></span>Дорожная карта</a>
+      <a href="/" class="fk-nav-back">← Портал</a>
+    </nav>
+  </div>
+</header>
+
+<section id="top" class="section-tight" style="padding-top:2.2rem;">
+  <div class="wrap">
+    <span class="eyebrow teal">Личная венчура · мост, не судьба · приватно</span>
+    <h1 class="mt1">VPN SLAM</h1>
+    <p class="lead muted mt2" style="max-width:80ch;">Совместный VPN-сервис на рынок РФ с Димой Артемовым (Слэм, <code>@artemov_d</code>). Заходим по образцу разобранного аналога: двое, без платной рекламы, больше 1 млн ₽ выручки в месяц, маржа за 80%. Их дыры — нет автосписания, не считают конверсии, не умеют в рекламу и рефералку. Наш заход ровно туда. Роли по звонку 08.07: Дима — техника (сервера, бот, кабинет, оплата), Андрей — маркетинг, воронка, трафик, упаковка.</p>
+    <div class="flex gap wrap-flex mt2">
+      <span class="pill"><span class="own d">Дима</span>техника</span>
+      <span class="pill"><span class="own a">Андрей</span>маркетинг + воронка</span>
+      <span class="pill"><span class="dot r"></span>гейт по CAC · 01.08</span>
+      <span class="pill"><span class="dot a"></span>окно волны · сентябрь</span>
+    </div>
+  </div>
+</section>
+
+<!-- РАМКА: капнутый мост -->
+<section class="section-tight" style="padding-top:.4rem;padding-bottom:.6rem;">
+  <div class="wrap">
+    <div class="callout warn">
+      <div class="h">Рамка проекта: капнутый мост, не третья компания</div>
+      <p class="mb0">Фокус Андрея — Founder Finance. VPN это фон под кэш и опцион на сентябрьскую волну блокировок, где технический риск несет Дима. Потолок времени Андрея: ~2-3 часа в неделю до 01.09. Любой блок, который лезет в вечер или выходные, стоп (семья). Гейт 01.08: один чистый показатель стоимости клиента. Проходит порог окупаемости (2-3 мес при ~300 ₽/мес) — едем; не проходит — выходим без сожалений.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" style="padding-top:.2rem;padding-bottom:.2rem;">
+  <div class="wrap">
+    <div class="grid g-4">
+      <div class="stat"><div class="n teal">~1 300-1 400</div><div class="l">оплат у аналога</div><div class="sub">~340 ₽/мес, упор на годовые</div></div>
+      <div class="stat"><div class="n teal">80%+</div><div class="l">маржа аналога</div><div class="sub">~700-800К ₽ чистыми, вдвоем</div></div>
+      <div class="stat"><div class="n">~10К ₽</div><div class="l">бюджет первого теста</div><div class="sub">цель CAC 500-700 ₽</div></div>
+      <div class="stat"><div class="n">1-2 млн ₽</div><div class="l">ориентир выручки к концу года</div><div class="sub">~200-300 € чистыми на каждого</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ДОСКА -->
+<section class="section-tight" id="board" style="scroll-margin-top:70px;">
+  <div class="wrap" style="max-width:100%;">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow teal">Задачи Андрея и Димы · дедлайны · описание</span>
+        <h2>Доска VPN SLAM</h2>
+        <p>Кто, что, к какому сроку. Источник — <code>vpn-slam/tasks.md</code>. Обновляется на закрытии дня. Цвет чипа: Андрей (синий), Дима (бирюза), Оба (фиолетовый).</p>
+      </div>
+    </div>
+    <div class="vb-wrap"><div class="vb-cols" id="vpnBoard"></div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ДОРОЖНАЯ КАРТА -->
+<section class="section-tight" id="roadmap" style="scroll-margin-top:70px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow teal">8 недель · 07.07-31.08 · окно волны 01.09</span>
+        <h2>Дорожная карта до 1 сентября</h2>
+        <p>Три трека: техника (Дима), маркетинг и воронка (Андрей), сборка и волна (вместе). Красный — критический путь. Источник — <code>vpn-slam/roadmap.md</code>.</p>
+      </div>
+    </div>
+    <div id="vpnGantt"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- КОНТЕКСТ / ЭКОНОМИКА -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid g-2" style="align-items:start;gap:1.6rem;">
+      <div class="card card-pad-lg">
+        <span class="eyebrow teal">Экономика и техника (разбор аналога)</span>
+        <div class="kv mt2">
+          <dt>Сервера</dt><dd>~14 шт, аренда ~15-50 $/мес каждый, старт можно с меньшего. SSL ~50-100 $/год на сервер.</dd>
+          <dt>Оплата</dt><dd>Platega (platega.io). Автосписания у аналога нет — юзер платит вручную каждый месяц, отсюда отток. Решаем + резервный провайдер.</dd>
+          <dt>Стек</dt><dd>Kubernetes, облако (не Tilda — блокируют), белый список, сайт с личным кабинетом + ТГ-бот. Кабинет без VPN — сильное преимущество.</dd>
+          <dt>Риск</dt><dd>Не быть заблокированным: маскировка под vk/bitrix, сервера вне РФ, перезаливка приложений. Сентябрь — ожидают новую волну.</dd>
+          <dt>Сроки MVP</dt><dd>Сервера 1-3 дня, бот 7-10 дней, платежка 1-3 дня, +5-7 дней на подводные камни.</dd>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="card">
+          <span class="eyebrow teal">Модель роста</span>
+          <p class="small muted mt1 mb0">Сарафан не масштабируется (у аналога отток обгонял приток). Рычаг — реклама (Google гео вне РФ + рус-сигналы, обходит запрет на рекламу VPN) и рефералка блогерам (100-200% выручки первого месяца, LTV ~7 мес оправдывает). Волна блокировок = всплеск притока к тому, кто уже стабилен.</p>
+        </div>
+        <div class="card" style="background:var(--fk-grad-soft);border-color:#D3E6F7;">
+          <span class="eyebrow blue">Апсейл на перспективу</span>
+          <p class="small mb0 mt1">VPN — дешевый вход в лояльную аудиторию. Дальше на нее: карты для зарубежных оплат, доступ к LLM, доступы к сервисам. Воронка окупает сама себя, аудитория = актив.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="fk-footer">
+  <div class="wrap">
+    <a href="#top" class="vs-brand"><span class="vs-logo" style="width:22px;height:22px;font-size:.7rem;">VS</span> VPN SLAM</a>
+    <div>Источник: <code>vpn-slam/</code> · приватно · мост, фокус — Founder Finance</div>
+    <div><a href="/">← Портал</a></div>
+  </div>
+</footer>
+
+<script src="/assets/fishok/gantt.js"></script>
+<script>
+/* ═══ СИД ДОСКИ VPN SLAM ═══
+   Правится вместе с vpn-slam/tasks.md. Статичный рендер (без drag/sync):
+   доску ведет Claude на закрытии дня. */
+window.VPN_BOARD = {
+  columns: [
+    { key:'week',  name:'Эта неделя', dot:'#1B8FD6' },
+    { key:'work',  name:'В работе',   dot:'#1E9E6A' },
+    { key:'back',  name:'Дальше',     dot:'#8A97A6' },
+    { key:'wait',  name:'Контекст / ждет', dot:'#C77A1A' },
+    { key:'done',  name:'Готово',     dot:'#5A6675' }
+  ],
+  cards: [
+    // ЭТА НЕДЕЛЯ
+    { col:'week', own:'a', prio:'P1', due:'08.07', title:'Отправить Диме пост-митинг в чат',
+      desc:'План с датами, роли, целевые метрики. Дима попросил явно, чтобы было перед глазами.' },
+
+    // В РАБОТЕ
+    { col:'work', own:'d', prio:'P1', due:'15.07', title:'Прототип воронки до кнопки оплатить',
+      desc:'Как юзер попадает внутрь и доходит до оплаты (бот или сайт). По возможности заглушка Platega. Делает на этой неделе, пока Андрей в отпуске.' },
+    { col:'work', own:'d', prio:'P1', due:'15.07', title:'Показать флоу до момента оплаты',
+      desc:'Что технически происходит до кнопки оплатить — чтобы Андрей наслоил на это воронку.' },
+
+    // ДАЛЬШЕ
+    { col:'back', own:'a', prio:'P1', due:'22.07', title:'Варианты продающей воронки до оплаты',
+      desc:'Фейк-продукт до кнопки оплатить, приблизить к реальной воронке (иначе тест соврет). Наслаивается на прототип Димы.' },
+    { col:'back', own:'a', prio:'P1', due:'22.07', title:'Каналы рекламы: Google гео + блогеры',
+      desc:'Google гео вне РФ с рус-сигналами (обходит запрет на рекламу VPN). Рефералка блогерам 100-200% первого месяца. Ресерч + подготовка.' },
+    { col:'back', own:'a', prio:'P2', due:'22.07', title:'Разобраться в запуске Google Ads + ТГ-бот флоу',
+      desc:'Сам сказал — не углублялся. Как запускается гео-реклама, что нужно для бота, какие варианты.' },
+    { col:'back', own:'a', prio:'P2', due:'22.07', title:'Схема аналитики и меток на страницу',
+      desc:'Отслеживание конверсий и CAC. У аналога трекинга нет — их слабое место. Часть мелких тех-запросов уходит Диме.' },
+    { col:'back', own:'a', prio:'P1', due:'01.08', title:'Первый тест рекламы ~10К ₽ → снять CAC',
+      desc:'22.07-01.08. Лью около 10К ₽, собираю конверсию и стоимость клиента до подключения реальной инфраструктуры.' },
+    { col:'back', own:'a', prio:'P1', due:'01.08', title:'🚦 Гейт по CAC — go / no-go', crit:true,
+      desc:'Порог: окупаемость 2-3 мес при ~300 ₽/мес. Дешевле 300 ₽ — разгон бюджета. Не проходит — выходим без сожалений.' },
+    { col:'back', own:'d', prio:'P1', due:'01.08', title:'Реальные VPN-сервера + личный кабинет', crit:true,
+      desc:'~14 серверов вне РФ, маскировка под vk/bitrix, белый список. Сайт с личным кабинетом (заходят без VPN). С 01.08, после выхода коллеги из отпуска.' },
+    { col:'back', own:'d', prio:'P2', due:'05.08', title:'Platega + автосписание + резервный провайдер',
+      desc:'Подключить оплату, автосписание подписки (у аналога нет — источник оттока), второй провайдер против single-point-of-failure.' },
+    { col:'back', own:'o', prio:'P1', due:'01.08', title:'Соединение воронки и техники (женитьба)',
+      desc:'Собрать воронку с реальной инфраструктурой, тест end-to-end до реальной оплаты. Ищем первого, кто дошел до оплаты.' },
+    { col:'back', own:'o', prio:'P2', due:'31.08', title:'Август: докрутка воронки + рост аудитории',
+      desc:'Улучшаем воронку, набираем людей, подключаем ютуб и блогеров по рефералке. Аудитория = актив.' },
+    { col:'back', own:'o', prio:'P3', due:'31.08', title:'Апсейл-модель на лояльную базу',
+      desc:'Позже: карты для зарубежных оплат, доступ к LLM, доступы к сервисам. Не ключевое, идея на перспективу.' },
+    { col:'back', own:'o', prio:'P1', due:'01.09', title:'🔴 Стабильность под волну блокировок', crit:true,
+      desc:'К сентябрю работаем стабильно, чтобы поймать всплеск притока. Это и есть смысл всей гонки по срокам.' },
+
+    // КОНТЕКСТ / ЖДЕТ
+    { col:'wait', own:'a', prio:'P3', due:'13.07', title:'Андрей в отпуске до 13.07',
+      desc:'Реальный вход Андрея в задачи с ~15.07. На этой неделе мяч на прототипе Димы.' },
+    { col:'wait', own:'d', prio:'P3', due:'30.07', title:'Дима — hard-режим 16-30.07',
+      desc:'Замена коллеги на две недели. Сервера в это окно не трогаем — это ок, они нужны только к 01.08 под тесты.' },
+
+    // ГОТОВО
+    { col:'done', own:'a', prio:'P1', due:'08.07', title:'Созвон 08.07 — роли и дорожная карта MVP',
+      desc:'Зафиксированы роли (Дима=техника, Андрей=маркетинг) и план по датам. Итог — эта дорожная карта + гейт 01.08.' },
+    { col:'done', own:'a', prio:'P2', due:'01.07', title:'Разбор экономики аналога',
+      desc:'~1 300-1 400 оплат, ~340 ₽/мес, маржа ~80%, ~700-800К ₽ чистыми вдвоем. Вскрыты дыры: нет автосписания, нет трекинга, нет рекламы и рефералки.' }
+  ]
+};
+
+(function renderBoard(){
+  var b = window.VPN_BOARD, root = document.getElementById('vpnBoard');
+  if(!b || !root) return;
+  var ownName = { a:'Андрей', d:'Дима', o:'Оба' };
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  var html = '';
+  b.columns.forEach(function(c){
+    var cards = b.cards.filter(function(x){ return x.col===c.key; });
+    html += '<div class="vb-col">';
+    html += '<div class="vb-colhead"><span class="t"><span class="dot" style="background:'+c.dot+'"></span>'+esc(c.name)+'</span><span class="cnt">'+cards.length+'</span></div>';
+    cards.forEach(function(x){
+      var dueCls = x.crit ? 'crit' : (x.col==='week'||x.col==='work' ? 'soon' : '');
+      html += '<div class="vb-card'+(x.col==='done'?' done':'')+'">';
+      html += '<div class="ct">'+esc(x.title)+'</div>';
+      if(x.desc) html += '<div class="cd">'+esc(x.desc)+'</div>';
+      html += '<div class="vb-meta">';
+      html += '<span class="own '+x.own+'">'+esc(ownName[x.own]||'')+'</span>';
+      if(x.prio) html += '<span class="prio '+x.prio+'">'+x.prio+'</span>';
+      if(x.due)  html += '<span class="due '+dueCls+'">до '+esc(x.due)+'</span>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+  });
+  root.innerHTML = html;
+})();
+
+/* ═══ ДОРОЖНАЯ КАРТА (Гант до 01.09) ═══ */
+FishokGantt.mount(document.getElementById('vpnGantt'), {
+  weeks: [
+    {n:'Нед 1', label:'07-13.07'}, {n:'Нед 2', label:'14-20.07'},
+    {n:'Нед 3', label:'21-27.07'}, {n:'Нед 4', label:'28.07-03.08'},
+    {n:'Нед 5', label:'04-10.08'}, {n:'Нед 6', label:'11-17.08'},
+    {n:'Нед 7', label:'18-24.08'}, {n:'Нед 8', label:'25-31.08'}
+  ],
+  nowWeek: 1,
+  groups: [
+    { name:'Дима · техника (VPN + оплата)', color:'#12756A', tasks:[
+      {name:'Прототип воронки до кнопки оплатить', start:1, end:2, status:'active', note:'~15.07'},
+      {name:'Показать флоу до оплаты', start:1, end:1, status:'active'},
+      {name:'Мелкие тех-запросы Андрея (аналитика/метки)', start:2, end:3, status:'plan'},
+      {name:'Hard-режим (замена коллеги) — сервера не трогаем', start:2, end:4, status:'block', label:'занят 16-30.07'},
+      {name:'Реальные сервера (~14, вне РФ) + личный кабинет', start:4, end:5, status:'crit', note:'с 01.08'},
+      {name:'Platega + автосписание + резервный провайдер', start:5, end:6, status:'plan'}
+    ]},
+    { name:'Андрей · маркетинг и воронка', color:'#6B45B0', tasks:[
+      {name:'Google Ads гео + ТГ-бот флоу — разобраться', start:2, end:2, status:'plan'},
+      {name:'Варианты воронки до оплаты + фейк-продукт', start:2, end:3, status:'active', note:'к 22.07'},
+      {name:'Схема аналитики / меток (конверсии, CAC)', start:3, end:3, status:'active'},
+      {name:'Первый тест рекламы ~10К ₽ → снять CAC', start:3, end:4, status:'active', note:'22.07-01.08'},
+      {name:'Гейт по CAC (go/no-go)', start:4, end:4, status:'crit', label:'🚦 01.08'},
+      {name:'Ютуб / блогеры по рефералке + рост аудитории', start:5, end:8, status:'plan', label:'весь август'}
+    ]},
+    { name:'Вместе · сборка и волна', color:'#1C4B6E', tasks:[
+      {name:'Соединение воронка ↔ техника, end-to-end тест', start:5, end:5, status:'active', note:'~01.08 женитьба'},
+      {name:'Докрутка воронки + апсейл-модель', start:5, end:8, status:'plan'},
+      {name:'Стабильность под волну блокировок', start:8, end:8, status:'crit', label:'🔴 к 01.09'}
+    ]}
+  ]
+});
+</script>
+</body>
+</html>
