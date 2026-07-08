@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Доска задач — Fishok OS</title>
 <link rel="icon" href="/assets/fishok/logo.svg">
-<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260708">
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260708b">
 </head>
 <body>
 
@@ -34,6 +34,7 @@
 
 <section style="padding-bottom:3rem;">
   <div class="wrap" style="max-width:100%;">
+    <div id="fkTodayRoot"></div>
     <div id="fkBoardRoot"></div>
   </div>
 </section>
@@ -48,6 +49,9 @@
 
 <script src="/assets/fishok/board-seed.js"></script>
 <script src="/assets/fishok/board.js"></script>
-<script>FishokBoard.mount(document.getElementById('fkBoardRoot'), {});</script>
+<script>
+  FishokBoard.mountToday(document.getElementById('fkTodayRoot'), {});
+  FishokBoard.mount(document.getElementById('fkBoardRoot'), {});
+</script>
 </body>
 </html>

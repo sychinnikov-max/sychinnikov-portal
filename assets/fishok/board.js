@@ -377,5 +377,43 @@ window.FishokBoard = (function () {
     render();
   }
 
-  return { mount: mount };
+  // ── Плашка «На сегодня» (фокус дня). Лёгкий рендер, без движка доски. ──
+  // Читает CFG.todayFocus. opts.deptTags — необязательный фильтр по тегам отдела.
+  function mountToday(root, opts){
+    if(!root){ return; }
+    var CFG = window.FISHOK_BOARD;
+    var TF = CFG && CFG.todayFocus;
+    if(!TF || !TF.items || !TF.items.length){ root.style.display='none'; return; }
+    opts = opts || {};
+    var TAGS = CFG.tags || {};
+    var items = TF.items;
+    if(opts.deptTags && opts.deptTags.length){
+      var ds = new Set(opts.deptTags);
+      items = items.filter(function(it){ return !it.tag || ds.has(it.tag); });
+    }
+    if(!items.length){ root.style.display='none'; return; }
+    var head = '<div class="fk-today-head">'+
+      '<span class="fk-today-label">📌 На сегодня</span>'+
+      (TF.date ? '<span class="fk-today-date">'+esc(TF.date)+(TF.dow?' · '+esc(TF.dow):'')+'</span>' : '')+
+      '</div>';
+    var rows = items.map(function(it){
+      var t = TAGS[it.tag] || {cls:'sys'};
+      var pcls = it.priority==='P1'?'p1':(it.priority==='P2'?'p2':'p3');
+      return '<li class="fk-today-item">'+
+        (it.n!=null ? '<span class="fk-today-n">'+esc(String(it.n))+'</span>' : '')+
+        '<div class="fk-today-body">'+
+          '<div class="fk-today-title">'+esc(it.title)+
+            (it.priority ? ' <span class="tag '+pcls+'">'+esc(it.priority)+'</span>' : '')+
+            (it.tag ? ' <span class="tag '+t.cls+'">'+esc(it.tag)+'</span>' : '')+
+          '</div>'+
+          (it.note ? '<div class="fk-today-note">'+esc(it.note)+'</div>' : '')+
+        '</div></li>';
+    }).join('');
+    root.innerHTML = '<div class="fk-today">'+head+
+      '<ol class="fk-today-list">'+rows+'</ol>'+
+      (TF.foot ? '<div class="fk-today-foot">'+esc(TF.foot)+'</div>' : '')+
+      '</div>';
+  }
+
+  return { mount: mount, mountToday: mountToday };
 })();

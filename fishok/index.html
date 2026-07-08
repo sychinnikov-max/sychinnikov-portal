@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Кабина Fishok — операционная система компании</title>
 <link rel="icon" href="/assets/fishok/logo.svg">
-<link rel="stylesheet" href="/assets/fishok/fishok.css">
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260708b">
 </head>
 <body>
 
@@ -29,7 +29,7 @@
   <div class="wrap">
     <div class="fk-hero-grid">
       <div>
-        <span class="fk-eyebrow">Операционная система компании · обновляется еженедельно</span>
+        <span class="fk-eyebrow">Операционная система компании · фокус дня обновляется по ходу дня</span>
         <h1>Кабина Fishok</h1>
         <p class="lead">Веб-упаковка вашей AI-системы управления Fishok. AI собирает хаос компании в ежедневный бриф, из которого вы за несколько минут видите одно главное узкое место и принимаете решение. Аналитику делает система, решает человек.</p>
         <div class="fk-hero-stats">
@@ -43,6 +43,13 @@
         <div class="disc"><img src="/assets/fishok/logo.svg" alt="Fishok"></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ФОКУС ДНЯ -->
+<section class="section-tight" style="padding-top:1.6rem;padding-bottom:0;">
+  <div class="wrap">
+    <div id="fkTodayRoot"></div>
   </div>
 </section>
 
@@ -193,6 +200,9 @@
   </div>
 </footer>
 
+<script src="/assets/fishok/board-seed.js"></script>
+<script src="/assets/fishok/board.js"></script>
 <script src="/assets/fishok/fishok.js"></script>
+<script>FishokBoard.mountToday(document.getElementById('fkTodayRoot'), {});</script>
 </body>
 </html>
