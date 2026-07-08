@@ -520,6 +520,9 @@
     </a>
     <nav class="nav">
       <a href="/" data-nav>Дашборд</a>
+      <a href="/founder-finance/" data-nav>💶 Founder Finance</a>
+      <a href="/vpn-slam/" data-nav>🔐 VPN Slam</a>
+      <a href="/fishok/" data-nav>🐟 Fishok</a>
       <a href="/tasks/" data-nav>Матрица</a>
       <a href="/founder-trajectory/" data-nav>Продукт</a>
       <a href="/clients/" data-nav>Клиенты</a>
@@ -541,6 +544,50 @@
     <p class="hero-sub">
       Что я решаю сейчас, что упаковываю, что с деньгами, кто звонил, какие правила менял. Один-два экрана — остальное в навигации.
     </p>
+  </div>
+</section>
+
+<!-- ─────────── БЫСТРЫЙ ПЕРЕХОД К ПРОЕКТАМ ─────────── -->
+<style>
+.launch-wrap{padding:1.8rem 0 1.4rem;}
+.launch-head{display:flex;align-items:baseline;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap;}
+.launch-head h2{font-size:1.1rem;font-weight:600;color:var(--color-text);letter-spacing:-0.01em;}
+.launch-head span{font-size:0.8rem;color:var(--color-text-soft);}
+.launch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.launch-card{display:flex;flex-direction:column;gap:.35rem;padding:1.3rem 1.4rem;border-radius:14px;text-decoration:none;transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out);}
+.launch-card:hover{transform:translateY(-3px);}
+.launch-emoji{font-size:1.7rem;line-height:1;}
+.launch-name{font-size:1.1rem;font-weight:650;color:var(--color-text);}
+.launch-desc{font-size:.8rem;color:var(--color-text-muted);line-height:1.4;}
+.launch-go{font-size:.8rem;font-weight:600;margin-top:.3rem;}
+@media(max-width:760px){.launch-grid{grid-template-columns:1fr;}}
+</style>
+<section class="launch-wrap">
+  <div class="container">
+    <div class="launch-head">
+      <h2>Мои проекты</h2>
+      <span>быстрый переход к рабочим кабинам</span>
+    </div>
+    <div class="launch-grid">
+      <a href="/founder-finance/" class="launch-card" style="border:1px solid #ECDFC2;background:linear-gradient(135deg,#FBF5E8,#FDFBF6);box-shadow:0 1px 3px rgba(169,133,63,.10);">
+        <span class="launch-emoji">💶</span>
+        <span class="launch-name">Founder Finance</span>
+        <span class="launch-desc">Аутсорс-финдиректор для фаундеров в ЕС. Фокус июля — 10 встреч.</span>
+        <span class="launch-go" style="color:#8A6A2E;">Открыть кабину →</span>
+      </a>
+      <a href="/vpn-slam/" class="launch-card" style="border:1px solid #CDEDE6;background:linear-gradient(135deg,#EAF7F4,#F4FBF9);box-shadow:0 1px 3px rgba(18,117,106,.10);">
+        <span class="launch-emoji">🔐</span>
+        <span class="launch-name">VPN Slam</span>
+        <span class="launch-desc">Венчура с Димой Артемовым. Доска задач и Гант до 01.09.</span>
+        <span class="launch-go" style="color:#12756A;">Открыть →</span>
+      </a>
+      <a href="/fishok/" class="launch-card" style="border:1px solid #CFE1F1;background:linear-gradient(135deg,#EAF4FC,#F4F9FE);box-shadow:0 1px 3px rgba(28,111,201,.10);">
+        <span class="launch-emoji">🐟</span>
+        <span class="launch-name">Fishok</span>
+        <span class="launch-desc">AI-кабина управления компанией: генштаб, продажи, финансы, доска.</span>
+        <span class="launch-go" style="color:#1B6FB0;">Открыть кабину →</span>
+      </a>
+    </div>
   </div>
 </section>
 
