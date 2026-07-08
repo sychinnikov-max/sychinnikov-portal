@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Founder Finance — кабина</title>
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260708">
+<style>
+  :root{ --ff-accent:#A9853F; --ff-accent-2:#8A6A2E; --ff-grad:linear-gradient(135deg,#8A6A2E 0%,#A9853F 55%,#C2A66A 100%); }
+  .ff-header{ position:sticky; top:0; z-index:40; background:rgba(255,255,255,.92); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--fk-line); }
+  .ff-header .wrap{ display:flex; align-items:center; justify-content:space-between; padding-block:.7rem; }
+  .ff-brand{ display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.02em; color:var(--fk-ink); font-size:1.05rem; }
+  .ff-logo{ width:26px; height:26px; border-radius:8px; background:var(--ff-grad); display:grid; place-items:center; color:#fff; font-family:var(--fk-mono); font-weight:700; font-size:.8rem; }
+  .ff-brand small{ font-weight:600; color:var(--fk-soft); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; }
+  .eyebrow.gold{ color:var(--ff-accent-2); }
+  .stat .n.gold{ background:var(--ff-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+  /* ── СЕВЕРНАЯ ЗВЕЗДА (крупный счетчик) ── */
+  .ns-card{ background:linear-gradient(135deg,#FBF7EE,#FDFBF6); border:1px solid #ECDFC2; border-radius:var(--fk-r-md); padding:1.1rem 1.3rem; }
+  .ns-top{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+  .ns-big{ font-family:var(--fk-mono); font-weight:800; font-size:2.4rem; line-height:1; color:var(--fk-ink); }
+  .ns-big em{ font-style:normal; color:var(--ff-accent-2); }
+  .ns-goal{ font-size:.82rem; color:var(--fk-soft); }
+  .ns-track{ height:14px; border-radius:100px; background:var(--fk-bg-2); border:1px solid var(--fk-line); margin-top:.7rem; overflow:hidden; }
+  .ns-fill{ height:100%; background:var(--ff-grad); width:0%; }
+  .ns-scale{ display:flex; justify-content:space-between; font-family:var(--fk-mono); font-size:.62rem; color:var(--fk-soft); margin-top:.25rem; }
+
+  /* ── ПЛАН-ФАКТ ПО НЕДЕЛЯМ ── */
+  .pf-grid{ display:grid; gap:.6rem; }
+  .pf-row{ display:grid; grid-template-columns:120px 1fr 88px; align-items:center; gap:.8rem; }
+  .pf-wk{ font-family:var(--fk-mono); font-size:.74rem; color:var(--fk-ink); font-weight:700; }
+  .pf-wk small{ display:block; font-weight:500; color:var(--fk-soft); font-size:.64rem; }
+  .pf-track{ position:relative; height:22px; background:var(--fk-bg-2); border:1px solid var(--fk-line); border-radius:7px; overflow:hidden; }
+  .pf-plan{ position:absolute; top:0; left:0; height:100%; background:repeating-linear-gradient(45deg, #F0E6CE, #F0E6CE 6px, #F6EFDD 6px, #F6EFDD 12px); }
+  .pf-fact{ position:absolute; top:0; left:0; height:100%; background:var(--ff-grad); }
+  .pf-num{ font-family:var(--fk-mono); font-size:.74rem; text-align:right; color:var(--fk-muted); }
+  .pf-num b{ color:var(--ff-accent-2); }
+  .pf-legend{ display:flex; gap:1.1rem; flex-wrap:wrap; font-size:.72rem; color:var(--fk-soft); margin-top:.2rem; }
+  .pf-legend i{ display:inline-block; width:14px; height:10px; border-radius:3px; vertical-align:middle; margin-right:.35rem; }
+
+  /* ── доска (kanban, статичный рендер из сида) ── */
+  .vb-wrap{ overflow-x:auto; padding-bottom:.5rem; }
+  .vb-cols{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(280px,1fr); gap:1rem; min-width:min-content; }
+  .vb-col{ background:var(--fk-bg-2); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.7rem; display:flex; flex-direction:column; gap:.6rem; }
+  .vb-colhead{ display:flex; align-items:center; justify-content:space-between; padding:.15rem .3rem .4rem; }
+  .vb-colhead .t{ display:flex; align-items:center; gap:.45rem; font-size:.82rem; font-weight:700; color:var(--fk-ink); }
+  .vb-colhead .cnt{ font-family:var(--fk-mono); font-size:.72rem; color:var(--fk-soft); }
+  .vb-card{ background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-sm); padding:.75rem .8rem; box-shadow:var(--fk-shadow); }
+  .vb-card .ct{ font-size:.9rem; font-weight:600; color:var(--fk-ink); line-height:1.3; }
+  .vb-card .cd{ font-size:.8rem; color:var(--fk-muted); margin-top:.4rem; line-height:1.45; }
+  .vb-meta{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.55rem; align-items:center; }
+  .ch{ display:inline-flex; align-items:center; gap:.3rem; font-size:.68rem; font-weight:700; padding:.16rem .5rem; border-radius:100px; }
+  .ch.warm{ background:#FBEEDD; color:#A9683F; }   /* теплая база */
+  .ch.anom{ background:#EFE9FB; color:#6B45B0; }   /* Аномалия */
+  .ch.cold{ background:#E7F1FB; color:#1B6FB0; }   /* канал I (cold) */
+  .ch.part{ background:#E1F5F0; color:#12756A; }   /* партнеры */
+  .ch.cont{ background:#FDECEF; color:#C0395A; }   /* контент/видео */
+  .ch.sys{  background:var(--fk-bg-2); color:var(--fk-muted); } /* воронка/система */
+  .due{ font-family:var(--fk-mono); font-size:.7rem; color:var(--fk-muted); }
+  .due.soon{ color:var(--fk-amber); } .due.crit{ color:var(--fk-red); font-weight:700; }
+  .prio{ font-family:var(--fk-mono); font-size:.66rem; font-weight:700; padding:.12rem .4rem; border-radius:5px; }
+  .prio.P1{ background:var(--fk-red-bg); color:var(--fk-red); } .prio.P2{ background:var(--fk-amber-bg); color:var(--fk-amber); } .prio.P3{ background:var(--fk-bg-2); color:var(--fk-muted); }
+  .vb-card.done .ct{ color:var(--fk-soft); } .vb-card.done{ opacity:.85; }
+</style>
+</head>
+<body>
+
+<header class="ff-header">
+  <div class="wrap">
+    <a href="#top" class="ff-brand"><span class="ff-logo">FF</span> Founder Finance <small>кабина</small></a>
+    <nav class="flex gap items-center">
+      <a href="#planfact" class="pill"><span class="dot b"></span>План-факт</a>
+      <a href="#board" class="pill"><span class="dot b"></span>Доска</a>
+      <a href="#gantt" class="pill"><span class="dot b"></span>Гант</a>
+      <a href="/" class="fk-nav-back">← Портал</a>
+    </nav>
+  </div>
+</header>
+
+<section id="top" class="section-tight" style="padding-top:2.2rem;">
+  <div class="wrap">
+    <span class="eyebrow gold">Продукт Founder Trajectory через финансовую дверь · приватно</span>
+    <h1 class="mt1">Founder Finance</h1>
+    <p class="lead muted mt2" style="max-width:82ch;">Аутсорс-финдиректор (управленческий учет + слой решений) для русскоязычных фаундеров с бизнесом вне РФ. На русском, оплата в евро, €2 490/мес. Финансы — это читаемая дверь, через которую заходит клиент (решение 02.07, ADR-020); продукт — управленческие решения. Один лидер проекта — агент <code>ff-lead</code>, одна работа — гнать к встречам.</p>
+    <div class="flex gap wrap-flex mt2">
+      <span class="pill"><span class="dot r"></span>метрика · 10 встреч в июле</span>
+      <span class="pill"><span class="dot a"></span>темп · 2-3 в неделю</span>
+      <span class="pill"><span class="dot b"></span>канал · десятки Аномалии</span>
+      <span class="pill"><span class="dot b"></span>канал · TG + ролики</span>
+    </div>
+  </div>
+</section>
+
+<!-- ОСНОВНОЙ ФОКУС -->
+<section class="section-tight" style="padding-top:.4rem;padding-bottom:.6rem;">
+  <div class="wrap">
+    <div class="callout warn">
+      <div class="h">Основной фокус июля: одна метрика — количество встреч</div>
+      <p class="mb0">Все остальное (контент, партнерка, каналы) — только топливо. Логика простая: продукт продается только в живом разговоре (диагностика цифр); нет потока встреч — нет продаж; с потоком 10+/мес хотя бы один покупает. Если ход не ведет к встрече на этой неделе — он подождет. Гардрейлы держим в каждой сделке: канон €2 490-2 500/мес + этапы, скоуп и цена письменно ДО работы (урок Сергей/Octo), теплый лид не форсируем.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ГЛАВНЫЕ ПОКАЗАТЕЛИ -->
+<section class="section-tight" style="padding-top:.2rem;padding-bottom:.2rem;">
+  <div class="wrap">
+    <div class="grid g-4">
+      <div class="stat"><div class="n gold">0 / 10</div><div class="l">встреч в июле</div><div class="sub">старт метрики 08.07</div></div>
+      <div class="stat"><div class="n gold">2-3</div><div class="l">цель встреч в неделю</div><div class="sub">W28-W31</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">теплых лида в работе</div><div class="sub">транспортная · Катя · Кирилл</div></div>
+      <div class="stat"><div class="n">€2 490</div><div class="l">чек в месяц (канон)</div><div class="sub">якорь €3 000, спеццена первым</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ПЛАН-ФАКТ -->
+<section class="section-tight" id="planfact" style="scroll-margin-top:70px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow gold">Метрика месяца · встречи с потенциальными клиентами</span>
+        <h2>План-факт встреч</h2>
+        <p>Одна метрика — встречи. Цель 10 за июль, темп 2-3 в неделю. Источник — <code>founder-finance/02_Sales/vstrechi-iyul.md</code>. Обновляется на закрытии дня.</p>
+      </div>
+    </div>
+
+    <!-- накопительно к 10 -->
+    <div class="ns-card">
+      <div class="ns-top">
+        <div class="ns-big"><em>0</em> / 10 <span style="font-size:1rem;font-family:var(--fk-body);color:var(--fk-soft);">встреч за июль</span></div>
+        <div class="ns-goal">осталось назначить и провести <b>10</b> · до конца месяца <b>~3,5 недели</b></div>
+      </div>
+      <div class="ns-track"><div class="ns-fill" style="width:0%;"></div></div>
+      <div class="ns-scale"><span>0</span><span>5</span><span>10</span></div>
+    </div>
+
+    <!-- по неделям -->
+    <div class="grid g-2 mt2" style="align-items:start;gap:1.6rem;">
+      <div class="card card-pad-lg">
+        <span class="eyebrow gold">По неделям (план — штрих, факт — золото)</span>
+        <div class="pf-grid mt2">
+          <div class="pf-row">
+            <div class="pf-wk">W28<small>07-13.07</small></div>
+            <div class="pf-track"><div class="pf-plan" style="width:66%;"></div><div class="pf-fact" style="width:0%;"></div></div>
+            <div class="pf-num">план <b>2</b> · факт 0</div>
+          </div>
+          <div class="pf-row">
+            <div class="pf-wk">W29<small>14-20.07</small></div>
+            <div class="pf-track"><div class="pf-plan" style="width:100%;"></div><div class="pf-fact" style="width:0%;"></div></div>
+            <div class="pf-num">план <b>3</b> · факт 0</div>
+          </div>
+          <div class="pf-row">
+            <div class="pf-wk">W30<small>21-27.07</small></div>
+            <div class="pf-track"><div class="pf-plan" style="width:100%;"></div><div class="pf-fact" style="width:0%;"></div></div>
+            <div class="pf-num">план <b>3</b> · факт 0</div>
+          </div>
+          <div class="pf-row">
+            <div class="pf-wk">W31<small>28.07-03.08</small></div>
+            <div class="pf-track"><div class="pf-plan" style="width:66%;"></div><div class="pf-fact" style="width:0%;"></div></div>
+            <div class="pf-num">план <b>2</b> · факт 0</div>
+          </div>
+        </div>
+        <div class="pf-legend">
+          <span><i style="background:repeating-linear-gradient(45deg,#F0E6CE,#F0E6CE 4px,#F6EFDD 4px,#F6EFDD 8px);"></i>план</span>
+          <span><i style="background:var(--ff-grad);"></i>факт</span>
+          <span>шкала трека = 3 встречи/нед</span>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <span class="eyebrow gold">Воронка недели (ведущие индикаторы)</span>
+          <div class="kv mt1" style="--kv-min:150px;">
+            <dt>Касания канала I</dt><dd>план 10/нед · факт 0 · база 51 нетронутый адрес</dd>
+            <dt>Лиды в работе</dt><dd>3 (транспортная 🔥 · Катя 🟡 · Кирилл 🟡)</dd>
+            <dt>Десятки Аномалии</dt><dd>0 из 3-5 (охват) · первая встреча 12-13.07</dd>
+            <dt>Партнеры-бухгалтеры</dt><dd>0 из 5 первых предложений</dd>
+          </div>
+        </div>
+        <div class="card" style="background:var(--fk-grad-soft);border-color:#ECDFC2;">
+          <span class="eyebrow gold">Ориентир воронки</span>
+          <p class="small mb0 mt1">~200 таргетированных контактов → ~8 диагностик → 2 оплаты (close ~25%). Рекомендации закрываются в 40-60% — главный рычаг экономии усилий. Источник: <code>01_Strategy/business-model.md</code>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ДОСКА -->
+<section class="section-tight" id="board" style="scroll-margin-top:70px;">
+  <div class="wrap" style="max-width:100%;">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow gold">Задачи под метрику встреч · дедлайны · канал</span>
+        <h2>Доска Founder Finance</h2>
+        <p>Что делаем, к какому сроку, по какому каналу. Источник — <code>founder-finance/02_Sales/vstrechi-iyul.md</code> + стендап <code>ff-lead</code>. Цвет чипа = канал.</p>
+      </div>
+    </div>
+    <div class="vb-wrap"><div class="vb-cols" id="ffBoard"></div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ГАНТ -->
+<section class="section-tight" id="gantt" style="scroll-margin-top:70px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="t">
+        <span class="eyebrow gold">Июль · 4 недели · 07.07-03.08</span>
+        <h2>Что делаем за июль (Гант)</h2>
+        <p>Три трека: встречи (метрика), каналы охвата, контент и воронка. Красный — критический путь к 10 встречам. Источник — <code>founder-finance/</code>.</p>
+      </div>
+    </div>
+    <div id="ffGantt"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- КОНТЕКСТ / МОДЕЛЬ -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid g-2" style="align-items:start;gap:1.6rem;">
+      <div class="card card-pad-lg">
+        <span class="eyebrow gold">Два канала воронки</span>
+        <div class="kv mt2">
+          <dt>Аномалия (десятки)</dt><dd>Платное сообщество Кирилла, ~15 тыс подписчиков по городам/десяткам. Цель — войти в 3-5 групп, давать пользу, нативно вести на диагностику. Самый теплый путь сейчас. Трекер — <code>channels/anomalia.md</code>.</dd>
+          <dt>TG-канал + ролики</dt><dd>Свой канал (экспертный контент) + короткие видео по промпту адаптации + ручной поиск бизнесов в чатах релокантов. Среднесрочное топливо. <code>03_Content/content-system.md</code>.</dd>
+          <dt>Партнерка</dt><dd>Бухгалтеры/аудиторы за рубежом (они статутка, ты управленка). Один партнер = несколько клиентов, соцсети не нужны. Трек Аномалии отдает 30-40%.</dd>
+          <dt>Холодный канал I</dt><dd>RU-фаундеры ЕС, брошен не провален (51 адрес не тронут, ~2.5% отклик). Заход от продукта, анкор «CEO → архитектор».</dd>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="card">
+          <span class="eyebrow gold">Модель и большая цель</span>
+          <p class="small muted mt1 mb0">$30K/мес чистыми за ~1,5 года: ~12-17 клиентов × €2 490, команда финдиректоров (1 ФД ведет 3 клиента) + операционка. Узкое место — продажи, не доставка. Юнит: €2 490 − €1 000 (ФД) − ~€1 000 (CAC+админ) ≈ €500 на старте, ~33% при масштабе.</p>
+        </div>
+        <div class="card" style="background:var(--fk-grad-soft);border-color:#ECDFC2;">
+          <span class="eyebrow gold">Связь с системой</span>
+          <p class="small mb0 mt1">Мозг-архив продукта (методология, конкуренты, кейсы) — в <code>founder-trajectory/</code>, не дублируется. Лендинг + калькулятор — <code>/founderfinance/</code>. Ежедневный стендап по встречам ведет агент <code>ff-lead</code>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="fk-footer">
+  <div class="wrap">
+    <a href="#top" class="ff-brand"><span class="ff-logo" style="width:22px;height:22px;font-size:.7rem;">FF</span> Founder Finance</a>
+    <div>Источник: <code>founder-finance/</code> · приватно · метрика — 10 встреч в июле</div>
+    <div><a href="/">← Портал</a></div>
+  </div>
+</footer>
+
+<script src="/assets/fishok/gantt.js"></script>
+<script>
+/* ═══ СИД ДОСКИ FOUNDER FINANCE ═══
+   Правится вместе с founder-finance/02_Sales/vstrechi-iyul.md.
+   Статичный рендер (без drag/sync): доску ведет Claude/ff-lead на закрытии дня.
+   Канал чипа: warm=теплая база, anom=Аномалия, cold=канал I, part=партнеры, cont=контент, sys=воронка/система. */
+window.FF_BOARD = {
+  columns: [
+    { key:'week', name:'Эта неделя (W28)', dot:'#A9853F' },
+    { key:'work', name:'В работе / назначается', dot:'#1E9E6A' },
+    { key:'next', name:'Дальше (W29-W31)', dot:'#8A97A6' },
+    { key:'wait', name:'Контекст / ждет', dot:'#C77A1A' },
+    { key:'done', name:'Готово', dot:'#5A6675' }
+  ],
+  cards: [
+    // ЭТА НЕДЕЛЯ (W28)
+    { col:'week', ch:'warm', prio:'P1', due:'13.07', title:'Написать Максиму (транспортная) → звонок с ЛПР',
+      desc:'Самый короткий путь к первой встрече. Продающий Zoom 18.06 был без собственника, сделка висит. Скоуп + цена (€2 490-2 500/мес + этапы) письменно ДО звонка.' },
+    { col:'week', ch:'warm', prio:'P1', due:'13.07', title:'Написать Кате (Финнобель) → разбор-созвон',
+      desc:'Попросить 4 цифры (CAC / LTV / доля годовых / серверы), назначить разбор. Финмодель уже построена, кандидат в кейс.' },
+    { col:'week', ch:'cold', prio:'P1', due:'13.07', title:'1-я партия 10 касаний канала I',
+      desc:'10 из 51 нетронутого адреса. Анкор «CEO → архитектор», финал — бесплатная финдиагностика 30 мин. Материалы: reactivation-2026-07.md.' },
+    { col:'week', ch:'anom', prio:'P2', due:'13.07', title:'Подключиться к десятке Аномалии 12-13.07',
+      desc:'Охват, не метрика. Оценить состав. Кирилл до 12-го в Амстердаме — не дожимать.' },
+
+    // ДАЛЬШЕ (W29-W31)
+    { col:'next', ch:'warm', prio:'P1', due:'20.07', title:'Провести встречи W28 → занести в журнал',
+      desc:'Транспортная и Катя, если назначатся. Зафиксировать след. шаг в пайплайне.' },
+    { col:'next', ch:'anom', prio:'P1', due:'20.07', title:'Аномалия: попросить доступ + разведать 2-4 десятки',
+      desc:'После возвращения Кирилла. Канал, не дожим лида: как попасть в другие десятки, условия.' },
+    { col:'next', ch:'part', prio:'P2', due:'20.07', title:'Первые 5 предложений партнерам-бухгалтерам',
+      desc:'Кипр/Испания. Они статутка, ты управленка. Один партнер = несколько клиентов.' },
+    { col:'next', ch:'anom', prio:'P1', due:'27.07', title:'Дать пользу в десятке → вытянуть 1-2 диагностики',
+      desc:'Нативная продажа: польза → «а как ты это делаешь?» → диагностика.' },
+    { col:'next', ch:'warm', prio:'P2', due:'27.07', title:'Пересобрать теплую базу custdev под покупку',
+      desc:'Кто из ~10 (Денис/Иван/Аня/Витя) реально фаундер с оборотом, а не коллега → позвать на разбор.' },
+    { col:'next', ch:'cold', prio:'P2', due:'27.07', title:'Партии 2-3 касаний канала I + фоллоу-апы',
+      desc:'Держать топливо, дожимать первые ответы.' },
+    { col:'next', ch:'cont', prio:'P2', due:'27.07', title:'Запустить TG-канал + первые 3-5 Shorts',
+      desc:'Первые посты + ролики по промпту адаптации (03_Content). Среднесрочный охват.' },
+    { col:'next', ch:'sys', prio:'P2', due:'20.07', title:'Починить форму сайта + калькулятор → TG-бот',
+      desc:'Hub воронки: скачал калькулятор = подписчик + лид. /founderfinance.' },
+    { col:'next', ch:'warm', prio:'P1', due:'31.07', title:'🎯 Добор встреч до 10 + срез воронки',
+      desc:'Закрыть добор до цели месяца. Срез: сколько встреч, откуда, конверсия в след. шаг → план на август.', crit:true },
+
+    // КОНТЕКСТ / ЖДЕТ
+    { col:'wait', ch:'anom', prio:'P3', due:'12.07', title:'Кирилл в Амстердаме до 12.07',
+      desc:'Не форсировать (дозревает, канон €2 500/мес удержан). Реальный контакт по десяткам с ~14.07.' },
+
+    // ГОТОВО
+    { col:'done', ch:'sys', prio:'P1', due:'08.07', title:'Собрана папка founder-finance/ + лидер ff-lead',
+      desc:'Отдельный контур как fishok. Каркас из iCloud/Finance + северная звезда + табло встреч. Эта кабина.' },
+    { col:'done', ch:'sys', prio:'P2', due:'08.07', title:'Первый стендап ff-lead — план июля по неделям',
+      desc:'W28-W31 разложены под метрику встреч. Три действия на сегодня: Максим, Катя, канал I.' }
+  ]
+};
+
+(function renderBoard(){
+  var b = window.FF_BOARD, root = document.getElementById('ffBoard');
+  if(!b || !root) return;
+  var chName = { warm:'теплая', anom:'Аномалия', cold:'канал I', part:'партнеры', cont:'контент', sys:'система' };
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  var html = '';
+  b.columns.forEach(function(c){
+    var cards = b.cards.filter(function(x){ return x.col===c.key; });
+    html += '<div class="vb-col">';
+    html += '<div class="vb-colhead"><span class="t"><span class="dot" style="background:'+c.dot+'"></span>'+esc(c.name)+'</span><span class="cnt">'+cards.length+'</span></div>';
+    cards.forEach(function(x){
+      var dueCls = x.crit ? 'crit' : (x.col==='week'||x.col==='work' ? 'soon' : '');
+      html += '<div class="vb-card'+(x.col==='done'?' done':'')+'">';
+      html += '<div class="ct">'+esc(x.title)+'</div>';
+      if(x.desc) html += '<div class="cd">'+esc(x.desc)+'</div>';
+      html += '<div class="vb-meta">';
+      html += '<span class="ch '+x.ch+'">'+esc(chName[x.ch]||'')+'</span>';
+      if(x.prio) html += '<span class="prio '+x.prio+'">'+x.prio+'</span>';
+      if(x.due)  html += '<span class="due '+dueCls+'">до '+esc(x.due)+'</span>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+  });
+  root.innerHTML = html;
+})();
+
+/* ═══ ГАНТ ИЮЛЯ ═══ */
+FishokGantt.mount(document.getElementById('ffGantt'), {
+  weeks: [
+    {n:'W28', label:'07-13.07'}, {n:'W29', label:'14-20.07'},
+    {n:'W30', label:'21-27.07'}, {n:'W31', label:'28.07-03.08'}
+  ],
+  nowWeek: 1,
+  groups: [
+    { name:'Встречи (метрика · цель 10)', color:'#8A6A2E', tasks:[
+      {name:'Транспортная → звонок с ЛПР', start:1, end:1, status:'active', note:'W28'},
+      {name:'Катя/Финнобель → разбор-созвон', start:1, end:2, status:'active'},
+      {name:'Провести встречи W28 → журнал', start:2, end:2, status:'plan'},
+      {name:'Диагностики из десяток Аномалии', start:3, end:4, status:'plan'},
+      {name:'Теплая база custdev → разборы', start:3, end:3, status:'plan'},
+      {name:'Добор до 10 + срез воронки', start:4, end:4, status:'crit', label:'🎯 к 31.07'}
+    ]},
+    { name:'Каналы охвата', color:'#6B45B0', tasks:[
+      {name:'Канал I: 1-я партия 10 касаний', start:1, end:1, status:'active'},
+      {name:'Канал I: партии + фоллоу-апы', start:2, end:4, status:'plan'},
+      {name:'Аномалия: подключиться к десятке', start:1, end:1, status:'active', note:'12-13.07'},
+      {name:'Аномалия: вход в 2-4 десятки', start:2, end:3, status:'plan'},
+      {name:'Партнеры-бухгалтеры: первые 5 предложений', start:2, end:3, status:'plan'}
+    ]},
+    { name:'Контент и воронка', color:'#C0395A', tasks:[
+      {name:'Починить форму сайта + калькулятор→бот', start:1, end:2, status:'plan'},
+      {name:'Запустить TG-канал + первые посты', start:2, end:3, status:'plan'},
+      {name:'Первые 3-5 Shorts по промпту', start:2, end:4, status:'plan'}
+    ]}
+  ]
+});
+</script>
+</body>
+</html>
