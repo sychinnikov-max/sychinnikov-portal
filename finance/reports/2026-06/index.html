@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAFAF7" />
+<title>Закрытие периода — Июнь 2026 · Sychinnikov Portal</title>
+<meta name="description" content="Управленческая отчётность личных финансов за июнь 2026. План-факт по конвертам, бизнес-зона, чистые активы €3 599, результат −€938 (с арендой) против плана −€1 940." />
+<link rel="stylesheet" href="/assets/css/portal.css" />
+<link rel="stylesheet" href="../../../assets/css/portal.css" />
+<style>
+/* Fallback — CSS-переменные на случай если portal.css не загрузился */
+:root {
+  --color-bg: #FAFAF7;
+  --color-bg-alt: #F4F2EC;
+  --color-card: #FFFFFF;
+  --color-text: #1A1A1A;
+  --color-text-muted: #5C5C5C;
+  --color-text-soft: #8A8680;
+  --color-border: #E8E6E0;
+  --color-border-soft: #EFEDE7;
+  --color-accent: #1F3A5F;
+  --color-success: #2F6F4F;
+  --color-warning: #B07024;
+  --color-danger: #9B2C2C;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+}
+
+body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); margin: 0; line-height: 1.55; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+.site-header { border-bottom: 1px solid var(--color-border); background: var(--color-card); padding: 0.85rem 0; }
+.site-header-inner { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.brand { font-weight: 600; text-decoration: none; color: var(--color-text); }
+.brand-sub { color: var(--color-text-soft); margin-left: 0.5rem; font-size: 0.78rem; font-weight: 400; }
+.brand-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); margin-right: 0.5rem; }
+.nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.nav a { color: var(--color-text-muted); text-decoration: none; font-size: 0.9rem; }
+.nav a.current, .nav a:hover { color: var(--color-text); }
+.page-hero { background: var(--color-bg-alt); padding: 2.5rem 0 2rem; border-bottom: 1px solid var(--color-border); }
+.page-eyebrow { font-size: 0.78rem; color: var(--color-text-soft); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.7rem; }
+.page-title { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 500; line-height: 1.25; margin: 0 0 0.85rem; max-width: 900px; }
+.page-sub { color: var(--color-text-muted); max-width: 900px; line-height: 1.6; font-size: 0.95rem; margin: 0; }
+.page-sub code { background: var(--color-card); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.85rem; }
+.section { padding: 2rem 0 3rem; }
+.section-head { margin-bottom: 1rem; }
+.section-title { font-family: var(--font-serif); font-weight: 500; font-size: 1.35rem; margin: 0; }
+.section-num { display: inline-block; color: var(--color-text-soft); font-size: 0.85rem; font-family: var(--font-sans); letter-spacing: 0.08em; margin-right: 0.6rem; }
+.section-meta { color: var(--color-text-soft); font-size: 0.85rem; margin: 0.35rem 0 0; }
+.card { background: var(--color-card); border: 1px solid var(--color-border-soft); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
+.card-label { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-soft); font-weight: 500; margin-bottom: 0.7rem; }
+.foot { padding: 2rem 0; border-top: 1px solid var(--color-border); font-size: 0.85rem; color: var(--color-text-soft); margin-top: 2rem; }
+.foot a { color: var(--color-text-muted); }
+
+.fin-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.fin-summary-card { padding: 1rem 1.15rem; background: var(--color-card); border: 1px solid var(--color-border-soft); border-radius: 10px; }
+.fin-summary-label { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-soft); font-weight: 500; margin-bottom: 0.5rem; }
+.fin-summary-val { font-family: var(--font-serif); font-size: 1.65rem; font-variation-settings: "opsz" 24, "wght" 440; line-height: 1; font-feature-settings: "tnum"; }
+.fin-summary-val.profit { color: var(--color-success); }
+.fin-summary-val.danger { color: var(--color-danger); }
+.fin-summary-val.warn { color: #B85C00; }
+.fin-summary-sub { font-size: 0.74rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+
+.plfact-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 1rem; }
+.plfact-table th, .plfact-table td { text-align: left; padding: 0.55rem 0.65rem; border-bottom: 1px solid var(--color-border-soft); font-feature-settings: "tnum"; }
+.plfact-table th { font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-soft); font-weight: 600; }
+.plfact-table td.num { text-align: right; font-family: var(--font-mono); }
+.plfact-table tr.total td { border-top: 2px solid var(--color-text); border-bottom: 0; padding-top: 0.85rem; font-weight: 600; font-family: var(--font-serif); font-size: 1rem; }
+.plfact-table tr.subhead td { background: var(--color-bg-alt); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text-soft); }
+.plfact-table .over { color: var(--color-danger); font-weight: 500; }
+.plfact-table .ok { color: var(--color-success); }
+.plfact-table .warn { color: #B85C00; }
+.plfact-table .muted { color: var(--color-text-soft); font-size: 0.78rem; }
+
+.tkp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; margin-bottom: 1rem; }
+.tkp { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 0.85rem; padding: 0.75rem 1rem; background: var(--color-bg-alt); border: 1px solid var(--color-border-soft); border-radius: 8px; font-size: 0.88rem; }
+.tkp-name { line-height: 1.35; }
+.tkp-val { font-family: var(--font-mono); font-weight: 600; }
+.tkp-status { font-size: 1rem; }
+
+.swot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+.swot-card { padding: 1rem 1.15rem; border: 1px solid var(--color-border-soft); border-radius: 10px; background: var(--color-card); }
+.swot-card h4 { font-family: var(--font-sans); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-soft); font-weight: 600; margin-bottom: 0.7rem; }
+.swot-card.green h4 { color: var(--color-success); }
+.swot-card.red h4 { color: var(--color-danger); }
+.swot-card.yellow h4 { color: #B85C00; }
+.swot-card.gray h4 { color: var(--color-text-soft); }
+.swot-card ul { list-style: none; padding: 0; margin: 0; }
+.swot-card ul li { font-size: 0.86rem; line-height: 1.5; margin-bottom: 0.4rem; padding-left: 0.85rem; position: relative; }
+.swot-card ul li::before { content: "·"; position: absolute; left: 0; color: var(--color-text-soft); font-weight: 700; }
+
+.tbu-chart-wrap { background: var(--color-bg-alt); border: 1px solid var(--color-border-soft); border-radius: 10px; padding: 1rem; margin: 1rem 0; }
+
+.callout { padding: 0.85rem 1.1rem; border-radius: 8px; font-size: 0.9rem; line-height: 1.55; margin-top: 0.85rem; }
+.callout.warn { background: #FFF6E8; border: 1px solid #E8D5A8; color: #6B4500; }
+.callout.danger { background: #FBF1F1; border: 1px solid #E5C8C8; color: #8B2020; }
+.callout.success { background: #F0F7F0; border: 1px solid #C8E0C8; color: #1E5520; }
+
+.reports-nav { display: flex; gap: 0.7rem; flex-wrap: wrap; font-size: 0.85rem; margin-bottom: 1rem; }
+.reports-nav a { padding: 0.35rem 0.7rem; background: var(--color-bg-alt); border: 1px solid var(--color-border-soft); border-radius: 999px; text-decoration: none; color: var(--color-text-soft); }
+.reports-nav a:hover { background: var(--color-card); color: var(--color-text); }
+.reports-nav a.current { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+
+.errata-block { background: #F0F5FB; border: 2px solid #A8C4E0; border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem; }
+.errata-block h3 { font-family: var(--font-sans); font-size: 0.9rem; color: #1F3A5F; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 0.7rem; }
+.errata-block p { font-size: 0.9rem; line-height: 1.6; margin: 0 0 0.6rem; }
+.errata-block ul { font-size: 0.9rem; line-height: 1.6; margin: 0.5rem 0; padding-left: 1.2rem; }
+
+.calendar { display: grid; gap: 0.6rem; }
+.cal-row { display: grid; grid-template-columns: 100px 1fr auto; gap: 1rem; align-items: center; padding: 0.75rem 1rem; background: var(--color-bg-alt); border: 1px solid var(--color-border-soft); border-radius: 8px; font-size: 0.88rem; }
+.cal-row.urgent { background: #FBF1F1; border-color: #E5C8C8; }
+.cal-row.done { background: #F2F8F2; border-color: #C8E0C8; opacity: 0.9; }
+.cal-row.upcoming { background: #FFF6E8; border-color: #E8D5A8; }
+.cal-date { font-family: var(--font-mono); font-weight: 600; font-size: 0.84rem; }
+.cal-date small { display: block; color: var(--color-text-soft); font-weight: 400; }
+.cal-name { line-height: 1.4; }
+.cal-name small { display: block; color: var(--color-text-soft); margin-top: 0.2rem; font-size: 0.76rem; }
+.cal-sum { font-family: var(--font-mono); font-weight: 600; font-feature-settings: "tnum"; }
+
+.section-anchor { color: var(--color-text-soft); margin-left: 0.4rem; font-size: 0.8rem; opacity: 0.6; text-decoration: none; }
+.section-anchor:hover { opacity: 1; }
+
+@media (max-width: 1024px) {
+  .fin-summary { grid-template-columns: repeat(2, 1fr); }
+  .tkp-grid, .swot-grid { grid-template-columns: 1fr; }
+  .cal-row { grid-template-columns: 80px 1fr auto; }
+}
+@media (max-width: 640px) {
+  .fin-summary { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="brand"><span class="brand-dot"></span>Sychinnikov Portal<span class="brand-sub">private</span></a>
+    <nav class="nav">
+      <a href="/" data-nav>Дашборд</a>
+      <a href="/founder-trajectory/" data-nav>Продукт</a>
+      <a href="/clients/" data-nav>Клиенты</a>
+      <a href="/contacts/" data-nav>Контакты</a>
+      <a href="/finance/" data-nav class="current">Финансы</a>
+      <a href="/system/" data-nav>Система</a>
+      <a href="/decisions/" data-nav>Решения</a>
+      <a href="/wisdom/" data-nav>Wisdom</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <p class="page-eyebrow">04 · Финансы · закрытие периода · июнь 2026 · финал 09.07 · все счета сверены</p>
+    <h1 class="page-title">Управленческая отчётность за июнь 2026. Первый месяц с полным планом-фактом. Источник истины — wallets/*.md + ledger.md.</h1>
+    <p class="page-sub">
+      Адаптация методологии Нескучных Финансов под личные финансы. Главный ЦКП — «цифры показывают правду». Июнь пересобран снизу-вверх по <code>ledger.md</code> (все счета, весь месяц), с корректировками на закрытии по подтверждениям Андрея (09.07). Впервые — отдельная <strong>бизнес-зона</strong> (предпринимательский контур: доход − себестоимость − налог = прибыль). Источник: <code>finance/state.md</code> + <code>finance/business/deals.md</code>.
+    </p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+
+    <div class="reports-nav">
+      <a href="/finance/">← Главная финансов</a>
+      <a href="/finance/reports/2026-05/">Закрытие · май 2026 (v2)</a>
+      <a href="/finance/reports/2026-06/" class="current">Закрытие · июнь 2026</a>
+    </div>
+
+    <!-- Корректировки на закрытии -->
+    <div class="errata-block">
+      <h3>✎ Корректировки на закрытии (09.07, по подтверждениям Андрея)</h3>
+      <p>База отчёта — полная пересборка июня снизу-вверх по <code>ledger.md</code> (финдиректор, 08.07). На финальном закрытии Андрей подтвердил три кассовых момента, которые сдвинули итог:</p>
+      <ul>
+        <li><strong>Коворкинг €160</strong> — оплачен налом (18–24.06), в пересборке стоял факт €0. Добавлен → Зона 1 факт вырос на €160.</li>
+        <li><strong>Нал-нерасшифровано €160</strong> (18–24.06) → отнесён на <strong>Вику как карманные</strong> (правило Андрея: весь неопределённый остаток нала → Вика-ЗП). Зона 1 факт +€160.</li>
+        <li><strong>Няня €450</strong> оплачена налом в хвосте месяца (25–30.06). Значит касса на 30.06 = €890 − €450 = <strong>€440</strong> (не €890 — это был снимок 24.06 до няни). <strong>Чистые активы 30.06 скорректированы €4 049 → €3 599.</strong></li>
+      </ul>
+      <p style="margin-top: 0.7rem;"><strong>Итог:</strong> Зона 1 факт €3 164.24 → <strong>€3 484.24</strong>. Чистые активы 30.06 → <strong>~€3 599</strong>. Всё остальное — как в источнике, без подгонки.</p>
+    </div>
+
+    <!-- Summary -->
+    <div class="fin-summary">
+      <div class="fin-summary-card">
+        <div class="fin-summary-label">Личный доход (факт)</div>
+        <div class="fin-summary-val profit">+€3 635</div>
+        <div class="fin-summary-sub">Fishok €3 500 + консультация €99 + кэшбэк €36</div>
+      </div>
+      <div class="fin-summary-card">
+        <div class="fin-summary-label">Расходы факт (Зона 1+2)</div>
+        <div class="fin-summary-val">−€3 573</div>
+        <div class="fin-summary-sub">Зона 1 €3 484 + Зона 2 €88.55 · с арендой €4 573</div>
+      </div>
+      <div class="fin-summary-card">
+        <div class="fin-summary-label">Результат месяца</div>
+        <div class="fin-summary-val danger">−€938</div>
+        <div class="fin-summary-sub">С арендой экономически · без аренды +€62 · план был −€1 940</div>
+      </div>
+      <div class="fin-summary-card">
+        <div class="fin-summary-label">Чистые активы 30.06</div>
+        <div class="fin-summary-val warn">~€3 599</div>
+        <div class="fin-summary-sub">11 счетов · было €4 049 до няни · runway ~2.5 мес</div>
+      </div>
+    </div>
+
+    <div class="callout success">
+      🆕 <strong>Бизнес-зона июня: прибыль +€447.68</strong> (выручка €1 261 − себестоимость €813 − налог €0). Три сделки — Fishok-дизайн, консультация, буклет+флайер. Это <strong>новые деньги сверх зарплаты</strong>, отдельный P&L — см. раздел 06.
+    </div>
+
+    <!-- ЦКП -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">01</span> ЦКП личного финдиректора</h2>
+      <p class="section-meta">7 ЦКП — главный: «цифры показывают правду»</p>
+    </div>
+
+    <div class="tkp-grid">
+      <div class="tkp"><div class="tkp-name">Управляемый денежный поток<br><small style="color: var(--color-text-soft);">все 11 счетов сверены до цента</small></div><div class="tkp-val">100%</div><div class="tkp-status">✅</div></div>
+      <div class="tkp"><div class="tkp-name">Своевременная оплата фикс-обязательств<br><small style="color: var(--color-text-soft);">аренда, кредит РФ, cuota</small></div><div class="tkp-val">100%</div><div class="tkp-status">✅</div></div>
+      <div class="tkp"><div class="tkp-name">Точность планирования<br><small style="color: var(--color-text-soft);">впервые есть план — факт лёг рядом</small></div><div class="tkp-val">75%</div><div class="tkp-status">🟡</div></div>
+      <div class="tkp"><div class="tkp-name">Финансовая безопасность<br><small style="color: var(--color-text-soft);">runway ~2.5 мес vs цель ≥ 3</small></div><div class="tkp-val">55%</div><div class="tkp-status">🟡</div></div>
+      <div class="tkp"><div class="tkp-name">Второй источник дохода<br><small style="color: var(--color-text-soft);">бизнес-контур +€448 — первый сигнал</small></div><div class="tkp-val">40%</div><div class="tkp-status">🟡</div></div>
+      <div class="tkp"><div class="tkp-name">Решения на основе цифр</div><div class="tkp-val">100%</div><div class="tkp-status">✅</div></div>
+      <div class="tkp" style="grid-column: 1 / -1; background: #F0F7F0; border-color: #C8E0C8;"><div class="tkp-name">🎯 <strong>Цифры показывают правду</strong> — главный ЦКП<br><small style="color: var(--color-text-soft);">3 раунда правок 08.07 (Bybit Вика −€159, autónomo −€238, BBVA банк −€342) + корректировки закрытия 09.07 — все вниз, честно</small></div><div class="tkp-val">95%</div><div class="tkp-status">✅</div></div>
+    </div>
+
+    <!-- ДДС общая картина -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">02</span> Общая картина — доход, расход, результат</h2>
+      <p class="section-meta">личный контур (без бизнес-зоны, у неё свой P&L)</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead><tr><th>Показатель</th><th class="num">Сумма EUR</th></tr></thead>
+        <tbody>
+          <tr><td>Чистые активы на начало (01.06, = закрытие мая)</td><td class="num">~2 565</td></tr>
+          <tr><td>Личный доход (Fishok €3 500.20 + консультация €98.90 + кэшбэк €35.99)</td><td class="num ok">+3 635.09</td></tr>
+          <tr><td>Расходы Зона 1 (жизнь, все счета, весь июнь)</td><td class="num over">−3 484.24</td></tr>
+          <tr><td>Расходы Зона 2 (cuota autónomo, единственная реализованная)</td><td class="num over">−88.55</td></tr>
+          <tr class="total"><td>Операционный результат (без аренды)</td><td class="num ok">+62.30</td></tr>
+          <tr><td>Аренда июня (оплачена авансом 23.05, экономически июньская)</td><td class="num over">−1 000</td></tr>
+          <tr class="total"><td>Результат с учётом аренды</td><td class="num over">−937.70</td></tr>
+          <tr><td>Чистые активы на конец (30.06, касса €440)</td><td class="num">~3 599</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn">
+        📌 Рост чистых активов (+€1 034 за месяц) при отрицательном операционном результате — потому что зарплата Fishok €3 500 осела на Bybit Вики почти нетронутой: из неё реально «разошлось» только ~€1 409 (из них €133 — погашение долга Сесилии, не жизнь). Остальные расходы июня профинансированы из <strong>прежних наличных</strong> (старт €1 405) и остатков Ether/Bybit Андрея.
+      </div>
+    </div>
+
+    <!-- ⭐ План-факт Зона 1 -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">03</span> План-факт по конвертам — Зона 1 (операционка) ★</h2>
+      <p class="section-meta">центр отчёта · план из finance/plans/2026-06.md · факт снизу-вверх по ledger.md + корректировки 09.07</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead><tr><th>Конверт</th><th class="num">План</th><th class="num">Факт</th><th class="num">Остаток</th><th>Статус</th></tr></thead>
+        <tbody>
+          <tr class="subhead"><td colspan="5">Жильё</td></tr>
+          <tr><td>Аренда <span class="muted">(оплачена 23.05 авансом)</span></td><td class="num">1 000</td><td class="num">0</td><td class="num">0</td><td class="ok">✅ экономически июньская</td></tr>
+          <tr><td>Коммуналка (Comunidad Adosinda)</td><td class="num">145</td><td class="num">0</td><td class="num">145</td><td class="over">🔴 нет данных, гэп</td></tr>
+          <tr><td>Электричество (BASER)</td><td class="num">35</td><td class="num over">44.95</td><td class="num over">−9.95</td><td class="over">🔴 превышен</td></tr>
+          <tr class="subhead"><td colspan="5">Еда и быт</td></tr>
+          <tr><td>Еда:Продукты</td><td class="num">1 000</td><td class="num">893.95</td><td class="num ok">106.05</td><td class="ok">✅ в плане</td></tr>
+          <tr><td>Еда:Быт</td><td class="num">100</td><td class="num">20.23</td><td class="num ok">79.77</td><td class="ok">✅</td></tr>
+          <tr><td>Рестораны</td><td class="num">400</td><td class="num">176.08</td><td class="num ok">223.92</td><td class="ok">✅ жёстко в лимите</td></tr>
+          <tr><td>Кафе</td><td class="num">200</td><td class="num over">304.07</td><td class="num over">−104.07</td><td class="over">🔴 превышен</td></tr>
+          <tr><td>Доставка Glovo</td><td class="num">50</td><td class="num over">66.33</td><td class="num over">−16.33</td><td class="over">🔴 превышен</td></tr>
+          <tr class="subhead"><td colspan="5">Дети и семья</td></tr>
+          <tr><td>Няня</td><td class="num">600</td><td class="num">450.00</td><td class="num ok">150.00</td><td class="ok">✅ нал, хвост месяца</td></tr>
+          <tr><td>Дети:Товары</td><td class="num">100</td><td class="num">90.09</td><td class="num">9.91</td><td class="warn">🟡 почти исчерпан</td></tr>
+          <tr><td>Дети:Книги <span class="muted">🆕</span></td><td class="num">—</td><td class="num">28.05</td><td class="num">—</td><td class="muted">вне бюджета</td></tr>
+          <tr><td>Семья:Свидания</td><td class="num">100</td><td class="num">0</td><td class="num">100</td><td class="muted">не было</td></tr>
+          <tr><td>Семья:Прочее</td><td class="num">100</td><td class="num">52.52</td><td class="num ok">47.48</td><td class="ok">✅</td></tr>
+          <tr><td>Семья:Собака</td><td class="num">62</td><td class="num">61.19</td><td class="num">0.81</td><td class="ok">✅ закрыт</td></tr>
+          <tr><td>Семья:Красота <span class="muted">🆕</span></td><td class="num">—</td><td class="num">30.00</td><td class="num">—</td><td class="warn">🟡 маникюр, ⚠ подтвердить</td></tr>
+          <tr><td>Семья:Юристы Аргентина <span class="muted">(долг Сесилии)</span></td><td class="num">136</td><td class="num">133.30</td><td class="num ok">2.70</td><td class="ok">✅ оплачен 19.06</td></tr>
+          <tr><td>Образование:Школа <span class="muted">🆕</span></td><td class="num">—</td><td class="num">90.00</td><td class="num">—</td><td class="muted">матрикула 22.06</td></tr>
+          <tr><td>Открытие autónomo (½, гестор)</td><td class="num">121</td><td class="num">0</td><td class="num">121</td><td class="over">🔴 нет данных</td></tr>
+          <tr class="subhead"><td colspan="5">Здоровье</td></tr>
+          <tr><td>Здоровье <span class="muted">(врач Вике ~€60/нед + БАДы iHerb)</span></td><td class="num">400</td><td class="num">253.98</td><td class="num ok">146.02</td><td class="ok">✅</td></tr>
+          <tr class="subhead"><td colspan="5">Вика</td></tr>
+          <tr><td>Вика-ЗП (карманные) <span class="muted">✎ реклассиф. нала</span></td><td class="num">300</td><td class="num">160.00</td><td class="num ok">140.00</td><td class="warn">🟡 нал 18–24.06 → Вика (правило Андрея)</td></tr>
+          <tr class="subhead"><td colspan="5">Операционное</td></tr>
+          <tr><td>Транспорт (+ каршеринг)</td><td class="num">100</td><td class="num">34.88</td><td class="num ok">65.12</td><td class="ok">✅</td></tr>
+          <tr><td>Связь и подписки</td><td class="num">80</td><td class="num over">99.89</td><td class="num over">−19.89</td><td class="over">🔴 превышен</td></tr>
+          <tr><td>Коворкинг <span class="muted">✎ подтв. 09.07</span></td><td class="num">160</td><td class="num">160.00</td><td class="num">0</td><td class="ok">✅ нал, оплачен</td></tr>
+          <tr class="subhead"><td colspan="5">Вне бюджета / требует уточнения</td></tr>
+          <tr><td>Спорт:Зал (абонемент VG) <span class="muted">🆕</span></td><td class="num">—</td><td class="num">34.90</td><td class="num">—</td><td class="muted">~€35/мес</td></tr>
+          <tr><td>Одежда:Взрослые (Zara online)</td><td class="num">—</td><td class="num">33.85</td><td class="num">—</td><td class="muted">вне бюджета</td></tr>
+          <tr><td>Одежда/Дети — Zara Fresnos <span class="muted">⚠</span></td><td class="num">—</td><td class="num">12.95</td><td class="num">—</td><td class="warn">🟡 состав неизвестен</td></tr>
+          <tr><td>Amazon неизвестного назначения (Ether Вика) <span class="muted">⚠</span></td><td class="num">—</td><td class="num over">217.93</td><td class="num">—</td><td class="over">🔴 30.06 = €165 за день, состав неизвестен</td></tr>
+          <tr><td>Sumup *Mendez Amido SL <span class="muted">⚠</span></td><td class="num">—</td><td class="num">35.10</td><td class="num">—</td><td class="over">🔴 назначение неизвестно</td></tr>
+          <tr class="total"><td>ИТОГО Зона 1 (факт)</td><td class="num">—</td><td class="num">3 484.24</td><td class="num">—</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn">
+        ⚠ <strong>«Июнь лучше плана» — наполовину оптика.</strong> Часть плановых обязательств просто ещё не наступила или не подтверждена: IRPF €1 000 (платёж 20.07), гестор €62.50, Comunidad €145, открытие autónomo €121, свидания €100 — суммарно ~€1 428. Это не экономия, а отложенные обязательства. IRPF €1 000 — реальный долг, который придёт 20.07.
+      </div>
+    </div>
+
+    <!-- Зона 2 -->
+    <div class="section-head" style="margin-top: 2rem;">
+      <h2 class="section-title"><span class="section-num">04</span> План-факт — Зона 2 (autónomo + налоги)</h2>
+      <p class="section-meta">Вика-autónomo · гестор Юрий · IRPF-резерв</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead><tr><th>Статья</th><th class="num">План</th><th class="num">Факт</th><th>Статус</th></tr></thead>
+        <tbody>
+          <tr><td>Cuota autónomo (Вика)</td><td class="num">88.56</td><td class="num">88.55</td><td class="ok">✅ оплачена 30.06 (2 списания TGSS)</td></tr>
+          <tr><td>Ведение Юрия</td><td class="num">62.50</td><td class="num">0</td><td class="warn">🟡 фактура конца месяца, не найдена</td></tr>
+          <tr><td>IRPF резерв (Вика)</td><td class="num">1 000</td><td class="num">0</td><td class="over">🔴🔴 первый платёж 20.07 · резерв обнулён</td></tr>
+          <tr class="total"><td>Зона 2</td><td class="num">1 151</td><td class="num">88.55</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div class="callout danger">
+        🔴🔴 <strong>IRPF 20.07 — €1 000, резерв на autónomo практически на нуле (€8.95 на 08.07).</strong> В июле с Bybit Вики ушло €1 070 Андрею, съев earmark. <strong>Пополнить autónomo до 15.07 — топ-приоритет.</strong> Резерв обязан лежать в евро, не в крипте.
+      </div>
+    </div>
+
+    <!-- Детализация 14 групп -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">05</span> Детализация расходов — по группам</h2>
+      <p class="section-meta">весь июнь, все счета · ранжировано по размеру · Σ €3 484.24</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead><tr><th>#</th><th>Группа</th><th class="num">EUR</th><th class="num">Доля</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Еда:Продукты</strong> (Supercor + DIA + Mercadona + Carrefour + Slavianka)</td><td class="num">893.95</td><td class="num">25.7%</td></tr>
+          <tr><td>2</td><td><strong>Няня</strong> (зарплата июня, нал)</td><td class="num">450.00</td><td class="num">12.9%</td></tr>
+          <tr><td>3</td><td><strong>Заведения:Кафе</strong> (Starbucks, DUALL ×3, Manolo, кофе/смузи нал)</td><td class="num over">304.07</td><td class="num">8.7%</td></tr>
+          <tr><td>4</td><td><strong>Здоровье</strong> (врач Вике ~€60/нед €170 + БАДы iHerb €133.98)</td><td class="num">253.98</td><td class="num">7.3%</td></tr>
+          <tr><td>5</td><td><strong>Amazon неизвестное</strong> (Ether Вика: 18.06 + 30.06 ×2)</td><td class="num over">217.93</td><td class="num">6.3%</td></tr>
+          <tr><td>6</td><td><strong>Заведения:Рестораны</strong> (Cocina Japonesa, UME, Vegallagos, Dual)</td><td class="num">176.08</td><td class="num">5.1%</td></tr>
+          <tr><td>7</td><td><strong>Коворкинг</strong> (нал)</td><td class="num">160.00</td><td class="num">4.6%</td></tr>
+          <tr><td>8</td><td><strong>Вика-ЗП</strong> (карманные, реклассиф. нала)</td><td class="num">160.00</td><td class="num">4.6%</td></tr>
+          <tr><td>9</td><td><strong>Дети</strong> (товары €90.09 + книги €28.05 + Zara €12.95)</td><td class="num">131.09</td><td class="num">3.8%</td></tr>
+          <tr><td>10</td><td><strong>Юристы Аргентина</strong> (долг Сесилии 155 USDT)</td><td class="num">133.30</td><td class="num">3.8%</td></tr>
+          <tr><td>11</td><td><strong>Связь и подписки</strong> (Granola, iCloud, Prime, Mi Orange, Google Cloud…)</td><td class="num over">99.89</td><td class="num">2.9%</td></tr>
+          <tr><td>12</td><td><strong>Образование:Школа</strong> (матрикула)</td><td class="num">90.00</td><td class="num">2.6%</td></tr>
+          <tr><td>13</td><td><strong>Семья:Прочее + Красота</strong> (Amazon €20.52 + Flores €32 + маникюр €30)</td><td class="num">82.52</td><td class="num">2.4%</td></tr>
+          <tr><td>14</td><td><strong>Доставка Glovo</strong></td><td class="num over">66.33</td><td class="num">1.9%</td></tr>
+          <tr><td>15</td><td><strong>Семья:Собака</strong> (Royal Canin 12кг)</td><td class="num">61.19</td><td class="num">1.8%</td></tr>
+          <tr><td>16</td><td><strong>Электричество</strong> (BASER)</td><td class="num">44.95</td><td class="num">1.3%</td></tr>
+          <tr><td>17</td><td><strong>Прочее</strong> (Sumup €35.10 + Зал €34.90 + Транспорт €34.88 + Одежда €33.85 + Быт €20.23)</td><td class="num">159.01</td><td class="num">4.6%</td></tr>
+          <tr class="total"><td></td><td>ИТОГО</td><td class="num">3 484.24</td><td class="num">100%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout danger">
+        🔴 <strong>Три чёрные дыры июня, которые нужно закрыть:</strong> (1) Amazon Ether Вика €217.93 — состав неизвестен, €165 за один день 30.06; (2) Кафе €304 против плана €200 — привычка (DUALL ×3 = €97.50, Starbucks); (3) Sumup Mendez €35.10 — назначение неизвестно. Итого «тумана» ≈ €253.
+      </div>
+    </div>
+
+    <!-- Заведения детально -->
+    <div style="margin-top: 1.5rem;">
+      <h3 style="font-size: 1.05rem; margin-bottom: 0.7rem;">5.1 Заведения — €546 (Кафе €304 + Рестораны €176 + Glovo €66)</h3>
+      <div class="card">
+        <table class="plfact-table">
+          <thead><tr><th>Заведение</th><th>Тип</th><th class="num">EUR</th></tr></thead>
+          <tbody>
+            <tr><td>DUALL Specialty Coffee ×3 (06.06 / 11.06 / 28.06)</td><td>кафе/ресторан</td><td class="num over">97.50</td></tr>
+            <tr><td>Cocina Japonesa Ye</td><td>ресторан</td><td class="num">49.90</td></tr>
+            <tr><td>UME</td><td>ресторан</td><td class="num">34.60</td></tr>
+            <tr><td>кофе + смузи Вике и Саре (нал, 08–15.06)</td><td>кафе</td><td class="num">105.00</td></tr>
+            <tr><td>кафе (жена, нал 04.06)</td><td>кафе</td><td class="num">30.00</td></tr>
+            <tr><td>Starbucks San Bernardo ×2</td><td>кафе</td><td class="num">14.60</td></tr>
+            <tr><td>Vegallagos + Manolo + Un Tercio + Celemin + прочее</td><td>кафе</td><td class="num">80.00</td></tr>
+            <tr><td>Glovo (доставка, весь июнь)</td><td>доставка</td><td class="num over">66.33</td></tr>
+            <tr class="total"><td>Итого заведения</td><td></td><td class="num">~546</td></tr>
+          </tbody>
+        </table>
+        <div class="callout warn">
+          ⚠ <strong>DUALL ×3 за месяц (€97.50)</strong> + Starbucks — рекуррентная привычка. Кафе превысил план на €104. Рычаг оптимизации: лимит на кофейни ~€150/мес сэкономит €90–130.
+        </div>
+      </div>
+    </div>
+
+    <!-- Бизнес-зона -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">06</span> Бизнес-зона — предпринимательский контур 🆕</h2>
+      <p class="section-meta">новые деньги сверх зарплаты · выручка − себестоимость − налог = прибыль · источник: business/deals.md</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead><tr><th>Сделка</th><th class="num">Выручка</th><th class="num">Себестоимость</th><th class="num">Налог</th><th class="num">Прибыль</th><th>Маржа</th></tr></thead>
+        <tbody>
+          <tr><td><strong>001</strong> Fishok-дизайн (Юлия, РФ) <span class="muted">🟡 в работе, предоплата 50%</span></td><td class="num">981.00</td><td class="num">686.48</td><td class="num">0</td><td class="num ok">294.52</td><td>30%</td></tr>
+          <tr><td><strong>002</strong> Консультация (Константин, партнёр Надя) <span class="muted">✅</span></td><td class="num">100.00</td><td class="num">50.00</td><td class="num">0</td><td class="num ok">50.00</td><td>50%</td></tr>
+          <tr><td><strong>003</strong> Fishok буклет + флайер (Вова, РФ) <span class="muted">✅</span></td><td class="num">180.00</td><td class="num">76.84</td><td class="num">0</td><td class="num ok">103.16</td><td>57%</td></tr>
+          <tr class="total"><td>ИТОГО контур</td><td class="num">1 261.00</td><td class="num">813.32</td><td class="num">0</td><td class="num ok">447.68</td><td>35%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success">
+        💡 <strong>Налог сделок = €0.</strong> IRPF €1 000/мес платится за статус визы DNV по-любому; сделки уложились в обязательную квоту €5 000/мес → предельного налога не добавили. Поэтому прибыль = выручка − себестоимость. Главный рычаг прибыли — <strong>себестоимость подрядчика и цена клиенту</strong>.
+      </div>
+      <p style="font-size: 0.85rem; color: var(--color-text-soft); margin-top: 0.7rem; line-height: 1.5;">
+        Инвойсы дизайна (001 + 003 = €1 161) идут через autónomo Вики и <strong>не входят в личный доход напрямую</strong> — у них свой P&L здесь. Их прибыль €397.68 — реальные новые деньги, часть уже осела на autónomo. Консультация €100 (002) — единственная, что пересекается с личным доходом (строка «консультация €98.90»). Открытый вопрос по 001 — gross-up второго инвойса (см. <code>business/deals.md</code>).
+      </p>
+    </div>
+
+    <!-- ОДР + ТБУ -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">07</span> Анализ ОДР · Точка безубыточности</h2>
+      <p class="section-meta">фикс / переменные / разовые · касса Зона 1 €3 484</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead><tr><th>Тип</th><th class="num">Сумма</th><th class="num">Доля</th><th>Что входит</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Фикс-расходы</strong></td><td class="num">850.93</td><td class="num">24.4%</td><td>Няня + коворкинг + связь + собака + зал + BASER</td></tr>
+          <tr><td><strong>Переменные</strong></td><td class="num">1 999.61</td><td class="num">57.4%</td><td>Продукты + кафе + здоровье + рестораны + Вика-ЗП + Glovo + транспорт + быт + дети:товары</td></tr>
+          <tr><td><strong>Разовые</strong></td><td class="num warn">633.70</td><td class="num">18.2%</td><td>Amazon €218 + юристы €133 + школа €90 + Sumup €35 + одежда + книги + красота + прочее</td></tr>
+          <tr class="total"><td>Итого Зона 1</td><td class="num">3 484.24</td><td class="num">100%</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size: 0.88rem; color: var(--color-text-soft); margin-top: 0.7rem;">
+        Доля переменных <strong>57%</strong> — высокая, здесь и рычаг управления (кафе, Amazon-туман). Фикс всего 24% (без аренды) — комфортно.
+      </p>
+    </div>
+
+    <div class="tbu-chart-wrap">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-text-soft); letter-spacing: 0.05em; text-transform: uppercase;">Точка безубыточности (июнь, с арендой)</h4>
+      <svg viewBox="0 0 600 220" width="100%" style="max-width: 600px; display: block;">
+        <line x1="50" y1="180" x2="580" y2="180" stroke="#999" stroke-width="1"></line>
+        <line x1="50" y1="20" x2="50" y2="180" stroke="#999" stroke-width="1"></line>
+        <rect x="110" y="20" width="90" height="160" fill="#E8B850" rx="3"></rect>
+        <text x="155" y="12" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">€4 573</text>
+        <text x="155" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">ТБУ (с арендой)</text>
+        <rect x="255" y="52" width="90" height="128" fill="#5B8A3A" rx="3"></rect>
+        <text x="300" y="44" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">€3 635</text>
+        <text x="300" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">Личный доход</text>
+        <rect x="400" y="118" width="90" height="62" fill="#3F7E5E" rx="3"></rect>
+        <text x="445" y="110" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1E5520">+€448</text>
+        <text x="445" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">Бизнес-прибыль</text>
+        <rect x="510" y="150" width="70" height="30" fill="#C0392B" rx="3"></rect>
+        <text x="545" y="142" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#C0392B">−€490</text>
+        <text x="545" y="200" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">Итог. разрыв</text>
+      </svg>
+      <p style="font-size: 0.88rem; color: var(--color-text-soft); margin-top: 0.7rem; line-height: 1.5;">
+        С арендой ТБУ €4 573. Личный доход покрывает €3 635, бизнес-контур добавляет ~€398 новых денег (консультация €50 уже в личном) → <strong>реальный разрыв ~−€490/мес</strong> вместо −€938. Бизнес-контур — первый рычаг, который начал закрывать дефицит.
+      </p>
+    </div>
+
+    <!-- Личный баланс -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">08</span> Чистые активы · финансовая устойчивость</h2>
+      <p class="section-meta">11 счетов на 30.06 · сверены до цента (3 раунда правок 08.07)</p>
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead><tr><th>Счёт</th><th>Владелец</th><th class="num">30.06 EUR</th></tr></thead>
+        <tbody>
+          <tr><td>Наличные дома <span class="muted">(после няни €450)</span></td><td>семья</td><td class="num">440.00</td></tr>
+          <tr><td>BBVA *2395 <span class="muted">(банк = истина)</span></td><td>Андрей</td><td class="num">14.72</td></tr>
+          <tr><td>BBVA *4780 autónomo <span class="muted">(IRPF earmark)</span></td><td>Вика</td><td class="num">642.45</td></tr>
+          <tr><td>Santander *1644</td><td>Андрей</td><td class="num">3.18</td></tr>
+          <tr><td>Wise — Андрей <span class="muted">(+ ARS earmark, вне runway)</span></td><td>Андрей</td><td class="num">255.76</td></tr>
+          <tr><td>Зелёный счёт (Wise Вика)</td><td>Вика</td><td class="num">35.32</td></tr>
+          <tr><td>Bybit — Андрей (старый)</td><td>Андрей</td><td class="num">~19</td></tr>
+          <tr><td>Bybit — Вика <span class="muted">(2 507.60 USDT @0.860)</span></td><td>Вика</td><td class="num">~2 157</td></tr>
+          <tr><td>Ether — Андрей</td><td>Андрей</td><td class="num">20.65</td></tr>
+          <tr><td>Ether — Вика</td><td>Вика</td><td class="num">11.19</td></tr>
+          <tr class="total"><td>Чистые активы 30.06</td><td></td><td class="num">~3 599</td></tr>
+        </tbody>
+      </table>
+      <table class="plfact-table" style="margin-top: 1rem;">
+        <thead><tr><th>Коэффициент</th><th class="num">Значение</th><th>Норма</th><th>Статус</th></tr></thead>
+        <tbody>
+          <tr><td>Евро-ликвид свободный</td><td class="num">~€749</td><td>—</td><td class="warn">🟡 нал €440 + BBVA €15 + Santander €3 + Wise €256 + зелёный €35</td></tr>
+          <tr><td>Крипто-пул (Bybit Вика)</td><td class="num">~€2 157</td><td>—</td><td>основной живой резерв</td></tr>
+          <tr><td>Runway без дохода (€3 599 / €1 940)</td><td class="num warn">~1.85 мес</td><td>≥ 3 мес</td><td>🟡</td></tr>
+          <tr><td>Концентрация дохода (Fishok)</td><td class="num over">96%</td><td>&lt; 70%</td><td>🔴 бизнес-контур снижает</td></tr>
+          <tr><td>Доля фикс-расходов (без аренды)</td><td class="num ok">24%</td><td>&lt; 50%</td><td>✅</td></tr>
+        </tbody>
+      </table>
+      <div class="callout danger">
+        ⚠ <strong>Переход кредита РФ на евро 02.08.2026.</strong> После этого €1 700/мес начнут съедать евро-runway. IRPF €1 000 (20.07) при почти нулевом резерве — ближайшая угроза. Решение по покрытию кредита должно быть готово к 15.07.
+      </div>
+    </div>
+
+    <!-- SWOT -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">09</span> SWOT</h2>
+      <p class="section-meta">фокус внимания на июль</p>
+    </div>
+
+    <div class="swot-grid">
+      <div class="swot-card green">
+        <h4>🟢 Сильные стороны</h4>
+        <ul>
+          <li>Учёт полный: 11 счетов сверены до цента</li>
+          <li>Впервые есть план — факт лёг рядом (Зона 1 в плане)</li>
+          <li><strong>Бизнес-контур заработал +€448</strong> — первый доход сверх зарплаты</li>
+          <li>Кредит РФ, аренда, cuota оплачены вовремя</li>
+          <li>Фикс-расходы всего 24%</li>
+        </ul>
+      </div>
+      <div class="swot-card red">
+        <h4>🔴 Слабые стороны</h4>
+        <ul>
+          <li>Концентрация дохода 96% Fishok</li>
+          <li><strong>IRPF-резерв обнулён</strong> — €1 000 к 20.07 нечем платить</li>
+          <li>Runway ~1.85 мес без дохода</li>
+          <li>Кафе превышен (€304 vs €200), Amazon-туман €218</li>
+          <li>Comunidad €145 — статус неизвестен весь месяц</li>
+        </ul>
+      </div>
+      <div class="swot-card yellow">
+        <h4>🟡 Возможности</h4>
+        <ul>
+          <li>Масштабировать бизнес-контур (дизайн + консультации)</li>
+          <li>Сделка 001 фаза 2 — ещё +€150–260 прибыли</li>
+          <li>Партнёрство с Надей (релокация 30% прибыли)</li>
+          <li>Оптимизация кафе/Amazon — €130–200/мес</li>
+          <li>Второй клиент Founder Trajectory</li>
+        </ul>
+      </div>
+      <div class="swot-card gray">
+        <h4>⚠ Угрозы</h4>
+        <ul>
+          <li>Кредит РФ на евро 02.08 → runway ~0.9 мес</li>
+          <li>IRPF €1 000 со 20.07 — резерв на нуле</li>
+          <li>Порту €1 239 (жильё+авто) уже списано — минус из июльского ликвида</li>
+          <li>Иван-фулфилмент 24 800 ₽ (Ozon РФ) — просрочен</li>
+          <li>Зависимость от одного клиента (Fishok)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Платёжный календарь -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">10</span> Платёжный календарь — июль</h2>
+      <p class="section-meta">что переходит из июня · контрольные точки</p>
+    </div>
+
+    <div class="calendar">
+      <div class="cal-row done">
+        <div class="cal-date">01.07<small>выполнено</small></div>
+        <div class="cal-name">Аренда июля<small>с Bybit Вики → Wise → хозяин · кассового разрыва не было</small></div>
+        <div class="cal-sum">~€1 000</div>
+      </div>
+      <div class="cal-row done">
+        <div class="cal-date">06.07<small>приход</small></div>
+        <div class="cal-name">Аванс Влад К (Fishok, июль)<small>+3 995 USDT на Bybit Вики · найден при сверке 08.07</small></div>
+        <div class="cal-sum">+€3 500</div>
+      </div>
+      <div class="cal-row urgent">
+        <div class="cal-date">до 15.07<small>топ-приоритет</small></div>
+        <div class="cal-name">Пополнить IRPF-резерв autónomo<small>резерв €8.95, нужно €1 000 · с Bybit Вики</small></div>
+        <div class="cal-sum">~€991</div>
+      </div>
+      <div class="cal-row done">
+        <div class="cal-date">09–13.07<small>оплачено</small></div>
+        <div class="cal-name">Порту — поездка семьёй (вместо Парижа)<small>€1 000 жильё уже списано + €239 заморожено на авто</small></div>
+        <div class="cal-sum">~€1 239</div>
+      </div>
+      <div class="cal-row urgent">
+        <div class="cal-date">20.07<small>критично</small></div>
+        <div class="cal-name">IRPF — modelo 130 за июнь<small>первый налоговый платёж · резерв обязан быть в евро</small></div>
+        <div class="cal-sum">~€1 000</div>
+      </div>
+      <div class="cal-row upcoming">
+        <div class="cal-date">~25.07<small>JetLend</small></div>
+        <div class="cal-name">Ответ по кредитным каникулам<small>запрос отправлен 26.06 (170к→40к ₽)</small></div>
+        <div class="cal-sum">—</div>
+      </div>
+      <div class="cal-row urgent">
+        <div class="cal-date">02.08<small>перелом</small></div>
+        <div class="cal-name">Кредит РФ → переключение на евро<small>€1 700/мес начнут съедать евро-runway · решение к 15.07</small></div>
+        <div class="cal-sum">€1 700</div>
+      </div>
+    </div>
+
+    <!-- Над чем работаем в июле -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">11</span> Над чем работаем в июле</h2>
+      <p class="section-meta">переход к планированию июля</p>
+    </div>
+
+    <div class="callout danger" style="margin-bottom: 1rem;">
+      <strong>Два узла июля:</strong> (1) закрыть IRPF-резерв €1 000 до 15.07 — иначе 20.07 нечем платить; (2) подготовить решение по кредиту РФ (переход на евро 02.08). Порту (€1 000 жильё + €239 авто) уже оплачен и списан — не конкурирует за пул. Оба узла упираются в крипто-пул Bybit Вики.
+    </div>
+
+    <div class="card">
+      <table class="plfact-table">
+        <thead><tr><th>Задача</th><th>Срок</th><th>Метрика</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Пополнить IRPF-резерв autónomo</strong></td><td>до 15.07</td><td>€1 000 в евро на *4780</td></tr>
+          <tr><td>Решение по кредиту РФ (переход на евро)</td><td>до 15.07</td><td>план покрытия €1 700/мес</td></tr>
+          <tr><td>Масштабировать бизнес-контур</td><td>весь июль</td><td>≥ 2 новые сделки/консультации</td></tr>
+          <tr><td>Закрыть Amazon-туман €218 + Sumup €35</td><td>до 10.07</td><td>категории уточнены</td></tr>
+          <tr><td>Лимит на кафе</td><td>с 01.07</td><td>≤ €150/мес</td></tr>
+          <tr><td>Отправить долг Наде 57.5 USDT</td><td>до 10.07</td><td>отправлено</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Итоги -->
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 class="section-title"><span class="section-num">12</span> Итоги июня 2026</h2>
+      <p class="section-meta">главный вывод</p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-success); letter-spacing: 0.05em; text-transform: uppercase;">Что сработало</h4>
+      <ul style="padding-left: 1.1rem; margin: 0 0 1.2rem; font-size: 0.9rem; line-height: 1.7;">
+        <li>Первый месяц с планом — факт лёг рядом, Зона 1 в целом в бюджете</li>
+        <li><strong>Бизнес-контур заработал +€448</strong> — три сделки, налог €0 (floor визы)</li>
+        <li>Все 11 счетов сверены до цента (3 раунда честных правок вниз)</li>
+        <li>Зарплата Fishok осела резервом — из €3 500 разошлось только €1 409</li>
+        <li>Долг Сесилии закрыт, cuota оплачена, кредит РФ вовремя</li>
+      </ul>
+
+      <h4 style="margin: 0 0 0.7rem; font-size: 0.85rem; color: var(--color-danger); letter-spacing: 0.05em; text-transform: uppercase;">Что не сработало</h4>
+      <ul style="padding-left: 1.1rem; margin: 0 0 1.2rem; font-size: 0.9rem; line-height: 1.7;">
+        <li>IRPF-резерв не сформирован — €1 000 к 20.07 под угрозой</li>
+        <li>Кафе превышен на €104, Amazon-туман €218 не разобран</li>
+        <li>«Лучше плана» наполовину оптика — ~€1 428 обязательств просто ещё не наступили</li>
+        <li>Comunidad €145, Sumup €35 — статус весь месяц неизвестен</li>
+        <li>Второй стабильный клиент не появился (бизнес-контур пока разовый)</li>
+      </ul>
+
+      <div class="callout warn">
+        <strong>Главный вывод месяца:</strong> июнь формально лучше мая (результат с арендой −€938 против −€1 578), и <strong>впервые появился второй источник — бизнес-контур +€448</strong>, который сузил реальный разрыв до ~−€490/мес. Но структурный дефицit не закрыт, а IRPF-резерв обнулён. <strong>Июль — это гонка: закрыть €1 000 налога до 20.07 и не дать кредиту РФ (02.08) сжать runway.</strong><br><br>
+        <strong>Рычаг остаётся тот же:</strong> превратить разовый бизнес-контур в стабильный поток (второй клиент), а не оптимизация трат — она даёт максимум €130–200/мес.
+      </div>
+    </div>
+
+    <p style="font-size: 0.8rem; color: var(--color-text-soft); margin-top: 2rem; text-align: center;">
+      Отчёт сформирован 2026-07-09 (финал июня). Источник данных: <code>finance/state.md</code> (пересборка 08.07) + <code>finance/ledger.md</code> + <code>finance/wallets/*.md</code> (11 счетов) + <code>finance/business/deals.md</code> (3 сделки).<br>
+      Корректировки закрытия 09.07: коворкинг €160, нал €160 → Вика-ЗП, касса 30.06 €440 (после няни), чистые активы €3 599. Курс USDT→EUR: 0.860 (зарплатный). Методология: НФ (адаптация).
+    </p>
+
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <a href="/finance/">← главная финансов</a> · <a href="/finance/reports/2026-05/">закрытие мая 2026</a> · <a href="/decisions/">решения по деньгам</a> · <a href="/">дашборд</a>
+  </div>
+</footer>
+
+<script src="/assets/js/portal.js" defer></script>
+</body>
+</html>
