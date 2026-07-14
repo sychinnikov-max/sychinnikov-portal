@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>VPN SLAM — дорожная карта</title>
+<title>Slam VPN — дорожная карта</title>
 <link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260708">
 <style>
   :root{ --vs-accent:#1E9E8A; --vs-accent-2:#12756A; --vs-grad:linear-gradient(135deg,#12756A 0%,#1E9E8A 55%,#2BBBA5 100%); }
@@ -43,7 +43,7 @@
 
 <header class="vs-header">
   <div class="wrap">
-    <a href="#top" class="vs-brand"><span class="vs-logo">VS</span> VPN SLAM <small>мост</small></a>
+    <a href="#top" class="vs-brand"><span class="vs-logo">VS</span> Slam VPN <small>мост</small></a>
     <nav class="flex gap items-center">
       <a href="#board" class="pill"><span class="dot b"></span>Доска</a>
       <a href="#roadmap" class="pill"><span class="dot b"></span>Дорожная карта</a>
@@ -55,7 +55,7 @@
 <section id="top" class="section-tight" style="padding-top:2.2rem;">
   <div class="wrap">
     <span class="eyebrow teal">Личная венчура · мост, не судьба · приватно</span>
-    <h1 class="mt1">VPN SLAM</h1>
+    <h1 class="mt1">Slam VPN</h1>
     <p class="lead muted mt2" style="max-width:80ch;">Совместный VPN-сервис на рынок РФ с Димой Артемовым (Слэм, <code>@artemov_d</code>). Заходим по образцу разобранного аналога: двое, без платной рекламы, больше 1 млн ₽ выручки в месяц, маржа за 80%. Их дыры — нет автосписания, не считают конверсии, не умеют в рекламу и рефералку. Наш заход ровно туда. Роли по звонку 08.07: Дима — техника (сервера, бот, кабинет, оплата), Андрей — маркетинг, воронка, трафик, упаковка.</p>
     <div class="flex gap wrap-flex mt2">
       <span class="pill"><span class="own d">Дима</span>техника</span>
@@ -95,8 +95,8 @@
     <div class="sec-head">
       <div class="t">
         <span class="eyebrow teal">Задачи Андрея и Димы · дедлайны · описание</span>
-        <h2>Доска VPN SLAM</h2>
-        <p>Кто, что, к какому сроку. Источник — <code>vpn-slam/tasks.md</code>. Обновляется на закрытии дня. Цвет чипа: Андрей (синий), Дима (бирюза), Оба (фиолетовый).</p>
+        <h2>Доска Slam VPN</h2>
+        <p>Кто, что, к какому сроку. Источник — <code>slam-vpn/tasks.md</code>. Обновляется на закрытии дня. Цвет чипа: Андрей (синий), Дима (бирюза), Оба (фиолетовый).</p>
       </div>
     </div>
     <div class="vb-wrap"><div class="vb-cols" id="vpnBoard"></div></div>
@@ -112,7 +112,7 @@
       <div class="t">
         <span class="eyebrow teal">8 недель · 07.07-31.08 · окно волны 01.09</span>
         <h2>Дорожная карта до 1 сентября</h2>
-        <p>Три трека: техника (Дима), маркетинг и воронка (Андрей), сборка и волна (вместе). Красный — критический путь. Источник — <code>vpn-slam/roadmap.md</code>.</p>
+        <p>Три трека: техника (Дима), маркетинг и воронка (Андрей), сборка и волна (вместе). Красный — критический путь. Источник — <code>slam-vpn/roadmap.md</code>.</p>
       </div>
     </div>
     <div id="vpnGantt"></div>
@@ -151,16 +151,16 @@
 
 <footer class="fk-footer">
   <div class="wrap">
-    <a href="#top" class="vs-brand"><span class="vs-logo" style="width:22px;height:22px;font-size:.7rem;">VS</span> VPN SLAM</a>
-    <div>Источник: <code>vpn-slam/</code> · приватно · мост, фокус — Founder Finance</div>
+    <a href="#top" class="vs-brand"><span class="vs-logo" style="width:22px;height:22px;font-size:.7rem;">VS</span> Slam VPN</a>
+    <div>Источник: <code>slam-vpn/</code> · приватно · мост, фокус — Founder Finance</div>
     <div><a href="/">← Портал</a></div>
   </div>
 </footer>
 
 <script src="/assets/fishok/gantt.js"></script>
 <script>
-/* ═══ СИД ДОСКИ VPN SLAM ═══
-   Правится вместе с vpn-slam/tasks.md. Статичный рендер (без drag/sync):
+/* ═══ СИД ДОСКИ Slam VPN ═══
+   Правится вместе с slam-vpn/tasks.md. Статичный рендер (без drag/sync):
    доску ведет Claude на закрытии дня. */
 window.VPN_BOARD = {
   columns: [
