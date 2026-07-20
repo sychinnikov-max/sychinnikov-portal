@@ -62,6 +62,30 @@
   .prio{ font-family:var(--fk-mono); font-size:.66rem; font-weight:700; padding:.12rem .4rem; border-radius:5px; }
   .prio.P1{ background:var(--fk-red-bg); color:var(--fk-red); } .prio.P2{ background:var(--fk-amber-bg); color:var(--fk-amber); } .prio.P3{ background:var(--fk-bg-2); color:var(--fk-muted); }
   .vb-card.done .ct{ color:var(--fk-soft); } .vb-card.done{ opacity:.85; }
+
+  /* ── КАБИНА ДНЯ (обновляется на day-close из data.json) ── */
+  .ff-daily{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+  @media (max-width:820px){ .ff-daily{ grid-template-columns:1fr; } }
+  .dc{ background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:1rem 1.15rem; box-shadow:var(--fk-shadow); }
+  .dc.wide{ grid-column:1 / -1; }
+  .dc-h{ display:flex; align-items:center; gap:.5rem; font-weight:800; color:var(--fk-ink); font-size:.98rem; margin-bottom:.2rem; }
+  .dc-h .ic{ width:24px;height:24px;border-radius:7px;background:var(--ff-grad);display:grid;place-items:center;color:#fff;font-size:.8rem; }
+  .dc-sub{ font-size:.74rem; color:var(--fk-soft); margin-bottom:.7rem; }
+  .dc ul{ margin:.3rem 0 0; padding-left:1.1rem; }
+  .dc li{ font-size:.84rem; color:var(--fk-muted); line-height:1.5; margin-bottom:.3rem; }
+  .dc li b{ color:var(--fk-ink); }
+  .dc-block-t{ font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--ff-accent-2); margin:.8rem 0 .3rem; }
+  .goal-row{ display:flex; align-items:center; justify-content:space-between; gap:.8rem; margin:.35rem 0; }
+  .goal-row .lab{ font-size:.82rem; color:var(--fk-ink); }
+  .goal-row .val{ font-family:var(--fk-mono); font-size:.82rem; color:var(--ff-accent-2); font-weight:700; white-space:nowrap; }
+  .mini-track{ height:9px; border-radius:100px; background:var(--fk-bg-2); border:1px solid var(--fk-line); overflow:hidden; margin:.15rem 0 .5rem; }
+  .mini-fill{ height:100%; background:var(--ff-grad); }
+  .chip-list{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.4rem; }
+  .chan-chip{ display:inline-flex; align-items:center; gap:.35rem; font-size:.72rem; padding:.2rem .55rem; border-radius:100px; background:var(--fk-bg-2); color:var(--fk-muted); border:1px solid var(--fk-line); }
+  .chan-chip.pri{ background:#FBF3E2; color:var(--ff-accent-2); border-color:#ECDFC2; font-weight:700; }
+  .agent-line{ font-size:.82rem; color:var(--fk-muted); margin:.25rem 0; }
+  .agent-line b{ color:var(--fk-ink); font-family:var(--fk-mono); font-size:.78rem; }
+  .spark{ margin-top:.3rem; }
 </style>
 </head>
 <body>
@@ -70,6 +94,7 @@
   <div class="wrap">
     <a href="#top" class="ff-brand"><span class="ff-logo">FF</span> Founder Finance <small>кабина</small></a>
     <nav class="flex gap items-center">
+      <a href="#daily" class="pill"><span class="dot r"></span>Кабина дня</a>
       <a href="#planfact" class="pill"><span class="dot b"></span>План-факт</a>
       <a href="#board" class="pill"><span class="dot b"></span>Доска</a>
       <a href="#gantt" class="pill"><span class="dot b"></span>Гант</a>
@@ -91,6 +116,20 @@
     </div>
   </div>
 </section>
+
+<!-- КАБИНА ДНЯ (обновляется на day-close из data.json) -->
+<section id="daily" class="section-tight" style="scroll-margin-top:70px;padding-top:.6rem;padding-bottom:.4rem;">
+  <div class="wrap">
+    <div class="sec-head"><div class="t">
+      <span class="eyebrow gold">Обновляется каждый день на закрытии · <span id="ff-updated">—</span></span>
+      <h2>Кабина дня</h2>
+      <p>Десятки, воронка к главным целям, контент и соцсети. Источник — <code>founder-finance/data.json</code>, обновляется на <code>/day-close</code>.</p>
+    </div></div>
+    <div id="ff-daily" class="ff-daily"><div class="dc wide"><div class="dc-sub">Загрузка данных…</div></div></div>
+  </div>
+</section>
+
+<hr class="rule">
 
 <!-- ОСНОВНОЙ ФОКУС -->
 <section class="section-tight" style="padding-top:.4rem;padding-bottom:.6rem;">
@@ -371,6 +410,72 @@ FishokGantt.mount(document.getElementById('ffGantt'), {
     ]}
   ]
 });
+</script>
+
+<!-- КАБИНА ДНЯ — рендер из data.json -->
+<script>
+(function(){
+  var esc = function(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); };
+  var li = function(arr){ return '<ul>'+(arr||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>'; };
+  function bar(done,goal){ var p = goal? Math.min(100,Math.round(done/goal*100)) : 0; return '<div class="mini-track"><div class="mini-fill" style="width:'+p+'%"></div></div>'; }
+  function spark(hist,goal){
+    if(!hist||hist.length<1) return '';
+    var w=260,h=48,pad=4, max=Math.max(goal||1, Math.max.apply(null,hist.map(function(d){return d.total;})),1);
+    var n=hist.length, dx=n>1?(w-2*pad)/(n-1):0;
+    var pts=hist.map(function(d,i){ var x=pad+dx*i, y=h-pad-(h-2*pad)*(d.total/max); return x.toFixed(1)+','+y.toFixed(1); });
+    var line = n>1? '<polyline fill="none" stroke="#A9853F" stroke-width="2" points="'+pts.join(' ')+'"/>' : '';
+    var dot = '<circle cx="'+(pad+dx*(n-1))+'" cy="'+(h-pad-(h-2*pad)*(hist[n-1].total/max))+'" r="3" fill="#8A6A2E"/>';
+    return '<svg class="spark" width="100%" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" style="height:48px">'+line+dot+'</svg>';
+  }
+
+  fetch('./data.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){
+    var upd=document.getElementById('ff-updated'); if(upd) upd.textContent='обновлено '+esc(d.updated||'');
+    var ns=d.north_star||{}, dz=d.desyatki||{}, dec=d.declaration||{}, wp=d.weekly_plan||{}, ct=d.content||{}, so=d.social||{};
+
+    // 1. Десятки
+    var c1='<div class="dc"><div class="dc-h"><span class="ic">🔟</span>Десятки Аномалии</div>'
+      +'<div class="dc-sub">'+esc(dz.summary||'')+'</div>'
+      +'<div class="dc-block-t">Выводы</div>'+li(dz.conclusions)
+      +'<div class="dc-block-t">Рекомендации</div>'+li(dz.recommendations)+'</div>';
+
+    // 2. Воронка к главным целям + декларация
+    var cd=ns.custdev_done||0, cg=ns.custdev_goal_0109||20, cg2=ns.custdev_goal_2109||30;
+    var c2='<div class="dc"><div class="dc-h"><span class="ic">🎯</span>Воронка к главным целям</div>'
+      +'<div class="dc-sub">Декларация в десятку · дедлайн '+esc(dec.deadline||'')+'</div>'
+      +'<div class="goal-row"><span class="lab">Кастдев-разборы</span><span class="val">'+cd+' / '+cg+' (к 01.09) · '+cg2+' (к 21.09)</span></div>'+bar(cd,cg)
+      +'<div class="goal-row"><span class="lab">Платящих клиентов</span><span class="val">'+(ns.clients_done||0)+' / '+(ns.clients_goal||3)+'</span></div>'+bar(ns.clients_done||0,ns.clients_goal||3)
+      +'<div class="goal-row"><span class="lab">Выступления</span><span class="val">'+(ns.talks_done||0)+' / '+(ns.talks_goal||2)+'</span></div>'+bar(ns.talks_done||0,ns.talks_goal||2)
+      +'<div class="dc-block-t">Декларация (обязательства к '+esc(dec.deadline||'')+')</div>'+li(dec.obligations)
+      +'<div class="dc-block-t">План на неделю · '+esc(wp.week||'')+'</div>'+li(wp.items)
+      +'<div class="dc-block-t">Ключевые действия — найти первых клиентов</div>'+li(d.key_actions)
+      +'<div class="dc-sub" style="margin-top:.7rem">Цена слова: '+esc(dec.penalty||'')+' · Награда: '+esc(dec.reward||'')+'</div></div>';
+
+    // 3. Контент (агенты + бэклог + задачи)
+    var bl=ct.backlog||{};
+    var agents=(ct.agents||[]).map(function(a){return '<div class="agent-line"><b>'+esc(a.name)+'</b> — '+esc(a.role)+' · '+esc(a.status)+'</div>';}).join('');
+    var c3='<div class="dc"><div class="dc-h"><span class="ic">📝</span>Контент · мини-команда</div>'
+      +'<div class="dc-sub">Цель: '+esc(ct.cadence_goal||'')+'</div>'
+      +agents
+      +'<div class="dc-block-t">Бэклог радара</div>'
+      +'<div class="chip-list"><span class="chan-chip">Темы: '+(bl.themes||0)+'</span><span class="chan-chip">Посты: '+(bl.posts||0)+'</span><span class="chan-chip">Кейсы: '+(bl.cases||0)+'</span><span class="chan-chip">Сценарии: '+(bl.scripts||0)+'</span></div>'
+      +'<div class="dc-sub" style="margin-top:.5rem">'+esc(ct.radar_note||'')+'</div>'
+      +'<div class="dc-block-t">Задачи контента</div>'+li(ct.tasks)+'</div>';
+
+    // 4. Соцсети (дашборд + спарклайн)
+    var g1=so.goal_subs_2109||1000, g2=so.goal_subs_eoy||5000;
+    var cur=(so.history&&so.history.length)? so.history[so.history.length-1].total : 0;
+    var chans=(so.channels||[]).map(function(c){return '<span class="chan-chip'+(c.priority?' pri':'')+'">'+esc(c.name)+': '+esc(c.subs)+' · '+esc(c.status)+'</span>';}).join('');
+    var c4='<div class="dc wide"><div class="dc-h"><span class="ic">📈</span>Соцсети · дашборд роста</div>'
+      +'<div class="dc-sub">Приоритет: '+esc(so.priority||'')+' · '+esc(so.cadence_goal||'')+' · стрик '+(so.streak_days||0)+' дн · опубликовано '+(so.posts_published||0)+'</div>'
+      +'<div class="goal-row"><span class="lab">Подписчики (суммарно)</span><span class="val">'+cur+' / '+g1+' (к 21.09) · '+g2+' (к концу 2026)</span></div>'+bar(cur,g1)
+      +spark(so.history,g1)
+      +'<div class="dc-block-t">Каналы</div><div class="chip-list">'+chans+'</div></div>';
+
+    document.getElementById('ff-daily').innerHTML = c1+c2+c3+c4;
+  }).catch(function(e){
+    document.getElementById('ff-daily').innerHTML='<div class="dc wide"><div class="dc-sub">Не удалось загрузить data.json ('+esc(e.message)+'). Проверь, что файл задеплоен.</div></div>';
+  });
+})();
 </script>
 </body>
 </html>
