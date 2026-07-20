@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAFAF7" />
+<title>Ментор · Sychinnikov Portal</title>
+<meta name="description" content="Ежедневная честная оценка дня от ментора. Как прошёл день, где дрейф, на чём фокус завтра." />
+<link rel="stylesheet" href="/assets/css/portal.css" />
+<style>
+.m-wrap { max-width: var(--content-default); }
+.m-latest {
+  background: var(--color-card); border: 1px solid var(--color-border-soft);
+  border-left: 3px solid var(--color-accent); border-radius: 12px;
+  padding: clamp(1.3rem, 3vw, 2rem); box-shadow: var(--shadow-card); margin-bottom: 2.5rem;
+}
+.m-latest-eyebrow {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--color-text-soft); margin-bottom: 0.9rem;
+}
+.m-headline {
+  font-family: var(--font-serif); font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-variation-settings: "opsz" 28, "wght" 470; line-height: 1.3;
+  color: var(--color-text); margin-bottom: 1.1rem;
+}
+.m-markers { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 1.4rem; }
+.m-marker {
+  display: flex; flex-direction: column; gap: 0.35rem; padding: 0.5rem 0.75rem;
+  background: var(--color-bg-alt); border-radius: 8px; min-width: 6.5rem;
+}
+.m-marker-label { font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text-soft); font-weight: 600; }
+.m-dots { display: flex; gap: 3px; }
+.m-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--color-border); }
+.m-good .m-dot.on { background: var(--color-success); }
+.m-mid .m-dot.on { background: var(--color-warning); }
+.m-low .m-dot.on { background: var(--color-danger); }
+.m-body p { font-size: 0.94rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.9rem; }
+.m-body strong { color: var(--color-text); font-weight: 600; }
+.m-h {
+  font-family: var(--font-sans); font-size: 0.74rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--color-accent); font-weight: 700;
+  margin: 1.5rem 0 0.6rem;
+}
+.m-ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+.m-ul li { font-size: 0.92rem; line-height: 1.6; color: var(--color-text-muted); margin-bottom: 0.35rem; }
+.m-hist { border: 1px solid var(--color-border-soft); border-radius: 9px; margin-bottom: 0.7rem; background: var(--color-card); }
+.m-hist[open] { box-shadow: var(--shadow-card); }
+.m-hist-sum { display: grid; grid-template-columns: 6.5rem 1fr auto; gap: 0.9rem; align-items: center; padding: 0.85rem 1.1rem; cursor: pointer; list-style: none; }
+.m-hist-sum::-webkit-details-marker { display: none; }
+.m-hist-date { font-family: var(--font-mono); font-size: 0.76rem; color: var(--color-text-soft); }
+.m-hist-head { font-size: 0.86rem; color: var(--color-text); line-height: 1.35; }
+.m-hist-chips { display: flex; gap: 0.35rem; }
+.m-hist-chips .m-marker { min-width: 0; padding: 0.25rem 0.4rem; background: transparent; }
+.m-hist-chips .m-marker-label { display: none; }
+.m-hist .m-body { padding: 0 1.1rem 1.1rem; }
+.m-empty { color: var(--color-text-soft); font-size: 0.85rem; font-style: italic; }
+.m-note { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.55; background: var(--color-accent-soft); border-radius: 8px; padding: 0.9rem 1.1rem; margin-top: 2.5rem; }
+@media (max-width: 640px) { .m-hist-sum { grid-template-columns: 1fr; gap: 0.35rem; } .m-hist-chips { justify-content: flex-start; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="brand"><span class="brand-dot"></span>Sychinnikov Portal<span class="brand-sub">private</span></a>
+    <nav class="nav">
+      <a href="/" data-nav>Кокпит</a>
+      <a href="/mentor/" data-nav>🧭 Ментор</a>
+      <a href="/founder-finance/" data-nav>💶 Founder Finance</a>
+      <a href="/fishok/" data-nav>🐟 Fishok</a>
+      <a href="/system/" data-nav>Система</a>
+      <a href="/finance/" data-nav>Финансы</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <p class="page-eyebrow">Ментор · ежедневная оценка</p>
+    <h1 class="page-title">Как ментор оценивает мой день.</h1>
+    <p class="page-sub">Честная обратная связь вечером: как прошёл день, где дрейф, на чём фокус завтра. Обновляется автоматически после закрытия дня.</p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container m-wrap">
+    <div class="m-latest">
+      <div class="m-latest-eyebrow">Вердикт дня · 20 июл 2026 · понедельник · W30</div>
+      
+    <div class="m-headline">Сильный день по системе, пустой по деньгам. Построил два станка, но станок на ноль встреч даёт ноль.</div>
+    <div class="m-markers"><div class="m-marker m-good"><span class="m-marker-label">энергия</span><span class="m-dots"><span class="m-dot on"></span><span class="m-dot on"></span><span class="m-dot on"></span><span class="m-dot on"></span><span class="m-dot "></span></span></div><div class="m-marker m-low"><span class="m-marker-label">приоритет</span><span class="m-dots"><span class="m-dot on"></span><span class="m-dot on"></span><span class="m-dot "></span><span class="m-dot "></span><span class="m-dot "></span></span></div><div class="m-marker m-low"><span class="m-marker-label">деньги/клиенты</span><span class="m-dots"><span class="m-dot on"></span><span class="m-dot "></span><span class="m-dot "></span><span class="m-dot "></span><span class="m-dot "></span></span></div></div>
+    <div class="m-body"><h3 class="m-h">Оценка дня</h3>
+<p>Продуктивный день, но не тот, что был нужен. Ты за один день построил два рабочих контура, каждый — актив: контент-радар Founder Finance под ключ (сбор → курация → сценарии рилсов) и CRM-контур Fishok (revival-pipeline, таблица клиентов Даниэлю, ежедневный дайджест по дуал-менеджерам). Плюс проработал пять десяток и закрыл Юлю. По ремеслу — отличная работа.</p>
+<p>Но давай честно про цифру, которая одна имеет значение в июле. Встреч с потенциальными клиентами: <strong>0</strong>. Вторую неделю подряд табло FF стоит на нуле. Ты весь день строил множители, а множитель на ноль клиентских разговоров даёт ноль денег. Радар и дайджест — это усилители будущего дохода, они не заменяют сам доход.</p>
+<p>Энергия высокая, руки золотые, и именно поэтому день ушёл в стройку, а не в продажу. Это твой знакомый паттерн — комфорт оператора. Строить систему приятно и понятно, звать человека на разговор про его деньги — тревожно и неопределённо. Ты сегодня выбрал приятное.</p>
+<h3 class="m-h">Что сработало</h3>
+<ul class="m-ul"><li>Радар FF — первый настоящий шаг к inbound, к цели года «приходят сами». Два новых агента (курация + сценарии) закрывают производство контента.</li><li>CRM-дайджест по Даниэлю и Владу — ты начал управлять командой по данным, а не по ощущениям. Это правильный рычаг РОПа.</li><li>IRPF списался, Юля закрыта. Мелкие обязательства не повисли.</li></ul>
+<h3 class="m-h">Дрейф / слепая зона</h3>
+<p><strong>Кирилл.</strong> Он сам открыл дверь пять дней назад — «покажу тебе таблицы и финансы». Ты не написал ему ни 17-го, ни 18-го, ни сегодня. Это не занятость, это избегание. Тёплое окно, где человек сам зовёт тебя в свои цифры, — самый лёгкий вход в кастдев, который у тебя есть. И он остывает.</p>
+<p>Спроси себя честно вечером: что было проще — весь день строить радар или написать Кириллу одно сообщение? Ты знаешь ответ. И знаешь, что это значит.</p>
+<h3 class="m-h">Фокус на завтра</h3>
+<p>Завтра — день продаж, ты сам это решил. Держи одну метрику перед глазами: <strong>сколько людей я записал на кастдев сегодня.</strong> Не «доделал радар», не «поправил дайджест» — записал на разговор.</p>
+<ul class="m-ul"><li>Первым действием, до всего остального, — написать Кириллу и назначить разбор. Пока не отправил это сообщение, день не начался.</li><li>Цель недели: 3-4 кастдева. Значит завтра — максимум приглашений: Кирилл, десятки (рамка снята с 21.07), Крутилин, Демидов.</li><li>Slam — узкий слот (реклама на модерацию), не давай ему съесть день снова.</li></ul>
+<p>Станки подождут. Завтра ты продаёшь.</p></div>
+    
+    </div>
+
+    <div class="section-head">
+      <h2 class="section-title"><span class="section-num">↺</span> История оценок</h2>
+      <p class="section-meta">прошлые дни · нажми чтобы развернуть</p>
+    </div>
+    <p class="m-empty">Пока только сегодняшняя запись.</p>
+
+    <div class="m-note">
+      Это письменный след, не диалог в моменте. Если тема зацепила — на следующий день можно разогнать её глубже в вечерней сессии с ментором (агент <code>co-pilot</code>). Голос ментора = тот же второй пилот, что ведёт утро и вечер.
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <a href="/">← кокпит</a> · <a href="/system/">система</a> · источник: <code>mentor/daily/</code>
+  </div>
+</footer>
+
+<script src="/assets/js/portal.js" defer></script>
+</body>
+</html>

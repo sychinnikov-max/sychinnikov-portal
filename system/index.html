@@ -5,84 +5,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#FAFAF7" />
 <title>Система AndreiOS · Sychinnikov Portal</title>
-<meta name="description" content="Архитектура AndreiOS: 4 субагента, slash-команды, правила контекста, ритмы работы, kill-switch." />
+<meta name="description" content="Как устроена моя система: потоки захвата, Claude со скиллами и агентами, state-файлы, портал. Что работает, что нет." />
 <link rel="stylesheet" href="/assets/css/portal.css" />
 <style>
-.agents-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
-.agent {
-  background: var(--color-card);
-  border: 1px solid var(--color-border-soft);
-  border-radius: 10px;
-  padding: 1.2rem 1.35rem;
-  position: relative;
-}
-.agent::before {
-  content: "";
-  position: absolute; left: 0; top: 1.2rem; bottom: 1.2rem;
-  width: 3px; background: var(--color-accent); border-radius: 0 3px 3px 0;
-}
-.agent-name {
-  font-family: var(--font-mono); font-size: 0.78rem;
-  color: var(--color-accent); font-weight: 600;
-  letter-spacing: 0.04em; margin-bottom: 0.55rem;
-}
-.agent-title {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-variation-settings: "opsz" 20, "wght" 500;
-  margin-bottom: 0.6rem;
-}
-.agent-row {
-  display: grid; grid-template-columns: 7.5rem 1fr;
-  gap: 0.4rem 0.85rem; font-size: 0.83rem;
-  padding: 0.35rem 0; line-height: 1.45;
-}
-.agent-row dt {
-  font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--color-text-soft); font-weight: 600; padding-top: 0.15rem;
-}
-.agent-row dd { margin: 0; color: var(--color-text-muted); }
-.agent-row.bad dt { color: var(--color-danger); }
+.sys-note { font-size: 0.82rem; color: var(--color-text-soft); margin-top: -0.4rem; margin-bottom: 1.6rem; }
 
-.ritm { display: grid; grid-template-columns: 8rem 1fr 8rem; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border-soft); gap: 1rem; font-size: 0.88rem; }
+/* Карта слоёв */
+.layers { display: grid; gap: 0.7rem; }
+.layer { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; align-items: center; padding: 0.9rem 1.1rem; background: var(--color-card); border: 1px solid var(--color-border-soft); border-radius: 10px; box-shadow: var(--shadow-card); }
+.layer-name { font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent); font-weight: 700; }
+.layer-body { font-size: 0.86rem; color: var(--color-text-muted); line-height: 1.5; }
+.layer-body strong { color: var(--color-text); font-weight: 600; }
+.layer-arrow { text-align: center; color: var(--color-text-soft); font-size: 1.1rem; padding: 0.1rem; }
+
+/* Петля дня */
+.loop { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: stretch; }
+.loop-step { flex: 1 1 8rem; min-width: 8rem; background: var(--color-bg-alt); border: 1px solid var(--color-border-soft); border-radius: 9px; padding: 0.8rem 0.9rem; }
+.loop-when { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-soft); font-weight: 600; margin-bottom: 0.3rem; }
+.loop-what { font-size: 0.82rem; color: var(--color-text); line-height: 1.4; }
+.loop-cmd { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-accent); margin-top: 0.35rem; }
+
+/* Агенты */
+.agents-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+.agent { background: var(--color-card); border: 1px solid var(--color-border-soft); border-radius: 10px; padding: 1rem 1.15rem; position: relative; }
+.agent::before { content: ""; position: absolute; left: 0; top: 1rem; bottom: 1rem; width: 3px; border-radius: 0 3px 3px 0; background: var(--color-accent); }
+.agent.frozen::before { background: var(--color-text-soft); }
+.agent.hot::before { background: var(--color-success); }
+.agent-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.4rem; }
+.agent-name { font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-accent); font-weight: 600; }
+.agent-badge { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; padding: 0.12rem 0.45rem; border-radius: 4px; white-space: nowrap; }
+.badge-hot { background: var(--color-success-soft); color: var(--color-success); }
+.badge-frozen { background: var(--color-bg-alt); color: var(--color-text-soft); }
+.badge-occ { background: var(--color-warning-soft); color: var(--color-warning); }
+.agent-desc { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.5; }
+
+.group-label { font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-soft); font-weight: 700; margin: 1.6rem 0 0.7rem; }
+
+.ritm { display: grid; grid-template-columns: 8rem 1fr 8rem; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid var(--color-border-soft); gap: 1rem; font-size: 0.86rem; }
 .ritm:last-child { border-bottom: 0; }
-.ritm-when { font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-text-soft); }
+.ritm-when { font-family: var(--font-mono); font-size: 0.76rem; color: var(--color-text-soft); }
 .ritm-what { color: var(--color-text); }
-.ritm-cmd {
-  font-family: var(--font-mono); font-size: 0.78rem;
-  background: var(--color-accent-soft); color: var(--color-accent);
-  padding: 0.2rem 0.55rem; border-radius: 4px; text-align: center;
-  justify-self: end;
-}
+.ritm-cmd { font-family: var(--font-mono); font-size: 0.76rem; background: var(--color-accent-soft); color: var(--color-accent); padding: 0.2rem 0.55rem; border-radius: 4px; text-align: center; justify-self: end; }
+
+/* Таблица использования */
+.utable { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.utable th { text-align: left; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-soft); font-weight: 700; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--color-border); }
+.utable td { padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--color-border-soft); vertical-align: top; line-height: 1.45; color: var(--color-text-muted); }
+.utable td:first-child { color: var(--color-text); font-weight: 500; white-space: nowrap; }
+.u-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.4rem; }
+.u-hi { background: var(--color-success); }
+.u-mid { background: var(--color-warning); }
+.u-lo { background: var(--color-danger); }
 
 .rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-.rule {
-  padding: 1rem 1.15rem; background: var(--color-bg-alt);
-  border: 1px solid var(--color-border-soft); border-radius: 8px;
-}
-.rule-head {
-  font-family: var(--font-serif); font-size: 1rem;
-  font-variation-settings: "opsz" 18, "wght" 500;
-  margin-bottom: 0.4rem;
-}
+.rule { padding: 1rem 1.15rem; background: var(--color-bg-alt); border: 1px solid var(--color-border-soft); border-radius: 8px; }
+.rule-head { font-family: var(--font-serif); font-size: 1rem; font-variation-settings: "opsz" 18, "wght" 500; margin-bottom: 0.4rem; }
 .rule-body { font-size: 0.83rem; color: var(--color-text-muted); line-height: 1.5; }
 
-.kill-switch {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1rem 1.25rem;
-  background: var(--color-danger-soft);
-  border: 1px solid #E5C8C8;
-  border-left: 3px solid var(--color-danger);
-  border-radius: 8px;
-  font-size: 0.88rem; color: var(--color-text);
-}
+.verdict-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.vcol { border-radius: 10px; padding: 1.1rem 1.25rem; }
+.vcol.works { background: var(--color-success-soft); border: 1px solid #CBE0D3; }
+.vcol.broken { background: var(--color-danger-soft); border: 1px solid #E5C8C8; }
+.vcol h3 { font-family: var(--font-serif); font-size: 1.02rem; font-variation-settings: "opsz" 18, "wght" 520; margin-bottom: 0.6rem; }
+.vcol ul { margin: 0; padding-left: 1.15rem; }
+.vcol li { font-size: 0.85rem; line-height: 1.55; margin-bottom: 0.45rem; color: var(--color-text); }
+
+.kill-switch { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--color-danger-soft); border: 1px solid #E5C8C8; border-left: 3px solid var(--color-danger); border-radius: 8px; font-size: 0.88rem; color: var(--color-text); }
 .kill-switch-icon { font-size: 1.5rem; }
 
-@media (max-width: 1024px) {
-  .agents-grid, .rules { grid-template-columns: 1fr; }
-  .ritm { grid-template-columns: 6rem 1fr; }
-  .ritm-cmd { grid-column: 2; justify-self: start; margin-top: 0.25rem; }
-}
+@media (max-width: 1024px) { .agents-grid, .rules, .verdict-cols { grid-template-columns: 1fr; } .ritm { grid-template-columns: 6rem 1fr; } .ritm-cmd { grid-column: 2; justify-self: start; margin-top: 0.25rem; } .layer { grid-template-columns: 1fr; gap: 0.4rem; } }
 </style>
 </head>
 <body>
@@ -91,14 +82,12 @@
   <div class="container site-header-inner">
     <a href="/" class="brand"><span class="brand-dot"></span>Sychinnikov Portal<span class="brand-sub">private</span></a>
     <nav class="nav">
-      <a href="/" data-nav>Дашборд</a>
-      <a href="/founder-trajectory/" data-nav>Продукт</a>
-      <a href="/clients/" data-nav>Клиенты</a>
-      <a href="/contacts/" data-nav>Контакты</a>
-      <a href="/finance/" data-nav>Финансы</a>
+      <a href="/" data-nav>Кокпит</a>
+      <a href="/mentor/" data-nav>🧭 Ментор</a>
+      <a href="/founder-finance/" data-nav>💶 Founder Finance</a>
+      <a href="/fishok/" data-nav>🐟 Fishok</a>
       <a href="/system/" data-nav>Система</a>
-      <a href="/decisions/" data-nav>Решения</a>
-      <a href="/wisdom/" data-nav>Wisdom</a>
+      <a href="/finance/" data-nav>Финансы</a>
     </nav>
   </div>
 </header>
@@ -106,193 +95,183 @@
 <section class="page-hero">
   <div class="page-hero-grid"></div>
   <div class="container page-hero-inner">
-    <p class="page-eyebrow">05 · Система · AndreiOS</p>
-    <h1 class="page-title">Операционная система моей жизни и практики.</h1>
+    <p class="page-eyebrow">Система · AndreiOS · обновлено 20.07.2026</p>
+    <h1 class="page-title">Как устроена моя система.</h1>
     <p class="page-sub">
-      4 субагента, slash-команды, правила контекста, ритм работы день-неделя-месяц, kill-switch. Это не блог про продуктивность — это рабочая инфраструктура.
+      Не блог про продуктивность — рабочая инфраструктура. Потоки захвата собирают всё, что происходит за день. Claude со скиллами и агентами это разбирает. State-файлы держат истину. Портал показывает картину. Ниже — из чего это собрано, что используется часто, а что стоит без дела.
     </p>
   </div>
 </section>
 
 <section class="section reveal">
-  <div class="container">
+  <div class="container" style="max-width: var(--content-wide);">
 
+    <!-- 01 КАРТА -->
     <div class="section-head">
-      <h2 class="section-title"><span class="section-num">01</span> AI-команда — 4 субагента</h2>
-      <p class="section-meta">пересобрана 2026-05-18 · trajectory-architect добавлен 2026-05-21 · последняя сверка 2026-05-25</p>
+      <h2 class="section-title"><span class="section-num">01</span> Карта за 30 секунд</h2>
+      <p class="section-meta">четыре слоя, один поток</p>
     </div>
-
-    <div class="agents-grid">
-      <article class="agent">
-        <div class="agent-name">mentor</div>
-        <h3 class="agent-title">Главный наставник по жизненной траектории</h3>
-        <dl>
-          <div class="agent-row"><dt>Зачем</dt><dd>Стратегический советчик по долгосрочным целям $10М+ к 40. Задаёт вопросы и подсвечивает противоречия.</dd></div>
-          <div class="agent-row"><dt>Когда</dt><dd>Цели 90 дней, главные развилки, семья и эмиграция в стратегическом разрезе.</dd></div>
-          <div class="agent-row bad"><dt>Не для</dt><dd>Операционка, продажи, финрасчёты — есть специализированные.</dd></div>
-        </dl>
-      </article>
-
-      <article class="agent">
-        <div class="agent-name">trajectory-architect</div>
-        <h3 class="agent-title">Жёсткий наставник по упаковке Founder Trajectory</h3>
-        <dl>
-          <div class="agent-row"><dt>Зачем</dt><dd>Гибридный путь 6 недель — методология → продуктизация → позиционирование. Школа Бейкера + Эннса + Вайс.</dd></div>
-          <div class="agent-row"><dt>Когда</dt><dd>Упаковка продукта, методология, цены, отстройка, фильтр клиента, мета-блок «импостер в комфорте оператора».</dd></div>
-          <div class="agent-row bad"><dt>Не для</dt><dd>Жизненная стратегия (это mentor), продажа, контент.</dd></div>
-        </dl>
-      </article>
-
-      <article class="agent">
-        <div class="agent-name">finance-director</div>
-        <h3 class="agent-title">Семейный и проектный финдиректор</h3>
-        <dl>
-          <div class="agent-row"><dt>Зачем</dt><dd>Cashflow, runway, долги, инвестиции, equity-портфель.</dd></div>
-          <div class="agent-row"><dt>Когда</dt><dd>Работа с деньгами — личными или клиентскими. Расчёты, бюджетирование, проверки.</dd></div>
-          <div class="agent-row bad"><dt>Не для</dt><dd>Жизненная стратегия. Финансовые цели уровня «зачем» — это mentor.</dd></div>
-        </dl>
-      </article>
-
-      <article class="agent">
-        <div class="agent-name">octo-advisor</div>
-        <h3 class="agent-title">Внутренний советник проекта Octo</h3>
-        <dl>
-          <div class="agent-row"><dt>Зачем</dt><dd>Изолирован от остальной AndreiOS. Паттерн advisor — при долгосрочном клиенте создаётся свой <code>&lt;name&gt;-advisor</code>.</dd></div>
-          <div class="agent-row"><dt>Когда</dt><dd>Стратегические разборы Octo, аудит проекта, помощь со скоупом.</dd></div>
-          <div class="agent-row bad"><dt>Не для</dt><dd>Другие клиенты — у них свои advisor или общий контекст.</dd></div>
-        </dl>
-      </article>
+    <div class="layers">
+      <div class="layer"><span class="layer-name">1 · Захват</span><span class="layer-body"><strong>Потоки входят сами.</strong> Лиды из Telegram Business, сигналы из каналов (watcher), созвоны (Granola), голос (VoiceInk), быстрые мысли (/intake), сессии с ботом.</span></div>
+      <div class="layer-arrow">↓</div>
+      <div class="layer"><span class="layer-name">2 · Разбор</span><span class="layer-body"><strong>Claude как мозг.</strong> 20 скиллов (ритм дня) + 16 агентов (роли). Утром собирает лист дня, вечером закрывает день и разносит по проектам.</span></div>
+      <div class="layer-arrow">↓</div>
+      <div class="layer"><span class="layer-name">3 · Истина</span><span class="layer-body"><strong>State-файлы в Claude-Context.</strong> Один источник правды по каждому проекту, финансам, контактам, решениям. Меняются ежедневно, не раздуваются.</span></div>
+      <div class="layer-arrow">↓</div>
+      <div class="layer"><span class="layer-name">4 · Витрина</span><span class="layer-body"><strong>Этот портал.</strong> Кокпит фокуса, кабины проектов, деньги за 30 сек, доска задач Fishok, оценка ментора. Деплой Cloudflare при push.</span></div>
     </div>
+    <p class="sys-note" style="margin-top: 1rem;">Правило: портал — зеркало, не источник. Правки идут в state-файлы Claude-Context, портал пересобирается из них.</p>
 
-    <div class="card">
-      <div class="card-label">Правило вызова</div>
-      <p style="font-size: 0.9rem; line-height: 1.55; color: var(--color-text);">
-        <strong>Mentor задаёт рамку.</strong> Trajectory-architect исполняет внутри (упаковка продукта). Finance-director — деньги отдельным контуром. Octo-advisor — изолирован к одному проекту. Не путать функции.
-      </p>
-    </div>
-
+    <!-- 02 ПЕТЛЯ ДНЯ -->
     <div class="section-head" style="margin-top: 3rem;">
-      <h2 class="section-title"><span class="section-num">02</span> Ритм работы — день, неделя, месяц</h2>
+      <h2 class="section-title"><span class="section-num">02</span> Ежедневная петля</h2>
+      <p class="section-meta">утро → работа → вечер → ментор → авто-деплой</p>
+    </div>
+    <div class="loop">
+      <div class="loop-step"><div class="loop-when">07:00 утро</div><div class="loop-what">Pull всех источников → лист дня с одним действием</div><div class="loop-cmd">/day-open</div></div>
+      <div class="loop-step"><div class="loop-when">в течение дня</div><div class="loop-what">Захват сырья, звонки, финансы, задачи</div><div class="loop-cmd">/intake /call /finance</div></div>
+      <div class="loop-step"><div class="loop-when">вечер</div><div class="loop-what">Свод дня, разнос по проектам, обновление state</div><div class="loop-cmd">/day-close</div></div>
+      <div class="loop-step"><div class="loop-when">вечер</div><div class="loop-what">Ментор пишет честную оценку дня</div><div class="loop-cmd">mentor/daily/</div></div>
+      <div class="loop-step"><div class="loop-when">21:30 ночь</div><div class="loop-what">Авто-рендер портала + push → Cloudflare</div><div class="loop-cmd">portal-deploy</div></div>
+    </div>
+
+    <!-- 03 АГЕНТЫ -->
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">03</span> Агенты — 16 ролей</h2>
+      <p class="section-meta"><span class="agent-badge badge-hot">активный</span> в работе · <span class="agent-badge badge-occ">по случаю</span> по запросу · <span class="agent-badge badge-frozen">заморожен</span> не используется сейчас</p>
+    </div>
+
+    <div class="group-label">Ежедневный контур</div>
+    <div class="agents-grid">
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">co-pilot</span><span class="agent-badge badge-hot">активный</span></div><div class="agent-desc">Второй пилот. Утро и вечер: одно действие дня, три маркера, дрейф, дни без клиента. Пишет оценку на <a href="/mentor/">/mentor/</a>.</div></article>
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">ff-lead</span><span class="agent-badge badge-hot">активный</span></div><div class="agent-desc">Директор привлечения Founder Finance. Одна метрика — встречи с клиентами. Ведёт к кастдеву каждое утро.</div></article>
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">fishok-sales</span><span class="agent-badge badge-hot">активный</span></div><div class="agent-desc">AI-РОП Fishok. Воронка, застрявшие сделки, подготовка к синкам ПН/ЧТ.</div></article>
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">fishok-growth</span><span class="agent-badge badge-hot">активный</span></div><div class="agent-desc">Архитектор роста Fishok + строитель AI-системы. Утренний стендап, недельный бриф, узкие места.</div></article>
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">fishok-finance</span><span class="agent-badge badge-hot">активный</span></div><div class="agent-desc">AI-финдиректор Fishok. Управленческий учёт с нуля, рентабельность позиций, ценообразование.</div></article>
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">finance-director</span><span class="agent-badge badge-hot">активный</span></div><div class="agent-desc">Семейный и проектный финдиректор. Cashflow, runway, долги, реконсиляция.</div></article>
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">calendar</span><span class="agent-badge badge-hot">активный</span></div><div class="agent-desc">Секретарь по календарю. Создаёт и двигает события через Google Calendar, цветовая кодировка, всё private.</div></article>
+    </div>
+
+    <div class="group-label">Контент Founder Finance (новое, 20.07)</div>
+    <div class="agents-grid">
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">content-curator</span><span class="agent-badge badge-hot">новый</span></div><div class="agent-desc">Куратор контент-радара. Отделяет настоящую экспертику от рекламы, кластеризует темы, ведёт бэклог постов и кейсов.</div></article>
+      <article class="agent hot"><div class="agent-head"><span class="agent-name">video-scriptwriter</span><span class="agent-badge badge-hot">новый</span></div><div class="agent-desc">Сценарист вертикальных видео. Берёт кластеры тем и пишет Reels/Shorts 20-40 сек с хуком первой секунды под ICP.</div></article>
+    </div>
+
+    <div class="group-label">Продукт и лендинг (по запросу)</div>
+    <div class="agents-grid">
+      <article class="agent frozen"><div class="agent-head"><span class="agent-name">trajectory-architect</span><span class="agent-badge badge-frozen">заморожен</span></div><div class="agent-desc">Упаковка Founder Trajectory. Пауза: фокус ушёл в Founder Finance (продукт через финансовую дверь).</div></article>
+      <article class="agent"><div class="agent-head"><span class="agent-name">conversion-analyst / -architect</span><span class="agent-badge badge-occ">по случаю</span></div><div class="agent-desc">Пара для /conversion-lab. Фундамент-бриф → каркас лендинга до копирайта.</div></article>
+      <article class="agent"><div class="agent-head"><span class="agent-name">landing-researcher / -strategist</span><span class="agent-badge badge-occ">по случаю</span></div><div class="agent-desc">Первая половина /landing-studio. Voice-of-customer, конкуренты, UVP, углы.</div></article>
+      <article class="agent"><div class="agent-head"><span class="agent-name">landing-copywriter / -critic</span><span class="agent-badge badge-occ">по случаю</span></div><div class="agent-desc">Вторая половина /landing-studio. Полные варианты копии + red-team критика.</div></article>
+    </div>
+
+    <p class="sys-note" style="margin-top: 1.4rem;">Убраны из системы: <code>mentor</code> (старый — влит в co-pilot, 08.06), <code>octo-advisor</code> (Octo закрыт 10.06), growth-агенты Fishok (заморожены). Паттерн: у долгосрочного клиента появляется свой контур агентов (sales / finance / growth), как у Fishok.</p>
+
+    <!-- 04 СКИЛЛЫ -->
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">04</span> Скиллы — 20 команд</h2>
       <p class="section-meta">slash-команды через Claude Code</p>
     </div>
-
     <div class="card">
-      <div class="ritm"><div class="ritm-when">Утро</div><div class="ritm-what">Активный pull Granola + inbox + state-файлы → рабочий лист дня с источниками</div><div class="ritm-cmd">/day-open</div></div>
-      <div class="ritm"><div class="ritm-when">После звонка</div><div class="ritm-what">Pull транскрипта → задачи / решения / открытые → разнос по проектам</div><div class="ritm-cmd">/call</div></div>
-      <div class="ritm"><div class="ritm-when">В течение дня</div><div class="ritm-what">Любое сырьё → inbox/today.md с таймстампом</div><div class="ritm-cmd">/intake</div></div>
-      <div class="ritm"><div class="ritm-when">В течение дня</div><div class="ritm-what">Трата / доход / перевод — финансовый учёт</div><div class="ritm-cmd">/finance</div></div>
-      <div class="ritm"><div class="ritm-when">Вечер</div><div class="ritm-what">Свод дня, классификация записей, обновление state-файлов</div><div class="ritm-cmd">/day-close</div></div>
-      <div class="ritm"><div class="ritm-when">Пятница / сб</div><div class="ritm-what">Недельная рефлексия в формате диалога</div><div class="ritm-cmd">/weekly-dialogue</div></div>
-      <div class="ritm"><div class="ritm-when">1-е число</div><div class="ritm-what">Закрытие месяца, снимок капитала</div><div class="ritm-cmd">/finance close</div></div>
-      <div class="ritm"><div class="ritm-when">Каждые 2-4 нед</div><div class="ritm-what">Аудит структуры AndreiOS, поиск дублей и сиротских файлов</div><div class="ritm-cmd">/system-cleanup</div></div>
-      <div class="ritm"><div class="ritm-when">По запросу</div><div class="ritm-what">Прогнать решение через 3+ экспертных ролей с опросом</div><div class="ritm-cmd">/expert-panel</div></div>
+      <div class="ritm"><div class="ritm-when">Ежедневно</div><div class="ritm-what">Утренний sync: pull источников → лист дня</div><div class="ritm-cmd">/day-open</div></div>
+      <div class="ritm"><div class="ritm-when">Ежедневно</div><div class="ritm-what">Закрытие дня: свод, разнос, обновление state, оценка ментора</div><div class="ritm-cmd">/day-close</div></div>
+      <div class="ritm"><div class="ritm-when">По ходу</div><div class="ritm-what">Сырьё в inbox · разбор звонка · срочный лид</div><div class="ritm-cmd">/intake /call /lead</div></div>
+      <div class="ritm"><div class="ritm-when">По ходу</div><div class="ritm-what">Финансовый учёт · задача через матрицу · доска задач</div><div class="ritm-cmd">/finance /triage /tasks</div></div>
+      <div class="ritm"><div class="ritm-when">Неделя / месяц</div><div class="ritm-what">Недельная рефлексия · аудит структуры системы</div><div class="ritm-cmd">/weekly-dialogue /system-cleanup</div></div>
+      <div class="ritm"><div class="ritm-when">Производство</div><div class="ritm-what">Лендинг (studio / conversion / site-factory) · холодный канал</div><div class="ritm-cmd">/landing-studio /outreach</div></div>
+      <div class="ritm"><div class="ritm-when">Разовое</div><div class="ritm-what">Панель экспертов · BPMN-процесс · таблицы · дизайн-фронт</div><div class="ritm-cmd">/expert-panel /xlsx</div></div>
     </div>
 
+    <!-- 05 АВТОМАТИЗАЦИИ -->
     <div class="section-head" style="margin-top: 3rem;">
-      <h2 class="section-title"><span class="section-num">03</span> Правила контекста и роста</h2>
+      <h2 class="section-title"><span class="section-num">05</span> Автоматизации и скрипты</h2>
+      <p class="section-meta">фоновые контуры, работают без меня</p>
+    </div>
+    <div class="rules">
+      <div class="rule"><div class="rule-head">🟢 Telegram-бот лидов</div><div class="rule-body">Через Telegram Business ловит личные переписки с клиентами, транскрибирует голосовые (whisper) → <code>inbox/leads/</code>. Разбор в /day-close. Работает локально на Маке.</div></div>
+      <div class="rule"><div class="rule-head">🟢 Watcher каналов</div><div class="rule-body">Слушает каналы (Аномалия, десятки, финансы) → поток сигналов и потенциальных лидов в утренний бриф. <code>telegram-watcher</code>.</div></div>
+      <div class="rule"><div class="rule-head">🟢 Контент-радар FF (новый, 20.07)</div><div class="rule-body">Мониторит контент-каналы, ранжирует по выбросу охвата, отдаёт бэклог постов и кейсов для рилсов. <code>fin-content-monitor</code>.</div></div>
+      <div class="rule"><div class="rule-head">🟢 CRM-дайджест Fishok (новый, 20.07)</div><div class="rule-body">Ежедневно 08:00 (launchd): срез по дуал-менеджерам Даниэль/Влад, Discipline Score, что сделать в сделках. <code>pipedrive-digest</code>.</div></div>
+      <div class="rule"><div class="rule-head">🟢 Авто-деплой портала (новый, 20.07)</div><div class="rule-body">Ночью 21:30 (launchd): рендер оценки ментора + push портала → Cloudflare. <code>portal-deploy</code>.</div></div>
+      <div class="rule"><div class="rule-head">🟡 WhatsApp-читалка · Telegram-inbox</div><div class="rule-body">WhatsApp → inbox. Inbox-бот — отключён (<code>.disabled</code>), функцию забрал основной бот. Держим как резерв.</div></div>
+    </div>
+
+    <!-- 06 ИСПОЛЬЗОВАНИЕ -->
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">06</span> Что использую часто, что стоит без дела</h2>
+      <p class="section-meta">честный срез на 20.07</p>
+    </div>
+    <div class="card">
+      <table class="utable">
+        <thead><tr><th>Контур</th><th>Частота</th><th>Комментарий</th></tr></thead>
+        <tbody>
+          <tr><td><span class="u-dot u-hi"></span>day-open / day-close</td><td>каждый день</td><td>Костяк ритма. Держит контекст и не даёт дню растечься.</td></tr>
+          <tr><td><span class="u-dot u-hi"></span>Захват лидов + watcher</td><td>постоянно</td><td>Работают сами, ловят то, что иначе бы потерялось.</td></tr>
+          <tr><td><span class="u-dot u-hi"></span>Агенты Fishok</td><td>каждый день</td><td>Операционка клиента идёт через них — синки, воронка, учёт.</td></tr>
+          <tr><td><span class="u-dot u-hi"></span>Финансовый учёт</td><td>часто</td><td>Записи транзакций регулярны. Реконсиляция — реже, чем надо (см. ниже).</td></tr>
+          <tr><td><span class="u-dot u-mid"></span>ff-lead / десятки</td><td>ежедневно, но</td><td>Стендапы идут, но в цифру (встречи) пока не конвертятся.</td></tr>
+          <tr><td><span class="u-dot u-mid"></span>Контент-радар + сценарии</td><td>только родились</td><td>Построены 20.07. Ещё не прогнаны от темы до готового ролика.</td></tr>
+          <tr><td><span class="u-dot u-lo"></span>/weekly-dialogue</td><td>пропущен</td><td>Недельный план устарел на 4 недели (W26 при текущей W30). Ритм недели выпал.</td></tr>
+          <tr><td><span class="u-dot u-lo"></span>/landing-studio, conversion-lab</td><td>редко</td><td>Мощные, но лендинг всё ещё итерируется, до потока клиентов не довёл.</td></tr>
+          <tr><td><span class="u-dot u-lo"></span>trajectory-architect</td><td>заморожен</td><td>Упаковка FT на паузе — фокус ушёл в FF.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 07 РАБОТАЕТ / НЕТ -->
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">07</span> Что работает, а что нет</h2>
+      <p class="section-meta">без прикрас</p>
+    </div>
+    <div class="verdict-cols">
+      <div class="vcol works">
+        <h3>✅ Работает</h3>
+        <ul>
+          <li>Захват и разбор: ничего важного не теряется — лиды, звонки, сигналы каналов собираются и разносятся.</li>
+          <li>Ежедневный ритм держит фокус и контекст между днями.</li>
+          <li>Операционная поддержка Fishok: синки, воронка, первичка, учёт — контур зрелый.</li>
+          <li>Финансовая прозрачность: DDS, кошельки, runway — картина есть, когда сверена.</li>
+          <li>Строю инфраструктуру быстро: за день собран радар + CRM-дайджест + авто-деплой.</li>
+        </ul>
+      </div>
+      <div class="vcol broken">
+        <h3>⚠️ Не работает пока</h3>
+        <ul>
+          <li><strong>Главное: система не приводит деньги.</strong> Встреч с клиентами FF — 0, вторую неделю. Все контуры — усилители, но самого дохода-2 нет.</li>
+          <li>Тёплые окна остывают: Кирилл сам открыл дверь 17.07, касание не сделано.</li>
+          <li>Недельный контур выпал: /weekly-dialogue не запускался, план на 4 недели старый.</li>
+          <li>Реконсиляция финансов реже, чем нужно (12 дней без сверки на 20.07).</li>
+          <li>Риск: люблю строить станки больше, чем звонить людям (комфорт оператора).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 08 ПРАВИЛА -->
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 class="section-title"><span class="section-num">08</span> Правила контекста и роста</h2>
       <p class="section-meta">экономия токенов · защита от раздувания</p>
     </div>
-
     <div class="rules">
-      <div class="rule">
-        <div class="rule-head">Правило роста</div>
-        <div class="rule-body">Новая папка/файл создаётся <strong>только</strong> когда: (а) действующий файл &gt;200 строк, или (б) ≥3 однотипных артефакта шумят в общем, или (в) явно решено «нужно для одной из трёх целей 90 дней». <em>Запрещено</em> создавать «на всякий случай» или «для красоты».</div>
-      </div>
-      <div class="rule">
-        <div class="rule-head">Не читать archive/</div>
-        <div class="rule-body">Никогда не читать архив без явного запроса. Старые raw-файлы не переписывать, только архивировать.</div>
-      </div>
-      <div class="rule">
-        <div class="rule-head">Inbox только в /day-close</div>
-        <div class="rule-body"><code>inbox/today.md</code> — живой накопитель сырья. Читается только при разборе дня. При обычной работе — не загружать в контекст.</div>
-      </div>
-      <div class="rule">
-        <div class="rule-head">Contacts только по запросу</div>
-        <div class="rule-body">Картотека читается только при «порекомендуй человека для X», «кто у меня есть по теме Y». При обычной работе — не сканировать. <code>contacts/_private/</code> исключается из автоматических рекомендаций.</div>
-      </div>
-      <div class="rule">
-        <div class="rule-head">Granola — отдельный источник</div>
-        <div class="rule-body">Pull только при <code>/day-open</code> и <code>/call</code>. В обычной работе не вытягивать — съедает токены. MCP подключён локально.</div>
-      </div>
-      <div class="rule">
-        <div class="rule-head">Pre-flight confidentiality</div>
-        <div class="rule-body">Перед любым sales/outreach: фильтр (а) Fishok-full-time-фрейм, (б) Octo-пауза. Контакт в красной зоне — в «запрещённые каналы», не в outreach.</div>
-      </div>
+      <div class="rule"><div class="rule-head">Правило роста</div><div class="rule-body">Новый файл/папка — только когда файл &gt;200 строк, или ≥3 однотипных артефакта шумят, или явно нужно для одной из трёх целей 90 дней. Не «на всякий случай».</div></div>
+      <div class="rule"><div class="rule-head">Портал — зеркало</div><div class="rule-body">Источник истины — state-файлы в Claude-Context. Портал пересобирается из них, правки в HTML руками — только для витрины.</div></div>
+      <div class="rule"><div class="rule-head">Потоки только по расписанию</div><div class="rule-body">Granola, inbox, лиды, contacts грузятся только в свои моменты (/day-open, /call, /day-close). В обычной работе не сканируются — токены.</div></div>
+      <div class="rule"><div class="rule-head">Pre-flight confidentiality</div><div class="rule-body">Перед любым sales/outreach — фильтр конфиденциальности (Fishok-фрейм, закрытые контакты). Красная зона → в запрещённые каналы.</div></div>
+      <div class="rule"><div class="rule-head">Рабочая рамка до 18:00</div><div class="rule-body">Рабочие блоки до 18. После — семья. Задачи не ставятся на выходные (договорённость с Викой).</div></div>
+      <div class="rule"><div class="rule-head">Без выдуманных цифр</div><div class="rule-body">Деньги — только из банка/первички, не из CRM. Не показывать кассовый разрыв при асимметрии силы (урок Сергея).</div></div>
     </div>
 
+    <!-- 09 РЕЖИМЫ + KILL -->
     <div class="section-head" style="margin-top: 3rem;">
-      <h2 class="section-title"><span class="section-num">04</span> Инфраструктура — рабочие инструменты</h2>
-      <p class="section-meta">калькулярные каналы захвата и автоматизации</p>
+      <h2 class="section-title"><span class="section-num">09</span> Активные режимы и kill-switch</h2>
     </div>
-
-    <div class="rules">
-      <div class="rule">
-        <div class="rule-head">Google Calendar — Claude управляет (с 22.05)</div>
-        <div class="rule-body">
-          Личный календарь. Цветовая кодировка: 🟦 Octo · 🟧 Fishok · 🟪 Claude-сессии · 🟫 остальное. Напоминания по типу. Все события private. Только русский в названиях/описаниях.
-        </div>
-      </div>
-      <div class="rule">
-        <div class="rule-head">Рабочая рамка: до 18:00</div>
-        <div class="rule-body">
-          Все рабочие блоки до 18 (mentor, ритуалы, операции). После 18 — семья. Никаких рабочих окон вечером.
-        </div>
-      </div>
-      <div class="rule">
-        <div class="rule-head">VoiceInk push-to-talk (с 21.05)</div>
-        <div class="rule-body">
-          Диктовка на Mac через правую ⌘ → транскрипт в активное поле. Whisper.cpp локально, без интернета. Канал быстрого ввода для длинных мыслей.
-        </div>
-      </div>
-      <div class="rule">
-        <div class="rule-head">Telegram-бот на VPS Hetzner (с 22.05 17:20)</div>
-        <div class="rule-body">
-          CPX22 Falkenstein, systemd <code>andreyos-bot</code>. Двусторонний канал к Claude. Меню агентов в чате, vision, save-flow, persistent keyboard. Calendar НЕ работает на VPS (нет MCP).
-        </div>
-      </div>
+    <div class="card" style="margin-bottom: 1rem;">
+      <div class="card-label">Cashflow-only — активен</div>
+      <p style="font-size: 0.9rem; line-height: 1.55; color: var(--color-text);">До стабильных €8К/мес чистыми × 2 месяца equity-обсуждение не обязательный фильтр. Беру платные проекты без принудительного equity-разговора. После триггера фильтр возвращается.</p>
     </div>
-
-    <div class="section-head" style="margin-top: 3rem;">
-      <h2 class="section-title"><span class="section-num">05</span> Kill-switch</h2>
-    </div>
-
     <div class="kill-switch">
       <span class="kill-switch-icon">⚠</span>
-      <span>Если <strong>14 дней подряд нет коммитов</strong> в репозитории — система признана мёртвой. Не строим следующую итерацию ещё 30 дней. Сначала ретроспектива «почему не работало», потом решение.</span>
-    </div>
-
-    <div class="section-head" style="margin-top: 3rem;">
-      <h2 class="section-title"><span class="section-num">06</span> Активные режимы</h2>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Cashflow-only — с 2026-05-18</div>
-      <p style="font-size: 0.9rem; line-height: 1.55; margin-bottom: 0.85rem;">
-        До момента когда чистый доход стабильно держится €8К/мес 2 месяца подряд — <strong>equity-обсуждение НЕ обязательный фильтр</strong> при входе в проект. Беру платные проекты без принудительного equity-разговора.
-      </p>
-      <p style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5;">
-        Equity обсуждаю только если: (а) клиент сам поднимает, (б) проект явно проходит все 4 жёстких критерия. После €8К/мес × 2 — обязательный equity-фильтр возвращается на любой проект &gt;€2К/мес.
-      </p>
-    </div>
-
-    <div class="section-head" style="margin-top: 3rem;">
-      <h2 class="section-title"><span class="section-num">07</span> Что НЕ делать</h2>
-      <p class="section-meta">накопленные уроки</p>
-    </div>
-
-    <div class="card">
-      <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.7;">
-        <li>Не предлагать LinkedIn-каналы привлечения до июня</li>
-        <li>Не холодные продажи через РФ-нетворки</li>
-        <li>Не упоминать Оскара / Маддеру / Татьяну в сообщениях Кристапсу</li>
-        <li>Не работать «no win / no fee» без письменной фиксации скоупа и фикса (урок Octo)</li>
-        <li>Не подписывать с founder-каналами модель «агент платит процент»</li>
-        <li>Не покупать технику и необязательные вещи до стабильного €8К+/мес</li>
-        <li>Не ставить задачи на выходные (договорённость с Викой)</li>
-        <li>Не создавать новых файлов/папок без триггера правила роста</li>
-        <li>Не делать утренних 30-минутных ритуалов — есть вечерний /day-close</li>
-        <li>Не показывать кассовый разрыв при асимметрии силы (урок Сергей-21.05)</li>
-      </ul>
+      <span><strong>Kill-switch:</strong> если 14 дней подряд нет коммитов — система признана мёртвой, 30 дней не строим следующую итерацию. Сначала ретроспектива «почему не работало», потом решение.</span>
     </div>
 
   </div>
@@ -300,7 +279,7 @@
 
 <footer class="foot">
   <div class="container">
-    <a href="/">← дашборд</a> · <a href="/founder-trajectory/">продукт</a> · <a href="/decisions/">журнал решений</a>
+    <a href="/">← кокпит</a> · <a href="/mentor/">ментор</a> · <a href="/decisions/">журнал решений</a> · зеркало <code>Claude-Context/</code>
   </div>
 </footer>
 
