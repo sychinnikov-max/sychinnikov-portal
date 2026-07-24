@@ -57,6 +57,7 @@
   .ty.call{ background:#E7F1FB; color:#1B6FB0; }
   .ty.node{ background:var(--fk-bg-2); color:var(--fk-muted); border:1px solid var(--fk-line); }
   .flag{ font-size:.64rem; font-weight:800; padding:.13rem .42rem; border-radius:5px; background:var(--fk-red-bg); color:var(--fk-red); }
+  .flag.ok{ background:#E1F5F0; color:#12756A; }
   .due{ font-family:var(--fk-mono); font-size:.7rem; color:var(--fk-muted); margin-left:auto; }
   .pl-empty{ font-size:.76rem; color:var(--fk-soft); font-style:italic; padding:.6rem .3rem; text-align:center; }
 
@@ -192,7 +193,7 @@ function cardEl(card){
   el.draggable = true;
   el.dataset.id = card.id;
   const handle = card.handle ? `<span class="hn">${card.handle}</span>` : '';
-  const flag = card.flag ? `<span class="flag">${card.flag}</span>` : '';
+  const flag = card.flag ? `<span class="flag${/фит/i.test(card.flag) && !/не/i.test(card.flag) ? ' ok' : ''}">${card.flag}</span>` : '';
   const due = card.date ? `<span class="due">${card.date}</span>` : '';
   el.innerHTML = `
     <div class="nm">${card.name} ${handle} ${flag}</div>
