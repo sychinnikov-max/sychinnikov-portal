@@ -26,8 +26,10 @@
   .pl-banner.ok{ background:#E1F5F0; color:#12756A; border:1px solid #BBE7DC; }
 
   /* ── канбан ── */
+  .pl-full{ width:100%; padding:0 clamp(1rem,2.5vw,2.5rem); box-sizing:border-box; }
   .pl-wrap{ overflow-x:auto; padding-bottom:1rem; }
-  .pl-cols{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(268px,1fr); gap:.9rem; min-width:min-content; align-items:start; }
+  .pl-cols{ display:grid; grid-template-columns:repeat(6,minmax(240px,1fr)); gap:.9rem; align-items:start; }
+  @media (max-width:1400px){ .pl-cols{ grid-template-columns:repeat(6,minmax(240px,240px)); } }
   .pl-col{ background:var(--fk-bg-2); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.7rem; display:flex; flex-direction:column; gap:.55rem; min-height:120px; transition:background .12s, border-color .12s; }
   .pl-col.drag-over{ background:#FBF3E2; border-color:var(--ff-accent); }
   .pl-colhead{ display:flex; align-items:center; justify-content:space-between; padding:.1rem .25rem .45rem; border-bottom:1px dashed var(--fk-line); }
@@ -97,7 +99,7 @@
 </section>
 
 <section class="section-tight" style="padding-top:.3rem;">
-  <div class="wrap">
+  <div class="pl-full">
     <div class="pl-wrap">
       <div class="pl-cols" id="board"></div>
     </div>
