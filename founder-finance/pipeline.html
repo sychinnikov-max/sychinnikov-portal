@@ -31,25 +31,40 @@
   .pl-cols{ display:grid; grid-template-columns:repeat(6,minmax(240px,1fr)); gap:.9rem; align-items:start; }
   @media (max-width:1400px){ .pl-cols{ grid-template-columns:repeat(6,minmax(240px,240px)); } }
 
-  /* ── шапка: заголовок слева, цели справа ── */
-  .pl-head{ display:flex; gap:1.4rem; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
-  .pl-head-l{ flex:1 1 420px; min-width:300px; }
-  .pl-goals{ flex:0 0 350px; max-width:100%; background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.9rem 1.05rem; box-shadow:var(--fk-shadow); }
-  @media (max-width:720px){ .pl-goals{ flex-basis:100%; } }
-  .pl-goals h4{ font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ff-accent-2); margin:0 0 .5rem; font-weight:800; }
-  .pl-goals .gsec + .gsec{ margin-top:.75rem; padding-top:.7rem; border-top:1px dashed var(--fk-line); }
-  .gweek-target{ font-size:.82rem; color:var(--fk-ink); font-weight:700; }
-  .gweek-fact{ font-size:.75rem; color:var(--fk-soft); margin:.15rem 0 .45rem; }
-  .gfocus{ list-style:none; margin:0; padding:0; }
-  .gfocus li{ font-size:.75rem; color:var(--fk-muted); line-height:1.4; padding-left:.85rem; position:relative; margin-bottom:.28rem; }
-  .gfocus li:before{ content:'›'; position:absolute; left:0; color:var(--ff-accent); font-weight:800; }
+  /* ── шапка: заголовок слева, три блока целей справа ── */
+  .pl-head{ display:flex; gap:1.2rem; align-items:flex-start; flex-wrap:wrap; }
+  .pl-head-l{ flex:1 1 260px; min-width:240px; }
+  .pl-goals-row{ flex:3 1 660px; display:grid; grid-template-columns:repeat(3,minmax(210px,1fr)); gap:.8rem; }
+  @media (max-width:1100px){ .pl-goals-row{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:760px){ .pl-goals-row{ grid-template-columns:1fr; } }
+  .pl-goals{ background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.85rem 1rem; box-shadow:var(--fk-shadow); }
+  .pl-goals h4{ font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ff-accent-2); margin:0 0 .55rem; font-weight:800; }
+
   .gmetric{ margin-bottom:.5rem; }
   .gmetric:last-child{ margin-bottom:0; }
-  .gmetric .grow{ display:flex; justify-content:space-between; font-size:.78rem; margin-bottom:.2rem; }
+  .gmetric .grow{ display:flex; justify-content:space-between; align-items:baseline; font-size:.78rem; margin-bottom:.2rem; gap:.4rem; }
   .gmetric .grow .lab{ color:var(--fk-ink); }
-  .gmetric .grow .val{ font-family:var(--fk-mono); color:var(--ff-accent-2); font-weight:700; }
+  .gm-per{ font-size:.6rem; color:var(--fk-soft); font-weight:500; margin-left:.3rem; }
+  .gmetric .grow .val{ font-family:var(--fk-mono); color:var(--ff-accent-2); font-weight:700; white-space:nowrap; }
   .gbar{ height:7px; border-radius:100px; background:var(--fk-bg-2); border:1px solid var(--fk-line); overflow:hidden; }
   .gbar i{ display:block; height:100%; background:var(--ff-grad); }
+  .gm-div{ height:1px; background:var(--fk-line); border:0; border-top:1px dashed var(--fk-line); margin:.55rem 0; }
+
+  .gcalls{ list-style:none; margin:0; padding:0; }
+  .gcalls li{ display:flex; justify-content:space-between; gap:.5rem; font-size:.76rem; padding:.26rem 0; border-bottom:1px dashed var(--fk-line); }
+  .gcalls li:last-child{ border-bottom:none; }
+  .gc-nm{ color:var(--fk-ink); font-weight:600; }
+  .gc-nm .gc-ty{ font-size:.58rem; font-weight:800; text-transform:uppercase; color:var(--fk-soft); margin-left:.3rem; }
+  .gc-dt{ font-family:var(--fk-mono); color:var(--fk-soft); font-size:.68rem; white-space:nowrap; text-align:right; }
+
+  .gtask{ margin-bottom:.5rem; }
+  .gtask:last-child{ margin-bottom:0; }
+  .gtk{ display:flex; align-items:flex-start; gap:.42rem; font-size:.79rem; color:var(--fk-ink); cursor:pointer; line-height:1.35; }
+  .gtk input{ margin-top:.18rem; accent-color:var(--ff-accent); cursor:pointer; flex:none; }
+  .gtk.on > span{ text-decoration:line-through; color:var(--fk-soft); }
+  .gtk.parent{ font-weight:700; }
+  .gsub{ margin:.22rem 0 0 1.35rem; display:flex; flex-direction:column; gap:.18rem; }
+  .gtk.sub{ font-size:.73rem; font-weight:500; color:var(--fk-muted); }
   .pl-col{ background:var(--fk-bg-2); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.7rem; display:flex; flex-direction:column; gap:.55rem; min-height:120px; transition:background .12s, border-color .12s; }
   .pl-col.drag-over{ background:#FBF3E2; border-color:var(--ff-accent); }
   .pl-colhead{ display:flex; align-items:center; justify-content:space-between; padding:.1rem .25rem .45rem; border-bottom:1px dashed var(--fk-line); }
@@ -118,7 +133,11 @@
         </div>
         <div class="pl-banner" id="banner"></div>
       </div>
-      <aside class="pl-goals" id="goals"></aside>
+      <div class="pl-goals-row">
+        <aside class="pl-goals" id="goalsMetrics"></aside>
+        <aside class="pl-goals" id="goalsCalls"></aside>
+        <aside class="pl-goals" id="goalsTasks"></aside>
+      </div>
     </div>
   </div>
 </section>
@@ -147,6 +166,7 @@
 const LS_KEY = 'ff_pipeline_state_v1';
 let DATA = null;
 let overrides = {};   // cardId -> stageId (локальные перемещения Андрея)
+let taskState = {};   // taskId -> bool (локальные галочки чеклиста)
 let baseVersion = 0;
 
 const chanClass = (c) => {
@@ -165,36 +185,76 @@ function loadLocal(){
     const raw = localStorage.getItem(LS_KEY);
     if(!raw) return;
     const st = JSON.parse(raw);
-    if(st.baseVersion === baseVersion){ overrides = st.overrides || {}; }
-    else { overrides = {}; } // сервер новее — Клод обновил, сбрасываем локальное
-  }catch(e){ overrides = {}; }
+    if(st.baseVersion === baseVersion){ overrides = st.overrides || {}; taskState = st.taskState || {}; }
+    else { overrides = {}; taskState = {}; } // сервер новее — Клод обновил, сбрасываем локальное
+  }catch(e){ overrides = {}; taskState = {}; }
 }
 function saveLocal(){
-  localStorage.setItem(LS_KEY, JSON.stringify({ baseVersion, overrides }));
+  localStorage.setItem(LS_KEY, JSON.stringify({ baseVersion, overrides, taskState }));
 }
 
+const pctOf = (d, g) => g ? Math.min(100, Math.round(d / g * 100)) : 0;
+const tyShort = { custdev:'кастдев', call:'созвон', node:'узел' };
+
+function taskFallback(id){
+  for(const t of (DATA.goals.tasks || [])){
+    if(t.id === id) return !!t.done;
+    for(const s of (t.sub || [])) if(s.id === id) return !!s.done;
+  }
+  return false;
+}
+function taskDone(id, fb){ return (id in taskState) ? taskState[id] : fb; }
+
 function renderGoals(){
-  const g = DATA.goals, box = document.getElementById('goals');
-  if(!g){ box.style.display = 'none'; return; }
-  let html = '';
-  if(g.week){
-    html += '<div class="gsec"><h4>🎯 Неделя · ' + g.week.label + '</h4>';
-    if(g.week.target) html += '<div class="gweek-target">Цель: ' + g.week.target + '</div>';
-    if(g.week.fact)   html += '<div class="gweek-fact">Факт: ' + g.week.fact + '</div>';
-    if(g.week.focus)  html += '<ul class="gfocus">' + g.week.focus.map(f => '<li>' + f + '</li>').join('') + '</ul>';
-    html += '</div>';
-  }
-  if(g.declaration){
-    html += '<div class="gsec"><h4>📜 Декларация · до ' + g.declaration.deadline + '</h4>';
-    (g.declaration.metrics || []).forEach(m => {
-      const pct = m.goal ? Math.min(100, Math.round(m.done / m.goal * 100)) : 0;
-      html += '<div class="gmetric"><div class="grow"><span class="lab">' + m.label +
-              '</span><span class="val">' + m.done + ' / ' + m.goal + '</span></div>' +
-              '<div class="gbar"><i style="width:' + pct + '%"></i></div></div>';
+  const g = DATA.goals || {};
+
+  // Блок 1 — показатели (полоски)
+  let m = '<h4>📊 Показатели</h4>';
+  let prevPer = null;
+  (g.metrics || []).forEach(x => {
+    if(prevPer && x.period !== prevPer) m += '<hr class="gm-div">';
+    prevPer = x.period;
+    m += '<div class="gmetric"><div class="grow"><span class="lab">' + x.label +
+         (x.period ? '<span class="gm-per">' + x.period + '</span>' : '') +
+         '</span><span class="val">' + x.done + ' / ' + x.goal + '</span></div>' +
+         '<div class="gbar"><i style="width:' + pctOf(x.done, x.goal) + '%"></i></div></div>';
+  });
+  document.getElementById('goalsMetrics').innerHTML = m;
+
+  // Блок 2 — созвоны недели (авто из карточек «Созвон назначен»)
+  let c = '<h4>📅 Созвоны назначены</h4>';
+  const sched = DATA.cards.filter(k => curStage(k) === 'scheduled');
+  c += sched.length
+    ? '<ul class="gcalls">' + sched.map(k =>
+        '<li><span class="gc-nm">' + k.name + '<span class="gc-ty">' + (tyShort[k.type] || '') + '</span></span>' +
+        '<span class="gc-dt">' + (k.date || '') + '</span></li>').join('') + '</ul>'
+    : '<div class="gc-dt">нет назначенных</div>';
+  document.getElementById('goalsCalls').innerHTML = c;
+
+  // Блок 3 — главные задачи (чеклист с галочками)
+  let t = '<h4>✅ Главные задачи</h4>';
+  (g.tasks || []).forEach(task => {
+    const done = taskDone(task.id, task.done);
+    t += '<div class="gtask"><label class="gtk parent ' + (done ? 'on' : '') + '">' +
+         '<input type="checkbox" data-tid="' + task.id + '"' + (done ? ' checked' : '') + '><span>' + task.title + '</span></label>';
+    if(task.sub && task.sub.length){
+      t += '<div class="gsub">' + task.sub.map(s => {
+        const sd = taskDone(s.id, s.done);
+        return '<label class="gtk sub ' + (sd ? 'on' : '') + '"><input type="checkbox" data-tid="' + s.id + '"' +
+               (sd ? ' checked' : '') + '><span>' + s.title + '</span></label>';
+      }).join('') + '</div>';
+    }
+    t += '</div>';
+  });
+  document.getElementById('goalsTasks').innerHTML = t;
+
+  document.querySelectorAll('#goalsTasks input[type=checkbox]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const id = cb.dataset.tid, fb = taskFallback(id);
+      if(cb.checked === fb) delete taskState[id]; else taskState[id] = cb.checked;
+      saveLocal(); renderGoals(); updateMeta();
     });
-    html += '</div>';
-  }
-  box.innerHTML = html;
+  });
 }
 
 function render(){
@@ -227,7 +287,7 @@ function render(){
       if(!card) return;
       if(stage.id === card.stage) delete overrides[id];  // вернул на исходную
       else overrides[id] = stage.id;
-      saveLocal(); render();
+      saveLocal(); render(); renderGoals();
     });
     board.appendChild(col);
   });
@@ -261,8 +321,9 @@ function updateMeta(){
   const n = Object.keys(overrides).filter(id => {
     const c = DATA.cards.find(x=>x.id===id); return c && overrides[id]!==c.stage;
   }).length;
+  const tn = Object.keys(taskState).filter(id => taskState[id] !== taskFallback(id)).length;
   document.getElementById('meta').textContent =
-    `v${DATA.version} · обновлено ${DATA.updated} · перемещено с последней сверки: ${n}`;
+    `v${DATA.version} · обновлено ${DATA.updated} · перемещено: ${n} · галочек изменено: ${tn}`;
 }
 
 function buildExport(){
@@ -273,7 +334,11 @@ function buildExport(){
       moves.push({ id, name: c.name, from: c.stage, to: overrides[id] });
     }
   });
-  return JSON.stringify({ pipeline_update: true, base_version: DATA.version, moves }, null, 2);
+  const tasks = [];
+  Object.keys(taskState).forEach(id => {
+    if(taskState[id] !== taskFallback(id)) tasks.push({ id, done: taskState[id] });
+  });
+  return JSON.stringify({ pipeline_update: true, base_version: DATA.version, moves, tasks }, null, 2);
 }
 
 function openModal(){
@@ -290,8 +355,8 @@ document.getElementById('btnCopy').addEventListener('click', openModal);
 document.getElementById('btnCopyAgain').addEventListener('click', () => copyText(document.getElementById('exportText').value));
 document.getElementById('btnCloseModal').addEventListener('click', () => document.getElementById('modal').classList.remove('open'));
 document.getElementById('btnReset').addEventListener('click', () => {
-  if(!confirm('Сбросить все твои перемещения к последнему состоянию от Клода?')) return;
-  overrides = {}; saveLocal(); render();
+  if(!confirm('Сбросить все твои перемещения и галочки к последнему состоянию от Клода?')) return;
+  overrides = {}; taskState = {}; saveLocal(); render(); renderGoals();
 });
 
 fetch('pipeline.json?v=' + Date.now())
