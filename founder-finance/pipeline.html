@@ -30,6 +30,26 @@
   .pl-wrap{ overflow-x:auto; padding-bottom:1rem; }
   .pl-cols{ display:grid; grid-template-columns:repeat(6,minmax(240px,1fr)); gap:.9rem; align-items:start; }
   @media (max-width:1400px){ .pl-cols{ grid-template-columns:repeat(6,minmax(240px,240px)); } }
+
+  /* ── шапка: заголовок слева, цели справа ── */
+  .pl-head{ display:flex; gap:1.4rem; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+  .pl-head-l{ flex:1 1 420px; min-width:300px; }
+  .pl-goals{ flex:0 0 350px; max-width:100%; background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.9rem 1.05rem; box-shadow:var(--fk-shadow); }
+  @media (max-width:720px){ .pl-goals{ flex-basis:100%; } }
+  .pl-goals h4{ font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ff-accent-2); margin:0 0 .5rem; font-weight:800; }
+  .pl-goals .gsec + .gsec{ margin-top:.75rem; padding-top:.7rem; border-top:1px dashed var(--fk-line); }
+  .gweek-target{ font-size:.82rem; color:var(--fk-ink); font-weight:700; }
+  .gweek-fact{ font-size:.75rem; color:var(--fk-soft); margin:.15rem 0 .45rem; }
+  .gfocus{ list-style:none; margin:0; padding:0; }
+  .gfocus li{ font-size:.75rem; color:var(--fk-muted); line-height:1.4; padding-left:.85rem; position:relative; margin-bottom:.28rem; }
+  .gfocus li:before{ content:'›'; position:absolute; left:0; color:var(--ff-accent); font-weight:800; }
+  .gmetric{ margin-bottom:.5rem; }
+  .gmetric:last-child{ margin-bottom:0; }
+  .gmetric .grow{ display:flex; justify-content:space-between; font-size:.78rem; margin-bottom:.2rem; }
+  .gmetric .grow .lab{ color:var(--fk-ink); }
+  .gmetric .grow .val{ font-family:var(--fk-mono); color:var(--ff-accent-2); font-weight:700; }
+  .gbar{ height:7px; border-radius:100px; background:var(--fk-bg-2); border:1px solid var(--fk-line); overflow:hidden; }
+  .gbar i{ display:block; height:100%; background:var(--ff-grad); }
   .pl-col{ background:var(--fk-bg-2); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.7rem; display:flex; flex-direction:column; gap:.55rem; min-height:120px; transition:background .12s, border-color .12s; }
   .pl-col.drag-over{ background:#FBF3E2; border-color:var(--ff-accent); }
   .pl-colhead{ display:flex; align-items:center; justify-content:space-between; padding:.1rem .25rem .45rem; border-bottom:1px dashed var(--fk-line); }
@@ -84,18 +104,22 @@
   </div>
 </header>
 
-<section id="top" class="section-tight" style="padding-top:2rem;">
-  <div class="wrap">
-    <span class="eyebrow gold">Люди в воронке · приватно · перетаскивай карточки мышью</span>
-    <h1 class="mt1">Пайплайн клиентов</h1>
-    <p class="lead muted mt2" style="max-width:80ch;">Одна карточка на человека. Двигай между стадиями — состояние сохраняется в браузере. Подвигал → нажми «Скопировать для Клода» и вставь мне в чат (или боту в inbox). Я сверю, обновлю источник правды и задам вопрос, если что-то непонятно.</p>
-
-    <div class="pl-bar">
-      <button class="pl-btn primary" id="btnCopy">💾 Скопировать для Клода</button>
-      <button class="pl-btn" id="btnReset">↺ Сбросить мои перемещения</button>
-      <span class="pl-meta" id="meta">—</span>
+<section id="top" class="section-tight" style="padding-top:1.6rem;">
+  <div class="pl-full">
+    <div class="pl-head">
+      <div class="pl-head-l">
+        <span class="eyebrow gold">Люди в воронке · приватно · перетаскивай карточки мышью</span>
+        <h1 class="mt1" style="margin-bottom:.35rem;">Пайплайн клиентов</h1>
+        <p class="muted" style="max-width:64ch; font-size:.86rem; line-height:1.5; margin:0 0 .7rem;">Одна карточка на человека. Двигай между стадиями — состояние сохраняется в браузере. Подвигал → «Скопировать для Клода» и вставь мне в чат. Я сверю и обновлю источник правды.</p>
+        <div class="pl-bar">
+          <button class="pl-btn primary" id="btnCopy">💾 Скопировать для Клода</button>
+          <button class="pl-btn" id="btnReset">↺ Сбросить мои перемещения</button>
+          <span class="pl-meta" id="meta">—</span>
+        </div>
+        <div class="pl-banner" id="banner"></div>
+      </div>
+      <aside class="pl-goals" id="goals"></aside>
     </div>
-    <div class="pl-banner" id="banner"></div>
   </div>
 </section>
 
@@ -147,6 +171,30 @@ function loadLocal(){
 }
 function saveLocal(){
   localStorage.setItem(LS_KEY, JSON.stringify({ baseVersion, overrides }));
+}
+
+function renderGoals(){
+  const g = DATA.goals, box = document.getElementById('goals');
+  if(!g){ box.style.display = 'none'; return; }
+  let html = '';
+  if(g.week){
+    html += '<div class="gsec"><h4>🎯 Неделя · ' + g.week.label + '</h4>';
+    if(g.week.target) html += '<div class="gweek-target">Цель: ' + g.week.target + '</div>';
+    if(g.week.fact)   html += '<div class="gweek-fact">Факт: ' + g.week.fact + '</div>';
+    if(g.week.focus)  html += '<ul class="gfocus">' + g.week.focus.map(f => '<li>' + f + '</li>').join('') + '</ul>';
+    html += '</div>';
+  }
+  if(g.declaration){
+    html += '<div class="gsec"><h4>📜 Декларация · до ' + g.declaration.deadline + '</h4>';
+    (g.declaration.metrics || []).forEach(m => {
+      const pct = m.goal ? Math.min(100, Math.round(m.done / m.goal * 100)) : 0;
+      html += '<div class="gmetric"><div class="grow"><span class="lab">' + m.label +
+              '</span><span class="val">' + m.done + ' / ' + m.goal + '</span></div>' +
+              '<div class="gbar"><i style="width:' + pct + '%"></i></div></div>';
+    });
+    html += '</div>';
+  }
+  box.innerHTML = html;
 }
 
 function render(){
@@ -251,6 +299,7 @@ fetch('pipeline.json?v=' + Date.now())
   .then(json => {
     DATA = json; baseVersion = json.version;
     loadLocal();
+    renderGoals();
     // баннер: сервер новее локального базового
     const raw = localStorage.getItem(LS_KEY);
     if(raw){
