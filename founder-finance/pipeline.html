@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Founder Finance — пайплайн</title>
+<link rel="stylesheet" href="/assets/fishok/fishok.css?v=20260708">
+<style>
+  :root{ --ff-accent:#A9853F; --ff-accent-2:#8A6A2E; --ff-grad:linear-gradient(135deg,#8A6A2E 0%,#A9853F 55%,#C2A66A 100%); }
+  .ff-header{ position:sticky; top:0; z-index:40; background:rgba(255,255,255,.92); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--fk-line); }
+  .ff-header .wrap{ display:flex; align-items:center; justify-content:space-between; padding-block:.7rem; gap:1rem; flex-wrap:wrap; }
+  .ff-brand{ display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.02em; color:var(--fk-ink); font-size:1.05rem; }
+  .ff-logo{ width:26px; height:26px; border-radius:8px; background:var(--ff-grad); display:grid; place-items:center; color:#fff; font-family:var(--fk-mono); font-weight:700; font-size:.8rem; }
+  .ff-brand small{ font-weight:600; color:var(--fk-soft); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; }
+  .eyebrow.gold{ color:var(--ff-accent-2); }
+
+  /* ── панель управления ── */
+  .pl-bar{ display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; margin:.4rem 0 1rem; }
+  .pl-btn{ display:inline-flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:700; padding:.5rem .9rem; border-radius:100px; border:1px solid var(--fk-line); background:var(--fk-card); color:var(--fk-ink); cursor:pointer; box-shadow:var(--fk-shadow); }
+  .pl-btn.primary{ background:var(--ff-grad); color:#fff; border-color:transparent; }
+  .pl-btn:active{ transform:translateY(1px); }
+  .pl-meta{ font-size:.74rem; color:var(--fk-soft); font-family:var(--fk-mono); }
+  .pl-banner{ display:none; align-items:center; gap:.5rem; font-size:.8rem; padding:.55rem .85rem; border-radius:var(--fk-r-sm); margin-bottom:.9rem; }
+  .pl-banner.warn{ background:var(--fk-amber-bg); color:var(--fk-amber); border:1px solid #ECD9A8; }
+  .pl-banner.ok{ background:#E1F5F0; color:#12756A; border:1px solid #BBE7DC; }
+
+  /* ── канбан ── */
+  .pl-wrap{ overflow-x:auto; padding-bottom:1rem; }
+  .pl-cols{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(268px,1fr); gap:.9rem; min-width:min-content; align-items:start; }
+  .pl-col{ background:var(--fk-bg-2); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:.7rem; display:flex; flex-direction:column; gap:.55rem; min-height:120px; transition:background .12s, border-color .12s; }
+  .pl-col.drag-over{ background:#FBF3E2; border-color:var(--ff-accent); }
+  .pl-colhead{ display:flex; align-items:center; justify-content:space-between; padding:.1rem .25rem .45rem; border-bottom:1px dashed var(--fk-line); }
+  .pl-colhead .t{ display:flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:800; color:var(--fk-ink); }
+  .pl-colhead .hint{ display:block; font-weight:500; font-size:.64rem; color:var(--fk-soft); margin-top:.1rem; }
+  .pl-colhead .cnt{ font-family:var(--fk-mono); font-size:.74rem; color:var(--fk-soft); background:var(--fk-card); border:1px solid var(--fk-line); border-radius:100px; padding:.05rem .5rem; }
+
+  .pl-card{ background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-sm); padding:.7rem .78rem; box-shadow:var(--fk-shadow); cursor:grab; }
+  .pl-card:active{ cursor:grabbing; }
+  .pl-card.dragging{ opacity:.45; }
+  .pl-card.moved{ border-color:var(--ff-accent); box-shadow:0 0 0 1px var(--ff-accent) inset, var(--fk-shadow); }
+  .pl-card .nm{ font-size:.9rem; font-weight:700; color:var(--fk-ink); line-height:1.25; display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; }
+  .pl-card .hn{ font-family:var(--fk-mono); font-size:.7rem; color:var(--ff-accent-2); font-weight:600; }
+  .pl-card .bz{ font-size:.78rem; color:var(--fk-muted); margin-top:.35rem; line-height:1.4; }
+  .pl-card .nx{ font-size:.76rem; color:var(--fk-soft); margin-top:.45rem; line-height:1.4; padding-top:.4rem; border-top:1px dashed var(--fk-line); }
+  .pl-card .nx b{ color:var(--fk-ink); }
+  .pl-meta-row{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.5rem; align-items:center; }
+  .ch{ display:inline-flex; align-items:center; gap:.28rem; font-size:.66rem; font-weight:700; padding:.14rem .48rem; border-radius:100px; white-space:nowrap; }
+  .ch.anom{ background:#EFE9FB; color:#6B45B0; }
+  .ch.part{ background:#E1F5F0; color:#12756A; }
+  .ch.warm{ background:#FBEEDD; color:#A9683F; }
+  .ch.sys{  background:var(--fk-bg-2); color:var(--fk-muted); border:1px solid var(--fk-line); }
+  .ty{ font-size:.64rem; font-weight:800; letter-spacing:.03em; text-transform:uppercase; padding:.13rem .42rem; border-radius:5px; }
+  .ty.custdev{ background:var(--fk-red-bg); color:var(--fk-red); }
+  .ty.call{ background:#E7F1FB; color:#1B6FB0; }
+  .ty.node{ background:var(--fk-bg-2); color:var(--fk-muted); border:1px solid var(--fk-line); }
+  .flag{ font-size:.64rem; font-weight:800; padding:.13rem .42rem; border-radius:5px; background:var(--fk-red-bg); color:var(--fk-red); }
+  .due{ font-family:var(--fk-mono); font-size:.7rem; color:var(--fk-muted); margin-left:auto; }
+  .pl-empty{ font-size:.76rem; color:var(--fk-soft); font-style:italic; padding:.6rem .3rem; text-align:center; }
+
+  /* ── модалка экспорта ── */
+  .pl-modal{ display:none; position:fixed; inset:0; z-index:80; background:rgba(20,16,8,.45); align-items:center; justify-content:center; padding:1.2rem; }
+  .pl-modal.open{ display:flex; }
+  .pl-modal .box{ background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-md); padding:1.2rem 1.3rem; max-width:560px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.25); }
+  .pl-modal h3{ margin:0 0 .3rem; font-size:1.02rem; color:var(--fk-ink); }
+  .pl-modal p{ font-size:.82rem; color:var(--fk-muted); margin:.2rem 0 .7rem; line-height:1.5; }
+  .pl-modal textarea{ width:100%; height:160px; font-family:var(--fk-mono); font-size:.74rem; border:1px solid var(--fk-line); border-radius:var(--fk-r-sm); padding:.6rem .7rem; resize:vertical; background:var(--fk-bg-2); color:var(--fk-ink); }
+  .pl-modal .row{ display:flex; gap:.5rem; justify-content:flex-end; margin-top:.8rem; }
+</style>
+</head>
+<body>
+
+<header class="ff-header">
+  <div class="wrap">
+    <a href="index.html" class="ff-brand"><span class="ff-logo">FF</span> Founder Finance <small>пайплайн</small></a>
+    <nav class="flex gap items-center">
+      <a href="index.html#daily" class="pill"><span class="dot b"></span>Кабина дня</a>
+      <a href="index.html#board" class="pill"><span class="dot b"></span>Задачи</a>
+      <a href="/" class="fk-nav-back">← Портал</a>
+    </nav>
+  </div>
+</header>
+
+<section id="top" class="section-tight" style="padding-top:2rem;">
+  <div class="wrap">
+    <span class="eyebrow gold">Люди в воронке · приватно · перетаскивай карточки мышью</span>
+    <h1 class="mt1">Пайплайн клиентов</h1>
+    <p class="lead muted mt2" style="max-width:80ch;">Одна карточка на человека. Двигай между стадиями — состояние сохраняется в браузере. Подвигал → нажми «Скопировать для Клода» и вставь мне в чат (или боту в inbox). Я сверю, обновлю источник правды и задам вопрос, если что-то непонятно.</p>
+
+    <div class="pl-bar">
+      <button class="pl-btn primary" id="btnCopy">💾 Скопировать для Клода</button>
+      <button class="pl-btn" id="btnReset">↺ Сбросить мои перемещения</button>
+      <span class="pl-meta" id="meta">—</span>
+    </div>
+    <div class="pl-banner" id="banner"></div>
+  </div>
+</section>
+
+<section class="section-tight" style="padding-top:.3rem;">
+  <div class="wrap">
+    <div class="pl-wrap">
+      <div class="pl-cols" id="board"></div>
+    </div>
+  </div>
+</section>
+
+<div class="pl-modal" id="modal">
+  <div class="box">
+    <h3>Состояние пайплайна</h3>
+    <p>Скопировано в буфер. Если нет — выдели текст ниже и скопируй вручную, затем вставь мне в чат.</p>
+    <textarea id="exportText" readonly></textarea>
+    <div class="row">
+      <button class="pl-btn" id="btnCopyAgain">Скопировать ещё раз</button>
+      <button class="pl-btn primary" id="btnCloseModal">Готово</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const LS_KEY = 'ff_pipeline_state_v1';
+let DATA = null;
+let overrides = {};   // cardId -> stageId (локальные перемещения Андрея)
+let baseVersion = 0;
+
+const chanClass = (c) => {
+  if(!c) return 'sys';
+  if(c.includes('десятка')) return 'anom';
+  if(c.includes('партнёр') || c.includes('реферал')) return 'part';
+  if(c.includes('тёпл') || c.includes('тепл')) return 'warm';
+  return 'sys';
+};
+const typeLabel = (t) => ({custdev:'кастдев', call:'созвон', node:'узел'}[t] || t);
+
+function curStage(card){ return overrides[card.id] || card.stage; }
+
+function loadLocal(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return;
+    const st = JSON.parse(raw);
+    if(st.baseVersion === baseVersion){ overrides = st.overrides || {}; }
+    else { overrides = {}; } // сервер новее — Клод обновил, сбрасываем локальное
+  }catch(e){ overrides = {}; }
+}
+function saveLocal(){
+  localStorage.setItem(LS_KEY, JSON.stringify({ baseVersion, overrides }));
+}
+
+function render(){
+  const board = document.getElementById('board');
+  board.innerHTML = '';
+  DATA.stages.forEach(stage => {
+    const col = document.createElement('div');
+    col.className = 'pl-col';
+    col.dataset.stage = stage.id;
+    const cards = DATA.cards.filter(c => curStage(c) === stage.id);
+    col.innerHTML = `
+      <div class="pl-colhead">
+        <div class="t">${stage.emoji} ${stage.title}<span class="hint">${stage.hint}</span></div>
+        <span class="cnt">${cards.length}</span>
+      </div>`;
+    if(cards.length === 0){
+      const e = document.createElement('div');
+      e.className = 'pl-empty';
+      e.textContent = '—';
+      col.appendChild(e);
+    }
+    cards.forEach(card => col.appendChild(cardEl(card)));
+
+    col.addEventListener('dragover', ev => { ev.preventDefault(); col.classList.add('drag-over'); });
+    col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+    col.addEventListener('drop', ev => {
+      ev.preventDefault(); col.classList.remove('drag-over');
+      const id = ev.dataTransfer.getData('text/plain');
+      const card = DATA.cards.find(c => c.id === id);
+      if(!card) return;
+      if(stage.id === card.stage) delete overrides[id];  // вернул на исходную
+      else overrides[id] = stage.id;
+      saveLocal(); render();
+    });
+    board.appendChild(col);
+  });
+  updateMeta();
+}
+
+function cardEl(card){
+  const el = document.createElement('div');
+  const moved = overrides[card.id] && overrides[card.id] !== card.stage;
+  el.className = 'pl-card' + (moved ? ' moved' : '');
+  el.draggable = true;
+  el.dataset.id = card.id;
+  const handle = card.handle ? `<span class="hn">${card.handle}</span>` : '';
+  const flag = card.flag ? `<span class="flag">${card.flag}</span>` : '';
+  const due = card.date ? `<span class="due">${card.date}</span>` : '';
+  el.innerHTML = `
+    <div class="nm">${card.name} ${handle} ${flag}</div>
+    <div class="bz">${card.business || ''}</div>
+    <div class="pl-meta-row">
+      <span class="ty ${card.type}">${typeLabel(card.type)}</span>
+      <span class="ch ${chanClass(card.channel)}">${card.channel || ''}</span>
+      ${due}
+    </div>
+    ${card.next ? `<div class="nx"><b>След. шаг:</b> ${card.next}</div>` : ''}`;
+  el.addEventListener('dragstart', ev => { ev.dataTransfer.setData('text/plain', card.id); el.classList.add('dragging'); });
+  el.addEventListener('dragend', () => el.classList.remove('dragging'));
+  return el;
+}
+
+function updateMeta(){
+  const n = Object.keys(overrides).filter(id => {
+    const c = DATA.cards.find(x=>x.id===id); return c && overrides[id]!==c.stage;
+  }).length;
+  document.getElementById('meta').textContent =
+    `v${DATA.version} · обновлено ${DATA.updated} · перемещено с последней сверки: ${n}`;
+}
+
+function buildExport(){
+  const moves = [];
+  Object.keys(overrides).forEach(id => {
+    const c = DATA.cards.find(x=>x.id===id);
+    if(c && overrides[id] !== c.stage){
+      moves.push({ id, name: c.name, from: c.stage, to: overrides[id] });
+    }
+  });
+  return JSON.stringify({ pipeline_update: true, base_version: DATA.version, moves }, null, 2);
+}
+
+function openModal(){
+  const txt = buildExport();
+  const ta = document.getElementById('exportText');
+  ta.value = txt;
+  document.getElementById('modal').classList.add('open');
+  copyText(txt);
+  ta.select();
+}
+function copyText(t){ if(navigator.clipboard) navigator.clipboard.writeText(t).catch(()=>{}); }
+
+document.getElementById('btnCopy').addEventListener('click', openModal);
+document.getElementById('btnCopyAgain').addEventListener('click', () => copyText(document.getElementById('exportText').value));
+document.getElementById('btnCloseModal').addEventListener('click', () => document.getElementById('modal').classList.remove('open'));
+document.getElementById('btnReset').addEventListener('click', () => {
+  if(!confirm('Сбросить все твои перемещения к последнему состоянию от Клода?')) return;
+  overrides = {}; saveLocal(); render();
+});
+
+fetch('pipeline.json?v=' + Date.now())
+  .then(r => r.json())
+  .then(json => {
+    DATA = json; baseVersion = json.version;
+    loadLocal();
+    // баннер: сервер новее локального базового
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){
+      try{ const st = JSON.parse(raw);
+        if(st.baseVersion !== baseVersion){
+          const b = document.getElementById('banner');
+          b.className = 'pl-banner ok'; b.style.display='flex';
+          b.textContent = '✓ Клод обновил пайплайн (v'+baseVersion+') — твои прежние локальные перемещения сброшены, они уже учтены.';
+        }
+      }catch(e){}
+    }
+    render();
+  })
+  .catch(() => {
+    document.getElementById('board').innerHTML = '<div class="pl-empty">Не удалось загрузить pipeline.json</div>';
+  });
+</script>
+</body>
+</html>
