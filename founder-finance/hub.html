@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FAFAF7">
+<meta name="color-scheme" content="light">
+<title>Founder Finance</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/css/portal.css">
+<style>
+  :root{
+    --ff-cream:#FBF5E8; --ff-cream2:#FDFBF6; --ff-line:#ECDFC2;
+    --ff-gold:#A9853F; --ff-gold-ink:#8A6A2E; --ff-shadow:rgba(169,133,63,.12);
+  }
+  body{background:#FAFAF7}
+  .ff-wrap{max-width:720px;margin:0 auto;padding:34px 22px 70px}
+  .ff-top{display:flex;align-items:center;justify-content:space-between;font-size:.8rem;margin-bottom:34px}
+  .ff-top a{color:var(--color-text-soft);text-decoration:none}
+  .ff-top a:hover{color:var(--ff-gold-ink)}
+  .ff-head{margin-bottom:26px}
+  .ff-emoji{font-size:2rem;line-height:1}
+  .ff-title{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:650;color:var(--color-text);margin:.35rem 0 .3rem;
+    font-variation-settings:"opsz" 30,"wght" 460}
+  .ff-sub{font-size:.92rem;color:var(--color-text-muted);line-height:1.5;max-width:56ch}
+  .ff-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:8px}
+  @media(min-width:640px){.ff-grid{grid-template-columns:repeat(3,1fr)}}
+  .ff-card{
+    display:flex;flex-direction:column;gap:.45rem;padding:1.25rem 1.3rem;border-radius:16px;
+    text-decoration:none;border:1px solid var(--ff-line);
+    background:linear-gradient(135deg,var(--ff-cream),var(--ff-cream2));
+    box-shadow:0 1px 3px var(--ff-shadow);
+    transition:transform 160ms ease,box-shadow 160ms ease;
+    min-height:150px;
+  }
+  .ff-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px var(--ff-shadow)}
+  .ff-card .em{font-size:1.7rem;line-height:1}
+  .ff-card .nm{font-size:1.12rem;font-weight:650;color:var(--color-text)}
+  .ff-card .ds{font-size:.8rem;color:var(--color-text-muted);line-height:1.45;flex:1}
+  .ff-card .go{font-size:.8rem;font-weight:650;color:var(--ff-gold-ink);margin-top:.2rem}
+  .ff-foot{margin-top:34px;font-size:.76rem;color:var(--color-text-soft);border-top:1px solid var(--color-border-soft);padding-top:14px}
+</style>
+</head>
+<body>
+<div class="ff-wrap">
+
+  <div class="ff-top">
+    <a href="/">← Портал</a>
+    <span style="color:var(--color-text-soft)">приватный кокпит</span>
+  </div>
+
+  <div class="ff-head">
+    <div class="ff-emoji">💶</div>
+    <div class="ff-title">Founder Finance</div>
+    <div class="ff-sub">Аутсорс-финдиректор для фаундеров ЕС. Выбери, куда зайти.</div>
+  </div>
+
+  <div class="ff-grid">
+    <a class="ff-card" href="/founder-finance/#daily">
+      <span class="em">📊</span>
+      <span class="nm">Кабина дня</span>
+      <span class="ds">Сводка дня: десятки, воронка к целям, контент и соцсети.</span>
+      <span class="go">Открыть →</span>
+    </a>
+    <a class="ff-card" href="/founder-finance/pipeline.html">
+      <span class="em">🗂️</span>
+      <span class="nm">Пайплайн</span>
+      <span class="ds">Люди в воронке. Канбан, перетаскивай карточки между стадиями.</span>
+      <span class="go">Открыть →</span>
+    </a>
+    <a class="ff-card" href="/founder-finance/dashboard.html">
+      <span class="em">🎯</span>
+      <span class="nm">Цели</span>
+      <span class="ds">Метрики месяца, динамика по неделям, таймлайн и риски.</span>
+      <span class="go">Открыть →</span>
+    </a>
+  </div>
+
+  <div class="ff-foot">Founder Finance · приватный раздел портала за Cloudflare Access</div>
+
+</div>
+</body>
+</html>
