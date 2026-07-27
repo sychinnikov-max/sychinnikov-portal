@@ -196,6 +196,15 @@ function saveLocal(){
 const pctOf = (d, g) => g ? Math.min(100, Math.round(d / g * 100)) : 0;
 const tyShort = { custdev:'кастдев', call:'созвон', node:'узел' };
 
+// авто-значение показателя: "stage:custdev_done" → живой счёт карточек в стадии (учитывает перемещения Андрея)
+function metricDone(m){
+  if(m.auto && m.auto.indexOf('stage:') === 0){
+    const st = m.auto.slice(6);
+    return DATA.cards.filter(k => curStage(k) === st).length;
+  }
+  return m.done;
+}
+
 function taskFallback(id){
   for(const t of (DATA.goals.tasks || [])){
     if(t.id === id) return !!t.done;
@@ -214,10 +223,11 @@ function renderGoals(){
   (g.metrics || []).forEach(x => {
     if(prevPer && x.period !== prevPer) m += '<hr class="gm-div">';
     prevPer = x.period;
+    const dv = metricDone(x);
     m += '<div class="gmetric"><div class="grow"><span class="lab">' + x.label +
          (x.period ? '<span class="gm-per">' + x.period + '</span>' : '') +
-         '</span><span class="val">' + x.done + ' / ' + x.goal + '</span></div>' +
-         '<div class="gbar"><i style="width:' + pctOf(x.done, x.goal) + '%"></i></div></div>';
+         '</span><span class="val">' + dv + ' / ' + x.goal + '</span></div>' +
+         '<div class="gbar"><i style="width:' + pctOf(dv, x.goal) + '%"></i></div></div>';
   });
   document.getElementById('goalsMetrics').innerHTML = m;
 
