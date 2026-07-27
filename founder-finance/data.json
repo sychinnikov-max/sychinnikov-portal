@@ -94,14 +94,14 @@
     "goal_subs_eoy": 5000,
     "priority": "Telegram",
     "cadence_goal": "публикация каждый день",
-    "streak_days": 0,
-    "posts_published": 0,
+    "streak_days": 1,
+    "posts_published": 2,
     "channels": [
       {
         "name": "Telegram-канал",
         "handle": "@founderfinance",
         "subs": 0,
-        "status": "заведен, публикаций нет",
+        "status": "🚀 первая публикация 27.07",
         "priority": true
       },
       {
@@ -126,7 +126,7 @@
         "name": "LinkedIn",
         "handle": "личный профиль",
         "subs": 0,
-        "status": "оптимизировать + Company Page"
+        "status": "🚀 первая публикация 27.07 (+ Company Page)"
       }
     ],
     "history": [
