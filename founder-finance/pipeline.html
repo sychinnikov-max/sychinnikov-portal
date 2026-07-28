@@ -196,11 +196,12 @@ function saveLocal(){
 const pctOf = (d, g) => g ? Math.min(100, Math.round(d / g * 100)) : 0;
 const tyShort = { custdev:'кастдев', call:'созвон', node:'узел' };
 
-// авто-значение показателя: "stage:custdev_done" → живой счёт карточек в стадии (учитывает перемещения Андрея)
+// авто-значение показателя: "stage:custdev_done,offer_client" → живой счёт карточек в перечисленных стадиях
+// (несколько стадий через запятую: карточка в «Оффер/клиент» тоже засчитывает проведённый кастдев)
 function metricDone(m){
   if(m.auto && m.auto.indexOf('stage:') === 0){
-    const st = m.auto.slice(6);
-    return DATA.cards.filter(k => curStage(k) === st).length;
+    const sts = m.auto.slice(6).split(',').map(s => s.trim());
+    return DATA.cards.filter(k => sts.indexOf(curStage(k)) !== -1).length;
   }
   return m.done;
 }
