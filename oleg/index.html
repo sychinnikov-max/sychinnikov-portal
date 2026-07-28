@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Founder Finance · материалы для Олега</title>
+<meta name="description" content="Управленческий учет на русском для бизнеса в Европе: что мы делаем, что получает клиент, кейсы и форматы сотрудничества с блогером.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131210'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' fill='%23C2A66A' text-anchor='middle'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#131210;--surface:#1B1814;--surface-2:#221E18;--card:#1F1B16;
+  --ink:#EDE6D6;--ink-muted:#B0A48D;--ink-dim:#8A7E6B;
+  --gold:#C2A66A;--gold-ink:#141009;--gold-deep:#A98E50;--bronze:#9A875C;
+  --hair:color-mix(in oklab,var(--ink) 14%,transparent);
+  --hair-gold:color-mix(in oklab,var(--gold) 32%,transparent);
+  --fd:"Playfair Display",Georgia,"Times New Roman",serif;
+  --fb:"Manrope","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  --fm:"IBM Plex Mono",ui-monospace,"SFMono-Regular","Menlo","Consolas",monospace;
+  --maxw:1140px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden;font-size:17px}
+.inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(22px,4vw,52px)}
+.band{width:100%;border-top:1px solid var(--hair)}
+.band.alt{background:var(--surface)}.band.deep{background:var(--surface-2)}
+.pad{padding-top:clamp(52px,6vw,90px);padding-bottom:clamp(52px,6vw,90px)}
+.pad.sm{padding-top:clamp(40px,4.5vw,62px);padding-bottom:clamp(40px,4.5vw,62px)}
+a{color:inherit}.fd{font-family:var(--fd)}
+.eyebrow{font-family:var(--fm);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.h2{font-family:var(--fd);font-weight:600;font-size:clamp(28px,3.4vw,44px);line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--ink-muted);font-size:clamp(16px,1.4vw,19px);max-width:70ch;margin-top:16px;line-height:1.6}
+.muted{color:var(--ink-muted)}.dim{color:var(--ink-dim)}
+.sect-head{margin-bottom:40px;max-width:78ch}
+.lead-p{color:var(--ink-muted);font-size:clamp(16px,1.4vw,19px);max-width:68ch;line-height:1.65}
+.lead-p+.lead-p{margin-top:16px}
+.lead-p b{color:var(--ink);font-weight:600}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:60;background:color-mix(in oklab,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+.brand{font-family:var(--fd);font-weight:600;font-size:20px;text-decoration:none;color:var(--ink)}.brand b{color:var(--gold);margin:0 .24em}
+.nlinks{display:flex;gap:10px;align-items:center}
+.nlinks a{color:var(--ink-muted);text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 12px;border-radius:8px}
+.nlinks a:hover{color:var(--ink)}
+.nlinks a.ncta{color:var(--gold);border:1px solid var(--hair-gold);font-weight:600}
+.nlinks a.ncta:hover{background:color-mix(in oklab,var(--gold) 12%,transparent);color:var(--gold)}
+@media(max-width:560px){.nlinks a.plain{display:none}}
+
+/* hero */
+.hero{background-image:radial-gradient(72% 60% at 82% 12%,rgba(194,166,106,.12),transparent 58%)}
+h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3rem);line-height:1.1;letter-spacing:-.012em;margin:16px 0 20px;max-width:22ch;overflow-wrap:break-word;text-wrap:balance}
+.takeaway{background:var(--card);border:1px solid var(--hair-gold);border-radius:16px;padding:24px 28px;margin-top:34px;max-width:80ch;font-size:16.5px;line-height:1.6;color:var(--ink)}
+.takeaway b{color:var(--gold)}
+
+/* generic tick list */
+.ticks{list-style:none;margin:8px 0 0;padding:0;max-width:70ch}
+.ticks li{display:flex;align-items:flex-start;gap:13px;font-size:17px;color:var(--ink);line-height:1.5;padding:9px 0;border-top:1px solid var(--hair)}
+.ticks li:first-child{border-top:none}
+.ticks li::before{content:"";flex:0 0 7px;height:7px;border-radius:50%;background:var(--gold);margin-top:9px}
+
+/* pain rows */
+.painrows{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,56px)}
+@media(max-width:760px){.painrows{grid-template-columns:1fr}}
+.painrow{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:18px 0;border-top:1px solid var(--hair)}
+.painrow .pn{font-family:var(--fd);font-size:clamp(20px,2.4vw,28px);font-weight:700;color:var(--gold);line-height:.95}
+.painrow p{font-size:clamp(15.5px,1.4vw,17.5px);line-height:1.5;color:var(--ink-muted)}
+.painrow p b{color:var(--ink);font-weight:600}
+
+/* value metrics */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:820px){.metrics{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.metrics{grid-template-columns:1fr}}
+.metric{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:30px 28px;display:flex;flex-direction:column}
+.metric.core{border-color:var(--hair-gold);background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 8%,var(--card)),var(--card))}
+.metric .ml{font-family:var(--fd);font-weight:600;font-size:21px;margin:0 0 10px;line-height:1.18}
+.metric .md{font-size:15.5px;color:var(--ink-muted);line-height:1.55}
+
+/* tool groups */
+.toolgroups{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.toolgroups{grid-template-columns:1fr}}
+.tgroup{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:26px 26px}
+.tgroup.core{border-color:var(--hair-gold);background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 8%,var(--card)),var(--card))}
+.tgroup .tgh{font-family:var(--fd);font-weight:600;font-size:19px;margin-bottom:6px;line-height:1.2}
+.tgroup .tgs{font-size:13.5px;color:var(--ink-dim);margin-bottom:16px;line-height:1.45}
+.tgroup ul{list-style:none;margin:0;padding:0}
+.tgroup li{font-size:15px;color:var(--ink-muted);line-height:1.4;padding:7px 0 7px 20px;position:relative;border-top:1px solid var(--hair)}
+.tgroup li:first-child{border-top:none}
+.tgroup li::before{content:"";position:absolute;left:2px;top:14px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.tgroup li b{color:var(--ink);font-weight:600}
+
+/* artifacts client gets */
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.arts{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.arts{grid-template-columns:1fr}}
+.art{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:22px 22px}
+.art .an{font-family:var(--fm);font-size:12px;color:var(--gold);letter-spacing:.05em}
+.art .at{font-family:var(--fd);font-weight:600;font-size:17.5px;margin:9px 0 7px;line-height:1.22}
+.art .ad{font-size:14.5px;color:var(--ink-muted);line-height:1.5}
+
+/* pricing table */
+.tablewrap{overflow-x:auto;border:1px solid var(--hair-gold);border-radius:16px;background:var(--card)}
+.ptable{width:100%;border-collapse:collapse;font-size:16px;min-width:520px}
+.ptable th,.ptable td{text-align:left;padding:16px 18px;border-bottom:1px solid var(--hair);vertical-align:top}
+.ptable thead th{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);font-weight:500}
+.ptable td.step{font-family:var(--fd);font-weight:600;font-size:17px;color:var(--ink);white-space:nowrap}
+.ptable td.desc{color:var(--ink-muted);font-size:15.5px;line-height:1.5}
+.ptable td.price{font-family:var(--fm);color:var(--gold);white-space:nowrap;font-size:15px}
+.ptable tr:last-child td{border-bottom:none}
+.pricenote{font-size:15px;color:var(--ink-muted);margin-top:18px;max-width:72ch;line-height:1.55}
+.pricenote b{color:var(--ink)}
+
+/* diffs / benefits */
+.diffs{display:grid;grid-template-columns:1fr 1fr;gap:16px 40px}
+@media(max-width:720px){.diffs{grid-template-columns:1fr}}
+.diff{padding:18px 0;border-top:1px solid var(--hair)}
+.diff .dh{font-family:var(--fd);font-weight:600;font-size:18px;color:var(--ink);margin-bottom:6px}
+.diff .db{font-size:15.5px;color:var(--ink-muted);line-height:1.5}
+
+/* deal models */
+.deals{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:820px){.deals{grid-template-columns:1fr}}
+.deal{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:28px 26px}
+.deal .dn{font-family:var(--fm);font-size:13px;color:var(--gold);letter-spacing:.05em}
+.deal .dt{font-family:var(--fd);font-weight:600;font-size:22px;margin:12px 0 12px;line-height:1.16}
+.deal .dd{font-size:15.5px;color:var(--ink-muted);line-height:1.55}
+
+/* content ideas */
+.ideas{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:720px){.ideas{grid-template-columns:1fr}}
+.idea{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:26px 26px;display:flex;flex-direction:column}
+.idea.core{border-color:var(--hair-gold);background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 8%,var(--card)),var(--card))}
+.idea .ig{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze)}
+.idea.core .ig{color:var(--gold)}
+.idea .it{font-family:var(--fd);font-weight:600;font-size:20px;margin:10px 0 9px;line-height:1.2}
+.idea .id{font-size:15.5px;color:var(--ink-muted);line-height:1.55}
+
+/* steps */
+.steps{counter-reset:st;list-style:none;margin:8px 0 0;padding:0;max-width:74ch}
+.steps li{position:relative;padding:16px 0 16px 52px;border-top:1px solid var(--hair);font-size:17px;color:var(--ink);line-height:1.5}
+.steps li:first-child{border-top:none}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--hair-gold);color:var(--gold);font-family:var(--fd);font-weight:600;display:flex;align-items:center;justify-content:center;font-size:16px}
+
+/* flagship cases */
+.flags{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:820px){.flags{grid-template-columns:1fr}}
+.flag{background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 7%,var(--card)),var(--card));border:1px solid var(--hair-gold);border-radius:18px;padding:32px 30px;display:flex;flex-direction:column}
+.flag .fk{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.flag .ft{font-family:var(--fd);font-weight:600;font-size:23px;margin:12px 0 6px;line-height:1.15}
+.flag .fmeta{font-size:14px;color:var(--ink-dim);margin-bottom:16px}
+.flag .row{padding:12px 0;border-top:1px solid var(--hair)}
+.flag .row .rl{font-family:var(--fm);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--bronze);margin-bottom:5px}
+.flag .row .rt{font-size:15.5px;color:var(--ink-muted);line-height:1.5}
+.flag .row .rt b{color:var(--ink);font-weight:600}
+.flag .result{margin-top:auto;padding-top:16px;border-top:1px solid var(--hair-gold);font-size:15.5px;color:var(--ink);line-height:1.5}
+.flag .result b{color:var(--gold)}
+
+/* mini cases */
+.minis{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.minis{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.minis{grid-template-columns:1fr}}
+.mini{background:var(--card);border:1px solid var(--hair);border-radius:15px;padding:24px 24px;display:flex;flex-direction:column}
+.mini .mn{font-family:var(--fm);font-size:12px;color:var(--gold)}
+.mini .mt{font-family:var(--fd);font-weight:600;font-size:18.5px;margin:9px 0 10px;line-height:1.2}
+.mini .mh{font-size:14.5px;color:var(--ink);line-height:1.5;margin-bottom:10px;font-style:italic}
+.mini .md{font-size:14px;color:var(--ink-muted);line-height:1.5}
+.mini .mv{margin-top:auto;padding-top:12px;font-size:13.5px;color:var(--ink-dim)}
+.mini .mv b{color:var(--gold);font-weight:600}
+
+/* niche cases */
+.niches{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:760px){.niches{grid-template-columns:1fr}}
+.niche{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:26px 26px}
+.niche .nk{font-family:var(--fd);font-weight:600;font-size:20px;line-height:1.2;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.niche .tag{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--bronze);border:1px solid var(--hair);border-radius:100px;padding:4px 11px;white-space:nowrap}
+.niche .nrow{font-size:15px;color:var(--ink-muted);line-height:1.55;padding:9px 0;border-top:1px solid var(--hair)}
+.niche .nrow:first-of-type{border-top:none}
+.niche .nrow b{color:var(--ink);font-weight:600}
+.niche .nrow .lab{color:var(--gold);font-family:var(--fm);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+/* chips + disclaimer */
+.stripe{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.chip{font-family:var(--fm);font-size:13px;letter-spacing:.04em;color:var(--gold);border:1px solid var(--hair-gold);border-radius:100px;padding:9px 16px}
+.disclaim{font-size:14px;color:var(--ink-dim);margin-top:22px;max-width:78ch;line-height:1.55;border-left:2px solid var(--hair-gold);padding-left:16px}
+
+/* section divider heading */
+.divider{text-align:center}
+.divider .eyebrow{display:block;margin-bottom:10px}
+
+/* footer */
+.foot{padding:42px 0 54px}
+.sig{font-family:var(--fd);font-size:21px;color:var(--ink)}
+.sig .role{display:block;font-family:var(--fb);font-size:15px;color:var(--ink-muted);margin-top:6px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="#top">Founder<b>·</b>Finance</a>
+    <div class="nlinks">
+      <a class="plain" href="#produkt">Продукт</a>
+      <a class="plain" href="#formaty">Форматы</a>
+      <a class="ncta" href="#kejsy">Кейсы</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero band" id="top">
+  <div class="inner pad">
+    <div class="eyebrow">Коротко и по делу</div>
+    <h1>О продукте и о том, как мы можем поработать вместе</h1>
+    <p class="lead-p">Олег, спасибо за созвон. Ниже все главное: кто мы, кому и чем помогаем, что именно получает клиент, наши кейсы и как из этого получается полезный контент и заработок для тебя. Сделал так, чтобы за несколько минут стало понятно, что продавать и как красиво завернуть это в твой Инстаграм.</p>
+    <div class="takeaway">Наш клиент, это ровно твоя аудитория: <b>русскоязычные предприниматели в Испании и Европе.</b> Значит интеграция получается не чужой рекламой поверх контента, а полезной темой для твоих же подписчиков.</div>
+  </div>
+</header>
+
+<section class="band alt" id="produkt">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Кто мы</div>
+      <h2 class="h2">Наводим порядок в финансах и управлении бизнеса</h2>
+    </div>
+    <p class="lead-p">Меня зовут Андрей Сычинников. Я бывший предприниматель (моя компания делала выручку около 120 млн рублей в год), сейчас живу в Испании и веду консалтинговую практику для русскоязычных фаундеров в Европе.</p>
+    <p class="lead-p">Простыми словами: <b>я ставлю собственнику систему управления по цифрам, чтобы он видел реальную прибыль, принимал решения на основе данных, а не на ощущениях, и рос предсказуемо.</b> Работаю не один: со мной команда, финансовый директор и специалист по бизнес-процессам, все русскоязычные.</p>
+    <p class="lead-p">Отдельная фишка для наших в Испании: у меня европейская компания и счет в евро. Любой бизнес из ЕС платит напрямую, в евро, по-белому, без историй «как перевести деньги в Россию».</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Кому помогаем</div>
+      <h2 class="h2">Наш клиент</h2>
+    </div>
+    <ul class="ticks">
+      <li>Русскоязычный собственник бизнеса в Европе или работающий онлайн</li>
+      <li>В команде уже есть люди (хотя бы 3-4 человека), бизнес работает</li>
+      <li>Выручка примерно <b>от 10 тысяч евро в месяц</b></li>
+      <li>Ниша любая: агентство недвижимости, кофейня, магазин, услуги, онлайн-школа, производство</li>
+      <li>Человек уперся в потолок и понимает, что дальше на энтузиазме не вырасти, нужна система</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band deep">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Какую задачу решаем</div>
+      <h2 class="h2">Понятная боль, ее описывают сами предприниматели</h2>
+    </div>
+    <div class="painrows">
+      <div class="painrow"><div class="pn">01</div><p><b>«Кручусь в операционке»</b> и не понимаю за что хвататься и куда двигаться дальше.</p></div>
+      <div class="painrow"><div class="pn">02</div><p><b>«Не понимаю, какая у меня реальная прибыль».</b> Люди часто путают выручку и деньги на счете с прибылью.</p></div>
+      <div class="painrow"><div class="pn">03</div><p><b>«Постоянно кассовые разрывы».</b> Деньги вроде есть, а платить нечем.</p></div>
+      <div class="painrow"><div class="pn">04</div><p><b>«Хочу расти, но нет системы».</b> Не понимаю, какое решение к какому результату приведет.</p></div>
+    </div>
+    <p class="pricenote" style="margin-top:26px">Мы ставим простую систему управления по цифрам: движение денег, отчет о прибыли, платежный календарь (чтобы не влетать в кассовые разрывы). И учим команду держать эту систему без нас.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Наша ценность</div>
+      <h2 class="h2">Что получает собственник</h2>
+    </div>
+    <div class="metrics">
+      <div class="metric core"><div class="ml">Видит реальную прибыль</div><div class="md">А не «сколько денег на счете». Часто это первое сильное открытие.</div></div>
+      <div class="metric"><div class="ml">Решает по цифрам</div><div class="md">Понимает заранее, как то или иное действие повлияет на прибыль.</div></div>
+      <div class="metric"><div class="ml">Нет кассовых разрывов</div><div class="md">Видит наперед, где будет дыра, и успевает подстелить.</div></div>
+      <div class="metric"><div class="ml">Выходит из операционки</div><div class="md">Система и команда работают без ежеминутного участия собственника.</div></div>
+      <div class="metric core"><div class="ml">Система остается после нас</div><div class="md">Главное отличие от инфоцыган: не «поговорили и разошлись», а команда пользуется инструментом сама.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Что конкретно мы внедряем</div>
+      <h2 class="h2">Не советы, а рабочие инструменты в компании</h2>
+      <p class="sub">Мы не «консультируем на словах». Мы ставим конкретные таблицы и регламенты, по которым команда работает каждый день. Вот из чего складывается система.</p>
+    </div>
+    <div class="toolgroups">
+      <div class="tgroup core">
+        <div class="tgh">Деньги под контролем</div>
+        <div class="tgs">Собственник видит реальную картину, а не «сколько на счете»</div>
+        <ul>
+          <li><b>Учет движения денег</b> (ДДС): куда и откуда уходят деньги</li>
+          <li><b>Отчет о прибыли</b> (ОПиУ): реальная чистая прибыль</li>
+          <li><b>Платежный календарь</b>: конец кассовым разрывам</li>
+          <li><b>Баланс</b>: что у компании есть и кому она должна</li>
+        </ul>
+      </div>
+      <div class="tgroup">
+        <div class="tgh">Планирование и рост</div>
+        <div class="tgs">Видно наперед, а не задним числом</div>
+        <ul>
+          <li><b>Финансовая модель</b> с 3 сценариями наперед</li>
+          <li><b>Юнит-экономика</b>: сколько приносит клиент, товар, сделка</li>
+          <li><b>Панель приборов</b>: главные показатели на одном экране</li>
+          <li><b>План доходов и расходов</b> на квартал</li>
+        </ul>
+      </div>
+      <div class="tgroup">
+        <div class="tgh">Управление и команда</div>
+        <div class="tgs">Решения не теряются, процессы передаваемы</div>
+        <ul>
+          <li><b>Реестр управленческих решений</b>: ничего не забыто</li>
+          <li><b>Оргструктура «как по факту»</b>: кто за что реально отвечает</li>
+          <li><b>Регламенты процессов</b> (BPMN): работа описана</li>
+          <li><b>Дорожная карта</b> на 3 месяца с привязкой к прибыли</li>
+        </ul>
+      </div>
+    </div>
+    <p class="pricenote" style="margin-top:24px">В основе финансового контура методология «Нескучных финансов». Поверх нее мы добавляем управленческий слой: решения, команду, процессы. Набор инструментов подбираем под конкретный бизнес, не грузим всем сразу.</p>
+  </div>
+</section>
+
+<section class="band deep">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Что именно получает клиент</div>
+      <h2 class="h2">Артефакты, которые остаются в компании</h2>
+      <p class="sub">После работы у собственника на руках не «впечатления от консультаций», а конкретные рабочие документы. Они продолжают работать, когда мы уходим.</p>
+    </div>
+    <div class="arts">
+      <div class="art"><div class="an">Артефакт 01</div><div class="at">Управленческий отчет о прибыли</div><div class="ad">Собственник впервые видит реальную чистую прибыль по правильной структуре.</div></div>
+      <div class="art"><div class="an">Артефакт 02</div><div class="at">Платежный календарь</div><div class="ad">Видно наперед, где будет дыра в деньгах, и есть время подстелить.</div></div>
+      <div class="art"><div class="an">Артефакт 03</div><div class="at">Финмодель с 3 сценариями</div><div class="ad">Пессимистичный, базовый, оптимистичный. Виден рычаг роста прибыли.</div></div>
+      <div class="art"><div class="an">Артефакт 04</div><div class="at">Панель показателей</div><div class="ad">Главные цифры бизнеса на одном экране, обновляются регулярно.</div></div>
+      <div class="art"><div class="an">Артефакт 05</div><div class="at">Оргструктура «как по факту»</div><div class="ad">Реальная карта ответственности и зон риска в команде.</div></div>
+      <div class="art"><div class="an">Артефакт 06</div><div class="at">Дорожная карта на 3 месяца</div><div class="ad">Что, кто и к какой дате делает. Каждое действие привязано к прибыли.</div></div>
+      <div class="art"><div class="an">Артефакт 07</div><div class="at">Реестр управленческих решений</div><div class="ad">История решений с ответственными и результатом. Ничего не теряется.</div></div>
+      <div class="art"><div class="an">Артефакт 08</div><div class="at">Регламенты процессов (BPMN)</div><div class="ad">Ключевые процессы описаны так, что их можно передать новому человеку.</div></div>
+      <div class="art"><div class="an">Артефакт 09</div><div class="at">Обученный преемник в команде</div><div class="ad">Человек внутри компании, который держит систему без нас.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Выгоды для компании</div>
+      <h2 class="h2">Что это дает бизнесу в деньгах и времени</h2>
+    </div>
+    <div class="diffs">
+      <div class="diff"><div class="dh">Дешевле, чем нанимать управленца</div><div class="db">Штатный операционный директор в Европе стоит 90-160 тысяч евро в год и каждый год снова. Мы ставим систему один раз, дальше ее держит ваша же команда.</div></div>
+      <div class="diff"><div class="dh">Деньги перестают утекать незаметно</div><div class="db">Когда видно юнит-экономику и реальную прибыль, сразу понятно, какие товары, клиенты и каналы съедают деньги.</div></div>
+      <div class="diff"><div class="dh">Собственник выходит из операционки</div><div class="db">Освобождается время первого лица на стратегию и рост, а не на тушение пожаров.</div></div>
+      <div class="diff"><div class="dh">Рост становится предсказуемым</div><div class="db">Решения принимаются по цифрам, видно заранее, к какому результату они приведут.</div></div>
+      <div class="diff"><div class="dh">Знания остаются в компании</div><div class="db">Уходит сотрудник, не уходят знания: процессы описаны, система работает.</div></div>
+      <div class="diff"><div class="dh">Оплата в евро, по-белому</div><div class="db">Европейская компания и счет, никаких сложностей с переводами и комплаенсом.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Продукты и цены</div>
+      <h2 class="h2">Вход недорогой, дальше по нарастающей</h2>
+      <p class="sub">Клиент может зайти с любой ступени. Чеки реально от 490 евро до 4-5 тысяч евро в месяц: есть с чем работать и по цене, и по типу клиента.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="ptable">
+        <thead><tr><th>Ступень</th><th>Что это</th><th>Цена</th></tr></thead>
+        <tbody>
+          <tr><td class="step">Знакомство и разбор</td><td class="desc">Часовой созвон, показываю где компания теряет деньги. Без оплаты</td><td class="price">бесплатно</td></tr>
+          <tr><td class="step">Финансовая панель</td><td class="desc">Ставим финансовую систему: прибыль, деньги, платежный календарь. Легкий вход</td><td class="price">от 490 € / мес</td></tr>
+          <tr><td class="step">Аудит траектории</td><td class="desc">Полная диагностика: команда, финансы, стратегия. Дорожная карта на 3 месяца</td><td class="price">990 € разово</td></tr>
+          <tr><td class="step">Перезагрузка</td><td class="desc">3 месяца строим систему управления вместе с командой клиента</td><td class="price">от 2490 € / мес</td></tr>
+          <tr><td class="step">Советник</td><td class="desc">Сопровождаю собственника на дистанции, держим курс по цифрам</td><td class="price">4390 € / мес</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Чем отличаемся</div>
+      <h2 class="h2">Почему это не «еще один консультант»</h2>
+    </div>
+    <div class="diffs">
+      <div class="diff"><div class="dh">Не курс и не инфопродукт</div><div class="db">Мы не учим, мы встраиваем работающую систему в конкретный бизнес.</div></div>
+      <div class="diff"><div class="dh">Система остается после нас</div><div class="db">У инфоцыган: сделали, ушли, развалилось. У нас: сделали, ушли, работает.</div></div>
+      <div class="diff"><div class="dh">Русская экспертиза, евро-платежи</div><div class="db">Оплата в евро, по-белому, без санкционного трения. Удобно бизнесу в ЕС.</div></div>
+      <div class="diff"><div class="dh">Проверенная методология</div><div class="db">В основе подход «Нескучных финансов». Я сам прошел его как клиент в своем бизнесе.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= КЕЙСЫ ================= -->
+
+<section class="band deep" id="kejsy">
+  <div class="inner pad divider">
+    <div class="eyebrow">Раздел · Кейсы и разборы</div>
+    <h2 class="h2">Что мы находим и чиним в реальных бизнесах</h2>
+    <p class="sub" style="margin:16px auto 0">Три пласта: обезличенные проекты, с которыми работали вплотную, короткие разборы конкретных ситуаций, и типовые кейсы по нишам. Почти каждый разбор ложится в отдельный ролик.</p>
+    <div class="stripe" style="justify-content:center">
+      <span class="chip">Рыбное производство · ЕС</span>
+      <span class="chip">E-commerce · маркетплейсы</span>
+      <span class="chip">Дистрибуция · табак</span>
+      <span class="chip">Услуги · Испания</span>
+      <span class="chip">Отделы продаж</span>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Пласт 1 · Проекты вплотную</div>
+      <h2 class="h2">Обезличенные проекты из практики</h2>
+      <p class="sub">Имена и узнаваемые детали убраны. Показываем суть: с чем пришел собственник, что оказалось настоящей проблемой, что мы сделали и что осталось работать в компании.</p>
+    </div>
+    <div class="flags">
+      <div class="flag">
+        <div class="fk">Рыбное производство · ЕС</div>
+        <div class="ft">Пришли за продажами, нашли отсутствие управления</div>
+        <div class="fmeta">Семейный производственный бизнес, экспорт в ЕС</div>
+        <div class="row"><div class="rl">Запрос</div><div class="rt">«Посмотри на компанию, вроде буксуют продажи».</div></div>
+        <div class="row"><div class="rl">Истинная проблема</div><div class="rt">Не продажи. <b>Не было функции управления</b>: ни целей, ни плана, ни CRM, ни координации отделов.</div></div>
+        <div class="row"><div class="rl">Что сделали</div><div class="rt">Внедрили CRM с регламентами, единую доску задач, ребрендинг и каталог, подготовили и провели первую международную выставку.</div></div>
+        <div class="result"><b>Результат:</b> с первой же выставки более <b>120 квалифицированных B2B-контактов</b> в базе. Система продаж и учета работает без нас уже несколько месяцев.</div>
+      </div>
+      <div class="flag">
+        <div class="fk">E-commerce · маркетплейсы</div>
+        <div class="ft">Из управления «на глаз» в управление по цифрам</div>
+        <div class="fmeta">Товарный бизнес на нескольких площадках</div>
+        <div class="row"><div class="rl">Запрос</div><div class="rt">«Поставьте финансы, хочу понимать сколько зарабатываю и куда уходят деньги».</div></div>
+        <div class="row"><div class="rl">Истинная проблема</div><div class="rt">Не отчеты, а <b>управляемость через цифры</b>: решения принимались интуитивно, команда не работала на прибыль.</div></div>
+        <div class="row"><div class="rl">Что сделали</div><div class="rt">Полный цикл управленческого учета: ДДС, отчет о прибыли, финмодель, платежный календарь, реестр решений, регулярные встречи.</div></div>
+        <div class="result"><b>Результат:</b> дивиденды стали выплачиваться регулярно, точность планирования прибыли превысила <b>80 процентов</b>, собственник вышел из ежедневной операционки.</div>
+      </div>
+      <div class="flag">
+        <div class="fk">Дистрибуция · табак и вейп</div>
+        <div class="ft">Финансовый разбор вскрыл, где реально прибыль</div>
+        <div class="fmeta">Оптово-розничная дистрибуция</div>
+        <div class="row"><div class="rl">Запрос</div><div class="rt">«Оборот есть, а денег и ясности нет. Разберите цифры».</div></div>
+        <div class="row"><div class="rl">Что нашли</div><div class="rt">Бизнес раздроблен на десяток ИП, скрытый долг, а вся маржа держится на одной категории, а не там, где думал собственник.</div></div>
+        <div class="row"><div class="rl">Что сделали</div><div class="rt">Собрали управленческий P&L, показали доходность по категориям и реальную структуру бизнеса и рисков.</div></div>
+        <div class="result"><b>Результат:</b> собственник впервые увидел, <b>какая категория его кормит</b>, а какая создает оборот без прибыли. Появилась база для решений.</div>
+      </div>
+      <div class="flag">
+        <div class="fk">Услуги и релокация · Испания и Германия</div>
+        <div class="ft">Навести порядок в услуговом бизнесе в ЕС</div>
+        <div class="fmeta">Компании услуг для релокантов и предпринимателей</div>
+        <div class="row"><div class="rl">Запрос</div><div class="rt">Рынок просел, прежняя модель хуже приносит, непонятно за что держаться.</div></div>
+        <div class="row"><div class="rl">Истинная проблема</div><div class="rt">Нет понимания <b>юнит-экономики услуг</b>: какие направления зарабатывают, а какие тянут вниз.</div></div>
+        <div class="row"><div class="rl">Что сделали</div><div class="rt">Разложили выручку и расходы по направлениям, показали реальную маржинальность, помогли сфокусироваться.</div></div>
+        <div class="result"><b>Результат:</b> понятно, <b>какое направление усиливать</b>, а какое сворачивать. Решения по цифрам, а не по ощущениям.</div>
+      </div>
+    </div>
+    <p class="disclaim">Проекты приведены обезличенно: без названий компаний и точных финансовых показателей клиентов. Приводим суть работы и качественные результаты, которые относятся именно к нашему участию.</p>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Пласт 2 · Разборы ситуаций</div>
+      <h2 class="h2">Мини-разборы: находка и урок</h2>
+      <p class="sub">Такие ситуации мы находим на созвонах и в проектах постоянно. Каждый разбор это готовый сюжет для ролика: короткая ошибка, которая стоит бизнесу денег, и понятный вывод.</p>
+    </div>
+    <div class="minis">
+      <div class="mini"><div class="mn">Разбор 01</div><div class="mt">Чистая прибыль как KPI продавца</div><div class="mh">«Она поставила коммерческому KPI чистую прибыль. Логично. И это ошибка».</div><div class="md">Продавец не управляет чистой прибылью: на нее влияют закупка, логистика, налоги, другие отделы.</div><div class="mv"><b>Вывод:</b> KPI ставят на то, что человек контролирует напрямую.</div></div>
+      <div class="mini"><div class="mn">Разбор 02</div><div class="mt">Ваш CRM ворует у вас продажи</div><div class="mh">«Менеджеры тормозят не потому что ленивые, а потому что CRM заставляет кликать 10 раз».</div><div class="md">Дорогие продавцы половину дня работают операторами ввода данных. Каждый лишний клик это несделанный звонок.</div><div class="mv"><b>Вывод:</b> CRM должна работать на продавца, а не наоборот.</div></div>
+      <div class="mini"><div class="mn">Разбор 03</div><div class="mt">Продавец оформляет заказ = теряете дважды</div><div class="mh">«Лучший закрывающий занят пост-продажной рутиной. Это деньги дважды».</div><div class="md">Платите за продажи, получаете делопроизводство. И следующую сделку он в это время не закрывает.</div><div class="mv"><b>Вывод:</b> продажа и исполнение это разные функции.</div></div>
+      <div class="mini"><div class="mn">Разбор 04</div><div class="mt">Нанял 15, осталось 4</div><div class="mh">«Рынок виноват? Нет. Ваш онбординг».</div><div class="md">Отвал 70 процентов на старте это не плохие кандидаты, а отсутствие системы ввода: плана, скриптов, наставника.</div><div class="mv"><b>Вывод:</b> течет не воронка найма, а процесс адаптации.</div></div>
+      <div class="mini"><div class="mn">Разбор 05</div><div class="mt">Вам не нужно больше лидов</div><div class="mh">«100 заявок в день, гордость. А конверсия 20 процентов. Значит 80 заявок вы сжигаете».</div><div class="md">Рост ищут в новых лидах, а деньги лежат в конверсии. С 20 до 25 процентов это +25 процентов продаж без рубля в рекламу.</div><div class="mv"><b>Вывод:</b> сначала чините конверсию, потом лейте трафик.</div></div>
+      <div class="mini"><div class="mn">Разбор 06</div><div class="mt">Нельзя требовать то, что не считаешь</div><div class="mh">«Хочет управлять прибылью и ставит ее как KPI. А учета прибыли нет».</div><div class="md">Нельзя спрашивать с команды за цифру, которую сам не видишь в реальном времени.</div><div class="mv"><b>Вывод:</b> сначала учет, потом KPI. Иначе управление вслепую.</div></div>
+      <div class="mini"><div class="mn">Разбор 07</div><div class="mt">Выручка растет, а денег нет</div><div class="mh">«Продаж больше, чем когда-либо, а в конце месяца платить нечем».</div><div class="md">Прибыль и деньги на счете это разные вещи. Деньги замораживаются в товаре, отсрочках, авансах поставщикам.</div><div class="mv"><b>Вывод:</b> платежный календарь показывает разрыв заранее.</div></div>
+      <div class="mini"><div class="mn">Разбор 08</div><div class="mt">Собственник и компания это разные кошельки</div><div class="mh">«Заплатил налоги и понял, что это были не мои деньги».</div><div class="md">Когда траты собственника и бизнеса в одной куче, невозможно понять ни прибыль, ни сколько можно забрать себе.</div><div class="mv"><b>Вывод:</b> разделить контуры и посчитать роль собственника.</div></div>
+      <div class="mini"><div class="mn">Разбор 09</div><div class="mt">Скидка, которая съела маржу</div><div class="mh">«Дали 15 процентов скидки, думали разгонят продажи».</div><div class="md">При марже 30 процентов скидка в 15 процентов это половина прибыли со сделки. В процентах незаметно, в деньгах больно.</div><div class="mv"><b>Вывод:</b> скидки считают в деньгах, а не в процентах.</div></div>
+      <div class="mini"><div class="mn">Разбор 10</div><div class="mt">Самый лояльный клиент оказался убыточным</div><div class="mh">«Возит у нас годами. А когда посчитали, он в минус».</div><div class="md">Большие объемы с большими скидками, отсрочками и капризами часто убыточны. Без юнит-экономики по клиенту этого не видно.</div><div class="mv"><b>Вывод:</b> считать прибыль по каждому клиенту, а не оборот.</div></div>
+      <div class="mini"><div class="mn">Разбор 11</div><div class="mt">Склад, который съел годовую прибыль</div><div class="mh">«Прибыль на бумаге есть, а она вся лежит на складе неликвидом».</div><div class="md">Замороженные в товаре деньги это упущенная прибыль и риск списания. Оборачиваемость показывает, где деньги стоят.</div><div class="mv"><b>Вывод:</b> прибыль в отчете не равно деньги в руках.</div></div>
+      <div class="mini"><div class="mn">Разбор 12</div><div class="mt">Собственник платит себе последним</div><div class="mh">«Всем зарплату, поставщикам, налоги. А себе как получится».</div><div class="md">Без дивидендной политики и заложенной роли собственника бизнес живет, а его владелец нет. Это не жадность, это структура.</div><div class="mv"><b>Вывод:</b> доход собственника это плановая статья, а не остаток.</div></div>
+      <div class="mini"><div class="mn">Разбор 13</div><div class="mt">Три отчета, которые спорят между собой</div><div class="mh">«Бухгалтер говорит одно, таблица другое, ощущение третье».</div><div class="md">Пока нет единого управленческого источника правды, каждое совещание это спор о цифрах вместо решений.</div><div class="mv"><b>Вывод:</b> один управленческий контур, которому доверяют все.</div></div>
+      <div class="mini"><div class="mn">Разбор 14</div><div class="mt">Рост, который чуть не убил компанию</div><div class="mh">«Открыли второе направление на энтузиазме. Оно утянуло первое».</div><div class="md">Масштабирование без финмодели и сценариев часто съедает прибыль здорового направления. Сначала модель, потом рост.</div><div class="mv"><b>Вывод:</b> проверять рост на модели до вложений.</div></div>
+    </div>
+    <p class="disclaim">Разборы обезличены. Первые из них взяты из конкретных проектов и созвонов, остальные это частые ситуации, которые мы находим регулярно. Суть и урок реальны, узнаваемые детали клиентов убраны.</p>
+  </div>
+</section>
+
+<section class="band deep">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Пласт 3 · По нишам</div>
+      <h2 class="h2">Как это выглядит в разных бизнесах</h2>
+      <p class="sub">Типовые кейсы по нишам, которые близки твоей аудитории. Цифры здесь модельные, для наглядности, но ситуации и логика работы настоящие.</p>
+    </div>
+    <div class="niches">
+      <div class="niche">
+        <div class="nk">Агентство недвижимости<span class="tag">пример</span></div>
+        <div class="nrow"><span class="lab">Ситуация</span>Сделки идут, доход скачет от месяца к месяцу, непонятно, сколько реально зарабатывает агентство после расходов на рекламу и комиссии.</div>
+        <div class="nrow"><span class="lab">Что делаем</span>Считаем прибыль по каждому направлению и каждому агенту, юнит-экономику сделки, ставим платежный календарь.</div>
+        <div class="nrow"><span class="lab">Результат (модель)</span>Видно, что часть сделок при всей активности почти не приносит прибыли. Фокус смещается на маржинальные, доход выравнивается.</div>
+      </div>
+      <div class="niche">
+        <div class="nk">Кофейня или ресторан<span class="tag">пример</span></div>
+        <div class="nrow"><span class="lab">Ситуация</span>Гостей много, касса полная, а в конце месяца денег почти не остается. Куда уходят, непонятно.</div>
+        <div class="nrow"><span class="lab">Что делаем</span>Раскладываем себестоимость блюд, фудкост, аренду и ФОТ, показываем реальную маржу и точку безубыточности.</div>
+        <div class="nrow"><span class="lab">Результат (модель)</span>Находим позиции меню, которые работают в минус, и статьи, где деньги утекают. Прибыль появляется без роста выручки.</div>
+      </div>
+      <div class="niche">
+        <div class="nk">Онлайн-школа или курсы<span class="tag">пример</span></div>
+        <div class="nrow"><span class="lab">Ситуация</span>Обороты растут вместе с рекламным бюджетом, но прибыль стоит на месте. Масштабирование не радует.</div>
+        <div class="nrow"><span class="lab">Что делаем</span>Считаем экономику одного ученика: стоимость привлечения, окупаемость, возвраты, повторные покупки.</div>
+        <div class="nrow"><span class="lab">Результат (модель)</span>Видно, при какой цене привлечения запуск в плюс, а при какой в минус. Реклама перестает съедать прибыль.</div>
+      </div>
+      <div class="niche">
+        <div class="nk">Интернет-магазин<span class="tag">пример</span></div>
+        <div class="nrow"><span class="lab">Ситуация</span>Ассортимент большой, оборот приличный, но деньги вечно в товаре, а на счете впритык.</div>
+        <div class="nrow"><span class="lab">Что делаем</span>ABC-анализ, оборачиваемость, юнит-экономика по товарам, платежный календарь под закупки.</div>
+        <div class="nrow"><span class="lab">Результат (модель)</span>Видно, какие товары кормят, а какие замораживают деньги. Закупка становится осмысленной, кассовые разрывы уходят.</div>
+      </div>
+      <div class="niche">
+        <div class="nk">Агентство услуг<span class="tag">пример</span></div>
+        <div class="nrow"><span class="lab">Ситуация</span>Проектов много, команда загружена, а прибыль тонкая. Ощущение, что работают за еду.</div>
+        <div class="nrow"><span class="lab">Что делаем</span>Считаем рентабельность каждого проекта и клиента, загрузку команды, ставим учет времени и маржи.</div>
+        <div class="nrow"><span class="lab">Результат (модель)</span>Находим убыточных клиентов и провисающие проекты. Пересборка портфеля поднимает маржу без новых продаж.</div>
+      </div>
+      <div class="niche">
+        <div class="nk">Производство<span class="tag">пример</span></div>
+        <div class="nrow"><span class="lab">Ситуация</span>Заказы есть, цех загружен, а прибыль непредсказуема и зависит от «как повезет с закупкой».</div>
+        <div class="nrow"><span class="lab">Что делаем</span>Считаем реальную себестоимость продукции, маржу по видам изделий, планируем закупки и денежный поток.</div>
+        <div class="nrow"><span class="lab">Результат (модель)</span>Понятно, какие изделия выгодны, а какие тянут вниз. Ценообразование и загрузка выстраиваются под прибыль.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ФОРМАТЫ ================= -->
+
+<section class="band" id="formaty">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Почему это интересно тебе</div>
+      <h2 class="h2">Три формата сотрудничества</h2>
+      <p class="sub">Твоя аудитория и есть наши клиенты, совпадение почти стопроцентное. Оба базовых формата, как обсуждали, рабочие, плюс гибрид.</p>
+    </div>
+    <div class="deals">
+      <div class="deal"><div class="dn">Формат 1</div><div class="dt">Платная интеграция</div><div class="dd">Фиксированная оплата за рекламу или серию касаний: пост, сторис, прогрев.</div></div>
+      <div class="deal"><div class="dn">Формат 2</div><div class="dt">Партнерский процент</div><div class="dd">Делюсь процентом с каждой закрытой сделки, которая пришла от тебя. Чеки от 490 до 4-5 тысяч евро в месяц, и если клиент остается на несколько месяцев, доход растет.</div></div>
+      <div class="deal"><div class="dn">Формат 3</div><div class="dt">Гибрид</div><div class="dd">Небольшая фиксированная часть за производство контента плюс процент с продаж. Часто самый честный вариант для обеих сторон.</div></div>
+    </div>
+    <p class="pricenote" style="margin-top:24px">Точный процент и формат предлагаю обсудить отдельно, я гибкий.</p>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Как обыграть в контенте</div>
+      <h2 class="h2">Продаем не услугу, а историю и результат</h2>
+      <p class="sub">Ты верно сказал: продукт неосязаемый, в лоб рекламировать сложно. Согласен. Поэтому вот готовые заходы, каждый ложится в рилс или серию сторис.</p>
+    </div>
+    <div class="ideas">
+      <div class="idea core"><div class="ig">Главный заход</div><div class="it">Разбор бизнеса «до и после»</div><div class="id">Ты подгоняешь знакомый бизнес (кофейня, магазин, агентство), я бесплатно, в рамках интеграции, беру одну конкретную проблему, разбираю, даю решение. Снимаем «было так, стало так». Живой кейс, а не абстрактная реклама, и бизнес реальный, в твоем городе.</div></div>
+      <div class="idea"><div class="ig">Рубрика</div><div class="it">Финансовые ошибки предпринимателей</div><div class="id">Короткие ролики: «почему есть деньги, а прибыли нет», «что такое кассовый разрыв и как в него не влететь». Полезно, вирусится, в конце мягкий выход на меня.</div></div>
+      <div class="idea"><div class="ig">Формат</div><div class="it">Один инструмент, один ролик</div><div class="id">Например платежный календарь: показываю на пальцах, как предприниматель перестает жить в панике «чем платить в конце месяца». Осязаемо и понятно.</div></div>
+      <div class="idea"><div class="ig">Цифры</div><div class="it">«Сколько на самом деле зарабатывает бизнес»</div><div class="id">Берем условную нишу (недвижимость или общепит), на цифрах показываем разницу между выручкой и реальной прибылью. Аудитория предпринимателей такое обожает.</div></div>
+      <div class="idea"><div class="ig">Вовлечение</div><div class="it">Живой разбор подписчика</div><div class="id">Кто-то из подписчиков присылает свою ситуацию, разбираем ее в сторис или прямом эфире. Максимум вовлечения и сразу видно ценность.</div></div>
+      <div class="idea"><div class="ig">Суть</div><div class="it">Продукт становится осязаемым</div><div class="id">Я остаюсь онлайн-экспертом, но через реальный бизнес и конкретный результат тема становится наглядной. И это твой же полезный контент, а не рекламная вставка.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band deep">
+  <div class="inner pad">
+    <div class="sect-head">
+      <div class="eyebrow">Что дальше</div>
+      <h2 class="h2">Предлагаю такой порядок</h2>
+    </div>
+    <ol class="steps">
+      <li>Смотришь этот документ, прикидываешь, какой формат ближе: оплата, процент или гибрид.</li>
+      <li>Выбираем один пилотный заход, например разбор реального бизнеса «до и после», и пробуем на нем.</li>
+      <li>По результату решаем, как масштабировать.</li>
+    </ol>
+  </div>
+</section>
+
+<footer class="band">
+  <div class="inner foot">
+    <div class="sig">Андрей Сычинников<span class="role">Founder Finance · управленческий учет на русском для бизнеса в Европе</span></div>
+  </div>
+</footer>
+
+</body>
+</html>
