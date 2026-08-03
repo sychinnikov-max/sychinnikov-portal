@@ -39,6 +39,7 @@
   .p-cold{background:rgba(79,140,255,.14);color:#7fb0ff}
   .p-frozen{background:rgba(139,150,165,.15);color:#a4afbd}
   .p-good{background:rgba(55,201,138,.16);color:#4fd6a0}
+  .p-out{background:rgba(95,106,120,.2);color:#7b8694}
   .weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   @media(max-width:700px){.weeks{grid-template-columns:repeat(2,1fr)}}
   .wk{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
@@ -46,7 +47,8 @@
   .wk .r{font-size:22px;font-weight:700;margin-top:4px}
   .wk .g{font-size:12px;color:var(--dim);margin-top:2px}
   .wk.now{border-color:var(--accent);box-shadow:0 0 0 1px rgba(79,140,255,.35)}
-  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  .tbl-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
   th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
   th{color:var(--mut);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
   td .who{font-weight:600}
@@ -64,11 +66,18 @@
   .risk li::marker{color:var(--bad)}
   .focus li::marker{color:var(--good)}
   .foot{color:var(--dim);font-size:11.5px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
-  .row-flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-  .chan{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+  .chan{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
   .chan:last-child{border-bottom:none}
   .chan .nm{font-weight:600;font-size:14px}
   .chan .ds{color:var(--mut);font-size:12px;margin-top:2px}
+  .alert{background:rgba(242,86,90,.10);border:1px solid rgba(242,86,90,.35);border-radius:14px;padding:16px 18px;margin-top:18px}
+  .alert .t{font-weight:700;font-size:14px;color:#ff8f92}
+  .alert .b{font-size:13px;color:var(--ink);margin-top:6px}
+  .funnel{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:4px}
+  @media(max-width:760px){.funnel{grid-template-columns:repeat(2,1fr)}}
+  .fstep{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 12px 13px;text-align:center}
+  .fstep .n{font-size:26px;font-weight:700;line-height:1}
+  .fstep .l{font-size:11px;color:var(--mut);margin-top:5px;text-transform:uppercase;letter-spacing:.4px}
 </style>
 </head>
 <body>
@@ -77,33 +86,55 @@
   <header>
     <div>
       <h1>Founder Finance — цели и динамика</h1>
-      <div class="sub">Северная звезда июля: встречи с потенциальными клиентами · темп 2-3 в неделю</div>
+      <div class="sub">Северная звезда: кастдев-разборы → первая оплата · декларация 30 разборов до 21.09</div>
     </div>
-    <div class="stamp">Срез на 25.07.2026 (суббота)<br>источник: founder-finance/ (state-файлы)</div>
+    <div class="stamp">Срез на 03.08.2026 (понедельник)<br>источник: founder-finance/ + Granola + голос Андрея</div>
   </header>
+
+  <!-- ГЛАВНЫЙ АЛЕРТ -->
+  <div class="alert">
+    <div class="t">Ноль оплат вторую неделю подряд · воронка сжимается быстрее, чем наполняется</div>
+    <div class="b">За неделю 28.07–02.08 отправлено <b>3 оффера</b> (Анна, Роман, Алексей Борозна) — закрыто ноль. За ту же неделю из пула выбыли <b>3 контакта</b> (Кирилл, Мария, Евгений). Узкое место не в потоке встреч, а в том, что разговор не заканчивается ценой и датой.</div>
+  </div>
 
   <!-- KPI ROW -->
   <div class="grid cols-4" style="margin-top:18px">
     <div class="card kpi">
-      <div class="lab">Встречи июль</div>
-      <div class="big">3<small>&nbsp;/&nbsp;10</small></div>
-      <div class="bar"><i style="width:30%;background:var(--warn)"></i></div>
-      <div class="note">Даниил 22.07 (не фит) · Роман 24.07 (тест-клиент €500) · Анна 24.07 (тёплый, buying-signal финплан). Андрей Иванов 24.07 проведён (знакомство, бизнес РФ в банкротстве → не в счёт, реф-узел)</div>
+      <div class="lab">Кастдевы проведено</div>
+      <div class="big">8<small>&nbsp;/&nbsp;20 к 01.09</small></div>
+      <div class="bar"><i style="width:40%;background:var(--warn)"></i></div>
+      <div class="note">+1 за 30.07: Мария (Бельгия, недвижимость + SaaS-парсер). До 01.09 нужно ещё 12 — темп 3/нед</div>
     </div>
     <div class="card kpi">
-      <div class="lab">Назначено вперед</div>
-      <div class="big" style="color:#37c98a">2<small>&nbsp;в календаре</small></div>
-      <div class="note">Кирилл и Оксана (вт 28.07). Роман, Анна, Андрей Иванов проведены 24.07</div>
+      <div class="lab">Офферы отправлены</div>
+      <div class="big">3<small>&nbsp;/&nbsp;0 закрыто</small></div>
+      <div class="bar"><i style="width:0%;background:var(--bad)"></i></div>
+      <div class="note">Анна · Роман · Алексей Борозна. Результат: 1 отказ, 1 ждём ответ сегодня, 1 тишина</div>
     </div>
     <div class="card kpi">
-      <div class="lab">Горячих впереди</div>
-      <div class="big" style="color:#37c98a">3</div>
-      <div class="note">Оксана · Кирилл (оба вт 28.07) · Евгений @johny1460. Роман и Анна уже проведены → в работе</div>
+      <div class="lab">Платящих клиентов</div>
+      <div class="big" style="color:#f2565a">0</div>
+      <div class="note">Главная метрика. Цель августа — первая оплата от €490</div>
     </div>
     <div class="card kpi">
-      <div class="lab">Десятки Аномалии</div>
-      <div class="big">5<small>&nbsp;вход · 2 актив</small></div>
-      <div class="note">Рабочие: 379 и Испания. 656 без клиента (Даниил не фит), остаемся слушать</div>
+      <div class="lab">Контент</div>
+      <div class="big" style="color:#37c98a">12<small>&nbsp;роликов</small></div>
+      <div class="note">Instagram + YouTube. Ритм «2 в неделю» из декларации держится с запасом. Лид-магнита по-прежнему нет</div>
+    </div>
+  </div>
+
+  <!-- ВОРОНКА -->
+  <div class="sec-title">Воронка: где обрывается</div>
+  <div class="card">
+    <div class="funnel">
+      <div class="fstep"><div class="n">8</div><div class="l">разборов</div></div>
+      <div class="fstep"><div class="n">4</div><div class="l">назвал цену</div></div>
+      <div class="fstep"><div class="n">3</div><div class="l">оффер выслан</div></div>
+      <div class="fstep"><div class="n" style="color:var(--warn)">1</div><div class="l">ждёт ответа</div></div>
+      <div class="fstep"><div class="n" style="color:var(--bad)">0</div><div class="l">оплат</div></div>
+    </div>
+    <div class="note" style="color:var(--mut);font-size:12.5px;margin-top:14px">
+      Обрыв не на входе — на выходе. Разборы есть, цена называется, оффер уходит, а дальше тишина или «в сентябре». Критерий успеха дня на эту неделю сменён: не «сколько встреч», а <b>сколько раз назвал цену вслух</b>.
     </div>
   </div>
 
@@ -112,28 +143,28 @@
   <div class="grid cols-3">
     <div class="card kpi">
       <div class="lab">Целевой доход</div>
-      <div class="big">$30K<small>&nbsp;/мес чистыми</small></div>
-      <div class="note">Горизонт ~1,5 года</div>
+      <div class="big">€10K<small>&nbsp;/мес к 01.01.2027</small></div>
+      <div class="note">Декларация десяток. Горизонт $30K/мес — ~1,5 года</div>
     </div>
     <div class="card kpi">
-      <div class="lab">Модель до цели</div>
-      <div class="big">12-17<small>&nbsp;клиентов</small></div>
-      <div class="note">К НГ реалистичнее 8-10 (разгон нелинейный)</div>
+      <div class="lab">Линейка</div>
+      <div class="big">€490<small>&nbsp;→ €2490/мес</small></div>
+      <div class="note">L1 «Панель собственника» от €490 (ADR 27.07) · канон Reset €2490, якорь €3000</div>
     </div>
     <div class="card kpi">
-      <div class="lab">Цена-канон</div>
-      <div class="big">€2490<small>&nbsp;/мес</small></div>
-      <div class="note">Якорь €3000 · онбординг €500-1000</div>
+      <div class="lab">Десятки Аномалии</div>
+      <div class="big">5<small>&nbsp;вход · 2 актив</small></div>
+      <div class="note">Отчёты сдаются в 5 еженедельно. Рабочие — 379 и Испания</div>
     </div>
   </div>
 
   <!-- WEEKS -->
-  <div class="sec-title">Динамика по неделям</div>
+  <div class="sec-title">Динамика по неделям (кастдевы)</div>
   <div class="weeks">
-    <div class="wk"><div class="w">W28 · 07-13.07</div><div class="r" style="color:var(--bad)">0</div><div class="g">цель 2-3 · промах</div></div>
-    <div class="wk"><div class="w">W29 · 14-20.07</div><div class="r" style="color:var(--bad)">0</div><div class="g">цель 2-3 · ноль (рамка «экспертность»)</div></div>
-    <div class="wk now"><div class="w">W30 · 21-27.07 <span class="pill p-good">закрыта</span></div><div class="r" style="color:var(--good)">3</div><div class="g">Даниил · Роман · Анна · цель 3-4 взята · выходные</div></div>
-    <div class="wk"><div class="w">W31 · 28.07-03.08</div><div class="r" style="color:var(--dim)">2+</div><div class="g">вт Кирилл + Оксана · пт Евгений · чт MaRa</div></div>
+    <div class="wk"><div class="w">W29 · 14-20.07</div><div class="r" style="color:var(--bad)">0</div><div class="g">рамка «экспертность» · ноль</div></div>
+    <div class="wk"><div class="w">W30 · 21-27.07 <span class="pill p-good">закрыта</span></div><div class="r" style="color:var(--good)">3</div><div class="g">Даниил · Роман · Анна · цель взята</div></div>
+    <div class="wk"><div class="w">W31 · 28.07-02.08 <span class="pill p-warm">закрыта</span></div><div class="r" style="color:var(--good)">4</div><div class="g">Оксана · Алексей В. · Никита · Мария · но 0 оплат</div></div>
+    <div class="wk now"><div class="w">W32 · 04-10.08 <span class="pill p-hot">идёт</span></div><div class="r" style="color:var(--dim)">0</div><div class="g">цель: 3 кастдева + 1 оплата</div></div>
   </div>
 
   <!-- CHANNELS + PIPELINE -->
@@ -141,58 +172,61 @@
   <div class="grid cols-2">
     <div class="card">
       <div class="chan">
-        <div><div class="nm">Десятки Аномалии</div><div class="ds">Вход в 5, активен в 1 (beachhead). Первая встреча десятки 16.07</div></div>
-        <span class="pill p-hot">главный</span>
+        <div><div class="nm">Десятки Аномалии</div><div class="ds">Дали весь текущий пул. ⚠️ Пул выработан: 3 контакта дисквалифицированы за неделю</div></div>
+        <span class="pill p-warm">выработан</span>
       </div>
       <div class="chan">
-        <div><div class="nm">Партнерка (бухгалтеры ЕС)</div><div class="ds">1 предложение → отказ (Катерина 15.07). Запуск трека 23.07</div></div>
-        <span class="pill p-warm">запуск</span>
+        <div><div class="nm">Контент (ролики + TG)</div><div class="ds">12 роликов, ритм держится. Разморожен и работает, но без формы захвата</div></div>
+        <span class="pill p-good">работает</span>
       </div>
       <div class="chan">
-        <div><div class="nm">Холодный канал (RU-фаундеры ЕС)</div><div class="ds">51 нетронутый адрес из 91, отклик ~2,5%. Реактивация 24.07</div></div>
+        <div><div class="nm">Партнёрский трек</div><div class="ds">2 разговора: блогер с русскоязычной аудиторией ЕС + партнёр-рекомендатель. MaRa Wel обещала 2 контакта и не передала</div></div>
+        <span class="pill p-warm">разгон</span>
+      </div>
+      <div class="chan">
+        <div><div class="nm">Холодный канал (RU-фаундеры ЕС)</div><div class="ds">51 нетронутый адрес из 91, отклик ~2,5%. Не реактивирован</div></div>
         <span class="pill p-cold">пауза</span>
       </div>
       <div class="chan">
-        <div><div class="nm">TG-канал + вирусные ролики</div><div class="ds">Заморожен на 2 недели. Гейт-ревью 28.07</div></div>
-        <span class="pill p-frozen">заморожен</span>
+        <div><div class="nm">Лид-магнит + форма захвата</div><div class="ds">Второй раз в плане и второй раз не собран. Трафик идёт — подписаться некуда</div></div>
+        <span class="pill p-hot">долг</span>
       </div>
-      <div class="note" style="color:var(--dim);font-size:12px;margin-top:12px">Стек времени 16-28.07: десятки ~50% · горячий пайплайн ~30% · партнерка ~15% · контент ~0%</div>
     </div>
 
     <div class="card" style="padding:6px 0 0">
+      <div class="tbl-scroll">
       <table>
         <thead><tr><th>Контакт</th><th>Контекст</th><th>Статус</th></tr></thead>
         <tbody>
-          <tr><td class="who">Оксана</td><td class="meta">Клининг, Хорватия · идеальный фит под учет</td><td><span class="pill p-good">вт 28.07 17:00</span></td></tr>
-          <tr><td class="who">Кирилл Ушаков</td><td class="meta">Капитан Испания · сам предложил цифры + кассовый разрыв</td><td><span class="pill p-good">вт 28.07 14:30</span></td></tr>
-          <tr><td class="who">Роман Яркин</td><td class="meta">379 · СИП-дома Румыния · тест-клиент €500/мес, апсайд €1-2к через рост</td><td><span class="pill p-good">✓ 24.07 · разбор+модель</span></td></tr>
-          <tr><td class="who">Anna Lastovska</td><td class="meta">RetroPressa, Рига · ~100 заявок/день, 6 менеджеров · buying-signal финплан</td><td><span class="pill p-good">✓ 24.07 · фоллоу-ап</span></td></tr>
-          <tr><td class="who">Андрей Иванов</td><td class="meta">Маркетплейс-селлер, живёт в Бразилии, выход на US · бизнес РФ в банкротстве · нетворк/реф-узел</td><td><span class="pill">проведён 24.07</span></td></tr>
-          <tr><td class="who">Евгений @johny1460</td><td class="meta">379 · 50% рентабельность, застой · заход через рост</td><td><span class="pill p-hot">не писал</span></td></tr>
-          <tr><td class="who">MaRa Wel</td><td class="meta">379 · обещала отдать 2 контакта</td><td><span class="pill p-hot">забрать</span></td></tr>
-          <tr><td class="who">Наталья</td><td class="meta">379 · реферальный узел, интро к логисту</td><td><span class="pill p-cold">узел</span></td></tr>
-          <tr><td class="who">Даниил</td><td class="meta">656 · юрист релокейт · разовые услуги, отрицает учет</td><td><span class="pill p-frozen">не фит</span></td></tr>
+          <tr><td class="who">Anna Lastovska</td><td class="meta">RetroPressa, Рига · ~100 заявок/день, 6 менеджеров · сама просила оффер</td><td><span class="pill p-hot">оффер отправлен · ответ обещан 03.08</span></td></tr>
+          <tr><td class="who">Роман Яркин</td><td class="meta">СИП-дома, Румыния · сильнейший кастдев, сам надиктовал позиционирование · €500-700</td><td><span class="pill p-hot">оффер аудио · прослушал, молчит</span></td></tr>
+          <tr><td class="who">Оксана</td><td class="meta">Клининг тур-недвижимости, Хорватия · назвала €500, но болит качество и делегирование, не деньги</td><td><span class="pill p-warm">переупаковать под «высвобождение головы»</span></td></tr>
+          <tr><td class="who">Алексей Борозна</td><td class="meta">11 Европа · кастдев 21.07 · оффер отправлен</td><td><span class="pill p-cold">отказ сейчас · вернуться в сентябре</span></td></tr>
+          <tr><td class="who">MaRa Wel</td><td class="meta">379 · обещала 2 контакта, не передала · срок годности обещания истекает</td><td><span class="pill p-hot">забрать до 04.08</span></td></tr>
+          <tr><td class="who">Наталья</td><td class="meta">379 · реферальный узел: 30+ TG-каналов, интро к логисту</td><td><span class="pill p-cold">узел</span></td></tr>
+          <tr><td class="who">Кирилл Ушаков</td><td class="meta">Капитан Испания · оценка Андрея 03.08: «схемовик-затейник», работать неинтересно</td><td><span class="pill p-out">дисквалифицирован</span></td></tr>
+          <tr><td class="who">Мария</td><td class="meta">Бельгия · недвижимость + SaaS-парсер разрешений · кастдев 30.07 · строит свои стартапы, мешает работе</td><td><span class="pill p-out">не клиент</span></td></tr>
+          <tr><td class="who">Евгений @johny1460</td><td class="meta">ERP для курьерских служб, Турция · крупнейший оборот пула</td><td><span class="pill p-out">не заинтересован</span></td></tr>
+          <tr><td class="who">Даниил</td><td class="meta">656 · юрист релокейт · отрицает ценность учёта</td><td><span class="pill p-frozen">не фит</span></td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 
   <!-- TIMELINE + RISKS -->
   <div class="grid cols-2">
     <div>
-      <div class="sec-title">Таймлайн июля</div>
+      <div class="sec-title">Таймлайн</div>
       <div class="card">
         <div class="tl">
-          <div class="ev miss"><div class="d">08.07</div><div class="t">Старт отсчета метрики 0/10</div></div>
-          <div class="ev"><div class="d">15.07</div><div class="t">Предложение партнерства Катерине → отказ</div></div>
-          <div class="ev win"><div class="d">16.07</div><div class="t">Первая встреча десятки. Закрепился в 5 десятках. Собрана дорожная карта на 2 недели</div></div>
-          <div class="ev miss"><div class="d">17.07</div><div class="t">Рамка «сначала экспертность, потом личка» → W29 закрыта в ноль</div></div>
-          <div class="ev"><div class="d">20.07</div><div class="t">Решение: 21.07 — день целиком на продажи. Рамка снята, личку писать можно</div></div>
-          <div class="ev win"><div class="d">21.07</div><div class="t">День кастдевов: договоренность с Кириллом о разборе цифр, созвон Алексей (канал 50-60 селлеров), кастдев Елены. Воронка на назначение ожила</div></div>
-          <div class="ev win"><div class="d">22.07</div><div class="t"><b>Счет открыт 1/10.</b> Первая проведенная встреча — Даниил (656): не фит, отрицает ценность учета, нужны только лиды. Алекс прислал отчеты на анализ. Назначены Оксана, Кирилл, Андрей Иванов. Роман согласился на пятницу. Написан custdev-плейбук</div></div>
-          <div class="ev win"><div class="d">24.07</div><div class="t"><b>Счет 3/10 (цель недели 3-4 взята).</b> Три встречи: Роман (СИП-дома, Румыния) — сильнейший кастдев, сам надиктовал позиционирование (вход от кассового разрыва, отстройка от ChatGPT-как-CFO и бухгалтера-налогового-агента, 2 фильтра ICP); разворот — <b>тест-клиент €500/мес</b>, апсайд €1-2к через рост. Анна (RetroPressa, Рига) — тёплый лид, прямой buying-signal на финплан, фоллоу-ап на след. неделе. Андрей Иванов (маркетплейс-селлер, Бразилия, выход на US) — проведён 17:00: знакомство, но бизнес РФ в активном банкротстве (налоговая заморозила счета, списала вдвое). Андрей поделился своим опытом банкротства → «сделал мой день лучше». Не в счёт воронки (РФ, сам в ликвидации), держим как реф-узел/потенц. ЦА после выхода на US. Просил контакты брокеров. Next по Роману: забрать цифры → разбор + модель роста</div></div>
-          <div class="ev win"><div class="d">25.07</div><div class="t"><b>Суббота — неделя W30 закрыта на 3/4 кастдевах</b> (цель 3-4 взята впервые за месяц). Выходные, продаж не ведём. Впереди: пн 27.07 — П1 деньги (финсверка, не делалась 3 недели + кредит 02.08); вт 28.07 — два кастдева Кирилл + Оксана.</div></div>
-          <div class="ev"><div class="d">28.07</div><div class="t">Вторник: Кирилл 14:30, Оксана 17:00. Гейт-ревью: размораживать ли каналы</div></div>
+          <div class="ev win"><div class="d">24.07</div><div class="t"><b>Счёт 3/10.</b> Роман (СИП-дома) — сильнейший кастдев, сам надиктовал позиционирование: вход от кассового разрыва, отстройка от «ChatGPT-как-CFO». Анна — прямой buying-signal на финплан</div></div>
+          <div class="ev win"><div class="d">27.07</div><div class="t"><b>Введён продукт L1 «Панель собственника» от €490/мес</b> (ADR). Рынок покупает низ лестницы — появился вход для компаний на обороте €15-25к</div></div>
+          <div class="ev win"><div class="d">28.07</div><div class="t">Два кастдева: Кирилл 14:30 + Оксана 17:00. Плюс обмен опытом с Алексеем Васильевым (управленческий учёт, AI)</div></div>
+          <div class="ev"><div class="d">29-30.07</div><div class="t">Никита · <b>Мария (30.07, чт 17:02)</b> — Бельгия, портфель недвижимости + парсер разрешений на строительство. Разобрана unit-экономика: €250×60 клиентов = €15K, CAC ~€100 → чистыми меньше €10K. Её next: воронка и лендинг Андрею на разбор, тест рекламы на €200</div></div>
+          <div class="ev win"><div class="d">30.07</div><div class="t">Один разбор доведён до полного цикла за заход: кастдев → разбор цифр → <b>демо калькулятора чистой прибыли на созвоне</b>. Собственница сама назвала сумму. Инсайт: калькулятор конвертит сильнее ретроспективного разбора</div></div>
+          <div class="ev miss"><div class="d">02.08</div><div class="t">Неделя закрыта: 4 кастдева, 12 роликов, 2 оффера собраны — <b>и ноль оплат вторую неделю подряд</b>. Из 5 назначенных созвонов состоялось 3</div></div>
+          <div class="ev"><div class="d">03.08</div><div class="t"><b>Три оффера отправлены</b> (Анна, Роман, Алексей Борозна). Ответы: Борозна — «не сейчас, поговорим про финансы в сентябре»; Роман — прослушал аудио, молчит; Анна — ответит сегодня позже. Кирилл, Мария, Евгений сняты с пайплайна</div></div>
         </div>
       </div>
     </div>
@@ -201,36 +235,34 @@
       <div class="sec-title">Риски и блокеры</div>
       <div class="card">
         <ul class="clean risk">
-          <li><b>Даниил, главный актив десятки 656, оказался не фитом</b> — прежняя оценка приняла желаемое за фит. Проверять гипотезы звонком, а не заметками</li>
-          <li><b>Новый дисквалификатор:</b> закрытость к данным. Даниил не дал ни финансы, ни лидоген. Без доступа к информации помощь невозможна в любом продукте</li>
-          <li>Счет 3/10 за месяц. Темп восстановлен на одной неделе — удержать в W31, не откатиться в ноль как W28-W29</li>
-          <li>Теплая база кастдева выжата — структурно не пул покупателей</li>
-          <li>Точка отказа: расфокус в «комфортную стройку» (контент/инфра как убежище)</li>
-          <li>Часть контактов из РФ (Алекс, Андрей Иванов) — не проходят фильтр «вне РФ», в счет не идут</li>
-          <li>Десятки — территория Кирилла: не более 5 личек за раз, польза-first</li>
-          <li>Позиционирование: язык сайта — решение, а не боль; ЦА себя не узнает (инсайт Елены)</li>
-          <li>Узкое место — продажи, не доставка</li>
+          <li><b>Ноль оплат вторую неделю.</b> Не дожимаю разговор до цены и даты — оффер уходит и повисает</li>
+          <li><b>Пул десяток выработан.</b> За одну неделю выбыли Кирилл, Мария, Евгений. Дисквалификация идёт быстрее наполнения — нужен второй канал входа</li>
+          <li><b>У фаундеров на €15-25к боль не финансовая.</b> Все называют €300-500 и все говорят про качество и нехватку рук. Продавать надо освободившуюся голову, а не порядок в цифрах</li>
+          <li><b>Переносы не переназначаются.</b> Из 5 созвонов состоялось 3, двое перенесли — новая дата в тот же день не ставится</li>
+          <li><b>Лид-магнит — долг второй недели.</b> Трафик от 12 роликов идёт в никуда</li>
+          <li>Обещания протухают за пару дней (MaRa Wel: 2 контакта не забраны вовремя)</li>
+          <li>Точка отказа: расфокус в «комфортную стройку» — контент и продукт вместо просьбы о деньгах</li>
         </ul>
       </div>
 
-      <div class="sec-title">Фокус: выходные → W31</div>
+      <div class="sec-title">Фокус W32 · 04-10.08</div>
       <div class="card">
         <ul class="clean focus">
-          <li><b>Выходные (25-26.07)</b> — не продаём. Максимум: вынести формулировку Романа (кассовый разрыв → вход) в рилсы, пока горячо</li>
-          <li><b>Пн 27.07 П1 деньги</b> — финсверка (не делалась 3 недели) + кредит 02.08 (через 8 дней). Выше воронки</li>
-          <li><b>Вт 28.07 — два кастдева:</b> Кирилл 14:30 + Оксана 17:00. Мини-P&L по обоим собрать заранее</li>
-          <li><b>Роман — фоллоу-ап 28.07:</b> забрать цифры → мини-P&L + платёжный календарь + модель роста</li>
-          <li><b>Анна (RetroPressa) — сильный фоллоу-ап с оффером на платный аудит</b> (сама попросила)</li>
-          <li>Евгений @johny1460 — назначить твёрдый слот (~пт 31.07), заход через рост. MaRa Wel чт 30.07 — забрать 2 контакта</li>
-          <li>Развилка прицела письменно: кому реально продаётся продукт за твою цену в пуле десяток (€20к/мес vs канон €2490)</li>
+          <li><b>Закрыть минимум одну оплату.</b> Анна — ответ сегодня, идти за датой старта. Роман — прослушал и молчит, догнать текстом с прямым вопросом</li>
+          <li><b>3 кастдева:</b> переназначить двоих перенесших + один новый. Пул десяток больше не даёт — искать вход</li>
+          <li><b>Лид-магнит с формой захвата</b> и калькулятор сценариев цены в него. Калькулятор конвертит сильнее разбора — двигать в начало воронки</li>
+          <li><b>Оксану переупаковать:</b> заход не «порядок в деньгах», а высвобождение головы под рост</li>
+          <li>Контент: минимум 2 ролика + первый разбор-кейс «до и после по цифрам» (нужен и сайту, и партнёру-блогеру)</li>
+          <li>MaRa Wel — забрать 2 контакта до 04.08, дальше обещание мертво</li>
+          <li>Алексей Борозна — поставить напоминание на сентябрь, не терять</li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="foot">
-    Приватный дашборд Андрея · данные дословно из founder-finance/ (vstrechi-iyul.md, pipeline.md, roadmap-2-nedeli-2026-07.md, anomalia.md, business-model.md).
-    Обороты контактов указаны со слов участников, не верифицированы. Что считается за встречу: живой разговор 1:1 или диагностика цифр с фаундером бизнеса вне РФ с оборотом.
+    Приватный дашборд Андрея · данные из founder-finance/ (pipeline.md, desyatki/, decisions.md), Granola-карточек и устного апдейта 03.08.
+    Обороты контактов указаны со слов участников, не верифицированы. Что считается за кастдев: живой разговор 1:1 или диагностика цифр с фаундером бизнеса вне РФ с оборотом.
   </div>
 
 </div>
