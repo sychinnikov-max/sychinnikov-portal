@@ -2,8 +2,28 @@
 // GET  /os/api/ping           — статус биндинга (без секретов).
 // GET  /os/api/ping?write=1   — пробная запись и чтение ключа os:ping.
 // Ответ намеренно не содержит значений секретов.
+//
+// Авторизация обязательна: подпись Cloudflare Access ЛИБО Bearer BOARD_READ_TOKEN.
+// Причина: зеркало sychinnikov-portal.pages.dev стоит вне гейта Access, и без
+// проверки в интернете висела анонимная запись в боевое хранилище (проверено
+// живым запросом 04.08: ?write=1 без единого заголовка вернул write_test: ok).
+
+import { json, authOk } from './_shared.js';
 
 export async function onRequestGet({ request, env }) {
+  let allowed = false;
+  try {
+    allowed = await authOk(request, env);
+  } catch (e) {
+    allowed = false;
+  }
+  if (!allowed) {
+    return json({
+      error: 'unauthorized',
+      hint: 'вход через Cloudflare Access либо заголовок Authorization: Bearer',
+    }, 401);
+  }
+
   const url = new URL(request.url);
   const out = {
     ok: true,
@@ -24,7 +44,5 @@ export async function onRequestGet({ request, env }) {
     }
   }
 
-  return new Response(JSON.stringify(out, null, 1), {
-    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
-  });
+  return json(out, 200, 1);
 }

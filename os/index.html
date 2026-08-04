@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F0F0E" media="(prefers-color-scheme: dark)">
+<title>Сегодня</title>
+<link rel="icon" type="image/svg+xml" href="/os/assets/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231F3A5F'/%3E%3Ccircle cx='32' cy='32' r='9' fill='%23FFFFFF'/%3E%3C/svg%3E">
+<script>
+  /* Тема до первой отрисовки, чтобы не мигало. По умолчанию системная. */
+  (function () {
+    try {
+      var saved = localStorage.getItem('os.theme');
+      var dark = saved === 'dark' || (!saved && window.matchMedia
+        && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark');
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="/os/assets/os.css">
+</head>
+<body>
+
+<a class="skip" href="#b-today">перейти к главному действию</a>
+
+<!-- Плашка над строкой такта: ввод накопился и его нет в файлах системы -->
+<div class="alarm" data-slot="alarm" role="alert" hidden></div>
+
+<!-- Блок 0. Строка такта -->
+<header class="os-bar">
+  <div class="os-bar__left">
+    <button class="nav" type="button" data-act="prev" aria-label="предыдущий день">&lsaquo;</button>
+    <span class="os-bar__date" data-slot="takt.date"></span>
+    <button class="nav" type="button" data-act="next" aria-label="следующий день">&rsaquo;</button>
+    <button class="nav nav--today" type="button" data-act="today" hidden>сегодня</button>
+  </div>
+
+  <div class="os-bar__center">
+    <span class="dot" data-slot="takt.dot" aria-hidden="true"></span>
+    <span class="os-bar__status" data-slot="takt.status"></span>
+  </div>
+
+  <div class="os-bar__right">
+    <span class="os-bar__goal" data-slot="goal"></span>
+    <span class="os-bar__debts" data-slot="debts"></span>
+    <button class="theme" type="button" data-act="theme" aria-pressed="false">
+      <span data-slot="theme.label"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Честные пояснения о состоянии данных: возраст снимка, архивный день, сбой чтения -->
+<div class="notices" data-slot="notices"></div>
+
+<main class="os-main" id="os-main">
+
+  <!-- Блок 1. Рамка дня -->
+  <section class="block block--frame" id="b-frame" aria-label="рамка дня">
+    <p class="frame" data-slot="frame.value"></p>
+    <p class="meta" data-slot="frame.meta"></p>
+  </section>
+
+  <!-- Блок 2. Сегодня: одно главное действие и до трех ходов -->
+  <section class="block" id="b-today" aria-labelledby="h-today">
+    <h2 class="block__title" id="h-today">сегодня</h2>
+    <div data-slot="main"></div>
+    <ul class="moves" data-slot="moves"></ul>
+    <p class="tail" data-slot="moves.overflow"></p>
+  </section>
+
+  <!-- Блок 3. Деньги в воздухе -->
+  <section class="block" id="b-air" aria-labelledby="h-air">
+    <h2 class="block__title" id="h-air">деньги в воздухе</h2>
+    <ul class="air" data-slot="air"></ul>
+    <p class="rule">отказ лучше тишины: оффер, висящий неделю, стоит дороже отказа, полученного за день</p>
+  </section>
+
+  <!-- Блок 4. Три доски -->
+  <section class="block" id="b-boards" aria-labelledby="h-boards">
+    <h2 class="block__title" id="h-boards">три доски</h2>
+    <div class="metrics" data-slot="boards"></div>
+  </section>
+
+  <!-- Блок 5. Закрыть день -->
+  <section class="block" id="b-close" aria-labelledby="h-close">
+    <h2 class="block__title" id="h-close">закрыть день</h2>
+    <button class="btn btn--primary close-toggle" type="button" data-act="close-toggle"
+            aria-expanded="false" aria-controls="close-form">Закрыть день</button>
+    <form class="close" id="close-form" data-slot="close.form" hidden></form>
+    <div class="close__after" data-slot="close.after" hidden></div>
+    <p class="meta">то, что введено здесь, Клод не переспрашивает в чате</p>
+  </section>
+
+  <!-- Блок 6. Запись наставника -->
+  <section class="block" id="b-mentor" aria-labelledby="h-mentor">
+    <h2 class="block__title" id="h-mentor">запись наставника</h2>
+    <div data-slot="mentor"></div>
+  </section>
+
+</main>
+
+<!-- День без файла: честный пустой экран -->
+<div class="empty" data-slot="empty" hidden></div>
+
+<!-- Снимок дня не загрузился: причина и куда идти -->
+<div class="fatal" data-slot="fatal" hidden></div>
+
+<!-- Блок 7. Липкая строка ввода -->
+<footer class="os-input" data-slot="input.bar">
+  <form class="os-input__form" data-slot="note.form">
+    <input class="os-input__field" type="text" data-slot="note.field"
+           placeholder="что упало в голову" autocomplete="off" aria-label="что упало в голову">
+    <span class="os-input__ack" data-slot="note.ack" aria-live="polite"></span>
+  </form>
+  <span class="os-input__sync" data-slot="sync"></span>
+</footer>
+
+<div class="toast" data-slot="toast" role="status" aria-live="polite" hidden></div>
+
+<noscript>
+  <p class="fatal">Экран собирается скриптом из данных системы. Без скриптов здесь нечего показать, и врать статикой он не будет.</p>
+</noscript>
+
+<script type="module" src="/os/assets/os.js"></script>
+</body>
+</html>

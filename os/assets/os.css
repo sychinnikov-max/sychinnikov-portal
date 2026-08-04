@@ -1,0 +1,1091 @@
+/* ============================================================
+   os.css. Единственный набор стилей портала /os/
+   Спецификация: раздел 8 (токены, типографика, сетка, компоненты).
+   Покрывает ровно те узлы, которые создают index.html и os.js.
+   Ноль внешних запросов: только системные шрифты.
+
+   ------------------------------------------------------------
+   ДОГОВОР О РАЗМЕТКЕ (сверен с index.html и os.js, менять только вместе)
+
+   a.skip
+   div.alarm[hidden]                 плашка про неразобранный ввод
+   header.os-bar                     липкая сверху, 44
+     div.os-bar__left  · div.os-bar__center · div.os-bar__right
+   div.notices > p.notice            честные пояснения о состоянии данных
+   main.os-main#os-main > section.block
+   div.empty[hidden] · div.fatal[hidden]
+   footer.os-input                   липкая снизу
+     form.os-input__form > input.os-input__field + span.os-input__ack
+     span.os-input__sync
+   div.toast[hidden]                 видим только с классом is-on
+
+   Колонки-обертки нет: ширину 880 держит общий отступ по бокам,
+   поэтому липкие полосы тянутся во всю ширину, а содержимое стоит в колонке.
+
+   Контур: класс c-ff | c-fishok | c-money и атрибут data-contour
+   (os.js ставит оба, стили ловят любой из них).
+   Метка контура: .tag.tag--ff | .tag--fishok | .tag--money | .tag--none
+   Вердикт: .verdict.verdict--build|sell|drift|recover|mixed
+   Состояния: is-done, is-answered, is-on, is-err, is-red, marker--untouched
+   Скрытие: атрибут hidden.
+   ------------------------------------------------------------ */
+
+
+/* ============================================================
+   1. ТОКЕНЫ. Светлая тема
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* Поверхности */
+  --bg:        #FAFAF7;
+  --bg-alt:    #F4F2EC;
+  --surface:   #FFFFFF;
+  --text:      #1A1A1A;
+  --muted:     #5C5C5C;
+  --soft:      #8A8680;
+  --line:      #E8E6E0;
+  --line-2:    #EFEDE7;
+
+  /* Фон липких полос: полупрозрачный --bg под размытием */
+  --bg-blur:   rgba(250, 250, 247, 0.86);
+
+  /* Акцент */
+  --accent:       #1F3A5F;
+  --accent-hover: #16304F;
+  --accent-soft:  #EDF1F7;
+  --on-accent:    #FFFFFF;
+
+  /* Семантика */
+  --ok:     #2F6F4F;  --ok-bg:     #E9F0EC;
+  --warn:   #B07024;  --warn-bg:   #FAF1E3;
+  --danger: #9B2C2C;  --danger-bg: #F5E8E8;
+
+  /* Контуры */
+  --c-ff:     #A9853F;  --c-ff-bg:     #FBF5E8;
+  --c-fishok: #1B6FB0;  --c-fishok-bg: #EAF4FC;
+  --c-money:  #A03C42;  --c-money-bg:  #FBEFEF;
+
+  /* Отступы */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+
+  /* Скругления */
+  --r1: 4px; --r2: 8px; --r3: 12px;
+
+  /* Шрифты: только системные */
+  --ui:    -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --mono:  ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Размеры текста */
+  --fs-xs: 12px; --fs-sm: 13px; --fs-base: 14px;
+  --fs-md: 16px; --fs-lg: 18px; --fs-xl: 20px; --fs-2xl: 28px; --fs-3xl: 40px;
+
+  /* Ширина колонки, боковое поле и длительность перехода */
+  --maxw: 880px;
+  --gutter: 24px;
+  --t: 140ms;
+}
+
+
+/* ============================================================
+   2. ТОКЕНЫ. Темная тема
+   Два блока-зеркала: по классу html.dark (выбор запомнен)
+   и по системной настройке, если выбор не сделан.
+   ПРАВИТЬ ТОЛЬКО ОБА СРАЗУ.
+   ============================================================ */
+
+html.dark {
+  color-scheme: dark;
+
+  --bg: #0F0F0E; --bg-alt: #161614; --surface: #1A1A18;
+  --text: #F2F2F0; --muted: #A5A29B; --soft: #7C7972;
+  --line: #262622; --line-2: #201F1C;
+  --bg-blur: rgba(15, 15, 14, 0.86);
+
+  --accent: #7FA5D6; --accent-hover: #9BBBE4; --accent-soft: #1B2637;
+  --on-accent: #10151D;
+
+  --ok: #6FBF92; --ok-bg: #16231C;
+  --warn: #DFA45A; --warn-bg: #251C10;
+  --danger: #E08585; --danger-bg: #2A1616;
+
+  --c-ff: #D8B36A; --c-ff-bg: #2A2314;
+  --c-fishok: #6FAFE0; --c-fishok-bg: #12222F;
+  --c-money: #E08A8F; --c-money-bg: #2B1719;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light):not(.dark) {
+    color-scheme: dark;
+
+    --bg: #0F0F0E; --bg-alt: #161614; --surface: #1A1A18;
+    --text: #F2F2F0; --muted: #A5A29B; --soft: #7C7972;
+    --line: #262622; --line-2: #201F1C;
+    --bg-blur: rgba(15, 15, 14, 0.86);
+
+    --accent: #7FA5D6; --accent-hover: #9BBBE4; --accent-soft: #1B2637;
+    --on-accent: #10151D;
+
+    --ok: #6FBF92; --ok-bg: #16231C;
+    --warn: #DFA45A; --warn-bg: #251C10;
+    --danger: #E08585; --danger-bg: #2A1616;
+
+    --c-ff: #D8B36A; --c-ff-bg: #2A2314;
+    --c-fishok: #6FAFE0; --c-fishok-bg: #12222F;
+    --c-money: #E08A8F; --c-money-bg: #2B1719;
+  }
+}
+
+/* Контур: один источник для полосы карточки и для метки.
+   os.js ставит и класс, и атрибут, поэтому ловим оба написания. */
+.c-ff,     [data-contour="ff"],     .tag--ff     { --contour: var(--c-ff);     --contour-bg: var(--c-ff-bg); }
+.c-fishok, [data-contour="fishok"], .tag--fishok { --contour: var(--c-fishok); --contour-bg: var(--c-fishok-bg); }
+.c-money,  [data-contour="money"],  .tag--money  { --contour: var(--c-money);  --contour-bg: var(--c-money-bg); }
+
+
+/* ============================================================
+   3. ОСНОВА
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ui);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+/* Скрытие через атрибут должно побеждать любые display у классов */
+[hidden] { display: none !important; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--t) linear;
+}
+a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+::selection { background: var(--accent-soft); color: var(--text); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+input, textarea, button, select { font: inherit; color: inherit; }
+
+/* Ссылка для клавиатуры: не видна, пока на нее не встал фокус */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 60;
+  padding: var(--s2) var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  font-size: var(--fs-sm);
+}
+.skip:focus { left: var(--s3); top: var(--s3); }
+
+
+/* ============================================================
+   4. СЕТКА. Одна колонка 880, ритм 32
+   Колонку держит боковое поле: содержимое стоит в колонке,
+   а фон липких полос тянется во всю ширину окна.
+   ============================================================ */
+
+.alarm,
+.os-bar,
+.notices,
+.os-main,
+.empty,
+.fatal,
+.os-input {
+  padding-left: max(var(--gutter), calc((100% - var(--maxw)) / 2));
+  padding-right: max(var(--gutter), calc((100% - var(--maxw)) / 2));
+}
+
+.os-main {
+  padding-top: var(--s5);
+  padding-bottom: var(--s6);
+}
+
+.block + .block { margin-top: var(--s6); }
+
+/* Заголовок блока: без номеров, верхний регистр */
+.block__title {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+  margin-bottom: var(--s3);
+}
+
+/* Строка источника, возраста и любых честных подписей */
+.meta {
+  font-size: var(--fs-xs);
+  color: var(--soft);
+  margin-top: var(--s2);
+}
+.meta .tag { margin-right: var(--s1); }
+
+
+/* ============================================================
+   5. БЛОК 0. Строка такта (липкая сверху, 44)
+   ============================================================ */
+
+.os-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Перенос разрешен на любой ширине: на промежуточных размерах окна строка
+     иначе вылезала за экран и уводила всю страницу в горизонтальную прокрутку.
+     Прятать что-либо из шапки нельзя, значит переносим. */
+  flex-wrap: wrap;
+  row-gap: var(--s1);
+  gap: var(--s3);
+  background: var(--bg-blur);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-sm);
+}
+
+.os-bar__left,
+.os-bar__center,
+.os-bar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  min-width: 0;
+}
+
+.os-bar__right { gap: var(--s3); color: var(--muted); }
+
+/* Стрелки по дням и возврат на сегодня */
+.nav {
+  height: 24px;
+  min-width: 24px;
+  padding: 0 var(--s1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--r1);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background-color var(--t) linear, border-color var(--t) linear, color var(--t) linear;
+}
+.nav:hover { background: var(--bg-alt); color: var(--text); }
+.nav:active { background: var(--line-2); }
+.nav--today { font-size: var(--fs-xs); padding: 0 var(--s2); border-color: var(--line); }
+
+.os-bar__date {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Статус дня точкой */
+.os-bar__status { color: var(--muted); white-space: nowrap; }
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+  border: 1px solid var(--soft);
+  flex: none;
+}
+.dot--warn { background: var(--warn); border-color: var(--warn); }
+.dot--ok   { background: var(--ok);   border-color: var(--ok); }
+.dot--off  { background: var(--line); border-color: var(--soft); }
+
+.os-bar__goal { color: var(--muted); white-space: nowrap; }
+
+.os-bar__debts {
+  color: var(--soft);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+}
+.debt { color: var(--soft); }
+.debt__sep { color: var(--soft); }
+
+.theme {
+  height: 26px;
+  padding: 0 var(--s2);
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  transition: background-color var(--t) linear, border-color var(--t) linear, color var(--t) linear;
+}
+.theme:hover { background: var(--bg-alt); color: var(--text); }
+
+/* Плашка над строкой такта: ввод накопился и не разобран */
+.alarm {
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-size: var(--fs-sm);
+  padding-top: var(--s2);
+  padding-bottom: var(--s2);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Честные пояснения о состоянии данных */
+.notices:empty { display: none; }
+.notice {
+  padding-top: var(--s2);
+  font-size: var(--fs-xs);
+  color: var(--warn);
+}
+
+
+/* ============================================================
+   6. БЛОК 1. Рамка дня
+   ============================================================ */
+
+/* Рамка дня стоит без заголовка блока, поэтому ей нужен свой воздух сверху */
+.block--frame { padding-bottom: var(--s1); }
+
+.frame {
+  font-family: var(--serif);
+  font-size: var(--fs-xl);
+  line-height: 1.35;
+  color: var(--text);
+}
+
+
+/* ============================================================
+   7. КАРТОЧКИ, КНОПКИ, ПОЛЯ, МЕТКИ
+   ============================================================ */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: var(--s4);
+}
+
+/* Карточка действия: левая полоса цветом контура */
+.card--action {
+  border-left: 3px solid var(--contour, var(--accent));
+  padding-left: var(--s5);
+}
+.card--action.is-done { background: var(--bg-alt); }
+
+.btn {
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  padding: 0 var(--s3);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--t) linear, border-color var(--t) linear, color var(--t) linear;
+}
+.btn:hover { background: var(--bg-alt); border-color: var(--soft); }
+.btn:active { background: var(--line-2); }
+
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+.btn--ghost {
+  background: none;
+  border-color: transparent;
+  color: var(--muted);
+}
+.btn--ghost:hover { background: var(--bg-alt); border-color: transparent; color: var(--text); }
+
+.btn:disabled,
+.btn--primary:disabled,
+.btn--ghost:disabled {
+  color: var(--soft);
+  background: none;
+  border-color: var(--line);
+  cursor: default;
+}
+
+/* Однострочная форма результата или причины */
+.inline {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s3);
+}
+.inline__field {
+  flex: 1 1 220px;
+  min-width: 0;
+  height: 32px;
+  padding: 0 var(--s3);
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  font-size: var(--fs-sm);
+  transition: background-color var(--t) linear, border-color var(--t) linear;
+}
+.inline__field::placeholder { color: var(--soft); }
+.inline__field:hover { border-color: var(--soft); }
+.inline__field:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+.inline__field:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* Метка контура */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  background: var(--contour-bg, var(--bg-alt));
+  color: var(--contour, var(--muted));
+  white-space: nowrap;
+}
+.tag--none { background: var(--bg-alt); color: var(--soft); }
+
+/* Чип возраста источника: цвет по порогам, размер задает .age */
+.age { font-size: 11px; color: var(--soft); }
+.age--fresh { color: var(--soft); }
+.age--warn  { color: var(--warn); }
+.age--old   { color: var(--danger); }
+
+/* Значение не прочитано: старое не показываем никогда */
+.unread {
+  display: inline-block;
+  margin-top: var(--s1);
+  padding: var(--s1) var(--s2);
+  border-radius: var(--r1);
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-size: var(--fs-sm);
+}
+.unread__label { font-weight: 600; }
+.unread__why {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+
+/* ============================================================
+   8. БЛОК 2. Главное действие и ходы дня
+   ============================================================ */
+
+.action__text {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* Схлопнутая строка после отметки */
+.action__done {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  color: var(--muted);
+}
+.action__done .action__text { font-size: var(--fs-base); font-weight: 500; }
+.action__mark { color: var(--ok); font-size: var(--fs-md); }
+.action__time { font-size: var(--fs-xs); color: var(--soft); }
+
+.action__btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s3);
+}
+
+/* Ходы дня */
+.moves { margin-top: var(--s4); }
+
+.move {
+  padding: var(--s3) 0;
+  border-top: 1px solid var(--line-2);
+}
+.move:first-child { border-top: none; }
+
+.moves__empty {
+  padding: var(--s3) 0;
+  font-size: var(--fs-sm);
+  color: var(--soft);
+}
+
+.row-move {
+  display: grid;
+  grid-template-columns: 20px auto 1fr auto;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.move__check {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.move__text {
+  min-width: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: color var(--t) linear;
+}
+.move__text:hover { color: var(--accent); }
+
+.row-move__right {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  justify-self: end;
+}
+
+.move__due {
+  font-size: var(--fs-xs);
+  color: var(--soft);
+  white-space: nowrap;
+}
+
+/* Контекст хода: разворачивается на месте, под текстом */
+.move__ctx {
+  margin: var(--s2) 0 0 var(--s6);
+  padding-left: var(--s3);
+  border-left: 2px solid var(--line);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.move__ctx li + li { margin-top: var(--s1); }
+.move__ctx .meta { margin-top: var(--s2); }
+
+.move .inline,
+.move > .meta { margin-left: var(--s6); }
+
+/* Отмеченный ход гаснет, зачеркивается только текст */
+.move.is-done { opacity: .5; }
+.move.is-done .move__text { text-decoration: line-through; cursor: default; }
+.move.is-done .move__text:hover { color: inherit; }
+
+/* Третий перенос подряд: не сворачивается */
+.move__warn {
+  margin: var(--s2) 0 0 var(--s6);
+  font-size: var(--fs-xs);
+  color: var(--danger);
+}
+
+/* Хвост блока: остаток рабочего листа и бэклог */
+.tail {
+  margin-top: var(--s3);
+  font-size: var(--fs-sm);
+  color: var(--soft);
+}
+.tail__link { color: var(--soft); }
+.tail__link:hover { color: var(--text); }
+.tail__cut { color: var(--soft); }
+
+
+/* ============================================================
+   9. БЛОК 3. Деньги в воздухе
+   ============================================================ */
+
+.air { margin-top: var(--s1); }
+
+.air-row {
+  padding: var(--s3) 0;
+  border-top: 1px solid var(--line-2);
+}
+.air-row:first-child { border-top: none; }
+.air-row.is-answered { opacity: .6; }
+
+.air__empty,
+.air__tail {
+  padding: var(--s3) 0;
+  font-size: var(--fs-sm);
+  color: var(--soft);
+}
+
+.air-row__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s2);
+  min-width: 0;
+}
+.air-row__who { font-weight: 600; }
+.air-row__what,
+.air-row__amount { color: var(--muted); }
+/* Разделители ставятся точкой перед каждой частью сведения, кроме имени */
+.air-row__what::before,
+.air-row__amount::before {
+  content: "· ";
+  color: var(--soft);
+}
+
+/* Счетчик дней: моно, 24, вправо, цвет по порогам 5 и 8 дней */
+.days {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 24px;
+  line-height: 1.1;
+  text-align: right;
+  color: var(--soft);
+  white-space: nowrap;
+}
+
+.air-row__state {
+  margin-top: var(--s2);
+  font-size: var(--fs-sm);
+  color: var(--ok);
+}
+
+.air-row__btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s2);
+}
+.air-row__btns .meta { margin-top: 0; }
+
+/* Правило под списком */
+.rule {
+  margin-top: var(--s3);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--line-2);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   10. БЛОК 4. Три доски
+   ============================================================ */
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s4);
+}
+
+.metric {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: var(--s4);
+  min-width: 0;
+}
+
+.metric__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--soft);
+}
+
+.metric__value {
+  font-family: var(--serif);
+  font-size: var(--fs-2xl);
+  line-height: 1.15;
+  margin-top: var(--s1);
+  overflow-wrap: anywhere;
+}
+
+.metric__note {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-top: var(--s2);
+}
+
+
+/* ============================================================
+   11. БЛОК 5. Закрыть день
+   ============================================================ */
+
+.close-toggle { margin-bottom: var(--s3); }
+
+.close {
+  display: grid;
+  gap: var(--s3);
+  padding: var(--s4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+}
+.close .meta { margin-top: 0; }
+.close .btn--primary { justify-self: start; }
+
+.marker {
+  display: grid;
+  grid-template-columns: 72px 1fr 28px;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.marker__label { font-size: var(--fs-sm); color: var(--muted); }
+
+.marker__val {
+  font-size: var(--fs-md);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Значение до первого касания подается серым как подсказка */
+.marker--untouched .marker__val { color: var(--soft); }
+
+.marker__range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+}
+.marker__range::-webkit-slider-runnable-track {
+  height: 4px; border-radius: 999px; background: var(--line);
+}
+.marker__range::-moz-range-track {
+  height: 4px; border-radius: 999px; background: var(--line);
+}
+.marker__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; height: 16px; margin-top: -6px;
+  border: none; border-radius: 50%;
+  background: var(--accent);
+}
+.marker__range::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border: none; border-radius: 50%;
+  background: var(--accent);
+}
+.marker--untouched .marker__range::-webkit-slider-thumb { background: var(--soft); }
+.marker--untouched .marker__range::-moz-range-thumb { background: var(--soft); }
+
+/* Поля «что двинулось» и «семя на завтра» */
+.close__moved,
+.close__seed {
+  width: 100%;
+  padding: var(--s2) var(--s3);
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  transition: background-color var(--t) linear, border-color var(--t) linear;
+}
+.close__moved { resize: vertical; }
+.close__moved::placeholder,
+.close__seed::placeholder { color: var(--soft); }
+.close__moved:hover,
+.close__seed:hover { border-color: var(--soft); }
+.close__moved:focus,
+.close__seed:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+
+/* После отправки: подтверждение и строка команды */
+.close__after { margin-top: var(--s3); }
+
+.close__ok {
+  font-size: var(--fs-sm);
+  color: var(--ok);
+}
+
+.close__cmd {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s2);
+  padding: var(--s2) var(--s3);
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.close__cmd code { font-family: inherit; }
+.close__cmd .btn { height: 26px; margin-left: auto; font-family: var(--ui); }
+
+
+/* ============================================================
+   12. БЛОК 6. Запись наставника
+   ============================================================ */
+
+.mentor__line {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.mentor__date { color: var(--text); }
+.mentor__sep,
+.mentor__marker { color: var(--soft); }
+
+.verdict {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: var(--bg-alt);
+  color: var(--muted);
+}
+.verdict--build,
+.verdict--sell    { background: var(--ok-bg); color: var(--ok); }
+.verdict--drift   { background: var(--danger-bg); color: var(--danger); }
+.verdict--recover,
+.verdict--mixed   { background: var(--warn-bg); color: var(--warn); }
+
+.mentor__headline {
+  font-family: var(--serif);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: var(--s2);
+}
+
+/* Сворачиваемые разделы записи */
+.mentor__section {
+  border-top: 1px solid var(--line-2);
+  margin-top: var(--s3);
+}
+.mentor__section > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--s3) 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  transition: color var(--t) linear;
+}
+.mentor__section > summary::-webkit-details-marker { display: none; }
+.mentor__section > summary::before {
+  content: "›";
+  color: var(--soft);
+  transition: transform var(--t) linear;
+}
+.mentor__section[open] > summary::before { transform: rotate(90deg); }
+.mentor__section > summary:hover { color: var(--text); }
+
+.mentor__body {
+  padding-bottom: var(--s3);
+  color: var(--muted);
+}
+.mentor__body p + p,
+.mentor__body ul + p,
+.mentor__body p + ul { margin-top: var(--s2); }
+.mentor__body li,
+.mentor__body ul li { padding-left: var(--s3); position: relative; }
+.mentor__body li::before {
+  content: "·";
+  position: absolute;
+  left: var(--s1);
+  color: var(--soft);
+}
+
+/* Фокус на завтра: развернут по умолчанию, пункты пронумерованы */
+.mentor__focus {
+  counter-reset: focus;
+  padding-bottom: var(--s3);
+}
+.mentor__focus li {
+  counter-increment: focus;
+  position: relative;
+  padding: var(--s2) 0 var(--s2) var(--s5);
+  border-top: 1px solid var(--line-2);
+}
+.mentor__focus li:first-child { border-top: none; }
+.mentor__focus li::before {
+  content: counter(focus);
+  position: absolute;
+  left: 0;
+  color: var(--soft);
+  font-size: var(--fs-xs);
+}
+
+
+/* ============================================================
+   13. БЛОК 7. Липкая строка ввода и тост
+   ============================================================ */
+
+.os-input {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  padding-top: var(--s2);
+  padding-bottom: var(--s2);
+  background: var(--bg-blur);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+}
+
+.os-input__form {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.os-input__field {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 32px;
+  padding: 0 var(--s3);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  font-size: var(--fs-base);
+  transition: background-color var(--t) linear, border-color var(--t) linear;
+}
+.os-input__field::placeholder { color: var(--soft); }
+.os-input__field:hover { border-color: var(--soft); }
+.os-input__field:focus { outline: none; border-color: var(--accent); }
+
+.os-input__ack {
+  font-size: var(--fs-xs);
+  color: var(--ok);
+  white-space: nowrap;
+}
+
+/* Счетчик неразобранного: краснеет, когда ввод копится мимо файлов */
+.os-input__sync {
+  display: block;
+  margin-top: var(--s1);
+  font-size: var(--fs-xs);
+  color: var(--soft);
+}
+.os-input__sync.is-red { color: var(--danger); }
+
+/* Тост: правый нижний угол над строкой ввода */
+.toast {
+  position: fixed;
+  right: var(--s4);
+  bottom: 64px;
+  z-index: 50;
+  padding: var(--s2) var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  font-size: var(--fs-sm);
+  color: var(--text);
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition: opacity var(--t) linear, transform var(--t) linear;
+}
+.toast.is-on { opacity: 1; transform: none; }
+.toast.is-err { color: var(--danger); border-color: var(--danger); }
+
+
+/* ============================================================
+   14. ЧЕСТНАЯ ПУСТОТА И СБОЙ ЗАГРУЗКИ
+   ============================================================ */
+
+.empty,
+.fatal {
+  padding-top: var(--s7);
+  padding-bottom: var(--s7);
+  color: var(--muted);
+}
+
+.empty__title,
+.fatal__title {
+  font-family: var(--serif);
+  font-size: var(--fs-xl);
+  color: var(--text);
+}
+.fatal__title { color: var(--danger); }
+
+
+/* ============================================================
+   15. УЗКИЙ ЭКРАН. Поля 16, размеры текста не меняются
+   ============================================================ */
+
+@media (max-width: 640px) {
+  :root { --gutter: 16px; }
+
+  /* Строка такта переносится в две строки, но ничего не прячет */
+  .os-bar {
+    padding-top: var(--s2);
+    padding-bottom: var(--s2);
+  }
+  .os-bar__right { flex-wrap: wrap; }
+  .os-bar__left, .os-bar__center { flex-wrap: wrap; }
+
+  .metrics { grid-template-columns: 1fr; }
+
+  .row-move { grid-template-columns: 20px auto 1fr; }
+  .row-move__right { grid-column: 2 / -1; justify-self: start; }
+
+  .days { margin-left: 0; }
+
+  .card--action { padding-left: var(--s4); }
+
+  .marker { grid-template-columns: 60px 1fr 24px; }
+
+  .move__ctx,
+  .move__warn,
+  .move .inline,
+  .move > .meta { margin-left: var(--s5); }
+
+  .os-input__form { flex-wrap: wrap; }
+  .os-input__field { flex-basis: 100%; }
+
+  .toast { left: var(--s4); right: var(--s4); }
+}
+
+
+/* ============================================================
+   16. СНИЖЕННАЯ ПОДВИЖНОСТЬ
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
