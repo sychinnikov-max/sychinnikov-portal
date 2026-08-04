@@ -676,6 +676,13 @@ function renderMain() {
     }
   } else {
     card.appendChild(h('p', { class: 'action__text', text: main.text }));
+    /* Заголовок пункта часто звучит как «Роман — текстом, до всего остального»,
+       а сама формулировка (что именно сказать, какой закрытый вопрос) лежит в
+       уточнении. Без него самый крупный элемент экрана не отвечает на вопрос
+       «что делать», ради которого он и существует. */
+    if (main.detail) {
+      card.appendChild(h('p', { class: 'action__detail', text: main.detail }));
+    }
     card.appendChild(h('p', { class: 'meta' }, [tag, tag ? ' ' : null, meta.join(' · ')]));
     if (!S.readonly) {
       card.appendChild(h('div', { class: 'action__btns' }, [

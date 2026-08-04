@@ -511,6 +511,16 @@ input, textarea, button, select { font: inherit; color: inherit; }
   line-height: 1.35;
 }
 
+/* Уточнение под заголовком: сама формулировка действия — что сказать,
+   какой закрытый вопрос задать. Читается спокойнее заголовка, но крупнее подписи. */
+.action__detail {
+  margin-top: var(--s2);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--text);
+  max-width: 62ch;
+}
+
 /* Схлопнутая строка после отметки */
 .action__done {
   display: flex;
