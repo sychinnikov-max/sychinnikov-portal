@@ -362,9 +362,21 @@ body.hasbar .block{scroll-margin-top:140px}
   body,.card,.idxcard,.spheres,.sph,.printcta,.mk,.am{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .idxcard{background:#F7F3EA;border-color:#D8CFC0}
   .idxcard .num{color:#8A6E2E}
-  .sect{page-break-inside:auto;margin-top:8mm;padding-top:5mm}
-  .rvlist{grid-template-columns:1fr}
-  .rv,.pi,.card{page-break-inside:avoid;border-color:#E4DCCD}
+  /* каждый раздел с новой страницы: так заголовок никогда не остается
+     внизу листа в отрыве от своего содержания */
+  #answersheet,#review,#summarysect,.plan{break-before:page;page-break-before:always;
+     margin-top:0;padding-top:0;border-top:none}
+  .sect{page-break-inside:auto}
+
+  /* разрывы страниц плохо работают внутри grid, поэтому в печати
+     все контейнеры разделов переводим в обычный блочный поток */
+  .rvlist,.cards,.ansgrid{display:block}
+  .card{margin-bottom:4mm}
+  .ansblk{margin-bottom:5mm}
+  .rv,.pi,.card,.ansblk,.ansblk li,.spheres,.stage,.printcta{
+     break-inside:avoid;page-break-inside:avoid;-webkit-column-break-inside:avoid}
+  .rv,.pi,.card{border-color:#E4DCCD}
+  .pgstart{break-inside:avoid;page-break-inside:avoid}
   .card{background:#F7F3EA;border-color:#D8CFC0}
   .card.pin{background:#F3EBD8}
   .card .big,.rvn,.piq,.qt{color:#1A1512}
@@ -1097,11 +1109,15 @@ function renderPlan(){
   if(c.ans===0)body='<p class="pempty">Появится после ответов.</p>';
   else if(!groups.length)body='<p class="pempty">Все вопросы закрыты ответом «да». Проверьте, не слишком ли мягко шла оценка: закрытым считается вопрос, ответ на который подтверждается документом, а не ощущением.</p>';
   else body=groups.map(function(g){
-    return '<div class="pgroup"><h4>'+g.name+'</h4>'+g.items.map(function(it){
+    var item=function(it){
       return '<div class="pi"><span class="mk '+it.v+'">'+(it.v==="n"?"нет":"не знаю")+'</span>'+
         '<span class="piq">'+esc(it.t)+'</span>'+
         '<p class="piw"><b>Что даст закрытие</b>'+esc(it.w)+'</p></div>';
-    }).join("")+'</div>';
+    };
+    // заголовок сферы склеен с первым пунктом, чтобы не оторвался на печати
+    return '<div class="pgroup">'+
+      '<div class="pgstart"><h4>'+g.name+'</h4>'+item(g.items[0])+'</div>'+
+      g.items.slice(1).map(item).join("")+'</div>';
   }).join("");
 
   host.innerHTML='<h2 class="h2">Что не закрыто</h2>'+
