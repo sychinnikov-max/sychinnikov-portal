@@ -172,8 +172,29 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--bronze);border:2px solid var(--bg)}
 
 .qs{display:flex;flex-direction:column;margin-top:5px}
-.q{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 16px;padding:11px 0;border-bottom:1px solid var(--hair-soft);scroll-margin-top:100px}
-.q.hl{background:color-mix(in oklab,var(--gold) 9%,transparent)}
+.q{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 16px;padding:11px 0;border-bottom:1px solid var(--hair-soft);scroll-margin-top:160px}
+/* режим «есть пропуски»: подсвечиваем все вопросы без ответа, а не только первый */
+.q.miss{background:color-mix(in oklab,var(--no) 11%,transparent);box-shadow:inset 3px 0 0 var(--no);
+        padding-left:14px;margin-left:-14px;border-radius:2px}
+.q.miss .qt::after{content:"нет ответа";display:inline-block;margin-left:10px;vertical-align:2px;
+        font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+        color:var(--no);border:1px solid currentColor;border-radius:2px;padding:1px 6px;white-space:nowrap}
+.q.hl{outline:2px solid var(--gold);outline-offset:4px}
+.bmiss{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--no);
+       border:1px solid currentColor;border-radius:2px;padding:2px 7px;white-space:nowrap}
+
+/* полоса-напоминание под шапкой, пока есть незакрытые вопросы */
+.missbar{position:fixed;left:0;right:0;top:64px;z-index:55;display:none;align-items:center;
+         justify-content:center;gap:14px 18px;flex-wrap:wrap;padding:12px 20px;
+         background:color-mix(in oklab,var(--no) 26%,var(--bg));border-bottom:1px solid var(--no);
+         font-size:15.5px;color:var(--ink)}
+.missbar.show{display:flex}
+.mbbtn{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+       background:transparent;border:1px solid currentColor;color:var(--ink);border-radius:3px;
+       padding:7px 12px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.mbbtn:hover{background:var(--ink);color:var(--bg)}
+body.hasbar .stage{top:132px}
+body.hasbar .block{scroll-margin-top:140px}
 .qt{font-size:17px;line-height:1.45;max-width:62ch;text-wrap:pretty}
 .q.done .qt{color:var(--ink-muted)}
 .qn{display:block;font-size:15px;line-height:1.45;color:var(--ink-dim);margin-top:3px}
@@ -209,6 +230,21 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .ferr{display:none;color:var(--no);font-size:14.5px;line-height:1.4}
 .ferr.show{display:block}
 .gerr{display:none;color:var(--no);font-size:15px}
+
+/* сводка «почему не пускает», прямо над кнопкой */
+.gsum{display:none;border:1px solid var(--no);border-radius:3px;
+      background:color-mix(in oklab,var(--no) 13%,transparent);padding:15px 16px}
+.gsum.show{display:block}
+.gsum .gt{font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+          color:var(--no);font-weight:500;margin-bottom:9px}
+.gsum ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.gsum li{font-size:15.5px;line-height:1.45;color:var(--ink);position:relative;padding-left:19px}
+.gsum li::before{content:"";position:absolute;left:0;top:11px;width:9px;height:1.5px;background:var(--no)}
+.gsact{margin-top:14px;display:flex;gap:9px;flex-wrap:wrap}
+.gsact button{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+              background:transparent;border:1px solid var(--no);color:var(--no);border-radius:3px;
+              padding:9px 13px;cursor:pointer}
+.gsact button:hover{background:var(--no);color:var(--gold-ink)}
 .gate.sending .cta{opacity:.5;pointer-events:none}
 
 .locked{position:relative}
@@ -473,6 +509,12 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
             <p class="ferr" id="err-tg"></p>
           </div>
 
+          <div class="gsum" id="gsum">
+            <div class="gt">Разбор пока не открыть</div>
+            <ul id="gsumlist"></ul>
+            <div class="gsact" id="gsumact"></div>
+          </div>
+
           <button class="cta" id="gsubmit" type="submit">Открыть разбор</button>
           <p class="note" id="ghint">Заполните блок о компании и ответьте на все 43 вопроса.</p>
           <p class="gerr" id="gerr">Не отправилось. Разбор все равно открыт. Напишите мне в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
@@ -554,6 +596,12 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
   <p>Андрей Сычинников · управленческий учет на русском для бизнеса в Европе · Telegram <a href="https://t.me/Sychinnikov">@Sychinnikov</a> · <a href="/founderfinance/">на главную</a></p>
   <p style="margin-top:10px">Ответы хранятся в вашем браузере. Диагностика не заменяет аудит: это способ за 20 минут увидеть, где у бизнеса тонко.</p>
 </div></footer>
+
+<div class="missbar" id="missbar">
+  <span id="missbartext"></span>
+  <button class="mbbtn" id="mbnext" type="button">Показать следующий</button>
+  <a class="mbbtn" href="#gate">Вернуться к форме</a>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -823,8 +871,9 @@ function buildProfile(){
     if(!b)return;
     var pi=+b.dataset.p, o=PROFILE[pi].opts[+b.dataset.o];
     state.profile[pi]=state.profile[pi]===o?null:o;
-    document.getElementById("pfblock").classList.remove("hl");
+    if(state.profile.indexOf(null)<0)document.getElementById("pfblock").classList.remove("hl");
     update();
+    refreshGateSummary();
   });
 }
 
@@ -858,7 +907,8 @@ function buildBlocks(){
     return '<section class="block" id="blk-'+bi+'">'+
       '<div class="bhead">'+
         '<div class="btitle"><span class="bname">'+blk.name+'</span><span class="bsub">'+blk.sub+'</span></div>'+
-        '<div class="bscore"><span class="v" id="bs-'+bi+'">0.0</span><span class="d" id="bd-'+bi+'"></span></div>'+
+        '<div class="bscore"><span class="v" id="bs-'+bi+'">0.0</span><span class="d" id="bd-'+bi+'"></span>'+
+          '<span class="bmiss" id="bm-'+bi+'" style="display:none"></span></div>'+
         '<div class="goalrow"><span class="tg">Точка Б</span>'+
           '<input type="range" min="0" max="10" step="1" id="goal-'+bi+'" aria-label="Цель по сфере '+blk.name+'">'+
           '<span class="vl" id="gv-'+bi+'"></span></div>'+
@@ -881,6 +931,7 @@ function buildBlocks(){
     var row=document.getElementById("q-"+bi+"-"+qi);
     row&&row.classList.remove("hl");
     update();
+    refreshGateSummary();
   });
 }
 
@@ -1102,6 +1153,64 @@ function checkContacts(silent){
   return true;
 }
 
+/* ---------- режим пропусков ----------
+   включается после первой неудачной попытки открыть разбор и держится,
+   пока есть вопросы без ответа: подсвечивает их все, а не только первый */
+
+var missMode=false;
+
+function unansweredList(){
+  var out=[];
+  BLOCKS.forEach(function(blk,bi){
+    blk.qs.forEach(function(q,qi){ if(!state.ans[bi][qi]) out.push([bi,qi]); });
+  });
+  return out;
+}
+
+function renderMiss(){
+  var list=unansweredList();
+  var on=missMode&&list.length>0;
+
+  document.querySelectorAll(".q").forEach(function(el){el.classList.remove("miss");});
+  BLOCKS.forEach(function(blk,bi){
+    var box=document.getElementById("bm-"+bi);
+    var n=state.ans[bi].filter(function(v){return !v;}).length;
+    if(box){
+      if(on&&n>0){box.textContent="без ответа "+n;box.style.display="";}
+      else box.style.display="none";
+    }
+  });
+
+  if(on){
+    list.forEach(function(p){
+      var el=document.getElementById("q-"+p[0]+"-"+p[1]);
+      if(el)el.classList.add("miss");
+    });
+  }
+
+  var bar=document.getElementById("missbar");
+  bar.classList.toggle("show",on);
+  document.body.classList.toggle("hasbar",on);
+  if(on){
+    document.getElementById("missbartext").textContent=
+      "Без ответа "+list.length+" "+plural(list.length,"вопрос","вопроса","вопросов")+
+      " из "+TOTAL+". Нажмите да, нет или не знаю в каждой строке.";
+  }
+  if(!list.length)missMode=false;
+}
+
+var missCursor=0;
+function jumpToMiss(){
+  var list=unansweredList();
+  if(!list.length)return;
+  if(missCursor>=list.length)missCursor=0;
+  var p=list[missCursor++];
+  var el=document.getElementById("q-"+p[0]+"-"+p[1]);
+  document.querySelectorAll(".q.hl").forEach(function(e){e.classList.remove("hl");});
+  el.classList.add("hl");
+  el.scrollIntoView({block:"center",behavior:"smooth"});
+}
+
 /* ---------- гейт ---------- */
 function firstUnanswered(){
   for(var bi=0;bi<BLOCKS.length;bi++)
@@ -1222,9 +1331,60 @@ function toast(m){
   clearTimeout(tT);tT=setTimeout(function(){el.classList.remove("show");},2600);
 }
 
+/* ---------- сводка «почему не пускает» ---------- */
+
+// собирает список проблем; silent=true не трогает подсветку полей
+function collectProblems(silent){
+  var out=[];
+  if(state.profile.indexOf(null)>-1)
+    out.push({key:"pf",text:"Не заполнен блок «О компании» выше: нужны все три ответа."});
+  var left=TOTAL-counts().ans;
+  if(left>0)
+    out.push({key:"q",text:"Без ответа "+left+" "+plural(left,"вопрос","вопроса","вопросов")+
+      " из "+TOTAL+". Они подсвечены выше красным."});
+  if(!checkName(silent))
+    out.push({key:"name",text:"Не указано имя."});
+  if(!checkContacts(silent))
+    out.push({key:"contact",text:"Нужна почта или Telegram, и в рабочем формате."});
+  return out;
+}
+
+function refreshGateSummary(){
+  var box=document.getElementById("gsum");
+  if(state.unlocked||!box.classList.contains("show"))return;   // показываем только после попытки
+  showGateSummary(collectProblems(true));
+}
+
+function showGateSummary(problems){
+  var box=document.getElementById("gsum");
+  if(!problems.length){box.classList.remove("show");return;}
+  document.getElementById("gsumlist").innerHTML=
+    problems.map(function(p){return "<li>"+esc(p.text)+"</li>";}).join("");
+  var act=document.getElementById("gsumact");
+  act.innerHTML="";
+  if(problems.some(function(p){return p.key==="q";})){
+    var b=document.createElement("button");
+    b.type="button";b.textContent="Показать первый без ответа";
+    b.addEventListener("click",function(){missCursor=0;jumpToMiss();});
+    act.appendChild(b);
+  }
+  if(problems.some(function(p){return p.key==="pf";})){
+    var b2=document.createElement("button");
+    b2.type="button";b2.textContent="К блоку о компании";
+    b2.addEventListener("click",function(){
+      var pc=document.getElementById("pfblock");
+      pc.classList.add("hl");
+      pc.scrollIntoView({block:"center",behavior:"smooth"});
+    });
+    act.appendChild(b2);
+  }
+  box.classList.add("show");
+}
+
 /* ---------- цикл ---------- */
 function update(){
   syncProfile();syncBlocks();renderCanvas();renderAnswers();renderReview();renderReadout();renderPlan();
+  renderMiss();
   var left=TOTAL-counts().ans;
   var pfLeft=state.profile.filter(function(v){return !v;}).length;
   var hint=document.getElementById("ghint");
@@ -1250,9 +1410,10 @@ function init(){
   // живая проверка: подсказка появляется при уходе из поля, ошибка гаснет при правке
   [["gname",checkName],["gemail",checkEmail],["gtg",checkTg]].forEach(function(pair){
     var el=document.getElementById(pair[0]);
-    el.addEventListener("blur",function(){pair[1](false);});
+    el.addEventListener("blur",function(){pair[1](false);refreshGateSummary();});
     el.addEventListener("input",function(){
       if(el.classList.contains("bad"))pair[1](true),setErr(pair[0],"");
+      refreshGateSummary();
     });
   });
 
@@ -1263,32 +1424,19 @@ function init(){
     e.preventDefault();
     if(document.getElementById("botcheck").checked)return;
 
-    var pfMiss=state.profile.indexOf(null);
-    if(pfMiss>-1){
-      var pc=document.getElementById("pfblock");
-      pc.classList.add("hl");
-      pc.scrollIntoView({block:"center",behavior:"smooth"});
-      toast("Заполните блок о компании");
-      return;
-    }
-
-    var miss=firstUnanswered();
-    if(miss){
-      var row=document.getElementById("q-"+miss[0]+"-"+miss[1]);
-      row.classList.add("hl");
-      row.scrollIntoView({block:"center",behavior:"smooth"});
-      toast("Остались вопросы без ответа");
-      return;
-    }
-
-    var nameOk=checkName(false);
-    var contactsOk=checkContacts(false);
-    if(!nameOk||!contactsOk){
+    // проверяем все сразу и объясняем прямо у кнопки, а не уводим человека наверх
+    var problems=collectProblems(false);
+    if(problems.length){
+      if(problems.some(function(p){return p.key==="q";})){missMode=true;renderMiss();}
+      if(problems.some(function(p){return p.key==="pf";}))
+        document.getElementById("pfblock").classList.add("hl");
+      showGateSummary(problems);
       var bad=document.querySelector(".fin.bad");
-      if(bad){bad.focus();bad.scrollIntoView({block:"center",behavior:"smooth"});}
-      toast("Проверьте контакты");
+      if(bad)bad.focus();
+      document.getElementById("gsum").scrollIntoView({block:"center",behavior:"smooth"});
       return;
     }
+    document.getElementById("gsum").classList.remove("show");
 
     state.name=document.getElementById("gname").value.trim();
     state.company=document.getElementById("gcompany").value.trim();
@@ -1306,6 +1454,8 @@ function init(){
     document.getElementById("result").scrollIntoView({behavior:"smooth",block:"start"});
     toast("Разбор открыт");
   });
+
+  document.getElementById("mbnext").addEventListener("click",jumpToMiss);
 
   document.getElementById("btnPng").addEventListener("click",exportPNG);
   // колесо рисуется на canvas, поэтому под печать его надо перерисовать светлым.
