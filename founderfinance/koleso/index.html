@@ -272,11 +272,20 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
   .pfline{color:#4A4038;margin-bottom:6mm}
   .pfline b{color:#8A6E2E}
   .inner{padding:0;max-width:none}
+  /* секции на экране темные, в печати фон сбрасывается, иначе на листе плашка */
+  .band,.band.alt,.hero,.stage{background:#fff!important}
   .band,.sect{border-top:1px solid #D8CFC0}
+  /* заголовок раздела не должен оставаться один внизу страницы */
+  .sect > .h2,.sect > .sub,.pgroup h4,.ansblk h4{break-after:avoid;page-break-after:avoid}
   .pad{padding:0}
   .grid{display:block}
-  .stage{position:static;display:block;width:74mm;float:right;margin:0 0 10mm 8mm}
-  canvas#wheel{width:74mm!important;height:auto!important}
+  /* колесо и индекс идут одной строкой во всю ширину, без обтекания:
+     иначе лист ответов зажимается в половину полосы и рвется по словам */
+  .stage{position:static;float:none;width:100%;display:grid;grid-template-columns:76mm 1fr;
+         gap:10mm;align-items:center;margin:0 0 7mm}
+  canvas#wheel{width:76mm!important;height:auto!important}
+  .idxcard{align-self:center}
+  .answersheet{clear:both}
   .spheres{background:#D8CFC0;border-color:#D8CFC0}
   .sph{background:#F7F3EA}
   .sph .n{color:#1A1512}
@@ -317,7 +326,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
   .ansgrid{display:grid;grid-template-columns:1fr 1fr;gap:5mm 8mm}
   .ansblk{page-break-inside:avoid;break-inside:avoid}
-  .ansblk h4{font-family:var(--fm);font-size:9pt;letter-spacing:.1em;text-transform:uppercase;color:#8A6E2E;font-weight:400;margin-bottom:2mm;padding-bottom:1mm;border-bottom:1px solid #E4DCCD}
+  .ansblk h4{font-family:var(--fm);font-size:8.5pt;letter-spacing:.06em;text-transform:uppercase;color:#8A6E2E;font-weight:400;margin-bottom:2mm;padding-bottom:1mm;border-bottom:1px solid #E4DCCD;white-space:nowrap}
   .ansblk ul{list-style:none;margin:0;padding:0}
   .ansblk li{display:grid;grid-template-columns:15mm 1fr;gap:2mm;font-size:9pt;line-height:1.35;padding:1.1mm 0;color:#1A1512;page-break-inside:avoid}
   .am{font-family:var(--fm);font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:.3mm 0;border:1px solid currentColor;border-radius:1px;align-self:start;margin-top:.4mm}
@@ -1292,6 +1301,7 @@ function init(){
     gate.classList.remove("sending");
 
     unlock();
+    try{if(window.ym)ym(109611431,'reachGoal','lead_submit');}catch(e){}
     if(!ok)document.getElementById("gerr").style.display="block";
     document.getElementById("result").scrollIntoView({behavior:"smooth",block:"start"});
     toast("Разбор открыт");
