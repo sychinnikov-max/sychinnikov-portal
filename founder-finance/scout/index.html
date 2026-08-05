@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14100C">
+<title>Скаут — карта комнат и людей</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314100C'/%3E%3Ccircle cx='32' cy='32' r='11' fill='none' stroke='%23E0B84C' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%23FF6B2C'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#14100C; --bg2:#1B1611; --panel:#201A14; --panel2:#261F17;
+  --line:#33291F; --line2:#3F3325;
+  --ink:#F3EADC; --muted:#AC9B83; --soft:#7A6B57;
+  --gold:#E0B84C; --gold-deep:#C9A227; --gold-dim:#6E5A20;
+  --fire:#FF6B2C; --green:#4FB47A; --blue:#5C9BDD; --violet:#A98BE0; --red:#E0604A;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  --r:12px; --r-s:8px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; overflow:hidden;
+}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:6px}
+::-webkit-scrollbar-track{background:transparent}
+
+/* ── каркас ── */
+.app{display:grid;grid-template-rows:auto 1fr;height:100%}
+.top{
+  display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;
+  padding:.6rem 1rem;border-bottom:1px solid var(--line);background:var(--bg2);
+}
+.brand{display:flex;align-items:center;gap:.55rem;font-weight:700;letter-spacing:.01em}
+.brand .mark{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#8A6A2E,#E0B84C);display:grid;place-items:center;color:#14100C;font-weight:800;font-size:.72rem}
+.brand small{display:block;font-weight:500;color:var(--soft);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase}
+.kpis{display:flex;gap:.5rem;flex-wrap:wrap;margin-left:auto;align-items:center}
+.kpi{
+  display:flex;align-items:baseline;gap:.35rem;padding:.22rem .6rem;border-radius:100px;
+  background:var(--panel);border:1px solid var(--line);font-size:.76rem;color:var(--muted);
+}
+.kpi b{font-family:var(--mono);font-size:.9rem;color:var(--ink)}
+.kpi.fire{border-color:#5B2B12;background:#2A170D}
+.kpi.fire b{color:var(--fire)}
+.kpi.a b{color:var(--gold)}
+.stamp{font-family:var(--mono);font-size:.68rem;color:var(--soft)}
+
+.main{display:grid;grid-template-columns:288px 1fr 348px;min-height:0}
+@media (max-width:1180px){.main{grid-template-columns:250px 1fr 300px}}
+@media (max-width:900px){
+  body{overflow:auto}
+  .main{grid-template-columns:1fr;grid-auto-rows:min-content}
+  .col{max-height:none!important;border-right:none;border-bottom:1px solid var(--line)}
+  .stage{height:62vh}
+}
+.col{min-height:0;overflow-y:auto;border-right:1px solid var(--line);background:var(--bg2)}
+.col.right{border-right:none;border-left:1px solid var(--line);background:var(--bg2)}
+.colhead{
+  position:sticky;top:0;z-index:5;background:var(--bg2);
+  padding:.7rem .8rem .5rem;border-bottom:1px solid var(--line);
+}
+.colhead h2{margin:0;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:700}
+.colhead .sub{font-size:.72rem;color:var(--soft);margin-top:.15rem}
+
+/* ── комнаты ── */
+.rooms{padding:.55rem}
+.room{
+  width:100%;text-align:left;display:block;padding:.6rem .65rem;border-radius:var(--r-s);
+  border:1px solid transparent;margin-bottom:.3rem;transition:background .13s,border-color .13s;
+}
+.room:hover{background:var(--panel)}
+.room.on{background:var(--panel2);border-color:var(--gold-dim)}
+.room .rt{display:flex;align-items:center;gap:.4rem;font-size:.86rem;font-weight:600;line-height:1.25}
+.room .rt .fire{color:var(--fire)}
+.room .rm{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:.28rem;font-family:var(--mono);font-size:.66rem;color:var(--soft)}
+.fitbar{height:3px;border-radius:3px;background:var(--line);margin-top:.4rem;overflow:hidden}
+.fitbar i{display:block;height:100%;background:linear-gradient(90deg,#8A6A2E,#E0B84C)}
+.kind{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.05rem .3rem;border-radius:4px;background:var(--line);color:var(--muted)}
+.kind.desyatka{background:#2C2410;color:var(--gold)}
+.kind.forum{background:#152430;color:var(--blue)}
+
+/* ── сцена ── */
+.stage{position:relative;min-height:0;background:radial-gradient(ellipse at 50% 40%,#1B1611 0%,#100D09 78%)}
+canvas{display:block;width:100%;height:100%;cursor:grab}
+canvas.drag{cursor:grabbing}
+.stage-bar{
+  position:absolute;top:.6rem;left:.6rem;right:.6rem;display:flex;gap:.4rem;flex-wrap:wrap;
+  align-items:center;pointer-events:none;z-index:3;
+}
+.stage-bar>*{pointer-events:auto}
+.seg{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:100px;padding:2px}
+.seg button{padding:.2rem .6rem;border-radius:100px;font-size:.72rem;color:var(--muted)}
+.seg button.on{background:var(--gold);color:#191307;font-weight:700}
+.ghost{padding:.24rem .62rem;border-radius:100px;background:var(--panel);border:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.ghost:hover{color:var(--ink);border-color:var(--line2)}
+.ghost.on{color:var(--gold);border-color:var(--gold-dim)}
+.legend{
+  position:absolute;left:.7rem;bottom:.7rem;display:flex;gap:.75rem;flex-wrap:wrap;
+  font-size:.68rem;color:var(--soft);background:rgba(20,16,12,.72);padding:.35rem .6rem;
+  border-radius:100px;border:1px solid var(--line);backdrop-filter:blur(6px);
+}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.28rem;vertical-align:middle}
+.hint{position:absolute;right:.7rem;bottom:.7rem;font-size:.66rem;color:var(--soft);font-family:var(--mono)}
+.tip{
+  position:absolute;z-index:9;pointer-events:none;max-width:270px;padding:.45rem .6rem;
+  background:#0D0A07;border:1px solid var(--line2);border-radius:var(--r-s);
+  box-shadow:0 8px 30px rgba(0,0,0,.55);font-size:.76rem;line-height:1.35;
+}
+.tip b{display:block;font-size:.82rem;margin-bottom:.1rem}
+.tip span{color:var(--soft);font-size:.7rem}
+
+/* ── фильтры ── */
+.filters{padding:.6rem .75rem .2rem}
+.fgroup{margin-bottom:.7rem}
+.flab{font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:.32rem;display:flex;justify-content:space-between}
+.chips{display:flex;gap:.28rem;flex-wrap:wrap}
+.chip{
+  padding:.18rem .52rem;border-radius:100px;border:1px solid var(--line);
+  background:var(--panel);font-size:.72rem;color:var(--muted);
+}
+.chip:hover{border-color:var(--line2);color:var(--ink)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#191307;font-weight:600}
+.chip.on.fire{background:var(--fire);border-color:var(--fire);color:#fff}
+.chip .n{font-family:var(--mono);font-size:.64rem;opacity:.65;margin-left:.24rem}
+input[type=search],select{
+  width:100%;padding:.36rem .55rem;border-radius:var(--r-s);border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);font-size:.8rem;font-family:var(--sans);
+}
+input[type=search]:focus,select:focus{outline:none;border-color:var(--gold-dim)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+
+/* ── список людей ── */
+.people{padding:.2rem .5rem 1.4rem}
+.plist-head{
+  display:flex;justify-content:space-between;align-items:center;padding:.35rem .3rem;
+  font-size:.68rem;color:var(--soft);font-family:var(--mono);
+  border-top:1px solid var(--line);margin-top:.2rem;
+}
+.p{
+  width:100%;text-align:left;display:block;padding:.5rem .55rem;border-radius:var(--r-s);
+  border:1px solid transparent;margin-bottom:.22rem;
+}
+.p:hover{background:var(--panel)}
+.p.on{background:var(--panel2);border-color:var(--gold-dim)}
+.p .ph{display:flex;align-items:center;gap:.35rem}
+.p .nm{font-size:.83rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p .sc{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:var(--gold)}
+.p .pm{font-size:.72rem;color:var(--soft);margin-top:.12rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+.dot.a{background:var(--gold)}.dot.b{background:var(--blue)}
+.dot.c{background:var(--soft)}.dot.d{background:#3A3128}
+.dot.competitor{background:var(--violet)}
+.mk{font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:.04rem .3rem;border-radius:4px;background:var(--line);color:var(--muted);font-family:var(--sans)}
+.mk.written{background:#1A2A38;color:var(--blue)}
+.mk.replied{background:#12291D;color:var(--green)}
+.mk.no{background:#2C1B18;color:var(--red)}
+.empty{padding:1.6rem .9rem;text-align:center;color:var(--soft);font-size:.8rem}
+
+/* ── карточка человека ── */
+.card{padding:.75rem .8rem 2rem}
+.card .back{font-size:.72rem;color:var(--soft);margin-bottom:.5rem}
+.card h3{margin:0;font-size:1.05rem;line-height:1.25;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.badge{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:.1rem .38rem;border-radius:5px}
+.badge.a{background:#332911;color:var(--gold)}
+.badge.b{background:#14202D;color:var(--blue)}
+.badge.c{background:var(--line);color:var(--muted)}
+.badge.d{background:var(--line);color:var(--soft)}
+.badge.competitor{background:#251C33;color:var(--violet)}
+.badge.fire{background:#3A1B0B;color:var(--fire)}
+.badge.nb{background:#122A1E;color:var(--green)}
+.handle{font-family:var(--mono);font-size:.8rem}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:.2rem .6rem;margin:.6rem 0;font-size:.78rem}
+.facts dt{color:var(--soft)}
+.facts dd{margin:0}
+.why{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-s);padding:.5rem .6rem;font-size:.79rem;color:var(--muted);margin-bottom:.55rem}
+.appr{background:#241C10;border:1px solid var(--gold-dim);border-radius:var(--r-s);padding:.5rem .6rem;font-size:.8rem;margin-bottom:.6rem}
+.appr .l{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.2rem}
+.q{border-left:2px solid var(--line2);padding:.1rem 0 .1rem .55rem;margin-bottom:.55rem}
+.q.hot{border-left-color:var(--fire)}
+.q .qm{font-family:var(--mono);font-size:.64rem;color:var(--soft);margin-bottom:.15rem;display:flex;gap:.4rem;flex-wrap:wrap}
+.q p{margin:0;font-size:.79rem;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.acts{display:flex;gap:.4rem;flex-wrap:wrap;margin:.6rem 0}
+.btn{padding:.32rem .7rem;border-radius:100px;background:var(--gold);color:#191307;font-size:.78rem;font-weight:700}
+.btn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+.sechead{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:700;margin:.9rem 0 .35rem}
+
+/* ── состояния загрузки ── */
+.screen{display:grid;place-items:center;height:100%;padding:2rem;text-align:center}
+.screen .box{max-width:460px}
+.screen h1{font-size:1.1rem;margin:0 0 .5rem}
+.screen p{color:var(--muted);font-size:.85rem}
+.screen code{font-family:var(--mono);font-size:.76rem;background:var(--panel);padding:.1rem .3rem;border-radius:4px;color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="app" id="app" hidden>
+  <header class="top">
+    <div class="brand">
+      <span class="mark">SC</span>
+      <span>Скаут<small data-slot="window"></small></span>
+    </div>
+    <div class="kpis">
+      <span class="kpi fire" title="прямой живой запрос по моей теме"><b data-slot="k.hot">0</b> 🔥 горячих</span>
+      <span class="kpi a"><b data-slot="k.a">0</b> ядро A</span>
+      <span class="kpi"><b data-slot="k.b">0</b> B</span>
+      <span class="kpi" title="разобрано моделью из всех, кто говорил в окне"><b data-slot="k.people">0</b> людей разобрано</span>
+      <span class="kpi"><b data-slot="k.msgs">0</b> сообщений</span>
+      <span class="stamp" data-slot="stamp"></span>
+    </div>
+  </header>
+
+  <div class="main">
+    <!-- ЛЕВО: комнаты -->
+    <aside class="col">
+      <div class="colhead">
+        <h2>Комнаты</h2>
+        <div class="sub" data-slot="rooms.sub"></div>
+      </div>
+      <div class="rooms" data-slot="rooms"></div>
+    </aside>
+
+    <!-- ЦЕНТР: граф -->
+    <section class="stage">
+      <div class="stage-bar">
+        <div class="seg" data-slot="hubseg"></div>
+        <button class="ghost" data-act="edges">связи ответов</button>
+        <button class="ghost" data-act="labels">подписи</button>
+        <button class="ghost" data-act="reset">сброс вида</button>
+        <span class="ghost" data-slot="shown" style="pointer-events:none"></span>
+      </div>
+      <canvas data-slot="canvas"></canvas>
+      <div class="legend">
+        <span><i style="background:var(--gold)"></i>ядро A</span>
+        <span><i style="background:var(--blue)"></i>B</span>
+        <span><i style="background:var(--soft)"></i>C</span>
+        <span><i style="background:#3A3128"></i>шум</span>
+        <span><i style="background:var(--violet)"></i>конкурент</span>
+        <span><i style="background:var(--fire)"></i>🔥 живой запрос</span>
+      </div>
+      <div class="hint">колесо — масштаб · тянуть — сдвиг · клик — карточка</div>
+      <div class="tip" data-slot="tip" hidden></div>
+    </section>
+
+    <!-- ПРАВО: фильтр + люди / карточка -->
+    <aside class="col right" data-slot="right"></aside>
+  </div>
+</div>
+
+<div class="screen" id="screen">
+  <div class="box">
+    <h1 data-slot="s.title">Загружаю карту…</h1>
+    <p data-slot="s.text"></p>
+  </div>
+</div>
+
+<script>
+(function () {
+'use strict';
+
+var API = '/founder-finance/api/scout';
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var slot = function (n, r) { return (r || document).querySelector('[data-slot="' + n + '"]'); };
+
+// ── состояние ───────────────────────────────────────────────────────────
+var DATA = null;
+var ROOM_BY_ID = {};
+var S = {
+  hub: 'room',            // по чему собираем связки: комната, ниша, гео, уровень, роль
+  room: null,             // выбранная комната (фильтр)
+  sel: null,              // выбранный человек
+  q: '',
+  hot: false,
+  neighbor: false,
+  tiers: {},              // пусто = все, кроме шума и конкурентов
+  roles: {},
+  geo: '',
+  sort: 'fit',
+  edges: false,
+  labels: true,
+  showNoise: false,
+  showComp: false,
+  hideDone: false
+};
+
+// Пометки живут в браузере: карта пересобирается каждый прогон, и класть в нее
+// решения Андрея нельзя — их бы затирало. localStorage переживает пересборку.
+var MARKS = {};
+try { MARKS = JSON.parse(localStorage.getItem('scout.marks') || '{}'); } catch (e) { MARKS = {}; }
+var MARK_NAME = { written: 'написал', replied: 'ответил', no: 'не то' };
+function markOf(p) { return MARKS[p.id] || null; }
+function setMark(p, m) {
+  if (m) MARKS[p.id] = m; else delete MARKS[p.id];
+  try { localStorage.setItem('scout.marks', JSON.stringify(MARKS)); } catch (e) {}
+}
+
+var TIER_NAME = { a: 'ядро A', b: 'B', c: 'C', d: 'шум', competitor: 'конкурент' };
+var TIER_COLOR = { a: '#E0B84C', b: '#5C9BDD', c: '#7A6B57', d: '#3A3128', competitor: '#A98BE0' };
+var ROLE_NAME = {
+  owner: 'собственник', freelancer: 'фрилансер', agency: 'агентство',
+  employee: 'сотрудник', jobseeker: 'ищет работу', unknown: 'неясно'
+};
+var KIND_NAME = { desyatka: 'десятка', forum: 'форум', country: 'страна', service: 'сервис' };
+var HUBS = [
+  { k: 'room', t: 'по комнатам' },
+  { k: 'niche', t: 'по нишам' },
+  { k: 'geo', t: 'по гео' },
+  { k: 'tier', t: 'по уровню' },
+  { k: 'role', t: 'по роли' }
+];
+
+// ── загрузка ────────────────────────────────────────────────────────────
+function fail(title, text) {
+  $('#screen').hidden = false;
+  $('#app').hidden = true;
+  slot('s.title').textContent = title;
+  slot('s.text').innerHTML = text;
+}
+
+fetch(API, { credentials: 'include', cache: 'no-store' })
+  .then(function (r) {
+    if (r.status === 401) throw new Error('auth');
+    if (r.status === 404) throw new Error('empty');
+    if (!r.ok) throw new Error('http ' + r.status);
+    return r.json();
+  })
+  .then(function (d) { DATA = d; start(); })
+  .catch(function (e) {
+    if (e.message === 'auth') {
+      fail('Нужен вход', 'Сессия Cloudflare Access истекла. Обнови страницу — тебя перекинет на вход.');
+    } else if (e.message === 'empty') {
+      fail('Карта еще не собрана', 'Запусти на Маке <code>.scripts/telegram-scout/run.sh</code> — он соберет срез, разберет людей и опубликует карту сюда.');
+    } else {
+      fail('Не читается', 'Ошибка: ' + e.message);
+    }
+  });
+
+// ── старт ───────────────────────────────────────────────────────────────
+function start() {
+  $('#screen').hidden = true;
+  $('#app').hidden = false;
+
+  DATA.rooms.forEach(function (r) { ROOM_BY_ID[r.id] = r; });
+  DATA.people.forEach(function (p) {
+    p._search = ((p.name || '') + ' ' + (p.username || '') + ' ' + (p.company || '') + ' ' +
+                 (p.niche || '') + ' ' + (p.geo || '') + ' ' + (p.tags || []).join(' ') + ' ' +
+                 (p.why || '')).toLowerCase();
+  });
+
+  var w = DATA.window || {};
+  slot('window').textContent = 'окно ' + human(w.from) + ' — ' + human(w.to);
+  var s = DATA.stats || {};
+  slot('k.hot').textContent = s.hot || 0;
+  slot('k.a').textContent = s.a || 0;
+  slot('k.b').textContent = s.b || 0;
+  slot('k.people').textContent = (s.classified || 0) + ' / ' + (s.people || 0);
+  slot('k.msgs').textContent = s.messages || 0;
+  slot('stamp').textContent = 'собрано ' + (DATA.built_at || '').replace('T', ' ').slice(0, 16);
+
+  renderRooms();
+  renderHubSeg();
+  bindStageBar();
+  initCanvas();
+  renderRight();
+  rebuildGraph();
+}
+
+function human(d) {
+  if (!d) return '';
+  var p = d.split('-');
+  return p[2] + '.' + p[1];
+}
+
+// ── фильтрация ──────────────────────────────────────────────────────────
+function anyOn(o) { for (var k in o) if (o[k]) return true; return false; }
+
+function visible() {
+  var q = S.q.trim().toLowerCase();
+  var tierOn = anyOn(S.tiers), roleOn = anyOn(S.roles);
+  return DATA.people.filter(function (p) {
+    if (!p.classified) return false;
+    if (S.hot && !p.hot) return false;
+    if (S.neighbor && !p.neighbor) return false;
+    if (S.room && p.rooms.indexOf(S.room) === -1) return false;
+    if (S.geo && (p.geo || '') !== S.geo) return false;
+    if (S.hideDone && markOf(p)) return false;
+    if (tierOn) { if (!S.tiers[p.tier]) return false; }
+    else {
+      // по умолчанию прячем шум и конкурентов: они мешают увидеть ядро
+      if (p.tier === 'd' && !S.showNoise) return false;
+      if (p.competitor && !S.showComp) return false;
+    }
+    if (roleOn && !S.roles[p.role]) return false;
+    if (q && p._search.indexOf(q) === -1) return false;
+    return true;
+  }).sort(function (a, b) {
+    if (a.hot !== b.hot) return a.hot ? -1 : 1;
+    if (S.sort === 'msgs') return b.msgs - a.msgs;
+    if (S.sort === 'fresh') return (b.last || '').localeCompare(a.last || '');
+    return b.fit - a.fit || b.msgs - a.msgs;
+  });
+}
+
+function hubKey(p) {
+  if (S.hub === 'room') return p.main_room != null ? 'r' + p.main_room : null;
+  if (S.hub === 'niche') return p.niche ? 'n' + p.niche : 'n—';
+  if (S.hub === 'geo') return p.geo ? 'g' + p.geo : 'g—';
+  if (S.hub === 'tier') return 't' + p.tier;
+  return 'o' + p.role;
+}
+function hubLabel(key) {
+  var v = key.slice(1);
+  if (S.hub === 'room') return (ROOM_BY_ID[+v] || {}).title || 'комната';
+  if (S.hub === 'tier') return TIER_NAME[v] || v;
+  if (S.hub === 'role') return ROLE_NAME[v] || v;
+  return v === '—' ? 'не определено' : v;
+}
+
+// ── левая колонка: комнаты ──────────────────────────────────────────────
+function renderRooms() {
+  var box = slot('rooms');
+  var rooms = DATA.rooms.slice().sort(function (a, b) {
+    return (b.fit || 0) - (a.fit || 0) || b.msgs - a.msgs;
+  });
+  slot('rooms.sub').textContent = rooms.length + ' комнат · отсортированы по пригодности';
+  box.innerHTML = '';
+
+  var all = document.createElement('button');
+  all.className = 'room' + (S.room === null ? ' on' : '');
+  all.innerHTML = '<span class="rt">Все комнаты</span><span class="rm">' +
+    DATA.people.length + ' разобранных людей · ' + DATA.stats.messages + ' сообщений</span>';
+  all.onclick = function () { S.room = null; S.sel = null; renderRooms(); renderRight(); rebuildGraph(); };
+  box.appendChild(all);
+
+  rooms.forEach(function (r) {
+    var b = document.createElement('button');
+    b.className = 'room' + (S.room === r.id ? ' on' : '');
+    b.title = r.summary || '';
+    b.innerHTML =
+      '<span class="rt">' + esc(r.title) +
+        (r.hot ? ' <span class="fire">🔥' + r.hot + '</span>' : '') + '</span>' +
+      '<span class="rm">' +
+        '<span class="kind ' + r.kind + '">' + (KIND_NAME[r.kind] || r.kind) + '</span>' +
+        '<span>' + r.per_day + '/день</span>' +
+        '<span>' + r.authors + ' авторов</span>' +
+        '<span>фит ' + r.fit + '</span>' +
+      '</span>' +
+      '<span class="fitbar"><i style="width:' + Math.max(2, r.fit) + '%"></i></span>';
+    b.onclick = function () {
+      S.room = (S.room === r.id) ? null : r.id;
+      S.sel = null;
+      renderRooms(); renderRight(); rebuildGraph();
+    };
+    box.appendChild(b);
+  });
+}
+
+// ── правая колонка ──────────────────────────────────────────────────────
+function renderRight() {
+  var host = slot('right');
+  if (S.sel) { renderCard(host, S.sel); return; }
+  host.innerHTML = '';
+
+  var head = document.createElement('div');
+  head.className = 'colhead';
+  head.innerHTML = '<h2>Фильтр</h2>';
+  host.appendChild(head);
+
+  var f = document.createElement('div');
+  f.className = 'filters';
+  host.appendChild(f);
+
+  // поиск
+  var g0 = grp(f, 'Поиск по имени, компании, нише');
+  var inp = document.createElement('input');
+  inp.type = 'search';
+  inp.placeholder = 'например: клининг, Кипр, производство';
+  inp.value = S.q;
+  inp.oninput = function () { S.q = inp.value; refresh(true); };
+  g0.appendChild(inp);
+
+  // быстрые переключатели
+  var g1 = grp(f, 'Быстро');
+  var chips = document.createElement('div');
+  chips.className = 'chips';
+  g1.appendChild(chips);
+  chips.appendChild(chip('🔥 только с запросом', S.hot, 'fire', function () { S.hot = !S.hot; refresh(); }));
+  chips.appendChild(chip('соседи по десяткам', S.neighbor, '', function () { S.neighbor = !S.neighbor; refresh(); }));
+  chips.appendChild(chip('показать конкурентов', S.showComp, '', function () { S.showComp = !S.showComp; refresh(); }));
+  chips.appendChild(chip('показать шум', S.showNoise, '', function () { S.showNoise = !S.showNoise; refresh(); }));
+  var doneN = Object.keys(MARKS).length;
+  chips.appendChild(chip('скрыть отработанных<span class="n">' + doneN + '</span>', S.hideDone, '',
+    function () { S.hideDone = !S.hideDone; refresh(); }));
+
+  // уровни
+  var counts = {};
+  DATA.people.forEach(function (p) { if (p.classified) counts[p.tier] = (counts[p.tier] || 0) + 1; });
+  var g2 = grp(f, 'Уровень пригодности');
+  var c2 = document.createElement('div'); c2.className = 'chips'; g2.appendChild(c2);
+  ['a', 'b', 'c', 'd', 'competitor'].forEach(function (t) {
+    c2.appendChild(chip(TIER_NAME[t] + '<span class="n">' + (counts[t] || 0) + '</span>',
+      !!S.tiers[t], '', function () { S.tiers[t] = !S.tiers[t]; refresh(); }));
+  });
+
+  // роли
+  var rc = {};
+  DATA.people.forEach(function (p) { if (p.classified) rc[p.role] = (rc[p.role] || 0) + 1; });
+  var g3 = grp(f, 'Роль');
+  var c3 = document.createElement('div'); c3.className = 'chips'; g3.appendChild(c3);
+  Object.keys(rc).sort(function (a, b) { return rc[b] - rc[a]; }).forEach(function (r) {
+    c3.appendChild(chip((ROLE_NAME[r] || r) + '<span class="n">' + rc[r] + '</span>',
+      !!S.roles[r], '', function () { S.roles[r] = !S.roles[r]; refresh(); }));
+  });
+
+  // гео + сортировка
+  var g4 = grp(f, 'Гео и порядок');
+  var row = document.createElement('div'); row.className = 'row2'; g4.appendChild(row);
+  var geos = {};
+  DATA.people.forEach(function (p) { if (p.classified && p.geo) geos[p.geo] = (geos[p.geo] || 0) + 1; });
+  var sel = document.createElement('select');
+  sel.innerHTML = '<option value="">все гео</option>' +
+    Object.keys(geos).sort(function (a, b) { return geos[b] - geos[a]; })
+      .map(function (g) { return '<option value="' + esc(g) + '">' + esc(g) + ' (' + geos[g] + ')</option>'; }).join('');
+  sel.value = S.geo;
+  sel.onchange = function () { S.geo = sel.value; refresh(); };
+  row.appendChild(sel);
+  var srt = document.createElement('select');
+  srt.innerHTML = '<option value="fit">сначала пригодные</option>' +
+    '<option value="msgs">сначала активные</option><option value="fresh">сначала свежие</option>';
+  srt.value = S.sort;
+  srt.onchange = function () { S.sort = srt.value; refresh(); };
+  row.appendChild(srt);
+
+  var list = document.createElement('div');
+  list.className = 'people';
+  list.setAttribute('data-slot', 'plist');
+  host.appendChild(list);
+  renderList();
+}
+
+function grp(host, label) {
+  var d = document.createElement('div');
+  d.className = 'fgroup';
+  d.innerHTML = '<div class="flab"><span>' + label + '</span></div>';
+  host.appendChild(d);
+  return d;
+}
+function chip(html, on, extra, fn) {
+  var b = document.createElement('button');
+  b.className = 'chip ' + (extra || '') + (on ? ' on' : '');
+  b.innerHTML = html;
+  b.onclick = fn;
+  return b;
+}
+
+function renderList() {
+  var box = slot('plist');
+  if (!box) return;
+  var arr = visible();
+  box.innerHTML = '<div class="plist-head"><span>' + arr.length + ' человек' +
+    (S.room ? ' в комнате' : '') + '</span><span>' +
+    arr.filter(function (p) { return p.hot; }).length + ' 🔥</span></div>';
+
+  if (!arr.length) {
+    box.insertAdjacentHTML('beforeend',
+      '<div class="empty">Под фильтр никто не попал. Сними ограничения или включи «показать шум».</div>');
+    return;
+  }
+  arr.slice(0, 400).forEach(function (p) {
+    var b = document.createElement('button');
+    b.className = 'p';
+    var sub = [p.company, p.niche, p.geo].filter(Boolean).join(' · ') || (p.why || '').slice(0, 70);
+    var mk = markOf(p);
+    b.innerHTML =
+      '<span class="ph"><i class="dot ' + (p.competitor ? 'competitor' : p.tier) + '"></i>' +
+      '<span class="nm">' + (p.hot ? '🔥 ' : '') + esc(p.name) + '</span>' +
+      '<span class="sc">' + (mk ? '<span class="mk ' + mk + '">' + MARK_NAME[mk] + '</span> ' : '') +
+      p.fit + '</span></span>' +
+      '<span class="pm">' + esc(sub) + '</span>';
+    b.onclick = function () { select(p); };
+    box.appendChild(b);
+  });
+  if (arr.length > 400) {
+    box.insertAdjacentHTML('beforeend',
+      '<div class="empty">показаны первые 400 из ' + arr.length + ' — сузь фильтр</div>');
+  }
+}
+
+function select(p) {
+  S.sel = p;
+  renderRight();
+  focusNode(p.id);
+  draw();
+}
+
+function renderCard(host, p) {
+  var rooms = p.rooms.map(function (id) { return (ROOM_BY_ID[id] || {}).title; }).filter(Boolean);
+  var badges = '<span class="badge ' + (p.competitor ? 'competitor' : p.tier) + '">' +
+    (p.competitor ? 'конкурент' : TIER_NAME[p.tier]) + ' · ' + p.fit + '</span>' +
+    (p.hot ? '<span class="badge fire">🔥 живой запрос</span>' : '') +
+    (p.neighbor ? '<span class="badge nb">сосед по десятке</span>' : '');
+
+  var facts = '';
+  function fact(k, v) { if (v) facts += '<dt>' + k + '</dt><dd>' + esc(v) + '</dd>'; }
+  fact('роль', ROLE_NAME[p.role] || p.role);
+  fact('компания', p.company);
+  fact('ниша', p.niche);
+  fact('гео', p.geo);
+  fact('масштаб', p.scale);
+  fact('продает', p.sells);
+  fact('комнаты', rooms.join(', '));
+  fact('активность', p.msgs + ' сообщ. за ' + p.days + ' дн., ответов получил ' + p.replies);
+  fact('последний раз', p.last);
+
+  var quotes = (p.quotes || []).map(function (q) {
+    var isHot = p.quote && q.text.indexOf(p.quote.slice(0, 40)) !== -1;
+    return '<div class="q' + (isHot ? ' hot' : '') + '">' +
+      '<div class="qm"><span>' + esc(q.ts) + '</span><span>' + esc(q.room) +
+      (q.topic ? ' / ' + esc(q.topic) : '') + '</span>' +
+      (q.link ? '<a href="' + esc(q.link) + '" target="_blank" rel="noopener">открыть в telegram ↗</a>' : '') +
+      '</div><p>' + esc(q.text) + '</p></div>';
+  }).join('') || '<div class="empty">реплик в окне нет</div>';
+
+  host.innerHTML =
+    '<div class="colhead"><h2>Карточка</h2></div>' +
+    '<div class="card">' +
+      '<button class="back" data-act="back">← к списку и фильтру</button>' +
+      '<h3>' + (p.hot ? '🔥 ' : '') + esc(p.name) + '</h3>' +
+      '<div style="margin:.35rem 0 .1rem">' + badges + '</div>' +
+      (p.username ? '<div class="handle"><a href="https://t.me/' + esc(p.username) +
+        '" target="_blank" rel="noopener">@' + esc(p.username) + ' ↗</a></div>' : '') +
+      (p.tags && p.tags.length ? '<div class="chips" style="margin-top:.45rem">' +
+        p.tags.map(function (t) { return '<span class="chip">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
+      (p.why ? '<div class="why" style="margin-top:.6rem">' + esc(p.why) + '</div>' : '') +
+      (p.quote ? '<div class="appr" style="border-color:#5B2B12;background:#26150C">' +
+        '<div class="l" style="color:var(--fire)">прямой запрос</div>' + esc(p.quote) + '</div>' : '') +
+      (p.approach ? '<div class="appr"><div class="l">с чем заходить</div>' + esc(p.approach) + '</div>' : '') +
+      '<div class="acts">' +
+        (p.username ? '<a class="btn" href="https://t.me/' + esc(p.username) + '" target="_blank" rel="noopener">написать в telegram</a>' : '') +
+        (p.approach ? '<button class="btn sec" data-act="copy">копировать заход</button>' : '') +
+      '</div>' +
+      '<div class="sechead">Пометка</div>' +
+      '<div class="chips" data-slot="marks">' +
+        ['written', 'replied', 'no'].map(function (m) {
+          return '<button class="chip' + (markOf(p) === m ? ' on' : '') + '" data-mark="' + m + '">' +
+            MARK_NAME[m] + '</button>';
+        }).join('') +
+      '</div>' +
+      '<dl class="facts">' + facts + '</dl>' +
+      '<div class="sechead">Что он писал</div>' + quotes +
+    '</div>';
+
+  $('[data-act="back"]', host).onclick = function () { S.sel = null; renderRight(); draw(); };
+  Array.prototype.forEach.call(host.querySelectorAll('[data-mark]'), function (b) {
+    b.onclick = function () {
+      var m = b.getAttribute('data-mark');
+      setMark(p, markOf(p) === m ? null : m);
+      renderCard(host, p);
+      draw();
+    };
+  });
+  var cp = $('[data-act="copy"]', host);
+  if (cp) cp.onclick = function () {
+    navigator.clipboard.writeText(p.approach || '').then(function () {
+      cp.textContent = 'скопировано';
+      setTimeout(function () { cp.textContent = 'копировать заход'; }, 1400);
+    });
+  };
+}
+
+function refresh(listOnly) {
+  renderList();
+  if (!listOnly) {
+    // перерисовать чипы (состояния)
+    var scroll = slot('right').scrollTop;
+    renderRight();
+    slot('right').scrollTop = scroll;
+  }
+  rebuildGraph();
+}
+
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// ── панель над графом ───────────────────────────────────────────────────
+function renderHubSeg() {
+  var seg = slot('hubseg');
+  seg.innerHTML = '';
+  HUBS.forEach(function (h) {
+    var b = document.createElement('button');
+    b.textContent = h.t;
+    b.className = S.hub === h.k ? 'on' : '';
+    b.onclick = function () { S.hub = h.k; renderHubSeg(); rebuildGraph(); };
+    seg.appendChild(b);
+  });
+}
+
+function bindStageBar() {
+  $('[data-act="edges"]').onclick = function () {
+    S.edges = !S.edges; this.classList.toggle('on', S.edges); draw();
+  };
+  var lb = $('[data-act="labels"]');
+  lb.classList.add('on');
+  lb.onclick = function () { S.labels = !S.labels; this.classList.toggle('on', S.labels); draw(); };
+  $('[data-act="reset"]').onclick = function () { view.k = 1; view.x = 0; view.y = 0; rebuildGraph(); };
+}
+
+// ══ ГРАФ ═════════════════════════════════════════════════════════════════
+var cv, ctx, W = 0, H = 0, DPR = 1;
+var nodes = [], links = [], byId = {};
+var view = { k: 1, x: 0, y: 0 };
+var drag = null, panning = null, hover = null, raf = null, alpha = 0;
+var FONT = '';
+
+function initCanvas() {
+  cv = slot('canvas');
+  ctx = cv.getContext('2d');
+  FONT = getComputedStyle(document.body).fontFamily;
+  resize();
+  // Отдельный медленный такт для пульсации огоньков: гонять ради нее полные
+  // 60 кадров в секунду незачем, а когда идет раскладка — там своя перерисовка.
+  setInterval(function () {
+    if (!raf && document.visibilityState === 'visible' && hasFire()) draw();
+  }, 90);
+  window.addEventListener('resize', function () { resize(); draw(); });
+
+  cv.addEventListener('mousedown', onDown);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onUp);
+  cv.addEventListener('wheel', onWheel, { passive: false });
+  cv.addEventListener('mouseleave', function () { hover = null; slot('tip').hidden = true; draw(); });
+}
+
+function resize() {
+  DPR = window.devicePixelRatio || 1;
+  var r = cv.parentElement.getBoundingClientRect();
+  W = r.width; H = r.height;
+  cv.width = Math.round(W * DPR);
+  cv.height = Math.round(H * DPR);
+}
+
+function rebuildGraph() {
+  var people = visible();
+  // Потолок узлов: дальше граф превращается в клубок и перестает читаться,
+  // а список справа все равно показывает всех.
+  var CAP = 320;
+  var shown = people.slice(0, CAP);
+
+  var hubs = {};
+  shown.forEach(function (p) {
+    var k = hubKey(p);
+    if (!k) return;
+    if (!hubs[k]) hubs[k] = { id: k, hub: true, label: hubLabel(k), n: 0, hot: 0 };
+    hubs[k].n++;
+    if (p.hot) hubs[k].hot++;
+  });
+
+  var prev = byId;
+  nodes = []; links = []; byId = {};
+
+  Object.keys(hubs).forEach(function (k) {
+    var h = hubs[k];
+    var o = prev[k];
+    var n = {
+      id: k, hub: true, label: h.label, n: h.n, hot: h.hot,
+      r: 11 + Math.min(26, Math.sqrt(h.n) * 3.4),
+      x: o ? o.x : (Math.random() - .5) * 220,
+      y: o ? o.y : (Math.random() - .5) * 220,
+      vx: 0, vy: 0
+    };
+    nodes.push(n); byId[k] = n;
+  });
+
+  shown.forEach(function (p) {
+    var o = prev[p.id];
+    var n = {
+      id: p.id, p: p, label: p.name,
+      r: 3.4 + Math.min(9, Math.sqrt(p.msgs) * 1.5) + (p.hot ? 2.2 : 0),
+      x: o ? o.x : (Math.random() - .5) * 460,
+      y: o ? o.y : (Math.random() - .5) * 460,
+      vx: 0, vy: 0
+    };
+    nodes.push(n); byId[p.id] = n;
+    var k = hubKey(p);
+    if (k && byId[k]) links.push({ a: n, b: byId[k], len: 46 + n.r * 2, w: 1 });
+  });
+
+  // связи «кто кому отвечает» — только между показанными людьми
+  (DATA.edges || []).forEach(function (e) {
+    var a = byId[e.from], b = byId[e.to];
+    if (a && b && !a.hub && !b.hub) links.push({ a: a, b: b, len: 70, w: Math.min(3, e.n), reply: true });
+  });
+
+  slot('shown').textContent = 'на карте ' + shown.length +
+    (people.length > shown.length ? ' из ' + people.length : '') + ' · связок ' + Object.keys(hubs).length;
+
+  alpha = 1;
+  tick();
+}
+
+function focusNode(id) {
+  var n = byId[id];
+  if (!n) return;
+  view.x = -n.x * view.k;
+  view.y = -n.y * view.k;
+}
+
+// раскладка: отталкивание всех от всех + пружины связей + сбор к центру
+function step() {
+  var i, j, a, b, dx, dy, d, f;
+  var N = nodes.length;
+  for (i = 0; i < N; i++) {
+    a = nodes[i];
+    for (j = i + 1; j < N; j++) {
+      b = nodes[j];
+      dx = b.x - a.x; dy = b.y - a.y;
+      d = dx * dx + dy * dy;
+      if (d < 1) { d = 1; dx = Math.random() - .5; dy = Math.random() - .5; }
+      if (d > 250000) continue;
+      f = ((a.hub || b.hub) ? 2600 : 900) / d;
+      var dist = Math.sqrt(d);
+      var ux = dx / dist, uy = dy / dist;
+      a.vx -= ux * f; a.vy -= uy * f;
+      b.vx += ux * f; b.vy += uy * f;
+    }
+  }
+  for (i = 0; i < links.length; i++) {
+    var l = links[i];
+    dx = l.b.x - l.a.x; dy = l.b.y - l.a.y;
+    d = Math.sqrt(dx * dx + dy * dy) || 1;
+    f = (d - l.len) * (l.reply ? 0.012 : 0.045);
+    var ux2 = dx / d * f, uy2 = dy / d * f;
+    l.a.vx += ux2; l.a.vy += uy2;
+    l.b.vx -= ux2; l.b.vy -= uy2;
+  }
+  for (i = 0; i < N; i++) {
+    a = nodes[i];
+    a.vx -= a.x * (a.hub ? 0.010 : 0.0025);
+    a.vy -= a.y * (a.hub ? 0.010 : 0.0025);
+    if (drag && drag.node === a) continue;
+    a.vx *= 0.82; a.vy *= 0.82;
+    a.x += a.vx * alpha; a.y += a.vy * alpha;
+  }
+  alpha *= 0.988;
+}
+
+function hasFire() {
+  for (var i = 0; i < nodes.length; i++) if (!nodes[i].hub && nodes[i].p.hot) return true;
+  return false;
+}
+
+function tick() {
+  if (raf) cancelAnimationFrame(raf);
+  var loop = function () {
+    if (alpha > 0.02) { step(); draw(); raf = requestAnimationFrame(loop); }
+    else { raf = null; draw(); }
+  };
+  raf = requestAnimationFrame(loop);
+}
+
+function toScreen(n) {
+  return { x: W / 2 + view.x + n.x * view.k, y: H / 2 + view.y + n.y * view.k };
+}
+
+function draw() {
+  if (!ctx) return;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+
+  // связи
+  for (var i = 0; i < links.length; i++) {
+    var l = links[i];
+    if (l.reply && !S.edges) continue;
+    var A = toScreen(l.a), B = toScreen(l.b);
+    ctx.beginPath();
+    ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y);
+    ctx.strokeStyle = l.reply ? 'rgba(169,139,224,.28)' : 'rgba(122,107,87,.20)';
+    ctx.lineWidth = l.reply ? l.w * 0.7 : 0.8;
+    ctx.stroke();
+  }
+
+  // узлы
+  for (var k = 0; k < nodes.length; k++) {
+    var n = nodes[k], P = toScreen(n), r = n.r * Math.max(.55, Math.min(1.7, view.k));
+    if (P.x < -80 || P.x > W + 80 || P.y < -80 || P.y > H + 80) continue;
+
+    if (n.hub) {
+      ctx.beginPath(); ctx.arc(P.x, P.y, r, 0, 6.284);
+      ctx.fillStyle = 'rgba(224,184,76,.10)';
+      ctx.fill();
+      ctx.lineWidth = 1.4; ctx.strokeStyle = 'rgba(224,184,76,.55)'; ctx.stroke();
+      if (S.labels || view.k > .7) {
+        ctx.font = '600 11px ' + FONT;
+        ctx.textAlign = 'center'; ctx.fillStyle = '#E0B84C';
+        ctx.fillText(cut(n.label, 26), P.x, P.y - r - 6);
+        ctx.font = '10px ui-monospace,monospace'; ctx.fillStyle = '#7A6B57';
+        ctx.fillText(n.n + (n.hot ? ' · 🔥' + n.hot : ''), P.x, P.y + r + 13);
+      }
+      continue;
+    }
+
+    var p = n.p, mk = markOf(p);
+    if (p.hot && !mk) {
+      var pulse = 1 + Math.sin(Date.now() / 320) * .12;
+      var g = ctx.createRadialGradient(P.x, P.y, r, P.x, P.y, r * 4.2 * pulse);
+      g.addColorStop(0, 'rgba(255,107,44,.42)');
+      g.addColorStop(1, 'rgba(255,107,44,0)');
+      ctx.beginPath(); ctx.arc(P.x, P.y, r * 4.2 * pulse, 0, 6.284);
+      ctx.fillStyle = g; ctx.fill();
+    }
+    ctx.beginPath(); ctx.arc(P.x, P.y, r, 0, 6.284);
+    ctx.fillStyle = p.hot && !mk ? '#FF6B2C' : (TIER_COLOR[p.competitor ? 'competitor' : p.tier] || '#7A6B57');
+    // Отработанный человек гаснет: на карте должно оставаться только то, к чему
+    // еще не подходил.
+    ctx.globalAlpha = mk ? .28 : ((S.sel && S.sel.id !== p.id) ? .45 : 1);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    if (S.sel && S.sel.id === p.id) {
+      ctx.beginPath(); ctx.arc(P.x, P.y, r + 5, 0, 6.284);
+      ctx.strokeStyle = '#F3EADC'; ctx.lineWidth = 1.6; ctx.stroke();
+    }
+    if (p.neighbor) {
+      ctx.beginPath(); ctx.arc(P.x, P.y, r + 2.6, 0, 6.284);
+      ctx.strokeStyle = 'rgba(79,180,122,.8)'; ctx.lineWidth = 1.1; ctx.stroke();
+    }
+    var big = (p.hot || p.tier === 'a') && !mk;
+    if (S.labels && (view.k > 1.25 || big) && r > 3) {
+      ctx.font = '500 10px ' + FONT;
+      ctx.textAlign = 'center';
+      ctx.fillStyle = mk ? 'rgba(243,234,220,.28)' : (p.hot ? '#FFB48A' : 'rgba(243,234,220,.62)');
+      ctx.fillText(cut(p.name, 18), P.x, P.y + r + 11);
+    }
+  }
+
+}
+
+function cut(s, n) { s = String(s || ''); return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+
+function pick(mx, my) {
+  for (var i = nodes.length - 1; i >= 0; i--) {
+    var n = nodes[i], P = toScreen(n);
+    var r = Math.max(7, n.r * Math.max(.55, Math.min(1.7, view.k)));
+    if ((mx - P.x) * (mx - P.x) + (my - P.y) * (my - P.y) <= r * r) return n;
+  }
+  return null;
+}
+
+function localXY(e) {
+  var b = cv.getBoundingClientRect();
+  return { x: e.clientX - b.left, y: e.clientY - b.top };
+}
+
+function onDown(e) {
+  var m = localXY(e), n = pick(m.x, m.y);
+  if (n) { drag = { node: n, moved: false }; }
+  else { panning = { x: e.clientX - view.x, y: e.clientY - view.y }; cv.classList.add('drag'); }
+}
+
+function onMove(e) {
+  var m = localXY(e);
+  if (drag) {
+    drag.moved = true;
+    drag.node.x = (m.x - W / 2 - view.x) / view.k;
+    drag.node.y = (m.y - H / 2 - view.y) / view.k;
+    drag.node.vx = drag.node.vy = 0;
+    alpha = Math.max(alpha, .35); tick();
+    return;
+  }
+  if (panning) { view.x = e.clientX - panning.x; view.y = e.clientY - panning.y; draw(); return; }
+  if (e.target !== cv) { return; }
+
+  var n = pick(m.x, m.y);
+  if (n !== hover) {
+    hover = n;
+    var tip = slot('tip');
+    if (!n) { tip.hidden = true; }
+    else {
+      tip.hidden = false;
+      if (n.hub) {
+        tip.innerHTML = '<b>' + esc(n.label) + '</b><span>' + n.n + ' человек' +
+          (n.hot ? ' · 🔥 ' + n.hot : '') + '</span>';
+      } else {
+        var p = n.p;
+        tip.innerHTML = '<b>' + (p.hot ? '🔥 ' : '') + esc(p.name) + '</b>' +
+          '<span>' + esc([p.company, p.niche, p.geo].filter(Boolean).join(' · ') || TIER_NAME[p.tier]) +
+          ' · фит ' + p.fit + '</span>';
+      }
+      var b = cv.getBoundingClientRect();
+      tip.style.left = Math.min(m.x + 14, b.width - 285) + 'px';
+      tip.style.top = Math.max(6, m.y - 12) + 'px';
+    }
+    draw();
+  }
+}
+
+function onUp(e) {
+  if (drag) {
+    if (!drag.moved) {
+      var n = drag.node;
+      if (n.hub) {
+        if (S.hub === 'room') {
+          S.room = +n.id.slice(1); S.sel = null; renderRooms(); renderRight(); rebuildGraph();
+        }
+      } else { select(n.p); }
+    }
+    drag = null;
+  }
+  panning = null;
+  cv.classList.remove('drag');
+}
+
+function onWheel(e) {
+  e.preventDefault();
+  var m = localXY(e);
+  var f = Math.exp(-e.deltaY * 0.0016);
+  var k2 = Math.max(.25, Math.min(4.5, view.k * f));
+  // масштаб вокруг курсора: точка под мышью остается на месте
+  var wx = (m.x - W / 2 - view.x) / view.k;
+  var wy = (m.y - H / 2 - view.y) / view.k;
+  view.k = k2;
+  view.x = m.x - W / 2 - wx * k2;
+  view.y = m.y - H / 2 - wy * k2;
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>
