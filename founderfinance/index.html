@@ -18,6 +18,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<!-- Yandex.Metrika counter · счетчик 109611431, общий с foundertrajectory.
+     Поставлен 05.08.2026: до этого на страницах Founder Finance не было
+     никакой аналитики, и по пришедшей заявке нельзя было понять ни источник,
+     ни путь человека по сайту. Цель заявки: lead_submit. -->
+<script>
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(109611431, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109611431" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <!-- ============================================================
      Founder Finance — быстрый тестовый лендинг (проект finansy-eu).
      Бренд: Founder Finance (решение Андрея 30.06; сверить с naming-map.md).
@@ -596,6 +611,27 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 // ===== Founder Finance — поведение прототипа =====
 // Отправка форм: впишите endpoint (например Web3Forms access_key). Пусто = прототип покажет окно успеха.
 const FORM_ENDPOINT = "https://api.web3forms.com/submit"; const FORM_KEY = "24d71a36-877d-46e1-9956-566f0dbb8d50";
+// Свой прием заявок: Телеграм сразу, журнал в KV, письмо как запасной след.
+// Код: functions/founderfinance/api/lead.js. Если функция недоступна, форма
+// падает обратно на прямую отправку письма, как работала раньше.
+const LEAD_ENDPOINT = "/founderfinance/api/lead";
+
+// Метки источника. utm живут только в адресе первой открытой страницы и
+// теряются при первом же переходе внутри сайта, поэтому запоминаются на сессию.
+const SRC = (function(){
+  var q, now = [], utm = "", ref = "";
+  try{
+    q = new URLSearchParams(location.search);
+    ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){
+      var v = q.get(k); if(v) now.push(k.replace("utm_","") + "=" + v);
+    });
+    utm = now.join(" · ");
+    ref = document.referrer || "";
+    if(utm) sessionStorage.setItem("ff_utm", utm); else utm = sessionStorage.getItem("ff_utm") || "";
+    if(ref) sessionStorage.setItem("ff_ref", ref); else ref = sessionStorage.getItem("ff_ref") || "";
+  }catch(e){ /* приватный режим браузера, обходимся тем, что есть */ }
+  return { utm: utm, referrer: ref };
+})();
 
 const nt=document.getElementById('navtoggle'), nl=document.getElementById('nlinks');
 nt&&nt.addEventListener('click',()=>nl.classList.toggle('open'));
@@ -609,8 +645,16 @@ function showOk(title,desc){if(title)document.getElementById('oktitle').textCont
 document.getElementById('okclose').addEventListener('click',()=>okm.classList.remove('show'));
 okm.addEventListener('click',e=>{if(e.target===okm)okm.classList.remove('show');});
 
-function track(){try{if(window.fbq)fbq('track','Lead');}catch(e){}}
+function track(){
+  try{if(window.fbq)fbq('track','Lead');}catch(e){}
+  try{if(window.ym)ym(109611431,'reachGoal','lead_submit');}catch(e){}
+}
 async function sendForm(data){
+  const payload={...data,page:location.pathname+location.search,referrer:SRC.referrer,utm:SRC.utm};
+  try{
+    const r=await fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)});
+    if(r.ok)return true;
+  }catch(e){ /* функция недоступна, уходим на запасной путь */ }
   if(!FORM_ENDPOINT||!FORM_KEY)return true;
   try{const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:FORM_KEY,...data})});return r.ok;}catch(e){return false;}
 }

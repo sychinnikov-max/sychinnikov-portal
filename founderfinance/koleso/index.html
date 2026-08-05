@@ -17,6 +17,33 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<!-- Yandex.Metrika counter · счетчик 109611431, общий с остальными страницами.
+     Поставлен 05.08.2026 вместе со счетчиком на лендинге. Цель: lead_submit. -->
+<script>
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(109611431, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109611431" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Yandex.Metrika counter · счетчик 109611431, тот же что на лендинге.
+     Цель на открытие разбора: lead_submit (совпадает с заявкой с лендинга,
+     потому что открытие разбора и есть оставленный контакт). -->
+<script>
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(109611431, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109611431" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <!-- ============================================================
      Founder Finance — колесо финансового здоровья (лид-магнит).
      Дизайн-система: Founder Trajectory / лендинг /founderfinance/.
@@ -282,7 +309,33 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
   .lockmsg{display:none}
   .printfoot{display:block!important;margin-top:8mm;padding-top:4mm;border-top:1px solid #D8CFC0;font-size:9.5pt;color:#6A5F52}
 }
-.printfoot{display:none}
+.printfoot,.printonly{display:none}
+
+/* лист ответов и оффер печатаются только в PDF */
+@media print{
+  .printonly{display:block!important}
+
+  .ansgrid{display:grid;grid-template-columns:1fr 1fr;gap:5mm 8mm}
+  .ansblk{page-break-inside:avoid;break-inside:avoid}
+  .ansblk h4{font-family:var(--fm);font-size:9pt;letter-spacing:.1em;text-transform:uppercase;color:#8A6E2E;font-weight:400;margin-bottom:2mm;padding-bottom:1mm;border-bottom:1px solid #E4DCCD}
+  .ansblk ul{list-style:none;margin:0;padding:0}
+  .ansblk li{display:grid;grid-template-columns:15mm 1fr;gap:2mm;font-size:9pt;line-height:1.35;padding:1.1mm 0;color:#1A1512;page-break-inside:avoid}
+  .am{font-family:var(--fm);font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:.3mm 0;border:1px solid currentColor;border-radius:1px;align-self:start;margin-top:.4mm}
+  .am.y{color:#4E6A4A}
+  .am.n{color:#9B4A36}
+  .am.u{color:#5E5273}
+
+  .printcta{margin-top:9mm;padding:6mm;border:1.2pt solid #C2A66A;border-radius:2mm;background:#FBF7EF;page-break-inside:avoid}
+  .pce{font-family:var(--fm);font-size:9pt;letter-spacing:.14em;text-transform:uppercase;color:#8A6E2E}
+  .pct{font-family:var(--fd);font-size:17pt;font-weight:600;color:#1A1512;margin:2mm 0 3mm;line-height:1.15}
+  .printcta p{font-size:11pt;line-height:1.45;color:#4A4038;margin-bottom:2.5mm;max-width:none}
+  .printcta ul{list-style:none;margin:0 0 3mm;padding:0}
+  .printcta li{position:relative;padding-left:6mm;font-size:11pt;line-height:1.45;color:#4A4038;margin-bottom:1.2mm}
+  .printcta li::before{content:"";position:absolute;left:0;top:2.6mm;width:3.5mm;height:.4mm;background:#8A6E2E}
+  .pclinks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm;margin-top:4mm;padding-top:4mm;border-top:1px solid #E0D7C6}
+  .pclinks b{display:block;font-family:var(--fm);font-size:8pt;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:#8A6E2E;margin-bottom:1mm}
+  .pclinks a{font-size:10.5pt;color:#1A1512;text-decoration:none;word-break:break-word}
+}
 </style>
 </head>
 <body>
@@ -429,6 +482,8 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
       <p class="pfline" id="pfline"></p>
 
+      <div class="sect printonly" id="answersheet"></div>
+
       <div class="sect" id="review" style="margin-top:0;padding-top:0;border-top:none"></div>
 
       <div class="sect" id="summarysect">
@@ -439,8 +494,25 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
       <div class="sect" id="plan"></div>
 
+      <div class="printcta printonly">
+        <div class="pce">Что дальше</div>
+        <div class="pct">Разберу ваши цифры лично, бесплатно</div>
+        <p>Колесо показало, где у бизнеса тонко. Чего оно не говорит, так это сколько слабая сфера стоит вам в деньгах каждый месяц. Это считается только на ваших цифрах, и за 30-45 минут я показываю реальную прибыль, юнит-экономику и сколько собственник может забирать без риска для бизнеса.</p>
+        <ul>
+          <li>посчитаем, во что обходится самая слабая сфера из вашего колеса;</li>
+          <li>разберем, с чего начинать: обычно это один отчет, а не вся система сразу;</li>
+          <li>назову сроки и порядок цен, если захотите, чтобы учет ставил я.</li>
+        </ul>
+        <p>Уйдете с дорожной картой, даже если дальше мы не работаем.</p>
+        <div class="pclinks">
+          <div><b>Написать в Telegram</b><a href="https://t.me/Sychinnikov">t.me/Sychinnikov</a></div>
+          <div><b>Записаться на диагностику</b><a href="https://sychinnikov.com/founderfinance/#cta">sychinnikov.com/founderfinance</a></div>
+          <div><b>Пройти колесо заново</b><a href="https://sychinnikov.com/founderfinance/koleso/">sychinnikov.com/founderfinance/koleso</a></div>
+        </div>
+      </div>
+
       <div class="printfoot">
-        Колесо финансового здоровья компании · Founder Finance · Андрей Сычинников · sychinnikov.com/founderfinance · Telegram @Sychinnikov
+        Колесо финансового здоровья компании · Founder Finance · Андрей Сычинников · управленческий учет на русском для бизнеса в Европе
       </div>
 
     </div>
@@ -482,6 +554,25 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
 var FORM_ENDPOINT="https://api.web3forms.com/submit";
 var FORM_KEY="24d71a36-877d-46e1-9956-566f0dbb8d50";
+// Свой прием заявок: Телеграм сразу, журнал в KV, письмо как запасной след.
+// Код: functions/founderfinance/api/lead.js.
+var LEAD_ENDPOINT="/founderfinance/api/lead";
+
+// Метки источника на сессию: utm теряются при первом переходе внутри сайта.
+var SRC=(function(){
+  var now=[], utm="", ref="";
+  try{
+    var q=new URLSearchParams(location.search);
+    ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){
+      var v=q.get(k); if(v) now.push(k.replace("utm_","")+"="+v);
+    });
+    utm=now.join(" · ");
+    ref=document.referrer||"";
+    if(utm)sessionStorage.setItem("ff_utm",utm); else utm=sessionStorage.getItem("ff_utm")||"";
+    if(ref)sessionStorage.setItem("ff_ref",ref); else ref=sessionStorage.getItem("ff_ref")||"";
+  }catch(e){ /* приватный режим браузера */ }
+  return {utm:utm, referrer:ref};
+})();
 
 var PROFILE=[
  {key:"size",label:"Сколько человек в компании",short:"Команда",
@@ -832,6 +923,25 @@ function renderReview(){
     '<div class="rvlist">'+rows+'</div>';
 }
 
+/* лист ответов печатается только в PDF, на экране скрыт */
+function renderAnswers(){
+  var host=document.getElementById("answersheet");
+  var LBL={y:"да",n:"нет",u:"не знаю"};
+  var blocks=BLOCKS.map(function(blk,bi){
+    var yes=state.ans[bi].filter(function(v){return v==="y";}).length;
+    var items=blk.qs.map(function(q,qi){
+      var a=state.ans[bi][qi];
+      return '<li><span class="am '+(a||"n")+'">'+(a?LBL[a]:"нет ответа")+'</span>'+
+        '<span>'+esc(q[0])+'</span></li>';
+    }).join("");
+    return '<div class="ansblk"><h4>'+blk.name+" · "+scoreOf(bi).toFixed(1)+
+      " · "+yes+" из "+blk.qs.length+'</h4><ul>'+items+'</ul></div>';
+  }).join("");
+  host.innerHTML='<h2 class="h2">Ваши ответы</h2>'+
+    '<p class="sub">Все 43 вопроса и что вы ответили. Лист для сверки: через квартал пройдите заново и сравните, что сдвинулось.</p>'+
+    '<div class="ansgrid">'+blocks+'</div>';
+}
+
 function renderReadout(){
   var vals=scores(), idx=avg(vals), c=counts(), i;
   document.getElementById("idxNum").textContent=idx.toFixed(1);
@@ -1030,8 +1140,21 @@ async function sendLead(){
     message:head+"\n"+answersText()
   };
   if(state.email)data.replyto=state.email;
+
+  // Основной путь: своя функция. Она шлет в Телеграм, пишет в журнал и дублирует письмом.
+  var payload={};
+  Object.keys(data).forEach(function(k){ if(k!=="access_key") payload[k]=data[k]; });
+  payload.page=location.pathname+location.search;
+  payload.referrer=SRC.referrer;
+  payload.utm=SRC.utm;
+  try{
+    var lr=await fetch(LEAD_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
+    if(lr.ok){ try{ if(window.ym) ym(109611431,"reachGoal","lead_submit"); }catch(e){} return true; }
+  }catch(e){ /* функция недоступна, уходим на запасной путь */ }
+
   try{
     var r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});
+    if(r.ok){ try{ if(window.ym) ym(109611431,"reachGoal","lead_submit"); }catch(e){} }
     return r.ok;
   }catch(e){return false;}
 }
@@ -1092,7 +1215,7 @@ function toast(m){
 
 /* ---------- цикл ---------- */
 function update(){
-  syncProfile();syncBlocks();renderCanvas();renderReview();renderReadout();renderPlan();
+  syncProfile();syncBlocks();renderCanvas();renderAnswers();renderReview();renderReadout();renderPlan();
   var left=TOTAL-counts().ans;
   var pfLeft=state.profile.filter(function(v){return !v;}).length;
   var hint=document.getElementById("ghint");
