@@ -1357,6 +1357,8 @@ function refreshGateSummary(){
 
 function showGateSummary(problems){
   var box=document.getElementById("gsum");
+  // подсказка под кнопкой и сводка говорят одно и то же, показываем что-то одно
+  document.getElementById("ghint").style.display=problems.length?"none":"";
   if(!problems.length){box.classList.remove("show");return;}
   document.getElementById("gsumlist").innerHTML=
     problems.map(function(p){return "<li>"+esc(p.text)+"</li>";}).join("");
