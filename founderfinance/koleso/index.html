@@ -110,6 +110,21 @@ canvas#wheel{width:100%;height:auto;display:block}
 .sw{width:16px;height:3px;border-radius:2px;background:var(--gold)}
 .sw.goal{height:0;border-top:2px dashed var(--bronze);background:none}
 
+/* ---------- о компании ---------- */
+.pfcard{border:1px solid var(--hair-gold);border-radius:5px;background:var(--card);padding:clamp(22px,2.6vw,32px);margin-bottom:clamp(30px,3.5vw,46px)}
+.pfhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.pfhead .h3{font-family:var(--fd);font-size:23px;font-weight:600}
+.pfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px clamp(22px,3vw,40px);margin-top:20px}
+.pfq .fl{margin-bottom:9px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--fb);font-size:14px;line-height:1.3;padding:8px 13px;border:1px solid var(--hair);border-radius:3px;background:transparent;color:var(--ink-muted);cursor:pointer;transition:background .12s ease,color .12s ease,border-color .12s ease}
+.chip:hover{background:var(--surface-2);color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--gold-ink);font-weight:600}
+.pfcard.hl{box-shadow:0 0 0 2px color-mix(in oklab,var(--gold) 55%,transparent)}
+.pfline{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 20px;font-size:14.5px;color:var(--ink-muted)}
+.pfline span{display:inline-flex;gap:7px}
+.pfline b{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);font-weight:400;align-self:center}
+
 .blocks{display:flex;flex-direction:column;gap:34px}
 .block{border-top:2px solid var(--gold-deep);padding-top:15px;scroll-margin-top:84px}
 .bhead{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:6px 14px}
@@ -219,7 +234,9 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 @media print{
   @page{margin:14mm}
   body{background:#fff;color:#1A1512;font-size:11.5pt;line-height:1.45}
-  .nav,.hero .btnrow,.blocks,.gate,.final,.foot,.toast,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
+  .nav,.hero .btnrow,.blocks,.pfcard,.gate,.final,.foot,.toast,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
+  .pfline{color:#4A4038;margin-bottom:6mm}
+  .pfline b{color:#8A6E2E}
   .inner{padding:0;max-width:none}
   .band,.sect{border-top:1px solid #D8CFC0}
   .pad{padding:0}
@@ -307,6 +324,18 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
 <!-- РАБОЧАЯ ЧАСТЬ -->
 <section class="band alt" id="work"><div class="inner pad">
+
+  <div class="pfcard" id="pfcard">
+    <div class="pfhead">
+      <div class="eyebrow">Шаг 1</div>
+      <div class="h3">О компании</div>
+    </div>
+    <p class="note" style="max-width:70ch">Три вопроса до диагностики. Они не влияют на оценку, но без них разбор читается вслепую: одни и те же ответы у компании на пять человек и у компании на сто значат разное.</p>
+    <div class="pfgrid" id="pfgrid"></div>
+  </div>
+
+  <div class="eyebrow noprint" style="margin-bottom:12px">Шаг 2 · 43 вопроса по шести сферам</div>
+
   <div class="grid">
 
     <div class="stage">
@@ -377,6 +406,8 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
     <div class="lockedbody" id="lockbody">
 
+      <p class="pfline" id="pfline"></p>
+
       <div class="sect" id="review" style="margin-top:0;padding-top:0;border-top:none"></div>
 
       <div class="sect" id="summarysect">
@@ -430,6 +461,17 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
 var FORM_ENDPOINT="https://api.web3forms.com/submit";
 var FORM_KEY="24d71a36-877d-46e1-9956-566f0dbb8d50";
+
+var PROFILE=[
+ {key:"size",label:"Сколько человек в компании",short:"Команда",
+  opts:["до 5","6-20","21-50","51-150","больше 150"]},
+ {key:"turnover",label:"Оборот за последний год",short:"Оборот",
+  opts:["до €100 тыс","€100-500 тыс","€500 тыс - €2 млн","€2-10 млн","больше €10 млн"],
+  note:"или эквивалент в другой валюте"},
+ {key:"finance",label:"Кто ведет финансы",short:"Финансы ведет",
+  opts:["веду сам","бухгалтер","финансовый менеджер","финдиректор в штате"],
+  note:"выберите самую старшую роль, которая есть"}
+];
 
 var BLOCKS=[
 {key:"money",name:"Деньги",sub:"про платежеспособность",
@@ -541,6 +583,7 @@ var TOTAL=BLOCKS.reduce(function(s,b){return s+b.qs.length;},0);
 
 var state={
   company:"",name:"",contact:"",
+  profile:PROFILE.map(function(){return null;}),
   ans:BLOCKS.map(function(b){return b.qs.map(function(){return null;});}),
   b:[8,8,8,8,8,8],
   unlocked:false
@@ -642,6 +685,40 @@ function renderCanvas(){
   var ctx=c.getContext("2d");
   ctx.setTransform(dpr,0,0,dpr,0,0);
   drawWheel(ctx,w,{});
+}
+
+/* ---------- о компании ---------- */
+function buildProfile(){
+  var host=document.getElementById("pfgrid");
+  host.innerHTML=PROFILE.map(function(p,pi){
+    return '<div class="pfq"><div class="fl">'+esc(p.label)+
+      (p.note?' <span style="text-transform:none;letter-spacing:0;font-family:var(--fb)">('+esc(p.note)+')</span>':'')+'</div>'+
+      '<div class="chips">'+p.opts.map(function(o,oi){
+        return '<button type="button" class="chip" data-p="'+pi+'" data-o="'+oi+'" aria-pressed="false">'+esc(o)+'</button>';
+      }).join("")+'</div></div>';
+  }).join("");
+  host.addEventListener("click",function(e){
+    var b=e.target.closest("button[data-p]");
+    if(!b)return;
+    var pi=+b.dataset.p, o=PROFILE[pi].opts[+b.dataset.o];
+    state.profile[pi]=state.profile[pi]===o?null:o;
+    document.getElementById("pfcard").classList.remove("hl");
+    update();
+  });
+}
+
+function syncProfile(){
+  document.querySelectorAll("#pfgrid button[data-p]").forEach(function(b){
+    var pi=+b.dataset.p, o=PROFILE[pi].opts[+b.dataset.o];
+    b.setAttribute("aria-pressed",state.profile[pi]===o?"true":"false");
+  });
+  var filled=state.profile.filter(Boolean).length;
+  var line=document.getElementById("pfline");
+  if(filled===0){line.innerHTML="";return;}
+  line.innerHTML=PROFILE.map(function(p,pi){
+    if(!state.profile[pi])return "";
+    return '<span><b>'+esc(p.short)+'</b>'+esc(state.profile[pi])+'</span>';
+  }).join("");
 }
 
 /* ---------- вопросы ---------- */
@@ -818,6 +895,7 @@ function load(){
     var ok=BLOCKS.every(function(b,i){return Array.isArray(s.ans[i])&&s.ans[i].length===b.qs.length;});
     if(!ok)return;
     state.ans=s.ans;
+    if(Array.isArray(s.profile)&&s.profile.length===PROFILE.length)state.profile=s.profile;
     if(Array.isArray(s.b)&&s.b.length===6)state.b=s.b;
     state.company=s.company||"";state.name=s.name||"";state.contact=s.contact||"";
     state.unlocked=!!s.unlocked;
@@ -858,6 +936,7 @@ async function sendLead(){
   var c=counts();
   var head="[КОЛЕСО ФИНЗДОРОВЬЯ · Founder Finance]\n"+
     "Имя: "+(state.name||"—")+"\nКомпания: "+(state.company||"—")+"\nКонтакт: "+(state.contact||"—")+"\n\n"+
+    PROFILE.map(function(p,pi){return p.label+": "+(state.profile[pi]||"—");}).join("\n")+"\n\n"+
     "Индекс: "+avg(scores()).toFixed(1)+"/10\n"+
     "Закрыто: "+c.yes+" из "+c.total+" · нет: "+c.no+" · не знаю: "+c.unk+"\n"+
     BLOCKS.map(function(b,i){return b.name+" "+scoreOf(i).toFixed(1);}).join(" · ");
@@ -931,17 +1010,22 @@ function toast(m){
 
 /* ---------- цикл ---------- */
 function update(){
-  syncBlocks();renderCanvas();renderReview();renderReadout();renderPlan();
+  syncProfile();syncBlocks();renderCanvas();renderReview();renderReadout();renderPlan();
   var left=TOTAL-counts().ans;
+  var pfLeft=state.profile.filter(function(v){return !v;}).length;
   var hint=document.getElementById("ghint");
-  if(!state.unlocked)hint.textContent=left>0
-    ?"Осталось "+left+" "+plural(left,"вопрос","вопроса","вопросов")+". Нажмите кнопку, я подсвечу первый без ответа."
-    :"Все 43 вопроса закрыты. Можно открывать разбор.";
+  if(!state.unlocked){
+    if(pfLeft>0&&left>0)hint.textContent="Не заполнен блок о компании и осталось "+left+" "+plural(left,"вопрос","вопроса","вопросов")+".";
+    else if(pfLeft>0)hint.textContent="Вопросы закрыты, остался блок о компании вверху страницы.";
+    else if(left>0)hint.textContent="Осталось "+left+" "+plural(left,"вопрос","вопроса","вопросов")+". Нажмите кнопку, я подсвечу первый без ответа.";
+    else hint.textContent="Все заполнено. Можно открывать разбор.";
+  }
   save();
 }
 
 function init(){
   load();
+  buildProfile();
   buildBlocks();
 
   if(state.company)document.getElementById("gcompany").value=state.company;
@@ -954,6 +1038,15 @@ function init(){
   document.getElementById("gform").addEventListener("submit",async function(e){
     e.preventDefault();
     if(document.getElementById("botcheck").checked)return;
+
+    var pfMiss=state.profile.indexOf(null);
+    if(pfMiss>-1){
+      var pc=document.getElementById("pfcard");
+      pc.classList.add("hl");
+      pc.scrollIntoView({block:"center",behavior:"smooth"});
+      toast("Заполните блок о компании");
+      return;
+    }
 
     var miss=firstUnanswered();
     if(miss){
