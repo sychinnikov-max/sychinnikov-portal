@@ -301,10 +301,9 @@ body.hasbar .block{scroll-margin-top:140px}
   .grid{display:block}
   /* колесо и индекс идут одной строкой во всю ширину, без обтекания:
      иначе лист ответов зажимается в половину полосы и рвется по словам */
-  .stage{position:static;float:none;width:100%;display:grid;grid-template-columns:76mm 1fr;
-         gap:10mm;align-items:center;margin:0 0 7mm}
-  canvas#wheel{width:76mm!important;height:auto!important}
-  .idxcard{align-self:center}
+  .stage{position:static;float:none;width:100%;display:block;margin:0 0 7mm;overflow:hidden}
+  canvas#wheel{width:76mm!important;height:auto!important;float:left;margin:0 10mm 0 0}
+  .idxcard{overflow:hidden;margin-top:16mm}
   .answersheet{clear:both}
   .spheres{background:#D8CFC0;border-color:#D8CFC0}
   .sph{background:#F7F3EA}
@@ -368,19 +367,31 @@ body.hasbar .block{scroll-margin-top:140px}
      margin-top:0;padding-top:0;border-top:none}
   .sect{page-break-inside:auto}
 
-  /* разрывы страниц плохо работают внутри grid, поэтому в печати
-     все контейнеры разделов переводим в обычный блочный поток */
+  /* Ни одного grid и flex внутри печатаемых разделов: браузеры (Safari
+     особенно) не умеют считать разрывы страниц внутри таких контейнеров,
+     из-за этого строки резались пополам. Только блоки и обтекание. */
   .rvlist,.cards,.ansgrid{display:block}
   .card{margin-bottom:4mm}
-  .ansblk{margin-bottom:5mm}
-  .rv,.pi,.card,.ansblk,.ansblk li,.spheres,.stage,.printcta{
+
+  .rv{display:block;overflow:hidden;padding:3mm 0}
+  .rvs{float:left;width:13mm;padding:0;line-height:1.25}
+  .rvt{display:block;margin-left:13mm}
+  .rvn,.rvc{display:inline}
+  .rvc{margin-left:2.5mm}
+  .rvx{display:block;margin-left:13mm;margin-top:1mm}
+
+  .pi{display:block;overflow:hidden;padding:2.6mm 0}
+  .mk{float:left;width:19mm;margin:.6mm 0 0;text-align:center}
+  .piq{display:block;margin-left:22mm}
+  .piw{display:block;margin-left:22mm;margin-top:.8mm}
+
+  p,li{orphans:3;widows:3}
+  .rv,.pi,.card,.ansblk,.ansblk li,.spheres,.stage,.printcta,.pgstart{
      break-inside:avoid;page-break-inside:avoid;-webkit-column-break-inside:avoid}
   .rv,.pi,.card{border-color:#E4DCCD}
-  .pgstart{break-inside:avoid;page-break-inside:avoid}
   .card{background:#F7F3EA;border-color:#D8CFC0}
   .card.pin{background:#F3EBD8}
   .card .big,.rvn,.piq,.qt{color:#1A1512}
-  .cards{grid-template-columns:1fr 1fr}
   .pgroup h4{color:#8A6E2E}
   .mk.n{color:#9B4A36}
   .mk.u{color:#5E5273}
@@ -395,12 +406,15 @@ body.hasbar .block{scroll-margin-top:140px}
 @media print{
   .printonly{display:block!important}
 
-  .ansgrid{display:grid;grid-template-columns:1fr 1fr;gap:5mm 8mm}
-  .ansblk{page-break-inside:avoid;break-inside:avoid}
-  .ansblk h4{font-family:var(--fm);font-size:8.5pt;letter-spacing:.06em;text-transform:uppercase;color:#8A6E2E;font-weight:400;margin-bottom:2mm;padding-bottom:1mm;border-bottom:1px solid #E4DCCD;white-space:nowrap}
+  /* лист ответов: тоже без grid, две колонки не нужны, полная ширина
+     читается лучше и не зависит от того, сколько у человека ответов */
+  .ansgrid{display:block}
+  .ansblk{page-break-inside:avoid;break-inside:avoid;margin-bottom:5mm}
+  .ansblk h4{font-family:var(--fm);font-size:8.5pt;letter-spacing:.06em;text-transform:uppercase;color:#8A6E2E;font-weight:400;margin-bottom:1.5mm;padding-bottom:1mm;border-bottom:1px solid #E4DCCD;white-space:nowrap}
   .ansblk ul{list-style:none;margin:0;padding:0}
-  .ansblk li{display:grid;grid-template-columns:15mm 1fr;gap:2mm;font-size:9pt;line-height:1.35;padding:1.1mm 0;color:#1A1512;page-break-inside:avoid}
-  .am{font-family:var(--fm);font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:.3mm 0;border:1px solid currentColor;border-radius:1px;align-self:start;margin-top:.4mm}
+  .ansblk li{display:block;overflow:hidden;font-size:9.5pt;line-height:1.35;padding:1.1mm 0;color:#1A1512;page-break-inside:avoid;break-inside:avoid}
+  .at{display:block;margin-left:19mm}
+  .am{float:left;width:16mm;box-sizing:border-box;font-family:var(--fm);font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:.3mm 0;border:1px solid currentColor;border-radius:1px;margin-top:.3mm}
   .am.y{color:#4E6A4A}
   .am.n{color:#9B4A36}
   .am.u{color:#5E5273}
@@ -1037,7 +1051,7 @@ function renderAnswers(){
     var items=blk.qs.map(function(q,qi){
       var a=state.ans[bi][qi];
       return '<li><span class="am '+(a||"n")+'">'+(a?LBL[a]:"нет ответа")+'</span>'+
-        '<span>'+esc(q[0])+'</span></li>';
+        '<span class="at">'+esc(q[0])+'</span></li>';
     }).join("");
     return '<div class="ansblk"><h4>'+blk.name+" · "+scoreOf(bi).toFixed(1)+
       " · "+yes+" из "+blk.qs.length+'</h4><ul>'+items+'</ul></div>';
