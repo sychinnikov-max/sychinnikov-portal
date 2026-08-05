@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Колесо финансового здоровья компании · Founder Finance</title>
+<meta name="description" content="43 вопроса по шести сферам финансового управления. Ответьте да, нет или не знаю и получите разбор: что происходит с деньгами, прибылью, дивидендами, капиталом, безопасностью и командой, и конкретный список того, что нужно закрыть.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Founder Finance">
+<meta property="og:title" content="Колесо финансового здоровья компании">
+<meta property="og:description" content="43 вопроса по шести сферам. На выходе разбор по каждой сфере и список того, что нужно закрыть, чтобы компания была финансово устойчивой.">
+<meta property="og:url" content="https://sychinnikov.com/founderfinance/koleso/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131210'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' fill='%23C2A66A' text-anchor='middle'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     Founder Finance — колесо финансового здоровья (лид-магнит).
+     Дизайн-система: Founder Trajectory / лендинг /founderfinance/.
+     Стиль текстов: без ё, без тире.
+     Источник вопросов: диагностика Марии на разборе 04.08.2026, 43 вопроса, 6 сфер.
+     Гейт: разбор открывается после отправки контакта. Ответы уходят вместе с заявкой.
+     Рабочая версия для созвонов живет отдельно в Claude-Context/founder-finance/tools/.
+     ============================================================ -->
+
+<style>
+:root{
+  --bg:#131210;--surface:#1B1814;--surface-2:#221E18;--card:#1F1B16;
+  --ink:#EDE6D6;--ink-muted:#B0A48D;--ink-dim:#8A7E6B;
+  --gold:#C2A66A;--gold-ink:#141009;--gold-deep:#A98E50;--bronze:#9A875C;
+  --ok:#86AE6E;--no:#B07A66;--unk:#9B8FB0;
+  --hair:color-mix(in oklab,var(--ink) 14%,transparent);
+  --hair-soft:color-mix(in oklab,var(--ink) 8%,transparent);
+  --hair-gold:color-mix(in oklab,var(--gold) 32%,transparent);
+  --fd:"Playfair Display",Georgia,serif;--fb:"Manrope",system-ui,sans-serif;--fm:"IBM Plex Mono",monospace;
+  --maxw:1380px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden;font-size:17px}
+.inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(24px,4vw,60px)}
+.band{width:100%;border-top:1px solid var(--hair)}
+.band.alt{background:var(--surface)}
+.pad{padding:clamp(52px,7vw,92px) 0}
+.pad.sm{padding:clamp(36px,4.5vw,58px) 0}
+
+a{color:inherit}
+.eyebrow{font-family:var(--fm);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+h1{font-family:var(--fd);font-weight:600;font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
+.h2{font-family:var(--fd);font-weight:600;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:-.01em;text-wrap:balance}
+.h3{font-family:var(--fd);font-weight:600;font-size:clamp(21px,2vw,26px);line-height:1.2}
+.lead{font-size:clamp(17px,1.35vw,20px);color:var(--ink-muted);margin-top:16px;max-width:60ch}
+.sub{color:var(--ink-muted);margin-top:12px;max-width:66ch}
+.note{font-size:14px;color:var(--ink-dim)}
+
+/* ---------- шапка ---------- */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;gap:18px;height:64px}
+.brand{font-family:var(--fd);font-size:20px;font-weight:600;text-decoration:none;letter-spacing:-.01em}
+.brand b{color:var(--gold)}
+.nlinks{display:flex;align-items:center;gap:22px}
+.nlinks a{font-size:14.5px;text-decoration:none;color:var(--ink-muted)}
+.nlinks a:hover{color:var(--ink)}
+.ncta{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--hair-gold);color:var(--gold)!important;padding:9px 14px;border-radius:3px}
+.ncta:hover{background:var(--gold);color:var(--gold-ink)!important}
+@media(max-width:760px){.nlinks a:not(.ncta){display:none}}
+
+/* ---------- кнопки ---------- */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--gold);color:var(--gold-ink);font-weight:600;font-size:15.5px;padding:14px 24px;border-radius:3px;text-decoration:none;border:1px solid var(--gold);cursor:pointer;font-family:var(--fb);transition:background .15s ease,border-color .15s ease,opacity .15s ease}
+.cta:hover{background:#D3B87C;border-color:#D3B87C}
+.cta:disabled{opacity:.42;cursor:not-allowed}
+.cta.ghost{background:transparent;color:var(--gold);border-color:var(--hair-gold)}
+.cta.ghost:hover{background:color-mix(in oklab,var(--gold) 12%,transparent);color:var(--gold)}
+.cta:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+
+/* ---------- герой ---------- */
+.hero{padding:clamp(44px,6vw,84px) 0 clamp(30px,4vw,50px)}
+.herorow{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,64px);align-items:start}
+@media(max-width:940px){.herorow{grid-template-columns:1fr}}
+.herolist{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:9px}
+.herolist li{position:relative;padding-left:24px;color:var(--ink-muted);font-size:16px}
+.herolist li::before{content:"";position:absolute;left:2px;top:11px;width:9px;height:1.5px;background:var(--gold)}
+.spheres{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:4px;overflow:hidden}
+.sph{background:var(--card);padding:15px 16px}
+.sph .n{font-family:var(--fd);font-size:19px;font-weight:600}
+.sph .d{font-size:13px;color:var(--ink-dim);margin-top:2px}
+.sph .c{font-family:var(--fm);font-size:11px;color:var(--gold);letter-spacing:.08em;margin-top:6px}
+
+/* ---------- рабочая часть ---------- */
+.grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:clamp(28px,3.5vw,54px);align-items:start}
+@media(max-width:1040px){.grid{grid-template-columns:1fr}}
+.stage{position:sticky;top:84px;display:flex;flex-direction:column;gap:14px}
+@media(max-width:1040px){.stage{position:static}}
+canvas#wheel{width:100%;height:auto;display:block}
+
+.idxcard{display:flex;align-items:baseline;gap:13px;padding:15px 17px;background:var(--card);border:1px solid var(--hair);border-radius:4px}
+.idxcard .num{font-family:var(--fd);font-size:40px;line-height:1;font-weight:600;color:var(--gold)}
+.idxcard .of{font-family:var(--fm);font-size:12px;color:var(--ink-dim);white-space:nowrap}
+.idxcard .vd{font-size:14px;color:var(--ink-muted);line-height:1.35}
+
+.bar{height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .25s ease}
+.barmeta{display:flex;justify-content:space-between;gap:12px;font-family:var(--fm);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:16px;height:3px;border-radius:2px;background:var(--gold)}
+.sw.goal{height:0;border-top:2px dashed var(--bronze);background:none}
+
+.blocks{display:flex;flex-direction:column;gap:34px}
+.block{border-top:2px solid var(--gold-deep);padding-top:15px;scroll-margin-top:84px}
+.bhead{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:6px 14px}
+.btitle{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.bname{font-family:var(--fd);font-size:26px;font-weight:600}
+.bsub{font-size:13.5px;color:var(--ink-dim)}
+.bscore{display:flex;align-items:baseline;gap:8px;font-family:var(--fm)}
+.bscore .v{font-size:24px}
+.bscore .d{font-size:11px;color:var(--ink-dim);letter-spacing:.06em}
+.goalrow{grid-column:1/-1;display:grid;grid-template-columns:86px 1fr 40px;align-items:center;gap:12px;margin:11px 0 3px}
+.goalrow .tg{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+.goalrow .vl{font-family:var(--fm);font-size:13px;color:var(--ink-muted);text-align:right}
+
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;background:transparent;height:20px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:var(--hair)}
+input[type=range]::-moz-range-track{height:3px;border-radius:2px;background:var(--hair)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--bronze);border:2px solid var(--bg);margin-top:-6px}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--bronze);border:2px solid var(--bg)}
+
+.qs{display:flex;flex-direction:column;margin-top:5px}
+.q{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 16px;padding:11px 0;border-bottom:1px solid var(--hair-soft);scroll-margin-top:100px}
+.q.hl{background:color-mix(in oklab,var(--gold) 9%,transparent)}
+.qt{font-size:15px;line-height:1.4}
+.q.done .qt{color:var(--ink-muted)}
+.qn{display:block;font-size:13px;color:var(--ink-dim);margin-top:2px}
+.seg{display:flex;flex-shrink:0}
+.seg button{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);background:transparent;border:1px solid var(--hair);padding:7px 10px;cursor:pointer;margin-left:-1px;white-space:nowrap;transition:background .12s ease,color .12s ease,border-color .12s ease}
+.seg button:first-child{margin-left:0;border-radius:3px 0 0 3px}
+.seg button:last-child{border-radius:0 3px 3px 0}
+.seg button:hover{background:var(--surface-2);color:var(--ink)}
+.seg button[aria-pressed=true]{color:var(--gold-ink);position:relative;z-index:1;font-weight:500}
+.seg button.y[aria-pressed=true]{background:var(--ok);border-color:var(--ok)}
+.seg button.u[aria-pressed=true]{background:var(--unk);border-color:var(--unk)}
+.seg button.n[aria-pressed=true]{background:var(--no);border-color:var(--no)}
+.bhint{margin-top:13px;font-size:13.5px;color:var(--ink-dim);padding:11px 13px;background:var(--surface-2);border-radius:3px}
+.bhint b{color:var(--ink-muted)}
+@media(max-width:560px){.q{grid-template-columns:1fr}.seg{justify-content:flex-start}}
+
+/* ---------- гейт ---------- */
+.gate{margin-top:52px;border:1px solid var(--hair-gold);border-radius:5px;background:var(--card);padding:clamp(24px,3vw,40px);scroll-margin-top:84px}
+.gategrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:clamp(22px,3vw,44px);align-items:start}
+@media(max-width:860px){.gategrid{grid-template-columns:1fr}}
+.gatelist{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.gatelist li{position:relative;padding-left:24px;color:var(--ink-muted);font-size:15.5px}
+.gatelist li::before{content:"";position:absolute;left:2px;top:11px;width:9px;height:1.5px;background:var(--gold)}
+.gateform{display:flex;flex-direction:column;gap:11px}
+.fl{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+.fin{font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--hair);border-radius:3px;padding:12px 13px;width:100%}
+.fin::placeholder{color:var(--ink-dim)}
+.gerr{display:none;color:var(--no);font-size:14px}
+.gate.sending .cta{opacity:.5;pointer-events:none}
+
+.locked{position:relative}
+.locked > .lockedbody{filter:blur(7px);opacity:.35;pointer-events:none;user-select:none;max-height:520px;overflow:hidden}
+.lockmsg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
+.lockmsg .in2{max-width:52ch}
+.lockmsg .h3{margin-bottom:10px}
+
+/* ---------- результат ---------- */
+.sect{margin-top:52px;padding-top:30px;border-top:1px solid var(--hair)}
+.sect > h2{margin-bottom:4px}
+.sect > .sub{margin-bottom:22px}
+
+.rvlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 clamp(24px,3vw,40px)}
+.rv{display:grid;grid-template-columns:46px 1fr;gap:2px 14px;padding:16px 0;border-bottom:1px solid var(--hair-soft);align-items:start;align-content:start}
+.rvs{font-family:var(--fm);font-size:20px;grid-row:span 2;padding-top:3px}
+.rvt{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.rvn{font-family:var(--fd);font-size:20px;font-weight:600}
+.rvc{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+.rvx{margin-top:3px;font-size:14.5px;color:var(--ink-muted);line-height:1.45}
+.rvb{display:block;margin-top:5px;color:var(--unk)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--surface-2);border:1px solid var(--hair);border-radius:4px;padding:19px 19px 21px}
+.card.pin{border-color:var(--hair-gold);background:color-mix(in oklab,var(--gold) 8%,var(--surface-2))}
+.card h3{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:10px;font-weight:400}
+.card .big{font-family:var(--fd);font-size:24px;font-weight:600;line-height:1.15;margin-bottom:8px}
+.card p{color:var(--ink-muted);font-size:14.5px}
+.card p+p{margin-top:9px}
+
+.pgroup{margin-bottom:26px}
+.pgroup h4{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:500}
+.pi{display:grid;grid-template-columns:auto 1fr;gap:3px 11px;padding:13px 0;border-bottom:1px solid var(--hair-soft);align-items:start}
+.mk{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:2px;border:1px solid currentColor;white-space:nowrap;margin-top:3px;min-width:74px;text-align:center}
+.mk.n{color:var(--no)}
+.mk.u{color:var(--unk)}
+.piq{font-size:15px;line-height:1.4}
+.piw{grid-column:2;font-size:14.5px;color:var(--ink-muted);line-height:1.45}
+.piw b{font-family:var(--fm);font-size:10px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);display:block;margin-bottom:1px}
+.pempty{color:var(--ink-dim);font-size:14.5px}
+
+/* ---------- финальный блок ---------- */
+.final{background:var(--surface);border:1px solid var(--hair-gold);border-radius:5px;padding:clamp(24px,3vw,40px);margin-top:46px;text-align:center}
+.final .h2{margin-bottom:10px}
+.final .sub{margin:0 auto}
+.final .btnrow{justify-content:center;margin-top:26px}
+
+.foot{border-top:1px solid var(--hair);margin-top:60px;padding:32px 0 46px;font-size:14px;color:var(--ink-dim)}
+.foot a{color:var(--gold)}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);background:var(--card);border:1px solid var(--hair-gold);color:var(--ink);font-family:var(--fm);font-size:12.5px;letter-spacing:.05em;padding:11px 18px;border-radius:3px;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:80}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- печать в PDF ---------- */
+@media print{
+  @page{margin:14mm}
+  body{background:#fff;color:#1A1512;font-size:11.5pt;line-height:1.45}
+  .nav,.hero .btnrow,.blocks,.gate,.final,.foot,.toast,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
+  .inner{padding:0;max-width:none}
+  .band,.sect{border-top:1px solid #D8CFC0}
+  .pad{padding:0}
+  .grid{display:block}
+  .stage{position:static;display:block;width:74mm;float:right;margin:0 0 10mm 8mm}
+  canvas#wheel{width:74mm!important;height:auto!important}
+  .spheres{background:#D8CFC0;border-color:#D8CFC0}
+  .sph{background:#F7F3EA}
+  .sph .n{color:#1A1512}
+  .sph .d{color:#4A4038}
+  .sph .c{color:#8A6E2E}
+  .herolist li{color:#4A4038}
+  .herolist li::before{background:#8A6E2E}
+  .idxcard{display:block}
+  .idxcard .num{display:inline-block;margin-right:6px}
+  .idxcard .of{display:inline-block;margin-right:8px}
+  .idxcard .vd{display:block;margin-top:4px}
+  h1{font-size:22pt;color:#1A1512}
+  .h2{font-size:15pt;color:#1A1512}
+  .eyebrow{color:#8A6E2E}
+  .lead,.sub,.note,.rvx,.card p,.piw,.rvc,.idxcard .vd{color:#4A4038}
+  .idxcard{background:#F7F3EA;border-color:#D8CFC0}
+  .idxcard .num{color:#8A6E2E}
+  .sect{page-break-inside:auto;margin-top:8mm;padding-top:5mm}
+  .rvlist{grid-template-columns:1fr}
+  .rv,.pi,.card{page-break-inside:avoid;border-color:#E4DCCD}
+  .card{background:#F7F3EA;border-color:#D8CFC0}
+  .card.pin{background:#F3EBD8}
+  .card .big,.rvn,.piq,.qt{color:#1A1512}
+  .cards{grid-template-columns:1fr 1fr}
+  .pgroup h4{color:#8A6E2E}
+  .mk.n{color:#9B4A36}
+  .mk.u{color:#5E5273}
+  .rvb{color:#5E5273}
+  .locked > .lockedbody{filter:none;opacity:1;max-height:none;overflow:visible}
+  .lockmsg{display:none}
+  .printfoot{display:block!important;margin-top:8mm;padding-top:4mm;border-top:1px solid #D8CFC0;font-size:9.5pt;color:#6A5F52}
+}
+.printfoot{display:none}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="inner">
+  <a class="brand" href="/founderfinance/">Founder<b>·</b>Finance</a>
+  <nav class="nlinks">
+    <a href="/founderfinance/">На главную</a>
+    <a href="#work">Пройти</a>
+    <a class="ncta" href="https://t.me/Sychinnikov" target="_blank" rel="noopener">Написать в Telegram</a>
+  </nav>
+</div></header>
+
+<!-- ГЕРОЙ -->
+<section class="hero"><div class="inner">
+  <div class="herorow">
+    <div>
+      <div class="eyebrow">Бесплатная диагностика · 43 вопроса · 20 минут</div>
+      <h1>Колесо финансового здоровья компании</h1>
+      <p class="lead">Шесть сфер финансового управления, внутри каждой закрытые вопросы. Отвечаете да, нет или не знаю. На выходе видите, что происходит с деньгами в каждой сфере и что именно нужно закрыть, чтобы компания стала финансово устойчивой.</p>
+      <ul class="herolist">
+        <li>Разбор по каждой из шести сфер, а не одна общая оценка</li>
+        <li>Отдельно считаются слепые зоны: то, чего собственник про свой бизнес не знает</li>
+        <li>Список того, что не закрыто, и что даст закрытие каждого пункта</li>
+        <li>Готовый PDF, который можно забрать и отдать своему финансисту</li>
+      </ul>
+      <div class="btnrow">
+        <a class="cta" href="#work">Пройти диагностику</a>
+        <a class="cta ghost" href="/founderfinance/#cta">Бесплатная диагностика со мной →</a>
+      </div>
+      <p class="note" style="margin-top:18px">Отвечайте по факту, а не по намерению. Сфера считается закрытой, только если ответ подтверждается документом, а не ощущением.</p>
+    </div>
+    <div>
+      <div class="spheres">
+        <div class="sph"><div class="n">Деньги</div><div class="d">платежеспособность</div><div class="c">8 вопросов</div></div>
+        <div class="sph"><div class="n">Дивиденды</div><div class="d">доход собственника</div><div class="c">6 вопросов</div></div>
+        <div class="sph"><div class="n">Богатство</div><div class="d">эффективность бизнеса</div><div class="c">7 вопросов</div></div>
+        <div class="sph"><div class="n">Безопасность</div><div class="d">устойчивость к удару</div><div class="c">8 вопросов</div></div>
+        <div class="sph"><div class="n">Прибыль</div><div class="d">планирование чистой прибыли</div><div class="c">8 вопросов</div></div>
+        <div class="sph"><div class="n">Команда</div><div class="d">решения на основе цифр</div><div class="c">6 вопросов</div></div>
+      </div>
+      <p class="note" style="margin-top:14px">Порядок сфер повторяет путь денег в компании: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому этим управлять.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- РАБОЧАЯ ЧАСТЬ -->
+<section class="band alt" id="work"><div class="inner pad">
+  <div class="grid">
+
+    <div class="stage">
+      <canvas id="wheel" width="800" height="800" role="img" aria-label="Колесо финансового здоровья по шести сферам"></canvas>
+      <div class="idxcard">
+        <span class="num" id="idxNum">0.0</span>
+        <span class="of">из 10</span>
+        <span class="vd" id="idxVerdict">Ответьте на вопросы, колесо соберется само.</span>
+      </div>
+      <div class="bar"><i id="barFill"></i></div>
+      <div class="barmeta">
+        <span>Отвечено <b id="pAns">0</b> из <b id="pTotal">43</b></span>
+        <span>Да <b id="pYes">0</b> · не знаю <b id="pUnk">0</b></span>
+      </div>
+      <div class="legend">
+        <span><i class="sw"></i> Точка А, как сейчас</span>
+        <span><i class="sw goal"></i> Точка Б, куда идем</span>
+      </div>
+    </div>
+
+    <div class="blocks" id="blocks"></div>
+
+  </div>
+
+  <!-- ГЕЙТ -->
+  <div class="gate" id="gate">
+    <div class="gategrid">
+      <div>
+        <div class="eyebrow">Последний шаг</div>
+        <div class="h2" style="margin-top:12px">Откройте разбор</div>
+        <p class="sub">Разбор считается по вашим ответам и открывается прямо на этой странице. В нем:</p>
+        <ul class="gatelist">
+          <li>вывод по каждой из шести сфер, что сейчас происходит с бизнесом внутри нее;</li>
+          <li>слабое звено, слепые зоны и форма колеса;</li>
+          <li>полный список того, что не закрыто, и что даст закрытие каждого пункта;</li>
+          <li>кнопка сохранить все это в PDF.</li>
+        </ul>
+        <p class="note" style="margin-top:18px">Вместе с контактом ко мне приходят ваши ответы, поэтому я смогу написать по существу, а не «здравствуйте, чем помочь». Никому больше эти данные не уходят.</p>
+      </div>
+      <div>
+        <form class="gateform" id="gform" novalidate>
+          <input type="checkbox" id="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <div>
+            <div class="fl" style="margin-bottom:6px">Как вас зовут</div>
+            <input class="fin" id="gname" type="text" placeholder="Имя" autocomplete="name">
+          </div>
+          <div>
+            <div class="fl" style="margin-bottom:6px">Компания</div>
+            <input class="fin" id="gcompany" type="text" placeholder="Название, чтобы подписать PDF" autocomplete="organization">
+          </div>
+          <div>
+            <div class="fl" style="margin-bottom:6px">Куда прислать комментарий</div>
+            <input class="fin" id="gcontact" type="text" placeholder="Telegram или почта" autocomplete="email">
+          </div>
+          <button class="cta" id="gsubmit" type="submit">Открыть разбор</button>
+          <p class="note" id="ghint">Ответьте на все 43 вопроса, чтобы разбор был честным.</p>
+          <p class="gerr" id="gerr">Не отправилось. Разбор все равно открыт. Напишите мне в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div></section>
+
+<!-- РЕЗУЛЬТАТ -->
+<section class="band" id="result"><div class="inner pad">
+  <div class="locked" id="lockwrap">
+
+    <div class="lockedbody" id="lockbody">
+
+      <div class="sect" id="review" style="margin-top:0;padding-top:0;border-top:none"></div>
+
+      <div class="sect" id="summarysect">
+        <h2 class="h2">Общая оценка</h2>
+        <p class="sub">Свод по всем шести сферам сразу: где узкое место, чего собственник не видит и какой формы получилось колесо.</p>
+        <div class="cards" id="readout"></div>
+      </div>
+
+      <div class="sect" id="plan"></div>
+
+      <div class="printfoot">
+        Колесо финансового здоровья компании · Founder Finance · Андрей Сычинников · sychinnikov.com/founderfinance · Telegram @Sychinnikov
+      </div>
+
+    </div>
+
+    <div class="lockmsg" id="lockmsg">
+      <div class="in2">
+        <div class="h3">Разбор закрыт</div>
+        <p class="sub" style="margin:0 auto">Ответьте на вопросы выше и нажмите «Открыть разбор». Здесь появится вывод по каждой сфере, общая оценка и список того, что нужно закрыть.</p>
+        <div class="btnrow" style="justify-content:center"><a class="cta ghost" href="#gate">Перейти к форме</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="final noprint" id="final" style="display:none">
+    <div class="eyebrow">Что дальше</div>
+    <div class="h2" style="margin-top:12px">Заберите разбор и приходите с вопросами</div>
+    <p class="sub" style="max-width:64ch">PDF можно сохранить и отдать своему бухгалтеру или финансисту. Если по какому-то пункту непонятно, что делать руками, напишите мне: разберу ваш случай и скажу, с чего начинать, даже если дальше мы не работаем.</p>
+    <div class="btnrow">
+      <button class="cta" id="btnPdf" type="button">Скачать PDF</button>
+      <button class="cta ghost" id="btnPng" type="button">Скачать колесо картинкой</button>
+      <a class="cta ghost" href="https://t.me/Sychinnikov" target="_blank" rel="noopener">Написать в Telegram →</a>
+    </div>
+    <p class="note" style="margin-top:16px">Кнопка PDF открывает окно печати. Выберите «Сохранить как PDF» и получите документ на несколько страниц.</p>
+  </div>
+
+</div></section>
+
+<footer class="foot noprint"><div class="inner">
+  <p>Андрей Сычинников · управленческий учет на русском для бизнеса в Европе · Telegram <a href="https://t.me/Sychinnikov">@Sychinnikov</a> · <a href="/founderfinance/">на главную</a></p>
+  <p style="margin-top:10px">Ответы хранятся в вашем браузере. Диагностика не заменяет аудит: это способ за 20 минут увидеть, где у бизнеса тонко.</p>
+</div></footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+var FORM_ENDPOINT="https://api.web3forms.com/submit";
+var FORM_KEY="24d71a36-877d-46e1-9956-566f0dbb8d50";
+
+var BLOCKS=[
+{key:"money",name:"Деньги",sub:"про платежеспособность",
+ hint:"<b>Что закрывает сферу.</b> Платежный календарь на все поступления и выбытия, согласованный коридор остатка и разделенные деньги бизнеса и собственника.",
+ verdicts:[
+  "Деньгами не управляют, за ними наблюдают. Решения принимаются по остатку на счете, и каждый крупный платеж это сюрприз. С этой сферы начинают всегда: без нее остальные пять считать не на чем.",
+  "Часть контура есть, но он держится в голове, а не в документе. Такая конструкция работает, пока деньгами занят лично собственник, и ломается ровно тогда, когда он выпадает или обороты прибавляют.",
+  "Деньги под контролем, узкие места точечные. Обычно не хватает одного элемента: либо календаря на все выбытия, либо согласованного коридора остатка. Дешевле всего закрыть сейчас, пока обороты не выросли.",
+  "Деньгами управляют. Видно на несколько недель вперед, разрывов нет, личное и деловое разделено. Дальше сфера растет не полнотой, а горизонтом планирования."],
+ qs:[
+ ["Согласован комфортный коридор остатка денег, и фактический остаток в него укладывается","например: на конец периода на счетах должно оставаться от 2 до 6 тысяч евро","Появляется граница, ниже которой деньги трогать нельзя. Решение о крупной трате перестает быть спором и становится проверкой: пробиваем коридор или нет."],
+ ["Операционный денежный поток положительный на выбранном интервале","","Подтверждается, что бизнес кормит себя сам, а не живет на кредите и авансах. Это первое, на что смотрит банк и любой покупатель доли."],
+ ["Платежи планируются в платежном календаре или в бюджете движения денег с точностью выше 80 процентов","","Кассовый разрыв виден за несколько недель до того, как случится. Появляется время договориться о переносе, а не тушить в день платежа на любых условиях."],
+ ["Знаете остаток денег по всем счетам, картам бизнеса и по наличным","в норме сводка приходит каждое утро","Пропадает ежедневный вопрос «сколько у нас есть». Заодно вскрываются счета и кассы, где деньги лежат и о них забыли."],
+ ["Остаток денег за последние 3 месяца растет","деньги, выведенные собственнику, здесь не считаются","Компания начинает копить собственную подушку, а не только прогонять деньги насквозь. Без этого любой сбой оплачивается кредитом."],
+ ["Поступления больше, чем списания, за предыдущие 3 месяца","","Подтверждается, что рост не съедает сам себя. Если наоборот, значит масштабирование финансируется остатком, и остаток закончится."],
+ ["Кассовых разрывов за предыдущие 3 месяца не было","","Уходит режим ручного тушения: команда перестает жить в авралах вокруг платежей. Поставщики дают лучшие условия тем, кто платит вовремя, и это считается в деньгах."],
+ ["Оплаты бизнеса и личные оплаты разделены","личная покупка с карты компании ломает весь учет","Цифра чистой прибыли становится настоящей, а не смешанной с личными тратами. Плюс это снимает половину вопросов при проверке и при продаже бизнеса."]]},
+
+{key:"dividends",name:"Дивиденды",sub:"про доход собственника",
+ hint:"<b>Что закрывает сферу.</b> Правило вывода, привязанное к чистой прибыли, отдельный фонд под дивиденды и спокойствие собственника в момент вывода.",
+ verdicts:[
+  "Собственник берет деньги из бизнеса, но никто не считает, сколько бизнес может отдать. Это самый частый способ незаметно вынуть оборотку и потом занять ее же под проценты.",
+  "Дивиденды есть, правила нет. Сумма определяется наличием денег на счете, а не заработанной прибылью: в хороший месяц забирается лишнее, в плохой возникает вопрос, откуда брать.",
+  "Вывод управляемый, не хватает механики. Чаще всего отсутствует отдельный фонд, из-за чего дивиденды конкурируют с закупкой и зарплатой за одни и те же деньги на счете.",
+  "Собственник получает доход по правилу, в срок и в пределах заработанного. Состояние редкое, и главный его эффект в том, что исчезает ежемесячный торг с самим собой."],
+ qs:[
+ ["Дивиденды за период начислены согласно регламенту или правилу","какой процент чистой прибыли забираем, зафиксировано ли это","Вывод перестает зависеть от настроения и от остатка на счете. Собственник знает сумму заранее, компания знает, что у нее заберут."],
+ ["Дивиденды выплачивались в течение трех предыдущих периодов","","Бизнес доказывает, что он источник дохода, а не место, куда деньги все время докладывают. Это же главный аргумент в разговоре с партнером и инвестором."],
+ ["Дивиденды не выводятся в размере больше, чем чистая прибыль","чистая считается уже с налогами и процентами по кредитам","Компания перестает финансировать личный доход собственника за счет оборотки и кредитов. Именно так бизнес незаметно проедает себя при растущей выручке."],
+ ["Чувствуете себя уверенно в момент вывода дивидендов","нет ощущения «выведу сейчас, а завтра нечем платить»","Уходят качели «вытащу побольше, пока есть» и следом «надо срочно занести обратно». Это прямая экономия на процентах и на нервах."],
+ ["Знаете, сколько дивидендов можно взять","","Появляется потолок, который считается, а не угадывается. Дальше можно спокойно планировать личные крупные покупки и обязательства."],
+ ["Есть фонд для выплаты дивидендов, который регулярно пополняется","","Дивиденды перестают конкурировать с закупкой и зарплатой за одни и те же деньги. Вывод больше не зависит от того, какая неделя выдалась."]]},
+
+{key:"wealth",name:"Богатство",sub:"про эффективность бизнеса",
+ hint:"<b>Что закрывает сферу.</b> Управленческий баланс. Без него собственный капитал считается на глаз, и вопрос «сколько стоит компания» остается без ответа.",
+ verdicts:[
+  "Капитал компании не считается вообще. Нет ответа на вопрос, сколько стоит бизнес и стал ли собственник богаче за год, а значит нет и способа сравнить этот бизнес с любой другой возможностью вложить деньги.",
+  "Отдельные цифры есть, баланса нет. Собственный капитал прикидывается на глаз, поэтому расхождения между прибылью, деньгами и запасами списываются на погрешность вместо того, чтобы указывать на ошибку в учете.",
+  "Баланс собран или почти собран. Осталось довести его до регулярности и начать смотреть динамику: одна точка не показывает ничего, смысл появляется на третьем месяце.",
+  "Собственный капитал считается и растет, отдача выше альтернативы. Это состояние, в котором бизнес можно осмысленно продавать, закладывать и брать в него партнера."],
+ qs:[
+ ["Собственный капитал увеличивается последние два периода","активы минус пассивы, а не размер товарного остатка","Видно, что компания дорожает, а не просто крутит все больший оборот. Это единственная цифра, которая отвечает, стал ли собственник богаче за год."],
+ ["Рентабельность собственного капитала выше ставки по депозитам или выше согласованной собственниками","","Появляется ответ на неприятный вопрос: не выгоднее ли положить эти деньги в банк и не работать. Если выгоднее, бизнес требует пересборки, а не усилий."],
+ ["Есть управленческий баланс как отчет","","Прибыль, деньги и запасы начинают сходиться между собой. Расхождение, которое сейчас списывают на «где-то потерялось», превращается в конкретную сумму и конкретную статью."],
+ ["Знаете точную сумму, вложенную в бизнес","включая довложения после старта, не только открытие","Считается настоящая отдача на вложенное, а не только прибыль за месяц. Без этой цифры бизнес не с чем сравнить."],
+ ["Собственный капитал больше, чем в прошлом году","","Годовой итог перестает измеряться выручкой. Появляется ответ, что осталось от года, кроме оборота."],
+ ["Знаете соотношение собственного и заемного капитала","","Понятно, есть ли еще место под кредитное плечо или его уже перебрали. Решение о новом займе перестает быть интуитивным."],
+ ["Знаете точную стоимость активов компании","","Появляется цена входа в разговор о продаже доли, привлечении партнера и залоге. Без нее переговоры идут на цифрах другой стороны."]]},
+
+{key:"safety",name:"Безопасность",sub:"про устойчивость к удару",
+ hint:"<b>Что закрывает сферу.</b> Фондирование: фонд безопасности, фонд развития и фонд дивидендов на отдельных счетах. Условный резерв в личном сейфе собственника резервом компании не является.",
+ verdicts:[
+  "Устойчивость не измеряется. Компания держится на том, что рынок пока не проверял ее на прочность. Первый серьезный сбой оплачивается распродажей товара или займом на любых условиях.",
+  "Долги и обязательства известны, запаса нет. Работает, пока выручка ровная. Резерв в личных деньгах собственника резервом компании не является: в момент падения решение о его возврате принимает уже не только он.",
+  "Основа устойчивости есть, не хватает измерителей. Коэффициенты считаются один раз и дальше отслеживаются ежемесячно, это дешевая процедура с высокой отдачей.",
+  "Компания выдержит удар и знает, какой именно. Резервы отделены, коэффициенты в норме, обязательные платежи покрыты. Отсюда плечо берут осознанно, а не боятся его."],
+ qs:[
+ ["Коэффициент текущей ликвидности больше 1,5","оборотные активы делить на краткосрочные обязательства","Подтверждается, что компания расплатится по коротким обязательствам, не распродавая склад. Это первый сигнал, который смотрит банк перед кредитом."],
+ ["Коэффициент финансовой устойчивости не меньше 0,6","собственный капитал плюс долгосрочные кредиты, поделить на активы","Видно, какая доля бизнеса построена на своих деньгах, а какая на чужих. Цифра заранее показывает, переживет ли компания падение выручки."],
+ ["Коэффициент абсолютной ликвидности больше 0,2","деньги делить на краткосрочные обязательства","Понятно, какую часть срочных долгов можно закрыть прямо завтра живыми деньгами. Это ответ на вопрос «если завтра все попросят сразу»."],
+ ["Знаете точную сумму кредитов","тело кредита, а не платеж","Считается настоящая стоимость заемных денег в месяц. Часто оказывается, что проценты съедают больше, чем приносит направление, ради которого кредит брали."],
+ ["Знаете, сколько должны вы и сколько должны вам","кредиторка и дебиторка с расшифровкой","Видно замороженные деньги. Обычно там лежит ровно та сумма, ради которой собираются брать новый кредит."],
+ ["Есть деньги, чтобы покрыть налоги, зарплату и текущий платеж по кредитам","","Обязательные платежи перестают конкурировать с закупкой. Это те три статьи, просрочка по которым стоит дороже всего, включая репутацию."],
+ ["Есть резервный фонд на непредвиденные расходы","на счете компании, а не в личных деньгах собственника","Появляется запас, который позволяет пережить падение выручки, не распродавая товар и не занимая под четверть годовых."],
+ ["Внедрено фондирование: фонд безопасности, развития и дивидендов на отдельных счетах","","Деньги перестают быть одной кучей, из которой все берут. Развитие, безопасность и дивиденды копятся отдельно и больше не съедают друг друга."]]},
+
+{key:"profit",name:"Прибыль",sub:"про планирование чистой прибыли",
+ hint:"<b>Что закрывает сферу.</b> Отчет о прибылях и убытках методом начисления плюс план, поставленный до начала периода, а не восстановленный после.",
+ verdicts:[
+  "Прибыль не планируется и не считается по правилам учета. Значит, ей нельзя управлять: любой вывод о том, что выгодно, а что нет, сейчас основан на ощущении.",
+  "Прибыль считается, но задним числом. План либо не ставится, либо не сверяется, поэтому расходы объясняются постфактум, а решения принимаются на цифрах прошлого месяца.",
+  "Отчетность собрана, план работает. Обычно остается разложить расходы по группам и начать смотреть прибыль в динамике, а не одной цифрой за месяц.",
+  "Прибыль планируется до периода и попадает в план. Это уровень, на котором можно принимать решения о росте: понятно, что именно вырастет вместе с выручкой, а что нет."],
+ qs:[
+ ["Выручка и чистая прибыль планируются до начала периода","план ставится на прибыль, а не только на выручку","Прибыль становится целью, а не остатком. Расходы начинают сверяться с планом заранее, а не объясняться после закрытия месяца."],
+ ["Факт чистой прибыли держится в коридоре 80 до 120 процентов от плана три месяца подряд","","План превращается в рабочий инструмент, на который можно опираться в решениях. Пока факт гуляет шире, планирование остается упражнением."],
+ ["Есть отчет о прибылях и убытках, посчитанный методом начисления","не кассовым: выручка признается по отгрузке, не по деньгам","Прибыль перестает прыгать вместе с датами оплат. Виден настоящий результат месяца, а не то, кто когда успел заплатить."],
+ ["Чистая прибыль положительная","","Подтверждается, что бизнес зарабатывает после всех расходов, налогов и процентов, а не только выглядит прибыльным на уровне маржи."],
+ ["Знаете значение чистой прибыли за последние три месяца","","Виден тренд, а не одна точка. Разворот замечается на втором месяце, а не через полгода, когда исправлять уже дорого."],
+ ["Знаете рентабельность бизнеса по чистой прибыли","","Появляется цифра, по которой бизнес сравнивается сам с собой год к году и с другими. Рост выручки без роста рентабельности перестает считаться успехом."],
+ ["Знаете динамику выручки и чистой прибыли","видите ее графиком, а не одной цифрой","Видно, расходится ли прибыль с выручкой. Это самая частая точка, где рост оказывается убыточным, и на графике она заметна сразу."],
+ ["Знаете суммы производственных, административных и коммерческих расходов","расходы разделены на три группы, а не одним списком","Понятно, какая группа расходов растет быстрее выручки. Сокращать становится нечего наугад, появляется конкретный адрес."]]},
+
+{key:"team",name:"Команда",sub:"про решения на основе цифр",
+ hint:"<b>Что закрывает сферу.</b> За каждую статью отвечает человек, который планирует ее и отчитывается за отклонение. Тогда контроль перестает висеть на собственнике.",
+ verdicts:[
+  "Все финансовые решения замкнуты на собственнике. Это потолок роста: скорость компании равна скорости одного человека, и его отпуск или болезнь останавливают контур целиком.",
+  "Команда есть, но за цифры не отвечает. Люди выполняют задачи, а не показатели, поэтому отклонение замечает собственник и он же его разбирает.",
+  "Команда включена в цифры. Остается закрепить регулярность: план ставит тот, кто отвечает, и он же объясняет отклонение, иначе через квартал контур снова сползет на собственника.",
+  "Решения принимаются на цифрах и распределены по людям. Собственник утверждает план и разбирает отклонения, а не собирает данные. Ради этого состояния весь учет и строится."],
+ qs:[
+ ["Есть команда, которая тоже отвечает за прибыль, кроме собственников","","Прибыль перестает быть заботой одного человека. Появляются люди, которые ловят отклонение раньше собственника."],
+ ["Команда участвует в планировании","","План перестает быть спущенным сверху и становится обязательством. Спорить с цифрой, которую поставил сам, гораздо труднее."],
+ ["Знаете сумму денег, которую тратите на команду","","Считается настоящая стоимость людей и отдача на нее. Обычно это вторая по величине статья после закупки и при этом самая редко пересматриваемая."],
+ ["Есть фонд на развитие и обучение сотрудников","запланированный, а не из непредвиденных расходов по случаю","Обучение перестает происходить по остаточному принципу в удачный месяц. Люди растут планово, а не когда получилось."],
+ ["В разговоре с другими предпринимателями опираетесь на цифры чистой прибыли и рентабельности","есть финмодель на год вперед","Проверяется, что цифры действительно живут в голове, а не в таблице. Заодно это фильтр окружения: с теми, кто своих цифр не знает, разговор быстро становится бесполезным."],
+ ["Решения по новым проектам, инвестициям и мотивации считаются до запуска","сначала посчитали, потом сделали, а не наоборот","Ошибка стоит расчета, а не денег. Идея отсеивается на бумаге до того, как под нее наняли людей и закупили товар."]]}
+];
+
+var VERDICTS=[
+ {max:3.9,text:"Бизнес управляется вслепую. Решения принимаются по ощущению остатка на счете."},
+ {max:6.9,text:"Цифры в целом есть, но решения на них пока опираются наполовину. Система собрана не до конца."},
+ {max:10,text:"Финансы работают как приборная панель. Дальше это вопрос точности, а не наличия."}
+];
+
+var STORE="ff-koleso-web-v1", MAXV=10, LEVELS=5;
+var TOTAL=BLOCKS.reduce(function(s,b){return s+b.qs.length;},0);
+
+var state={
+  company:"",name:"",contact:"",
+  ans:BLOCKS.map(function(b){return b.qs.map(function(){return null;});}),
+  b:[8,8,8,8,8,8],
+  unlocked:false
+};
+
+var PRINT=false;
+var DARK={ring:"rgba(237,230,214,.13)",ringStrong:"rgba(237,230,214,.24)",ink3:"#8A7E6B",
+  line:"#C2A66A",fill:"rgba(194,166,106,.17)",goal:"#9A875C",panel:"#1B1814",bg:null};
+var LIGHT={ring:"#E0D7C6",ringStrong:"#C9BCA4",ink3:"#6A5F52",
+  line:"#8A6E2E",fill:"rgba(138,110,46,.15)",goal:"#8A7E6B",panel:"#FFFFFF",bg:"#FFFFFF"};
+
+function pal(){return PRINT?LIGHT:DARK;}
+function bandColor(v){
+  if(PRINT)return v<=3?"#9B4A36":(v<=6?"#8A6E2E":"#4E6A4A");
+  return v<=3?"#B07A66":(v<=6?"#C2A66A":"#86AE6E");
+}
+
+function scoreOf(i){var a=state.ans[i],y=0,k;for(k=0;k<a.length;k++)if(a[k]==="y")y++;return 10*y/a.length;}
+function scores(){return BLOCKS.map(function(b,i){return scoreOf(i);});}
+function avg(a){var s=0,i;for(i=0;i<a.length;i++)s+=a[i];return s/a.length;}
+function bandIndex(v){return v<3?0:(v<6?1:(v<9?2:3));}
+function plural(n,o,f,m){var a=n%10,b=n%100;if(a===1&&b!==11)return o;if(a>=2&&a<=4&&(b<12||b>14))return f;return m;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function counts(){
+  var c={ans:0,yes:0,unk:0,no:0,total:TOTAL};
+  state.ans.forEach(function(a){a.forEach(function(v){
+    if(v)c.ans++; if(v==="y")c.yes++; if(v==="u")c.unk++; if(v==="n")c.no++;});});
+  return c;
+}
+
+/* ---------- колесо ---------- */
+function drawWheel(ctx,size,opts){
+  opts=opts||{};
+  var P=pal();
+  var pad=size*(opts.tight?.185:.19), cx=size/2, cy=size/2, R=size/2-pad;
+  var n=BLOCKS.length, vals=scores();
+  var ang=function(i){return -Math.PI/2+i*2*Math.PI/n;};
+  var pt=function(i,v){var r=R*(v/MAXV);return [cx+r*Math.cos(ang(i)),cy+r*Math.sin(ang(i))];};
+  var i,p,lvl;
+
+  var bg=opts.bg||P.bg;
+  if(bg){ctx.fillStyle=bg;ctx.fillRect(0,0,size,size);}else ctx.clearRect(0,0,size,size);
+
+  for(lvl=1;lvl<=LEVELS;lvl++){
+    var rr=R*lvl/LEVELS;
+    ctx.beginPath();
+    for(i=0;i<n;i++){var x=cx+rr*Math.cos(ang(i)),y=cy+rr*Math.sin(ang(i));if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}
+    ctx.closePath();
+    ctx.strokeStyle=lvl===LEVELS?P.ringStrong:P.ring;
+    ctx.lineWidth=lvl===LEVELS?size*.0028:size*.0016;
+    ctx.stroke();
+  }
+  ctx.beginPath();ctx.arc(cx,cy,R*1.045,0,Math.PI*2);
+  ctx.strokeStyle=P.ring;ctx.lineWidth=size*.0016;ctx.stroke();
+
+  for(i=0;i<n;i++){ctx.beginPath();ctx.moveTo(cx,cy);p=pt(i,MAXV);ctx.lineTo(p[0],p[1]);
+    ctx.strokeStyle=P.ring;ctx.lineWidth=size*.0016;ctx.stroke();}
+
+  ctx.save();
+  ctx.setLineDash([size*.012,size*.012]);
+  ctx.beginPath();
+  for(i=0;i<n;i++){p=pt(i,state.b[i]);if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);}
+  ctx.closePath();ctx.strokeStyle=P.goal;ctx.lineWidth=size*.0026;ctx.stroke();
+  ctx.restore();
+
+  ctx.beginPath();
+  for(i=0;i<n;i++){p=pt(i,vals[i]);if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);}
+  ctx.closePath();
+  ctx.fillStyle=P.fill;ctx.fill();
+  ctx.strokeStyle=P.line;ctx.lineWidth=size*.0036;ctx.lineJoin="round";ctx.stroke();
+
+  for(i=0;i<n;i++){p=pt(i,vals[i]);
+    ctx.beginPath();ctx.arc(p[0],p[1],size*.0105,0,Math.PI*2);
+    ctx.fillStyle=bandColor(vals[i]);ctx.fill();
+    ctx.lineWidth=size*.0026;ctx.strokeStyle=P.panel;ctx.stroke();}
+
+  var ns=Math.round(size*.030);
+  for(i=0;i<n;i++){
+    var a=ang(i), lx=cx+R*1.07*Math.cos(a), ly=cy+R*1.07*Math.sin(a);
+    var cv=Math.cos(a), sv=Math.sin(a);
+    ctx.textAlign=Math.abs(cv)<.25?"center":(cv>0?"left":"right");
+    ctx.textBaseline="middle";
+    var dy=Math.abs(cv)<.25?(sv<0?-ns*.55:ns*.15):-ns*.42;
+    ctx.fillStyle=P.ink3;
+    ctx.font="500 "+ns+'px "Manrope",system-ui,sans-serif';
+    ctx.fillText(BLOCKS[i].name,lx,ly+dy);
+    ctx.fillStyle=bandColor(vals[i]);
+    ctx.font="500 "+ns+'px "IBM Plex Mono",monospace';
+    ctx.fillText(vals[i].toFixed(1),lx,ly+dy+ns*1.12);
+  }
+}
+
+function renderCanvas(){
+  var c=document.getElementById("wheel");
+  var w=Math.max(260,Math.round(c.getBoundingClientRect().width||400));
+  var dpr=Math.min(window.devicePixelRatio||1,3);
+  c.width=w*dpr;c.height=w*dpr;c.style.height=w+"px";
+  var ctx=c.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  drawWheel(ctx,w,{});
+}
+
+/* ---------- вопросы ---------- */
+function buildBlocks(){
+  var host=document.getElementById("blocks");
+  host.innerHTML=BLOCKS.map(function(blk,bi){
+    var qs=blk.qs.map(function(q,qi){
+      return '<div class="q" id="q-'+bi+'-'+qi+'">'+
+        '<div class="qt">'+esc(q[0])+(q[1]?'<span class="qn">'+esc(q[1])+'</span>':'')+'</div>'+
+        '<div class="seg" role="group">'+
+          '<button type="button" class="y" data-b="'+bi+'" data-q="'+qi+'" data-v="y" aria-pressed="false">Да</button>'+
+          '<button type="button" class="u" data-b="'+bi+'" data-q="'+qi+'" data-v="u" aria-pressed="false">Не знаю</button>'+
+          '<button type="button" class="n" data-b="'+bi+'" data-q="'+qi+'" data-v="n" aria-pressed="false">Нет</button>'+
+        '</div></div>';
+    }).join("");
+    return '<section class="block" id="blk-'+bi+'">'+
+      '<div class="bhead">'+
+        '<div class="btitle"><span class="bname">'+blk.name+'</span><span class="bsub">'+blk.sub+'</span></div>'+
+        '<div class="bscore"><span class="v" id="bs-'+bi+'">0.0</span><span class="d" id="bd-'+bi+'"></span></div>'+
+        '<div class="goalrow"><span class="tg">Точка Б</span>'+
+          '<input type="range" min="0" max="10" step="1" id="goal-'+bi+'" aria-label="Цель по сфере '+blk.name+'">'+
+          '<span class="vl" id="gv-'+bi+'"></span></div>'+
+      '</div>'+
+      '<div class="qs">'+qs+'</div>'+
+      '<p class="bhint">'+blk.hint+'</p></section>';
+  }).join("");
+
+  BLOCKS.forEach(function(blk,bi){
+    var g=document.getElementById("goal-"+bi);
+    g.value=state.b[bi];
+    g.addEventListener("input",function(){state.b[bi]=parseInt(g.value,10);update();});
+  });
+
+  host.addEventListener("click",function(e){
+    var btn=e.target.closest("button[data-v]");
+    if(!btn)return;
+    var bi=+btn.dataset.b, qi=+btn.dataset.q, v=btn.dataset.v;
+    state.ans[bi][qi]=state.ans[bi][qi]===v?null:v;
+    var row=document.getElementById("q-"+bi+"-"+qi);
+    row&&row.classList.remove("hl");
+    update();
+  });
+}
+
+function syncBlocks(){
+  BLOCKS.forEach(function(blk,bi){
+    var sc=scoreOf(bi);
+    var yes=state.ans[bi].filter(function(v){return v==="y";}).length;
+    var el=document.getElementById("bs-"+bi);
+    el.textContent=sc.toFixed(1);el.style.color=bandColor(sc);
+    document.getElementById("bd-"+bi).textContent=yes+" / "+blk.qs.length+" закрыто";
+    document.getElementById("gv-"+bi).textContent=state.b[bi];
+    document.getElementById("goal-"+bi).value=state.b[bi];
+    blk.qs.forEach(function(q,qi){
+      var cur=state.ans[bi][qi];
+      var row=document.getElementById("q-"+bi+"-"+qi);
+      row.classList.toggle("done",!!cur);
+      row.querySelectorAll("button[data-v]").forEach(function(b){
+        b.setAttribute("aria-pressed",b.dataset.v===cur?"true":"false");});
+    });
+  });
+}
+
+/* ---------- разбор ---------- */
+function renderReview(){
+  var host=document.getElementById("review"), c=counts();
+  if(c.ans===0){
+    host.innerHTML='<h2 class="h2">Разбор по сферам</h2><p class="sub">Появится после ответов.</p>';return;
+  }
+  var rows=BLOCKS.map(function(blk,bi){
+    var a=state.ans[bi];
+    var yes=a.filter(function(v){return v==="y";}).length;
+    var unk=a.filter(function(v){return v==="u";}).length;
+    var done=a.filter(function(v){return !!v;}).length;
+    var sc=scoreOf(bi), text, blind="";
+    if(done===0){
+      text="Сфера не заполнена. Пока по ней нет ни одного ответа, оценка 0 означает отсутствие данных, а не отсутствие системы.";
+    }else{
+      text=blk.verdicts[bandIndex(sc)];
+      if(done<a.length)text+=" Отвечено "+done+" из "+a.length+", вывод предварительный.";
+      if(unk>0)blind='<span class="rvb">'+unk+" "+plural(unk,"ответ","ответа","ответов")+
+        " «не знаю»: здесь дело не в качестве бизнеса, а в видимости. То, что не измеряется, не управляется.</span>";
+    }
+    return '<div class="rv"><span class="rvs" style="color:'+bandColor(sc)+'">'+sc.toFixed(1)+'</span>'+
+      '<div class="rvt"><span class="rvn">'+blk.name+'</span><span class="rvc">'+yes+" из "+a.length+' закрыто</span></div>'+
+      '<p class="rvx">'+text+blind+'</p></div>';
+  }).join("");
+  host.innerHTML='<h2 class="h2">Разбор по сферам</h2>'+
+    '<p class="sub">Что происходит с бизнесом внутри каждой из шести сфер, исходя из ваших ответов. Читать сверху вниз: сферы стоят в том порядке, в котором деньги проходят через компанию.</p>'+
+    '<div class="rvlist">'+rows+'</div>';
+}
+
+function renderReadout(){
+  var vals=scores(), idx=avg(vals), c=counts(), i;
+  document.getElementById("idxNum").textContent=idx.toFixed(1);
+  document.getElementById("pAns").textContent=c.ans;
+  document.getElementById("pTotal").textContent=c.total;
+  document.getElementById("pYes").textContent=c.yes;
+  document.getElementById("pUnk").textContent=c.unk;
+  document.getElementById("barFill").style.width=Math.round(100*c.ans/c.total)+"%";
+
+  var v=VERDICTS[0];
+  for(i=0;i<VERDICTS.length;i++){if(idx<=VERDICTS[i].max){v=VERDICTS[i];break;}}
+  document.getElementById("idxVerdict").textContent=
+    c.ans===0?"Ответьте на вопросы, колесо соберется само.":v.text;
+
+  var weak=0;for(i=1;i<vals.length;i++)if(vals[i]<vals[weak])weak=i;
+  var gapI=0,gapV=-Infinity;
+  for(i=0;i<vals.length;i++){var g=state.b[i]-vals[i];if(g>gapV){gapV=g;gapI=i;}}
+  var blindI=0,blindMax=-1;
+  BLOCKS.forEach(function(blk,bi){
+    var u=state.ans[bi].filter(function(x){return x==="u";}).length;
+    if(u>blindMax){blindMax=u;blindI=bi;}});
+
+  var mn=Math.min.apply(null,vals), mx=Math.max.apply(null,vals), sp=mx-mn;
+  var shape=sp<=2?"Ровное":(sp<=5?"С провалом":"Рваное");
+  var shapeText=sp<=2
+    ?"Сферы подтянуты друг к другу. Здесь работает не латание дыры, а общий подъем уровня: следующий шаг это регулярность, а не отдельная сфера."
+    :(sp<=5
+      ?"Одна или две проваленные сферы на фоне остальных. Самый частый рисунок и самый благодарный: подъем одной сферы даст больше, чем равномерное улучшение всего."
+      :"Разброс больше пяти баллов. Сильные сферы в этом случае обманывают: они держатся на ручном режиме и посыпятся первыми, когда упрется слабая.");
+
+  var blindCard=blindMax>0
+    ?'<p class="big">'+BLOCKS[blindI].name+" · "+blindMax+" "+plural(blindMax,"ответ","ответа","ответов")+' «не знаю»</p>'+
+     '<p>Всего по замеру '+c.unk+" "+plural(c.unk,"вопрос","вопроса","вопросов")+' без ответа по существу. Это не оценка бизнеса, это оценка видимости: собственник не может управлять тем, чего не измеряет. Слепые зоны закрываются быстрее всего, потому что чаще всего цифра уже есть, ее просто никто не сводит.</p>'
+    :(c.ans===0
+      ?'<p class="big">Замер не начат</p><p>Слепые зоны появятся здесь, как только в ответах будет «не знаю».</p>'
+      :'<p class="big">Слепых зон нет</p><p>Ни одного «не знаю»: вы понимаете каждый вопрос и знаете по нему ответ. Это редкость и отдельный сильный сигнал.</p>');
+
+  document.getElementById("readout").innerHTML=
+   '<div class="card pin"><h3>Слабое звено</h3><p class="big">'+BLOCKS[weak].name+" · "+vals[weak].toFixed(1)+' из 10</p><p>'+
+     BLOCKS[weak].hint.replace(/<\/?b>/g,"")+'</p></div>'+
+   '<div class="card"><h3>Слепые зоны</h3>'+blindCard+'</div>'+
+   '<div class="card"><h3>Самый большой разрыв до точки Б</h3><p class="big">'+BLOCKS[gapI].name+" · "+
+     (gapV>0?"+"+gapV.toFixed(1):"разрыва нет")+'</p><p>'+
+     (gapV>0?"Сюда уйдет больше всего усилий. Если разрыв больше четырех баллов, точка Б поставлена скорее на год, чем на квартал."
+            :"Точка Б не выше текущего состояния. Поднимите цель хотя бы по одной сфере, иначе замер не показывает направление.")+'</p></div>'+
+   '<div class="card"><h3>Форма колеса</h3><p class="big">'+shape+'</p><p>'+shapeText+'</p></div>';
+}
+
+function renderPlan(){
+  var host=document.getElementById("plan"), c=counts();
+  var groups=BLOCKS.map(function(blk,bi){
+    var items=[];
+    blk.qs.forEach(function(q,qi){
+      var a=state.ans[bi][qi];
+      if(a==="n"||a==="u")items.push({v:a,t:q[0],w:q[2]});});
+    return {name:blk.name,items:items};
+  }).filter(function(g){return g.items.length;});
+
+  var body;
+  if(c.ans===0)body='<p class="pempty">Появится после ответов.</p>';
+  else if(!groups.length)body='<p class="pempty">Все вопросы закрыты ответом «да». Проверьте, не слишком ли мягко шла оценка: закрытым считается вопрос, ответ на который подтверждается документом, а не ощущением.</p>';
+  else body=groups.map(function(g){
+    return '<div class="pgroup"><h4>'+g.name+'</h4>'+g.items.map(function(it){
+      return '<div class="pi"><span class="mk '+it.v+'">'+(it.v==="n"?"нет":"не знаю")+'</span>'+
+        '<span class="piq">'+esc(it.t)+'</span>'+
+        '<p class="piw"><b>Что даст закрытие</b>'+esc(it.w)+'</p></div>';
+    }).join("")+'</div>';
+  }).join("");
+
+  host.innerHTML='<h2 class="h2">Что не закрыто</h2>'+
+    '<p class="sub">Все вопросы с ответом «нет» и «не знаю», сгруппированные по сферам, и под каждым то, что бизнес получит, если этот пункт закрыть. Это и есть план работ: сверху вниз, начиная со слабейшей сферы.</p>'+
+    body;
+}
+
+/* ---------- сохранение ---------- */
+function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
+function load(){
+  try{
+    var raw=localStorage.getItem(STORE);if(!raw)return;
+    var s=JSON.parse(raw);
+    if(!s||!Array.isArray(s.ans)||s.ans.length!==BLOCKS.length)return;
+    var ok=BLOCKS.every(function(b,i){return Array.isArray(s.ans[i])&&s.ans[i].length===b.qs.length;});
+    if(!ok)return;
+    state.ans=s.ans;
+    if(Array.isArray(s.b)&&s.b.length===6)state.b=s.b;
+    state.company=s.company||"";state.name=s.name||"";state.contact=s.contact||"";
+    state.unlocked=!!s.unlocked;
+  }catch(e){}
+}
+
+/* ---------- гейт ---------- */
+function firstUnanswered(){
+  for(var bi=0;bi<BLOCKS.length;bi++)
+    for(var qi=0;qi<BLOCKS[bi].qs.length;qi++)
+      if(!state.ans[bi][qi])return [bi,qi];
+  return null;
+}
+
+function unlock(){
+  state.unlocked=true;save();
+  document.getElementById("lockwrap").classList.remove("locked");
+  document.getElementById("lockmsg").style.display="none";
+  document.getElementById("final").style.display="";
+  document.getElementById("gate").style.display="none";
+}
+
+function answersText(){
+  var out=[];
+  BLOCKS.forEach(function(blk,bi){
+    out.push("");
+    out.push(blk.name.toUpperCase()+" — "+scoreOf(bi).toFixed(1)+"/10 (цель "+state.b[bi]+")");
+    blk.qs.forEach(function(q,qi){
+      var a=state.ans[bi][qi];
+      out.push("  ["+(a==="y"?"да":a==="n"?"НЕТ":a==="u"?"НЕ ЗНАЮ":"—")+"] "+q[0]);
+    });
+  });
+  return out.join("\n");
+}
+
+async function sendLead(){
+  if(!FORM_ENDPOINT||!FORM_KEY)return true;
+  var c=counts();
+  var head="[КОЛЕСО ФИНЗДОРОВЬЯ · Founder Finance]\n"+
+    "Имя: "+(state.name||"—")+"\nКомпания: "+(state.company||"—")+"\nКонтакт: "+(state.contact||"—")+"\n\n"+
+    "Индекс: "+avg(scores()).toFixed(1)+"/10\n"+
+    "Закрыто: "+c.yes+" из "+c.total+" · нет: "+c.no+" · не знаю: "+c.unk+"\n"+
+    BLOCKS.map(function(b,i){return b.name+" "+scoreOf(i).toFixed(1);}).join(" · ");
+  var data={
+    access_key:FORM_KEY,
+    subject:"Колесо финздоровья — "+(state.company||state.name||"заявка"),
+    from_name:"Founder Finance · колесо",
+    name:state.name||"Колесо финздоровья",
+    message:head+"\n"+answersText()
+  };
+  if(/@/.test(state.contact))data.replyto=state.contact;
+  try{
+    var r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});
+    return r.ok;
+  }catch(e){return false;}
+}
+
+/* ---------- PNG ---------- */
+function exportPNG(){
+  var S=1400,titleSpace=190,footer=96;
+  var out=document.createElement("canvas");
+  out.width=S;out.height=S+titleSpace+footer;
+  var ctx=out.getContext("2d"), c=counts();
+  var wasPrint=PRINT;PRINT=false;
+  var P=pal(), bg="#131210";
+
+  ctx.fillStyle=bg;ctx.fillRect(0,0,out.width,out.height);
+  ctx.textAlign="left";ctx.textBaseline="alphabetic";
+  ctx.fillStyle="#C2A66A";
+  ctx.font='500 22px "IBM Plex Mono",monospace';
+  ctx.fillText("FOUNDER FINANCE · КОЛЕСО ФИНАНСОВОГО ЗДОРОВЬЯ",90,78);
+  ctx.fillStyle="#EDE6D6";
+  ctx.font='600 54px "Playfair Display",Georgia,serif';
+  ctx.fillText(state.company||"Ваша компания",90,142);
+  var sub=["индекс "+avg(scores()).toFixed(1)+" из 10",c.yes+" из "+c.total+" закрыто"];
+  if(c.unk)sub.push(c.unk+" не знаю");
+  ctx.fillStyle="#B0A48D";
+  ctx.font='400 26px "Manrope",system-ui,sans-serif';
+  ctx.fillText(sub.join("   ·   "),90,182);
+
+  ctx.save();ctx.translate(0,titleSpace);
+  drawWheel(ctx,S,{tight:true,bg:bg});
+  ctx.restore();
+
+  var ly=S+titleSpace+48;
+  ctx.strokeStyle="#C2A66A";ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(90,ly-7);ctx.lineTo(132,ly-7);ctx.stroke();
+  ctx.fillStyle="#8A7E6B";ctx.font='400 22px "IBM Plex Mono",monospace';
+  ctx.fillText("ТОЧКА А, КАК СЕЙЧАС",146,ly);
+  ctx.save();ctx.setLineDash([9,9]);ctx.strokeStyle="#9A875C";ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(470,ly-7);ctx.lineTo(512,ly-7);ctx.stroke();ctx.restore();
+  ctx.fillText("ТОЧКА Б, КУДА ИДЕМ",526,ly);
+  ctx.fillText("SYCHINNIKOV.COM/FOUNDERFINANCE",90,ly+40);
+
+  PRINT=wasPrint;
+  out.toBlob(function(blob){
+    var url=URL.createObjectURL(blob), a=document.createElement("a");
+    a.href=url;a.download="koleso-finzdorovya.png";
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  },"image/png");
+}
+
+/* ---------- сообщения ---------- */
+var tT=null;
+function toast(m){
+  var el=document.getElementById("toast");
+  el.textContent=m;el.classList.add("show");
+  clearTimeout(tT);tT=setTimeout(function(){el.classList.remove("show");},2600);
+}
+
+/* ---------- цикл ---------- */
+function update(){
+  syncBlocks();renderCanvas();renderReview();renderReadout();renderPlan();
+  var left=TOTAL-counts().ans;
+  var hint=document.getElementById("ghint");
+  if(!state.unlocked)hint.textContent=left>0
+    ?"Осталось "+left+" "+plural(left,"вопрос","вопроса","вопросов")+". Нажмите кнопку, я подсвечу первый без ответа."
+    :"Все 43 вопроса закрыты. Можно открывать разбор.";
+  save();
+}
+
+function init(){
+  load();
+  buildBlocks();
+
+  if(state.company)document.getElementById("gcompany").value=state.company;
+  if(state.name)document.getElementById("gname").value=state.name;
+  if(state.contact)document.getElementById("gcontact").value=state.contact;
+
+  update();
+  if(state.unlocked)unlock();
+
+  document.getElementById("gform").addEventListener("submit",async function(e){
+    e.preventDefault();
+    if(document.getElementById("botcheck").checked)return;
+
+    var miss=firstUnanswered();
+    if(miss){
+      var row=document.getElementById("q-"+miss[0]+"-"+miss[1]);
+      row.classList.add("hl");
+      row.scrollIntoView({block:"center",behavior:"smooth"});
+      toast("Остались вопросы без ответа");
+      return;
+    }
+
+    state.name=document.getElementById("gname").value.trim();
+    state.company=document.getElementById("gcompany").value.trim();
+    state.contact=document.getElementById("gcontact").value.trim();
+
+    var ce=document.getElementById("gcontact");
+    if(!state.contact){ce.focus();ce.style.borderColor="var(--no)";return;}
+    ce.style.borderColor="";
+
+    var gate=document.getElementById("gate");
+    gate.classList.add("sending");
+    var ok=await sendLead();
+    gate.classList.remove("sending");
+
+    unlock();
+    if(!ok)document.getElementById("gerr").style.display="block";
+    document.getElementById("result").scrollIntoView({behavior:"smooth",block:"start"});
+    toast("Разбор открыт");
+  });
+
+  document.getElementById("btnPng").addEventListener("click",exportPNG);
+  // колесо рисуется на canvas, поэтому под печать его надо перерисовать светлым.
+  // beforeprint поддержан не везде, поэтому кнопка переключает палитру сама.
+  document.getElementById("btnPdf").addEventListener("click",function(){
+    PRINT=true;renderCanvas();
+    setTimeout(function(){window.print();},60);
+    setTimeout(function(){PRINT=false;renderCanvas();},3000);
+  });
+
+  window.addEventListener("beforeprint",function(){PRINT=true;renderCanvas();});
+  window.addEventListener("afterprint",function(){PRINT=false;renderCanvas();});
+
+  var rt=null;
+  window.addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(renderCanvas,120);});
+}
+
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);
+else init();
+})();
+</script>
+</body>
+</html>
