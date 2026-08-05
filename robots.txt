@@ -2,7 +2,8 @@
 # Публично открыт раздел /foundertrajectory/ (продукт Founder Trajectory).
 # /founderfinance/ — тестовый лендинг под платный трафик: краулинг разрешён (для превью ссылок),
 #   но индексация выключена через meta noindex на самой странице.
-# /koleso/ — тот же инструмент отдельной ссылкой для рассылки, без привязки к сайту.
+# /founderfinance/tool/ и /koleso/ — тот же инструмент отдельной ссылкой для рассылки,
+#   без привязки к сайту. /koleso/ заработает после bypass-политики в Cloudflare Access.
 # Остальное (finance, tasks, contacts, decisions, wisdom, system) остаётся закрытым.
 
 User-agent: *

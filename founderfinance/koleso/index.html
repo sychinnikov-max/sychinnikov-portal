@@ -1489,7 +1489,10 @@ function update(){
 function init(){
   // страница живет по двум адресам: внутри сайта и отдельной ссылкой для рассылки.
   // во втором случае ссылки на сайт прячем, единственный выход это личный Telegram
-  var standalone=location.pathname.indexOf("/founderfinance/")!==0;
+  // режим сайта только по «родному» адресу внутри лендинга.
+  // по всем остальным адресам (/koleso/, /founderfinance/tool/) это
+  // автономный инструмент для рассылки: ссылок на сайт нет
+  var standalone=!/^\/founderfinance\/koleso\/?$/.test(location.pathname);
   if(standalone){
     document.querySelectorAll(".sitelink").forEach(function(el){el.style.display="none";});
     document.querySelectorAll(".tgonly").forEach(function(el){el.style.display="";});
