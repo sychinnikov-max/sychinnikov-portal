@@ -69,12 +69,26 @@ a:hover{text-decoration:underline}
 .colhead h2{margin:0;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:700}
 .colhead .sub{font-size:.72rem;color:var(--soft);margin-top:.15rem}
 
-/* ── комнаты ── */
+/* ── папки сред и комнаты ── */
 .rooms{padding:.55rem}
+.folder{
+  width:100%;text-align:left;display:block;padding:.55rem .6rem;border-radius:var(--r-s);
+  border:1px solid var(--line);background:var(--panel);margin-bottom:.3rem;
+  transition:background .13s,border-color .13s;
+}
+.folder:hover{border-color:var(--line2)}
+.folder.on{background:var(--panel2);border-color:var(--gold-dim)}
+.folder .fh{display:flex;align-items:center;gap:.4rem}
+.folder .caret{color:var(--gold);font-size:.7rem;width:.8em}
+.folder .fn{font-size:.92rem;font-weight:700;letter-spacing:.01em}
+.folder .fc{margin-left:auto;font-family:var(--mono);font-size:.7rem;color:var(--soft)}
+.folder .fire{color:var(--fire);font-size:.72rem;font-family:var(--mono)}
+.nest{margin:0 0 .45rem .55rem;padding-left:.5rem;border-left:1px solid var(--line)}
 .room{
   width:100%;text-align:left;display:block;padding:.6rem .65rem;border-radius:var(--r-s);
   border:1px solid transparent;margin-bottom:.3rem;transition:background .13s,border-color .13s;
 }
+.room.all{border:1px solid var(--line);background:var(--panel)}
 .room:hover{background:var(--panel)}
 .room.on{background:var(--panel2);border-color:var(--gold-dim)}
 .room .rt{display:flex;align-items:center;gap:.4rem;font-size:.86rem;font-weight:600;line-height:1.25}
@@ -120,6 +134,8 @@ canvas.drag{cursor:grabbing}
 .rblock{padding:.7rem .75rem .8rem;border-bottom:1px solid var(--line);background:var(--panel)}
 .rb-top{display:flex;align-items:flex-start;gap:.45rem;justify-content:space-between}
 .rb-name{font-size:.95rem;font-weight:650;line-height:1.25}
+.rb-env{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.rb-warn{margin-top:.45rem;font-size:.7rem;color:var(--muted);background:#2A2115;border:1px solid var(--gold-dim);border-radius:var(--r-s);padding:.35rem .5rem}
 .rb-nums{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.45rem;font-size:.7rem;color:var(--soft)}
 .rb-nums b{font-family:var(--mono);font-size:.82rem;color:var(--ink);margin-right:.15rem}
 .rb-nums .fire b{color:var(--fire)}
@@ -286,6 +302,7 @@ var DATA = null;
 var ROOM_BY_ID = {};
 var S = {
   hub: 'room',            // по чему собираем связки: комната, ниша, гео, уровень, роль
+  env: null,              // выбранная среда (папка комнат)
   room: null,             // выбранная комната (фильтр)
   sel: null,              // выбранный человек
   q: '',
@@ -321,6 +338,7 @@ var ROLE_NAME = {
 };
 var KIND_NAME = { desyatka: 'десятка', forum: 'форум', country: 'страна', service: 'сервис' };
 var HUBS = [
+  { k: 'env', t: 'по средам' },
   { k: 'room', t: 'по комнатам' },
   { k: 'niche', t: 'по нишам' },
   { k: 'geo', t: 'по гео' },
@@ -400,6 +418,7 @@ function visible() {
     if (!p.classified) return false;
     if (S.hot && !p.hot) return false;
     if (S.neighbor && !p.neighbor) return false;
+    if (S.env && (p.envs || []).indexOf(S.env) === -1) return false;
     if (S.room && p.rooms.indexOf(S.room) === -1) return false;
     if (S.geo && (p.geo || '') !== S.geo) return false;
     if (S.hideDone && markOf(p)) return false;
@@ -421,6 +440,7 @@ function visible() {
 }
 
 function hubKey(p) {
+  if (S.hub === 'env') return 'e' + ((p.envs || [])[0] || '—');
   if (S.hub === 'room') return p.main_room != null ? 'r' + p.main_room : null;
   if (S.hub === 'niche') return p.niche ? 'n' + p.niche : 'n—';
   if (S.hub === 'geo') return p.geo ? 'g' + p.geo : 'g—';
@@ -429,49 +449,82 @@ function hubKey(p) {
 }
 function hubLabel(key) {
   var v = key.slice(1);
+  if (S.hub === 'env') return v === '—' ? 'без среды' : envTitle(v);
   if (S.hub === 'room') return (ROOM_BY_ID[+v] || {}).title || 'комната';
   if (S.hub === 'tier') return TIER_NAME[v] || v;
   if (S.hub === 'role') return ROLE_NAME[v] || v;
   return v === '—' ? 'не определено' : v;
 }
 
-// ── левая колонка: комнаты ──────────────────────────────────────────────
+// ── левая колонка: папки сред и комнаты внутри ──────────────────────────
 function renderRooms() {
   var box = slot('rooms');
-  var rooms = DATA.rooms.slice().sort(function (a, b) {
-    return (b.fit || 0) - (a.fit || 0) || b.msgs - a.msgs;
-  });
-  slot('rooms.sub').textContent = rooms.length + ' комнат · отсортированы по пригодности';
+  var envs = DATA.envs && DATA.envs.length ? DATA.envs : [{ key: null, title: 'Все', rooms: DATA.rooms.length }];
+  slot('rooms.sub').textContent = envs.length + ' среды · ' + DATA.rooms.length + ' комнат';
   box.innerHTML = '';
 
   var all = document.createElement('button');
-  all.className = 'room' + (S.room === null ? ' on' : '');
-  all.innerHTML = '<span class="rt">Все комнаты</span><span class="rm">' +
-    DATA.people.length + ' разобранных людей · ' + DATA.stats.messages + ' сообщений</span>';
-  all.onclick = function () { S.room = null; S.sel = null; renderRooms(); renderRight(); rebuildGraph(); };
+  all.className = 'room all' + (S.env === null && S.room === null ? ' on' : '');
+  all.innerHTML = '<span class="rt">Все среды</span><span class="rm">' +
+    DATA.people.length + ' разобранных · ' + DATA.stats.messages + ' сообщений</span>';
+  all.onclick = function () {
+    S.env = null; S.room = null; S.sel = null;
+    renderRooms(); renderRight(); rebuildGraph();
+  };
   box.appendChild(all);
 
-  rooms.forEach(function (r) {
-    var b = document.createElement('button');
-    b.className = 'room' + (S.room === r.id ? ' on' : '');
-    b.title = r.summary || '';
-    b.innerHTML =
-      '<span class="rt">' + esc(r.title) +
-        (r.hot ? ' <span class="fire">🔥' + r.hot + '</span>' : '') + '</span>' +
-      '<span class="rm">' +
-        '<span class="kind ' + r.kind + '">' + (KIND_NAME[r.kind] || r.kind) + '</span>' +
-        '<span>' + r.per_day + '/день</span>' +
-        '<span>' + r.authors + ' авторов</span>' +
-        '<span>фит ' + r.fit + '</span>' +
-      '</span>' +
-      '<span class="fitbar"><i style="width:' + Math.max(2, r.fit) + '%"></i></span>';
-    b.onclick = function () {
-      S.room = (S.room === r.id) ? null : r.id;
-      S.sel = null;
+  envs.forEach(function (e) {
+    var open = S.env === e.key;
+    var f = document.createElement('button');
+    f.className = 'folder' + (open ? ' on' : '');
+    f.innerHTML =
+      '<span class="fh"><span class="caret">' + (open ? '▾' : '▸') + '</span>' +
+      '<span class="fn">' + esc(e.title) + '</span>' +
+      (e.hot ? '<span class="fire">🔥' + e.hot + '</span>' : '') +
+      '<span class="fc">' + e.rooms + '</span></span>' +
+      '<span class="rm"><span>' + e.people + ' людей</span>' +
+      '<span>ядро A ' + e.a + '</span><span>B ' + e.b + '</span>' +
+      '<span>' + e.msgs + ' сообщ.</span></span>';
+    f.onclick = function () {
+      // Повторный клик по раскрытой папке сворачивает ее и снимает фильтр.
+      S.env = open ? null : e.key;
+      S.room = null; S.sel = null;
       renderRooms(); renderRight(); rebuildGraph();
     };
-    box.appendChild(b);
+    box.appendChild(f);
+
+    if (!open) return;
+
+    var inner = document.createElement('div');
+    inner.className = 'nest';
+    DATA.rooms
+      .filter(function (r) { return r.env === e.key; })
+      .sort(function (a, b) { return (b.fit || 0) - (a.fit || 0) || b.msgs - a.msgs; })
+      .forEach(function (r) { inner.appendChild(roomButton(r)); });
+    box.appendChild(inner);
   });
+}
+
+function roomButton(r) {
+  var b = document.createElement('button');
+  b.className = 'room' + (S.room === r.id ? ' on' : '');
+  b.title = r.summary || '';
+  b.innerHTML =
+    '<span class="rt">' + esc(r.title) +
+      (r.hot ? ' <span class="fire">🔥' + r.hot + '</span>' : '') + '</span>' +
+    '<span class="rm">' +
+      '<span class="kind ' + r.kind + '">' + (KIND_NAME[r.kind] || r.kind) + '</span>' +
+      '<span>' + r.per_day + '/день</span>' +
+      '<span>' + r.authors + ' авторов</span>' +
+      '<span>фит ' + r.fit + '</span>' +
+    '</span>' +
+    '<span class="fitbar"><i style="width:' + Math.max(2, r.fit) + '%"></i></span>';
+  b.onclick = function () {
+    S.room = (S.room === r.id) ? null : r.id;
+    S.sel = null;
+    renderRooms(); renderRight(); rebuildGraph();
+  };
+  return b;
 }
 
 // ── правая колонка ──────────────────────────────────────────────────────
@@ -482,10 +535,11 @@ function renderRight() {
 
   var head = document.createElement('div');
   head.className = 'colhead';
-  head.innerHTML = '<h2>' + (S.room ? 'Комната' : 'Фильтр') + '</h2>';
+  head.innerHTML = '<h2>' + (S.room ? 'Комната' : (S.env ? 'Среда' : 'Фильтр')) + '</h2>';
   host.appendChild(head);
 
   if (S.room && ROOM_BY_ID[S.room]) host.appendChild(roomBlock(ROOM_BY_ID[S.room]));
+  else if (S.env) host.appendChild(envBlock(S.env));
 
   var f = document.createElement('div');
   f.className = 'filters';
@@ -573,7 +627,8 @@ function roomBlock(r) {
 
   d.innerHTML =
     '<div class="rb-top">' +
-      '<div class="rb-name">' + esc(r.title) + '</div>' +
+      '<div><div class="rb-env">' + esc(envTitle(r.env)) + '</div>' +
+      '<div class="rb-name">' + esc(r.title) + '</div></div>' +
       '<span class="kind ' + r.kind + '">' + (KIND_NAME[r.kind] || r.kind) + '</span>' +
     '</div>' +
     '<div class="rb-nums">' +
@@ -583,6 +638,11 @@ function roomBlock(r) {
       (r.hot ? '<span class="fire"><b>' + r.hot + '</b> 🔥</span>' : '') +
       '<span><b>' + r.active_days + '</b> дн. живет</span>' +
     '</div>' +
+    // Честно про глубину: у части чатов история залита не на все окно, и
+    // ритм посчитан от первого прочитанного дня, а не от начала окна.
+    (r.covered_days && r.covered_days < (DATA.window || {}).days
+      ? '<div class="rb-warn">читаем с ' + esc(r.since) + ': история за окно залита не вся, ' +
+        'ритм посчитан по ' + r.covered_days + ' дн.</div>' : '') +
     '<div class="rb-fit"><span>пригодность ' + r.fit + '</span>' +
       '<span class="fitbar" style="flex:1"><i style="width:' + Math.max(2, r.fit) + '%"></i></span></div>' +
     (r.why ? '<div class="why">' + esc(r.why) + '</div>' : '') +
@@ -590,12 +650,54 @@ function roomBlock(r) {
     (themes ? '<div class="flab" style="margin-top:.5rem"><span>О чем говорят</span></div><div class="chips">' + themes + '</div>' : '') +
     (topics ? '<div class="flab" style="margin-top:.5rem"><span>Топики по объему</span></div><div class="chips">' + topics + '</div>' : '') +
     (r.etiquette ? '<div class="flab" style="margin-top:.5rem"><span>Как заходить</span></div><div class="rb-et">' + esc(r.etiquette) + '</div>' : '') +
-    '<button class="chip" data-act="allrooms" style="margin-top:.6rem">← все комнаты</button>';
+    '<button class="chip" data-act="allrooms" style="margin-top:.6rem">← вся среда «' +
+      esc(envTitle(r.env)) + '»</button>';
 
   d.querySelector('[data-act="allrooms"]').onclick = function () {
-    S.room = null; S.sel = null; renderRooms(); renderRight(); rebuildGraph();
+    S.env = r.env; S.room = null; S.sel = null;
+    renderRooms(); renderRight(); rebuildGraph();
   };
   return d;
+}
+
+// Паспорт среды: сколько комнат, сколько людей, где внутри огонь.
+// Отвечает на вопрос «нажал на папку — что я тут получил».
+function envBlock(key) {
+  var e = (DATA.envs || []).filter(function (x) { return x.key === key; })[0] || {};
+  var rooms = DATA.rooms.filter(function (r) { return r.env === key; })
+    .sort(function (a, b) { return (b.fit || 0) - (a.fit || 0); });
+  var d = document.createElement('div');
+  d.className = 'rblock';
+  d.innerHTML =
+    '<div class="rb-top"><div class="rb-name">' + esc(e.title || key) + '</div></div>' +
+    '<div class="rb-nums">' +
+      '<span><b>' + (e.rooms || 0) + '</b> комнат</span>' +
+      '<span><b>' + (e.people || 0) + '</b> людей</span>' +
+      '<span><b>' + (e.a || 0) + '</b> ядро A</span>' +
+      '<span><b>' + (e.b || 0) + '</b> B</span>' +
+      (e.hot ? '<span class="fire"><b>' + e.hot + '</b> 🔥</span>' : '') +
+      '<span><b>' + (e.msgs || 0) + '</b> сообщ.</span>' +
+    '</div>' +
+    '<div class="rb-fit"><span>лучшая комната ' + (e.fit || 0) + '</span>' +
+      '<span class="fitbar" style="flex:1"><i style="width:' + Math.max(2, e.fit || 0) + '%"></i></span></div>' +
+    (rooms.length ? '<div class="flab" style="margin-top:.5rem"><span>Комнаты по пригодности</span></div>' +
+      '<div class="chips">' + rooms.map(function (r) {
+        return '<button class="chip" data-room="' + r.id + '">' + esc(r.title) +
+          '<span class="n">' + r.fit + '</span></button>';
+      }).join('') + '</div>' : '');
+
+  Array.prototype.forEach.call(d.querySelectorAll('[data-room]'), function (b) {
+    b.onclick = function () {
+      S.room = +b.getAttribute('data-room'); S.sel = null;
+      renderRooms(); renderRight(); rebuildGraph();
+    };
+  });
+  return d;
+}
+
+function envTitle(key) {
+  var e = (DATA.envs || []).filter(function (x) { return x.key === key; })[0];
+  return e ? e.title : (key || 'без среды');
 }
 
 function grp(host, label) {
@@ -1062,7 +1164,15 @@ function onUp(e) {
       var n = drag.node;
       if (n.hub) {
         if (S.hub === 'room') {
-          S.room = +n.id.slice(1); S.sel = null; renderRooms(); renderRight(); rebuildGraph();
+          var rid = +n.id.slice(1);
+          S.env = (ROOM_BY_ID[rid] || {}).env || S.env;
+          S.room = rid; S.sel = null;
+          renderRooms(); renderRight(); rebuildGraph();
+        } else if (S.hub === 'env') {
+          var ek = n.id.slice(1);
+          S.env = ek === '—' ? null : ek;
+          S.room = null; S.sel = null;
+          renderRooms(); renderRight(); rebuildGraph();
         }
       } else { select(n.p); }
     }
