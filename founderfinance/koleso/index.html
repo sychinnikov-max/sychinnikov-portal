@@ -317,10 +317,49 @@ body.hasbar .block{scroll-margin-top:140px}
   .idxcard .num{display:inline-block;margin-right:6px}
   .idxcard .of{display:inline-block;margin-right:8px}
   .idxcard .vd{display:block;margin-top:4px}
-  h1{font-size:22pt;color:#1A1512}
-  .h2{font-size:15pt;color:#1A1512}
-  .eyebrow{color:#8A6E2E}
+  /* на экране все размеры в px и vw. в печати их надо задать в пунктах,
+     иначе Safari печатает первый экран огромным и режет таблицу сфер */
+  .eyebrow{font-size:8pt;letter-spacing:.12em;color:#8A6E2E}
+  h1{font-size:20pt;line-height:1.12;color:#1A1512}
+  .h2{font-size:14pt;color:#1A1512}
+  .lead{font-size:11pt;line-height:1.4;margin-top:3mm;max-width:none}
+  .sub{font-size:10.5pt;line-height:1.4;margin-top:2mm;max-width:none}
+  .note{font-size:9.5pt;line-height:1.4;margin-top:3mm;max-width:none}
   .lead,.sub,.note,.rvx,.card p,.piw,.rvc,.idxcard .vd{color:#4A4038}
+
+  /* обложка: одна колонка, компактная полоса сфер на три штуки в ряд */
+  .hero{padding:0 0 4mm}
+  .herorow{display:block}
+  .herolist{margin-top:4mm;gap:2mm;padding-left:4mm;border-left:1.5pt solid #C2A66A}
+  .herolist li{font-size:10.5pt;line-height:1.35;font-weight:400;padding-left:5mm;
+               color:#4A4038;max-width:none}
+  .herolist li::before{top:2.3mm;width:3mm;height:.4mm;background:#8A6E2E}
+  .spheres{grid-template-columns:repeat(3,1fr);margin-top:5mm}
+  .sph{padding:3mm 3.5mm}
+  .sph .n{font-size:11.5pt;line-height:1.15}
+  .sph .d{font-size:9pt;margin-top:.6mm}
+  .sph .c{font-size:8pt;margin-top:1.5mm}
+
+  /* остальные размеры в пунктах, чтобы файл не зависел от ширины окна */
+  .idxcard .num{font-size:22pt}
+  .idxcard .of{font-size:8pt}
+  .idxcard .vd{font-size:10pt;line-height:1.35}
+  .pfline{font-size:10pt}
+  .pfline b{font-size:7.5pt}
+  .rvs,.rvn{font-size:12pt}
+  .rvc{font-size:7.5pt}
+  .rvx{font-size:10pt;line-height:1.4}
+  .card h3{font-size:7.5pt}
+  .card .big{font-size:13pt}
+  .card p{font-size:10pt;line-height:1.4}
+  .pgroup h4{font-size:8.5pt}
+  .piq{font-size:10.5pt;line-height:1.35}
+  .piw{font-size:10pt;line-height:1.4}
+  .piw b{font-size:7.5pt}
+  .mk{font-size:7.5pt;min-width:17mm;padding:.4mm 1mm}
+
+  /* Safari по умолчанию не печатает фоны, просим явно */
+  body,.card,.idxcard,.spheres,.sph,.printcta,.mk,.am{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .idxcard{background:#F7F3EA;border-color:#D8CFC0}
   .idxcard .num{color:#8A6E2E}
   .sect{page-break-inside:auto;margin-top:8mm;padding-top:5mm}
@@ -571,7 +610,7 @@ body.hasbar .block{scroll-margin-top:140px}
       <button class="cta ghost" id="btnPng" type="button">Скачать колесо картинкой</button>
       <a class="cta ghost" href="https://t.me/Sychinnikov" target="_blank" rel="noopener">Написать в Telegram →</a>
     </div>
-    <p class="note" style="margin-top:16px">Кнопка PDF открывает окно печати. Выберите «Сохранить как PDF» и получите документ на несколько страниц.</p>
+    <p class="note" style="margin-top:16px">Кнопка PDF открывает окно печати. На Mac внизу слева нажмите «PDF» и выберите «Сохранить как PDF». Если сверху страницы печатается адрес и дата, снимите галочку «Печатать колонтитулы» в разделе «Показать подробности».</p>
   </div>
 
 </div></section>
