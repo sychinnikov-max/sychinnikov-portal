@@ -57,6 +57,7 @@ async function toTelegram(env, lead) {
   const lines = [
     '🔔 ЗАЯВКА С САЙТА',
     lead.subject || 'Founder Finance',
+    lead.suspect ? '⚠️ адрес похож на опечатку, письмо может вернуться' : null,
     '',
     lead.message || '',
     '',
@@ -65,13 +66,14 @@ async function toTelegram(env, lead) {
   ];
   if (lead.utm) lines.push('Метки: ' + lead.utm);
   if (lead.replyto) lines.push('Ответить: ' + lead.replyto);
+  const text = lines.filter((l) => l !== null).join('\n');
   try {
     const r = await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: env.TG_CHAT_ID,
-        text: shortenForTelegram(lines.join('\n')),
+        text: shortenForTelegram(text),
         disable_web_page_preview: true,
       }),
     });
@@ -99,6 +101,7 @@ async function toMail(env, lead) {
   const tail = [
     '',
     '---',
+    lead.suspect ? 'ВНИМАНИЕ: адрес похож на опечатку, письмо может вернуться' : null,
     'Страница: ' + (lead.page || 'неизвестна'),
     'Источник: ' + (lead.referrer || 'прямой заход'),
     lead.utm ? 'Метки: ' + lead.utm : null,
@@ -152,6 +155,8 @@ export async function onRequestPost({ request, env }) {
     page: cut(data.page, MAX_SHORT),
     referrer: cut(data.referrer, MAX_SHORT),
     utm: cut(data.utm, MAX_SHORT),
+    // Страница помечает адреса, в имени которых сидит чужой домен: почти всегда описка.
+    suspect: Boolean(data.suspect),
     ip: request.headers.get('CF-Connecting-IP') || null,
     country: (request.cf && request.cf.country) || null,
   };

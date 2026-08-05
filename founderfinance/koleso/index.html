@@ -30,27 +30,10 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/109611431" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-<!-- Yandex.Metrika counter · счетчик 109611431, тот же что на лендинге.
-     Цель на открытие разбора: lead_submit (совпадает с заявкой с лендинга,
-     потому что открытие разбора и есть оставленный контакт). -->
-<script>
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-   ym(109611431, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/109611431" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
 <!-- ============================================================
-     Founder Finance — колесо финансового здоровья (лид-магнит).
-     Дизайн-система: Founder Trajectory / лендинг /founderfinance/.
-     Стиль текстов: без ё, без тире.
-     Источник вопросов: диагностика Марии на разборе 04.08.2026, 43 вопроса, 6 сфер.
-     Гейт: разбор открывается после отправки контакта. Ответы уходят вместе с заявкой.
-     Рабочая версия для созвонов живет отдельно в Claude-Context/founder-finance/tools/.
+     Founder Finance — колесо финансового здоровья.
+     Дизайн-система: лендинг /founderfinance/. Стиль текстов: без е с точками, без тире.
+     Разбор открывается после отправки контакта.
      ============================================================ -->
 
 <style>
@@ -76,7 +59,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--fb);-webkit-font-sm
 
 a{color:inherit}
 .eyebrow{font-family:var(--fm);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
-h1{font-family:var(--fd);font-weight:600;font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
+h1{font-family:var(--fd);font-weight:600;font-size:clamp(29px,3.5vw,44px);line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
 .h2{font-family:var(--fd);font-weight:600;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:-.01em;text-wrap:balance}
 .h3{font-family:var(--fd);font-weight:600;font-size:clamp(21px,2vw,26px);line-height:1.2}
 .lead{font-size:clamp(17px,1.35vw,20px);color:var(--ink-muted);margin-top:16px;max-width:58ch;text-wrap:pretty}
@@ -109,14 +92,20 @@ p,li{text-wrap:pretty}
 .hero{padding:clamp(44px,6vw,84px) 0 clamp(30px,4vw,50px)}
 .herorow{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,64px);align-items:start}
 @media(max-width:940px){.herorow{grid-template-columns:1fr}}
-.herolist{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:9px}
-.herolist li{position:relative;padding-left:24px;color:var(--ink-muted);font-size:16px}
-.herolist li::before{content:"";position:absolute;left:2px;top:11px;width:9px;height:1.5px;background:var(--gold)}
-.spheres{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:4px;overflow:hidden}
-.sph{background:var(--card);padding:15px 16px}
-.sph .n{font-family:var(--fd);font-size:19px;font-weight:600}
-.sph .d{font-size:13px;color:var(--ink-dim);margin-top:2px}
-.sph .c{font-family:var(--fm);font-size:11px;color:var(--gold);letter-spacing:.08em;margin-top:6px}
+/* четыре пункта это главный аргумент первого экрана, поэтому они крупнее лида */
+.herolist{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:13px;
+          padding-left:20px;border-left:2px solid var(--hair-gold)}
+.herolist li{position:relative;padding-left:26px;color:var(--ink);font-size:18.5px;line-height:1.45;
+             font-weight:500;max-width:52ch}
+.herolist li::before{content:"";position:absolute;left:0;top:13px;width:13px;height:2px;background:var(--gold)}
+
+.spheres{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hair);
+         border:1px solid var(--hair-gold);border-radius:5px;overflow:hidden}
+.sph{background:var(--card);padding:22px 24px}
+.sph .n{font-family:var(--fd);font-size:26px;font-weight:600;line-height:1.15}
+.sph .d{font-size:16px;color:var(--ink-muted);margin-top:5px;line-height:1.35}
+.sph .c{font-family:var(--fm);font-size:13px;color:var(--gold);letter-spacing:.08em;margin-top:11px}
+@media(max-width:520px){.spheres{grid-template-columns:1fr}.sph{padding:17px 18px}.sph .n{font-size:23px}}
 
 /* ---------- рабочая часть ---------- */
 .grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:clamp(28px,3.5vw,54px);align-items:start}
@@ -614,6 +603,16 @@ var FORM_KEY="24d71a36-877d-46e1-9956-566f0dbb8d50";
 // Свой прием заявок: Телеграм сразу, журнал в KV, письмо как запасной след.
 // Код: functions/founderfinance/api/lead.js.
 var LEAD_ENDPOINT="/founderfinance/api/lead";
+
+// Ловушка на слепленный адрес. Заявка 01.08.2026 пришла с почтой вида
+// «Olga.nepo.pro@gmail.com»: рабочий адрес olga@nepo.pro приклеен к гуглопочте.
+// Формально такой адрес верный, поэтому проверка type=email его пропускает, а
+// письмо возвращается с ошибкой 550. Домен внутри имени почты это почти всегда описка.
+var TLD_IN_LOCAL=/\.(ru|com|pro|net|org|io|es|de|fr|it|kz|by|ua|uk|eu)(\.|$)/i;
+function looksMistyped(v){
+  var at=(v||"").indexOf("@");
+  return at>0 && TLD_IN_LOCAL.test(v.slice(0,at));
+}
 
 // Метки источника на сессию: utm теряются при первом переходе внутри сайта.
 var SRC=(function(){
@@ -1265,6 +1264,7 @@ async function sendLead(){
   payload.page=location.pathname+location.search;
   payload.referrer=SRC.referrer;
   payload.utm=SRC.utm;
+  payload.suspect=looksMistyped(state.email);
   try{
     var lr=await fetch(LEAD_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
     if(lr.ok){ try{ if(window.ym) ym(109611431,"reachGoal","lead_submit"); }catch(e){} return true; }
