@@ -116,6 +116,18 @@ canvas.drag{cursor:grabbing}
 .tip b{display:block;font-size:.82rem;margin-bottom:.1rem}
 .tip span{color:var(--soft);font-size:.7rem}
 
+/* ── паспорт комнаты ── */
+.rblock{padding:.7rem .75rem .8rem;border-bottom:1px solid var(--line);background:var(--panel)}
+.rb-top{display:flex;align-items:flex-start;gap:.45rem;justify-content:space-between}
+.rb-name{font-size:.95rem;font-weight:650;line-height:1.25}
+.rb-nums{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.45rem;font-size:.7rem;color:var(--soft)}
+.rb-nums b{font-family:var(--mono);font-size:.82rem;color:var(--ink);margin-right:.15rem}
+.rb-nums .fire b{color:var(--fire)}
+.rb-fit{display:flex;align-items:center;gap:.5rem;margin-top:.5rem;font-size:.7rem;color:var(--soft);font-family:var(--mono)}
+.rb-sum{font-size:.79rem;color:var(--muted);margin:.5rem 0 0;line-height:1.45}
+.rb-et{font-size:.76rem;color:var(--muted);line-height:1.4}
+.chip.gold{border-color:var(--gold-dim);color:var(--gold)}
+
 /* ── фильтры ── */
 .filters{padding:.6rem .75rem .2rem}
 .fgroup{margin-bottom:.7rem}
@@ -470,8 +482,10 @@ function renderRight() {
 
   var head = document.createElement('div');
   head.className = 'colhead';
-  head.innerHTML = '<h2>Фильтр</h2>';
+  head.innerHTML = '<h2>' + (S.room ? 'Комната' : 'Фильтр') + '</h2>';
   host.appendChild(head);
+
+  if (S.room && ROOM_BY_ID[S.room]) host.appendChild(roomBlock(ROOM_BY_ID[S.room]));
 
   var f = document.createElement('div');
   f.className = 'filters';
@@ -543,6 +557,45 @@ function renderRight() {
   list.setAttribute('data-slot', 'plist');
   host.appendChild(list);
   renderList();
+}
+
+// Паспорт комнаты: то, ради чего комнаты вообще стали объектом — активность,
+// о чем говорят, водится ли тут целевой человек и как здесь принято заходить.
+function roomBlock(r) {
+  var d = document.createElement('div');
+  d.className = 'rblock';
+  var topics = (r.topics || []).slice(0, 8).map(function (t) {
+    return '<span class="chip">' + esc(t.title) + '<span class="n">' + t.n + '</span></span>';
+  }).join('');
+  var themes = (r.themes || []).map(function (t) {
+    return '<span class="chip gold">' + esc(t) + '</span>';
+  }).join('');
+
+  d.innerHTML =
+    '<div class="rb-top">' +
+      '<div class="rb-name">' + esc(r.title) + '</div>' +
+      '<span class="kind ' + r.kind + '">' + (KIND_NAME[r.kind] || r.kind) + '</span>' +
+    '</div>' +
+    '<div class="rb-nums">' +
+      '<span><b>' + r.per_day + '</b> сообщ./день</span>' +
+      '<span><b>' + r.authors + '</b> авторов</span>' +
+      '<span><b>' + r.people + '</b> разобрано</span>' +
+      (r.hot ? '<span class="fire"><b>' + r.hot + '</b> 🔥</span>' : '') +
+      '<span><b>' + r.active_days + '</b> дн. живет</span>' +
+    '</div>' +
+    '<div class="rb-fit"><span>пригодность ' + r.fit + '</span>' +
+      '<span class="fitbar" style="flex:1"><i style="width:' + Math.max(2, r.fit) + '%"></i></span></div>' +
+    (r.why ? '<div class="why">' + esc(r.why) + '</div>' : '') +
+    (r.summary ? '<p class="rb-sum">' + esc(r.summary) + '</p>' : '') +
+    (themes ? '<div class="flab" style="margin-top:.5rem"><span>О чем говорят</span></div><div class="chips">' + themes + '</div>' : '') +
+    (topics ? '<div class="flab" style="margin-top:.5rem"><span>Топики по объему</span></div><div class="chips">' + topics + '</div>' : '') +
+    (r.etiquette ? '<div class="flab" style="margin-top:.5rem"><span>Как заходить</span></div><div class="rb-et">' + esc(r.etiquette) + '</div>' : '') +
+    '<button class="chip" data-act="allrooms" style="margin-top:.6rem">← все комнаты</button>';
+
+  d.querySelector('[data-act="allrooms"]').onclick = function () {
+    S.room = null; S.sel = null; renderRooms(); renderRight(); rebuildGraph();
+  };
+  return d;
 }
 
 function grp(host, label) {
