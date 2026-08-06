@@ -34,6 +34,8 @@
 <style>
 :root{
   --bg:#131210;--surface:#1B1814;--surface-2:#221E18;--card:#1F1B16;
+  /* ступени высоты для гейта: полоса → карточка → шаг → поле ввода */
+  --panel:#2A241C;--panel-2:#332C22;
   --ink:#EDE6D6;--ink-muted:#B0A48D;--ink-dim:#8A7E6B;
   --gold:#C2A66A;--gold-ink:#141009;--gold-deep:#A98E50;--bronze:#9A875C;
   --ok:#86AE6E;--no:#B07A66;--unk:#9B8FB0;
@@ -88,7 +90,7 @@ p,li{text-wrap:pretty}
 .herorow{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,64px);align-items:start}
 @media(max-width:940px){.herorow{grid-template-columns:1fr}}
 /* четыре пункта это главный аргумент первого экрана, поэтому они крупнее лида */
-.herolist{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:13px;
+.herolist{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:12px;
           padding-left:20px;border-left:2px solid var(--hair-gold)}
 .herolist li{position:relative;padding-left:26px;color:var(--ink);font-size:18.5px;line-height:1.45;
              font-weight:500;max-width:52ch}
@@ -103,6 +105,10 @@ p,li{text-wrap:pretty}
 @media(max-width:520px){.spheres{grid-template-columns:1fr}.sph{padding:17px 18px}.sph .n{font-size:23px}}
 
 /* ---------- рабочая часть ---------- */
+/* инструкция перед вопросами: без нее непонятно, что вообще надо делать */
+.worklead{margin-bottom:clamp(24px,2.8vw,34px);padding-left:18px;border-left:2px solid var(--hair-gold)}
+.worklead .wt{font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:var(--ink);margin-top:11px;max-width:74ch;text-wrap:pretty}
+.worklead .wn{font-size:15px;line-height:1.5;color:var(--ink-dim);margin-top:7px;max-width:74ch;text-wrap:pretty}
 .grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:clamp(28px,3.5vw,54px);align-items:start}
 @media(max-width:1040px){.grid{grid-template-columns:1fr}}
 .stage{position:sticky;top:84px;display:flex;flex-direction:column;gap:14px}
@@ -123,20 +129,25 @@ canvas#wheel{width:100%;height:auto;display:block}
 .sw.goal{height:0;border-top:2px dashed var(--bronze);background:none}
 
 /* ---------- о компании ---------- */
-.pfblock{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:24px 0;margin:26px 0 24px;border-radius:3px;transition:box-shadow .2s ease}
-.pfblock.hl{box-shadow:0 0 0 2px color-mix(in oklab,var(--gold) 55%,transparent)}
-.pfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px clamp(22px,3vw,40px);margin-top:18px}
-.pfq .fl{margin-bottom:10px}
+/* средняя колонка шире: там поле с оборотом, а не чипы */
+.pfgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1.15fr);gap:22px clamp(20px,2.6vw,34px)}
+@media(max-width:860px){.pfgrid{grid-template-columns:1fr}}
+/* уточнение с новой строки и общая высота шапок: иначе три колонки съезжают */
+.pfq .fl{margin-bottom:11px;min-height:38px}
+.pfq .flnote{display:block;margin-top:3px}
+@media(max-width:860px){.pfq .fl{min-height:0}}
 .flnote{text-transform:none;letter-spacing:0;font-family:var(--fb);font-size:14px;color:var(--ink-dim)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--fb);font-size:15px;line-height:1.3;padding:9px 14px;border:1px solid var(--hair);border-radius:3px;background:transparent;color:var(--ink-muted);cursor:pointer;transition:background .12s ease,color .12s ease,border-color .12s ease}
-.chip:hover{background:var(--surface-2);color:var(--ink)}
+.chip{font-family:var(--fb);font-size:15px;line-height:1.3;padding:9px 14px;border:1px solid var(--hair);border-radius:3px;background:var(--panel-2);color:var(--ink-muted);cursor:pointer;transition:background .12s ease,color .12s ease,border-color .12s ease}
+.chip:hover{background:color-mix(in oklab,var(--ink) 10%,var(--panel-2));color:var(--ink)}
 .chip[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--gold-ink);font-weight:600}
 .pfline{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 22px;font-size:16px;color:var(--ink-muted)}
 .pfline span{display:inline-flex;gap:8px}
 .pfline b{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);font-weight:400;align-self:center}
 
-.blocks{display:flex;flex-direction:column;gap:34px}
+/* правый отступ, иначе кнопки «да / не знаю / нет» упираются в край экрана */
+.blocks{display:flex;flex-direction:column;gap:34px;padding-right:clamp(0px,2.2vw,36px)}
+@media(max-width:1040px){.blocks{padding-right:0}}
 .block{border-top:2px solid var(--gold-deep);padding-top:15px;scroll-margin-top:84px}
 .bhead{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:6px 14px}
 .btitle{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -183,10 +194,10 @@ body.hasbar .block{scroll-margin-top:140px}
 .q.done .qt{color:var(--ink-muted)}
 .qn{display:block;font-size:15px;line-height:1.45;color:var(--ink-dim);margin-top:3px}
 .seg{display:flex;flex-shrink:0}
-.seg button{font-family:var(--fm);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);background:transparent;border:1px solid var(--hair);padding:9px 12px;cursor:pointer;margin-left:-1px;white-space:nowrap;transition:background .12s ease,color .12s ease,border-color .12s ease}
+.seg button{font-family:var(--fm);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);background:var(--surface-2);border:1px solid var(--hair);padding:9px 13px;cursor:pointer;margin-left:-1px;white-space:nowrap;transition:background .12s ease,color .12s ease,border-color .12s ease}
 .seg button:first-child{margin-left:0;border-radius:3px 0 0 3px}
 .seg button:last-child{border-radius:0 3px 3px 0}
-.seg button:hover{background:var(--surface-2);color:var(--ink)}
+.seg button:hover{background:var(--panel);color:var(--ink)}
 .seg button[aria-pressed=true]{color:var(--gold-ink);position:relative;z-index:1;font-weight:500}
 .seg button.y[aria-pressed=true]{background:var(--ok);border-color:var(--ok)}
 .seg button.u[aria-pressed=true]{background:var(--unk);border-color:var(--unk)}
@@ -195,19 +206,44 @@ body.hasbar .block{scroll-margin-top:140px}
 .bhint b{color:var(--ink-muted)}
 @media(max-width:560px){.q{grid-template-columns:1fr}.seg{justify-content:flex-start}}
 
-/* ---------- гейт ---------- */
-.gate{margin-top:52px;border:1px solid var(--hair-gold);border-radius:5px;background:var(--card);padding:clamp(24px,3vw,40px);scroll-margin-top:84px}
-.gatetop{max-width:70ch}
-.gategrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:clamp(24px,3.5vw,52px);align-items:start}
-@media(max-width:900px){.gategrid{grid-template-columns:1fr}}
-.gatelist{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:10px}
-.gatelist li{position:relative;padding-left:26px;color:var(--ink-muted);font-size:16.5px;line-height:1.5}
-.gatelist li::before{content:"";position:absolute;left:2px;top:12px;width:10px;height:1.5px;background:var(--gold)}
-.gateform{display:flex;flex-direction:column;gap:15px}
+/* ---------- гейт ----------
+   три уровня высоты, иначе весь блок читается одним пятном:
+   полоса секции → карточка гейта → шаг → поле ввода */
+.gate{max-width:1040px;margin:clamp(46px,5vw,68px) auto 0;border:1px solid var(--hair-gold);
+      border-radius:6px;background:var(--surface-2);padding:clamp(20px,2.6vw,34px);scroll-margin-top:84px}
+.gatehead{max-width:56ch;margin:clamp(6px,1vw,14px) auto clamp(24px,2.8vw,34px);text-align:center}
+.gatehead .h2{margin-top:12px}
+.gatehead .sub{margin:12px auto 0}
+.gsteps{display:flex;flex-direction:column;gap:clamp(14px,1.8vw,20px)}
+.gstep{background:var(--panel);border:1px solid var(--hair);border-radius:5px;
+       padding:clamp(20px,2.4vw,30px);transition:box-shadow .2s ease}
+.gstep.hl{box-shadow:0 0 0 2px color-mix(in oklab,var(--gold) 55%,transparent)}
+.gsh{display:grid;grid-template-columns:auto 1fr;gap:2px 15px;margin-bottom:clamp(17px,2vw,23px)}
+.gnum{font-family:var(--fm);font-size:12px;letter-spacing:.12em;color:var(--gold);line-height:1;
+      border:1px solid var(--hair-gold);border-radius:3px;padding:6px 9px;align-self:start}
+.gst{font-family:var(--fd);font-size:clamp(20px,1.7vw,24px);font-weight:600;line-height:1.2;align-self:center}
+.gsn{grid-column:2;font-size:15.5px;line-height:1.5;color:var(--ink-dim);max-width:72ch;margin-top:8px;text-wrap:pretty}
+@media(max-width:520px){.gsh{grid-template-columns:1fr;gap:9px}.gsn{grid-column:1}.gnum{justify-self:start}}
+
+/* что внутри разбора: справка, а не шаг, поэтому без номера и с золотой чертой */
+.ginfo{background:color-mix(in oklab,var(--gold) 7%,var(--panel));border:1px solid var(--hair-gold);
+       border-left:3px solid var(--gold);border-radius:5px;padding:clamp(20px,2.4vw,28px)}
+.gatelist{list-style:none;margin-top:15px;display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:11px clamp(20px,3vw,40px)}
+.gatelist li{position:relative;padding-left:24px;color:var(--ink);font-size:16.5px;line-height:1.45;text-wrap:pretty}
+.gatelist li::before{content:"";position:absolute;left:0;top:12px;width:12px;height:1.5px;background:var(--gold)}
+
+.gateform{display:flex;flex-direction:column;gap:17px;max-width:700px}
+/* ровно две колонки: при auto-fit четвертое поле оставалось одно в ряду */
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px clamp(18px,2.4vw,28px)}
+@media(max-width:620px){.fgrid{grid-template-columns:1fr}}
+.gact{display:flex;flex-wrap:wrap;align-items:center;gap:13px 22px}
+.gact .cta{min-width:250px;padding:15px 26px;font-size:16.5px}
+.gact .note{max-width:40ch;margin:0}
 .fl{font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
 .fl2{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500}
 .ffield{display:flex;flex-direction:column;gap:7px}
-.fin{font:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid var(--hair);border-radius:3px;padding:12px 13px;width:100%;transition:border-color .15s ease}
+.fin{font:inherit;font-size:16px;color:var(--ink);background:var(--panel-2);border:1px solid var(--hair);border-radius:3px;padding:12px 13px;width:100%;transition:border-color .15s ease}
 .fin::placeholder{color:var(--ink-dim)}
 .fin.bad{border-color:var(--no)}
 .fin.good{border-color:color-mix(in oklab,var(--ok) 60%,transparent)}
@@ -451,7 +487,7 @@ body.hasbar .block{scroll-margin-top:140px}
     <div>
       <div class="eyebrow">Бесплатная диагностика · 43 вопроса · 20 минут</div>
       <h1>Колесо финансового здоровья компании</h1>
-      <p class="lead">Шесть сфер финансового управления, внутри каждой закрытые вопросы. Отвечаете да, нет или не знаю. На выходе видите, что происходит с деньгами в каждой сфере и что именно нужно закрыть, чтобы компания стала финансово устойчивой.</p>
+      <p class="lead">Шесть сфер финансового управления, внутри каждой закрытые вопросы. На выходе видно, что происходит с деньгами в каждой сфере и что нужно закрыть, чтобы бизнес стал устойчивым.</p>
       <ul class="herolist">
         <li>Разбор по каждой из шести сфер, а не одна общая оценка</li>
         <li>Отдельно считаются слепые зоны: то, чего собственник про свой бизнес не знает</li>
@@ -482,7 +518,11 @@ body.hasbar .block{scroll-margin-top:140px}
 <!-- РАБОЧАЯ ЧАСТЬ -->
 <section class="band alt" id="work"><div class="inner pad">
 
-  <div class="eyebrow noprint" style="margin-bottom:14px">Вопросы · шесть сфер, 43 пункта</div>
+  <div class="worklead noprint">
+    <div class="eyebrow">Вопросы · шесть сфер, 43 пункта</div>
+    <p class="wt">Отвечайте на каждый вопрос: да, не знаю или нет. Колесо пересобирается сразу, и по нему видно, как меняется баланс шести сфер.</p>
+    <p class="wn">Ползунок «точка Б» в каждой сфере, это цель, к которой идете. По умолчанию 8 из 10, можно поменять.</p>
+  </div>
 
   <div class="grid">
 
@@ -510,20 +550,25 @@ body.hasbar .block{scroll-margin-top:140px}
 
   <!-- ГЕЙТ -->
   <div class="gate" id="gate">
-    <div class="gatetop">
+
+    <div class="gatehead">
       <div class="eyebrow">Последний шаг</div>
-      <div class="h2" style="margin-top:12px">Откройте разбор</div>
-      <p class="sub">Три вопроса о компании и контакт для связи. После этого разбор откроется прямо здесь, на этой странице.</p>
+      <div class="h2">Откройте разбор</div>
+      <p class="sub">Три вопроса о компании и контакт для связи. Разбор откроется прямо здесь, на этой странице.</p>
     </div>
 
-    <div class="pfblock" id="pfblock">
-      <div class="fl2">О компании</div>
-      <p class="note" style="margin-top:8px">На оценку эти ответы не влияют, но без них разбор читается вслепую: одно и то же состояние учета у компании на пять человек и у компании на сто значит совершенно разное.</p>
-      <div class="pfgrid" id="pfgrid"></div>
-    </div>
+    <div class="gsteps">
 
-    <div class="gategrid">
-      <div>
+      <section class="gstep" id="pfblock">
+        <div class="gsh">
+          <span class="gnum">01</span>
+          <div class="gst">О компании</div>
+          <p class="gsn">На оценку эти ответы не влияют, но без них разбор читается вслепую: одно и то же состояние учета у компании на пять человек и у компании на сто значит совершенно разное.</p>
+        </div>
+        <div class="pfgrid" id="pfgrid"></div>
+      </section>
+
+      <section class="ginfo">
         <div class="fl2">Что внутри разбора</div>
         <ul class="gatelist">
           <li>вывод по каждой из шести сфер, что сейчас происходит с бизнесом внутри нее;</li>
@@ -531,34 +576,42 @@ body.hasbar .block{scroll-margin-top:140px}
           <li>полный список того, что не закрыто, и что даст закрытие каждого пункта;</li>
           <li>кнопка сохранить все это в PDF.</li>
         </ul>
-        <p class="note" style="margin-top:20px">Вместе с контактом ко мне приходят ваши ответы, поэтому я смогу написать по существу, а не «здравствуйте, чем помочь». Никому больше эти данные не уходят.</p>
-      </div>
-      <div>
+      </section>
+
+      <section class="gstep">
+        <div class="gsh">
+          <span class="gnum">02</span>
+          <div class="gst">Ваши данные</div>
+          <p class="gsn">Вместе с контактом ко мне приходят ваши ответы, поэтому я смогу написать по существу, а не «здравствуйте, чем помочь». Никому больше эти данные не уходят.</p>
+        </div>
+
         <form class="gateform" id="gform" novalidate>
           <input type="checkbox" id="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
-          <div class="ffield">
-            <label class="fl" for="gname">Имя</label>
-            <input class="fin" id="gname" type="text" placeholder="Как к вам обращаться" autocomplete="name">
-            <p class="ferr" id="err-name"></p>
-          </div>
+          <div class="fgrid">
+            <div class="ffield">
+              <label class="fl" for="gname">Имя</label>
+              <input class="fin" id="gname" type="text" placeholder="Как к вам обращаться" autocomplete="name">
+              <p class="ferr" id="err-name"></p>
+            </div>
 
-          <div class="ffield">
-            <label class="fl" for="gcompany">Компания <span class="flnote">для подписи в PDF</span></label>
-            <input class="fin" id="gcompany" type="text" placeholder="Название" autocomplete="organization">
-            <p class="ferr" id="err-company"></p>
-          </div>
+            <div class="ffield">
+              <label class="fl" for="gcompany">Компания <span class="flnote">для подписи в PDF</span></label>
+              <input class="fin" id="gcompany" type="text" placeholder="Название" autocomplete="organization">
+              <p class="ferr" id="err-company"></p>
+            </div>
 
-          <div class="ffield">
-            <label class="fl" for="gemail">Почта</label>
-            <input class="fin" id="gemail" type="email" inputmode="email" placeholder="name@company.com" autocomplete="email" spellcheck="false">
-            <p class="ferr" id="err-email"></p>
-          </div>
+            <div class="ffield">
+              <label class="fl" for="gemail">Почта</label>
+              <input class="fin" id="gemail" type="email" inputmode="email" placeholder="name@company.com" autocomplete="email" spellcheck="false">
+              <p class="ferr" id="err-email"></p>
+            </div>
 
-          <div class="ffield">
-            <label class="fl" for="gtg">Telegram</label>
-            <input class="fin" id="gtg" type="text" placeholder="@nickname" autocomplete="off" spellcheck="false">
-            <p class="ferr" id="err-tg"></p>
+            <div class="ffield">
+              <label class="fl" for="gtg">Telegram</label>
+              <input class="fin" id="gtg" type="text" placeholder="@nickname" autocomplete="off" spellcheck="false">
+              <p class="ferr" id="err-tg"></p>
+            </div>
           </div>
 
           <div class="gsum" id="gsum">
@@ -567,11 +620,14 @@ body.hasbar .block{scroll-margin-top:140px}
             <div class="gsact" id="gsumact"></div>
           </div>
 
-          <button class="cta" id="gsubmit" type="submit">Открыть разбор</button>
-          <p class="note" id="ghint">Заполните блок о компании и ответьте на все 43 вопроса.</p>
+          <div class="gact">
+            <button class="cta" id="gsubmit" type="submit">Открыть разбор</button>
+            <p class="note" id="ghint">Заполните блок о компании и ответьте на все 43 вопроса.</p>
+          </div>
           <p class="gerr" id="gerr">Не отправилось. Разбор все равно открыт. Напишите мне в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.</p>
         </form>
-      </div>
+      </section>
+
     </div>
   </div>
 
@@ -701,7 +757,7 @@ var PROFILE=[
  // оборот текстом, а не диапазонами: колесо проходят компании из разных
  // стран и валют, любая готовая шкала для кого-то будет бессмысленной
  {key:"turnover",label:"Оборот за последний год",short:"Оборот",type:"text",
-  placeholder:"например 120 млн рублей или 800 тысяч евро",
+  placeholder:"120 млн рублей, 800 тысяч евро",
   note:"в своей валюте, примерно"},
  {key:"finance",label:"Кто ведет финансы",short:"Финансы ведет",
   opts:["веду сам","бухгалтер","финансовый менеджер","финдиректор в штате"],
