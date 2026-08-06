@@ -11,7 +11,7 @@
 <meta property="og:site_name" content="Founder Finance">
 <meta property="og:title" content="Колесо финансового здоровья компании">
 <meta property="og:description" content="43 вопроса по шести сферам. На выходе разбор по каждой сфере и список того, что нужно закрыть, чтобы компания была финансово устойчивой.">
-<meta property="og:url" content="https://sychinnikov.com/koleso/">
+<meta property="og:url" content="https://sychinnikov.com/founderfinance/tool/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131210'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' fill='%23C2A66A' text-anchor='middle'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,58 +32,80 @@
 
 
 <style>
+/* Палитра и компоненты единые с sychinnikov.com/foundertrajectory:
+   один бренд, одни шрифты, одни кнопки, одни карточки. */
 :root{
-  --bg:#131210;--surface:#1B1814;--surface-2:#221E18;--card:#1F1B16;
-  /* ступени высоты для гейта: полоса → карточка → шаг → поле ввода */
+  --bg:#14120F;--surface:#1E1A15;--surface-2:#26211A;--card:#231E18;
+  /* ступени высоты: полоса секции → карточка → шаг → поле ввода */
   --panel:#2A241C;--panel-2:#332C22;
-  --ink:#EDE6D6;--ink-muted:#B0A48D;--ink-dim:#8A7E6B;
-  --gold:#C2A66A;--gold-ink:#141009;--gold-deep:#A98E50;--bronze:#9A875C;
-  --ok:#86AE6E;--no:#B07A66;--unk:#9B8FB0;
-  --hair:color-mix(in oklab,var(--ink) 14%,transparent);
-  --hair-soft:color-mix(in oklab,var(--ink) 8%,transparent);
-  --hair-gold:color-mix(in oklab,var(--gold) 32%,transparent);
+  --field:#171310;   /* поле ввода глубже фона: «сюда писать» */
+  --raise:#2E2820;   /* кнопка-панель светлее фона: «сюда нажимать» */
+  --ink:#F4EEE2;--ink-muted:#C6B99F;--ink-dim:#9B8E79;
+  --gold:#D9B872;--gold-ink:#14100A;--gold-deep:#C2A05C;--bronze:#B39A66;--gold-bright:#F0D294;
+  --ok:#8FBE74;--no:#C48870;--unk:#A79CC0;
+  --hair:color-mix(in oklab,var(--ink) 17%,transparent);
+  --hair-soft:color-mix(in oklab,var(--ink) 9%,transparent);
+  --hair-gold:color-mix(in oklab,var(--gold) 40%,transparent);
+  --glow:0 0 0 1px color-mix(in oklab,var(--gold) 26%,transparent),0 18px 50px color-mix(in oklab,var(--gold) 13%,transparent);
   --fd:"Playfair Display",Georgia,serif;--fb:"Manrope",system-ui,sans-serif;--fm:"IBM Plex Mono",monospace;
-  --maxw:1380px;
+  --maxw:1380px;--tap:48px;--navh:64px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden;font-size:17px}
 .inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(24px,4vw,60px)}
-.band{width:100%;border-top:1px solid var(--hair)}
+.band{width:100%;border-top:1px solid var(--hair);position:relative}
 .band.alt{background:var(--surface)}
-.pad{padding:clamp(52px,7vw,92px) 0}
-.pad.sm{padding:clamp(36px,4.5vw,58px) 0}
+.band.alt::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(58% 62% at 12% 0%,color-mix(in oklab,var(--gold) 8%,transparent),transparent 62%),
+             radial-gradient(46% 54% at 92% 100%,color-mix(in oklab,var(--gold) 6%,transparent),transparent 60%)}
+.band > .inner{position:relative;z-index:1}
+/* только по вертикали: сокращенная запись padding обнуляла боковые отступы
+   у .inner, и вся рабочая часть упиралась в края экрана */
+.pad{padding-top:clamp(52px,7vw,92px);padding-bottom:clamp(52px,7vw,92px)}
+.pad.sm{padding-top:clamp(36px,4.5vw,58px);padding-bottom:clamp(36px,4.5vw,58px)}
 
 a{color:inherit}
-.eyebrow{font-family:var(--fm);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
-h1{font-family:var(--fd);font-weight:600;font-size:clamp(29px,3.5vw,44px);line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
-.h2{font-family:var(--fd);font-weight:600;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:-.01em;text-wrap:balance}
-.h3{font-family:var(--fd);font-weight:600;font-size:clamp(21px,2vw,26px);line-height:1.2}
+.eyebrow{font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright);font-weight:500}
+h1{font-family:var(--fd);font-weight:600;font-size:clamp(29px,3.5vw,46px);line-height:1.09;letter-spacing:-.012em;text-wrap:balance}
+.h2{font-family:var(--fd);font-weight:600;font-size:clamp(26px,3vw,40px);line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
+.h3{font-family:var(--fd);font-weight:600;font-size:clamp(21px,2vw,27px);line-height:1.2}
 .lead{font-size:clamp(17px,1.35vw,20px);color:var(--ink-muted);margin-top:16px;max-width:58ch;text-wrap:pretty}
 .sub{color:var(--ink-muted);margin-top:12px;max-width:64ch;text-wrap:pretty}
 .note{font-size:15px;line-height:1.55;color:var(--ink-dim);max-width:62ch;text-wrap:pretty}
 p,li{text-wrap:pretty}
 
+/* переключатель версий: только прячем, display не назначаем заново */
+@media(min-width:761px){.m-only{display:none!important}}
+@media(max-width:760px){.d-only{display:none!important}}
+
 /* ---------- шапка ---------- */
-.nav{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
-.nav .inner{display:flex;align-items:center;justify-content:space-between;gap:18px;height:64px}
-.brand{font-family:var(--fd);font-size:20px;font-weight:600;text-decoration:none;letter-spacing:-.01em}
-.brand b{color:var(--gold)}
+.nav{position:sticky;top:0;z-index:60;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;gap:18px;height:var(--navh)}
+.brand{font-family:var(--fd);font-size:21px;font-weight:600;text-decoration:none;letter-spacing:-.01em;color:var(--ink)}
+.brand b{color:var(--gold);margin:0 .24em}
 .nlinks{display:flex;align-items:center;gap:22px}
-.nlinks a{font-size:14.5px;text-decoration:none;color:var(--ink-muted)}
+.nlinks a{font-size:15px;font-weight:500;text-decoration:none;color:var(--ink-muted)}
 .nlinks a:hover{color:var(--ink)}
-.ncta{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--hair-gold);color:var(--gold)!important;padding:9px 14px;border-radius:3px}
-.ncta:hover{background:var(--gold);color:var(--gold-ink)!important}
+.ncta{font-size:14px;font-weight:600;letter-spacing:0;text-transform:none;border:1px solid var(--hair-gold);color:var(--gold)!important;padding:10px 18px;border-radius:8px;white-space:nowrap}
+.ncta:hover{background:color-mix(in oklab,var(--gold) 14%,transparent);color:var(--gold)!important}
 @media(max-width:760px){.nlinks a:not(.ncta){display:none}}
 
 /* ---------- кнопки ---------- */
-.cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--gold);color:var(--gold-ink);font-weight:600;font-size:15.5px;padding:14px 24px;border-radius:3px;text-decoration:none;border:1px solid var(--gold);cursor:pointer;font-family:var(--fb);transition:background .15s ease,border-color .15s ease,opacity .15s ease}
-.cta:hover{background:#D3B87C;border-color:#D3B87C}
-.cta:disabled{opacity:.42;cursor:not-allowed}
-.cta.ghost{background:transparent;color:var(--gold);border-color:var(--hair-gold)}
-.cta.ghost:hover{background:color-mix(in oklab,var(--gold) 12%,transparent);color:var(--gold)}
-.cta:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  background:linear-gradient(168deg,#D3AC65,#BE9450);color:var(--gold-ink);font-weight:700;font-size:16.5px;
+  padding:15px 28px;border-radius:10px;text-decoration:none;border:none;cursor:pointer;font-family:var(--fb);
+  box-shadow:0 14px 40px color-mix(in oklab,var(--gold) 26%,transparent);
+  transition:background .2s ease,box-shadow .25s ease,transform .18s ease,opacity .15s ease;line-height:1.25}
+.cta:hover{background:linear-gradient(168deg,#DDB86E,#C79C56);transform:translateY(-2px);
+  box-shadow:0 16px 46px color-mix(in oklab,var(--gold) 38%,transparent)}
+.cta:active{transform:translateY(0)}
+.cta:disabled{opacity:.42;cursor:not-allowed;transform:none}
+.cta.ghost{background:transparent;color:var(--gold);border:1px solid var(--hair-gold);box-shadow:none;font-weight:600}
+.cta.ghost:hover{background:color-mix(in oklab,var(--gold) 12%,transparent);color:var(--gold);box-shadow:none}
+.cta:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+@media(prefers-reduced-motion:reduce){.cta:hover{transform:none}}
 
 /* ---------- герой ---------- */
 .hero{padding:clamp(26px,3.2vw,44px) 0 clamp(44px,5.5vw,72px)}
@@ -97,12 +119,12 @@ p,li{text-wrap:pretty}
 .herolist li::before{content:"";position:absolute;left:0;top:13px;width:13px;height:2px;background:var(--gold)}
 
 .spheres{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hair);
-         border:1px solid var(--hair-gold);border-radius:5px;overflow:hidden}
+         border:1px solid var(--hair-gold);border-radius:16px;overflow:hidden;
+         box-shadow:0 18px 46px rgba(0,0,0,.34)}
 .sph{background:var(--card);padding:22px 24px}
 .sph .n{font-family:var(--fd);font-size:26px;font-weight:600;line-height:1.15}
 .sph .d{font-size:16px;color:var(--ink-muted);margin-top:5px;line-height:1.35}
-.sph .c{font-family:var(--fm);font-size:13px;color:var(--gold);letter-spacing:.08em;margin-top:11px}
-@media(max-width:520px){.spheres{grid-template-columns:1fr}.sph{padding:17px 18px}.sph .n{font-size:23px}}
+.sph .c{font-family:var(--fm);font-size:13px;color:var(--gold-bright);letter-spacing:.08em;margin-top:11px}
 
 /* ---------- рабочая часть ---------- */
 /* инструкция перед вопросами: без нее непонятно, что вообще надо делать */
@@ -111,22 +133,66 @@ p,li{text-wrap:pretty}
 .worklead .wn{font-size:15px;line-height:1.5;color:var(--ink-dim);margin-top:7px;max-width:74ch;text-wrap:pretty}
 .grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:clamp(28px,3.5vw,54px);align-items:start}
 @media(max-width:1040px){.grid{grid-template-columns:1fr}}
-.stage{position:sticky;top:84px;display:flex;flex-direction:column;gap:14px}
+.stage{position:sticky;top:calc(var(--navh) + 20px);display:flex;flex-direction:column;gap:14px}
 @media(max-width:1040px){.stage{position:static}}
 canvas#wheel{width:100%;height:auto;display:block}
 
-.idxcard{display:flex;align-items:baseline;gap:13px;padding:15px 17px;background:var(--card);border:1px solid var(--hair);border-radius:4px}
-.idxcard .num{font-family:var(--fd);font-size:40px;line-height:1;font-weight:600;color:var(--gold)}
+.idxcard{display:flex;align-items:baseline;gap:13px;padding:16px 18px;background:var(--card);
+  border:1px solid var(--hair-gold);border-radius:14px}
+.idxcard .num{font-family:var(--fd);font-size:40px;line-height:1;font-weight:600;color:var(--gold-bright)}
 .idxcard .of{font-family:var(--fm);font-size:12px;color:var(--ink-dim);white-space:nowrap}
 .idxcard .vd{font-size:14px;color:var(--ink-muted);line-height:1.35}
 
-.bar{height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .25s ease}
-.barmeta{display:flex;justify-content:space-between;gap:12px;font-family:var(--fm);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim)}
+.bar{height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));width:0;transition:width .25s ease}
+.barmeta{display:flex;justify-content:space-between;gap:12px;font-family:var(--fm);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim)}
+.barmeta b{color:var(--ink)}
 .legend{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
 .legend span{display:inline-flex;align-items:center;gap:7px}
 .sw{width:16px;height:3px;border-radius:2px;background:var(--gold)}
 .sw.goal{height:0;border-top:2px dashed var(--bronze);background:none}
+
+/* ---------- липкая полоса с колесом на телефоне ----------
+   на узком экране колесо уезжает вверх, и человек перестает видеть,
+   что его ответы вообще на что-то влияют. Полоса это возвращает. */
+.wbar{position:fixed;left:0;right:0;top:var(--navh);z-index:55;display:none;align-items:center;gap:12px;
+  padding:9px 16px;background:color-mix(in oklab,var(--bg) 94%,transparent);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--hair-gold);transform:translateY(-120%);transition:transform .28s cubic-bezier(.2,.7,.2,1)}
+.wbar.show{transform:translateY(0)}
+.wbar canvas{width:58px;height:58px;flex:none;display:block}
+.wb-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.wb-top{display:flex;align-items:baseline;gap:7px;font-family:var(--fm);font-size:11px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.wb-top b{font-family:var(--fd);font-size:21px;line-height:1;font-weight:700;color:var(--gold-bright);letter-spacing:0}
+.wb-top em{margin-left:auto;font-style:normal;color:var(--ink-muted)}
+.wb-bar{height:5px;background:var(--surface-2);border-radius:3px;overflow:hidden}
+.wb-bar i{display:block;height:100%;width:0;border-radius:3px;
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));transition:width .25s ease}
+.wb-open{flex:none;font-family:var(--fb);font-size:13.5px;font-weight:600;color:var(--gold);
+  background:var(--raise);border:1px solid var(--hair-gold);border-radius:9px;padding:10px 13px;
+  cursor:pointer;min-height:44px}
+body.wbar-on .block{scroll-margin-top:calc(var(--navh) + 84px)}
+body.wbar-on .q{scroll-margin-top:calc(var(--navh) + 110px)}
+
+/* развернутое колесо поверх экрана */
+.wsheet{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;
+  padding:16px;background:color-mix(in oklab,#000 80%,transparent);backdrop-filter:blur(8px)}
+.wsheet.open{display:flex}
+.ws-card{background:var(--surface-2);border:1px solid var(--hair-gold);border-radius:20px;
+  padding:16px;width:100%;max-width:460px;max-height:92vh;overflow:auto;box-shadow:var(--glow),0 40px 90px rgba(0,0,0,.6)}
+.ws-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.ws-head span{font-family:var(--fm);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright)}
+.ws-head button{font-family:var(--fb);font-size:14px;font-weight:600;color:var(--ink);background:var(--raise);
+  border:1px solid var(--hair);border-radius:9px;padding:9px 14px;cursor:pointer;min-height:42px}
+.ws-card canvas{width:100%;height:auto;display:block}
+.ws-list{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.ws-list span{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:11px;
+  border:1px solid var(--hair);background:color-mix(in oklab,var(--bg) 55%,transparent);font-size:14px}
+.ws-list i{width:9px;height:9px;border-radius:50%;flex:none}
+.ws-list em{margin-left:auto;font-family:var(--fd);font-style:normal;font-weight:700;font-size:17px}
+.ws-note{margin-top:12px;font-size:14px;line-height:1.45;color:var(--ink-muted)}
+.ws-act{margin-top:14px}
+.ws-act .cta{width:100%}
 
 /* ---------- о компании ---------- */
 /* средняя колонка шире: там поле с оборотом, а не чипы */
@@ -138,9 +204,13 @@ canvas#wheel{width:100%;height:auto;display:block}
 @media(max-width:860px){.pfq .fl{min-height:0}}
 .flnote{text-transform:none;letter-spacing:0;font-family:var(--fb);font-size:14px;color:var(--ink-dim)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--fb);font-size:15px;line-height:1.3;padding:9px 14px;border:1px solid var(--hair);border-radius:3px;background:var(--panel-2);color:var(--ink-muted);cursor:pointer;transition:background .12s ease,color .12s ease,border-color .12s ease}
-.chip:hover{background:color-mix(in oklab,var(--ink) 10%,var(--panel-2));color:var(--ink)}
-.chip[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--gold-ink);font-weight:600}
+.chip{font-family:var(--fb);font-size:15px;line-height:1.3;padding:11px 16px;min-height:44px;
+  display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;
+  background:var(--raise);color:var(--ink);cursor:pointer;
+  transition:background .12s ease,color .12s ease,border-color .12s ease,box-shadow .2s ease}
+.chip:hover{border-color:var(--hair-gold);background:color-mix(in oklab,var(--gold) 12%,var(--raise))}
+.chip[aria-pressed=true]{background:var(--gold);border-color:transparent;color:var(--gold-ink);font-weight:700;
+  box-shadow:0 8px 22px color-mix(in oklab,var(--gold) 30%,transparent)}
 .pfline{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 22px;font-size:16px;color:var(--ink-muted)}
 .pfline span{display:inline-flex;gap:8px}
 .pfline b{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);font-weight:400;align-self:center}
@@ -148,26 +218,36 @@ canvas#wheel{width:100%;height:auto;display:block}
 /* правый отступ, иначе кнопки «да / не знаю / нет» упираются в край экрана */
 .blocks{display:flex;flex-direction:column;gap:34px;padding-right:clamp(0px,2.2vw,36px)}
 @media(max-width:1040px){.blocks{padding-right:0}}
-.block{border-top:2px solid var(--gold-deep);padding-top:15px;scroll-margin-top:84px}
+.block{border-top:2px solid var(--gold-deep);padding-top:15px;scroll-margin-top:calc(var(--navh) + 20px)}
 .bhead{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:6px 14px}
 .btitle{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.bname{font-family:var(--fd);font-size:27px;font-weight:600}
+.bname{font-family:var(--fd);font-size:28px;font-weight:600}
 .bsub{font-size:15px;color:var(--ink-dim)}
 .bscore{display:flex;align-items:baseline;gap:8px;font-family:var(--fm)}
-.bscore .v{font-size:24px}
+.bscore .v{font-size:25px}
 .bscore .d{font-size:11px;color:var(--ink-dim);letter-spacing:.06em}
 .goalrow{grid-column:1/-1;display:grid;grid-template-columns:86px 1fr 40px;align-items:center;gap:12px;margin:11px 0 3px}
 .goalrow .tg{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
-.goalrow .vl{font-family:var(--fm);font-size:13px;color:var(--ink-muted);text-align:right}
+.goalrow .vl{font-family:var(--fm);font-size:14px;color:var(--gold-bright);text-align:right}
 
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;background:transparent;height:20px;cursor:pointer}
-input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:var(--hair)}
-input[type=range]::-moz-range-track{height:3px;border-radius:2px;background:var(--hair)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--bronze);border:2px solid var(--bg);margin-top:-6px}
-input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--bronze);border:2px solid var(--bg)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;background:transparent;height:28px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:3px;background:var(--hair)}
+input[type=range]::-moz-range-track{height:4px;border-radius:3px;background:var(--hair)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+  background:var(--gold);border:2px solid var(--bg);margin-top:-8px;
+  box-shadow:0 0 0 1px var(--hair-gold),0 4px 12px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);
+  box-shadow:0 0 0 1px var(--hair-gold),0 4px 12px rgba(0,0,0,.5)}
 
 .qs{display:flex;flex-direction:column;margin-top:5px}
-.q{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 16px;padding:11px 0;border-bottom:1px solid var(--hair-soft);scroll-margin-top:160px}
+.q{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 16px;
+   padding:12px 0 12px 14px;border-bottom:1px solid var(--hair-soft);
+   scroll-margin-top:calc(var(--navh) + 90px);transition:background .2s ease}
+/* отвеченный вопрос помечен полосой в цвете ответа: видно, где уже был */
+.q::after{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:2px;background:transparent;transition:background .2s ease}
+.q[data-a=y]::after{background:var(--ok)}
+.q[data-a=u]::after{background:var(--unk)}
+.q[data-a=n]::after{background:var(--no)}
 /* режим «есть пропуски»: подсвечиваем все вопросы без ответа, а не только первый */
 .q.miss{background:color-mix(in oklab,var(--no) 11%,transparent);box-shadow:inset 3px 0 0 var(--no);
         padding-left:14px;margin-left:-14px;border-radius:2px}
@@ -179,57 +259,63 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
        border:1px solid currentColor;border-radius:2px;padding:2px 7px;white-space:nowrap}
 
 /* полоса-напоминание под шапкой, пока есть незакрытые вопросы */
-.missbar{position:fixed;left:0;right:0;top:64px;z-index:55;display:none;align-items:center;
-         justify-content:center;gap:14px 18px;flex-wrap:wrap;padding:12px 20px;
-         background:color-mix(in oklab,var(--no) 26%,var(--bg));border-bottom:1px solid var(--no);
+.missbar{position:fixed;left:0;right:0;bottom:0;z-index:75;display:none;align-items:center;
+         justify-content:center;gap:12px 18px;flex-wrap:wrap;
+         padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));
+         background:color-mix(in oklab,var(--no) 24%,var(--bg));border-top:1px solid var(--no);
          font-size:15.5px;color:var(--ink)}
 .missbar.show{display:flex}
-.mbbtn{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-       background:transparent;border:1px solid currentColor;color:var(--ink);border-radius:3px;
-       padding:7px 12px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.mbbtn{font-family:var(--fb);font-size:14px;font-weight:600;
+       background:transparent;border:1px solid currentColor;color:var(--ink);border-radius:9px;
+       padding:10px 14px;min-height:44px;display:inline-flex;align-items:center;
+       cursor:pointer;text-decoration:none;white-space:nowrap}
 .mbbtn:hover{background:var(--ink);color:var(--bg)}
-body.hasbar .stage{top:132px}
-body.hasbar .block{scroll-margin-top:140px}
+body.hasbar{padding-bottom:96px}
 .qt{font-size:17px;line-height:1.45;max-width:62ch;text-wrap:pretty}
 .q.done .qt{color:var(--ink-muted)}
 .qn{display:block;font-size:15px;line-height:1.45;color:var(--ink-dim);margin-top:3px}
-.seg{display:flex;flex-shrink:0}
-.seg button{font-family:var(--fm);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);background:var(--surface-2);border:1px solid var(--hair);padding:9px 13px;cursor:pointer;margin-left:-1px;white-space:nowrap;transition:background .12s ease,color .12s ease,border-color .12s ease}
-.seg button:first-child{margin-left:0;border-radius:3px 0 0 3px}
-.seg button:last-child{border-radius:0 3px 3px 0}
-.seg button:hover{background:var(--panel);color:var(--ink)}
-.seg button[aria-pressed=true]{color:var(--gold-ink);position:relative;z-index:1;font-weight:500}
-.seg button.y[aria-pressed=true]{background:var(--ok);border-color:var(--ok)}
-.seg button.u[aria-pressed=true]{background:var(--unk);border-color:var(--unk)}
-.seg button.n[aria-pressed=true]{background:var(--no);border-color:var(--no)}
-.bhint{margin-top:14px;font-size:15.5px;line-height:1.5;color:var(--ink-dim);padding:13px 15px;background:var(--surface-2);border-radius:3px;max-width:none}
-.bhint b{color:var(--ink-muted)}
-@media(max-width:560px){.q{grid-template-columns:1fr}.seg{justify-content:flex-start}}
+/* три кнопки ответа: светлее фона, с рамкой, по 44 пикселя высоты.
+   выбранный ответ заливается цветом, невыбранные остаются серыми */
+.seg{display:flex;flex-shrink:0;gap:7px}
+.seg button{font-family:var(--fb);font-size:14.5px;font-weight:600;color:var(--ink);
+  background:var(--raise);border:1px solid var(--hair);border-radius:9px;padding:10px 15px;min-height:44px;
+  cursor:pointer;white-space:nowrap;transition:background .12s ease,color .12s ease,border-color .12s ease,box-shadow .2s ease}
+.seg button:hover{border-color:var(--hair-gold);background:color-mix(in oklab,var(--gold) 12%,var(--raise))}
+.seg button[aria-pressed=true]{color:var(--gold-ink);font-weight:700;border-color:transparent}
+.seg button.y[aria-pressed=true]{background:var(--ok);box-shadow:0 6px 18px color-mix(in oklab,var(--ok) 32%,transparent)}
+.seg button.u[aria-pressed=true]{background:var(--unk);box-shadow:0 6px 18px color-mix(in oklab,var(--unk) 32%,transparent)}
+.seg button.n[aria-pressed=true]{background:var(--no);box-shadow:0 6px 18px color-mix(in oklab,var(--no) 32%,transparent)}
+.bhint{margin-top:16px;font-size:15.5px;line-height:1.5;color:var(--ink-muted);padding:15px 17px;
+  background:var(--surface-2);border:1px solid var(--hair);border-left:3px solid var(--gold-deep);
+  border-radius:12px;max-width:none}
+.bhint b{color:var(--gold-bright)}
 
 /* ---------- гейт ----------
    три уровня высоты, иначе весь блок читается одним пятном:
    полоса секции → карточка гейта → шаг → поле ввода */
-.gate{max-width:1040px;margin:clamp(46px,5vw,68px) auto 0;border:1px solid var(--hair-gold);
-      border-radius:6px;background:var(--surface-2);padding:clamp(20px,2.6vw,34px);scroll-margin-top:84px}
+.gate{max-width:1040px;margin:clamp(46px,5vw,68px) auto 0;border:1.5px solid var(--hair-gold);
+      border-radius:22px;background:linear-gradient(152deg,color-mix(in oklab,var(--gold) 8%,var(--surface-2)),var(--surface-2) 62%);
+      padding:clamp(20px,2.6vw,34px);scroll-margin-top:calc(var(--navh) + 20px);
+      box-shadow:var(--glow),0 28px 70px rgba(0,0,0,.4)}
 .gatehead{max-width:56ch;margin:clamp(6px,1vw,14px) auto clamp(24px,2.8vw,34px);text-align:center}
 .gatehead .h2{margin-top:12px}
 .gatehead .sub{margin:12px auto 0}
 .gsteps{display:flex;flex-direction:column;gap:clamp(14px,1.8vw,20px)}
-.gstep{background:var(--panel);border:1px solid var(--hair);border-radius:5px;
+.gstep{background:var(--panel);border:1px solid var(--hair);border-radius:16px;
        padding:clamp(20px,2.4vw,30px);transition:box-shadow .2s ease}
-.gstep.hl{box-shadow:0 0 0 2px color-mix(in oklab,var(--gold) 55%,transparent)}
+.gstep.hl{box-shadow:0 0 0 2px color-mix(in oklab,var(--gold) 60%,transparent)}
 .gsh{display:grid;grid-template-columns:auto 1fr;gap:2px 15px;margin-bottom:clamp(17px,2vw,23px)}
-.gnum{font-family:var(--fm);font-size:12px;letter-spacing:.12em;color:var(--gold);line-height:1;
-      border:1px solid var(--hair-gold);border-radius:3px;padding:6px 9px;align-self:start}
+.gnum{font-family:var(--fm);font-size:12px;letter-spacing:.12em;color:var(--gold-bright);line-height:1;
+      border:1px solid var(--hair-gold);border-radius:8px;padding:7px 10px;align-self:start}
 .gst{font-family:var(--fd);font-size:clamp(20px,1.7vw,24px);font-weight:600;line-height:1.2;align-self:center}
 .gsn{grid-column:2;font-size:15.5px;line-height:1.5;color:var(--ink-dim);max-width:72ch;margin-top:8px;text-wrap:pretty}
 @media(max-width:520px){.gsh{grid-template-columns:1fr;gap:9px}.gsn{grid-column:1}.gnum{justify-self:start}}
 
 /* что внутри разбора: справка, а не шаг, поэтому без номера и с золотой чертой */
 .ginfo{background:color-mix(in oklab,var(--gold) 7%,var(--panel));border:1px solid var(--hair-gold);
-       border-left:3px solid var(--gold);border-radius:5px;padding:clamp(20px,2.4vw,28px)}
+       border-left:3px solid var(--gold);border-radius:16px;padding:clamp(20px,2.4vw,28px)}
 .gatelist{list-style:none;margin-top:15px;display:grid;
-          grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:11px clamp(20px,3vw,40px)}
+          grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:11px clamp(20px,3vw,40px)}
 .gatelist li{position:relative;padding-left:24px;color:var(--ink);font-size:16.5px;line-height:1.45;text-wrap:pretty}
 .gatelist li::before{content:"";position:absolute;left:0;top:12px;width:12px;height:1.5px;background:var(--gold)}
 
@@ -238,13 +324,17 @@ body.hasbar .block{scroll-margin-top:140px}
 .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px clamp(18px,2.4vw,28px)}
 @media(max-width:620px){.fgrid{grid-template-columns:1fr}}
 .gact{display:flex;flex-wrap:wrap;align-items:center;gap:13px 22px}
-.gact .cta{min-width:250px;padding:15px 26px;font-size:16.5px}
+.gact .cta{min-width:250px;padding:16px 26px;font-size:17px}
 .gact .note{max-width:40ch;margin:0}
-.fl{font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
-.fl2{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500}
-.ffield{display:flex;flex-direction:column;gap:7px}
-.fin{font:inherit;font-size:16px;color:var(--ink);background:var(--panel-2);border:1px solid var(--hair);border-radius:3px;padding:12px 13px;width:100%;transition:border-color .15s ease}
+.fl{font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted)}
+.fl2{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-bright);font-weight:500}
+.ffield{display:flex;flex-direction:column;gap:8px}
+/* поле ввода темнее панели и с внутренней тенью: сразу видно, что сюда пишут */
+.fin{font:inherit;font-size:16px;color:var(--ink);background:var(--field);border:1px solid var(--hair);
+  border-radius:10px;padding:14px 15px;width:100%;min-height:var(--tap);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.35);transition:border-color .15s ease,box-shadow .15s ease}
 .fin::placeholder{color:var(--ink-dim)}
+.fin:focus{outline:none;border-color:var(--gold);box-shadow:inset 0 2px 6px rgba(0,0,0,.35),0 0 0 3px color-mix(in oklab,var(--gold) 20%,transparent)}
 .fin.bad{border-color:var(--no)}
 .fin.good{border-color:color-mix(in oklab,var(--ok) 60%,transparent)}
 .ferr{display:none;color:var(--no);font-size:14.5px;line-height:1.4}
@@ -252,7 +342,7 @@ body.hasbar .block{scroll-margin-top:140px}
 .gerr{display:none;color:var(--no);font-size:15px}
 
 /* сводка «почему не пускает», прямо над кнопкой */
-.gsum{display:none;border:1px solid var(--no);border-radius:3px;
+.gsum{display:none;border:1px solid var(--no);border-radius:12px;
       background:color-mix(in oklab,var(--no) 13%,transparent);padding:15px 16px}
 .gsum.show{display:block}
 .gsum .gt{font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
@@ -261,9 +351,9 @@ body.hasbar .block{scroll-margin-top:140px}
 .gsum li{font-size:15.5px;line-height:1.45;color:var(--ink);position:relative;padding-left:19px}
 .gsum li::before{content:"";position:absolute;left:0;top:11px;width:9px;height:1.5px;background:var(--no)}
 .gsact{margin-top:14px;display:flex;gap:9px;flex-wrap:wrap}
-.gsact button{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-              background:transparent;border:1px solid var(--no);color:var(--no);border-radius:3px;
-              padding:9px 13px;cursor:pointer}
+.gsact button{font-family:var(--fb);font-size:14px;font-weight:600;
+              background:transparent;border:1px solid var(--no);color:var(--no);border-radius:9px;
+              padding:11px 15px;min-height:44px;cursor:pointer}
 .gsact button:hover{background:var(--no);color:var(--gold-ink)}
 .gate.sending .cta{opacity:.5;pointer-events:none}
 
@@ -278,27 +368,31 @@ body.hasbar .block{scroll-margin-top:140px}
 .sect > h2{margin-bottom:4px}
 .sect > .sub{margin-bottom:22px}
 
-.rvlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:0 clamp(28px,3.5vw,48px)}
+.rvlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:0 clamp(28px,3.5vw,48px)}
 .rv{display:grid;grid-template-columns:52px 1fr;gap:3px 15px;padding:18px 0;border-bottom:1px solid var(--hair-soft);align-items:start;align-content:start}
 .rvs{font-family:var(--fm);font-size:22px;grid-row:span 2;padding-top:3px}
 .rvt{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.rvn{font-family:var(--fd);font-size:22px;font-weight:600}
+.rvn{font-family:var(--fd);font-size:23px;font-weight:600}
 .rvc{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
 .rvx{margin-top:4px;font-size:16.5px;color:var(--ink-muted);line-height:1.5}
 .rvb{display:block;margin-top:7px;color:var(--unk)}
 
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.card{background:var(--surface-2);border:1px solid var(--hair);border-radius:4px;padding:19px 19px 21px}
-.card.pin{border-color:var(--hair-gold);background:color-mix(in oklab,var(--gold) 8%,var(--surface-2))}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:21px 21px 23px;
+  box-shadow:0 14px 38px rgba(0,0,0,.26)}
+.card.pin{border-color:var(--hair-gold);
+  background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 10%,var(--card)),var(--card) 66%);
+  box-shadow:var(--glow)}
 .card h3{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:10px;font-weight:400}
-.card .big{font-family:var(--fd);font-size:25px;font-weight:600;line-height:1.18;margin-bottom:9px;text-wrap:balance}
+.card .big{font-family:var(--fd);font-size:25px;font-weight:600;line-height:1.18;margin-bottom:9px;text-wrap:balance;color:var(--ink)}
+.card.pin .big{color:var(--gold-bright)}
 .card p{color:var(--ink-muted);font-size:16px;line-height:1.5}
 .card p+p{margin-top:9px}
 
 .pgroup{margin-bottom:28px}
 .pgroup h4{font-family:var(--fm);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:500}
 .pi{display:grid;grid-template-columns:auto 1fr;gap:4px 13px;padding:15px 0;border-bottom:1px solid var(--hair-soft);align-items:start}
-.mk{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:2px;border:1px solid currentColor;white-space:nowrap;margin-top:3px;min-width:82px;text-align:center}
+.mk{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:6px;border:1px solid currentColor;white-space:nowrap;margin-top:3px;min-width:82px;text-align:center}
 .mk.n{color:var(--no)}
 .mk.u{color:var(--unk)}
 .piq{font-size:17px;line-height:1.45;max-width:74ch;text-wrap:pretty}
@@ -307,11 +401,17 @@ body.hasbar .block{scroll-margin-top:140px}
 .pempty{color:var(--ink-dim);font-size:16px}
 
 /* ---------- финальный блок ---------- */
-.final{background:var(--surface);border:1px solid var(--hair-gold);border-radius:5px;padding:clamp(24px,3vw,40px);margin-top:46px;text-align:center}
+.final{background:linear-gradient(152deg,color-mix(in oklab,var(--gold) 9%,var(--surface)),var(--surface) 64%);
+  border:1.5px solid var(--hair-gold);border-radius:22px;padding:clamp(24px,3vw,40px);margin-top:46px;text-align:center;
+  box-shadow:var(--glow),0 26px 66px rgba(0,0,0,.4)}
 .final .h2{margin-bottom:10px}
 .final .sub{margin:0 auto}
 .final .note{max-width:74ch;margin-left:auto;margin-right:auto;text-wrap:balance}
 .final .btnrow{justify-content:center;margin-top:26px}
+/* что будет на разборе: список внутри выровненного по центру блока */
+.finlist{list-style:none;display:inline-block;text-align:left;margin:18px auto 0;max-width:60ch}
+.finlist li{position:relative;padding-left:24px;margin-bottom:8px;font-size:16.5px;line-height:1.45;color:var(--ink)}
+.finlist li::before{content:"";position:absolute;left:0;top:12px;width:12px;height:1.5px;background:var(--gold)}
 
 .foot{border-top:1px solid var(--hair);margin-top:60px;padding:32px 0 46px;font-size:14px;color:var(--ink-dim)}
 .foot a{color:var(--gold)}
@@ -322,14 +422,138 @@ body.hasbar .block{scroll-margin-top:140px}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
+/* ============================================================
+   ТЕЛЕФОН. Не сжатый экран, а своя версия:
+   колесо всегда на виду, кнопки ответов во всю ширину,
+   поля ввода читаются как поля, тексты короче.
+   ============================================================ */
+@media(max-width:1040px){
+  .wbar{display:flex}
+}
+@media(max-width:860px){
+  .pfq .fl{min-height:0}
+}
+@media(max-width:760px){
+  :root{--navh:56px}
+  body{font-size:16.5px}
+  .inner{padding:0 18px}
+  .pad{padding-top:34px;padding-bottom:34px}
+  .pad.sm{padding-top:26px;padding-bottom:26px}
+  h1{font-size:28px}
+  .h2{font-size:24px}
+  .h3{font-size:20px}
+  .lead{font-size:16.5px;margin-top:12px}
+  .sub{font-size:15.5px}
+  .note{font-size:14px}
+  .eyebrow{font-size:11px;letter-spacing:.13em}
+  .brand{font-size:18px}
+  .ncta{font-size:13.5px;padding:10px 14px}
+
+  /* первый экран */
+  .hero{padding:20px 0 30px}
+  .herorow{gap:22px}
+  .herolist{margin-top:16px;gap:9px;padding-left:16px}
+  .herolist li{font-size:16px;line-height:1.4;padding-left:20px;max-width:none}
+  .herolist li::before{top:11px;width:10px}
+  .btnrow{gap:9px;margin-top:18px;flex-direction:column;align-items:stretch}
+  .cta{width:100%;font-size:16.5px;padding:15px 18px;min-height:var(--tap)}
+  .spheres{grid-template-columns:1fr 1fr;border-radius:14px}
+  .sph{padding:14px 14px}
+  .sph .n{font-size:18px}
+  .sph .d{font-size:13px;margin-top:2px;line-height:1.3}
+  .sph .c{font-size:11.5px;margin-top:7px}
+
+  /* рабочая часть */
+  .worklead{margin-bottom:20px;padding-left:14px}
+  .worklead .wt{font-size:16px;margin-top:9px}
+  .worklead .wn{font-size:14px}
+  .grid{gap:22px}
+  .stage{gap:11px}
+  .idxcard{padding:13px 15px;gap:10px;border-radius:12px}
+  .idxcard .num{font-size:32px}
+  .idxcard .vd{font-size:13.5px}
+  .barmeta{font-size:10.5px}
+  .legend{font-size:10px;gap:14px}
+
+  /* блоки вопросов */
+  .blocks{gap:26px}
+  .block{padding-top:13px}
+  .bhead{grid-template-columns:1fr auto;gap:4px 10px}
+  .bname{font-size:23px}
+  .bsub{font-size:13.5px;width:100%}
+  .bscore .v{font-size:21px}
+  .bscore .d{display:none}
+  .goalrow{grid-template-columns:64px 1fr 26px;gap:9px;margin:9px 0 2px}
+  input[type=range]{height:38px}
+  input[type=range]::-webkit-slider-thumb{width:24px;height:24px;margin-top:-10px}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px}
+  .qt{font-size:16px;max-width:none}
+  .qn{font-size:14px}
+  .q{grid-template-columns:1fr;gap:11px;padding:14px 0 15px 12px}
+  /* три кнопки поровну во всю ширину: попасть пальцем нельзя мимо */
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:100%}
+  .seg button{padding:12px 6px;min-height:var(--tap);font-size:14.5px;text-align:center}
+  .bhint{font-size:14.5px;padding:13px 14px;margin-top:13px}
+
+  /* гейт */
+  .gate{margin-top:32px;padding:18px 16px;border-radius:18px}
+  .gatehead{margin-bottom:20px}
+  .gsteps{gap:14px}
+  .gstep,.ginfo{padding:18px 16px;border-radius:14px}
+  .gsh{margin-bottom:15px}
+  .gst{font-size:19px}
+  .gsn{font-size:14.5px;margin-top:6px}
+  .gatelist{gap:9px}
+  .gatelist li{font-size:15.5px;padding-left:20px}
+  .pfgrid{gap:18px}
+  .gact{flex-direction:column;align-items:stretch;gap:11px}
+  .gact .cta{min-width:0;width:100%}
+  .gact .note{max-width:none;text-align:center}
+  .gsum li{font-size:15px}
+  .gsact button{width:100%}
+
+  /* результат */
+  .sect{margin-top:34px;padding-top:22px}
+  .rv{grid-template-columns:44px 1fr;gap:2px 12px;padding:15px 0}
+  .rvs{font-size:19px}
+  .rvn{font-size:20px}
+  .rvx{font-size:15.5px}
+  .cards{gap:12px}
+  .card{padding:17px 17px 19px;border-radius:14px}
+  .card .big{font-size:21px}
+  .card p{font-size:15px}
+  .pi{grid-template-columns:1fr;gap:7px;padding:14px 0}
+  .mk{justify-self:start;margin-top:0}
+  .piq{font-size:16px}
+  .piw{grid-column:1;font-size:15px}
+  .lockmsg{padding:16px}
+  .locked > .lockedbody{max-height:360px}
+
+  /* финал и подвал */
+  .final{margin-top:30px;padding:20px 16px;border-radius:18px}
+  .final .btnrow{margin-top:18px}
+  .foot{margin-top:36px;padding:24px 0 34px}
+  .footlead{font-size:15.5px}
+  .missbar{font-size:14.5px;gap:9px;padding:11px 14px calc(11px + env(safe-area-inset-bottom,0px))}
+  .missbar span{width:100%;text-align:center}
+  .mbbtn{flex:1;justify-content:center}
+}
+@media(max-width:380px){
+  .inner{padding:0 14px}
+  h1{font-size:26px}
+  .spheres{grid-template-columns:1fr}
+  .seg button{font-size:13.5px;padding:12px 4px}
+  .ws-list{grid-template-columns:1fr}
+}
+
 /* ---------- печать в PDF ---------- */
 @media print{
   @page{margin:14mm}
   body{background:#fff;color:#1A1512;font-size:11.5pt;line-height:1.45}
-  .nav,.hero .btnrow,.blocks,.gate,.final,.foot,.toast,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
+  .nav,.hero .btnrow,.blocks,.gate,.final,.foot,.toast,.wbar,.wsheet,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
   .pfline{color:#4A4038;margin-bottom:6mm}
   .pfline b{color:#8A6E2E}
-  .inner{padding:0;max-width:none}
+  .inner{padding:0!important;max-width:none}
   /* секции на экране темные, в печати фон сбрасывается, иначе на листе плашка */
   .band,.band.alt,.hero,.stage{background:#fff!important}
   .band,.sect{border-top:1px solid #D8CFC0}
@@ -481,25 +705,45 @@ body.hasbar .block{scroll-margin-top:140px}
   </nav>
 </div></header>
 
+<!-- узкий экран: колесо уезжает вверх, поэтому оно едет следом полосой -->
+<div class="wbar noprint" id="wbar">
+  <canvas id="wheelmini" width="160" height="160" aria-hidden="true"></canvas>
+  <div class="wb-info">
+    <div class="wb-top"><b id="wbIdx">0.0</b><span>из 10</span><em id="wbCnt">0 / 43</em></div>
+    <div class="wb-bar"><i id="wbFill"></i></div>
+  </div>
+  <button class="wb-open" id="wbOpen" type="button">Колесо</button>
+</div>
+
 <!-- ГЕРОЙ -->
 <section class="hero"><div class="inner">
   <div class="herorow">
     <div>
-      <div class="eyebrow">Бесплатная диагностика · 43 вопроса · 20 минут</div>
+      <div class="eyebrow">Бесплатно · 43 вопроса · 20 минут</div>
       <h1>Колесо финансового здоровья компании</h1>
-      <p class="lead">Шесть сфер финансового управления, внутри каждой закрытые вопросы. На выходе видно, что происходит с деньгами в каждой сфере и что нужно закрыть, чтобы бизнес стал устойчивым.</p>
-      <ul class="herolist">
+      <p class="lead d-only">Шесть сфер финансового управления, внутри каждой закрытые вопросы. На выходе видно, что происходит с деньгами в каждой сфере и что нужно закрыть, чтобы бизнес стал устойчивым.</p>
+      <p class="lead m-only">Шесть сфер финансов, в каждой вопросы с ответом да или нет. На выходе видно, что происходит с деньгами и что закрыть первым.</p>
+      <p class="note d-only" style="margin-top:14px">Автор: Андрей Сычинников, бывший генеральный директор и собственник компании. Ставлю управленческий учет: собственник видит реальную прибыль, что ее съедает и сколько можно забирать себе.</p>
+      <p class="note m-only" style="margin-top:12px">Автор: Андрей Сычинников, бывший генеральный директор и собственник компании. Ставлю управленческий учет собственникам бизнеса.</p>
+      <ul class="herolist d-only">
         <li>Разбор по каждой из шести сфер, а не одна общая оценка</li>
         <li>Отдельно считаются слепые зоны: то, чего собственник про свой бизнес не знает</li>
         <li>Список того, что не закрыто, и что даст закрытие каждого пункта</li>
         <li>Готовый PDF, который можно забрать и отдать своему финансисту</li>
       </ul>
+      <ul class="herolist m-only">
+        <li>Разбор по каждой сфере, а не одна оценка</li>
+        <li>Слепые зоны: чего вы про свой бизнес не знаете</li>
+        <li>Что не закрыто и что даст закрытие</li>
+        <li>PDF, который можно отдать своему финансисту</li>
+      </ul>
       <div class="btnrow">
-        <a class="cta" href="#work">Пройти диагностику</a>
+        <a class="cta" href="#work">Пройти колесо</a>
         <a class="cta ghost sitelink" href="/founderfinance/#cta">Бесплатная диагностика со мной →</a>
-        <a class="cta ghost tgonly" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener" style="display:none">Забрать материалы в боте →</a>
+        <a class="cta ghost tgonly" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener" style="display:none">Бесплатный разбор со мной →</a>
       </div>
-      <p class="note" style="margin-top:18px">Отвечайте по факту, а не по намерению. Сфера считается закрытой, только если ответ подтверждается документом, а не ощущением.</p>
+      <p class="note d-only" style="margin-top:18px">Отвечайте по факту, а не по намерению. Сфера считается закрытой, только если ответ подтверждается документом, а не ощущением.</p>
+      <p class="note m-only" style="margin-top:16px">Отвечайте по факту, а не по намерению: закрыто то, что подтверждается документом, а не ощущением.</p>
     </div>
     <div>
       <div class="spheres">
@@ -507,10 +751,11 @@ body.hasbar .block{scroll-margin-top:140px}
         <div class="sph"><div class="n">Дивиденды</div><div class="d">доход собственника</div><div class="c">6 вопросов</div></div>
         <div class="sph"><div class="n">Богатство</div><div class="d">эффективность бизнеса</div><div class="c">7 вопросов</div></div>
         <div class="sph"><div class="n">Безопасность</div><div class="d">устойчивость к удару</div><div class="c">8 вопросов</div></div>
-        <div class="sph"><div class="n">Прибыль</div><div class="d">планирование чистой прибыли</div><div class="c">8 вопросов</div></div>
+        <div class="sph"><div class="n">Прибыль</div><div class="d">планирование прибыли</div><div class="c">8 вопросов</div></div>
         <div class="sph"><div class="n">Команда</div><div class="d">решения на основе цифр</div><div class="c">6 вопросов</div></div>
       </div>
-      <p class="note" style="margin-top:14px">Порядок сфер повторяет путь денег в компании: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому этим управлять.</p>
+      <p class="note d-only" style="margin-top:14px">Порядок сфер повторяет путь денег в компании: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому этим управлять.</p>
+      <p class="note m-only" style="margin-top:12px">Порядок сфер это путь денег: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому управлять.</p>
     </div>
   </div>
 </div></section>
@@ -520,7 +765,7 @@ body.hasbar .block{scroll-margin-top:140px}
 
   <div class="worklead noprint">
     <div class="eyebrow">Вопросы · шесть сфер, 43 пункта</div>
-    <p class="wt">Отвечайте на каждый вопрос: да, не знаю или нет. Колесо пересобирается сразу, и по нему видно, как меняется баланс шести сфер.</p>
+    <p class="wt">Отвечайте на каждый вопрос: да, не знаю или нет. Оценку поднимает только «да»: «не знаю» считается так же, как «нет», потому что то, чего вы не видите, вы не контролируете. Колесо пересобирается сразу, и по нему видно, как меняется баланс шести сфер.</p>
     <p class="wn">Ползунок «точка Б» в каждой сфере, это цель, к которой идете. По умолчанию 8 из 10, можно поменять.</p>
   </div>
 
@@ -563,7 +808,7 @@ body.hasbar .block{scroll-margin-top:140px}
         <div class="gsh">
           <span class="gnum">01</span>
           <div class="gst">О компании</div>
-          <p class="gsn">На оценку эти ответы не влияют, но без них разбор читается вслепую: одно и то же состояние учета у компании на пять человек и у компании на сто значит совершенно разное.</p>
+          <p class="gsn">Эти три ответа обязательны. На оценку они не влияют, но без них разбор читается вслепую: одно и то же состояние учета у компании на пять человек и у компании на сто значит совершенно разное.</p>
         </div>
         <div class="pfgrid" id="pfgrid"></div>
       </section>
@@ -602,13 +847,13 @@ body.hasbar .block{scroll-margin-top:140px}
             </div>
 
             <div class="ffield">
-              <label class="fl" for="gemail">Почта</label>
+              <label class="fl" for="gemail">Почта <span class="flnote">хватит одного контакта из двух</span></label>
               <input class="fin" id="gemail" type="email" inputmode="email" placeholder="name@company.com" autocomplete="email" spellcheck="false">
               <p class="ferr" id="err-email"></p>
             </div>
 
             <div class="ffield">
-              <label class="fl" for="gtg">Telegram</label>
+              <label class="fl" for="gtg">Телеграм <span class="flnote">если удобнее сюда</span></label>
               <input class="fin" id="gtg" type="text" placeholder="@nickname" autocomplete="off" spellcheck="false">
               <p class="ferr" id="err-tg"></p>
             </div>
@@ -666,22 +911,22 @@ body.hasbar .block{scroll-margin-top:140px}
         <p>Уйдете с дорожной картой, даже если дальше мы не работаем.</p>
         <div class="pclinks">
           <div><b>Телеграм-бот</b><a href="https://t.me/Sychinnikov_finance_bot">t.me/Sychinnikov_finance_bot</a></div>
-          <div class="sitelink"><b>Записаться на диагностику</b><a href="https://sychinnikov.com/founderfinance/#cta">sychinnikov.com/founderfinance</a></div>
+          <div class="sitelink"><b>Записаться на разбор</b><a href="https://sychinnikov.com/founderfinance/#cta">sychinnikov.com/founderfinance</a></div>
           <div><b>Пройти колесо заново</b><a id="selflink" href="https://sychinnikov.com/koleso/">sychinnikov.com/koleso</a></div>
         </div>
       </div>
 
       <div class="printfoot">
-        Колесо финансового здоровья компании · Founder Finance · Андрей Сычинников · ставим управленческий учет: собственник видит реальную прибыль и сколько можно забирать себе · Telegram @Sychinnikov_finance_bot
+        Колесо финансового здоровья компании · Founder Finance · Андрей Сычинников · ставим управленческий учет: собственник видит реальную прибыль и сколько можно забирать себе · Телеграм @Sychinnikov_finance_bot
       </div>
 
     </div>
 
     <div class="lockmsg" id="lockmsg">
       <div class="in2">
-        <div class="h3">Разбор закрыт</div>
-        <p class="sub" style="margin:0 auto">Ответьте на вопросы выше и нажмите «Открыть разбор». Здесь появится вывод по каждой сфере, общая оценка и список того, что нужно закрыть.</p>
-        <div class="btnrow" style="justify-content:center"><a class="cta ghost" href="#gate">Перейти к форме</a></div>
+        <div class="h3">Здесь появится ваш разбор</div>
+        <p class="sub" style="margin:0 auto">Вывод по каждой из шести сфер, слабое звено, слепые зоны и список того, что закрывать первым.</p>
+        <div class="btnrow" style="justify-content:center"><a class="cta ghost" href="#gate">К форме выше</a></div>
       </div>
     </div>
 
@@ -689,12 +934,19 @@ body.hasbar .block{scroll-margin-top:140px}
 
   <div class="final noprint" id="final" style="display:none">
     <div class="eyebrow">Что дальше</div>
-    <div class="h2" style="margin-top:12px">Заберите разбор и приходите с вопросами</div>
-    <p class="sub" style="max-width:64ch">PDF можно сохранить и отдать своему бухгалтеру или финансисту. Если по какому-то пункту непонятно, что делать руками, напишите в телеграм-бот: разберу ваш случай и скажу, с чего начинать, даже если дальше мы не работаем.</p>
+    <div class="h2" style="margin-top:12px">Разберу ваши цифры лично, бесплатно</div>
+    <p class="sub d-only" style="max-width:66ch">Колесо показало, где у бизнеса тонко. Чего оно не говорит, так это сколько слабая сфера стоит вам в деньгах каждый месяц. Это считается только на ваших цифрах, и за 30-45 минут я показываю реальную прибыль, экономику одной продажи и сколько собственник может забирать без риска для бизнеса.</p>
+    <p class="sub m-only">Колесо показало, где тонко. Сколько это стоит вам в деньгах каждый месяц, считается только на ваших цифрах. За 30-45 минут показываю реальную прибыль и сколько можно забирать себе.</p>
+    <ul class="finlist">
+      <li>посчитаем, во что обходится самая слабая сфера из вашего колеса;</li>
+      <li>разберем, с чего начинать: обычно это один отчет, а не вся система сразу;</li>
+      <li>назову сроки и порядок цен, если захотите, чтобы учет ставили мы.</li>
+    </ul>
+    <p class="note" style="max-width:60ch;margin:16px auto 0;color:var(--ink-muted)">Уйдете с дорожной картой, даже если дальше мы не работаем.</p>
     <div class="btnrow">
-      <button class="cta" id="btnPdf" type="button">Скачать PDF</button>
+      <a class="cta" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener">Записаться на бесплатный разбор →</a>
+      <button class="cta ghost" id="btnPdf" type="button">Скачать разбор в PDF</button>
       <button class="cta ghost" id="btnPng" type="button">Скачать колесо картинкой</button>
-      <a class="cta ghost" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener">Написать в телеграм-бот →</a>
     </div>
     <p class="note" style="margin-top:16px">Кнопка PDF открывает окно печати: на Mac нажмите «PDF» внизу слева и выберите «Сохранить как PDF». Если сверху листа печатается адрес и дата, снимите галочку «Печатать колонтитулы» в разделе «Показать подробности».</p>
   </div>
@@ -703,14 +955,28 @@ body.hasbar .block{scroll-margin-top:140px}
 
 <footer class="foot noprint"><div class="inner">
   <p class="footlead">Ставим управленческий учет: собственник видит реальную прибыль, что ее съедает и сколько можно забирать себе, не подрезая бизнес.</p>
-  <p style="margin-top:12px">Андрей Сычинников · Founder Finance · Telegram <a href="https://t.me/Sychinnikov_finance_bot">@Sychinnikov_finance_bot</a><span class="sitelink"> · <a href="/founderfinance/">на главную</a></span></p>
-  <p style="margin-top:10px">Ответы хранятся в вашем браузере. Диагностика не заменяет аудит: это способ за 20 минут увидеть, где у бизнеса тонко.</p>
+  <p style="margin-top:12px">Андрей Сычинников · Founder Finance · Телеграм <a href="https://t.me/Sychinnikov_finance_bot">@Sychinnikov_finance_bot</a><span class="sitelink"> · <a href="/founderfinance/">на главную</a></span></p>
+  <p style="margin-top:10px">Ответы хранятся в вашем браузере. Колесо не заменяет разбор ваших цифр: это способ за 20 минут увидеть, где у бизнеса тонко.</p>
 </div></footer>
 
-<div class="missbar" id="missbar">
+<div class="missbar noprint" id="missbar">
   <span id="missbartext"></span>
   <button class="mbbtn" id="mbnext" type="button">Показать следующий</button>
   <a class="mbbtn" href="#gate">Вернуться к форме</a>
+</div>
+
+<!-- колесо во весь экран: открывается с липкой полосы -->
+<div class="wsheet noprint" id="wsheet" aria-hidden="true">
+  <div class="ws-card" role="dialog" aria-label="Ваше колесо">
+    <div class="ws-head">
+      <span>Ваше колесо сейчас</span>
+      <button type="button" id="wsClose">Закрыть</button>
+    </div>
+    <canvas id="wheelbig" width="800" height="800" role="img" aria-label="Колесо финансового здоровья по шести сферам"></canvas>
+    <div class="ws-list" id="wsList"></div>
+    <p class="ws-note" id="wsNote"></p>
+    <div class="ws-act" id="wsAct" style="display:none"><a class="cta" href="#gate" id="wsGo">Открыть разбор →</a></div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -758,7 +1024,7 @@ var PROFILE=[
  // стран и валют, любая готовая шкала для кого-то будет бессмысленной
  {key:"turnover",label:"Оборот за последний год",short:"Оборот",type:"text",
   placeholder:"120 млн рублей, 800 тысяч евро",
-  note:"в своей валюте, примерно"},
+  note:"в своей валюте, примерно, можно пропустить",optional:true},
  {key:"finance",label:"Кто ведет финансы",short:"Финансы ведет",
   opts:["веду сам","бухгалтер","финансовый менеджер","финдиректор в штате"],
   note:"самая старшая роль"}
@@ -881,15 +1147,16 @@ var state={
 };
 
 var PRINT=false;
-var DARK={ring:"rgba(237,230,214,.13)",ringStrong:"rgba(237,230,214,.24)",ink3:"#8A7E6B",
-  line:"#C2A66A",fill:"rgba(194,166,106,.17)",goal:"#9A875C",panel:"#1B1814",bg:null};
+/* палитра колеса совпадает с палитрой сайта: те же золото, зелень и терракота */
+var DARK={ring:"rgba(244,238,226,.14)",ringStrong:"rgba(244,238,226,.26)",ink3:"#9B8E79",
+  line:"#D9B872",fill:"rgba(217,184,114,.17)",goal:"#B39A66",panel:"#1E1A15",bg:null};
 var LIGHT={ring:"#E0D7C6",ringStrong:"#C9BCA4",ink3:"#6A5F52",
   line:"#8A6E2E",fill:"rgba(138,110,46,.15)",goal:"#8A7E6B",panel:"#FFFFFF",bg:"#FFFFFF"};
 
 function pal(){return PRINT?LIGHT:DARK;}
 function bandColor(v){
   if(PRINT)return v<=3?"#9B4A36":(v<=6?"#8A6E2E":"#4E6A4A");
-  return v<=3?"#B07A66":(v<=6?"#C2A66A":"#86AE6E");
+  return v<=3?"#C48870":(v<=6?"#D9B872":"#8FBE74");
 }
 
 function scoreOf(i){var a=state.ans[i],y=0,k;for(k=0;k<a.length;k++)if(a[k]==="y")y++;return 10*y/a.length;}
@@ -910,7 +1177,8 @@ function counts(){
 function drawWheel(ctx,size,opts){
   opts=opts||{};
   var P=pal();
-  var pad=size*(opts.tight?.185:.19), cx=size/2, cy=size/2, R=size/2-pad;
+  // мини-версия для липкой полосы: без подписей, поэтому поля почти не нужны
+  var pad=size*(opts.mini?.045:(opts.tight?.185:.19)), cx=size/2, cy=size/2, R=size/2-pad;
   var n=BLOCKS.length, vals=scores();
   var ang=function(i){return -Math.PI/2+i*2*Math.PI/n;};
   var pt=function(i,v){var r=R*(v/MAXV);return [cx+r*Math.cos(ang(i)),cy+r*Math.sin(ang(i))];};
@@ -944,13 +1212,16 @@ function drawWheel(ctx,size,opts){
   ctx.beginPath();
   for(i=0;i<n;i++){p=pt(i,vals[i]);if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);}
   ctx.closePath();
-  ctx.fillStyle=P.fill;ctx.fill();
-  ctx.strokeStyle=P.line;ctx.lineWidth=size*.0036;ctx.lineJoin="round";ctx.stroke();
+  // в мини-версии заливка плотнее и линия толще, иначе на 58 пикселях ничего не разобрать
+  ctx.fillStyle=opts.mini?"rgba(217,184,114,.30)":P.fill;ctx.fill();
+  ctx.strokeStyle=P.line;ctx.lineWidth=size*(opts.mini?.022:.0036);ctx.lineJoin="round";ctx.stroke();
 
   for(i=0;i<n;i++){p=pt(i,vals[i]);
-    ctx.beginPath();ctx.arc(p[0],p[1],size*.0105,0,Math.PI*2);
+    ctx.beginPath();ctx.arc(p[0],p[1],size*(opts.mini?.028:.0105),0,Math.PI*2);
     ctx.fillStyle=bandColor(vals[i]);ctx.fill();
-    ctx.lineWidth=size*.0026;ctx.strokeStyle=P.panel;ctx.stroke();}
+    ctx.lineWidth=size*(opts.mini?.008:.0026);ctx.strokeStyle=P.panel;ctx.stroke();}
+
+  if(opts.mini)return;
 
   var ns=Math.round(size*.030);
   for(i=0;i<n;i++){
@@ -968,14 +1239,21 @@ function drawWheel(ctx,size,opts){
   }
 }
 
-function renderCanvas(){
-  var c=document.getElementById("wheel");
-  var w=Math.max(260,Math.round(c.getBoundingClientRect().width||400));
+function paintTo(c,opts){
+  if(!c)return;
+  var w=Math.max(40,Math.round(c.getBoundingClientRect().width||300));
   var dpr=Math.min(window.devicePixelRatio||1,3);
   c.width=w*dpr;c.height=w*dpr;c.style.height=w+"px";
   var ctx=c.getContext("2d");
   ctx.setTransform(dpr,0,0,dpr,0,0);
-  drawWheel(ctx,w,{});
+  drawWheel(ctx,w,opts||{});
+}
+
+function renderCanvas(){
+  paintTo(document.getElementById("wheel"),{});
+  if(barVisible())paintTo(document.getElementById("wheelmini"),{mini:true});
+  var big=document.getElementById("wheelbig");
+  if(big&&document.getElementById("wsheet").classList.contains("open"))paintTo(big,{});
 }
 
 /* ---------- о компании ---------- */
@@ -996,7 +1274,7 @@ function buildProfile(){
     var el=document.getElementById("pft-"+pi);
     el.addEventListener("input",function(){
       state.profile[pi]=el.value.trim()||null;
-      if(state.profile.indexOf(null)<0)document.getElementById("pfblock").classList.remove("hl");
+      if(profileReady())document.getElementById("pfblock").classList.remove("hl");
       syncProfile();save();refreshGateSummary();
     });
   });
@@ -1006,10 +1284,15 @@ function buildProfile(){
     if(!b)return;
     var pi=+b.dataset.p, o=PROFILE[pi].opts[+b.dataset.o];
     state.profile[pi]=state.profile[pi]===o?null:o;
-    if(state.profile.indexOf(null)<0)document.getElementById("pfblock").classList.remove("hl");
+    if(profileReady())document.getElementById("pfblock").classList.remove("hl");
     update();
     refreshGateSummary();
   });
+}
+
+// профиль готов, когда заполнены все обязательные поля
+function profileReady(){
+  return !PROFILE.some(function(p,i){return !p.optional && state.profile[i]==null;});
 }
 
 function syncProfile(){
@@ -1088,6 +1371,7 @@ function syncBlocks(){
       var cur=state.ans[bi][qi];
       var row=document.getElementById("q-"+bi+"-"+qi);
       row.classList.toggle("done",!!cur);
+      if(cur)row.setAttribute("data-a",cur); else row.removeAttribute("data-a");
       row.querySelectorAll("button[data-v]").forEach(function(b){
         b.setAttribute("aria-pressed",b.dataset.v===cur?"true":"false");});
     });
@@ -1111,8 +1395,10 @@ function renderReview(){
     }else{
       text=blk.verdicts[bandIndex(sc)];
       if(done<a.length)text+=" Отвечено "+done+" из "+a.length+", вывод предварительный.";
+      // одно короткое напоминание на сферу: подробное объяснение стоит ниже,
+      // в карточке «слепые зоны», и повторять его шесть раз незачем
       if(unk>0)blind='<span class="rvb">'+unk+" "+plural(unk,"ответ","ответа","ответов")+
-        " «не знаю»: здесь дело не в качестве бизнеса, а в видимости. То, что не измеряется, не управляется.</span>";
+        " «не знаю»: эту часть сферы вы сейчас не видите.</span>";
     }
     return '<div class="rv"><span class="rvs" style="color:'+bandColor(sc)+'">'+sc.toFixed(1)+'</span>'+
       '<div class="rvt"><span class="rvn">'+blk.name+'</span><span class="rvc">'+yes+" из "+a.length+' закрыто</span></div>'+
@@ -1216,8 +1502,60 @@ function renderPlan(){
   }).join("");
 
   host.innerHTML='<h2 class="h2">Что не закрыто</h2>'+
-    '<p class="sub">Все вопросы с ответом «нет» и «не знаю», сгруппированные по сферам, и под каждым то, что бизнес получит, если этот пункт закрыть. Это и есть план работ: сверху вниз, начиная со слабейшей сферы.</p>'+
+    '<p class="sub">Все вопросы с ответом «нет» и «не знаю», сгруппированные по сферам, и под каждым то, что бизнес получит, если этот пункт закрыть. Порядок тот же, что и выше, по пути денег. Начинать стоит со слабого звена: оно названо в общей оценке.</p>'+
     body;
+}
+
+/* ---------- липкая полоса с колесом ----------
+   на телефоне колесо стоит первым и уезжает вверх. Полоса возвращает его
+   на экран: видно и оценку, и то, как ответы меняют форму. */
+// у элемента с position:fixed offsetParent всегда null, поэтому видимость
+// проверяем по вычисленному display, а не по offsetParent
+function barVisible(){
+  var bar=document.getElementById("wbar");
+  return !!bar&&getComputedStyle(bar).display!=="none";
+}
+
+function renderBar(){
+  var bar=document.getElementById("wbar");
+  if(!barVisible())return;
+  var c=counts(), idx=avg(scores());
+  document.getElementById("wbIdx").textContent=idx.toFixed(1);
+  document.getElementById("wbCnt").textContent=c.ans+" / "+c.total;
+  document.getElementById("wbFill").style.width=Math.round(100*c.ans/c.total)+"%";
+}
+
+function renderSheet(){
+  var sheet=document.getElementById("wsheet");
+  if(!sheet||!sheet.classList.contains("open"))return;
+  var vals=scores(), c=counts();
+  document.getElementById("wsList").innerHTML=BLOCKS.map(function(b,i){
+    var col=bandColor(vals[i]);
+    return '<span><i style="background:'+col+'"></i>'+b.name+
+      '<em style="color:'+col+'">'+vals[i].toFixed(1)+'</em></span>';
+  }).join("");
+  var left=c.total-c.ans;
+  document.getElementById("wsNote").textContent=
+    c.ans===0?"Ответьте на вопросы, колесо соберется само."
+    :(left>0?"Отвечено "+c.ans+" из "+c.total+", общая оценка "+avg(vals).toFixed(1)+" из 10. Осталось "+
+             left+" "+plural(left,"вопрос","вопроса","вопросов")+"."
+           :"Все "+c.total+" "+plural(c.total,"вопрос","вопроса","вопросов")+" закрыты, общая оценка "+avg(vals).toFixed(1)+
+            " из 10. Дальше открывается разбор по каждой сфере и список того, что чинить первым.");
+  // кнопка появляется только когда идти дальше действительно есть куда
+  document.getElementById("wsAct").style.display=(left===0&&!state.unlocked)?"":"none";
+  paintTo(document.getElementById("wheelbig"),{});
+}
+
+function openSheet(){
+  var sheet=document.getElementById("wsheet");
+  sheet.classList.add("open");sheet.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+  renderSheet();
+}
+function closeSheet(){
+  var sheet=document.getElementById("wsheet");
+  sheet.classList.remove("open");sheet.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
 }
 
 /* ---------- сохранение ---------- */
@@ -1270,7 +1608,7 @@ function checkEmail(silent){
 function checkTg(silent){
   var v=document.getElementById("gtg").value.trim();
   if(!v){setErr("gtg","");return null;}
-  if(CYR_RE.test(v)){if(!silent)setErr("gtg","Ник в Telegram пишется латиницей, без русских букв");return false;}
+  if(CYR_RE.test(v)){if(!silent)setErr("gtg","Ник в Телеграме пишется латиницей, без русских букв");return false;}
   if(/^(https?:\/\/)?t\.me\//i.test(v)){                          // принимаем ссылку и чистим ее
     v=v.replace(/^(https?:\/\/)?t\.me\//i,"").replace(/[/?].*$/,"");
     document.getElementById("gtg").value="@"+v;
@@ -1289,8 +1627,8 @@ function checkContacts(silent){
   if(e===false||t===false)return false;
   if(e===null&&t===null){
     if(!silent){
-      setErr("gemail","Оставьте почту или Telegram, хотя бы что-то одно");
-      setErr("gtg","Оставьте почту или Telegram, хотя бы что-то одно");
+      setErr("gemail","Оставьте почту или Телеграм, хватит одного");
+      setErr("gtg","Оставьте почту или Телеграм, хватит одного");
     }
     return false;
   }
@@ -1375,10 +1713,10 @@ function answersText(){
   var out=[];
   BLOCKS.forEach(function(blk,bi){
     out.push("");
-    out.push(blk.name.toUpperCase()+" — "+scoreOf(bi).toFixed(1)+"/10 (цель "+state.b[bi]+")");
+    out.push(blk.name.toUpperCase()+": "+scoreOf(bi).toFixed(1)+"/10 (цель "+state.b[bi]+")");
     blk.qs.forEach(function(q,qi){
       var a=state.ans[bi][qi];
-      out.push("  ["+(a==="y"?"да":a==="n"?"НЕТ":a==="u"?"НЕ ЗНАЮ":"—")+"] "+q[0]);
+      out.push("  ["+(a==="y"?"да":a==="n"?"НЕТ":a==="u"?"НЕ ЗНАЮ":"без ответа")+"] "+q[0]);
     });
   });
   return out.join("\n");
@@ -1388,15 +1726,15 @@ async function sendLead(){
   if(!FORM_ENDPOINT||!FORM_KEY)return true;
   var c=counts();
   var head="[КОЛЕСО ФИНЗДОРОВЬЯ · Founder Finance]\n"+
-    "Имя: "+(state.name||"—")+"\nКомпания: "+(state.company||"—")+
-    "\nПочта: "+(state.email||"—")+"\nTelegram: "+(state.tg||"—")+"\n\n"+
-    PROFILE.map(function(p,pi){return p.label+": "+(state.profile[pi]||"—");}).join("\n")+"\n\n"+
+    "Имя: "+(state.name||"не указано")+"\nКомпания: "+(state.company||"не указана")+
+    "\nПочта: "+(state.email||"не указана")+"\nTelegram: "+(state.tg||"не указан")+"\n\n"+
+    PROFILE.map(function(p,pi){return p.label+": "+(state.profile[pi]||"не указано");}).join("\n")+"\n\n"+
     "Индекс: "+avg(scores()).toFixed(1)+"/10\n"+
     "Закрыто: "+c.yes+" из "+c.total+" · нет: "+c.no+" · не знаю: "+c.unk+"\n"+
     BLOCKS.map(function(b,i){return b.name+" "+scoreOf(i).toFixed(1);}).join(" · ");
   var data={
     access_key:FORM_KEY,
-    subject:"Колесо финздоровья — "+(state.company||state.name||"заявка"),
+    subject:"Колесо финздоровья: "+(state.company||state.name||"заявка"),
     from_name:"Founder Finance · колесо",
     name:state.name||"Колесо финздоровья",
     message:head+"\n"+answersText()
@@ -1481,8 +1819,10 @@ function toast(m){
 // собирает список проблем; silent=true не трогает подсветку полей
 function collectProblems(silent){
   var out=[];
-  if(state.profile.indexOf(null)>-1)
-    out.push({key:"pf",text:"Не заполнен блок «О компании» выше: нужны все три ответа."});
+  // оборот необязателен: это самое чувствительное поле, и держать на нем
+  // весь разбор дороже, чем недополучить одну строку в заявке
+  if(PROFILE.some(function(p,i){return !p.optional && state.profile[i]==null;}))
+    out.push({key:"pf",text:"Не заполнен блок «О компании» выше: нужны ответы про команду и про то, кто ведет финансы."});
   var left=TOTAL-counts().ans;
   if(left>0)
     out.push({key:"q",text:"Без ответа "+left+" "+plural(left,"вопрос","вопроса","вопросов")+
@@ -1490,7 +1830,7 @@ function collectProblems(silent){
   if(!checkName(silent))
     out.push({key:"name",text:"Не указано имя."});
   if(!checkContacts(silent))
-    out.push({key:"contact",text:"Нужна почта или Telegram, и в рабочем формате."});
+    out.push({key:"contact",text:"Нужна почта вида name@company.com или ник вида @nickname, хватит одного."});
   return out;
 }
 
@@ -1531,7 +1871,7 @@ function showGateSummary(problems){
 /* ---------- цикл ---------- */
 function update(){
   syncProfile();syncBlocks();renderCanvas();renderAnswers();renderReview();renderReadout();renderPlan();
-  renderMiss();
+  renderMiss();renderBar();renderSheet();
   var left=TOTAL-counts().ans;
   var pfLeft=state.profile.filter(function(v){return !v;}).length;
   var hint=document.getElementById("ghint");
@@ -1622,6 +1962,40 @@ function init(){
   });
 
   document.getElementById("mbnext").addEventListener("click",jumpToMiss);
+
+  // полоса с колесом появляется, когда само колесо ушло вверх,
+  // и прячется, как только рабочая часть закончилась
+  (function(){
+    var bar=document.getElementById("wbar"), stage=document.querySelector(".stage"),
+        work=document.getElementById("work");
+    if(!bar||!stage||!work||!("IntersectionObserver" in window))return;
+    var stageOut=false, inWork=false;
+    var sync=function(){
+      var on=stageOut&&inWork&&barVisible();
+      bar.classList.toggle("show",on);
+      document.body.classList.toggle("wbar-on",on);
+      if(on){renderBar();paintTo(document.getElementById("wheelmini"),{mini:true});}
+    };
+    new IntersectionObserver(function(es){
+      stageOut=!es[0].isIntersecting;sync();
+    },{rootMargin:"-70px 0px 0px 0px"}).observe(stage);
+    new IntersectionObserver(function(es){
+      inWork=es[0].isIntersecting;sync();
+    }).observe(work);
+  })();
+
+  document.getElementById("wbOpen").addEventListener("click",openSheet);
+  document.getElementById("wsClose").addEventListener("click",closeSheet);
+  document.getElementById("wsGo").addEventListener("click",function(){
+    closeSheet();
+    document.getElementById("gate").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+  document.getElementById("wsheet").addEventListener("click",function(e){
+    if(e.target===this)closeSheet();
+  });
+  window.addEventListener("keydown",function(e){
+    if(e.key==="Escape"&&document.getElementById("wsheet").classList.contains("open"))closeSheet();
+  });
 
   document.getElementById("btnPng").addEventListener("click",exportPNG);
   // колесо рисуется на canvas, поэтому под печать его надо перерисовать светлым.

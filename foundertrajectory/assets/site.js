@@ -93,6 +93,25 @@
     }catch(_){if(err)err.style.display='block';lf.classList.remove('sending');}
   });}
 
+  /* липкая кнопка на телефоне: появляется после первого экрана,
+     прячется на самом блоке заявки, чтобы не перекрывать форму */
+  var mcta=document.getElementById('mcta');
+  if(mcta){
+    var target=document.getElementById('cta');
+    var hero=document.querySelector('.hero');
+    var pastHero=false,onForm=false;
+    var sync=function(){mcta.classList.toggle('hide',!pastHero||onForm);};
+    sync();
+    if('IntersectionObserver' in window){
+      if(hero){new IntersectionObserver(function(es){
+        pastHero=!es[0].isIntersecting;sync();
+      },{threshold:0}).observe(hero);}else{pastHero=true;sync();}
+      if(target){new IntersectionObserver(function(es){
+        onForm=es[0].isIntersecting;sync();
+      },{threshold:0}).observe(target);}
+    }else{pastHero=true;sync();}
+  }
+
   /* трекинг кликов по целевым кнопкам */
   document.querySelectorAll('a.cta,a.ncta').forEach(function(a){a.addEventListener('click',function(){
     if(window.dataLayer)window.dataLayer.push({event:'cta_click',cta_text:(a.textContent||'').trim().slice(0,60),page_variant:variant});

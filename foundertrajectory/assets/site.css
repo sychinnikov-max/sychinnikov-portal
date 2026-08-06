@@ -603,6 +603,10 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   display:flex;align-items:baseline;justify-content:center;gap:7px}
 .rung .rg-price small{font-size:.36em;font-weight:600;color:var(--ink-muted)}
 .rung .rg-sub{font-size:14px;text-align:left;padding-top:16px;border-top:1px solid var(--hair);margin-top:0}
+/* что остается у клиента после работы: отдельной строкой, а не в общем перечне */
+.rung .rg-out{display:block;margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);
+  font-size:13.5px;line-height:1.45;color:var(--ink)}
+.rung .rg-out b{color:var(--gold-bright);font-weight:600}
 .rung.core{border-color:color-mix(in oklab,var(--gold) 55%,transparent);
   background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 11%,var(--card)),var(--card) 66%);
   box-shadow:var(--glow)}
@@ -624,4 +628,239 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .casecard,.ccase,.rung{will-change:transform}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ============================================================
+   ЕДИНАЯ БРЕНД-СИСТЕМА + МОБИЛЬНАЯ ВЕРСИЯ (07.08.2026)
+   Телефон получает не сжатый десктоп, а свою короткую версию:
+   тезисы вместо абзацев, крупные кнопки, липкое целевое действие.
+   Переключение содержания: .d-only (экран) / .m-only (телефон).
+   ============================================================ */
+
+:root{
+  --field:#171310;         /* поле ввода: глубже фона карточки, читается как «сюда писать» */
+  --raise:#2E2820;         /* кнопка-панель: светлее фона, читается как «сюда нажимать» */
+  --tap:48px;              /* минимальная высота нажимаемого элемента на телефоне */
+}
+
+/* якоря не должны уезжать под липкую шапку */
+section[id],div[id],article[id]{scroll-margin-top:88px}
+
+/* поля ввода: 16px, иначе Safari на айфоне зумит страницу при фокусе */
+.finput{background:var(--field);font-size:16px;padding:13px 14px;border-radius:10px}
+input.finput:focus,textarea.finput:focus{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in oklab,var(--gold) 18%,transparent)}
+.chip{background:var(--raise);color:var(--ink)}
+.chip:has(:checked){box-shadow:0 6px 18px color-mix(in oklab,var(--gold) 28%,transparent)}
+
+/* Переключатель версий: только прячем, никогда не назначаем display заново,
+   иначе сетки (.metrics, .weeks) теряют grid, а кнопки теряют flex. */
+@media(min-width:761px){.m-only{display:none!important}}
+@media(max-width:760px){.d-only{display:none!important}}
+
+/* ---------- планшет ---------- */
+@media(max-width:1024px){
+  .ccases{gap:14px}
+  .takeaway.split{gap:18px}
+}
+@media(min-width:761px) and (max-width:960px){
+  /* одна колонка: портрет прижимается влево к тексту, а не в правый край */
+  .heroportrait img{margin-left:0}
+  .heroportrait .cap{margin-left:0;margin-right:auto}
+}
+@media(max-width:900px){
+  /* на планшете три колонки съеживаются до двух слов в строке */
+  .metrics{grid-template-columns:1fr}
+  .proofbar{grid-template-columns:1fr 1fr}
+  .pb{border-bottom:1px solid var(--hair)}
+  .pb:nth-child(2n){border-right:none}
+  .pb:nth-last-child(-n+2){border-bottom:none}
+  .assets{grid-template-columns:1fr}
+}
+
+/* ---------- телефон ---------- */
+@media(max-width:760px){
+  /* появление блоков выключено: на телефоне люди листают рывками, и наблюдатель
+     иногда не успевает пометить блок, из-за чего экран остается пустым */
+  .rv{opacity:1!important;transform:none!important;transition:none!important}
+
+  body{font-size:16.5px}
+  section[id],div[id],article[id]{scroll-margin-top:70px}
+  .inner{padding:0 18px}
+  .pad{padding-top:44px;padding-bottom:44px}
+  .pad.sm{padding-top:34px;padding-bottom:34px}
+  .sect-head{margin-bottom:26px}
+  .h2{font-size:26px;line-height:1.14}
+  .sub{font-size:16px;margin-top:11px}
+  .eyebrow{font-size:11.5px;letter-spacing:.14em}
+  .note{font-size:14px}
+
+  /* шапка */
+  .nav .inner{height:60px;gap:12px}
+  .brand{font-size:18px}
+  .navtoggle{padding:11px 15px;font-size:14px;min-height:42px}
+  .nlinks{top:60px;padding:6px 0 10px}
+  .nlinks a{padding:15px 18px;font-size:16px;min-height:var(--tap);display:flex;align-items:center}
+  /* целевое действие в мобильном меню остается кнопкой, а не строкой списка */
+  .nlinks .ncta{margin:8px 18px 0;padding:14px 18px;justify-content:center;font-weight:700;
+    border:1px solid var(--hair-gold);border-radius:10px;
+    background:color-mix(in oklab,var(--gold) 15%,transparent)}
+
+  /* первый экран */
+  .hero .inner{padding-top:18px;padding-bottom:26px}
+  .hero h1{font-size:29px;line-height:1.14;margin:12px 0 0;max-width:none;letter-spacing:-.005em}
+  .hero .herolist{margin:16px 0 0}
+  .hero .herolist li{font-size:16px;line-height:1.4;padding:6px 0;gap:11px;white-space:normal;align-items:flex-start}
+  .hero .herolist li::before{flex:0 0 7px;height:7px;margin-top:.45em}
+  .hero .actions{margin:20px 0 0;gap:10px;flex-direction:column;align-items:stretch}
+  .hero .actions.second{margin:10px 0 0}
+  .hero .lead{margin:14px 0 0;font-size:15px}
+
+  /* портрет: на телефоне компактная карточка вместо полосы во весь экран */
+  .heroportrait{display:flex;gap:14px;align-items:center;margin-top:22px;
+    background:var(--card);border:1px solid var(--hair-gold);border-radius:16px;padding:14px}
+  .heroportrait img{width:96px;height:112px;min-width:96px;max-width:96px;aspect-ratio:auto;
+    border-radius:12px;margin:0;box-shadow:none;object-position:center 12%}
+  .heroportrait .cap{margin:0;max-width:none}
+  .heroportrait .c1{font-size:15.5px}
+  .heroportrait .c2{font-size:12.8px;margin-top:5px;line-height:1.45}
+
+  /* кнопки: во всю ширину, палец попадает без прицеливания */
+  .cta{width:100%;text-align:center;font-size:17px;padding:16px 20px;min-height:var(--tap);
+    display:flex;align-items:center;justify-content:center;line-height:1.25}
+  .actions{flex-direction:column;align-items:stretch;gap:10px}
+  .cta.ghost{font-size:15.5px;padding:14px 18px}
+  .takeaway.split{flex-direction:column;align-items:stretch;gap:16px}
+  .takeaway.split p{min-width:0}
+  .takeaway.split .cta{white-space:normal}
+
+  /* полоса доказательств */
+  .proofbar{margin-top:20px;border-radius:16px}
+  .pb{padding:18px 12px}
+  .pb .pbn{font-size:24px}
+  .pb .pbl{font-size:12.5px;margin-top:7px;line-height:1.35}
+
+  /* боли */
+  .painrow{padding:13px 0;gap:12px}
+  .painrow .pn{font-size:19px}
+  .painrow p{font-size:15.5px;line-height:1.42}
+  .takeaway{padding:18px 18px;border-radius:16px;font-size:15.5px;margin-top:20px}
+
+  /* результат */
+  .metric{padding:22px 20px;border-radius:16px}
+  .metric .ml{font-size:21px;margin-bottom:9px}
+  .metric .md{font-size:15.5px;line-height:1.5}
+  .metric .mtrend{font-size:18px!important;white-space:normal;margin-top:14px;padding-top:12px}
+  .metrics{gap:14px}
+
+  /* три месяца */
+  .weeks{gap:14px}
+  .week{padding:22px 20px;border-radius:16px}
+  .week .wn{font-size:12.5px}
+  .week .wt{font-size:21px;margin:9px 0 12px}
+  .week .wl li{font-size:15px;line-height:1.45;padding:4px 0 4px 16px}
+  .week .itog{padding-top:14px}
+  .week .itog .it{font-size:15px}
+  .week.first{margin-bottom:4px}
+
+  /* два направления */
+  .vcol{padding:22px 20px;border-radius:16px}
+  .vcol h4{font-size:22px!important;margin-bottom:12px}
+  .vcol p{font-size:15.5px!important;line-height:1.5!important}
+
+  /* кейсы */
+  .ccases{gap:12px}
+  .ccase{border-radius:16px}
+  .cc-head{padding:13px 16px;gap:8px}
+  .cc-name{font-size:16.5px}
+  .cc-geo{font-size:10.5px;padding:2px 8px}
+  .cc-col{padding:14px 16px 15px}
+  .cc-lbl{font-size:10px;margin-bottom:6px}
+  .cc-col p{font-size:14px;line-height:1.45}
+
+  /* команда */
+  .assets{gap:14px}
+  .asset{padding:20px 18px;border-radius:16px}
+  .asset .at{font-size:19px!important}
+  .asset .ad{font-size:15px!important;line-height:1.5!important}
+
+  /* колесо на главной */
+  .wheelcard{--wpad:18px;border-radius:18px}
+  .wh-top{grid-template-columns:1fr;gap:18px;justify-items:stretch;text-align:left}
+  .wh-figure{width:100%}
+  .wh-figure svg{width:min(260px,72vw)}
+  .wh-intro .wh-h{font-size:22px;max-width:none;margin:8px 0 6px}
+  .wh-intro .wh-s{font-size:15px;max-width:none}
+  .wh-scale{gap:6px;margin-top:12px}
+  .wh-scale .sc{font-size:10.5px;padding:4px 9px}
+  .wh-spheres{grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .wh-spheres span{padding:10px 12px;gap:8px;border-radius:12px}
+  .wh-spheres b{font-size:14px}
+  .wh-spheres em{font-size:17px}
+  .wh-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .wh-item{padding:11px 12px}
+  .wh-item b{font-size:13.5px}
+  .wh-item span{font-size:12.5px;line-height:1.35}
+  .wh-cta{flex-direction:column;align-items:stretch;gap:10px}
+  .wh-cta span{font-size:13px;text-align:center}
+
+  /* цены */
+  .ladder{gap:12px;margin-top:20px}
+  .rung{padding:24px 20px 24px;border-radius:16px}
+  .rung .rg-name{font-size:20px;min-height:0;margin-bottom:2px}
+  .rung .rg-price{font-size:34px;margin:12px 0}
+  .rung .rg-sub{font-size:14px;padding-top:13px}
+  .rung .rg-badge{left:50%;transform:translateX(-50%)}
+  .pricenote{padding:18px 18px;font-size:15px;border-radius:16px;margin-top:20px}
+
+  /* форма */
+  .formwrap{gap:22px}
+  .formcard{padding:18px 16px;border-radius:16px}
+  .fq{margin-bottom:16px}
+  .fq .fl{font-size:14px;margin-bottom:9px}
+  .chips{gap:8px}
+  .chip{font-size:15px;padding:11px 15px;min-height:44px;display:flex;align-items:center}
+  textarea.finput{min-height:92px}
+  .formcard .cta{padding:16px 20px;font-size:17px;margin-top:10px}
+  .cta-list li{font-size:15px;padding:5px 0 5px 20px}
+  .final .h2{font-size:24px}
+
+  /* подвал */
+  .fgrid{gap:24px;padding:34px 0 22px}
+  .fgrid p{font-size:14px;max-width:none}
+  .fbar{font-size:12.5px;padding:16px 0}
+  .fgrid .fnav a{display:inline-block;padding:3px 0}
+}
+
+/* совсем узкие экраны */
+@media(max-width:380px){
+  .inner{padding:0 15px}
+  .hero h1{font-size:27px}
+  .proofbar{grid-template-columns:1fr 1fr}
+  .wh-spheres{grid-template-columns:1fr}
+  .wh-grid{grid-template-columns:1fr}
+  .cta{font-size:16px;padding:15px 16px}
+}
+
+/* раскрывающийся блок в мобильной версии: подробности не занимают экран */
+.mdet{border-bottom:none;margin-top:12px}
+.mdet summary{font-family:var(--fb);font-weight:600;font-size:15px;color:var(--gold);
+  padding:11px 0 0;justify-content:flex-start;gap:9px;line-height:1.4;min-height:40px;align-items:center}
+.mdet summary::after{content:"+";font-size:20px;margin-left:auto}
+.mdet[open] summary::after{content:"–"}
+.mdet p{font-size:14.5px;line-height:1.55;padding:10px 0 0;color:var(--ink-muted)}
+.mdet[open] p:last-child{padding-bottom:4px}
+
+/* ---------- липкое целевое действие на телефоне ---------- */
+.mcta{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;
+  padding:9px 14px calc(9px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in oklab,var(--bg) 93%,transparent);backdrop-filter:blur(12px);
+  border-top:1px solid var(--hair-gold);
+  transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.mcta.hide{transform:translateY(130%)}
+.mcta .cta{width:100%;padding:15px 18px;font-size:16.5px;margin:0}
+.mcta .mnote{display:block;text-align:center;font-size:11.5px;color:var(--ink-dim);margin-top:5px;
+  font-family:var(--fm);letter-spacing:.05em}
+@media(max-width:760px){
+  .mcta{display:block}
+  body{padding-bottom:88px}
 }

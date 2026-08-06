@@ -45,12 +45,13 @@ fbq('init','PIXEL_ID'); fbq('track','PageView');
 
 <style>
 :root{
-  --bg:#131210;--surface:#1B1814;--surface-2:#221E18;--card:#1F1B16;
-  --ink:#EDE6D6;--ink-muted:#B0A48D;--ink-dim:#8A7E6B;
-  --gold:#C2A66A;--gold-ink:#141009;--gold-deep:#A98E50;--bronze:#9A875C;
-  --ok:#86AE6E;--no:#B07A66;
-  --hair:color-mix(in oklab,var(--ink) 14%,transparent);
-  --hair-gold:color-mix(in oklab,var(--gold) 32%,transparent);
+  /* палитра общая с /foundertrajectory и с колесом: один бренд */
+  --bg:#14120F;--surface:#1E1A15;--surface-2:#26211A;--card:#231E18;
+  --ink:#F4EEE2;--ink-muted:#C6B99F;--ink-dim:#9B8E79;
+  --gold:#D9B872;--gold-ink:#14100A;--gold-deep:#C2A05C;--bronze:#B39A66;--gold-bright:#F0D294;
+  --ok:#8FBE74;--no:#C48870;
+  --hair:color-mix(in oklab,var(--ink) 17%,transparent);
+  --hair-gold:color-mix(in oklab,var(--gold) 40%,transparent);
   --fd:"Playfair Display",Georgia,serif;--fb:"Manrope",system-ui,sans-serif;--fm:"IBM Plex Mono",monospace;
   --maxw:1380px;
 }
@@ -141,9 +142,12 @@ h1{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,2.4vw + 1rem,3.2re
 .metric .mtrend{margin-top:16px;padding-top:14px;border-top:1px solid var(--hair-gold);font-size:14px;color:var(--gold);font-family:var(--fm);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
 
 /* deliverables / moat cards */
-.assets{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:900px){.assets{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.assets{grid-template-columns:1fr}}
+/* minmax(0,1fr) обязателен: с обычным 1fr длинные слова распирали сетку
+   и страница ехала вбок на телефоне */
+.assets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.assets.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){.assets,.assets.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.assets,.assets.three{grid-template-columns:1fr}}
 .asset{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:28px 26px;display:flex;flex-direction:column}
 .asset.core{border-color:var(--hair-gold);background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 8%,var(--card)),var(--card))}
 .asset .ag{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze)}
@@ -397,8 +401,8 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <div class="eyebrow">Почему вы летите вслепую</div>
     <h2 class="h2" style="margin-top:14px">Вы зажаты между тремя мирами, и ни один вас не закрывает</h2>
   </div>
-  <div class="assets rv" style="grid-template-columns:repeat(3,1fr)">
-    <div class="asset"><div class="ag">Мир 1</div><div class="at">Местный бухгалтер</div><div class="ad">Делает только отчеты в налоговую (compliance). Управленческий учет не ведет, по-русски не объяснит, для ваших решений бесполезен.</div></div>
+  <div class="assets rv three">
+    <div class="asset"><div class="ag">Мир 1</div><div class="at">Местный бухгалтер</div><div class="ad">Делает только отчеты в налоговую. Управленческий учет не ведет, по-русски не объяснит, для ваших решений бесполезен.</div></div>
     <div class="asset"><div class="ag">Мир 2</div><div class="at">Российские сервисы</div><div class="ad">Управленческий учет по-русски и понятно, но не знают европейских реалий (евро, местные налоги, структура) и сидят на российском контуре оплаты.</div></div>
     <div class="asset core"><div class="ag">Мир 3</div><div class="at">Founder Finance</div><div class="ad">На пересечении: управленческий учет под европейский контур, оплата в евро по-белому, плюс мой слой решений по цифрам.</div></div>
   </div>
