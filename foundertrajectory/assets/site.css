@@ -507,16 +507,18 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .caselist.compact .casecard .cmeta .cd{font-size:14.5px;margin-top:5px}
 .caselist.compact .casecard .cgo{display:none}
 
-/* ===== ГЕРОЙ: верх текста строго на линии с верхом фотографии ===== */
-.hero .herorow{align-items:start}
-.hero .herorow > *{align-self:start}
-.hero .eyebrow{display:block;line-height:1.15;margin-top:2px}
-.hero h1{margin:16px 0 0;max-width:28ch;text-wrap:balance}
+/* ===== ГЕРОЙ: контент прижат к верху, текст на линии с фотографией ===== */
+.hero .inner{min-height:0;display:block;padding-top:clamp(30px,4.2vh,58px);padding-bottom:clamp(40px,6vh,80px)}
+.hero .herorow{display:grid;align-items:start}
+.hero .herorow > *{align-self:start;margin-top:0}
+.hero .eyebrow{display:block;line-height:1;margin:0;padding:0}
+.hero h1{margin:18px 0 0;max-width:28ch;text-wrap:balance}
 .hero .heroline{margin:20px 0 0}
-.hero .actions{margin:26px 0 0}
-.hero .lead{margin:16px 0 0}
-.heroportrait img{aspect-ratio:3.4/4;margin-top:0}
-@media(max-width:960px){.hero .herorow > *{align-self:stretch}}
+.hero .actions{margin:28px 0 0}
+.hero .lead{margin:18px 0 0}
+.heroportrait{margin-top:0;padding-top:0}
+.heroportrait img{aspect-ratio:3.4/4;margin-top:-4px}
+@media(max-width:960px){.hero .herorow > *{align-self:stretch}.heroportrait img{margin-top:0}}
 
 /* иллюстративные кейсы без ссылки */
 .casecard.nolink{cursor:default}
