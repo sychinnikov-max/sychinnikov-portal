@@ -1,12 +1,14 @@
 /* Founder Trajectory — общая таблица стилей многостраничника.
    Источник дизайн-системы: прежняя product-страница (2026-06). Правится в одном месте для всех страниц. */
 :root{
-  --bg:#131210;--surface:#1B1814;--surface-2:#221E18;--card:#1F1B16;
-  --ink:#EDE6D6;--ink-muted:#B0A48D;--ink-dim:#8A7E6B;
-  --gold:#C2A66A;--gold-ink:#141009;--gold-deep:#A98E50;--bronze:#9A875C;
-  --ok:#86AE6E;--no:#B07A66;
-  --hair:color-mix(in oklab,var(--ink) 14%,transparent);
-  --hair-gold:color-mix(in oklab,var(--gold) 32%,transparent);
+  --bg:#14120F;--surface:#1E1A15;--surface-2:#26211A;--card:#231E18;
+  --ink:#F4EEE2;--ink-muted:#C6B99F;--ink-dim:#9B8E79;
+  --gold:#D9B872;--gold-ink:#14100A;--gold-deep:#C2A05C;--bronze:#B39A66;
+  --gold-bright:#F0D294;
+  --ok:#8FBE74;--no:#C48870;
+  --hair:color-mix(in oklab,var(--ink) 17%,transparent);
+  --hair-gold:color-mix(in oklab,var(--gold) 40%,transparent);
+  --glow:0 0 0 1px color-mix(in oklab,var(--gold) 26%,transparent),0 18px 50px color-mix(in oklab,var(--gold) 13%,transparent);
   --fd:"Playfair Display",Georgia,serif;--fb:"Manrope",system-ui,sans-serif;--fm:"IBM Plex Mono",monospace;
   --maxw:1380px;
 }
@@ -385,3 +387,82 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .urf{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:13px 15px}
 .urf .fk{font-family:var(--fm);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim)}
 .urf .fv{font-size:14.5px;color:var(--ink);margin-top:5px;line-height:1.4}
+
+/* ============================================================
+   ПРАВКИ 06.08.2026 — яркость, акценты, новые компоненты
+   ============================================================ */
+
+/* свечение секций: мягкие световые пятна, чтобы полотно не было плоским */
+.band{position:relative}
+.band.alt::before,.band.glowdeep::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(58% 62% at 12% 0%,color-mix(in oklab,var(--gold) 9%,transparent),transparent 62%),
+             radial-gradient(46% 54% at 92% 100%,color-mix(in oklab,var(--gold) 7%,transparent),transparent 60%);
+}
+.band > .inner{position:relative;z-index:1}
+.hero{background-image:radial-gradient(72% 62% at 78% 14%,color-mix(in oklab,var(--gold) 15%,transparent),transparent 60%),
+                      radial-gradient(48% 46% at 4% 96%,color-mix(in oklab,var(--gold) 8%,transparent),transparent 62%)}
+.cta{box-shadow:0 14px 40px color-mix(in oklab,var(--gold) 30%,transparent)}
+.cta:hover{box-shadow:0 16px 46px color-mix(in oklab,var(--gold) 40%,transparent)}
+.eyebrow{color:var(--gold-bright)}
+.takeaway{box-shadow:0 18px 46px rgba(0,0,0,.34)}
+.takeaway b{color:var(--gold-bright)}
+
+/* герой: буллиты одной строкой через точку */
+.heroline{font-size:clamp(17px,1.5vw,20.5px);color:var(--ink);line-height:1.6;margin:18px 0 4px;max-width:74ch}
+.heroline i{font-style:normal;color:var(--gold-bright);margin:0 .5em;font-weight:700}
+
+/* результат: крупный итог отдельной строкой внизу карточки */
+.metric{display:flex;flex-direction:column;box-shadow:0 16px 44px rgba(0,0,0,.3)}
+.metric .ml{font-size:clamp(23px,2.2vw,29px);margin-bottom:14px}
+.metric .md{font-size:16px;flex:1}
+.metric .mtrend{display:block;margin-top:20px;padding-top:18px;border-top:1px solid var(--hair-gold);
+  font-family:var(--fd);font-weight:700;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.01em;
+  color:var(--gold-bright);text-shadow:0 0 26px color-mix(in oklab,var(--gold) 40%,transparent);line-height:1.15}
+
+/* три месяца: первый выделен и отбит от остальных */
+.weeks{grid-template-columns:1.18fr 1fr 1fr;gap:20px;align-items:stretch}
+@media(max-width:900px){.weeks{grid-template-columns:1fr;gap:18px}}
+.week{box-shadow:0 16px 40px rgba(0,0,0,.28)}
+.week.first{
+  border-color:color-mix(in oklab,var(--gold) 62%,transparent);
+  background:linear-gradient(158deg,color-mix(in oklab,var(--gold) 15%,var(--card)),var(--card) 62%);
+  box-shadow:var(--glow),0 22px 60px rgba(0,0,0,.4);
+  position:relative;margin-right:14px}
+@media(max-width:900px){.week.first{margin-right:0;margin-bottom:10px}}
+.week.first::after{content:"";position:absolute;top:22px;right:-15px;bottom:22px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--hair-gold),transparent)}
+@media(max-width:900px){.week.first::after{display:none}}
+.week .wbadge{position:absolute;top:-11px;left:26px;background:var(--gold);color:var(--gold-ink);
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:999px;
+  box-shadow:0 8px 22px color-mix(in oklab,var(--gold) 40%,transparent)}
+.week.first .wt{color:var(--gold-bright)}
+.week .wnote{margin-top:14px;font-size:14.5px;color:var(--ink-muted);line-height:1.5;
+  border-left:2px solid var(--hair-gold);padding-left:13px}
+
+/* команда и артефакты: текст крупнее */
+.asset .ad{font-size:16.5px;line-height:1.55}
+.asset .at{font-size:22px}
+.asset{box-shadow:0 14px 38px rgba(0,0,0,.26)}
+
+/* ============ БЛОК КОЛЕСА: мини-лендинг внутри лендинга ============ */
+.wheelpromo{
+  display:grid;grid-template-columns:.86fr 1.14fr;gap:clamp(28px,4vw,56px);align-items:center;
+  background:linear-gradient(152deg,color-mix(in oklab,var(--gold) 13%,var(--surface-2)),var(--card) 68%);
+  border:1.5px solid color-mix(in oklab,var(--gold) 46%,transparent);border-radius:26px;
+  padding:clamp(28px,3.6vw,50px);box-shadow:var(--glow),0 30px 80px rgba(0,0,0,.44)}
+@media(max-width:900px){.wheelpromo{grid-template-columns:1fr;gap:26px}}
+.wheelart{position:relative;text-align:center}
+.wheelart svg{width:100%;max-width:340px;height:auto;filter:drop-shadow(0 0 34px color-mix(in oklab,var(--gold) 30%,transparent))}
+.wheelart .wcap{display:flex;justify-content:center;gap:22px;margin-top:16px;flex-wrap:wrap}
+.wheelart .wcap span{font-family:var(--fm);font-size:12.5px;color:var(--ink-muted);display:flex;align-items:center;gap:7px}
+.wheelart .wcap i{width:13px;height:13px;border-radius:3px;display:inline-block}
+.wheelright .wh-eyebrow{font-family:var(--fm);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright)}
+.wheelright .wh-h{font-family:var(--fd);font-weight:600;font-size:clamp(26px,2.9vw,38px);line-height:1.1;margin:12px 0 8px}
+.wheelright .wh-s{font-size:16.5px;color:var(--ink-muted);line-height:1.55;margin-bottom:18px}
+.wh-list{list-style:none;margin:0 0 22px;display:grid;gap:9px}
+.wh-list li{font-size:16.5px;color:var(--ink);line-height:1.45;padding-left:26px;position:relative}
+.wh-list li::before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:50%;
+  background:var(--gold-bright);box-shadow:0 0 12px color-mix(in oklab,var(--gold) 70%,transparent)}
+.wh-list li b{color:var(--gold-bright);font-weight:600}
+.wh-foot{font-size:14.5px;color:var(--ink-dim);margin-top:14px}
