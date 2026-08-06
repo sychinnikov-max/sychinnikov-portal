@@ -409,8 +409,8 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .takeaway b{color:var(--gold-bright)}
 
 /* герой: буллиты одной строкой через точку */
-.heroline{font-size:clamp(17px,1.5vw,20.5px);color:var(--ink);line-height:1.6;margin:18px 0 4px;max-width:74ch}
-.heroline i{font-style:normal;color:var(--gold-bright);margin:0 .5em;font-weight:700}
+.heroline{font-size:clamp(16.5px,1.45vw,19.5px);color:var(--ink);line-height:1.65;margin:18px 0 4px;max-width:70ch}
+.heroline i{font-style:normal;color:var(--gold-bright);font-weight:700;padding:0 .12em}
 
 /* результат: крупный итог отдельной строкой внизу карточки */
 .metric{display:flex;flex-direction:column;box-shadow:0 16px 44px rgba(0,0,0,.3)}
@@ -507,9 +507,16 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .caselist.compact .casecard .cmeta .cd{font-size:14.5px;margin-top:5px}
 .caselist.compact .casecard .cgo{display:none}
 
-/* герой: подзаголовок на уровне фотографии */
-.herorow{align-items:start}
-.heroportrait img{aspect-ratio:3.4/4}
+/* ===== ГЕРОЙ: верх текста строго на линии с верхом фотографии ===== */
+.hero .herorow{align-items:start}
+.hero .herorow > *{align-self:start}
+.hero .eyebrow{display:block;line-height:1.15;margin-top:2px}
+.hero h1{margin:16px 0 0;max-width:28ch;text-wrap:balance}
+.hero .heroline{margin:20px 0 0}
+.hero .actions{margin:26px 0 0}
+.hero .lead{margin:16px 0 0}
+.heroportrait img{aspect-ratio:3.4/4;margin-top:0}
+@media(max-width:960px){.hero .herorow > *{align-self:stretch}}
 
 /* иллюстративные кейсы без ссылки */
 .casecard.nolink{cursor:default}
