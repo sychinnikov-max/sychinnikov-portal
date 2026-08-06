@@ -507,18 +507,29 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .caselist.compact .casecard .cmeta .cd{font-size:14.5px;margin-top:5px}
 .caselist.compact .casecard .cgo{display:none}
 
-/* ===== ГЕРОЙ: контент прижат к верху, текст на линии с фотографией ===== */
-.hero .inner{min-height:0;display:block;padding-top:clamp(30px,4.2vh,58px);padding-bottom:clamp(40px,6vh,80px)}
-.hero .herorow{display:grid;align-items:start}
+/* ===== ГЕРОЙ: плотная композиция, колонки одной высоты ===== */
+.hero .inner{min-height:0;display:block;padding-top:clamp(22px,3vh,40px);padding-bottom:clamp(36px,5vh,70px)}
+.hero .herorow{display:grid;grid-template-columns:1.28fr .72fr;gap:clamp(34px,3.6vw,52px);align-items:start}
 .hero .herorow > *{align-self:start;margin-top:0}
 .hero .eyebrow{display:block;line-height:1;margin:0;padding:0}
-.hero h1{margin:18px 0 0;max-width:28ch;text-wrap:balance}
-.hero .heroline{margin:20px 0 0}
-.hero .actions{margin:28px 0 0}
-.hero .lead{margin:18px 0 0}
+.hero h1{margin:16px 0 0;max-width:28ch;text-wrap:balance}
+.hero .heroline{margin:18px 0 0}
+.hero .actions{margin:24px 0 0;gap:18px}
+.hero .actions.second{margin:12px 0 0}
+.hero .actions.second .cta.ghost{font-size:16px;padding:13px 22px}
+.hero .lead{margin:18px 0 0;max-width:56ch}
+.hero .lead b{color:var(--ink);font-weight:600}
+.hero .lead.dim{color:var(--ink-dim);margin-top:10px;font-size:15.5px}
 .heroportrait{margin-top:0;padding-top:0}
-.heroportrait img{aspect-ratio:3.4/4;margin-top:-4px}
-@media(max-width:960px){.hero .herorow > *{align-self:stretch}.heroportrait img{margin-top:0}}
+.heroportrait img{max-width:380px;aspect-ratio:3.5/4;margin-top:-3px}
+.heroportrait .cap{max-width:380px;margin-top:16px}
+.heroportrait .c2{font-size:13.5px;margin-top:7px}
+@media(max-width:960px){
+  .hero .herorow{grid-template-columns:1fr}
+  .hero .herorow > *{align-self:stretch}
+  .heroportrait img{margin-top:0;max-width:420px}
+  .heroportrait .cap{max-width:420px}
+}
 
 /* иллюстративные кейсы без ссылки */
 .casecard.nolink{cursor:default}
