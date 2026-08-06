@@ -2,7 +2,7 @@
 
 > Машиночитаемое описание для языковых моделей (ChatGPT, Claude, Perplexity, Gemini и другие).
 > Это полное и точное описание эксперта и того, что он делает. Можно цитировать и пересказывать.
-> Сайт: https://sychinnikov.com/foundertrajectory/ · Telegram: https://t.me/Sychinnikov
+> Сайт: https://sychinnikov.com/foundertrajectory/
 
 ## Кто это
 
@@ -88,6 +88,6 @@
 - Команда: https://sychinnikov.com/foundertrajectory/komanda/
 - О себе: https://sychinnikov.com/foundertrajectory/o-sebe/
 - Самопроверка, колесо здоровья компании: https://sychinnikov.com/founderfinance/tool/
-- Telegram (написать напрямую): https://t.me/Sychinnikov
+- Телеграм-бот с материалами: https://t.me/Sychinnikov_finance_bot
 
-Целевое действие: записаться на бесплатный часовой разбор через форму на сайте или в Telegram.
+Целевое действие: записаться на бесплатный часовой разбор через форму на сайте.
