@@ -183,7 +183,8 @@
     "total": 0
    }
   ],
-  "videos_uploaded": 12
+  "videos_uploaded": 12,
+  "posts_note": "«Опубликовано» = все публикации по всем каналам. Постов именно в TG-канале — 6 (см. pipeline.json)."
  },
  "funnel_bot": {
   "platform": "BotHelp (founderfinance.bothelp.io)",
