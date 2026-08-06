@@ -513,16 +513,19 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 .hero .herorow > *{align-self:start;margin-top:0}
 .hero .eyebrow{display:block;line-height:1;margin:0;padding:0}
 .hero h1{margin:16px 0 0;max-width:28ch;text-wrap:balance}
-.hero .heroline{margin:18px 0 0}
-.hero .actions{margin:24px 0 0;gap:18px}
+.hero .herolist{margin:20px 0 0;padding:0;max-width:56ch}
+.hero .herolist li{align-items:flex-start;gap:15px;font-size:17.5px;line-height:1.5;padding:8px 0;color:var(--ink)}
+.hero .herolist li::before{flex:0 0 8px;height:8px;margin-top:.55em;background:var(--gold-bright);
+  box-shadow:0 0 10px color-mix(in oklab,var(--gold) 55%,transparent)}
+.hero .actions{margin:26px 0 0;gap:18px}
 .hero .actions.second{margin:12px 0 0}
 .hero .actions.second .cta.ghost{font-size:16px;padding:13px 22px}
 .hero .lead{margin:18px 0 0;max-width:56ch}
 .hero .lead b{color:var(--ink);font-weight:600}
 .hero .lead.dim{color:var(--ink-dim);margin-top:10px;font-size:15.5px}
 .heroportrait{margin-top:0;padding-top:0}
-.heroportrait img{max-width:380px;aspect-ratio:3.5/4;margin-top:-3px}
-.heroportrait .cap{max-width:380px;margin-top:16px}
+.heroportrait img{max-width:420px;aspect-ratio:3.5/4;margin-top:-3px}
+.heroportrait .cap{max-width:420px;margin-top:16px}
 .heroportrait .c2{font-size:13.5px;margin-top:7px}
 @media(max-width:960px){
   .hero .herorow{grid-template-columns:1fr}
