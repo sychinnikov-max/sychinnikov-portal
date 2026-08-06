@@ -466,3 +466,5 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
   background:var(--gold-bright);box-shadow:0 0 12px color-mix(in oklab,var(--gold) 70%,transparent)}
 .wh-list li b{color:var(--gold-bright);font-weight:600}
 .wh-foot{font-size:14.5px;color:var(--ink-dim);margin-top:14px}
+.casecard.nolink{cursor:default;grid-template-columns:auto 1fr}
+.casecard.nolink:hover{border-color:var(--hair);transform:none}
