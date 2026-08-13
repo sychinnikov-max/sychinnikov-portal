@@ -30,17 +30,20 @@ a{color:inherit}
 (function(){
   // Короткие ссылки-метки для отслеживания переходов в Метрике 109611431.
   // Формат: /founderfinance/go/?a  →  /founderfinance/tool/?utm_source=...
+  var TOOL = '/founderfinance/tool/';
   var map = {
-    a: 'anomalia-evropa',
-    b: 'anomalia-obshiy',
-    c: 'partnery-lichka',
-    d: 'kanal-tg',
-    e: 'youtube'
+    a: {s: 'anomalia-evropa', c: 'partnery'},
+    b: {s: 'anomalia-obshiy', c: 'partnery'},
+    c: {s: 'partnery-lichka', c: 'partnery'},
+    d: {s: 'kanal-tg',        c: 'kanaly'},
+    e: {s: 'youtube',         c: 'kanaly'},
+    // Профиль в телеграме. Меняется destination здесь, ссылку в профиле трогать не надо.
+    p: {s: 'tg-profile',      c: 'kanaly', to: '/foundertrajectory/'}
   };
   var q = (location.search || '').replace('?', '').split('&')[0].split('=')[0].toLowerCase();
-  var src = map[q] || 'go';
-  var url = '/founderfinance/tool/?utm_source=' + encodeURIComponent(src)
-          + '&utm_medium=telegram&utm_campaign=partnery';
+  var m = map[q] || {s: 'go', c: 'kanaly'};
+  var url = (m.to || TOOL) + '?utm_source=' + encodeURIComponent(m.s)
+          + '&utm_medium=telegram&utm_campaign=' + encodeURIComponent(m.c);
   location.replace(url);
 })();
 </script>
