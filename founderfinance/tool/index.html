@@ -126,6 +126,14 @@ p,li{text-wrap:pretty}
 .sph .d{font-size:16px;color:var(--ink-muted);margin-top:5px;line-height:1.35}
 .sph .c{font-family:var(--fm);font-size:13px;color:var(--gold-bright);letter-spacing:.08em;margin-top:11px}
 
+/* ---------- пример колеса на первом экране ----------
+   человек должен увидеть результат до того, как начнет отвечать:
+   колесо наливается на глазах, поэтому понятно, что он получит */
+.demo{margin:0 0 clamp(16px,2.2vw,22px)}
+.demo canvas{width:100%;max-width:460px;height:auto;display:block;margin:0 auto}
+.demo figcaption{margin-top:-4px;text-align:center;font-family:var(--fm);font-size:11.5px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-dim)}
+
 /* ---------- рабочая часть ---------- */
 /* инструкция перед вопросами: без нее непонятно, что вообще надо делать */
 .worklead{margin-bottom:clamp(24px,2.8vw,34px);padding-left:18px;border-left:2px solid var(--hair-gold)}
@@ -204,10 +212,27 @@ body.wbar-on .q{scroll-margin-top:calc(var(--navh) + 110px)}
 @media(max-width:860px){.pfq .fl{min-height:0}}
 .flnote{text-transform:none;letter-spacing:0;font-family:var(--fb);font-size:14px;color:var(--ink-dim)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--fb);font-size:15px;line-height:1.3;padding:11px 16px;min-height:44px;
-  display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;
-  background:var(--raise);color:var(--ink);cursor:pointer;
+/* рамка золотая и подложка светлее фона: чип должен читаться как кнопка,
+   а не как подпись рядом с полем */
+.chip{font-family:var(--fb);font-size:15px;line-height:1.25;padding:11px 14px;min-height:46px;
+  display:inline-flex;align-items:center;justify-content:center;text-align:center;
+  border:1px solid color-mix(in oklab,var(--gold) 32%,transparent);border-radius:999px;
+  background:linear-gradient(168deg,var(--raise),color-mix(in oklab,#000 22%,var(--raise)));
+  color:var(--ink);cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.3);
   transition:background .12s ease,color .12s ease,border-color .12s ease,box-shadow .2s ease}
+/* сетка вместо переноса: варианты не расползаются по строкам */
+.ch-size,.ch-finance{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+
+/* поле выручки в той же рамке, что и кнопки, плюс мигающий курсор:
+   видно, что сюда не нажимают, а печатают */
+.pfin{position:relative}
+.pfin .fin{padding-left:29px;border-radius:14px;border-color:color-mix(in oklab,var(--gold) 32%,transparent)}
+.pfin::before{content:"";position:absolute;left:15px;top:50%;transform:translateY(-50%);
+  width:2px;height:19px;background:var(--gold);pointer-events:none;
+  animation:caretblink 1.1s steps(1) infinite}
+.pfin.filled::before,.pfin:focus-within::before{display:none}
+@keyframes caretblink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.pfin::before{animation:none}}
 .chip:hover{border-color:var(--hair-gold);background:color-mix(in oklab,var(--gold) 12%,var(--raise))}
 .chip[aria-pressed=true]{background:var(--gold);border-color:transparent;color:var(--gold-ink);font-weight:700;
   box-shadow:0 8px 22px color-mix(in oklab,var(--gold) 30%,transparent)}
@@ -458,6 +483,14 @@ body.hasbar{padding-bottom:96px}
   .btnrow{gap:9px;margin-top:18px;flex-direction:column;align-items:stretch}
   .cta{width:100%;font-size:16.5px;padding:15px 18px;min-height:var(--tap)}
   .spheres{grid-template-columns:1fr 1fr;border-radius:14px}
+  /* колесо на первом экране: крупное, но так, чтобы кнопка осталась видна */
+  .demo{margin:18px 0 2px}
+  .demo canvas{max-width:min(74vw,300px)}
+  .demo figcaption{margin-top:-6px;font-size:10.5px;letter-spacing:.07em}
+  /* размер компании в одну строку, роль по две в строке */
+  .ch-size{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .ch-size .chip{padding:11px 2px;font-size:14px}
+  .ch-finance .chip{padding:11px 6px;font-size:14px;line-height:1.2}
   .sph{padding:14px 14px}
   .sph .n{font-size:18px}
   .sph .d{font-size:13px;margin-top:2px;line-height:1.3}
@@ -539,6 +572,7 @@ body.hasbar{padding-bottom:96px}
   .mbbtn{flex:1;justify-content:center}
 }
 @media(max-width:380px){
+  .ch-size .chip{font-size:13px}
   .inner{padding:0 14px}
   h1{font-size:26px}
   .spheres{grid-template-columns:1fr}
@@ -550,7 +584,7 @@ body.hasbar{padding-bottom:96px}
 @media print{
   @page{margin:14mm}
   body{background:#fff;color:#1A1512;font-size:11.5pt;line-height:1.45}
-  .nav,.hero .btnrow,.blocks,.gate,.final,.foot,.toast,.wbar,.wsheet,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
+  .nav,.hero .btnrow,.blocks,.gate,.final,.foot,.toast,.wbar,.wsheet,.demo,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
   .pfline{color:#4A4038;margin-bottom:6mm}
   .pfline b{color:#8A6E2E}
   .inner{padding:0!important;max-width:none}
@@ -721,33 +755,37 @@ body.hasbar{padding-bottom:96px}
     <div>
       <div class="eyebrow">Бесплатно · 50 вопросов · 25 минут</div>
       <h1>Колесо финансового здоровья компании</h1>
-      <p class="lead d-only">Шесть сфер финансового управления, внутри каждой вопросы с ответом да, не знаю или нет. На выходе видно, что происходит с деньгами в каждой сфере, с каких трех шагов начинать и что даст закрытие каждого пункта.</p>
-      <p class="lead m-only">Шесть сфер финансов, в каждой вопросы с ответом да, не знаю или нет. На выходе разбор по сферам и три шага, с которых начинать.</p>
-      <p class="note d-only" style="margin-top:14px">Автор: Андрей Сычинников, бывший генеральный директор и собственник компании с выручкой 120 млн рублей в год. Ставлю управленческий учет: собственник видит реальную прибыль, что ее съедает и сколько можно забирать себе.</p>
-      <p class="note m-only" style="margin-top:12px">Автор: Андрей Сычинников, бывший генеральный директор и собственник компании. Ставлю управленческий учет собственникам бизнеса.</p>
+      <p class="lead d-only">Шесть сфер финансов, в каждой вопросы с ответом да, не знаю или нет. На выходе разбор по каждой сфере и три шага, с которых начинать.</p>
+      <p class="lead m-only">Шесть сфер финансов. На выходе разбор по каждой сфере и три шага, с которых начинать.</p>
+
+      <!-- телефон: пример собранного колеса стоит прямо на первом экране,
+           до кнопки, иначе человек не понимает, что он получит -->
+      <figure class="demo m-only" id="demowrapM">
+        <canvas id="demoM" width="640" height="640" role="img" aria-label="Пример собранного колеса финансового здоровья"></canvas>
+        <figcaption>Пример: колесо компании после 50 ответов</figcaption>
+      </figure>
+
       <ul class="herolist d-only">
         <li>Разбор по каждой из шести сфер, а не одна общая оценка</li>
-        <li>Отдельно считаются слепые зоны: то, чего собственник про свой бизнес не знает</li>
-        <li>Три первых шага: с чего начинать именно вам, а не список из тридцати дел</li>
-        <li>Полный список того, что не закрыто, и что даст закрытие каждого пункта</li>
-        <li>Готовый PDF, который можно забрать и отдать своему финансисту или бухгалтеру</li>
-      </ul>
-      <ul class="herolist m-only">
-        <li>Разбор по каждой сфере, а не одна оценка</li>
-        <li>Слепые зоны: чего вы про свой бизнес не знаете</li>
-        <li>Три первых шага, с которых начинать</li>
-        <li>Что не закрыто и что даст закрытие</li>
-        <li>PDF, который можно отдать своему финансисту</li>
+        <li>Слепые зоны: то, чего собственник про свой бизнес не знает</li>
+        <li>Три первых шага и PDF, который можно забрать</li>
       </ul>
       <div class="btnrow">
         <a class="cta" href="#work">Пройти колесо</a>
         <a class="cta ghost sitelink" href="/founderfinance/#cta">Бесплатная диагностика со мной →</a>
         <a class="cta ghost tgonly" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener" style="display:none">Бесплатный разбор со мной →</a>
       </div>
-      <p class="note d-only" style="margin-top:18px">Отвечайте по факту, а не по намерению. Сфера считается закрытой, только если ответ подтверждается документом, а не ощущением.</p>
-      <p class="note m-only" style="margin-top:16px">Отвечайте по факту, а не по намерению: закрыто то, что подтверждается документом, а не ощущением.</p>
+      <ul class="herolist m-only">
+        <li>Разбор по каждой сфере, а не одна оценка</li>
+        <li>Слепые зоны: чего вы про свой бизнес не знаете</li>
+        <li>Три первых шага и PDF</li>
+      </ul>
     </div>
     <div>
+      <figure class="demo d-only" id="demowrap">
+        <canvas id="demo" width="800" height="800" role="img" aria-label="Пример собранного колеса финансового здоровья"></canvas>
+        <figcaption>Пример: колесо компании после 50 ответов</figcaption>
+      </figure>
       <div class="spheres">
         <div class="sph"><div class="n">Деньги</div><div class="d">чем платить завтра</div><div class="c">9 вопросов</div></div>
         <div class="sph"><div class="n">Дивиденды</div><div class="d">доход собственника</div><div class="c">7 вопросов</div></div>
@@ -756,8 +794,7 @@ body.hasbar{padding-bottom:96px}
         <div class="sph"><div class="n">Прибыль</div><div class="d">планирование прибыли</div><div class="c">10 вопросов</div></div>
         <div class="sph"><div class="n">Команда</div><div class="d">решения на основе цифр</div><div class="c">7 вопросов</div></div>
       </div>
-      <p class="note d-only" style="margin-top:14px">Порядок сфер повторяет путь денег в компании: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому этим управлять.</p>
-      <p class="note m-only" style="margin-top:12px">Порядок сфер это путь денег: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому управлять.</p>
+      <p class="note d-only" style="margin-top:14px">Порядок сфер это путь денег: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому управлять.</p>
     </div>
   </div>
 </div></section>
@@ -767,8 +804,8 @@ body.hasbar{padding-bottom:96px}
 
   <div class="worklead noprint">
     <div class="eyebrow">Вопросы · шесть сфер, 50 пунктов</div>
-    <p class="wt">Отвечайте на каждый вопрос: да, не знаю или нет. Оценку поднимает только «да»: «не знаю» считается так же, как «нет», потому что то, чего вы не видите, вы не контролируете. Ответ «не знаю» при этом не пропадает: из таких ответов собирается отдельный разбор слепых зон. Колесо пересобирается сразу, и по нему видно, как меняется баланс шести сфер.</p>
-    <p class="wn">Ползунок «точка Б» в каждой сфере, это цель, к которой идете. По умолчанию 8 из 10, можно поменять. Сферы идут в том порядке, в котором деньги проходят через компанию, поэтому проходить их лучше сверху вниз.</p>
+    <p class="wt">Отвечайте да, не знаю или нет. Оценку поднимает только «да»: то, чего вы не видите, вы не контролируете. Ответы «не знаю» не пропадают, из них собирается разбор слепых зон.</p>
+    <p class="wn">Закрыто то, что подтверждается документом, а не ощущением. «Точка Б» это ваша цель по сфере, по умолчанию 8 из 10.</p>
   </div>
 
   <div class="grid">
@@ -801,7 +838,7 @@ body.hasbar{padding-bottom:96px}
     <div class="gatehead">
       <div class="eyebrow">Последний шаг</div>
       <div class="h2">Откройте разбор</div>
-      <p class="sub">Три вопроса о компании и контакт для связи. Разбор откроется прямо здесь, на этой странице.</p>
+      <p class="sub">Три вопроса о компании и контакт. Разбор откроется здесь же.</p>
     </div>
 
     <div class="gsteps">
@@ -810,7 +847,7 @@ body.hasbar{padding-bottom:96px}
         <div class="gsh">
           <span class="gnum">01</span>
           <div class="gst">О компании</div>
-          <p class="gsn">Эти три ответа обязательны. На оценку они не влияют, но без них разбор читается вслепую: одно и то же состояние учета у компании на пять человек и у компании на сто значит совершенно разное.</p>
+          <p class="gsn">Три ответа. На оценку не влияют, но без них разбор читается вслепую.</p>
         </div>
         <div class="pfgrid" id="pfgrid"></div>
       </section>
@@ -830,7 +867,7 @@ body.hasbar{padding-bottom:96px}
         <div class="gsh">
           <span class="gnum">02</span>
           <div class="gst">Ваши данные</div>
-          <p class="gsn">Вместе с контактом ко мне приходят ваши ответы, поэтому я смогу написать по существу, а не «здравствуйте, чем помочь». Никому больше эти данные не уходят.</p>
+          <p class="gsn">Имя и один контакт, по которому ответить.</p>
         </div>
 
         <form class="gateform" id="gform" novalidate>
@@ -844,19 +881,19 @@ body.hasbar{padding-bottom:96px}
             </div>
 
             <div class="ffield">
-              <label class="fl" for="gcompany">Компания <span class="flnote">для подписи в PDF</span></label>
-              <input class="fin" id="gcompany" type="text" placeholder="Название" autocomplete="organization">
+              <label class="fl" for="gcompany">Компания</label>
+              <input class="fin" id="gcompany" type="text" placeholder="Название компании" autocomplete="organization">
               <p class="ferr" id="err-company"></p>
             </div>
 
             <div class="ffield">
-              <label class="fl" for="gemail">Почта <span class="flnote">хватит одного контакта из двух</span></label>
+              <label class="fl" for="gemail">Почта</label>
               <input class="fin" id="gemail" type="email" inputmode="email" placeholder="name@company.com" autocomplete="email" spellcheck="false">
               <p class="ferr" id="err-email"></p>
             </div>
 
             <div class="ffield">
-              <label class="fl" for="gtg">Телеграм <span class="flnote">если удобнее сюда</span></label>
+              <label class="fl" for="gtg">Телеграм</label>
               <input class="fin" id="gtg" type="text" placeholder="@nickname" autocomplete="off" spellcheck="false">
               <p class="ferr" id="err-tg"></p>
             </div>
@@ -1023,16 +1060,14 @@ var SRC=(function(){
 })();
 
 var PROFILE=[
- {key:"size",label:"Сколько человек работает в компании",short:"Команда",
-  opts:["до 5","6-20","21-50","51-150","больше 150"]},
+ {key:"size",label:"Сколько человек в компании",short:"Команда",
+  opts:["до 5","6-20","21-50","больше 50"]},
  // выручка текстом, а не диапазонами: колесо проходят компании из разных
  // стран и валют, любая готовая шкала для кого-то будет бессмысленной
- {key:"turnover",label:"Выручка за последние 12 месяцев",short:"Выручка",type:"text",
-  placeholder:"120 млн рублей, 800 тысяч евро",
-  note:"в своей валюте, примерно, можно пропустить",optional:true},
- {key:"finance",label:"Кто в компании отвечает за цифры",short:"За цифры отвечает",
-  opts:["отвечаю сам","бухгалтер","финансовый менеджер","финдиректор в штате"],
-  note:"самая старшая роль"}
+ {key:"turnover",label:"Выручка",short:"Выручка",type:"text",
+  placeholder:"Выручка за 12 месяцев",optional:true},
+ {key:"finance",label:"Кто отвечает за цифры",short:"За цифры отвечает",
+  opts:["отвечаю сам","бухгалтер","финансовый менеджер","финдиректор в штате"]}
 ];
 
 var BLOCKS=[
@@ -1191,7 +1226,8 @@ function drawWheel(ctx,size,opts){
   var P=pal();
   // мини-версия для липкой полосы: без подписей, поэтому поля почти не нужны
   var pad=size*(opts.mini?.045:(opts.tight?.185:.19)), cx=size/2, cy=size/2, R=size/2-pad;
-  var n=BLOCKS.length, vals=scores();
+  // opts.vals и opts.goals нужны демо-колесу на первом экране
+  var n=BLOCKS.length, vals=opts.vals||scores(), goals=opts.goals||state.b;
   var ang=function(i){return -Math.PI/2+i*2*Math.PI/n;};
   var pt=function(i,v){var r=R*(v/MAXV);return [cx+r*Math.cos(ang(i)),cy+r*Math.sin(ang(i))];};
   var i,p,lvl;
@@ -1217,7 +1253,7 @@ function drawWheel(ctx,size,opts){
   ctx.save();
   ctx.setLineDash([size*.012,size*.012]);
   ctx.beginPath();
-  for(i=0;i<n;i++){p=pt(i,state.b[i]);if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);}
+  for(i=0;i<n;i++){p=pt(i,goals[i]);if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);}
   ctx.closePath();ctx.strokeStyle=P.goal;ctx.lineWidth=size*.0026;ctx.stroke();
   ctx.restore();
 
@@ -1268,13 +1304,69 @@ function renderCanvas(){
   if(big&&document.getElementById("wsheet").classList.contains("open"))paintTo(big,{});
 }
 
+/* ---------- пример колеса на первом экране ----------
+   значения условные, подписаны как пример: задача показать форму
+   результата и то, что колесо живое, а не картинка */
+var DEMO_VALS=[6.7,3.3,2.5,4.4,7.0,5.7], DEMO_GOAL=[8,8,8,8,8,8];
+
+function paintDemo(c,k){
+  if(!c)return;
+  var w=Math.max(40,Math.round(c.getBoundingClientRect().width||300));
+  var dpr=Math.min(window.devicePixelRatio||1,3);
+  c.width=w*dpr;c.height=w*dpr;c.style.height=w+"px";
+  var ctx=c.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  // лучи наливаются по очереди: сначала деньги, дальше по кругу
+  var vals=DEMO_VALS.map(function(v,i){
+    var t=Math.max(0,Math.min(1,k*1.5-i*0.08));
+    return v*(1-Math.pow(1-t,3));
+  });
+  drawWheel(ctx,w,{vals:vals,goals:DEMO_GOAL});
+}
+
+function runDemo(c){
+  if(!demoVisible(c)||c.dataset.playing==="1")return;
+  var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduced||!window.requestAnimationFrame){paintDemo(c,1);return;}
+  c.dataset.playing="1";
+  var t0=null, DUR=1600;
+  requestAnimationFrame(function step(ts){
+    if(t0===null)t0=ts;
+    var k=Math.min(1,(ts-t0)/DUR);
+    paintDemo(c,k);
+    if(k<1)requestAnimationFrame(step); else c.dataset.playing="0";
+  });
+}
+
+// колесо проигрывается, когда попадает на экран, и повторяется при возврате
+// у скрытого предка (.d-only или .m-only) computed display самого canvas
+// остается block, поэтому видимость проверяем по offsetParent
+function demoVisible(c){return !!c&&!!c.offsetParent;}
+
+function initDemo(){
+  [document.getElementById("demo"),document.getElementById("demoM")].forEach(function(c){
+    if(!c)return;
+    if(demoVisible(c))paintDemo(c,0);
+    if(!("IntersectionObserver" in window)){runDemo(c);return;}
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting&&demoVisible(c))runDemo(c); });
+    },{threshold:.35}).observe(c);
+  });
+}
+
+function repaintDemo(){
+  [document.getElementById("demo"),document.getElementById("demoM")].forEach(function(c){
+    if(demoVisible(c)&&c.dataset.playing!=="1")paintDemo(c,1);
+  });
+}
+
 /* ---------- о компании ---------- */
 function buildProfile(){
   var host=document.getElementById("pfgrid");
   host.innerHTML=PROFILE.map(function(p,pi){
     var body=p.type==="text"
-      ? '<input class="fin" type="text" id="pft-'+pi+'" placeholder="'+esc(p.placeholder||"")+'" autocomplete="off">'
-      : '<div class="chips">'+p.opts.map(function(o,oi){
+      ? '<div class="pfin" id="pfw-'+pi+'"><input class="fin" type="text" id="pft-'+pi+'" placeholder="'+esc(p.placeholder||"")+'" autocomplete="off"></div>'
+      : '<div class="chips ch-'+p.key+'">'+p.opts.map(function(o,oi){
           return '<button type="button" class="chip" data-p="'+pi+'" data-o="'+oi+'" aria-pressed="false">'+esc(o)+'</button>';
         }).join("")+'</div>';
     return '<div class="pfq"><div class="fl">'+esc(p.label)+
@@ -1286,6 +1378,7 @@ function buildProfile(){
     var el=document.getElementById("pft-"+pi);
     el.addEventListener("input",function(){
       state.profile[pi]=el.value.trim()||null;
+      document.getElementById("pfw-"+pi).classList.toggle("filled",!!el.value.trim());
       if(profileReady())document.getElementById("pfblock").classList.remove("hl");
       syncProfile();save();refreshGateSummary();
     });
@@ -1316,6 +1409,8 @@ function syncProfile(){
     if(p.type!=="text")return;
     var el=document.getElementById("pft-"+pi);
     if(el&&document.activeElement!==el)el.value=state.profile[pi]||"";
+    var w=document.getElementById("pfw-"+pi);
+    if(w)w.classList.toggle("filled",!!(state.profile[pi]||""));
   });
   var filled=state.profile.filter(Boolean).length;
   var line=document.getElementById("pfline");
@@ -1989,6 +2084,7 @@ function init(){
   });
 
   update();
+  initDemo();
   if(state.unlocked)unlock();
 
   document.getElementById("gform").addEventListener("submit",async function(e){
@@ -2075,7 +2171,7 @@ function init(){
   window.addEventListener("afterprint",function(){PRINT=false;renderCanvas();});
 
   var rt=null;
-  window.addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(renderCanvas,120);});
+  window.addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){renderCanvas();repaintDemo();},120);});
 }
 
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);
