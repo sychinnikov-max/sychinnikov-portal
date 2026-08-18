@@ -132,8 +132,7 @@ p,li{text-wrap:pretty}
 /* уровень зрелости слева, колесо справа: человек сам листает состояния
    и видит, как меняется форма колеса */
 .demoblock{display:grid;grid-template-columns:minmax(0,168px) minmax(0,1fr);
-  gap:clamp(10px,1.3vw,18px);align-items:center;margin-top:clamp(10px,1.8vw,22px)}
-.lvlcol{display:flex;flex-direction:column;gap:14px}
+  gap:clamp(10px,1.3vw,18px);align-items:start;margin-top:clamp(10px,1.8vw,22px)}
 .lvls{display:flex;flex-direction:column;gap:8px}
 .lvl{font-family:var(--fb);font-size:13.5px;line-height:1.2;text-align:left;
   padding:10px 12px;min-height:46px;cursor:pointer;color:var(--ink);
@@ -151,11 +150,10 @@ p,li{text-wrap:pretty}
 .demo canvas{width:100%;max-width:min(52vh,520px);height:auto;display:block;margin:0 auto}
 /* подпись уровня: на компьютере она стоит слева под кнопками, на телефоне
    под колесом. Стили общие, отличается только выравнивание */
-.demo figcaption,.demonote{font-family:var(--fm);font-size:11px;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
-.demo figcaption{margin-top:-6px;text-align:center}
-.demo figcaption b,.demonote b{display:block;font-family:var(--fb);font-weight:400;font-size:14px;
-  letter-spacing:0;text-transform:none;color:var(--ink-muted);margin-top:5px;text-wrap:pretty}
+.demo figcaption{font-family:var(--fm);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-dim);margin-top:-10px;text-align:center}
+.demo figcaption b{display:block;font-family:var(--fb);font-weight:400;font-size:14.5px;
+  letter-spacing:0;text-transform:none;color:var(--ink-muted);margin-top:5px;text-wrap:balance}
 
 /* ---------- рабочая часть ---------- */
 /* инструкция перед вопросами: без нее непонятно, что вообще надо делать */
@@ -511,13 +509,13 @@ body.hasbar{padding-bottom:96px}
   .lvls{display:grid;grid-template-columns:1fr 1fr;gap:7px}
   .lvl{font-size:12.5px;padding:7px 9px;min-height:40px;border-radius:10px;gap:1px}
   .lvl i{font-size:9px;letter-spacing:.07em}
-  .demo{margin-top:6px}
-  .demo canvas{max-width:min(84vw,300px)}
-  .demo figcaption{margin-top:-10px;font-size:10px;letter-spacing:.06em}
-  .demo figcaption b{font-size:13px;margin-top:3px;line-height:1.35}
+  .demo{margin-top:2px}
+  .demo canvas{max-width:min(76vw,272px)}
+  /* подпись уровня на телефоне не нужна: она съедала место у кнопки */
+  .demo figcaption{display:none}
   .lead{font-size:16px}
-  .herolist{margin-top:12px;gap:7px}
-  .herolist li{font-size:15.5px}
+  .herolist{margin-top:6px;gap:6px;padding-left:16px}
+  .herolist li{font-size:15px;line-height:1.35}
   /* размер компании в одну строку, роль по две в строке */
   .ch-size{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
   .ch-size .chip{padding:11px 2px;font-size:14px}
@@ -836,12 +834,10 @@ body.hasbar{padding-bottom:96px}
         <div class="sph"><div class="n">Команда</div><div class="d">решения на основе цифр</div><div class="c">7 вопросов</div></div>
       </div>
       <div class="demoblock d-only">
-        <div class="lvlcol">
-          <div class="lvls" id="lvlsD"></div>
-          <p class="demonote" id="democapD"></p>
-        </div>
+        <div class="lvls" id="lvlsD"></div>
         <figure class="demo" id="demowrap">
           <canvas id="demo" width="800" height="800" role="img" aria-label="Пример колеса финансового здоровья"></canvas>
+          <figcaption id="democapD"></figcaption>
         </figure>
       </div>
     </div>
@@ -1361,16 +1357,16 @@ function renderCanvas(){
 var DEMO_GOAL=[8,8,8,8,8,8];
 var DEMO_LEVELS=[
  {tag:"Уровень 1",name:"Начинающий бизнес",
-  note:"Деньги считают, люди есть. Капитала, защиты и дохода собственника нет.",
+  note:"Деньги считают, капитала и защиты нет",
   vals:[5.6,1.4,1.3,2.2,4.0,4.3]},
  {tag:"Уровень 2",name:"Уверенный бизнес",
-  note:"Деньги и прибыль под контролем. Капитал и защита от удара отстают.",
+  note:"Деньги и прибыль есть, капитал и защита отстают",
   vals:[7.8,4.3,2.5,3.3,7.0,5.7]},
  {tag:"Уровень 3",name:"Эффективные финансы",
-  note:"Прибыль планируется, капитал считается. Тоньше всего безопасность.",
+  note:"Почти все собрано, тоньше всего безопасность",
   vals:[8.9,7.1,6.3,5.6,9.0,8.6]},
  {tag:"Уровень 4",name:"Прокачанные финансы",
-  note:"Решения на цифрах, собственник разбирает отклонения, а не собирает данные.",
+  note:"Решения принимаются на цифрах, а не на ощущении",
   vals:[10.0,8.6,8.8,8.9,10.0,10.0]}
 ];
 var demoLevel=1, demoCur=[0,0,0,0,0,0], demoRaf=null, demoStarted=false;
