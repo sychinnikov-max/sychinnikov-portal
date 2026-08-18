@@ -118,20 +118,20 @@ p,li{text-wrap:pretty}
              font-weight:500;max-width:52ch}
 .herolist li::before{content:"";position:absolute;left:0;top:13px;width:13px;height:2px;background:var(--gold)}
 
-.spheres{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hair);
+.spheres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--hair);
          border:1px solid var(--hair-gold);border-radius:16px;overflow:hidden;
          box-shadow:0 18px 46px rgba(0,0,0,.34)}
-.sph{background:var(--card);padding:22px 24px}
-.sph .n{font-family:var(--fd);font-size:26px;font-weight:600;line-height:1.15}
-.sph .d{font-size:16px;color:var(--ink-muted);margin-top:5px;line-height:1.35}
-.sph .c{font-family:var(--fm);font-size:13px;color:var(--gold-bright);letter-spacing:.08em;margin-top:11px}
+.sph{background:var(--card);padding:15px 17px}
+.sph .n{font-family:var(--fd);font-size:21px;font-weight:600;line-height:1.15}
+.sph .d{font-size:14px;color:var(--ink-muted);margin-top:3px;line-height:1.3}
+.sph .c{font-family:var(--fm);font-size:12px;color:var(--gold-bright);letter-spacing:.07em;margin-top:7px}
 
 /* ---------- пример колеса на первом экране ----------
    человек должен увидеть результат до того, как начнет отвечать:
    колесо наливается на глазах, поэтому понятно, что он получит */
-.demo{margin:0 0 clamp(16px,2.2vw,22px)}
-.demo canvas{width:100%;max-width:460px;height:auto;display:block;margin:0 auto}
-.demo figcaption{margin-top:-4px;text-align:center;font-family:var(--fm);font-size:11.5px;
+.demo{margin:clamp(8px,1.4vw,16px) 0 0}
+.demo canvas{width:100%;max-width:min(40vh,420px);height:auto;display:block;margin:0 auto}
+.demo figcaption{margin-top:-6px;text-align:center;font-family:var(--fm);font-size:11.5px;
   letter-spacing:.09em;text-transform:uppercase;color:var(--ink-dim)}
 
 /* ---------- рабочая часть ---------- */
@@ -483,10 +483,11 @@ body.hasbar{padding-bottom:96px}
   .btnrow{gap:9px;margin-top:18px;flex-direction:column;align-items:stretch}
   .cta{width:100%;font-size:16.5px;padding:15px 18px;min-height:var(--tap)}
   .spheres{grid-template-columns:1fr 1fr;border-radius:14px}
-  /* колесо на первом экране: крупное, но так, чтобы кнопка осталась видна */
-  .demo{margin:18px 0 2px}
-  .demo canvas{max-width:min(74vw,300px)}
-  .demo figcaption{margin-top:-6px;font-size:10.5px;letter-spacing:.07em}
+  /* колесо прижато к подзаголовку: пустого поля между ними быть не должно */
+  .demo{margin:2px 0 0}
+  .demo canvas{max-width:min(76vw,310px)}
+  .demo figcaption{margin-top:-10px;font-size:10.5px;letter-spacing:.07em}
+  .herolist{margin-top:14px}
   /* размер компании в одну строку, роль по две в строке */
   .ch-size{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
   .ch-size .chip{padding:11px 2px;font-size:14px}
@@ -755,11 +756,10 @@ body.hasbar{padding-bottom:96px}
     <div>
       <div class="eyebrow">Бесплатно · 50 вопросов · 25 минут</div>
       <h1>Колесо финансового здоровья компании</h1>
-      <p class="lead d-only">Шесть сфер финансов, в каждой вопросы с ответом да, не знаю или нет. На выходе разбор по каждой сфере и три шага, с которых начинать.</p>
-      <p class="lead m-only">Шесть сфер финансов. На выходе разбор по каждой сфере и три шага, с которых начинать.</p>
+      <p class="lead">На выходе разбор по каждой сфере вашей компании и три шага, с которых начинать.</p>
 
-      <!-- телефон: пример собранного колеса стоит прямо на первом экране,
-           до кнопки, иначе человек не понимает, что он получит -->
+      <!-- телефон: колесо стоит сразу под подзаголовком, дальше пункты,
+           и только потом кнопка. Так первый экран показывает результат -->
       <figure class="demo m-only" id="demowrapM">
         <canvas id="demoM" width="640" height="640" role="img" aria-label="Пример собранного колеса финансового здоровья"></canvas>
         <figcaption>Пример: колесо компании после 50 ответов</figcaption>
@@ -767,25 +767,27 @@ body.hasbar{padding-bottom:96px}
 
       <ul class="herolist d-only">
         <li>Разбор по каждой из шести сфер, а не одна общая оценка</li>
-        <li>Слепые зоны: то, чего собственник про свой бизнес не знает</li>
-        <li>Три первых шага и PDF, который можно забрать</li>
+        <li>Отдельно считаются слепые зоны: то, чего собственник про свой бизнес не знает</li>
+        <li>Три первых шага: с чего начинать именно вам, а не список из тридцати дел</li>
+        <li>Полный список того, что не закрыто, и что даст закрытие каждого пункта</li>
+        <li>Готовый PDF, который можно забрать и отдать своему финансисту</li>
       </ul>
-      <div class="btnrow">
-        <a class="cta" href="#work">Пройти колесо</a>
-        <a class="cta ghost sitelink" href="/founderfinance/#cta">Бесплатная диагностика со мной →</a>
-        <a class="cta ghost tgonly" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener" style="display:none">Бесплатный разбор со мной →</a>
-      </div>
       <ul class="herolist m-only">
         <li>Разбор по каждой сфере, а не одна оценка</li>
         <li>Слепые зоны: чего вы про свой бизнес не знаете</li>
-        <li>Три первых шага и PDF</li>
+        <li>Три первых шага, с которых начинать</li>
+        <li>PDF, который можно забрать</li>
       </ul>
+
+      <div class="btnrow">
+        <a class="cta d-only" href="#work">Пройти колесо</a>
+        <a class="cta ghost sitelink" href="/founderfinance/#cta">Бесплатная диагностика со мной →</a>
+        <a class="cta ghost tgonly" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener" style="display:none">Бесплатный разбор со мной →</a>
+      </div>
+
+      <p class="note d-only" style="margin-top:16px">Автор: Андрей Сычинников, бывший генеральный директор и собственник компании с выручкой 1,4 миллиона евро в год. Ставлю управленческий учет собственникам бизнеса.</p>
     </div>
     <div>
-      <figure class="demo d-only" id="demowrap">
-        <canvas id="demo" width="800" height="800" role="img" aria-label="Пример собранного колеса финансового здоровья"></canvas>
-        <figcaption>Пример: колесо компании после 50 ответов</figcaption>
-      </figure>
       <div class="spheres">
         <div class="sph"><div class="n">Деньги</div><div class="d">чем платить завтра</div><div class="c">9 вопросов</div></div>
         <div class="sph"><div class="n">Дивиденды</div><div class="d">доход собственника</div><div class="c">7 вопросов</div></div>
@@ -794,7 +796,11 @@ body.hasbar{padding-bottom:96px}
         <div class="sph"><div class="n">Прибыль</div><div class="d">планирование прибыли</div><div class="c">10 вопросов</div></div>
         <div class="sph"><div class="n">Команда</div><div class="d">решения на основе цифр</div><div class="c">7 вопросов</div></div>
       </div>
-      <p class="note d-only" style="margin-top:14px">Порядок сфер это путь денег: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому управлять.</p>
+      <p class="note d-only" style="margin-top:12px">Порядок сфер это путь денег: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому управлять.</p>
+      <figure class="demo d-only" id="demowrap">
+        <canvas id="demo" width="800" height="800" role="img" aria-label="Пример собранного колеса финансового здоровья"></canvas>
+        <figcaption>Пример: колесо компании после 50 ответов</figcaption>
+      </figure>
     </div>
   </div>
 </div></section>
@@ -1225,7 +1231,9 @@ function drawWheel(ctx,size,opts){
   opts=opts||{};
   var P=pal();
   // мини-версия для липкой полосы: без подписей, поэтому поля почти не нужны
-  var pad=size*(opts.mini?.045:(opts.tight?.185:.19)), cx=size/2, cy=size/2, R=size/2-pad;
+  // opts.padK: демо-колесу нужны поля поменьше, иначе вокруг него
+  // остается пустая рамка и оно отрывается от текста
+  var pad=size*(opts.mini?.045:(opts.padK||(opts.tight?.185:.19))), cx=size/2, cy=size/2, R=size/2-pad;
   // opts.vals и opts.goals нужны демо-колесу на первом экране
   var n=BLOCKS.length, vals=opts.vals||scores(), goals=opts.goals||state.b;
   var ang=function(i){return -Math.PI/2+i*2*Math.PI/n;};
@@ -1321,7 +1329,7 @@ function paintDemo(c,k){
     var t=Math.max(0,Math.min(1,k*1.5-i*0.08));
     return v*(1-Math.pow(1-t,3));
   });
-  drawWheel(ctx,w,{vals:vals,goals:DEMO_GOAL});
+  drawWheel(ctx,w,{vals:vals,goals:DEMO_GOAL,padK:.155});
 }
 
 function runDemo(c){
