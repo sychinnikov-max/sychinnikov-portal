@@ -129,10 +129,29 @@ p,li{text-wrap:pretty}
 /* ---------- пример колеса на первом экране ----------
    человек должен увидеть результат до того, как начнет отвечать:
    колесо наливается на глазах, поэтому понятно, что он получит */
-.demo{margin:clamp(8px,1.4vw,16px) 0 0}
-.demo canvas{width:100%;max-width:min(40vh,420px);height:auto;display:block;margin:0 auto}
-.demo figcaption{margin-top:-6px;text-align:center;font-family:var(--fm);font-size:11.5px;
-  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-dim)}
+/* уровень зрелости слева, колесо справа: человек сам листает состояния
+   и видит, как меняется форма колеса */
+.demoblock{display:grid;grid-template-columns:minmax(0,186px) minmax(0,1fr);
+  gap:clamp(10px,1.3vw,18px);align-items:center;margin-top:clamp(8px,1.4vw,16px)}
+.lvls{display:flex;flex-direction:column;gap:8px}
+.lvl{font-family:var(--fb);font-size:13.5px;line-height:1.2;text-align:left;
+  padding:10px 12px;min-height:46px;cursor:pointer;color:var(--ink);
+  border:1px solid color-mix(in oklab,var(--gold) 26%,transparent);border-radius:12px;
+  background:linear-gradient(168deg,var(--raise),color-mix(in oklab,#000 22%,var(--raise)));
+  display:flex;flex-direction:column;justify-content:center;gap:2px;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,box-shadow .2s ease}
+.lvl i{font-family:var(--fm);font-style:normal;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold-bright)}
+.lvl:hover{border-color:var(--hair-gold)}
+.lvl[aria-pressed=true]{background:var(--gold);border-color:transparent;color:var(--gold-ink);font-weight:700;
+  box-shadow:0 8px 22px color-mix(in oklab,var(--gold) 28%,transparent)}
+.lvl[aria-pressed=true] i{color:var(--gold-ink);opacity:.75}
+.demo{margin:0}
+.demo canvas{width:100%;max-width:min(40vh,400px);height:auto;display:block;margin:0 auto}
+.demo figcaption{margin-top:-6px;text-align:center;font-family:var(--fm);font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+.demo figcaption b{display:block;font-family:var(--fb);font-weight:400;font-size:14px;
+  letter-spacing:0;text-transform:none;color:var(--ink-muted);margin-top:5px;text-wrap:pretty}
 
 /* ---------- рабочая часть ---------- */
 /* инструкция перед вопросами: без нее непонятно, что вообще надо делать */
@@ -483,10 +502,13 @@ body.hasbar{padding-bottom:96px}
   .btnrow{gap:9px;margin-top:18px;flex-direction:column;align-items:stretch}
   .cta{width:100%;font-size:16.5px;padding:15px 18px;min-height:var(--tap)}
   .spheres{grid-template-columns:1fr 1fr;border-radius:14px}
-  /* колесо прижато к подзаголовку: пустого поля между ними быть не должно */
-  .demo{margin:2px 0 0}
-  .demo canvas{max-width:min(76vw,310px)}
-  .demo figcaption{margin-top:-10px;font-size:10.5px;letter-spacing:.07em}
+  /* колесо прижато к подзаголовку, уровни слева под палец */
+  .demoblock{grid-template-columns:minmax(0,108px) minmax(0,1fr);gap:8px;margin-top:8px}
+  .lvl{font-size:12.5px;padding:9px 9px;min-height:48px;border-radius:11px}
+  .lvl i{font-size:9.5px;letter-spacing:.08em}
+  .demo canvas{max-width:100%}
+  .demo figcaption{margin-top:-8px;font-size:10px;letter-spacing:.06em}
+  .demo figcaption b{font-size:13px;margin-top:4px}
   .herolist{margin-top:14px}
   /* размер компании в одну строку, роль по две в строке */
   .ch-size{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
@@ -585,7 +607,7 @@ body.hasbar{padding-bottom:96px}
 @media print{
   @page{margin:14mm}
   body{background:#fff;color:#1A1512;font-size:11.5pt;line-height:1.45}
-  .nav,.hero .btnrow,.blocks,.gate,.final,.foot,.toast,.wbar,.wsheet,.demo,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
+  .nav,.hero .btnrow,.blocks,.gate,.final,.foot,.toast,.wbar,.wsheet,.demo,.demoblock,.stage .legend,.stage .bar,.stage .barmeta,.noprint{display:none!important}
   .pfline{color:#4A4038;margin-bottom:6mm}
   .pfline b{color:#8A6E2E}
   .inner{padding:0!important;max-width:none}
@@ -756,14 +778,21 @@ body.hasbar{padding-bottom:96px}
     <div>
       <div class="eyebrow">Бесплатно · 50 вопросов · 25 минут</div>
       <h1>Колесо финансового здоровья компании</h1>
-      <p class="lead">На выходе разбор по каждой сфере вашей компании и три шага, с которых начинать.</p>
+      <p class="lead">На выходе разбор по каждой сфере вашей компании.</p>
 
-      <!-- телефон: колесо стоит сразу под подзаголовком, дальше пункты,
-           и только потом кнопка. Так первый экран показывает результат -->
-      <figure class="demo m-only" id="demowrapM">
-        <canvas id="demoM" width="640" height="640" role="img" aria-label="Пример собранного колеса финансового здоровья"></canvas>
-        <figcaption>Пример: колесо компании после 50 ответов</figcaption>
-      </figure>
+      <!-- телефон: сверху вход в опрос, дальше колесо с переключателем
+           уровней, дальше пункты, и только внизу мягкий оффер -->
+      <div class="btnrow m-only" style="margin-top:16px">
+        <a class="cta" href="#work">Пройти колесо</a>
+      </div>
+
+      <div class="demoblock m-only">
+        <div class="lvls" id="lvlsM"></div>
+        <figure class="demo" id="demowrapM">
+          <canvas id="demoM" width="640" height="640" role="img" aria-label="Пример колеса финансового здоровья"></canvas>
+          <figcaption id="democapM"></figcaption>
+        </figure>
+      </div>
 
       <ul class="herolist d-only">
         <li>Разбор по каждой из шести сфер, а не одна общая оценка</li>
@@ -785,7 +814,7 @@ body.hasbar{padding-bottom:96px}
         <a class="cta ghost tgonly" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener" style="display:none">Бесплатный разбор со мной →</a>
       </div>
 
-      <p class="note d-only" style="margin-top:16px">Автор: Андрей Сычинников, бывший генеральный директор и собственник компании с выручкой 1,4 миллиона евро в год. Ставлю управленческий учет собственникам бизнеса.</p>
+      <p class="note d-only" style="margin-top:16px">Автор: Андрей Сычинников, ex-CEO и founder, выручка 1,4 mln €. Внедряю управленческий учет собственникам бизнеса.</p>
     </div>
     <div>
       <div class="spheres">
@@ -797,10 +826,13 @@ body.hasbar{padding-bottom:96px}
         <div class="sph"><div class="n">Команда</div><div class="d">решения на основе цифр</div><div class="c">7 вопросов</div></div>
       </div>
       <p class="note d-only" style="margin-top:12px">Порядок сфер это путь денег: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому управлять.</p>
-      <figure class="demo d-only" id="demowrap">
-        <canvas id="demo" width="800" height="800" role="img" aria-label="Пример собранного колеса финансового здоровья"></canvas>
-        <figcaption>Пример: колесо компании после 50 ответов</figcaption>
-      </figure>
+      <div class="demoblock d-only">
+        <div class="lvls" id="lvlsD"></div>
+        <figure class="demo" id="demowrap">
+          <canvas id="demo" width="800" height="800" role="img" aria-label="Пример колеса финансового здоровья"></canvas>
+          <figcaption id="democapD"></figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </div></section>
@@ -1313,60 +1345,107 @@ function renderCanvas(){
 }
 
 /* ---------- пример колеса на первом экране ----------
-   значения условные, подписаны как пример: задача показать форму
-   результата и то, что колесо живое, а не картинка */
-var DEMO_VALS=[6.7,3.3,2.5,4.4,7.0,5.7], DEMO_GOAL=[8,8,8,8,8,8];
+   четыре уровня зрелости: человек переключает их сам и видит,
+   как меняется форма колеса. Значения условные, подписаны как пример */
+var DEMO_GOAL=[8,8,8,8,8,8];
+var DEMO_LEVELS=[
+ {tag:"Уровень 1",name:"Начинающий бизнес",
+  note:"Деньги считают, люди есть. Капитала, защиты и дохода собственника нет.",
+  vals:[5.6,1.4,1.3,2.2,4.0,4.3]},
+ {tag:"Уровень 2",name:"Уверенный бизнес",
+  note:"Сферы подтянулись друг к другу, но держатся на ручном режиме.",
+  vals:[6.7,4.3,3.8,4.4,6.0,5.7]},
+ {tag:"Уровень 3",name:"Эффективные финансы",
+  note:"Прибыль планируется, капитал считается, резервы отделены.",
+  vals:[8.9,7.1,6.3,7.8,8.0,7.1]},
+ {tag:"Уровень 4",name:"Прокачанные финансы",
+  note:"Решения на цифрах, собственник разбирает отклонения, а не собирает данные.",
+  vals:[10.0,8.6,8.8,10.0,10.0,8.6]}
+];
+var demoLevel=1, demoCur=[0,0,0,0,0,0], demoRaf=null, demoStarted=false;
 
-function paintDemo(c,k){
-  if(!c)return;
+// у скрытого предка (.d-only или .m-only) computed display самого canvas
+// остается block, поэтому видимость проверяем по offsetParent
+function demoVisible(c){return !!c&&!!c.offsetParent;}
+function demoCanvases(){return [document.getElementById("demo"),document.getElementById("demoM")];}
+function demoReduced(){return !!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);}
+
+function paintDemo(c){
+  if(!demoVisible(c))return;
   var w=Math.max(40,Math.round(c.getBoundingClientRect().width||300));
   var dpr=Math.min(window.devicePixelRatio||1,3);
   c.width=w*dpr;c.height=w*dpr;c.style.height=w+"px";
   var ctx=c.getContext("2d");
   ctx.setTransform(dpr,0,0,dpr,0,0);
-  // лучи наливаются по очереди: сначала деньги, дальше по кругу
-  var vals=DEMO_VALS.map(function(v,i){
-    var t=Math.max(0,Math.min(1,k*1.5-i*0.08));
-    return v*(1-Math.pow(1-t,3));
-  });
-  drawWheel(ctx,w,{vals:vals,goals:DEMO_GOAL,padK:.155});
+  drawWheel(ctx,w,{vals:demoCur,goals:DEMO_GOAL,padK:.155});
 }
+function paintDemoAll(){demoCanvases().forEach(paintDemo);}
 
-function runDemo(c){
-  if(!demoVisible(c)||c.dataset.playing==="1")return;
-  var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(reduced||!window.requestAnimationFrame){paintDemo(c,1);return;}
-  c.dataset.playing="1";
-  var t0=null, DUR=1600;
-  requestAnimationFrame(function step(ts){
+// плавный переход между уровнями, одна анимация на обе версии страницы
+function animateDemoTo(vals,dur){
+  var from=demoCur.slice();
+  if(demoRaf){cancelAnimationFrame(demoRaf);demoRaf=null;}
+  if(demoReduced()||!window.requestAnimationFrame){demoCur=vals.slice();paintDemoAll();return;}
+  var t0=null;
+  demoRaf=requestAnimationFrame(function step(ts){
     if(t0===null)t0=ts;
-    var k=Math.min(1,(ts-t0)/DUR);
-    paintDemo(c,k);
-    if(k<1)requestAnimationFrame(step); else c.dataset.playing="0";
+    var k=Math.min(1,(ts-t0)/dur);
+    var e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+    demoCur=vals.map(function(v,i){return from[i]+(v-from[i])*e;});
+    paintDemoAll();
+    if(k<1)demoRaf=requestAnimationFrame(step); else demoRaf=null;
   });
 }
 
-// колесо проигрывается, когда попадает на экран, и повторяется при возврате
-// у скрытого предка (.d-only или .m-only) computed display самого canvas
-// остается block, поэтому видимость проверяем по offsetParent
-function demoVisible(c){return !!c&&!!c.offsetParent;}
+function syncLevels(){
+  var L=DEMO_LEVELS[demoLevel];
+  document.querySelectorAll(".lvl").forEach(function(b){
+    b.setAttribute("aria-pressed",+b.dataset.lvl===demoLevel?"true":"false");
+  });
+  ["democapD","democapM"].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.innerHTML="Пример · "+esc(L.name)+"<b>"+esc(L.note)+"</b>";
+  });
+}
+
+function setDemoLevel(i,dur){
+  demoLevel=i;syncLevels();
+  animateDemoTo(DEMO_LEVELS[i].vals,dur||700);
+}
+
+function buildLevels(){
+  var html=DEMO_LEVELS.map(function(L,i){
+    return '<button type="button" class="lvl" data-lvl="'+i+'" aria-pressed="false">'+
+      '<i>'+esc(L.tag)+'</i>'+esc(L.name)+'</button>';
+  }).join("");
+  ["lvlsD","lvlsM"].forEach(function(id){
+    var host=document.getElementById(id);
+    if(!host)return;
+    host.innerHTML=html;
+    host.addEventListener("click",function(e){
+      var b=e.target.closest("button[data-lvl]");
+      if(b)setDemoLevel(+b.dataset.lvl);
+    });
+  });
+  syncLevels();
+}
 
 function initDemo(){
-  [document.getElementById("demo"),document.getElementById("demoM")].forEach(function(c){
-    if(!c)return;
-    if(demoVisible(c))paintDemo(c,0);
-    if(!("IntersectionObserver" in window)){runDemo(c);return;}
-    new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting&&demoVisible(c))runDemo(c); });
-    },{threshold:.35}).observe(c);
-  });
+  buildLevels();
+  paintDemoAll();
+  var start=function(){
+    if(demoStarted)return;
+    demoStarted=true;
+    animateDemoTo(DEMO_LEVELS[demoLevel].vals,1500);
+  };
+  if(!("IntersectionObserver" in window)){start();return;}
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting&&demoVisible(e.target))start(); });
+  },{threshold:.3});
+  demoCanvases().forEach(function(c){ if(c)obs.observe(c); });
 }
 
-function repaintDemo(){
-  [document.getElementById("demo"),document.getElementById("demoM")].forEach(function(c){
-    if(demoVisible(c)&&c.dataset.playing!=="1")paintDemo(c,1);
-  });
-}
+function repaintDemo(){ if(!demoRaf)paintDemoAll(); }
 
 /* ---------- о компании ---------- */
 function buildProfile(){
