@@ -706,6 +706,9 @@ body.hasbar{padding-bottom:96px}
 
   /* Safari по умолчанию не печатает фоны, просим явно */
   body,.card,.idxcard,.spheres,.sph,.printcta,.mk,.am{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* Просмотрщик PDF на телефоне рисует мягкую тень плотным серым прямоугольником
+     под карточкой. В печати тени не нужны вовсе, поэтому снимаются целиком. */
+  *{box-shadow:none!important}
   .idxcard{background:#F7F3EA;border-color:#D8CFC0}
   .idxcard .num{color:#8A6E2E}
   /* каждый раздел с новой страницы: так заголовок никогда не остается
@@ -739,6 +742,8 @@ body.hasbar{padding-bottom:96px}
   .card{background:#F7F3EA;border-color:#D8CFC0}
   .card.pin{background:#F3EBD8}
   .card .big,.rvn,.piq,.qt{color:#1A1512}
+  /* на экране заголовок слабого звена золотой, на белом листе он не читается */
+  .card.pin .big{color:#1A1512}
   .pgroup h4{color:#8A6E2E}
   .mk.n{color:#9B4A36}
   .mk.u{color:#5E5273}
