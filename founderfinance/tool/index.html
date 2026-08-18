@@ -109,7 +109,7 @@ p,li{text-wrap:pretty}
 
 /* ---------- герой ---------- */
 .hero{padding:clamp(26px,3.2vw,44px) 0 clamp(44px,5.5vw,72px)}
-.herorow{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,64px);align-items:start}
+.herorow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
 @media(max-width:940px){.herorow{grid-template-columns:1fr}}
 /* четыре пункта это главный аргумент первого экрана, поэтому они крупнее лида */
 .herolist{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:12px;
@@ -131,8 +131,9 @@ p,li{text-wrap:pretty}
    колесо наливается на глазах, поэтому понятно, что он получит */
 /* уровень зрелости слева, колесо справа: человек сам листает состояния
    и видит, как меняется форма колеса */
-.demoblock{display:grid;grid-template-columns:minmax(0,186px) minmax(0,1fr);
-  gap:clamp(10px,1.3vw,18px);align-items:center;margin-top:clamp(8px,1.4vw,16px)}
+.demoblock{display:grid;grid-template-columns:minmax(0,168px) minmax(0,1fr);
+  gap:clamp(10px,1.3vw,18px);align-items:center;margin-top:clamp(10px,1.8vw,22px)}
+.lvlcol{display:flex;flex-direction:column;gap:14px}
 .lvls{display:flex;flex-direction:column;gap:8px}
 .lvl{font-family:var(--fb);font-size:13.5px;line-height:1.2;text-align:left;
   padding:10px 12px;min-height:46px;cursor:pointer;color:var(--ink);
@@ -147,10 +148,13 @@ p,li{text-wrap:pretty}
   box-shadow:0 8px 22px color-mix(in oklab,var(--gold) 28%,transparent)}
 .lvl[aria-pressed=true] i{color:var(--gold-ink);opacity:.75}
 .demo{margin:0}
-.demo canvas{width:100%;max-width:min(40vh,400px);height:auto;display:block;margin:0 auto}
-.demo figcaption{margin-top:-6px;text-align:center;font-family:var(--fm);font-size:11px;
+.demo canvas{width:100%;max-width:min(52vh,520px);height:auto;display:block;margin:0 auto}
+/* подпись уровня: на компьютере она стоит слева под кнопками, на телефоне
+   под колесом. Стили общие, отличается только выравнивание */
+.demo figcaption,.demonote{font-family:var(--fm);font-size:11px;
   letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
-.demo figcaption b{display:block;font-family:var(--fb);font-weight:400;font-size:14px;
+.demo figcaption{margin-top:-6px;text-align:center}
+.demo figcaption b,.demonote b{display:block;font-family:var(--fb);font-weight:400;font-size:14px;
   letter-spacing:0;text-transform:none;color:var(--ink-muted);margin-top:5px;text-wrap:pretty}
 
 /* ---------- рабочая часть ---------- */
@@ -502,14 +506,18 @@ body.hasbar{padding-bottom:96px}
   .btnrow{gap:9px;margin-top:18px;flex-direction:column;align-items:stretch}
   .cta{width:100%;font-size:16.5px;padding:15px 18px;min-height:var(--tap)}
   .spheres{grid-template-columns:1fr 1fr;border-radius:14px}
-  /* колесо прижато к подзаголовку, уровни слева под палец */
-  .demoblock{grid-template-columns:minmax(0,108px) minmax(0,1fr);gap:8px;margin-top:8px}
-  .lvl{font-size:12.5px;padding:9px 9px;min-height:48px;border-radius:11px}
-  .lvl i{font-size:9.5px;letter-spacing:.08em}
-  .demo canvas{max-width:100%}
-  .demo figcaption{margin-top:-8px;font-size:10px;letter-spacing:.06em}
-  .demo figcaption b{font-size:13px;margin-top:4px}
-  .herolist{margin-top:14px}
+  /* телефон: уровни сеткой два на два над колесом, колесо по центру */
+  .demoblock{display:block;margin-top:12px}
+  .lvls{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .lvl{font-size:12.5px;padding:7px 9px;min-height:40px;border-radius:10px;gap:1px}
+  .lvl i{font-size:9px;letter-spacing:.07em}
+  .demo{margin-top:6px}
+  .demo canvas{max-width:min(84vw,300px)}
+  .demo figcaption{margin-top:-10px;font-size:10px;letter-spacing:.06em}
+  .demo figcaption b{font-size:13px;margin-top:3px;line-height:1.35}
+  .lead{font-size:16px}
+  .herolist{margin-top:12px;gap:7px}
+  .herolist li{font-size:15.5px}
   /* размер компании в одну строку, роль по две в строке */
   .ch-size{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
   .ch-size .chip{padding:11px 2px;font-size:14px}
@@ -778,14 +786,12 @@ body.hasbar{padding-bottom:96px}
     <div>
       <div class="eyebrow">Бесплатно · 50 вопросов · 25 минут</div>
       <h1>Колесо финансового здоровья компании</h1>
-      <p class="lead">На выходе разбор по каждой сфере вашей компании.</p>
+      <p class="lead d-only">На выходе разбор по каждой сфере вашей компании.</p>
+      <p class="lead m-only">Разбор по каждой сфере вашей компании</p>
 
-      <!-- телефон: сверху вход в опрос, дальше колесо с переключателем
-           уровней, дальше пункты, и только внизу мягкий оффер -->
-      <div class="btnrow m-only" style="margin-top:16px">
-        <a class="cta" href="#work">Пройти колесо</a>
-      </div>
-
+      <!-- телефон: уровни и колесо стоят сразу под подзаголовком,
+           дальше пункты, дальше вход в опрос. Мягкий оффер уезжает
+           за первый экран -->
       <div class="demoblock m-only">
         <div class="lvls" id="lvlsM"></div>
         <figure class="demo" id="demowrapM">
@@ -808,6 +814,10 @@ body.hasbar{padding-bottom:96px}
         <li>PDF, который можно забрать</li>
       </ul>
 
+      <div class="btnrow m-only" style="margin-top:14px">
+        <a class="cta" href="#work">Пройти колесо</a>
+      </div>
+
       <div class="btnrow">
         <a class="cta d-only" href="#work">Пройти колесо</a>
         <a class="cta ghost sitelink" href="/founderfinance/#cta">Бесплатная диагностика со мной →</a>
@@ -825,12 +835,13 @@ body.hasbar{padding-bottom:96px}
         <div class="sph"><div class="n">Прибыль</div><div class="d">планирование прибыли</div><div class="c">10 вопросов</div></div>
         <div class="sph"><div class="n">Команда</div><div class="d">решения на основе цифр</div><div class="c">7 вопросов</div></div>
       </div>
-      <p class="note d-only" style="margin-top:12px">Порядок сфер это путь денег: пришли, заработали, дошли до собственника, осели в капитале, защищены, и есть кому управлять.</p>
       <div class="demoblock d-only">
-        <div class="lvls" id="lvlsD"></div>
+        <div class="lvlcol">
+          <div class="lvls" id="lvlsD"></div>
+          <p class="demonote" id="democapD"></p>
+        </div>
         <figure class="demo" id="demowrap">
           <canvas id="demo" width="800" height="800" role="img" aria-label="Пример колеса финансового здоровья"></canvas>
-          <figcaption id="democapD"></figcaption>
         </figure>
       </div>
     </div>
@@ -1353,14 +1364,14 @@ var DEMO_LEVELS=[
   note:"Деньги считают, люди есть. Капитала, защиты и дохода собственника нет.",
   vals:[5.6,1.4,1.3,2.2,4.0,4.3]},
  {tag:"Уровень 2",name:"Уверенный бизнес",
-  note:"Сферы подтянулись друг к другу, но держатся на ручном режиме.",
-  vals:[6.7,4.3,3.8,4.4,6.0,5.7]},
+  note:"Деньги и прибыль под контролем. Капитал и защита от удара отстают.",
+  vals:[7.8,4.3,2.5,3.3,7.0,5.7]},
  {tag:"Уровень 3",name:"Эффективные финансы",
-  note:"Прибыль планируется, капитал считается, резервы отделены.",
-  vals:[8.9,7.1,6.3,7.8,8.0,7.1]},
+  note:"Прибыль планируется, капитал считается. Тоньше всего безопасность.",
+  vals:[8.9,7.1,6.3,5.6,9.0,8.6]},
  {tag:"Уровень 4",name:"Прокачанные финансы",
   note:"Решения на цифрах, собственник разбирает отклонения, а не собирает данные.",
-  vals:[10.0,8.6,8.8,10.0,10.0,8.6]}
+  vals:[10.0,8.6,8.8,8.9,10.0,10.0]}
 ];
 var demoLevel=1, demoCur=[0,0,0,0,0,0], demoRaf=null, demoStarted=false;
 
