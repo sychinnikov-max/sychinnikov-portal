@@ -1575,12 +1575,14 @@ function buildBlocks(){
       '</div>'+
       '<div class="qs">'+qs+'</div>'+
       '<p class="bhint">'+blk.hint+'</p>'+
-      // телефон: колесо сразу после сферы, чтобы был виден результат ответов
+      // телефон: колесо сразу после сферы, чтобы был виден результат ответов.
+      // после последней сферы его нет: там сразу идет итоговое колесо
+      (bi===BLOCKS.length-1?'':
       '<div class="blockwheel noprint" id="bw-'+bi+'">'+
         '<div class="bwtitle">Ваше колесо сейчас</div>'+
         '<canvas id="bwc-'+bi+'" width="640" height="640" role="img" aria-label="Ваше колесо после сферы '+blk.name+'"></canvas>'+
         '<p class="bwnote" id="bwn-'+bi+'"></p>'+
-      '</div></section>';
+      '</div>')+'</section>';
   }).join("");
 
   BLOCKS.forEach(function(blk,bi){
@@ -1805,7 +1807,8 @@ function renderFirstSteps(){
 var bwSeen={};
 
 function bwIds(){
-  var a=BLOCKS.map(function(b,i){return "bwc-"+i;});
+  // последней сферы в списке нет: под ней стоит итоговое колесо
+  var a=BLOCKS.slice(0,-1).map(function(b,i){return "bwc-"+i;});
   a.push("bwc-final");
   return a;
 }
