@@ -126,6 +126,16 @@ p,li{text-wrap:pretty}
 .sph .d{font-size:14px;color:var(--ink-muted);margin-top:3px;line-height:1.3}
 .sph .c{font-family:var(--fm);font-size:12px;color:var(--gold-bright);letter-spacing:.07em;margin-top:7px}
 
+/* колесо после каждой сферы: на компьютере не нужно, там колесо
+   и так закреплено сбоку, поэтому блок включается только на телефоне */
+.blockwheel{display:none}
+.blockwheel canvas{width:100%;max-width:min(78vw,280px);height:auto;display:block;margin:0 auto}
+.bwtitle{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold-bright);text-align:center;margin-bottom:4px}
+.bwnote{text-align:center;font-size:14.5px;line-height:1.45;color:var(--ink-muted);margin-top:-10px}
+.bwnote b{display:block;color:var(--ink);font-weight:600;font-size:16px}
+.bwnote span{display:block;margin-top:2px;font-size:13.5px;color:var(--ink-dim)}
+
 /* ---------- пример колеса на первом экране ----------
    человек должен увидеть результат до того, как начнет отвечать:
    колесо наливается на глазах, поэтому понятно, что он получит */
@@ -505,6 +515,10 @@ body.hasbar{padding-bottom:96px}
   .btnrow{gap:9px;margin-top:18px;flex-direction:column;align-items:stretch}
   .cta{width:100%;font-size:16.5px;padding:15px 18px;min-height:var(--tap)}
   .spheres{grid-template-columns:1fr 1fr;border-radius:14px}
+  /* колесо после каждой сферы: видно, что заполнилось, до перехода дальше */
+  .blockwheel{display:block;margin:20px 0 0;padding:16px 12px 14px;border-radius:16px;
+    border:1px solid var(--hair-gold);background:color-mix(in oklab,var(--gold) 5%,var(--surface-2))}
+
   /* рабочая часть на телефоне: длинная инструкция убрана, остаются
      колесо и оценка под ним по центру */
   .worklead .wt,.worklead .wn{display:none}
@@ -885,6 +899,13 @@ body.hasbar{padding-bottom:96px}
 
     <div class="blocks" id="blocks"></div>
 
+  </div>
+
+  <!-- телефон: итоговое колесо перед последним шагом -->
+  <div class="blockwheel noprint" id="bw-final">
+    <div class="bwtitle">Итог: ваше колесо</div>
+    <canvas id="bwc-final" width="640" height="640" role="img" aria-label="Итоговое колесо"></canvas>
+    <p class="bwnote" id="bwn-final"></p>
   </div>
 
   <!-- ГЕЙТ -->
@@ -1548,7 +1569,13 @@ function buildBlocks(){
           '<span class="vl" id="gv-'+bi+'"></span></div>'+
       '</div>'+
       '<div class="qs">'+qs+'</div>'+
-      '<p class="bhint">'+blk.hint+'</p></section>';
+      '<p class="bhint">'+blk.hint+'</p>'+
+      // телефон: колесо сразу после сферы, чтобы был виден результат ответов
+      '<div class="blockwheel noprint" id="bw-'+bi+'">'+
+        '<div class="bwtitle">Ваше колесо сейчас</div>'+
+        '<canvas id="bwc-'+bi+'" width="640" height="640" role="img" aria-label="Ваше колесо после сферы '+blk.name+'"></canvas>'+
+        '<p class="bwnote" id="bwn-'+bi+'"></p>'+
+      '</div></section>';
   }).join("");
 
   BLOCKS.forEach(function(blk,bi){
@@ -1765,6 +1792,61 @@ function renderFirstSteps(){
     ? '<p class="note" style="margin-top:16px">Рабочий темп: один шаг в месяц. Через квартал пройдите колесо заново и сравните, что сдвинулось: лист с вашими ответами есть в PDF.</p>'
     : "";
   host.innerHTML='<h2 class="h2">С чего начинать</h2>'+sub+body+tail;
+}
+
+/* ---------- колеса между сферами (телефон) ----------
+   рисуем только те, что рядом с экраном: шесть холстов на каждый ответ
+   перерисовывать незачем */
+var bwSeen={};
+
+function bwIds(){
+  var a=BLOCKS.map(function(b,i){return "bwc-"+i;});
+  a.push("bwc-final");
+  return a;
+}
+
+function paintBlockWheel(id){
+  var c=document.getElementById(id);
+  if(!c||!c.offsetParent)return;
+  paintTo(c,{});
+  var note=document.getElementById(id.replace("bwc-","bwn-"));
+  if(!note)return;
+  var c2=counts(), idx=avg(scores()), left=c2.total-c2.ans;
+  var tail=left>0
+    ? "Общая оценка "+idx.toFixed(1)+" из 10, осталось "+left+" "+plural(left,"вопрос","вопроса","вопросов")
+    : "Общая оценка "+idx.toFixed(1)+" из 10, все вопросы закрыты";
+  if(id==="bwc-final"){
+    note.innerHTML="<b>"+idx.toFixed(1)+" из 10</b>"+
+      "<span>"+(left>0?"Отвечено "+c2.ans+" из "+c2.total+", разбор откроется после последнего ответа"
+                     :"Отвечено все "+c2.total+", можно открывать разбор")+"</span>";
+  }else{
+    var bi=+id.split("-")[1];
+    var yes=state.ans[bi].filter(function(v){return v==="y";}).length;
+    note.innerHTML="<b>"+esc(BLOCKS[bi].name)+" "+scoreOf(bi).toFixed(1)+" из 10</b>"+
+      "<span>Закрыто "+yes+" из "+BLOCKS[bi].qs.length+" · "+tail+"</span>";
+  }
+}
+
+function renderBlockWheels(){
+  bwIds().forEach(function(id){ if(bwSeen[id])paintBlockWheel(id); });
+}
+
+function initBlockWheels(){
+  if(!("IntersectionObserver" in window)){
+    bwIds().forEach(function(id){bwSeen[id]=true;});
+    renderBlockWheels();
+    return;
+  }
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      bwSeen[e.target.id]=e.isIntersecting;
+      if(e.isIntersecting)paintBlockWheel(e.target.id);
+    });
+  },{rootMargin:"320px 0px"});
+  bwIds().forEach(function(id){
+    var c=document.getElementById(id);
+    if(c)obs.observe(c);
+  });
 }
 
 /* ---------- липкая полоса с колесом ----------
@@ -2133,7 +2215,7 @@ function showGateSummary(problems){
 function update(){
   syncProfile();syncBlocks();renderCanvas();renderAnswers();renderReview();renderReadout();
   renderFirstSteps();renderPlan();
-  renderMiss();renderBar();renderSheet();
+  renderMiss();renderBar();renderSheet();renderBlockWheels();
   var left=TOTAL-counts().ans;
   var pfLeft=state.profile.filter(function(v){return !v;}).length;
   var hint=document.getElementById("ghint");
@@ -2189,6 +2271,7 @@ function init(){
 
   update();
   initDemo();
+  initBlockWheels();
   if(state.unlocked)unlock();
 
   document.getElementById("gform").addEventListener("submit",async function(e){
