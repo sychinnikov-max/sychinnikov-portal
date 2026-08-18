@@ -109,7 +109,7 @@ p,li{text-wrap:pretty}
 
 /* ---------- герой ---------- */
 .hero{padding:clamp(26px,3.2vw,44px) 0 clamp(44px,5.5vw,72px)}
-.herorow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+.herorow{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(28px,4vw,64px);align-items:start}
 @media(max-width:940px){.herorow{grid-template-columns:1fr}}
 /* четыре пункта это главный аргумент первого экрана, поэтому они крупнее лида */
 .herolist{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:12px;
@@ -131,9 +131,10 @@ p,li{text-wrap:pretty}
    колесо наливается на глазах, поэтому понятно, что он получит */
 /* уровень зрелости слева, колесо справа: человек сам листает состояния
    и видит, как меняется форма колеса */
-.demoblock{display:grid;grid-template-columns:minmax(0,168px) minmax(0,1fr);
-  gap:clamp(10px,1.3vw,18px);align-items:start;margin-top:clamp(10px,1.8vw,22px)}
-.lvls{display:flex;flex-direction:column;gap:8px}
+.demoblock{display:grid;grid-template-columns:minmax(0,192px) minmax(0,1fr);
+  gap:clamp(12px,1.6vw,24px);align-items:center;margin-top:clamp(6px,1.2vw,16px)}
+/* равные ряды: все четыре кнопки одной высоты, столбик читается сеткой */
+.lvls{display:grid;grid-template-rows:repeat(4,minmax(52px,1fr));gap:9px}
 .lvl{font-family:var(--fb);font-size:13.5px;line-height:1.2;text-align:left;
   padding:10px 12px;min-height:46px;cursor:pointer;color:var(--ink);
   border:1px solid color-mix(in oklab,var(--gold) 26%,transparent);border-radius:12px;
@@ -151,7 +152,7 @@ p,li{text-wrap:pretty}
 /* подпись уровня: на компьютере она стоит слева под кнопками, на телефоне
    под колесом. Стили общие, отличается только выравнивание */
 .demo figcaption{font-family:var(--fm);font-size:11px;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink-dim);margin-top:-10px;text-align:center}
+  text-transform:uppercase;color:var(--ink-dim);margin-top:-4%;text-align:center}
 .demo figcaption b{display:block;font-family:var(--fb);font-weight:400;font-size:14.5px;
   letter-spacing:0;text-transform:none;color:var(--ink-muted);margin-top:5px;text-wrap:balance}
 
