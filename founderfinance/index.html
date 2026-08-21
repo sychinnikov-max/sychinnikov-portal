@@ -284,7 +284,7 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
       </ul>
       <div class="actions">
         <a class="cta" href="#cta">Записаться на бесплатную диагностику</a>
-        <a class="cta ghost" href="/founderfinance/koleso/">Узнать финансовое здоровье компании →</a>
+        <a class="cta ghost" href="/founderfinance/tool/">Узнать финансовое здоровье компании →</a>
         <a class="cta ghost sm" href="#calc">Калькулятор прибыли</a>
       </div>
       <p class="microhint">За 30-45 минут на ваших цифрах покажу, где не видно прибыль и что упускает местный бухгалтер. <b>Уйдете с дорожной картой</b>, даже если дальше не работаем.</p>
@@ -446,21 +446,20 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
     <div>
       <div class="eyebrow">Бесплатный калькулятор</div>
       <div class="h3">Посчитайте свою реальную прибыль за 10 минут</div>
-      <p>Excel-таблица по структуре управленческого учета. Вводите оборот и расходы, видите маржинальный доход, операционную и чистую прибыль и долю каждой статьи. Внутри блок «три сценария»: что станет с прибылью, если продажи вырастут или упадут. Та же логика, по которой мы строим финмодель на диагностике.</p>
+      <p>Таблица по структуре управленческого учета. Вводите оборот и расходы, видите маржинальный доход, операционную и чистую прибыль и долю каждой статьи. Внутри блок «три сценария»: что станет с прибылью, если продажи вырастут или упадут. Та же логика, по которой мы строим финмодель на диагностике.</p>
     </div>
     <div class="lmcard">
       <div class="file">
-        <div class="fic">XLSX</div>
+        <div class="fic">TG</div>
         <div>
           <div class="fnm">Калькулятор управленческой прибыли</div>
-          <div class="fmeta">Excel · открывается в Excel, Numbers, Google Таблицах</div>
+          <div class="fmeta">Отдаю в телеграм-боте · своя копия таблицы на ваш Диск</div>
         </div>
       </div>
-      <form id="lmform" class="lmrow" novalidate>
-        <input class="finput" name="contact" type="text" placeholder="Telegram или почта, куда прислать разбор" autocomplete="off">
-        <a class="cta" id="lmget" href="/founderfinance/lead-magnet/calculator-upravlencheskaya-pribyl.xlsx" download>Получить калькулятор</a>
-        <p class="note" style="margin-top:2px;font-size:13.5px">Файл скачается сразу. Оставите контакт, пришлю короткий разбор под ваши цифры.</p>
-      </form>
+      <div class="lmrow">
+        <a class="cta" id="lmget" href="https://t.me/Sychinnikov_finance_bot?start=site_calc" target="_blank" rel="noopener">Получить калькулятор</a>
+        <p class="note" style="margin-top:2px;font-size:13.5px">Откроется телеграм-бот. Два вопроса о бизнесе кнопками, и он сразу отдает калькулятор, а вместе с ним остальные материалы.</p>
+      </div>
     </div>
   </div>
 </div></section>
@@ -469,20 +468,20 @@ footer{border-top:1px solid var(--hair);background:var(--surface)}
 <section class="band alt" id="koleso"><div class="inner pad">
   <div class="lmwrap rv">
     <div>
-      <div class="eyebrow">Бесплатная диагностика · 43 вопроса · 20 минут</div>
+      <div class="eyebrow">Бесплатная диагностика · 50 вопросов · 20 минут</div>
       <div class="h3">Узнайте финансовое здоровье своей компании</div>
-      <p>Шесть блоков: деньги, прибыль, дивиденды, богатство, безопасность, команда. Отвечаете да, нет или не знаю, и получаете PDF с разбором по каждому блоку и конкретным списком того, что нужно улучшать, чтобы компания была финансово устойчивой. Под каждым пунктом написано, что именно даст его закрытие. Та же диагностика, которую мы проводим на разборе с финансовым директором.</p>
+      <p>Шесть сфер: деньги, прибыль, дивиденды, богатство, безопасность, команда. Отвечаете да, нет или не знаю, и получаете разбор по каждой сфере, слабое звено и конкретный список того, что не закрыто, с пользой от закрытия каждого пункта. Отдельным блоком «С чего начинать»: три первых шага под ваши ответы. Разбор открывается на экране, PDF сохраняете себе. Та же диагностика, которую мы проводим на разборе с финансовым директором.</p>
     </div>
     <div class="lmcard">
       <div class="file">
         <div class="fic">PDF</div>
         <div>
           <div class="fnm">Колесо финансового здоровья</div>
-          <div class="fmeta">6 блоков · 43 вопроса · разбор и план работ</div>
+          <div class="fmeta">6 сфер · 50 вопросов · разбор, слабое звено и три первых шага</div>
         </div>
       </div>
       <div class="lmrow">
-        <a class="cta" href="/founderfinance/koleso/">Пройти и получить PDF</a>
+        <a class="cta" href="/founderfinance/tool/">Пройти и получить PDF</a>
         <p class="note" style="margin-top:2px;font-size:13.5px">Проходится прямо в браузере. Разбор открывается сразу, PDF сохраняете себе и отдаете своему бухгалтеру.</p>
       </div>
     </div>
@@ -691,13 +690,11 @@ lf&&lf.addEventListener('submit',async(e)=>{
   else{document.getElementById('formerr').style.display='block';}
 });
 
-const lmform=document.getElementById('lmform'), lmget=document.getElementById('lmget');
-lmget&&lmget.addEventListener('click',async()=>{
-  const contact=(lmform.contact.value||'').trim();
-  if(contact){const suspect=looksMistyped(contact);if(suspect)hintMistyped(lmform.contact);
-    await sendForm({subject:'Калькулятор: контакт с лендинга — Founder Finance',from_name:'Founder Finance · калькулятор',name:'Запрос калькулятора',message:'Контакт оставил калькулятор на лендинге: '+contact,replyto:(/@/.test(contact)?contact:undefined),suspect:suspect});track();
-    setTimeout(()=>showOk('Калькулятор у вас','Файл скачивается. Я получил ваш контакт и пришлю короткий разбор под ваши цифры. Можно сразу написать в Telegram <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a>.'),400);
-    lmform.reset();}
+// Калькулятор отдается телеграм-ботом: контакт собирает он сам, форма на лендинге не нужна.
+// Здесь только отметка перехода, чтобы в Метрике был виден спрос на материал.
+const lmget=document.getElementById('lmget');
+lmget&&lmget.addEventListener('click',()=>{
+  try{if(window.ym)ym(109611431,'reachGoal','bot_calc');}catch(e){}
 });
 </script>
 </body>
