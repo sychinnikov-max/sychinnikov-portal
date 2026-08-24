@@ -112,22 +112,26 @@ p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap
 .entryline .el-text{font-size:16px;color:var(--ink-muted);line-height:1.5;max-width:78ch}
 .entryline .el-text b{color:var(--ink)}
 /* кейсы: компактный список с раскрытием */
-.cases{display:flex;flex-direction:column;gap:14px}
+.cases{display:flex;flex-direction:column;gap:12px}
 .casebox{background:var(--card);border:1px solid var(--hair);border-radius:16px;
-  padding:24px 26px;transition:border-color .25s ease,background .25s ease}
+  padding:20px 24px;transition:border-color .25s ease,background .25s ease}
 .casebox[open]{border-color:var(--hair-gold);
   background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 6%,var(--card)),var(--card))}
 .casebox summary{list-style:none;cursor:pointer;display:grid;
-  grid-template-columns:1fr auto;align-items:center;gap:10px 22px}
+  grid-template-columns:1fr auto;grid-template-rows:auto auto auto;
+  align-items:center;gap:6px 20px}
+.cb-tag{grid-column:1;grid-row:1}
+.cb-title{grid-column:1;grid-row:2}
+.cb-res{grid-column:1;grid-row:3}
 .casebox summary::-webkit-details-marker{display:none}
 .casebox summary::after{content:"+";grid-row:1 / span 3;grid-column:2;align-self:center;
-  font-family:var(--fb);font-weight:600;font-size:26px;line-height:1;color:var(--gold);
-  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--fb);font-weight:600;font-size:24px;line-height:1;color:var(--gold);
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
   border:1px solid var(--hair-gold);border-radius:10px}
 .casebox[open] summary::after{content:"–"}
 .cb-tag{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
-.cb-title{font-family:var(--fd);font-weight:600;font-size:clamp(20px,1.9vw,25px);line-height:1.15;color:var(--ink)}
-.cb-res{font-size:16px;color:var(--ink-muted);line-height:1.5}
+.cb-title{font-family:var(--fd);font-weight:600;font-size:clamp(19px,1.7vw,23px);line-height:1.2;color:var(--ink)}
+.cb-res{font-size:15.5px;color:var(--ink-muted);line-height:1.45}
 .cb-body{margin-top:22px;padding-top:20px;border-top:1px solid var(--hair)}
 .cb-body p{font-size:16px;line-height:1.6;color:var(--ink-muted);margin-top:14px;max-width:86ch}
 .cb-body p b{color:var(--ink)}
