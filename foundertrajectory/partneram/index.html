@@ -29,19 +29,21 @@
 .secsub{font-family:var(--fd);font-weight:500;font-size:clamp(19px,1.75vw,26px);color:var(--ink);
   margin-top:12px;line-height:1.2;text-wrap:balance}
 
-/* номер этапа */
-.stagerow{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+/* номер этапа: стоит перед словом в той же строке */
 .stagenum{font-family:var(--fb);font-weight:800;font-variant-numeric:lining-nums tabular-nums;
-  font-size:clamp(26px,3vw,40px);line-height:1;color:var(--gold-ink);
-  background:linear-gradient(168deg,#D3AC65,#BE9450);border-radius:14px;padding:10px 20px;
-  box-shadow:0 14px 38px color-mix(in oklab,var(--gold) 32%,transparent)}
+  color:var(--gold-ink);background:linear-gradient(168deg,#D3AC65,#BE9450);
+  box-shadow:0 12px 32px color-mix(in oklab,var(--gold) 30%,transparent)}
+.seclabel .stagenum{display:inline-block;font-size:.58em;line-height:1;
+  padding:.22em .42em;border-radius:.26em;margin-right:.34em;vertical-align:.14em;
+  text-shadow:none}
+.stagenum.sm{display:inline-block;font-size:clamp(20px,1.8vw,26px);line-height:1;
+  padding:8px 16px;border-radius:12px}
 
 /* все по левому краю, единый ритм */
 .sect-head{text-align:left;max-width:68ch;margin:0 0 44px}
 .sect-head .sub{margin-left:0;margin-right:0}
 .pagehero .rv{text-align:left;max-width:none;margin:0}
 .pagehero .sub{margin-left:0;margin-right:0;max-width:58ch}
-.stagerow{flex-direction:column;align-items:flex-start;gap:14px}
 .pricenote{max-width:96ch;margin-left:0}
 .takeaway{margin-left:0;text-align:left;max-width:88ch}
 .rung{text-align:left}
@@ -221,7 +223,7 @@ p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap
 <!-- ЭТАП 1: АУДИТ -->
 <section class="band alt" id="audit"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="stagerow"><span class="stagenum">1</span><span class="seclabel">Аудит</span></div>
+    <div class="seclabel"><span class="stagenum">1</span>Аудит</div>
     <div class="secsub">Три фазы, 3-4&nbsp;недели</div>
     <p class="sub">Устроен как медицинское обследование: анамнез, анализы, диагноз. Без&nbsp;него внедрение превращается в&nbsp;угадывание.</p>
   </div>
@@ -264,7 +266,7 @@ p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap
 <!-- ЭТАП 2: РАБОТА -->
 <section class="band" id="rabota"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="stagerow"><span class="stagenum">2</span><span class="seclabel">Управленческий контур</span></div>
+    <div class="seclabel"><span class="stagenum">2</span>Управленческий контур</div>
     <div class="secsub">Три месяца после аудита</div>
     <p class="sub">Собираем систему, в которой компания управляется решениями по цифрам, а не присутствием собственника. Два этапа, внутри каждого два блока&nbsp;одновременно.</p>
   </div>
@@ -374,7 +376,7 @@ p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap
 <!-- ФИНАНСОВЫЙ КОНТУР -->
 <section class="band" id="kontur"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="stagerow"><span class="stagenum">3</span><span class="seclabel">Финансовый контур</span></div>
+    <div class="seclabel"><span class="stagenum">3</span>Финансовый контур</div>
     <div class="secsub">Второе направление, идет отдельно от управленческого</div>
     <p class="sub">Это не один отчет о прибыли. Это управленческая система, и она внедряется двумя этапами, а внутри каждого этапа два блока идут&nbsp;одновременно.</p>
   </div>
