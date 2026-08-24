@@ -50,7 +50,7 @@
 /* переносы: заголовки не роняют одно слово на строку */
 h1,.h2,.h3,.seclabel,.secsub,.stepn .ti,.asset .at,.metric .ml,.rung .rg-name,.vcol h4,.fitcol h4{text-wrap:balance}
 p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap:pretty}
-h1{text-wrap:balance;max-width:19ch;margin-left:0}
+h1{text-wrap:balance;max-width:27ch;margin-left:0}
 
 /* суммы: цифры сплошной высоты, читаются лучше засечек */
 .rung .rg-price{font-family:var(--fb);font-weight:700;letter-spacing:-.02em;
@@ -74,8 +74,40 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
 .rung .rg-sub li{list-style:none;font-size:14px;color:var(--ink-muted);padding-left:15px;position:relative;line-height:1.45}
 .rung .rg-sub li::before{content:"·";position:absolute;left:3px;color:var(--gold);font-weight:700;font-size:18px;top:-2px}
 
-/* контакты по центру */
-.kontakty .cta-list{display:inline-block;text-align:left}
+/* центрирование, которое приходит из общей таблицы сайта */
+.proofbar .pb{text-align:left}
+.rung .rg-name,.rung .rg-price{justify-content:flex-start}
+
+/* выравнивание высот внутри рядов карточек */
+.stepn ul{flex:1}
+.metric .mtrend{white-space:normal}
+@supports(grid-template-rows:subgrid){
+  @media(min-width:901px){
+    .assets{grid-template-rows:repeat(3,auto)}
+    .asset{display:grid;grid-template-rows:subgrid;grid-row:span 3}
+  }
+}
+
+/* один правый край: плашки во всю колонку, строка внутри держит меру */
+.takeaway,.pricenote{max-width:none}
+.takeaway p,.pricenote p{max-width:80ch}
+
+/* подзаголовок секции гротеском: воздух и цифры нормальной высоты */
+.secsub{font-family:var(--fb);font-weight:600;font-size:clamp(18px,1.5vw,21px);
+  color:var(--ink-muted);margin-top:20px;letter-spacing:0;line-height:1.35}
+
+/* лестница из трех тарифов, вход отдельной строкой над ней */
+.ladder{grid-template-columns:repeat(3,1fr)}
+@media(max-width:980px){.ladder{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ladder{grid-template-columns:1fr}}
+.rung .rg-dur b{color:var(--ink);font-family:var(--fb);font-weight:700;
+  font-variant-numeric:lining-nums tabular-nums}
+.entryline{display:flex;align-items:center;gap:24px;flex-wrap:wrap;background:var(--card);
+  border:1px solid var(--hair);border-radius:16px;padding:22px 26px;margin-bottom:20px}
+.entryline .el-price{font-family:var(--fb);font-weight:700;font-size:clamp(21px,1.9vw,26px);
+  color:var(--gold-bright);white-space:nowrap}
+.entryline .el-text{font-size:16px;color:var(--ink-muted);line-height:1.5;max-width:78ch}
+.entryline .el-text b{color:var(--ink)}
 </style>
 </head>
 <body data-variant="partneram">
@@ -85,7 +117,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
   <nav class="nlinks" id="nlinks">
     <a href="#chto">Что решаем</a>
     <a href="#audit">Аудит</a>
-    <a href="#rabota">Работа</a>
+    <a href="#rabota">После аудита</a>
     <a href="#ceny">Цены</a>
     <a href="#komissiya">Комиссия</a>
     <a class="ncta" href="#kontakty">Связаться</a>
@@ -97,9 +129,9 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
   <div class="rv">
     <div class="crumbs" style="display:flex;gap:8px"><a href="/foundertrajectory/">Главная</a> · Партнерам</div>
     <div class="eyebrow" style="margin-top:20px">Коммерческое предложение для партнеров</div>
-    <h1 style="margin-top:14px">Ставим управление и финансы в компаниях вашего&nbsp;клиента</h1>
+    <h1 style="margin-top:14px">Ставим управление и финансы в&nbsp;компаниях вашего&nbsp;клиента</h1>
     <p class="sub">Вы показываете клиенту, что происходит с людьми. Мы ставим управление: оргструктуру, показатели, регламенты и&nbsp;отчетность.</p>
-    <p class="sub" style="margin-top:14px">Комиссия партнеру <b>20 процентов</b> со всех платежей клиента в первые три&nbsp;месяца.</p>
+    <p class="sub" style="margin-top:14px">Комиссия партнеру <b>20 процентов</b> со всех платежей клиента в&nbsp;первые три&nbsp;месяца.</p>
   </div>
 </div></section>
 
@@ -108,13 +140,13 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
   <div class="sect-head rv">
     <div class="seclabel">Кто мы</div>
     <div class="secsub">Команда, которая ставит управление и&nbsp;финансы</div>
-    <p class="sub">Ведет Андрей Сычинников, ex-CEO компании с выручкой 1,4 млн евро (120 млн рублей) и MBA по&nbsp;управлению.</p>
+    <p class="sub">Ведет Андрей Сычинников, ex-CEO компании с выручкой 1,4 млн евро (120&nbsp;млн&nbsp;рублей) и MBA по&nbsp;управлению.</p>
   </div>
   <div class="proofbar rv">
     <div class="pb"><div class="pbn">5 лет</div><div class="pbl">управления собственной&nbsp;компанией</div></div>
     <div class="pb"><div class="pbn">3+ года</div><div class="pbl">внедряем финансовый&nbsp;менеджмент</div></div>
-    <div class="pb"><div class="pbn">Команда</div><div class="pbl">финдиректора с практикой от 10&nbsp;лет</div></div>
-    <div class="pb"><div class="pbn">Онлайн</div><div class="pbl">на русском, оплата в&nbsp;евро</div></div>
+    <div class="pb"><div class="pbn">10+ лет</div><div class="pbl">практики у финдиректоров&nbsp;команды</div></div>
+    <div class="pb"><div class="pbn">100%</div><div class="pbl">онлайн, на русском, оплата в&nbsp;евро</div></div>
   </div>
   <p class="sub rv" style="margin:26px 0 0">Отрасли, которые понимаем изнутри: оптовая и розничная торговля, производство, общепит, логистика и маркетплейсы.</p>
 </div></section>
@@ -153,11 +185,12 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
   <div class="sect-head rv">
     <div class="seclabel">Результат</div>
     <div class="secsub">Что получает&nbsp;собственник</div>
+    <p class="sub">Три изменения, по которым видно, что работа сделана. Их называет сам собственник через три&nbsp;месяца.</p>
   </div>
   <div class="metrics rv">
     <div class="metric">
       <div class="ml">Управляет по&nbsp;цифрам</div>
-      <div class="md">Видит настоящую чистую прибыль со своей зарплатой и налогами внутри. Видит, какие направления кормят компанию, а какие ее&nbsp;съедают.</div>
+      <div class="md">Видит настоящую чистую прибыль, со своей зарплатой и налогами внутри. Понятно, какие направления кормят компанию, а какие&nbsp;съедают.</div>
       <div class="mtrend">решения по фактам</div>
     </div>
     <div class="metric">
@@ -178,7 +211,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
   <div class="sect-head rv">
     <div class="stagerow"><span class="stagenum">1</span><span class="seclabel">Аудит</span></div>
     <div class="secsub">Три фазы, 3-4&nbsp;недели</div>
-    <p class="sub">Устроен как медицинское обследование: анамнез, анализы, диагноз. Без него внедрение превращается в&nbsp;угадывание.</p>
+    <p class="sub">Устроен как медицинское обследование: анамнез, анализы, диагноз. Без&nbsp;него внедрение превращается в&nbsp;угадывание.</p>
   </div>
   <div class="stepper three rv">
     <div class="stepn">
@@ -196,7 +229,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
       <div class="wk">Фаза 2 · неделя 2-3</div>
       <div class="ti">Финансовый аудит</div>
       <ul>
-        <li>Управленческий отчет о прибыли с долями от выручки</li>
+        <li>Отчет о прибыли с долями от выручки</li>
         <li>Три сценария: пессимистичный, базовый, оптимистичный</li>
         <li>Разбор модели вместе с финансовым директором</li>
       </ul>
@@ -206,14 +239,14 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
       <div class="wk">Фаза 3 · неделя 3-4</div>
       <div class="ti">Стратегическая сессия</div>
       <ul>
-        <li>Гипотезы роста по трем осям: эффект, скорость, цена</li>
+        <li>Гипотезы роста: эффект, скорость, цена</li>
         <li>Выбор 3-5 главных рычагов на три месяца</li>
-        <li>Дорожная карта в диаграмме Ганта: что, кто, когда</li>
+        <li>Дорожная карта в Ганте: что, кто, когда</li>
       </ul>
       <div class="mv">План изменений, с которым можно&nbsp;работать</div>
     </div>
   </div>
-  <div class="takeaway rv" style="margin-top:30px">Аудит связывает людей и деньги в одну картину: какие проблемы в команде имеют финансовый след и какой рычаг поднимет&nbsp;прибыль.</div>
+  <div class="takeaway rv" style="margin-top:30px"><p>Аудит связывает людей и деньги в одну картину: какие проблемы в команде имеют финансовый след и какой рычаг поднимет&nbsp;прибыль.</p></div>
 </div></section>
 
 <!-- ЭТАП 2: РАБОТА -->
@@ -221,7 +254,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
   <div class="sect-head rv">
     <div class="stagerow"><span class="stagenum">2</span><span class="seclabel">Работа после аудита</span></div>
     <div class="secsub">Три месяца, у каждого свой&nbsp;результат</div>
-    <p class="sub">Два созвона в неделю. Управление ведут Андрей и операционный менеджер, финансы считает финансовый&nbsp;директор.</p>
+    <p class="sub">Два созвона в неделю. Управление ведут Андрей и операционный&nbsp;менеджер, финансы считает финансовый&nbsp;директор.</p>
   </div>
   <div class="stepper three rv">
     <div class="stepn">
@@ -277,7 +310,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
     <div class="asset core">
       <div class="ag">Управление</div>
       <div class="at">Дорожная карта в диаграмме&nbsp;Ганта</div>
-      <div class="ad">Все изменения на три месяца: этап, ответственный, срок. Видно, что идет по плану, а что&nbsp;отстает.</div>
+      <div class="ad">Все изменения на три месяца: этап, ответственный, срок. Видно, что идет по&nbsp;плану, а что&nbsp;отстает.</div>
     </div>
     <div class="asset core">
       <div class="ag">Процессы</div>
@@ -292,7 +325,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
     <div class="asset core">
       <div class="ag">Деньги</div>
       <div class="at">Финмодель и платежный&nbsp;календарь</div>
-      <div class="ad">Отчет о прибыли, движение денег, календарь на восемь недель вперед, финмодель со&nbsp;сценариями.</div>
+      <div class="ad">Отчет о прибыли, движение денег, календарь на восемь недель вперед и финмодель со&nbsp;сценариями.</div>
     </div>
     <div class="asset core">
       <div class="ag">Внедрение</div>
@@ -309,14 +342,11 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
     <div class="secsub">Сколько это стоит&nbsp;клиенту</div>
     <p class="sub">Цены названы здесь, а не на созвоне. Передавайте их клиенту&nbsp;напрямую.</p>
   </div>
+  <div class="entryline rv">
+    <div class="el-price">Разбор бесплатно</div>
+    <div class="el-text"><b>Час разговора с собственником.</b> Называем главную проблему и первый шаг. Выводы остаются у него, даже если дальше мы не&nbsp;работаем.</div>
+  </div>
   <div class="ladder rv">
-    <div class="rung">
-      <div class="rg-tag">Вход</div>
-      <div class="rg-name">Разбор</div>
-      <div class="rg-dur">1 час</div>
-      <div class="rg-price">Бесплатно</div>
-      <div class="rg-sub">Разбираем бизнес клиента, называем главную проблему и говорим, с чего начать. Выводы остаются у него, даже если дальше мы не работаем.</div>
-    </div>
     <div class="rung core">
       <div class="rg-badge">С этого начинаем</div>
       <div class="rg-tag">Диагностика</div>
@@ -326,36 +356,36 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
       <div class="rg-sub">Три фазы: команда, финансы, стратегическая сессия.
         <ul>
           <li>Оргструктура «как по факту»</li>
-          <li>Проблемы в системе глазами команды</li>
+          <li>Проблемы глазами команды</li>
           <li>Отчет о прибыли и три сценария</li>
-          <li>Дорожная карта в диаграмме Ганта</li>
+          <li>Дорожная карта в Ганте</li>
         </ul>
       </div>
     </div>
-    <div class="rung core">
+    <div class="rung">
       <div class="rg-tag">Управление</div>
       <div class="rg-name">Перезагрузка траектории</div>
-      <div class="rg-dur">3 месяца, всего €7 470</div>
+      <div class="rg-dur">3 месяца, всего <b>€7 470</b></div>
       <div class="rg-price">€2 490<small>/ мес</small></div>
       <div class="rg-sub">Система управления строится и внедряется в команду.
         <ul>
-          <li>Показатели и мотивация под прибыль</li>
+          <li>Мотивация под прибыль</li>
           <li>Регламенты процессов в BPMN 2.0</li>
-          <li>Дашборды и еженедельная отчетность</li>
+          <li>Дашборды и отчетность</li>
           <li>Обучение преемника и приемка</li>
         </ul>
       </div>
     </div>
-    <div class="rung core soft">
+    <div class="rung">
       <div class="rg-tag">Деньги</div>
       <div class="rg-name">Финансовый контур</div>
       <div class="rg-dur">от 3 месяцев</div>
       <div class="rg-price">€1 900<small>/ мес</small></div>
       <div class="rg-sub">Подключаем финансового директора и ставим регулярный финансовый менеджмент.
         <ul>
-          <li>Движение денег, отчет о прибыли, баланс</li>
-          <li>Платежный календарь и финмодель на год</li>
-          <li>Облегченный вариант €700 в месяц: считает человек клиента по нашим шаблонам</li>
+          <li>Отчет о прибыли и движение денег</li>
+          <li>Платежный календарь и финмодель</li>
+          <li>Вариант €700 в месяц: считает человек клиента</li>
         </ul>
       </div>
     </div>
@@ -373,7 +403,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
   <div class="sect-head rv">
     <div class="seclabel">Комиссия</div>
     <div class="secsub">20 процентов&nbsp;партнеру</div>
-    <p class="sub">Со всех платежей клиента в первые три месяца, включая аудит. Не с первого чека, а с каждого платежа за этот&nbsp;период.</p>
+    <p class="sub">Со всех платежей клиента в первые три месяца, включая аудит. Не&nbsp;с&nbsp;первого чека, а с каждого платежа за этот&nbsp;период.</p>
   </div>
   <div class="metrics rv">
     <div class="metric">
@@ -421,11 +451,11 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
     <div class="fitcol no">
       <h4>Не подходит</h4>
       <ul>
-        <li><span class="mk">–</span> Соло-предприниматель без команды</li>
-        <li><span class="mk">–</span> Нужен подрядчик руками, без изменений в управлении</li>
-        <li><span class="mk">–</span> Собственник не готов показывать реальные цифры</li>
-        <li><span class="mk">–</span> Некому раз в неделю отдавать документы</li>
-        <li><span class="mk">–</span> Компания на стадии запуска, оборотов еще нет</li>
+        <li><span class="mk">×</span> Соло-предприниматель без команды</li>
+        <li><span class="mk">×</span> Нужен подрядчик руками, без изменений в управлении</li>
+        <li><span class="mk">×</span> Собственник не готов показывать реальные цифры</li>
+        <li><span class="mk">×</span> Некому раз в неделю отдавать документы</li>
+        <li><span class="mk">×</span> Компания на стадии запуска, оборотов еще нет</li>
       </ul>
     </div>
   </div>
@@ -436,6 +466,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
   <div class="sect-head rv">
     <div class="seclabel">Механика</div>
     <div class="secsub">Как передать&nbsp;клиента</div>
+    <p class="sub">Три шага. От вашего письма до первого платежа проходит от двух до четырех&nbsp;недель.</p>
   </div>
   <div class="stepper three rv">
     <div class="stepn">
@@ -463,7 +494,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
       <div class="ti">Клиент выбирает&nbsp;формат</div>
       <ul>
         <li>Аудит, управление, финансы или их сочетание</li>
-        <li>Договор и оплата в евро на европейский счет</li>
+        <li>Договор и оплата в евро</li>
         <li>Комиссия уходит вам после каждого платежа</li>
       </ul>
       <div class="mv">Держим вас в курсе, пока идет&nbsp;работа</div>
@@ -472,7 +503,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
 </div></section>
 
 <!-- КОНТАКТЫ -->
-<section class="band final kontakty" id="kontakty"><div class="inner pad sm">
+<section class="band final kontakty" id="kontakty"><div class="inner pad">
   <div class="sect-head rv" style="margin-bottom:0">
     <div class="seclabel">Контакты</div>
     <div class="secsub">Пишите напрямую</div>
@@ -483,7 +514,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
       <li>Телеграм: <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a></li>
       <li>Сайт: <a href="https://sychinnikov.com/foundertrajectory/" style="color:var(--gold)">sychinnikov.com/foundertrajectory</a></li>
     </ul>
-    <p class="note">Работаем на территории ЕС, оплата в евро на европейский счет.</p>
+    <p class="note">Работаем на территории ЕС, встречи и ведение&nbsp;онлайн.</p>
   </div>
 </div></section>
 
@@ -498,7 +529,7 @@ h1{text-wrap:balance;max-width:19ch;margin-left:0}
       <ul class="fnav">
         <li><a href="#chto">Что решаем</a></li>
         <li><a href="#audit">Аудит</a></li>
-        <li><a href="#rabota">Работа после аудита</a></li>
+        <li><a href="#rabota">После аудита</a></li>
         <li><a href="#ceny">Цены</a></li>
         <li><a href="#komissiya">Комиссия партнеру</a></li>
       </ul>
