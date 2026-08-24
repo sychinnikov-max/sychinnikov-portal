@@ -33,9 +33,9 @@
 .stagenum{font-family:var(--fb);font-weight:800;font-variant-numeric:lining-nums tabular-nums;
   color:var(--gold-ink);background:linear-gradient(168deg,#D3AC65,#BE9450);
   box-shadow:0 12px 32px color-mix(in oklab,var(--gold) 30%,transparent)}
-.seclabel .stagenum{display:inline-block;font-size:.58em;line-height:1;
-  padding:.22em .42em;border-radius:.26em;margin-right:.34em;vertical-align:.14em;
-  text-shadow:none}
+.seclabel:has(.stagenum){display:flex;align-items:flex-start;gap:.26em}
+.seclabel .stagenum{flex:none;font-size:.58em;line-height:1;
+  padding:.22em .42em;border-radius:.26em;margin-top:.14em;text-shadow:none}
 .stagenum.sm{display:inline-block;font-size:clamp(20px,1.8vw,26px);line-height:1;
   padding:8px 16px;border-radius:12px}
 
@@ -222,7 +222,7 @@ p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap
 <!-- ЭТАП 1: АУДИТ -->
 <section class="band alt" id="audit"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="seclabel"><span class="stagenum">1</span>Аудит</div>
+    <div class="seclabel"><span class="stagenum">1</span><span>Аудит</span></div>
     <div class="secsub">Три фазы, 3-4&nbsp;недели</div>
     <p class="sub">Устроен как медицинское обследование: анамнез, анализы, диагноз. Без&nbsp;него внедрение превращается в&nbsp;угадывание.</p>
   </div>
@@ -265,7 +265,7 @@ p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap
 <!-- ЭТАП 2: РАБОТА -->
 <section class="band" id="rabota"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="seclabel"><span class="stagenum">2</span>Управленческий контур</div>
+    <div class="seclabel"><span class="stagenum">2</span><span>Управленческий контур</span></div>
     <div class="secsub">Три месяца после аудита</div>
     <p class="sub">Собираем систему, в которой компания управляется решениями по цифрам, а не присутствием собственника. Два этапа, внутри каждого два блока&nbsp;одновременно.</p>
   </div>
@@ -375,7 +375,7 @@ p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap
 <!-- ФИНАНСОВЫЙ КОНТУР -->
 <section class="band" id="kontur"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="seclabel"><span class="stagenum">3</span>Финансовый контур</div>
+    <div class="seclabel"><span class="stagenum">3</span><span>Финансовый контур</span></div>
     <div class="secsub">Второе направление, идет отдельно от управленческого</div>
     <p class="sub">Это не один отчет о прибыли. Это управленческая система, и она внедряется двумя этапами, а внутри каждого этапа два блока идут&nbsp;одновременно.</p>
   </div>
