@@ -24,6 +24,9 @@
   .pl-banner{ display:none; align-items:center; gap:.5rem; font-size:.8rem; padding:.55rem .85rem; border-radius:var(--fk-r-sm); margin-bottom:.9rem; }
   .pl-banner.warn{ background:var(--fk-amber-bg); color:var(--fk-amber); border:1px solid #ECD9A8; }
   .pl-banner.ok{ background:#E1F5F0; color:#12756A; border:1px solid #BBE7DC; }
+  .pl-note{ background:var(--fk-card); border:1px solid var(--fk-line); border-radius:var(--fk-r-sm); padding:.5rem .8rem; margin-bottom:.6rem; }
+  .pl-note summary{ font-size:.76rem; font-weight:700; color:var(--ff-accent-2); cursor:pointer; }
+  .pl-note div{ font-size:.79rem; color:var(--fk-muted); line-height:1.55; margin-top:.5rem; }
 
   /* ── канбан ── */
   .pl-full{ width:100%; padding:0 clamp(1rem,2.5vw,2.5rem); box-sizing:border-box; }
@@ -91,6 +94,15 @@
   .ty.custdev{ background:var(--fk-red-bg); color:var(--fk-red); }
   .ty.call{ background:#E7F1FB; color:#1B6FB0; }
   .ty.node{ background:var(--fk-bg-2); color:var(--fk-muted); border:1px solid var(--fk-line); }
+  .ty.client{ background:#E1F5F0; color:#12756A; }
+  .ty.partner{ background:#EFE9FB; color:#6B45B0; }
+  .ty.referral{ background:#FBEEDD; color:#A9683F; }
+  .ty.warm{ background:#FBEEDD; color:#A9683F; }
+  .ty.peer{ background:var(--fk-bg-2); color:var(--fk-muted); border:1px solid var(--fk-line); }
+  .ty.inbound{ background:#E7F1FB; color:#1B6FB0; }
+  .amt{ font-size:.66rem; font-weight:800; padding:.14rem .5rem; border-radius:100px; background:var(--ff-grad); color:#fff; white-space:nowrap; }
+  .sil{ font-family:var(--fk-mono); font-size:.66rem; font-weight:700; padding:.14rem .48rem; border-radius:100px; background:var(--fk-bg-2); color:var(--fk-muted); border:1px solid var(--fk-line); white-space:nowrap; }
+  .sil.hot{ background:var(--fk-red-bg); color:var(--fk-red); border-color:#F0C9C4; }
   .flag{ font-size:.64rem; font-weight:800; padding:.13rem .42rem; border-radius:5px; background:var(--fk-red-bg); color:var(--fk-red); }
   .flag.ok{ background:#E1F5F0; color:#12756A; }
   .due{ font-family:var(--fk-mono); font-size:.7rem; color:var(--fk-muted); margin-left:auto; }
@@ -132,6 +144,7 @@
           <span class="pl-meta" id="meta">—</span>
         </div>
         <div class="pl-banner" id="banner"></div>
+        <details class="pl-note" id="noteBox"><summary>Что изменилось в этой версии</summary><div id="noteText"></div></details>
       </div>
       <div class="pl-goals-row">
         <aside class="pl-goals" id="goalsMetrics"></aside>
@@ -176,7 +189,8 @@ const chanClass = (c) => {
   if(c.includes('тёпл') || c.includes('тепл')) return 'warm';
   return 'sys';
 };
-const typeLabel = (t) => ({custdev:'кастдев', call:'созвон', node:'узел'}[t] || t);
+const TYPES = {custdev:'кастдев', call:'созвон', node:'узел', client:'клиент', partner:'партнёр', referral:'реферал', warm:'тёплый', peer:'peer', inbound:'входящий'};
+const typeLabel = (t) => TYPES[t] || t;
 
 function curStage(card){ return overrides[card.id] || card.stage; }
 
@@ -194,7 +208,15 @@ function saveLocal(){
 }
 
 const pctOf = (d, g) => g ? Math.min(100, Math.round(d / g * 100)) : 0;
-const tyShort = { custdev:'кастдев', call:'созвон', node:'узел' };
+const tyShort = TYPES;
+
+// сколько дней тишины с последнего касания (поле last: YYYY-MM-DD)
+function silenceDays(card){
+  if(!card.last) return null;
+  const t = Date.parse(card.last + 'T12:00:00');
+  if(isNaN(t)) return null;
+  return Math.floor((Date.now() - t) / 86400000);
+}
 
 // авто-значение показателя: "stage:custdev_done,offer_client" → живой счёт карточек в перечисленных стадиях
 // (несколько стадий через запятую: карточка в «Оффер/клиент» тоже засчитывает проведённый кастдев)
@@ -314,12 +336,18 @@ function cardEl(card){
   const handle = card.handle ? `<span class="hn">${card.handle}</span>` : '';
   const flag = card.flag ? `<span class="flag${/фит/i.test(card.flag) && !/не/i.test(card.flag) ? ' ok' : ''}">${card.flag}</span>` : '';
   const due = card.date ? `<span class="due">${card.date}</span>` : '';
+  const amt = card.amount ? `<span class="amt">${card.amount}</span>` : '';
+  const sd = silenceDays(card);
+  const stg = curStage(card);
+  const showSil = sd !== null && sd >= 3 && ['lead','custdev_done','offer_client'].indexOf(stg) !== -1;
+  const sil = showSil ? `<span class="sil${sd >= 7 ? ' hot' : ''}">🔇 ${sd} дн.</span>` : '';
   el.innerHTML = `
     <div class="nm">${card.name} ${handle} ${flag}</div>
     <div class="bz">${card.business || ''}</div>
     <div class="pl-meta-row">
       <span class="ty ${card.type}">${typeLabel(card.type)}</span>
       <span class="ch ${chanClass(card.channel)}">${card.channel || ''}</span>
+      ${amt}${sil}
       ${due}
     </div>
     ${card.next ? `<div class="nx"><b>След. шаг:</b> ${card.next}</div>` : ''}`;
@@ -374,6 +402,7 @@ fetch('pipeline.json?v=' + Date.now())
   .then(r => r.json())
   .then(json => {
     DATA = json; baseVersion = json.version;
+    document.getElementById('noteText').textContent = json.note || '';
     loadLocal();
     renderGoals();
     // баннер: сервер новее локального базового
