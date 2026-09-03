@@ -195,17 +195,19 @@ footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.8px;col
       <div class="inputs">
         <h3>Вводные</h3>
         <div class="f"><label>Роликов в пакете <b id="lQ">35</b></label><input type="range" id="q" min="30" max="90" step="5" value="35"></div>
-        <div class="f"><label>Цена клиенту, $ <b id="lP">1 490</b></label><input type="range" id="p" min="990" max="2600" step="10" value="1490"></div>
+        <div class="f"><label>Цена клиенту, $ <b id="lP">1 490</b></label><input type="range" id="p" min="990" max="5000" step="10" value="1490"></div>
         <div class="f"><label>Себестоимость, ₽ за ролик <b id="lC">973</b></label><input type="range" id="c" min="600" max="1200" step="1" value="973"></div>
+        <div class="f"><label>Ее розница в России, ₽ за ролик <b id="lF">3 429</b></label><input type="range" id="rf" min="1500" max="4500" step="1" value="3429"></div>
         <div class="f"><label>Доля Софии, % <b id="lS">50</b></label><input type="range" id="s" min="30" max="70" step="1" value="50"></div>
         <div class="f"><label>Налог с чека, % <b id="lT">20</b></label><input type="range" id="t" min="0" max="30" step="1" value="20"></div>
         <div class="f"><label>Курс, ₽ за $ <b id="lR">90,9</b></label><input type="range" id="r" min="80" max="105" step="0.1" value="90.9"></div>
         <div class="presets">
-          <button data-p="1490" data-c="973" data-s="50">Как есть сейчас</button>
-          <button data-p="1850" data-c="973" data-s="50">Только цена</button>
-          <button data-p="1490" data-c="657" data-s="50">Только фикс-зарплата</button>
-          <button data-p="1700" data-c="657" data-s="50">Цена + фикс</button>
-          <button data-p="1490" data-c="973" data-s="68">Только доля</button>
+          <button data-q="35" data-p="1490" data-c="973" data-f="3429" data-s="50">Как есть (вар. 2)</button>
+          <button data-q="35" data-p="1490" data-c="657" data-f="3429" data-s="50">Вар. 2 + фикс</button>
+          <button data-q="35" data-p="1700" data-c="657" data-f="3429" data-s="50">$1 700 + фикс</button>
+          <button data-q="35" data-p="2450" data-c="973" data-f="3429" data-s="50">Вар. 3, рынок</button>
+          <button data-q="35" data-p="2450" data-c="657" data-f="3429" data-s="50">Вар. 3 + фикс</button>
+          <button data-q="60" data-p="3900" data-c="657" data-f="2500" data-s="50">Ведение 60, вар. 3</button>
         </div>
       </div>
 
@@ -231,24 +233,44 @@ footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.8px;col
       </div>
     </div>
 
-    <p class="smeta" style="margin-top:16px">Альтернатива Софии считается по ее собственной цифре: 1 435 ₽ прибыли на ролик при рознице 3 429 ₽ (тест 5×7 за 120 000 ₽ в России). Себестоимость взята без ее налога УСН, иначе двойной счет: налог Андрея считается отдельно с чека.</p>
+    <p class="smeta" style="margin-top:16px"><b>Как считается ее альтернатива.</b> Из ее розницы в России вычитается ее налог УСН 6% и производство 973 ₽ за ролик. На тесте 5×7 за 120 000 ₽ это 78 745 ₽, то есть 2 250 ₽ на ролик. ⚠️ Прежняя цифра 1 435 ₽ на ролик выведена из старой розницы 90 000 ₽ и с 01.09 недействительна: порог вырос в полтора раза. Себестоимость взята без ее УСН, иначе двойной счет — налог Андрея считается отдельно с чека. Ее производство в России оставлено на 973 ₽, потому что объема на фикс-зарплату команды у нее одной нет.</p>
   </div>
 </section>
 
 <section id="rychagi">
   <div class="wrap">
-    <h2>Три рычага и что каждый дает</h2>
-    <p class="smeta">Расчет на тесте из 35 роликов. Порог, который надо перейти, — 50 225 ₽ ее чистыми.</p>
+    <h2>Спор о долях — это спор о цене</h2>
+    <p class="smeta">Расчет на тесте из 35 роликов, порог 78 745 ₽ ее чистыми. Главный вывод: при действующем прайсе (вариант 2) паритет недостижим ни долей, ни удешевлением — делить просто нечего. Вопрос закрывается ценой, и цена для этого уже посчитана в модели как вариант 3.</p>
     <table>
-      <thead><tr><th style="width:24%">Рычаг</th><th style="width:16%">Что меняем</th><th style="width:16%">Она получает</th><th style="width:12%">Итог</th><th style="width:32%">Чем платим</th></tr></thead>
+      <thead><tr><th style="width:26%">Вариант</th><th style="width:20%">Вводные</th><th style="width:15%">Она получает</th><th style="width:11%">Итог</th><th style="width:28%">Что это значит</th></tr></thead>
       <tbody>
-        <tr><td><b>Как есть сейчас</b></td><td>$1 490 · 973 ₽ · 50%</td><td>37 149 ₽</td><td><span class="pill no">0,74</span></td><td>Ничем. Она считает и отказывается</td></tr>
-        <tr><td><b>Поднять цену</b></td><td>$1 850 · 973 ₽ · 50%</td><td>50 268 ₽</td><td><span class="pill yes">1,00</span></td><td>$53 за ролик на тесте. Это выше рынка агентств и требует объяснения ценности до цены</td></tr>
-        <tr><td><b>Уронить себестоимость</b></td><td>$1 490 · 657 ₽ · 50%</td><td>42 679 ₽</td><td><span class="pill mid">0,85</span></td><td>Одного этого не хватает. Плюс перевод команды на фикс — это ее управленческая работа, не твоя</td></tr>
-        <tr><td><b>Цена плюс фикс</b></td><td>$1 700 · 657 ₽ · 50%</td><td>50 314 ₽</td><td><span class="pill yes">1,00</span></td><td>Два умеренных движения вместо одного резкого. <b>Рекомендую этот</b></td></tr>
-        <tr><td><b>Отдать долю</b></td><td>$1 490 · 973 ₽ · 68%</td><td>50 522 ₽</td><td><span class="pill yes">1,01</span></td><td>68 на 32 в ее пользу. Ломает саму рамку совладения и обнуляет твою половину</td></tr>
+        <tr><td><b>Как есть, вариант 2</b></td><td>$1 490 · 973 ₽ · 50%</td><td>37 149 ₽</td><td><span class="pill no">0,47</span></td><td>Она получает меньше половины своей альтернативы. Считать доли на этом прайсе бессмысленно</td></tr>
+        <tr><td><b>Вариант 2 плюс фикс</b></td><td>$1 490 · 657 ₽ · 50%</td><td>42 679 ₽</td><td><span class="pill no">0,54</span></td><td>Удешевление производства одно вопрос не решает даже близко</td></tr>
+        <tr><td><b>Цена $1 700 плюс фикс</b></td><td>$1 700 · 657 ₽ · 50%</td><td>50 314 ₽</td><td><span class="pill no">0,64</span></td><td>Шаг в верном направлении, но втрое меньше нужного</td></tr>
+        <tr><td><b>Вариант 3, рыночный</b></td><td>$2 450 · 973 ₽ · 50%</td><td>72 055 ₽</td><td><span class="pill mid">0,92</span></td><td>Почти паритет без единого движения с ее стороны</td></tr>
+        <tr><td><b>Вариант 3 плюс фикс</b></td><td>$2 450 · 657 ₽ · 50%</td><td>77 585 ₽</td><td><span class="pill yes">0,99</span></td><td>Ровно паритет. <b>Рекомендую этот</b>: половина рычага на ней, половина на цене</td></tr>
+        <tr><td><b>Чистый паритет ценой</b></td><td>$2 482 · 657 ₽ · 50%</td><td>78 745 ₽</td><td><span class="pill yes">1,00</span></td><td>$71 за ролик. Верхняя точка, дальше двигаться незачем</td></tr>
       </tbody>
     </table>
+
+    <h3 class="sub">Вариант 3 проходит по всем шести пакетам, вариант 2 не проходит ни по одному</h3>
+    <p class="smeta" style="margin-bottom:14px">Альтернатива считается по каждому пакету отдельно, потому что ее розница за ролик разная. Себестоимость 657 ₽ (команда на фикс-зарплате).</p>
+    <table>
+      <thead><tr><th style="width:19%">Пакет</th><th style="width:15%">Ее розница в РФ</th><th style="width:15%">Ее альтернатива</th><th style="width:17%">Вариант 2</th><th style="width:17%">Вариант 3</th><th style="width:17%">Точка паритета</th></tr></thead>
+      <tbody>
+        <tr><td><b>Тест 35</b></td><td>120 000 ₽</td><td>78 745 ₽</td><td>$1 490 <span class="pill no">0,47</span></td><td>$2 450 <span class="pill yes">0,99</span></td><td>$2 482 · $71 за ролик</td></tr>
+        <tr><td><b>Тест 70</b></td><td>150 000 ₽</td><td>72 890 ₽</td><td>$2 490 <span class="pill no">0,77</span></td><td>$3 900 <span class="pill yes">1,63</span></td><td>$2 637 · $38 за ролик</td></tr>
+        <tr><td><b>Ведение 30</b></td><td>120 000 ₽</td><td>83 610 ₽</td><td>$1 990 <span class="pill no">0,69</span></td><td>$2 990 <span class="pill yes">1,18</span></td><td>$2 571 · $86 за ролик</td></tr>
+        <tr><td><b>Ведение 60</b></td><td>150 000 ₽</td><td>82 620 ₽</td><td>$2 490 <span class="pill no">0,74</span></td><td>$3 900 <span class="pill yes">1,48</span></td><td>$2 814 · $47 за ролик</td></tr>
+        <tr><td><b>Ведение 90</b></td><td>190 000 ₽</td><td>91 030 ₽</td><td>$3 140 <span class="pill no">0,77</span></td><td>$4 900 <span class="pill yes">1,63</span></td><td>$3 317 · $37 за ролик</td></tr>
+        <tr><td><b>Аватар 30</b></td><td>90 000 ₽</td><td>55 410 ₽</td><td>$1 490 <span class="pill no">0,71</span></td><td>$2 450 <span class="pill yes">1,43</span></td><td>$1 795 · $60 за ролик</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <b>Вариант 3 — это не выдумка и не жадность, а посчитанная нижняя граница рынка.</b> Прайс-гайд конкурента ICG: $75 за ролик на объеме 30 в месяц, full-service агентства $5 000–25 000 в месяц за аккаунт. Вариант 3 дает $70 за ролик на тесте, то есть мы все еще дешевле.
+      <br><br><b>Подтверждение с поля:</b> Алексею названо 1 900 € за 30 роликов, это $69 за ролик — ровно уровень варианта 3. В живой сделке цена уже рыночная, отстал только прайс на сайте.
+      <br><br><b>Самый тяжелый пакет — тест 35</b>, и это логично: у нее он самый дорогой поштучно (3 429 ₽ за ролик). Все остальные пакеты на варианте 3 проходят с запасом от 18% до 63%. Значит запас на скидку есть везде, кроме входного теста.
+    </div>
 
     <h3 class="sub">Аргумент, который сильнее любого из трех рычагов</h3>
     <p class="smeta" style="margin-bottom:14px">Сравнение по одному тесту заведомо не в нашу пользу, и это ловушка. Правильная рамка сравнения — не пакет, а месяц загрузки.</p>
@@ -298,16 +320,18 @@ footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.8px;col
 
 <script>
 const E=id=>document.getElementById(id);
-const RU=n=>Math.round(n).toLocaleString("ru-RU").replace(/ /g," ");
-const ALT_PER_ROLIK=1435; // ее прибыль на ролик в России, ее собственная цифра
+const RU=n=>Math.round(n).toLocaleString("ru-RU").replace(/\u00a0/g," ");
+const HER_COST_RF=973; // ее производство в России, ₽ за ролик (объема на фикс у нее одной нет)
+const USN=0.06;        // ее налог УСН
 
 function calc(){
   const q=+E("q").value, p=+E("p").value, c=+E("c").value,
-        s=+E("s").value, t=+E("t").value, r=+E("r").value;
+        rf=+E("rf").value, s=+E("s").value, t=+E("t").value, r=+E("r").value;
 
   E("lQ").textContent=q;
   E("lP").textContent=RU(p);
   E("lC").textContent=RU(c);
+  E("lF").textContent=RU(rf);
   E("lS").textContent=s;
   E("lT").textContent=t;
   E("lR").textContent=r.toFixed(1).replace(".",",");
@@ -318,16 +342,17 @@ function calc(){
   const profit=revenue-tax-cogs;
   const sofia=profit*s/100;
   const andrei=profit-sofia;
-  const alt=q*ALT_PER_ROLIK;
+  const alt=q*rf*(1-USN)-q*HER_COST_RF;   // ее чистыми в России на том же объеме
   const k=alt>0?sofia/alt:0;
   const gross=revenue>0?(revenue-cogs)/revenue*100:0;
+  const parity=(2*alt+cogs)/(r*(1-t/100)); // цена клиенту, дающая ровный паритет при 50/50
 
   E("f1").textContent=RU(revenue)+" ₽";
   E("f2").textContent="− "+RU(tax)+" ₽";
   E("f3").textContent="− "+RU(cogs)+" ₽";
   E("f4").textContent=RU(profit)+" ₽";
   E("f5").textContent=gross.toFixed(0)+"%";
-  E("f6").textContent="$"+Math.round(p/q);
+  E("f6").textContent="$"+Math.round(p/q)+" · паритет при $"+RU(parity)+" ($"+Math.round(parity/q)+" за ролик)";
 
   E("oS").textContent=RU(sofia)+" ₽";
   E("oR").textContent=RU(alt)+" ₽";
@@ -338,20 +363,27 @@ function calc(){
   if(k>=1){
     vd.className="verdict ok";
     vh.textContent="Проходит: ей выгоднее, чем сейчас";
-    vp.textContent="На этом объеме она получает на "+RU(sofia-alt)+" ₽ больше, чем зарабатывает в России. Условие «чистыми не меньше, чем есть» выполнено, разговор о долях можно вести спокойно.";
-  } else if(k>=0.93){
+    vp.textContent="На этом объеме она получает на "+RU(sofia-alt)+" ₽ больше, чем зарабатывает в России, и при этом не приводит клиента и не тянет управленческий слой. Разговор о долях можно вести спокойно.";
+  } else if(k>=0.95){
     vd.className="verdict ok";
-    vh.textContent="Почти паритет";
-    vp.textContent="Разрыв "+RU(alt-sofia)+" ₽, это "+Math.round((1-k)*100)+"% от ее альтернативы. Закрывается объемом и тем, что клиента приводит не она. Но разрыв надо назвать вслух самому, а не ждать, пока она посчитает.";
+    vh.textContent="Паритет";
+    vp.textContent="Разрыв "+RU(alt-sofia)+" ₽, это "+Math.round((1-k)*100)+"% — в пределах погрешности курса и налога. С учетом того, что клиента приводит не она и 21 управленческая строка уходит с нее, это выгодная для нее сделка. Разрыв назвать вслух самому.";
+  } else if(k>=0.85){
+    vd.className="verdict bad";
+    vh.textContent="Близко, но не проходит";
+    vp.textContent="Она получает на "+RU(alt-sofia)+" ₽ меньше ("+Math.round((1-k)*100)+"%). Паритет наступает при цене $"+RU(parity)+" за этот пакет, то есть $"+Math.round(parity/q)+" за ролик. Разница закрывается ценой, а не долей.";
   } else {
     vd.className="verdict bad";
     vh.textContent="Не проходит: ей невыгодно";
-    vp.textContent="Она получает на "+RU(alt-sofia)+" ₽ меньше, чем на том же объеме в России. Это "+Math.round((1-k)*100)+"% потери. Пока цифра такая, доли обсуждать бессмысленно: сначала цена, себестоимость или объем.";
+    vp.textContent="Она получает на "+RU(alt-sofia)+" ₽ меньше, чем на том же объеме в России, это "+Math.round((1-k)*100)+"% потери. Паритет наступает при $"+RU(parity)+" за пакет ($"+Math.round(parity/q)+" за ролик). Пока цена ниже — доли обсуждать бессмысленно, делить нечего.";
   }
 }
 document.querySelectorAll("input[type=range]").forEach(i=>i.addEventListener("input",calc));
 document.querySelectorAll(".presets button").forEach(b=>b.addEventListener("click",()=>{
-  E("p").value=b.dataset.p; E("c").value=b.dataset.c; E("s").value=b.dataset.s; calc();
+  if(b.dataset.q) E("q").value=b.dataset.q;
+  E("p").value=b.dataset.p; E("c").value=b.dataset.c;
+  if(b.dataset.f) E("rf").value=b.dataset.f;
+  E("s").value=b.dataset.s; calc();
 }));
 calc();
 </script>
