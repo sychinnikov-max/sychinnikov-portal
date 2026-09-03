@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Salescast — зоны и оргструктура</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F1; --card:#FFFFFF; --sunk:#F5EFE6;
+  --ink:#1C1917; --ink2:#5D554C; --ink3:#8C8177;
+  --line:#E8DFD2; --line2:#F0E9DE;
+  --acc:#E2452A; --acc-soft:#FCEDE9;
+  --ochre:#F0A02B; --ochre-soft:#FDF3E2;
+  --teal:#12665A; --teal-soft:#E6F0ED;
+  --danger:#9B2C2C; --danger-soft:#F8EAEA;
+  --ok:#2F6F4F; --ok-soft:#EAF1EC;
+  --sans:"Golos Text",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --disp:"Unbounded",var(--sans);
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+
+header.hd{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;gap:20px;height:56px}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
+.brand .mark{width:19px;height:19px;flex:0 0 19px}
+.hd nav{display:flex;gap:16px;margin-left:auto;font-size:13.5px}
+.hd nav a{color:var(--ink2);text-decoration:none}
+.hd nav a:hover{color:var(--acc)}
+
+.hero{padding:44px 0 28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em}
+.lead{font-size:17px;color:var(--ink2);max-width:66ch;margin:0 0 24px}
+
+section{padding:36px 0}
+section+section{border-top:1px solid var(--line2)}
+h2{font-family:var(--disp);font-weight:600;font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+h3.sub{font-family:var(--disp);font-weight:600;font-size:16px;margin:28px 0 10px}
+.smeta{font-size:13.8px;color:var(--ink3);margin:0 0 22px;max-width:76ch}
+
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.sc{border-radius:12px;padding:15px 17px;border:1px solid}
+.sc .n{font-family:var(--disp);font-weight:700;font-size:30px;line-height:1;letter-spacing:-.02em}
+.sc .l{font-size:12.6px;margin-top:6px;line-height:1.35}
+.sc.a{background:var(--teal-soft);border-color:#CBDFDA} .sc.a .n{color:var(--teal)} .sc.a .l{color:#2E5A53}
+.sc.s{background:var(--ochre-soft);border-color:#EFDDBC} .sc.s .n{color:#8A5A0F} .sc.s .l{color:#7A5316}
+.sc.x{background:var(--card);border-color:var(--line)} .sc.x .n{color:var(--ink2)} .sc.x .l{color:var(--ink3)}
+.sc.q{background:var(--danger-soft);border-color:#EBD2D2} .sc.q .n{color:var(--danger)} .sc.q .l{color:#7A2626}
+
+/* zones */
+.zone{background:var(--card);border:1px solid var(--line);border-radius:13px;margin-bottom:14px;overflow:hidden}
+.zh{display:flex;align-items:baseline;gap:12px;padding:14px 18px;background:var(--sunk);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.zh .zn{font-family:var(--mono);font-size:11.5px;color:var(--ink3);letter-spacing:.06em}
+.zh h3{font-family:var(--disp);font-size:16px;font-weight:600;margin:0}
+.zh .zt{margin-left:auto;font-size:12.6px;color:var(--ink3)}
+.zb{padding:4px 18px}
+.task{display:flex;align-items:baseline;gap:12px;padding:9px 0;border-top:1px solid var(--line2);font-size:14.2px;color:var(--ink2)}
+.task:first-child{border-top:0}
+.task .tx{flex:1;min-width:0}
+.task .note{display:block;font-size:12.4px;color:var(--ink3);margin-top:2px}
+.who{font-family:var(--mono);font-size:11.5px;padding:3px 8px;border-radius:5px;white-space:nowrap;flex:0 0 auto}
+.who.a{background:var(--teal-soft);color:var(--teal)}
+.who.s{background:var(--ochre-soft);color:#8A5A0F}
+.who.x{background:var(--sunk);color:var(--ink3)}
+.who.q{background:var(--danger-soft);color:var(--danger)}
+.was{font-family:var(--mono);font-size:11px;color:var(--ink3);flex:0 0 92px;text-align:right}
+.was.empty{color:var(--danger)}
+
+.callout{background:var(--acc-soft);border:1px solid #F3D3CA;border-left:4px solid var(--acc);border-radius:11px;padding:16px 20px;font-size:14.5px;color:#7A2A1A;margin-top:16px}
+.callout b{color:#5E1F13}
+.note-ok{background:var(--ok-soft);border:1px solid #CFE0D5;border-left:4px solid var(--ok);border-radius:11px;padding:16px 20px;font-size:14.8px;color:#2B5C43}
+.note-ok b{color:#1E4531}
+
+.terms{counter-reset:t;display:grid;gap:10px}
+.t{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 18px 14px 52px;position:relative;font-size:14.5px;color:var(--ink2)}
+.t::before{counter-increment:t;content:counter(t);position:absolute;left:16px;top:13px;width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;font-family:var(--mono);font-size:12px;display:flex;align-items:center;justify-content:center}
+.t b{color:var(--ink)}
+
+.msg{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:20px 22px;position:relative}
+.msg p{margin:0 0 12px;font-size:14.8px;color:var(--ink2)}
+.msg p:last-child{margin-bottom:0}
+.msg .q{border-left:3px solid var(--ochre);padding-left:14px;color:var(--ink);font-style:italic}
+.copy{position:absolute;top:14px;right:16px;font-family:var(--sans);font-size:12.2px;padding:6px 12px;border:1px solid var(--line);background:var(--sunk);color:var(--ink2);border-radius:7px;cursor:pointer}
+.copy:hover{border-color:var(--acc);color:var(--acc)}
+
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{text-align:left;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:11px 14px;background:var(--sunk);border-bottom:1px solid var(--line)}
+td{padding:11px 14px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--ink2)}
+tr:last-child td{border-bottom:0}
+td b{color:var(--ink)}
+
+footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.8px;color:var(--ink3)}
+@media(max-width:760px){.hd nav a:not(.back){display:none}.was{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a href="/foundertrajectory/salescast/" class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 1.5 22.5 12 12 22.5 1.5 12 12 1.5Z" fill="var(--acc)"/><path d="M10 8.4 16 12l-6 3.6V8.4Z" fill="#fff"/></svg>
+      Salescast
+    </a>
+    <nav>
+      <a href="#tablica">41 задача</a>
+      <a href="#ogovorki">Оговорки</a>
+      <a href="#soobshenie">Сообщение</a>
+      <a href="#org">Оргструктура</a>
+      <a href="/foundertrajectory/salescast/" class="back">← Контур</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Блоки 01 и 02 · ответ на ее документ от 01.09</p>
+    <h1>Зоны ответственности:<br>двадцать одна против десяти</h1>
+    <p class="lead">Она прислала карту процессов и написала: «посмотри, какие из этих зон ты мог бы брать на себя, если заходить сразу в 50-50». Это ответ. Логика деления одна: Андрей забирает все, где надо поставить, проконтролировать и посчитать. София остается там, где надо придумать и решить по вкусу. Продукт по существу не трогаем вообще.</p>
+    <div class="score">
+      <div class="sc a"><div class="n">21</div><div class="l">Андрей: публикации, аналитика, менеджмент, продажи, приемка</div></div>
+      <div class="sc s"><div class="n">10</div><div class="l">София: продукт, вкус, платящий клиент</div></div>
+      <div class="sc x"><div class="n">10</div><div class="l">Исполнители: руки</div></div>
+      <div class="sc q"><div class="n">24</div><div class="l">не были назначены никому в ее карте</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="note-ok">
+      <b>Почему этот документ важнее всего, что было до него.</b> На созвоне 50/50 висело с оговоркой «только если я вообще не касаюсь клиента». Через пять часов она сама предложила посчитать по зонам — это движение в нашу сторону, а не в свою. Плюс она показала внутреннюю кухню без просьбы: на созвоне отказывалась отдавать клиенту даже отчет по анализу ниши, а тут отдала карту процессов с фамилиями. Это уровень доверия партнера, а не подрядчика.
+    </div>
+    <div class="callout">
+      <b>И она сама, не заметив, сняла противоречие про продажи.</b> На созвоне сказала «маркетинг и продажи точно не мое», а через минуту «я люблю продавать». Документ объясняет: удержание и допродажа уже купившему клиенту стоят на ней (зона 7, все четыре строки), а весь этап первичных продаж не назначен никому. Она любит общаться с тем, кто уже платит, и не любит приводить нового. Для нас это идеальный расклад: вход воронки свободен, а Андрей приносит именно вход.
+    </div>
+  </div>
+</section>
+
+<section id="tablica">
+  <div class="wrap">
+    <h2>41 задача, восемь зон</h2>
+    <p class="smeta">Правая колонка — что стояло в ее карте. Пустая ячейка означает, что ответственного не было. Обрати внимание, где именно они собраны: это ровно управленческий слой и весь вход воронки.</p>
+
+    <div class="zone">
+      <div class="zh"><span class="zn">ЗОНА 1</span><h3>Модель</h3><span class="zt">10 задач · Андрей 3 · София 4 · руки 3</span></div>
+      <div class="zb">
+        <div class="task"><span class="who s">София</span><span class="tx">поставить ТЗ на разработку модели</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">поставить ТЗ на имя и упаковку аккаунтов</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who x">Настя</span><span class="tx">сделать модель</span><span class="was">Настя</span></div>
+        <div class="task"><span class="who s">София</span><span class="tx">утвердить модель и внести правки</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who s">София</span><span class="tx">согласовать модель с клиентом и передать правки</span><span class="was">София</span></div>
+        <div class="task"><span class="who x">Настя</span><span class="tx">сделать голоса</span><span class="was">Настя</span></div>
+        <div class="task"><span class="who s">София</span><span class="tx">согласовать с клиентом голоса</span><span class="was">София</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">оживлять моделей в HeyGen<span class="note">⚠️ дыра прямо сейчас: в ее карте строка помечена «делала Настя, но сейчас хз». Закрывается наймом</span></span><span class="was empty">под вопросом</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">отслушивать на предмет ошибок в озвучке<span class="note">приемка, а не вкус</span></span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who x">Настя</span><span class="tx">передать исходники в монтаж</span><span class="was">Настя</span></div>
+      </div>
+    </div>
+
+    <div class="zone">
+      <div class="zh"><span class="zn">ЗОНА 2</span><h3>Сценарии</h3><span class="zt">6 задач · Андрей 1 · София 2 · руки 3</span></div>
+      <div class="zb">
+        <div class="task"><span class="who s">София</span><span class="tx">дать ТЗ на написание сценариев</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">организовать процесс сбора референсов</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who x">Настя</span><span class="tx">написать сценарии</span><span class="was">Настя</span></div>
+        <div class="task"><span class="who s">София</span><span class="tx">внести правки в сценарии</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who x">Настя</span><span class="tx">согласовать сценарии с клиентом</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who x">Настя</span><span class="tx">передать сценарии в оживление</span><span class="was">Настя</span></div>
+      </div>
+    </div>
+
+    <div class="zone">
+      <div class="zh"><span class="zn">ЗОНА 3</span><h3>Монтаж</h3><span class="zt">4 задачи · Андрей 1 · София 1 · руки 2</span></div>
+      <div class="zb">
+        <div class="task"><span class="who a">Андрей</span><span class="tx">поставить ТЗ на количество монтажа в день и неделю, передать референсы</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who x">Кирилл</span><span class="tx">смонтировать</span><span class="was">Кирилл</span></div>
+        <div class="task"><span class="who s">София</span><span class="tx">утвердить и внести правки в монтаж и обложку</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who x">Кирилл</span><span class="tx">передать на выкладку</span><span class="was">Кирилл</span></div>
+      </div>
+    </div>
+
+    <div class="zone" style="border-color:#CBDFDA">
+      <div class="zh" style="background:var(--teal-soft);border-color:#CBDFDA"><span class="zn">ЗОНА 4</span><h3>Публикации — забираю целиком</h3><span class="zt">6 задач · Андрей 5 · наемный публикатор 1</span></div>
+      <div class="zb">
+        <div class="task"><span class="who a">Андрей</span><span class="tx">утвердить порядок выкладки и работы публикаторов</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">найти и обучить нового публикатора<span class="note">в ее карте строка стоит со знаком вопроса. Это то, что она сама назвала первым, что сломается при масштабе</span></span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">дать ТЗ на описание и ответы на комментарии</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">подключить боты и автоответы, следить, чтобы ответы были вовремя</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">ежедневный контроль публикации</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who x">публикатор</span><span class="tx">ежедневная публикация<span class="note">сейчас это делает руками сама София. Снять ее с конвейера — первое, что будет видно как результат</span></span><span class="was">Соня</span></div>
+      </div>
+    </div>
+
+    <div class="zone" style="border-color:#CBDFDA">
+      <div class="zh" style="background:var(--teal-soft);border-color:#CBDFDA"><span class="zn">ЗОНА 5</span><h3>Аналитика — забираю целиком</h3><span class="zt">2 задачи · Андрей 2</span></div>
+      <div class="zb">
+        <div class="task"><span class="who a">Андрей</span><span class="tx">еженедельный сбор аналитики<span class="note">плюс от себя: собрать автоматический сбор статистики взамен умершей программки за 20 000 ₽ в месяц</span></span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">подготовить отчет клиенту и отправить<span class="note">это то, что клиент видит каждую неделю, и то, чего сейчас нет</span></span><span class="was empty">не назначен</span></div>
+      </div>
+    </div>
+
+    <div class="zone">
+      <div class="zh"><span class="zn">ЗОНА 6</span><h3>Общий менеджмент</h3><span class="zt">5 задач · Андрей 4 · руки 1</span></div>
+      <div class="zb">
+        <div class="task"><span class="who x">Дима</span><span class="tx">подготовить план работ</span><span class="was">Дима</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">еженедельно ставить план команде</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">ежедневно контролировать исполнение по плану</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">просчитать себестоимость и нагрузку команды</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">придумать, как оптимизировать процессы и убрать лишнее</span><span class="was empty">не назначен</span></div>
+      </div>
+    </div>
+
+    <div class="zone" style="border-color:#EFDDBC">
+      <div class="zh" style="background:var(--ochre-soft);border-color:#EFDDBC"><span class="zn">ЗОНА 7</span><h3>Коммуникация с клиентом — остается ей</h3><span class="zt">4 задачи · Андрей 1 · София 3</span></div>
+      <div class="zb">
+        <div class="task"><span class="who a">Андрей</span><span class="tx">договоры, акты, счета, допсоглашения<span class="note">для западных клиентов: юрлицо и инвойс на нем. Российских ведет она</span></span><span class="was">София</span></div>
+        <div class="task"><span class="who s">София</span><span class="tx">добиться от клиента ТЗ на продукты</span><span class="was">София</span></div>
+        <div class="task"><span class="who s">София</span><span class="tx">еженедельный созвон с обсуждением результатов</span><span class="was">София</span></div>
+        <div class="task"><span class="who s">София</span><span class="tx">продать идею работы на следующий месяц</span><span class="was">София</span></div>
+      </div>
+    </div>
+
+    <div class="zone" style="border-color:#CBDFDA">
+      <div class="zh" style="background:var(--teal-soft);border-color:#CBDFDA"><span class="zn">ЭТАП ПРОДАЖ</span><h3>Забираю целиком</h3><span class="zt">4 задачи · Андрей 4 · в ее карте пусто все</span></div>
+      <div class="zb">
+        <div class="task"><span class="who a">Андрей</span><span class="tx">провести первичный созвон</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">составить оффер и дожать</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">утвердить договор, внести правки, выставить счет</span><span class="was empty">не назначен</span></div>
+        <div class="task"><span class="who a">Андрей</span><span class="tx">провести бриф и собрать всю информацию</span><span class="was empty">не назначен</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Это и есть обоснование деления пополам.</b> Не «у меня больше опыта управления», а двадцать одна строка против десяти, и почти все двадцать одна — из тех, что сейчас не делает никто. Аргумент про стаж проверить нельзя, а список зон проверить можно, и он проверяется на первом же клиенте.
+      <br><br><b>⚠️ Оговорка по точности.</b> Колонка «было в ее карте» восстановлена по разбору документа: поименно там названы Настя, Кирилл, Дима, Соня и София. Общий факт из документа — 24 пустые ячейки из 41 плюс одна под вопросом. Построчная сверка с оригиналом не делалась, оригинал у нее. При отдаче таблицы правильнее отдать ее в том же файле, а не пересобирать.
+    </div>
+  </div>
+</section>
+
+<section id="ogovorki">
+  <div class="wrap">
+    <h2>Четыре оговорки, без которых список отдавать нельзя</h2>
+    <p class="smeta">Чистый список зон без границ через две недели превратится в круглосуточную операционку. Оговорки идут тем же сообщением, не отдельно и не позже.</p>
+    <div class="terms">
+      <div class="t"><b>Я беру зоны, а не выполняю их руками.</b> Публикатора я нанимаю и обучаю, а выкладывает он. Аналитику настраиваю один раз, дальше она собирается сама. Это условие, при котором список из двадцати одной строки вообще выполним.</div>
+      <div class="t"><b>Зоны закрываются не одновременно.</b> Первым идет публикатор и снятие Софии с ежедневной выкладки. Вторым аналитика и недельный отчет клиенту. Третьим план команде и ежедневный контроль.</div>
+      <div class="t"><b>Что нужно на входе:</b> доступы к аккаунтам и таблицам, контакты Насти и Кирилла, себестоимость цифрами, а не фотографиями (два скрина от 01.09 в текст не легли).</div>
+      <div class="t"><b>Продукт я не трогаю.</b> Модель, сценарии, вкус, качество — это ее и остается ее. Не лезу и не буду. Это ее прямая просьба с созвона: «придется мне за это отвечать».</div>
+    </div>
+  </div>
+</section>
+
+<section id="soobshenie">
+  <div class="wrap">
+    <h2>Что сказать вслух про 60 на 40</h2>
+    <p class="smeta">На созвоне 01.09 цифра 60 на 40 была названа до того, как показан список зон. Она не приняла и не отвергла, просто промолчала — а у человека, который прямо сказал «я не знаю твою экспертизу», молчание означает несогласие. Снять цифру надо самому и первым.</p>
+    <div class="msg">
+      <button class="copy" id="cp">Скопировать</button>
+      <p class="q" id="msgtext">Цифру 60 на 40, которую я назвал на созвоне, снимаю. Я назвал ее до того, как показал за что, и это было неправильно. Давай так: вот зоны, которые я беру. Отработаем на первом клиенте, ты увидишь, как я их закрываю, и после этого посчитаем доли по факту, а не по опыту.</p>
+      <p><b>Почему это сильнее, а не слабее.</b> Она получает не отступление, а обмен цифры на список обязательств. Человек, который сам отказался от преимущества в переговорах, читается как уверенный в результате. И это единственный способ снять с себя претензию «я не знаю твою экспертизу», не рассказывая про себя.</p>
+    </div>
+    <div class="callout">
+      <b>Чего в этом сообщении не должно быть.</b> Не возвращаться к долям, не спорить про цену на Западе, не обсуждать стоимость компании как актива. Единственная просьба в том же сообщении — себестоимость цифрами. Все остальное после первого закрытого клиента.
+    </div>
+  </div>
+</section>
+
+<section id="org">
+  <div class="wrap">
+    <h2>Оргструктура в рамке совладения</h2>
+    <p class="smeta">Семь отделений по Высоцкому. Владельцы двое, исполнительный директор София, операционное управление уходит к ней. У Андрея остается построение, деньги и вход воронки.</p>
+    <table>
+      <thead><tr><th style="width:8%">№</th><th style="width:22%">Отделение</th><th style="width:28%">Продукт отделения</th><th style="width:14%">Кто держит</th><th style="width:28%">Недельная статистика</th></tr></thead>
+      <tbody>
+        <tr><td><b>7</b></td><td><b>Административное</b></td><td>Работающая компания и растущая неделя к неделе прибыль</td><td><span class="who a">Андрей</span></td><td>Чистая прибыль и число оплат</td></tr>
+        <tr><td><b>1</b></td><td><b>Персонал и построение</b></td><td>Обученные люди на местах и работающие регламенты</td><td><span class="who a">Андрей</span></td><td>Людей с написанной инструкцией</td></tr>
+        <tr><td><b>2</b></td><td><b>Маркетинг и продажи</b></td><td>Оплаченные счета от новых клиентов</td><td><span class="who a">привлечение</span> <span class="who s">продажа</span></td><td>Обращений, созвонов, оплат</td></tr>
+        <tr><td><b>3</b></td><td><b>Финансы</b></td><td>Деньги на счете и честно поделенная прибыль</td><td><span class="who a">Андрей</span></td><td>Деньги на счете и неоплаченные счета</td></tr>
+        <tr><td><b>4</b></td><td><b>Техническое</b></td><td>Ролики, выложенные в срок и в нужном количестве</td><td><span class="who s">София</span></td><td>Роликов выложено и сколько с опозданием</td></tr>
+        <tr><td><b>5</b></td><td><b>Качество и квалификация</b></td><td>Подтвержденный результат клиента и продление</td><td><span class="who s">София</span></td><td>Клиентов продлилось и доля роликов в отсев</td></tr>
+        <tr><td><b>6</b></td><td><b>Связи с общественностью</b></td><td>Поток людей, которые о нас знают и хотят поговорить</td><td><span class="who s">контент</span> <span class="who a">рекомендации</span></td><td>Новых разговоров с потенциальными клиентами</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub">Ключевая линия разреза проходит внутри второго отделения</h3>
+    <p class="smeta" style="margin-bottom:14px">Отделение 2 не отдается целиком ни одному из партнеров, и это принципиально. Оно режется по линии «привлечение / продажа»: привлечение остается на Андрее, продажа и работа с клиентом уходят Софии.</p>
+    <div class="callout" style="margin-top:0">
+      <b>Почему именно так.</b> Она продюсер и маркетолог с шестью годами практики: онлайн-школа женского фитнеса на 500 тысяч подписчиков и 5 млн ₽ оборота, агентство со съемочными группами, школа китайского. <b>Но спрос она не создавала ни разу.</b> Ее слова на разборе 26.08: «я не ищу клиентов, я просто прихожу и рассказываю». Все три текущих клиента пришли пассивно. В международном агентстве с полусотней клиентов она была продюсером и не знает, как там привлекали.
+      <br><br>Отдать «маркетинг и продажи» одним блоком — это отдать вместе с продажей и привлечение, то есть единственную функцию, которой у нее нет. Андрей недооценивает эту функцию, потому что она для него привычная.
+    </div>
+
+    <h3 class="sub">Два владельческих рычага и риск, который с ними связан</h3>
+    <div class="callout" style="margin-top:0;background:var(--danger-soft);border-color:#EBD2D2;border-left-color:var(--danger);color:#7A2626">
+      <b>В рамке совладения у Андрея остаются ровно два рычага, и оба владельческие:</b> отделение 7 (недельные статистики) и отделение 3 (деньги и счет на его юрлице). Это работает ровно до тех пор, пока он снимает семь цифр каждую неделю. Перестанет — не останется ни управления, ни владения, только доля в отчетности, которую ведет партнер.
+      <br><br><b>Второй риск: она общается с клиентом.</b> Значит клиент должен принадлежать компании, а не человеку: договор, домен, почта, CRM и прием денег на юрлице, работа под брендом компании, а не под ее агентством. Это первое из семи условий в <a href="/foundertrajectory/salescast/partnerstvo/#usloviya" style="color:#5E1F13;text-decoration:underline">блоке «Партнерство»</a>.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Salescast · блоки 01 и 02 «Зоны и оргструктура» · 03.09.2026 · <a href="/foundertrajectory/salescast/">вернуться в контур</a> · <a href="/foundertrajectory/salescast/partnerstvo/">партнерство</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById("cp").addEventListener("click",function(){
+  var t=document.getElementById("msgtext").textContent.trim();
+  navigator.clipboard.writeText(t).then(()=>{this.textContent="Скопировано";setTimeout(()=>this.textContent="Скопировать",1800);},
+    ()=>{this.textContent="Не вышло";setTimeout(()=>this.textContent="Скопировать",1800);});
+});
+</script>
+</body>
+</html>
