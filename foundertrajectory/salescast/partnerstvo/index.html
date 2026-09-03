@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Salescast — партнерство и справедливость</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F1; --card:#FFFFFF; --sunk:#F5EFE6;
+  --ink:#1C1917; --ink2:#5D554C; --ink3:#8C8177;
+  --line:#E8DFD2; --line2:#F0E9DE;
+  --acc:#E2452A; --acc-soft:#FCEDE9;
+  --ochre:#F0A02B; --ochre-soft:#FDF3E2;
+  --teal:#12665A; --teal-soft:#E6F0ED;
+  --danger:#9B2C2C; --danger-soft:#F8EAEA;
+  --ok:#2F6F4F; --ok-soft:#EAF1EC;
+  --sans:"Golos Text",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --disp:"Unbounded",var(--sans);
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+
+header.hd{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;gap:20px;height:56px}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
+.brand .mark{width:19px;height:19px;flex:0 0 19px}
+.hd nav{display:flex;gap:16px;margin-left:auto;font-size:13.5px}
+.hd nav a{color:var(--ink2);text-decoration:none}
+.hd nav a:hover{color:var(--acc)}
+
+.hero{padding:44px 0 28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em}
+.lead{font-size:17px;color:var(--ink2);max-width:66ch;margin:0}
+
+section{padding:36px 0}
+section+section{border-top:1px solid var(--line2)}
+h2{font-family:var(--disp);font-weight:600;font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+h3.sub{font-family:var(--disp);font-weight:600;font-size:16px;margin:26px 0 10px}
+.smeta{font-size:13.8px;color:var(--ink3);margin:0 0 22px;max-width:74ch}
+
+.decided{background:var(--ok-soft);border:1px solid #CFE0D5;border-left:4px solid var(--ok);border-radius:11px;padding:16px 20px;font-size:14.8px;color:#2B5C43}
+.decided b{color:#1E4531}
+
+.layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px}
+.layer{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px;position:relative;overflow:hidden}
+.layer::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+.layer.l1::before{background:var(--ink3)}
+.layer.l2::before{background:var(--ochre)}
+.layer.l3::before{background:var(--teal)}
+.layer .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.layer h3{font-family:var(--disp);font-size:16px;font-weight:600;margin:6px 0 8px}
+.layer p{font-size:13.8px;color:var(--ink2);margin:0 0 10px;line-height:1.5}
+.layer .rule{font-size:12.8px;background:var(--sunk);border-radius:8px;padding:8px 10px;color:var(--ink2)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
+.inputs{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+.inputs h3{font-family:var(--disp);font-size:14px;font-weight:600;margin:0 0 14px}
+.f{margin-bottom:14px}
+.f label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--ink2);margin-bottom:5px}
+.f label b{font-family:var(--mono);font-size:13.5px;color:var(--ink);font-weight:600}
+.f input[type=range]{width:100%;accent-color:var(--acc);margin:0}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line2)}
+.presets button{font-family:var(--sans);font-size:12.2px;padding:6px 10px;border:1px solid var(--line);background:var(--sunk);color:var(--ink2);border-radius:7px;cursor:pointer;transition:.15s}
+.presets button:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-soft)}
+
+.out{display:grid;gap:14px}
+.verdict{border-radius:13px;padding:20px 22px;border:1px solid;transition:.2s}
+.verdict.bad{background:var(--danger-soft);border-color:#EBD2D2}
+.verdict.ok{background:var(--ok-soft);border-color:#CFE0D5}
+.verdict .vh{font-family:var(--disp);font-size:19px;font-weight:600;margin-bottom:8px}
+.verdict.bad .vh{color:#7A2626}
+.verdict.ok .vh{color:#1E4531}
+.verdict p{margin:0;font-size:14.2px;line-height:1.5}
+.verdict.bad p{color:#7A2626}
+.verdict.ok p{color:#2B5C43}
+
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.cell .l{font-size:12px;color:var(--ink3);line-height:1.3}
+.cell .n{font-family:var(--disp);font-weight:600;font-size:20px;margin-top:5px;letter-spacing:-.01em}
+.cell.hl{background:var(--teal-soft);border-color:#CBDFDA}
+.cell.hl .n{color:var(--teal)}
+.cell.warn{background:var(--ochre-soft);border-color:#EFDDBC}
+.cell.warn .n{color:#8A5A0F}
+
+.flow{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:6px 20px}
+.flow .r{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-top:1px solid var(--line2);font-size:14px;color:var(--ink2)}
+.flow .r:first-child{border-top:0}
+.flow .r.tot{font-weight:600;color:var(--ink)}
+.flow .r .v{font-family:var(--mono);font-size:14px;color:var(--ink)}
+.flow .r .v.neg{color:var(--danger)}
+
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{text-align:left;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:11px 14px;background:var(--sunk);border-bottom:1px solid var(--line)}
+td{padding:11px 14px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--ink2)}
+tr:last-child td{border-bottom:0}
+td b{color:var(--ink)}
+.pill{font-family:var(--mono);font-size:11.5px;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.pill.no{background:var(--danger-soft);color:var(--danger)}
+.pill.yes{background:var(--ok-soft);color:var(--ok)}
+.pill.mid{background:var(--ochre-soft);color:#8A5A0F}
+
+.callout{background:var(--acc-soft);border:1px solid #F3D3CA;border-left:4px solid var(--acc);border-radius:11px;padding:16px 20px;font-size:14.5px;color:#7A2A1A;margin-top:16px}
+.callout b{color:#5E1F13}
+
+.terms{counter-reset:t;display:grid;gap:10px}
+.t{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 18px 14px 52px;position:relative;font-size:14.5px;color:var(--ink2)}
+.t::before{counter-increment:t;content:counter(t);position:absolute;left:16px;top:13px;width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;font-family:var(--mono);font-size:12px;display:flex;align-items:center;justify-content:center}
+.t b{color:var(--ink)}
+
+footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.8px;color:var(--ink3)}
+@media(max-width:900px){.calc{grid-template-columns:1fr}.hd nav a:not(.back){display:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a href="/foundertrajectory/salescast/" class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 1.5 22.5 12 12 22.5 1.5 12 12 1.5Z" fill="var(--acc)"/><path d="M10 8.4 16 12l-6 3.6V8.4Z" fill="#fff"/></svg>
+      Salescast
+    </a>
+    <nav>
+      <a href="#sloi">Три слоя</a>
+      <a href="#calc">Калькулятор</a>
+      <a href="#rychagi">Рычаги</a>
+      <a href="#usloviya">Условия</a>
+      <a href="/foundertrajectory/salescast/" class="back">← Контур</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Блок 05 · рамка сделки выбрана 03.09.2026</p>
+    <h1>Партнерство:<br>чем платится справедливость</h1>
+    <p class="lead">Спор «кто вносит больше» не решается процентом. Он решается тем, что деньги разводятся на три слоя, и каждый слой платит за свое. Здесь механизм, живой калькулятор паритета и условия, без которых договоренность не подписывается.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="decided">
+      <b>Решение 03.09: совладение 50/50.</b> Производство закупается по себестоимости, прибыль делится пополам, работа каждого оплачивается отдельно зарплатой за роль. Закупочная ставка перестает быть предметом торга: в этой рамке она равна себестоимости и подтверждается открытым P&amp;L, а не переговорами. Три захода на вопрос «назови ставку» закрываются не ответом, а сменой конструкции.
+    </div>
+  </div>
+</section>
+
+<section id="sloi">
+  <div class="wrap">
+    <h2>Три слоя денег</h2>
+    <p class="smeta">Ключевая мысль, которую надо отдать ей раньше, чем она спросит про проценты: больше работы означает больше зарплату, а не больше долю. Тогда «я работаю больше» перестает быть аргументом в споре о владении.</p>
+    <div class="layers">
+      <div class="layer l1">
+        <span class="tag">Слой 1 · за объем</span>
+        <h3>Себестоимость</h3>
+        <p>Руки и сервисы: сценарист, оживление, монтаж, публикатор, HeyGen. Платится до всякой прибыли, ни одного из партнеров не касается и ни в чью долю не входит.</p>
+        <div class="rule">973 ₽ за ролик сейчас · 657 ₽ при команде на фикс-зарплате</div>
+      </div>
+      <div class="layer l2">
+        <span class="tag">Слой 2 · за роль</span>
+        <h3>Зарплата за работу</h3>
+        <p>Каждый партнер получает деньги за операционную роль, которую реально закрывает, и по объему. Роль, которую можно нанять, оплачивается по рыночной ставке этой роли.</p>
+        <div class="rule">Пока София стоит на ежедневной выкладке, ей платят как публикатору. Правильный ответ: нанять публикатора и снять с нее строку</div>
+      </div>
+      <div class="layer l3">
+        <span class="tag">Слой 3 · за владение</span>
+        <h3>Доля от прибыли</h3>
+        <p>Пополам от того, что осталось после первых двух слоев. Доля платит за риск, за вложенные деньги и за то, что клиент принадлежит компании, а не человеку.</p>
+        <div class="rule">Вложения Андрея в маркетинг, софт, домен и юрлицо возвращаются приоритетно, до деления</div>
+      </div>
+    </div>
+    <div class="callout">
+      <b>Правило, которое нельзя нарушать:</b> делим прибыль — закупаем по себестоимости. Закупаем с наценкой — прибыль не делим. В смешанном режиме наценка сначала съедает валовую, а потом от уже уменьшенной прибыли уходит еще доля. Проверено на модели: формула «60 на 40 в мою пользу» в смешанном режиме дает по факту 38 на 62 в обратную сторону.
+    </div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <h2>Калькулятор паритета</h2>
+    <p class="smeta">Вопрос, на который отвечает эта таблица, ровно один: получает ли она в Salescast больше, чем зарабатывает на том же объеме в России. Ее условие дословно: «чтобы чистыми оставалось не меньше, чем есть сейчас». Пока отношение ниже единицы, она не подпишет, потому что посчитает.</p>
+
+    <div class="calc">
+      <div class="inputs">
+        <h3>Вводные</h3>
+        <div class="f"><label>Роликов в пакете <b id="lQ">35</b></label><input type="range" id="q" min="30" max="90" step="5" value="35"></div>
+        <div class="f"><label>Цена клиенту, $ <b id="lP">1 490</b></label><input type="range" id="p" min="990" max="2600" step="10" value="1490"></div>
+        <div class="f"><label>Себестоимость, ₽ за ролик <b id="lC">973</b></label><input type="range" id="c" min="600" max="1200" step="1" value="973"></div>
+        <div class="f"><label>Доля Софии, % <b id="lS">50</b></label><input type="range" id="s" min="30" max="70" step="1" value="50"></div>
+        <div class="f"><label>Налог с чека, % <b id="lT">20</b></label><input type="range" id="t" min="0" max="30" step="1" value="20"></div>
+        <div class="f"><label>Курс, ₽ за $ <b id="lR">90,9</b></label><input type="range" id="r" min="80" max="105" step="0.1" value="90.9"></div>
+        <div class="presets">
+          <button data-p="1490" data-c="973" data-s="50">Как есть сейчас</button>
+          <button data-p="1850" data-c="973" data-s="50">Только цена</button>
+          <button data-p="1490" data-c="657" data-s="50">Только фикс-зарплата</button>
+          <button data-p="1700" data-c="657" data-s="50">Цена + фикс</button>
+          <button data-p="1490" data-c="973" data-s="68">Только доля</button>
+        </div>
+      </div>
+
+      <div class="out">
+        <div class="verdict bad" id="vd">
+          <div class="vh" id="vh">Не проходит</div>
+          <p id="vp">Загрузка</p>
+        </div>
+        <div class="grid4">
+          <div class="cell hl"><div class="l">София в Salescast</div><div class="n" id="oS">—</div></div>
+          <div class="cell warn"><div class="l">Она же в России, тот же объем</div><div class="n" id="oR">—</div></div>
+          <div class="cell"><div class="l">Отношение к альтернативе</div><div class="n" id="oK">—</div></div>
+          <div class="cell"><div class="l">Андрей</div><div class="n" id="oA">—</div></div>
+        </div>
+        <div class="flow">
+          <div class="r"><span>Чек клиенту</span><span class="v" id="f1">—</span></div>
+          <div class="r"><span>Минус налог с чека</span><span class="v neg" id="f2">—</span></div>
+          <div class="r"><span>Минус себестоимость производства</span><span class="v neg" id="f3">—</span></div>
+          <div class="r tot"><span>Прибыль к делению</span><span class="v" id="f4">—</span></div>
+          <div class="r"><span>Валовая маржа до налога</span><span class="v" id="f5">—</span></div>
+          <div class="r"><span>Цена за ролик клиенту</span><span class="v" id="f6">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="smeta" style="margin-top:16px">Альтернатива Софии считается по ее собственной цифре: 1 435 ₽ прибыли на ролик при рознице 3 429 ₽ (тест 5×7 за 120 000 ₽ в России). Себестоимость взята без ее налога УСН, иначе двойной счет: налог Андрея считается отдельно с чека.</p>
+  </div>
+</section>
+
+<section id="rychagi">
+  <div class="wrap">
+    <h2>Три рычага и что каждый дает</h2>
+    <p class="smeta">Расчет на тесте из 35 роликов. Порог, который надо перейти, — 50 225 ₽ ее чистыми.</p>
+    <table>
+      <thead><tr><th style="width:24%">Рычаг</th><th style="width:16%">Что меняем</th><th style="width:16%">Она получает</th><th style="width:12%">Итог</th><th style="width:32%">Чем платим</th></tr></thead>
+      <tbody>
+        <tr><td><b>Как есть сейчас</b></td><td>$1 490 · 973 ₽ · 50%</td><td>37 149 ₽</td><td><span class="pill no">0,74</span></td><td>Ничем. Она считает и отказывается</td></tr>
+        <tr><td><b>Поднять цену</b></td><td>$1 850 · 973 ₽ · 50%</td><td>50 268 ₽</td><td><span class="pill yes">1,00</span></td><td>$53 за ролик на тесте. Это выше рынка агентств и требует объяснения ценности до цены</td></tr>
+        <tr><td><b>Уронить себестоимость</b></td><td>$1 490 · 657 ₽ · 50%</td><td>42 679 ₽</td><td><span class="pill mid">0,85</span></td><td>Одного этого не хватает. Плюс перевод команды на фикс — это ее управленческая работа, не твоя</td></tr>
+        <tr><td><b>Цена плюс фикс</b></td><td>$1 700 · 657 ₽ · 50%</td><td>50 314 ₽</td><td><span class="pill yes">1,00</span></td><td>Два умеренных движения вместо одного резкого. <b>Рекомендую этот</b></td></tr>
+        <tr><td><b>Отдать долю</b></td><td>$1 490 · 973 ₽ · 68%</td><td>50 522 ₽</td><td><span class="pill yes">1,01</span></td><td>68 на 32 в ее пользу. Ломает саму рамку совладения и обнуляет твою половину</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub">Аргумент, который сильнее любого из трех рычагов</h3>
+    <p class="smeta" style="margin-bottom:14px">Сравнение по одному тесту заведомо не в нашу пользу, и это ловушка. Правильная рамка сравнения — не пакет, а месяц загрузки.</p>
+    <table>
+      <thead><tr><th style="width:34%">Что сравниваем</th><th style="width:33%">Она сама в России</th><th style="width:33%">Она в Salescast</th></tr></thead>
+      <tbody>
+        <tr><td><b>Кто приводит клиента</b></td><td>Никто. Ее слова: «я не ищу клиентов, я просто прихожу и рассказываю». Все три клиента пришли пассивно</td><td>Андрей. Привлечение — единственная функция, которую она не делала ни разу за шесть лет</td></tr>
+        <tr><td><b>Кто делает управленческий слой</b></td><td>Она же, плюс 24 задачи из 41 не делает никто</td><td>Андрей забирает 21 строку: публикации, аналитика, менеджмент, весь этап продаж</td></tr>
+        <tr><td><b>Где стоит собственник</b></td><td>На ежедневной выкладке роликов руками</td><td>Публикатор нанят, она возвращается в продукт и к платящему клиенту</td></tr>
+        <tr><td><b>Потолок</b></td><td>Ее личные часы и три клиента</td><td>250 роликов в месяц мощности, дальше второй подрядчик</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <b>Отсюда честная формулировка для нее:</b> прибыль на одном ролике в Salescast действительно меньше, чем у тебя в России, и я не буду это прятать. Разница в том, сколько роликов у тебя будет и сколько из них ты сделаешь сама. Сегодня твой потолок — это твои руки и клиенты, которые пришли случайно. Давай сравнивать не пакет с пакетом, а твой месяц с твоим месяцем.
+      <br><br><b>Что нужно посчитать до разговора:</b> ее фактический объем в роликах за последний месяц по трем клиентам. Цифры нет, запросить одной строкой. Без нее месячное сравнение не считается, а на пакете мы проигрываем.
+    </div>
+  </div>
+</section>
+
+<section id="usloviya">
+  <div class="wrap">
+    <h2>Условия, без которых не подписываем</h2>
+    <p class="smeta">У нее уже был разрыв с партнером и банкротство. Сценарий выхода пишется на входе, а не тогда, когда он понадобился.</p>
+    <div class="terms">
+      <div class="t"><b>Клиент принадлежит компании, а не человеку.</b> Договор, домен, почта, CRM и прием денег на юрлице. Она работает под брендом компании, не под своим агентством.</div>
+      <div class="t"><b>Открытый P&amp;L.</b> Оба видят одни и те же цифры, включая себестоимость производства построчно. Это условие закупки по себестоимости: без открытых цифр она превращается в наценку под другим названием.</div>
+      <div class="t"><b>Доля привязана к перечню зон и пересматривается.</b> Если функция не закрывается два месяца подряд, она уходит другому партнеру или наемному, и доля пересчитывается. Список зон — приложение к договору.</div>
+      <div class="t"><b>Сценарий развода написан заранее.</b> Кто забирает клиентов, кто аккаунты, кто бренд, как оценивается выход, какой срок предупреждения.</div>
+      <div class="t"><b>Приоритетный возврат вложений.</b> Деньги Андрея в маркетинг, софт, домен и юрлицо возвращаются из прибыли до деления.</div>
+      <div class="t"><b>Регламент запрещенных утверждений.</b> Что нельзя говорить о здоровье, БАДах, косметике и в гемблинге на рынках ЕС и США. Пишется до первого запуска. Ее нынешняя позиция «мы говорим что попало» для европейского юрлица не работает.</div>
+      <div class="t"><b>Доля в юрлице ЕС для налогового резидента РФ.</b> Банковский вопрос, а не юридический. Проверить у бухгалтера до того, как что-то обещать.</div>
+    </div>
+
+    <h3 class="sub">Что снимаю сам, до того как она вспомнит</h3>
+    <div class="callout" style="margin-top:0">
+      Цифру 60 на 40, названную на созвоне 01.09, снимаю вслух и первым. Формулировка: <b>«Я назвал ее до того, как показал за что, и это было неправильно. Вот зоны, которые я беру. Отработаем на первом клиенте, ты увидишь, как я их закрываю, и после этого посчитаем доли по факту, а не по опыту.»</b>
+      <br><br>Почему это сильнее, а не слабее: она получает не отступление, а обмен цифры на список обязательств. Человек, который сам отказался от преимущества в переговорах, читается как уверенный в результате. И это единственный способ снять с себя претензию «я не знаю твою экспертизу», не рассказывая про себя.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Salescast · блок 05 «Партнерство» · 03.09.2026 · <a href="/foundertrajectory/salescast/">вернуться в контур</a>
+  </div>
+</footer>
+
+<script>
+const E=id=>document.getElementById(id);
+const RU=n=>Math.round(n).toLocaleString("ru-RU").replace(/ /g," ");
+const ALT_PER_ROLIK=1435; // ее прибыль на ролик в России, ее собственная цифра
+
+function calc(){
+  const q=+E("q").value, p=+E("p").value, c=+E("c").value,
+        s=+E("s").value, t=+E("t").value, r=+E("r").value;
+
+  E("lQ").textContent=q;
+  E("lP").textContent=RU(p);
+  E("lC").textContent=RU(c);
+  E("lS").textContent=s;
+  E("lT").textContent=t;
+  E("lR").textContent=r.toFixed(1).replace(".",",");
+
+  const revenue=p*r;
+  const tax=revenue*t/100;
+  const cogs=q*c;
+  const profit=revenue-tax-cogs;
+  const sofia=profit*s/100;
+  const andrei=profit-sofia;
+  const alt=q*ALT_PER_ROLIK;
+  const k=alt>0?sofia/alt:0;
+  const gross=revenue>0?(revenue-cogs)/revenue*100:0;
+
+  E("f1").textContent=RU(revenue)+" ₽";
+  E("f2").textContent="− "+RU(tax)+" ₽";
+  E("f3").textContent="− "+RU(cogs)+" ₽";
+  E("f4").textContent=RU(profit)+" ₽";
+  E("f5").textContent=gross.toFixed(0)+"%";
+  E("f6").textContent="$"+Math.round(p/q);
+
+  E("oS").textContent=RU(sofia)+" ₽";
+  E("oR").textContent=RU(alt)+" ₽";
+  E("oA").textContent=RU(andrei)+" ₽";
+  E("oK").textContent=k.toFixed(2).replace(".",",");
+
+  const vd=E("vd"), vh=E("vh"), vp=E("vp");
+  if(k>=1){
+    vd.className="verdict ok";
+    vh.textContent="Проходит: ей выгоднее, чем сейчас";
+    vp.textContent="На этом объеме она получает на "+RU(sofia-alt)+" ₽ больше, чем зарабатывает в России. Условие «чистыми не меньше, чем есть» выполнено, разговор о долях можно вести спокойно.";
+  } else if(k>=0.93){
+    vd.className="verdict ok";
+    vh.textContent="Почти паритет";
+    vp.textContent="Разрыв "+RU(alt-sofia)+" ₽, это "+Math.round((1-k)*100)+"% от ее альтернативы. Закрывается объемом и тем, что клиента приводит не она. Но разрыв надо назвать вслух самому, а не ждать, пока она посчитает.";
+  } else {
+    vd.className="verdict bad";
+    vh.textContent="Не проходит: ей невыгодно";
+    vp.textContent="Она получает на "+RU(alt-sofia)+" ₽ меньше, чем на том же объеме в России. Это "+Math.round((1-k)*100)+"% потери. Пока цифра такая, доли обсуждать бессмысленно: сначала цена, себестоимость или объем.";
+  }
+}
+document.querySelectorAll("input[type=range]").forEach(i=>i.addEventListener("input",calc));
+document.querySelectorAll(".presets button").forEach(b=>b.addEventListener("click",()=>{
+  E("p").value=b.dataset.p; E("c").value=b.dataset.c; E("s").value=b.dataset.s; calc();
+}));
+calc();
+</script>
+</body>
+</html>
