@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Salescast — производство и операционная нагрузка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F1; --card:#FFFFFF; --sunk:#F5EFE6;
+  --ink:#1C1917; --ink2:#5D554C; --ink3:#8C8177;
+  --line:#E8DFD2; --line2:#F0E9DE;
+  --acc:#E2452A; --acc-soft:#FCEDE9;
+  --ochre:#F0A02B; --ochre-soft:#FDF3E2;
+  --teal:#12665A; --teal-soft:#E6F0ED;
+  --danger:#9B2C2C; --danger-soft:#F8EAEA;
+  --ok:#2F6F4F; --ok-soft:#EAF1EC;
+  --sans:"Golos Text",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --disp:"Unbounded",var(--sans);
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+
+header.hd{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;gap:20px;height:56px}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
+.brand .mark{width:19px;height:19px;flex:0 0 19px}
+.hd nav{display:flex;gap:16px;margin-left:auto;font-size:13.5px}
+.hd nav a{color:var(--ink2);text-decoration:none}
+.hd nav a:hover{color:var(--acc)}
+
+.hero{padding:44px 0 28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em}
+.lead{font-size:17px;color:var(--ink2);max-width:68ch;margin:0}
+
+section{padding:36px 0}
+section+section{border-top:1px solid var(--line2)}
+h2{font-family:var(--disp);font-weight:600;font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+h3.sub{font-family:var(--disp);font-weight:600;font-size:16px;margin:28px 0 10px}
+.smeta{font-size:13.8px;color:var(--ink3);margin:0 0 22px;max-width:78ch}
+
+/* конвейер */
+.pipe{display:grid;gap:10px}
+.ph{display:flex;align-items:center;gap:10px;margin:22px 0 4px}
+.ph .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:6px}
+.ph .badge.once{background:var(--teal-soft);color:var(--teal)}
+.ph .badge.day{background:var(--acc-soft);color:var(--acc)}
+.ph .badge.week{background:var(--ochre-soft);color:#8A5A0F}
+.ph h4{font-family:var(--disp);font-size:15px;font-weight:600;margin:0}
+.st{display:grid;grid-template-columns:34px 1fr 132px 150px;gap:12px;align-items:baseline;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 16px;font-size:14.2px;color:var(--ink2)}
+.st .no{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.st .nm b{color:var(--ink)}
+.st .nm span{display:block;font-size:12.4px;color:var(--ink3);margin-top:2px}
+.who{font-family:var(--mono);font-size:11.5px;padding:3px 8px;border-radius:5px;white-space:nowrap;display:inline-block}
+.who.a{background:var(--teal-soft);color:var(--teal)}
+.who.s{background:var(--ochre-soft);color:#8A5A0F}
+.who.x{background:var(--sunk);color:var(--ink3)}
+.who.q{background:var(--danger-soft);color:var(--danger)}
+.st .lo{font-size:12.6px;color:var(--ink3)}
+
+/* калькулятор */
+.calc{display:grid;grid-template-columns:296px 1fr;gap:18px;align-items:start}
+.inputs{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+.inputs h3{font-family:var(--disp);font-size:14px;font-weight:600;margin:0 0 6px}
+.inputs .hint{font-size:11.8px;color:var(--ink3);margin:0 0 14px;line-height:1.4}
+.f{margin-bottom:13px}
+.f label{display:flex;justify-content:space-between;align-items:baseline;font-size:12.8px;color:var(--ink2);margin-bottom:5px;gap:8px}
+.f label b{font-family:var(--mono);font-size:13.2px;color:var(--ink);font-weight:600;white-space:nowrap}
+.f input[type=range]{width:100%;accent-color:var(--acc);margin:0}
+.grp{margin-top:16px;padding-top:13px;border-top:1px solid var(--line2)}
+.grp .gt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line2)}
+.presets button{font-family:var(--sans);font-size:12.2px;padding:6px 10px;border:1px solid var(--line);background:var(--sunk);color:var(--ink2);border-radius:7px;cursor:pointer}
+.presets button:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-soft)}
+
+.out{display:grid;gap:14px}
+.verdict{border-radius:13px;padding:19px 22px;border:1px solid}
+.verdict.bad{background:var(--danger-soft);border-color:#EBD2D2}
+.verdict.warn{background:var(--ochre-soft);border-color:#EFDDBC}
+.verdict.ok{background:var(--ok-soft);border-color:#CFE0D5}
+.verdict .vh{font-family:var(--disp);font-size:18px;font-weight:600;margin-bottom:7px}
+.verdict.bad .vh{color:#7A2626} .verdict.warn .vh{color:#7A5316} .verdict.ok .vh{color:#1E4531}
+.verdict p{margin:0;font-size:14.2px;line-height:1.5}
+.verdict.bad p{color:#7A2626} .verdict.warn p{color:#7A5316} .verdict.ok p{color:#2B5C43}
+
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(142px,1fr));gap:11px}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.cell .l{font-size:11.8px;color:var(--ink3);line-height:1.3}
+.cell .n{font-family:var(--disp);font-weight:600;font-size:19px;margin-top:5px;letter-spacing:-.01em}
+.cell.hl{background:var(--teal-soft);border-color:#CBDFDA} .cell.hl .n{color:var(--teal)}
+.cell.warn{background:var(--ochre-soft);border-color:#EFDDBC} .cell.warn .n{color:#8A5A0F}
+.cell.bad{background:var(--danger-soft);border-color:#EBD2D2} .cell.bad .n{color:var(--danger)}
+
+.bars{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 20px}
+.bar{margin-bottom:13px}
+.bar:last-child{margin-bottom:0}
+.bar .bl{display:flex;justify-content:space-between;font-size:13.2px;color:var(--ink2);margin-bottom:5px}
+.bar .bl b{font-family:var(--mono);font-size:12.8px;color:var(--ink)}
+.track{height:9px;background:var(--sunk);border-radius:5px;overflow:hidden}
+.fill{height:100%;border-radius:5px;transition:width .18s}
+.fill.ok{background:var(--ok)} .fill.warn{background:var(--ochre)} .fill.bad{background:var(--danger)}
+
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{text-align:left;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:11px 14px;background:var(--sunk);border-bottom:1px solid var(--line)}
+td{padding:11px 14px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--ink2)}
+tr:last-child td{border-bottom:0}
+td b{color:var(--ink)}
+tr.brk td{background:var(--danger-soft)}
+.pill{font-family:var(--mono);font-size:11.5px;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.pill.no{background:var(--danger-soft);color:var(--danger)}
+.pill.yes{background:var(--ok-soft);color:var(--ok)}
+.pill.mid{background:var(--ochre-soft);color:#8A5A0F}
+
+.callout{background:var(--acc-soft);border:1px solid #F3D3CA;border-left:4px solid var(--acc);border-radius:11px;padding:16px 20px;font-size:14.5px;color:#7A2A1A;margin-top:16px}
+.callout b{color:#5E1F13}
+.fact{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:11px;padding:16px 20px;font-size:14.5px;color:var(--ink2);margin-top:16px}
+.fact b{color:var(--ink)}
+
+footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.8px;color:var(--ink3)}
+@media(max-width:900px){.calc{grid-template-columns:1fr}.st{grid-template-columns:28px 1fr;gap:8px}.st .lo,.st .wc{grid-column:2}.hd nav a:not(.back){display:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a href="/foundertrajectory/salescast/" class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 1.5 22.5 12 12 22.5 1.5 12 12 1.5Z" fill="var(--acc)"/><path d="M10 8.4 16 12l-6 3.6V8.4Z" fill="#fff"/></svg>
+      Salescast
+    </a>
+    <nav>
+      <a href="#konveyer">Конвейер</a>
+      <a href="#sebes">Себестоимость</a>
+      <a href="#nagruzka">Нагрузка</a>
+      <a href="#potolok">Потолок</a>
+      <a href="/foundertrajectory/salescast/" class="back">← Контур</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Блок 03 · производство и трудозатраты</p>
+    <h1>Из чего складывается<br>производство и нагрузка</h1>
+    <p class="lead">Двадцать три шага от первого разговора до недельного отчета. Главное деление здесь не «кто делает», а <b>как часто это повторяется</b>: разовая работа на старте клиента масштабируется наймом, ежедневная упирается в потолок мощности, а еженедельная это то, за что клиент фактически платит и что сейчас не делает никто.</p>
+  </div>
+</section>
+
+<section id="konveyer">
+  <div class="wrap">
+    <h2>Конвейер: двадцать три шага</h2>
+    <p class="smeta">Колонка справа — частота. Она важнее исполнителя: разовое можно потерпеть, ежедневное определяет потолок, еженедельное определяет продление.</p>
+
+    <div class="ph"><span class="badge once">Разово · до старта</span><h4>Продажа и вход клиента</h4></div>
+    <div class="pipe">
+      <div class="st"><span class="no">01</span><span class="nm"><b>Первичный созвон</b><span>квалификация ниши: подходит формат или нет</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">~1 ч на разговор</span></div>
+      <div class="st"><span class="no">02</span><span class="nm"><b>Проверка ниши у производства</b><span>ее ответ «подходит или нет» до оффера, а не после</span></span><span class="wc"><span class="who s">София</span></span><span class="lo">~15 мин</span></div>
+      <div class="st"><span class="no">03</span><span class="nm"><b>Оффер, дожим, договор, счет</b><span>инвойс от европейского юрлица</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">~4 ч на сделку</span></div>
+      <div class="st"><span class="no">04</span><span class="nm"><b>Бриф</b><span>созвон 15–20 минут с транскриптом для команды. Для компаний, где собственник не работает руками, письменный бриф</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">~1 ч</span></div>
+    </div>
+
+    <div class="ph"><span class="badge once">Разово · запуск</span><h4>Подготовка запуска</h4></div>
+    <div class="pipe">
+      <div class="st"><span class="no">05</span><span class="nm"><b>Анализ ниши</b><span>около 100 залетевших роликов в нише, на них строятся сценарии. Входит в цену, отдельно не считается</span></span><span class="wc"><span class="who x">команда</span></span><span class="lo">разово на клиента</span></div>
+      <div class="st"><span class="no">06</span><span class="nm"><b>Стратегия и воронка</b><span>тип персонажей, кодовое слово, автоответ, целевой шаг. Согласуется до первого ролика</span></span><span class="wc"><span class="who s">София</span></span><span class="lo">разово</span></div>
+      <div class="st"><span class="no">07</span><span class="nm"><b>Модели и голоса</b><span>5 персонажей на тесте. Клонирование 2 000 ₽, оживление 50 ₽ за видео</span></span><span class="wc"><span class="who x">Настя</span></span><span class="lo">5 шт на тест</span></div>
+      <div class="st"><span class="no">08</span><span class="nm"><b>Упаковка аккаунтов</b><span>один персонаж = один аккаунт. Почта заводится командой, аккаунт принадлежит клиенту, для YouTube нужен его номер</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">5 аккаунтов на тест</span></div>
+      <div class="st"><span class="no">09</span><span class="nm"><b>Подбор публикаторов под гео</b><span>живые люди в нужной стране</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">разово, дальше переиспользуются</span></div>
+    </div>
+
+    <div class="ph"><span class="badge day">Ежедневно</span><h4>Производственный цикл ролика</h4></div>
+    <div class="pipe">
+      <div class="st"><span class="no">10</span><span class="nm"><b>Сценарий</b><span>17% трудозатрат · 200 ₽ за ролик при поштучной оплате</span></span><span class="wc"><span class="who x">Настя</span></span><span class="lo">на каждый ролик</span></div>
+      <div class="st"><span class="no">11</span><span class="nm"><b>Правки в сценарий</b><span>вкусовое решение, не приемка</span></span><span class="wc"><span class="who s">София</span></span><span class="lo">на каждый ролик</span></div>
+      <div class="st"><span class="no">12</span><span class="nm"><b>Оживление в HeyGen</b><span>50 ₽ за видео. ⚠️ Строка помечена «делала Настя, но сейчас хз» — дыра в действующем проекте</span></span><span class="wc"><span class="who q">не закрыт</span></span><span class="lo">на каждый ролик</span></div>
+      <div class="st"><span class="no">13</span><span class="nm"><b>Монтаж</b><span>39% трудозатрат, самая тяжелая статья · 400 ₽ за ролик поштучно</span></span><span class="wc"><span class="who x">Кирилл</span></span><span class="lo">на каждый ролик</span></div>
+      <div class="st"><span class="no">14</span><span class="nm"><b>Приемка монтажа и обложки</b><span>вкус и качество</span></span><span class="wc"><span class="who s">София</span></span><span class="lo">на каждый ролик</span></div>
+      <div class="st"><span class="no">15</span><span class="nm"><b>Отслушать озвучку на ошибки</b><span>приемка, а не вкус</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">на каждый ролик</span></div>
+    </div>
+
+    <div class="ph"><span class="badge day">Ежедневно</span><h4>Выкладка и живой аккаунт</h4></div>
+    <div class="pipe">
+      <div class="st"><span class="no">16</span><span class="nm"><b>Публикация руками</b><span>два ролика в день на аккаунт, на тесте параллельно много аккаунтов. ⚠️ Сейчас это делает руками сама София</span></span><span class="wc"><span class="who q">публикатор</span></span><span class="lo">каждый день × аккаунты</span></div>
+      <div class="st"><span class="no">17</span><span class="nm"><b>Описания и ответы на комментарии</b><span>по продукту отвечаем, в директ не переписываемся</span></span><span class="wc"><span class="who x">публикатор</span></span><span class="lo">каждый день</span></div>
+      <div class="st"><span class="no">18</span><span class="nm"><b>Автоответы и боты</b><span>кодовое слово в комментарии → ссылка или артикул в директ</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">настройка разово, контроль ежедневно</span></div>
+      <div class="st"><span class="no">19</span><span class="nm"><b>Контроль публикации</b><span>вышло ли, вовремя ли, ответили ли</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">каждый день</span></div>
+      <div class="st"><span class="no">20</span><span class="nm"><b>Замена заблокированных аккаунтов</b><span>примерно 1 из 20. Аватар на лице реального человека восстанавливается в 95% случаев, вымышленный персонаж почти никогда</span></span><span class="wc"><span class="who x">команда</span></span><span class="lo">по факту</span></div>
+    </div>
+
+    <div class="ph"><span class="badge week">Еженедельно</span><h4>То, за что клиент фактически платит</h4></div>
+    <div class="pipe">
+      <div class="st"><span class="no">21</span><span class="nm"><b>Сбор аналитики и атрибуция</b><span>просмотры, кодовые слова, метка Amazon Attribution, промокод. ⚠️ Программка за 20 000 ₽ в месяц умерла, автосбора сейчас нет</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">каждую неделю</span></div>
+      <div class="st"><span class="no">22</span><span class="nm"><b>Отчет клиенту</b><span>единственное, что клиент видит регулярно. Сейчас не делает никто</span></span><span class="wc"><span class="who a">Андрей</span></span><span class="lo">каждую неделю</span></div>
+      <div class="st"><span class="no">23</span><span class="nm"><b>Созвон с клиентом и продление</b><span>результаты, правки, продажа следующего месяца</span></span><span class="wc"><span class="who s">София</span></span><span class="lo">каждую неделю</span></div>
+    </div>
+
+    <div class="fact">
+      <b>Что здесь видно сразу.</b> Из двадцати трех шагов только девять разовые. Четырнадцать повторяются каждый день или каждую неделю, и именно они определяют, сколько клиентов бизнес выдержит. Плюс два шага (12 и 16) не закрыты живым человеком прямо сейчас, и оба ежедневные.
+    </div>
+  </div>
+</section>
+
+<section id="sebes">
+  <div class="wrap">
+    <h2>Себестоимость по статьям</h2>
+    <p class="smeta">Ее фактическая таблица от 01.09, три реальных проекта плюс колонка оптимизации. Налог УСН из базы модели убран: свой налог Андрей считает отдельно с чека, иначе двойной счет.</p>
+    <table>
+      <thead><tr><th style="width:26%">Статья</th><th style="width:13%">Аргимакс, 60</th><th style="width:13%">Лувира, 60</th><th style="width:13%">Лемус, 60</th><th style="width:15%">Фикс-зарплата, 180</th><th style="width:20%">Комментарий</th></tr></thead>
+      <tbody>
+        <tr><td>Клонирование модели</td><td>2 000 ₽</td><td>2 000 ₽</td><td>2 500 ₽</td><td><b>0</b></td><td>Уходит в фикс-зарплату</td></tr>
+        <tr><td>Оживление</td><td>3 000 ₽</td><td>3 000 ₽</td><td>3 000 ₽</td><td><b>0</b></td><td>50 ₽ за видео, туда же</td></tr>
+        <tr><td><b>Монтаж</b></td><td>24 000 ₽</td><td>24 000 ₽</td><td>24 000 ₽</td><td>40 000 ₽</td><td>400 ₽ за видео поштучно. Самая тяжелая статья</td></tr>
+        <tr><td>Выкладка</td><td>10 000 ₽</td><td>10 000 ₽</td><td>6 000 ₽</td><td>26 000 ₽</td><td>Ее узкое место номер один</td></tr>
+        <tr><td>HeyGen</td><td>7 400 ₽</td><td>7 400 ₽</td><td>7 400 ₽</td><td>22 200 ₽</td><td>Максимальный тариф, около 50 000 ₽ в месяц на все проекты</td></tr>
+        <tr><td>Сценарист</td><td>12 000 ₽</td><td>12 000 ₽</td><td>12 000 ₽</td><td>30 000 ₽</td><td>200 ₽ за ролик</td></tr>
+        <tr><td><b>Производство за ролик</b></td><td><b>973 ₽</b></td><td><b>973 ₽</b></td><td><b>915 ₽</b></td><td><b>657 ₽</b></td><td>База модели: 973 ₽ сейчас</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <b>316 ₽ на ролике — это половина рычага паритета.</b> Перевод команды с поштучной оплаты на фикс-зарплату дает разницу 973 → 657 ₽, и это чистая управленческая работа, а не переговоры. Экономия берется из двух мест: клонирование и оживление уходят в оклад целиком, а монтаж и сценарий дешевеют на объеме (при 180 роликах монтаж 222 ₽ вместо 400, сценарий 167 ₽ вместо 200).
+      <br><br>⚠️ Обратная сторона: фикс-зарплата это <b>постоянный расход независимо от загрузки</b>. При 180 роликах в месяц она дает 657 ₽ за ролик, при 90 роликах те же 118 200 ₽ дадут уже 1 313 ₽. Переводить команду на оклад можно только тогда, когда поток подтвержден, иначе экономия превращается в убыток.
+    </div>
+  </div>
+</section>
+
+<section id="nagruzka">
+  <div class="wrap">
+    <h2>Калькулятор операционной нагрузки</h2>
+    <p class="smeta">Вопрос: при каком числе клиентов что ломается первым. Твердые цифры — мощность подрядчика 250 роликов в месяц (ее слова 01.09) и нормативы из ее колонки оптимизации на 180 роликов. Часы партнеров — допущение, крутится ползунками: настоящих замеров ни у кого нет.</p>
+
+    <div class="calc">
+      <div class="inputs">
+        <h3>Загрузка</h3>
+        <p class="hint">Сколько клиентов и какого объема сейчас в работе</p>
+        <div class="f"><label>Клиентов на ведении <b id="lN">3</b></label><input type="range" id="n" min="0" max="15" step="1" value="3"></div>
+        <div class="f"><label>Роликов на клиента в месяц <b id="lR">60</b></label><input type="range" id="r" min="30" max="90" step="30" value="60"></div>
+        <div class="f"><label>Новых тестов в месяц <b id="lT">1</b></label><input type="range" id="t" min="0" max="6" step="1" value="1"></div>
+
+        <div class="grp">
+          <div class="gt">Нормативы производства</div>
+          <div class="f"><label>Роликов на монтажера <b id="lM">180</b></label><input type="range" id="m" min="90" max="300" step="10" value="180"></div>
+          <div class="f"><label>Роликов на сценариста <b id="lSc">180</b></label><input type="range" id="sc" min="90" max="300" step="10" value="180"></div>
+          <div class="f"><label>Роликов на публикатора <b id="lPb">150</b></label><input type="range" id="pb" min="60" max="300" step="10" value="150"></div>
+        </div>
+
+        <div class="grp">
+          <div class="gt">Часы партнеров · допущение</div>
+          <div class="f"><label>Андрей: ч в неделю на клиента <b id="lHA">3</b></label><input type="range" id="ha" min="1" max="10" step="0.5" value="3"></div>
+          <div class="f"><label>Андрей: ч на одну продажу <b id="lHS">6</b></label><input type="range" id="hs" min="2" max="20" step="1" value="6"></div>
+          <div class="f"><label>София: ч в неделю на клиента <b id="lHS2">2</b></label><input type="range" id="hs2" min="0.5" max="8" step="0.5" value="2"></div>
+        </div>
+
+        <div class="presets">
+          <button data-n="1" data-t="1">1 клиент</button>
+          <button data-n="3" data-t="1">3 клиента</button>
+          <button data-n="5" data-t="2">5 клиентов</button>
+          <button data-n="10" data-t="3">10 клиентов</button>
+          <button data-n="4" data-t="1">Базовый сценарий М6</button>
+        </div>
+      </div>
+
+      <div class="out">
+        <div class="verdict ok" id="vd">
+          <div class="vh" id="vh">—</div>
+          <p id="vp">—</p>
+        </div>
+        <div class="grid4">
+          <div class="cell hl"><div class="l">Роликов в месяц всего</div><div class="n" id="oQ">—</div></div>
+          <div class="cell"><div class="l">Активных аккаунтов</div><div class="n" id="oAcc">—</div></div>
+          <div class="cell warn"><div class="l">Часов Андрея в месяц</div><div class="n" id="oHA">—</div></div>
+          <div class="cell warn"><div class="l">Часов Софии в месяц</div><div class="n" id="oHS">—</div></div>
+        </div>
+        <div class="bars">
+          <div class="bar"><div class="bl"><span>Мощность производства · потолок 250 роликов</span><b id="bq">—</b></div><div class="track"><div class="fill ok" id="fq" style="width:0"></div></div></div>
+          <div class="bar"><div class="bl"><span>Загрузка Андрея · рабочая неделя до 18:00, ~160 ч в месяц</span><b id="bha">—</b></div><div class="track"><div class="fill ok" id="fha" style="width:0"></div></div></div>
+          <div class="bar"><div class="bl"><span>Загрузка Софии · тот же лимит</span><b id="bhs">—</b></div><div class="track"><div class="fill ok" id="fhs" style="width:0"></div></div></div>
+        </div>
+        <div class="bars">
+          <div class="bar"><div class="bl"><span>Монтажеров нужно</span><b id="nm">—</b></div></div>
+          <div class="bar"><div class="bl"><span>Сценаристов нужно</span><b id="nsc">—</b></div></div>
+          <div class="bar"><div class="bl"><span>Публикаторов нужно</span><b id="npb">—</b></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="potolok">
+  <div class="wrap">
+    <h2>Где ломается первым</h2>
+    <p class="smeta">При объеме 60 роликов на клиента в месяц и одном новом тесте. Красная строка — момент, когда потолок производства пройден.</p>
+    <table>
+      <thead><tr><th style="width:14%">Клиентов</th><th style="width:16%">Роликов в месяц</th><th style="width:14%">Аккаунтов</th><th style="width:18%">Мощность 250</th><th style="width:18%">Команда</th><th style="width:20%">Что ломается</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td>95</td><td>8</td><td><span class="pill yes">38%</span></td><td>1 монтажер, 1 сценарист, 1 публикатор</td><td>Ничего. Но публикатора все равно надо нанять: сейчас это руки Софии</td></tr>
+        <tr><td><b>3</b></td><td>215</td><td>14</td><td><span class="pill mid">86%</span></td><td>2 монтажера, 2 сценариста, 2 публикатора</td><td>Запас 35 роликов. Один новый клиент выбивает за потолок</td></tr>
+        <tr class="brk"><td><b>5</b></td><td>335</td><td>25</td><td><span class="pill no">134%</span></td><td>2 монтажера, 2 сценариста, 3 публикатора</td><td><b>Потолок пройден.</b> Нужен второй подрядчик производства</td></tr>
+        <tr class="brk"><td><b>10</b></td><td>705</td><td>39</td><td><span class="pill no">282%</span></td><td>4 монтажера, 4 сценариста, 5 публикаторов</td><td>Три производственных площадки вместо одной. Это уже другая компания</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <b>Главный вывод по нагрузке: потолок наступает на четвертом-пятом клиенте, а не на десятом.</b> Мощность 250 роликов в месяц — это примерно 3,5 клиента на ведении по 60 роликов, или 8 клиентов по 30. Прежняя цифра 900 роликов из оргсхемы от 31.08 была завышена в 3,6 раза, и на ней все планы найма стояли неправильно.
+      <br><br>Это сходится с финмоделью с другой стороны: в базовом сценарии к шестому месяцу клиентов на ведении 4,2. То есть <b>второй подрядчик производства нужен примерно к шестому месяцу</b>, и он единственный наемный, кто окупается собственно нагрузкой, а не покупкой времени партнеров.
+    </div>
+
+    <h3 class="sub">Что известно точно и что допущение</h3>
+    <table>
+      <thead><tr><th style="width:44%">Параметр</th><th style="width:18%">Статус</th><th style="width:38%">Источник или что нужно</th></tr></thead>
+      <tbody>
+        <tr><td>Мощность производства 250 роликов в месяц</td><td><span class="pill yes">факт</span></td><td>Ее слова на созвоне 01.09</td></tr>
+        <tr><td>Себестоимость 973 ₽ и 657 ₽ за ролик</td><td><span class="pill yes">факт</span></td><td>Ее таблица по трем проектам, 01.09</td></tr>
+        <tr><td>Доли трудозатрат 39 / 28 / 17 / 9 / 7</td><td><span class="pill yes">факт</span></td><td>Ее презентация, слайд 16</td></tr>
+        <tr><td>Темп два ролика в день на аккаунт, тест 2–3 недели</td><td><span class="pill yes">факт</span></td><td>Ее слова 28.08</td></tr>
+        <tr><td>Нормативы на монтажера, сценариста, публикатора</td><td><span class="pill mid">выведено</span></td><td>Из ее же колонки оптимизации на 180 роликов. <b>Прямые нормативы по четырем ролям запрошены в постмитинге 01.09 и не получены</b></td></tr>
+        <tr><td>Часы Андрея и Софии на клиента</td><td><span class="pill no">допущение</span></td><td>Замеров нет ни у кого. Ставится по ощущению и уточняется на первом клиенте</td></tr>
+        <tr><td>Аккаунтов на клиента: 5 на тесте, 3 на ведении</td><td><span class="pill mid">выведено</span></td><td>Из состава пакетов. Один персонаж = один аккаунт</td></tr>
+      </tbody>
+    </table>
+
+    <div class="fact">
+      <b>Что запросить у нее одной строкой,</b> чтобы этот блок перестал стоять на допущениях: нормативы по четырем ролям (сколько роликов тянет один монтажер, сценарист, креатор, публикатор и в какой момент нужен следующий) и ее фактический объем в роликах за последний месяц по трем клиентам. Второе нужно еще и для <a href="/foundertrajectory/salescast/partnerstvo/" style="color:var(--ink);text-decoration:underline">месячного сравнения в блоке партнерства</a>. Это единственный незакрытый пункт из постмитинга, который блокирует сразу два блока.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Salescast · блок 03 «Производство и операционная нагрузка» · 03.09.2026 · <a href="/foundertrajectory/salescast/">вернуться в контур</a>
+  </div>
+</footer>
+
+<script>
+const E=id=>document.getElementById(id);
+const CAP=250;      // мощность подрядчика, роликов в месяц (её слова 01.09)
+const MONTH_H=160;  // рабочих часов в месяц при рамке до 18:00
+const TEST_Q=35, TEST_ACC=5, KEEP_ACC=3;
+
+function bar(el,lbl,pct,txt){
+  const f=E(el); f.style.width=Math.min(pct,100)+"%";
+  f.className="fill "+(pct>100?"bad":pct>85?"warn":"ok");
+  E(lbl).textContent=txt;
+}
+function calc(){
+  const n=+E("n").value, r=+E("r").value, t=+E("t").value,
+        m=+E("m").value, sc=+E("sc").value, pb=+E("pb").value,
+        ha=+E("ha").value, hs=+E("hs").value, hs2=+E("hs2").value;
+
+  E("lN").textContent=n; E("lR").textContent=r; E("lT").textContent=t;
+  E("lM").textContent=m; E("lSc").textContent=sc; E("lPb").textContent=pb;
+  E("lHA").textContent=ha.toString().replace(".",","); E("lHS").textContent=hs;
+  E("lHS2").textContent=hs2.toString().replace(".",",");
+
+  const q=n*r+t*TEST_Q;
+  const acc=n*KEEP_ACC+t*TEST_ACC;
+  const hA=n*ha*4.33 + t*hs + 12;      // +12 ч базы: недельные статистики, деньги, найм
+  const hS=n*hs2*4.33 + t*2 + 8;       // +8 ч базы: продукт, вкус, приемка
+  const need=x=>Math.ceil(q/x);
+
+  E("oQ").textContent=q;
+  E("oAcc").textContent=acc;
+  E("oHA").textContent=Math.round(hA)+" ч";
+  E("oHS").textContent=Math.round(hS)+" ч";
+
+  const pq=q/CAP*100, pa=hA/MONTH_H*100, ps=hS/MONTH_H*100;
+  bar("fq","bq",pq,q+" из 250 · "+Math.round(pq)+"%");
+  bar("fha","bha",pa,Math.round(hA)+" из 160 ч · "+Math.round(pa)+"%");
+  bar("fhs","bhs",ps,Math.round(hS)+" из 160 ч · "+Math.round(ps)+"%");
+
+  E("nm").textContent=need(m)+" · сейчас 1 (Кирилл)";
+  E("nsc").textContent=need(sc)+" · сейчас 1 (Настя)";
+  E("npb").textContent=need(pb)+" · сейчас 0, выкладывает София";
+
+  const vd=E("vd"), vh=E("vh"), vp=E("vp");
+  const over=[];
+  if(pq>100) over.push("производство");
+  if(pa>100) over.push("Андрей");
+  if(ps>100) over.push("София");
+
+  if(over.length){
+    vd.className="verdict bad";
+    vh.textContent="Перегруз: "+over.join(", ");
+    vp.textContent=(pq>100
+      ? "Производство просит "+q+" роликов при потолке 250. Нужен второй подрядчик, а не найм внутрь текущей команды. "
+      : "")+"Часы: Андрей "+Math.round(hA)+", София "+Math.round(hS)+" при лимите 160 в месяц. Разгружается публикатором, автосбором аналитики и вторым подрядчиком.";
+  } else if(pq>85||pa>85||ps>85){
+    vd.className="verdict warn";
+    vh.textContent="На пределе, запас меньше 15%";
+    vp.textContent="Загрузка производства "+Math.round(pq)+"%, запас "+(CAP-q)+" роликов. Один новый клиент выбивает за потолок. Второго подрядчика искать сейчас, а не когда сломается.";
+  } else {
+    vd.className="verdict ok";
+    vh.textContent="Выдерживаем";
+    vp.textContent="Запас производства "+(CAP-q)+" роликов, это еще "+Math.floor((CAP-q)/r)+" клиента такого же объема. Часы Андрея "+Math.round(hA)+", Софии "+Math.round(hS)+" из 160.";
+  }
+}
+document.querySelectorAll("input[type=range]").forEach(i=>i.addEventListener("input",calc));
+document.querySelectorAll(".presets button").forEach(b=>b.addEventListener("click",()=>{
+  E("n").value=b.dataset.n; E("t").value=b.dataset.t; calc();
+}));
+calc();
+</script>
+</body>
+</html>
