@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подбор ИИ-персонажа под вашу нишу - Salescast</title>
+<meta name="description" content="Десять вопросов о вашем бизнесе. В ответ присылаем тип персонажа под нишу, три заголовка роликов и пример видео.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F7F5F0; --surface:#FFFFFF; --sunk:#EDEAE1; --deep:#17181A;
+  --ink:#141513; --ink-2:#4A4C46; --muted:#87887E;
+  --line:#E2DFD4; --acc:#E2452A; --acc-2:#F0A02B;
+  --sh:0 1px 2px rgba(20,21,19,.05); --lift:0 18px 40px rgba(20,21,19,.13);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ground); color:var(--ink); font-family:"Golos Text","Helvetica Neue",Arial,sans-serif; font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(760px,92vw); margin:0 auto}
+h1,h2,.mono{font-family:"Unbounded","Golos Text",sans-serif; letter-spacing:-.02em}
+h1{font-size:clamp(26px,4vw,40px); line-height:1.1; margin:0 0 12px}
+h2{font-size:clamp(20px,2.6vw,26px); line-height:1.2; margin:0 0 6px}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.kicker{font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--acc); margin:0 0 10px}
+
+.top{padding:22px 0; border-bottom:1px solid var(--line)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px}
+.logo{font-family:"Unbounded",sans-serif; font-weight:700; font-size:19px; letter-spacing:-.03em; text-decoration:none}
+.logo i{color:var(--acc); font-style:normal}
+.back{font-size:14px; color:var(--muted); text-decoration:none}
+
+.head{padding:38px 0 20px}
+.lead{font-size:18px; color:var(--ink-2)}
+
+.bar{height:6px; background:var(--sunk); border-radius:999px; overflow:hidden; margin:20px 0 8px}
+.bar i{display:block; height:100%; width:0; background:var(--acc); border-radius:999px; transition:width .3s ease}
+.barlab{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--muted); letter-spacing:.08em}
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:clamp(22px,3.4vw,34px); box-shadow:var(--sh); margin:18px 0 28px}
+.q{display:none}
+.q.on{display:block; animation:fade .28s ease}
+@keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+
+.opts{display:grid; gap:10px; margin:18px 0 4px}
+.opt{display:flex; align-items:flex-start; gap:12px; border:1px solid var(--line); border-radius:14px; padding:14px 16px; cursor:pointer; background:var(--ground); transition:border-color .15s, background .15s}
+.opt:hover{border-color:var(--acc)}
+.opt input{margin:3px 0 0; accent-color:var(--acc); flex:none; width:18px; height:18px}
+.opt.sel{border-color:var(--acc); background:rgba(226,69,42,.05)}
+.opt span{font-size:16px}
+
+input[type=text], input[type=email], textarea{
+  width:100%; border:1px solid var(--line); border-radius:14px; padding:14px 16px;
+  font:400 16px/1.4 "Golos Text",sans-serif; background:var(--ground); color:var(--ink); margin-top:14px;
+}
+textarea{min-height:110px; resize:vertical}
+input:focus, textarea:focus{outline:none; border-color:var(--acc)}
+label.fl{display:block; font-size:14px; color:var(--muted); margin-top:16px}
+
+.nav{display:flex; gap:12px; align-items:center; margin-top:24px; flex-wrap:wrap}
+.btn{display:inline-flex; align-items:center; gap:8px; background:var(--acc); color:#fff; border:0; cursor:pointer; padding:14px 24px; border-radius:999px; font:600 16px/1 "Golos Text",sans-serif; text-decoration:none; transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translateY(-1px); box-shadow:var(--lift)}
+.btn[disabled]{opacity:.45; cursor:not-allowed; transform:none; box-shadow:none}
+.btn.ghost{background:transparent; color:var(--ink-2); border:1px solid var(--line)}
+.skip{font-size:14px; color:var(--muted); background:none; border:0; cursor:pointer; text-decoration:underline}
+
+.hp{position:absolute; left:-9999px; opacity:0; height:0}
+.err{color:var(--acc); font-size:14px; margin-top:10px; display:none}
+.err.on{display:block}
+
+.done{display:none; text-align:center; padding:20px 0 10px}
+.done.on{display:block}
+.done .tick{width:64px; height:64px; border-radius:50%; background:rgba(226,69,42,.1); color:var(--acc); display:flex; align-items:center; justify-content:center; font-size:30px; margin:0 auto 18px}
+.what{background:var(--sunk); border-radius:16px; padding:18px 20px; text-align:left; margin:20px 0}
+.what ul{margin:8px 0 0; padding-left:20px}
+.what li{margin-bottom:6px; font-size:15px}
+
+footer{padding:34px 0 48px; color:var(--muted); font-size:14px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <a class="logo" href="../">Sales<i>cast</i></a>
+    <a class="back" href="../">← на главную</a>
+  </div>
+</div>
+
+<div class="head">
+  <div class="wrap">
+    <p class="kicker">Бесплатно, без созвона</p>
+    <h1>Подберем персонажа под вашу нишу</h1>
+    <p class="lead">Десять коротких вопросов о бизнесе и товаре. В ответ пришлем тип персонажа, три заголовка роликов под вашу аудиторию и пример видео. Если ниша для этого формата не подходит, скажем прямо.</p>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="barlab" id="barlab">Вопрос 1 из 11</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <form id="f" class="card" autocomplete="off">
+    <input type="text" name="botcheck" class="hp" tabindex="-1" aria-hidden="true">
+
+    <div class="q on" data-k="Что продаете" data-type="radio" data-req="1">
+      <h2>Что вы продаете?</h2>
+      <p class="muted">Выберите то, что ближе всего.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="Физический товар"><span>Физический товар</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Услугу или экспертизу"><span>Услугу или экспертизу</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Мобильное приложение или сервис"><span>Мобильное приложение или сервис</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Обучение, курс, клуб"><span>Обучение, курс, клуб</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-k="Ниша" data-type="text" data-req="1">
+      <h2>Ваша ниша одной строкой</h2>
+      <p class="muted">Например: зубные пасты, детская стоматология, крепеж на Amazon, клиника женского здоровья.</p>
+      <input type="text" name="q2" placeholder="Ниша и что именно вы продаете">
+    </div>
+
+    <div class="q" data-k="Кто покупает" data-type="text" data-req="1">
+      <h2>Кто у вас покупает?</h2>
+      <p class="muted">Одной фразой: пол, возраст, ситуация, в которой человек ищет ваш продукт.</p>
+      <input type="text" name="q3" placeholder="Например: женщины 30-45, следят за здоровьем детей">
+    </div>
+
+    <div class="q" data-k="Где продаете" data-type="checkbox" data-req="1">
+      <h2>Где вы продаете сейчас?</h2>
+      <p class="muted">Можно выбрать несколько.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="q4" value="Маркетплейсы России"><span>Маркетплейсы России</span></label>
+        <label class="opt"><input type="checkbox" name="q4" value="Amazon или Shopify"><span>Amazon или Shopify</span></label>
+        <label class="opt"><input type="checkbox" name="q4" value="Свой сайт"><span>Свой сайт</span></label>
+        <label class="opt"><input type="checkbox" name="q4" value="Соцсети и мессенджеры"><span>Соцсети и мессенджеры</span></label>
+        <label class="opt"><input type="checkbox" name="q4" value="Офлайн, розница, клиника"><span>Офлайн, розница, клиника</span></label>
+        <label class="opt"><input type="checkbox" name="q4" value="Пока не продаю, запускаюсь"><span>Пока не продаю, запускаюсь</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-k="Ссылка на продукт" data-type="text" data-req="0">
+      <h2>Ссылка на товар, сайт или карточку</h2>
+      <p class="muted">Нужна, чтобы посмотреть продукт своими глазами и собрать пример ролика именно по нему.</p>
+      <input type="text" name="q5" placeholder="https://">
+    </div>
+
+    <div class="q" data-k="Соцсети" data-type="text" data-req="0">
+      <h2>Ссылки на ваши соцсети</h2>
+      <p class="muted">Instagram, TikTok, YouTube, Telegram. Через запятую, если несколько. Если их нет, так и напишите.</p>
+      <input type="text" name="q6" placeholder="@аккаунт или ссылки">
+    </div>
+
+    <div class="q" data-k="Контент сейчас" data-type="radio" data-req="1">
+      <h2>Какой контент вы делаете сейчас?</h2>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q7" value="Ничего не снимаем"><span>Ничего не снимаем</span></label>
+        <label class="opt"><input type="radio" name="q7" value="Снимаю сам, нерегулярно"><span>Снимаю сам, нерегулярно</span></label>
+        <label class="opt"><input type="radio" name="q7" value="Есть команда или подрядчик по контенту"><span>Есть команда или подрядчик по контенту</span></label>
+        <label class="opt"><input type="radio" name="q7" value="Покупаем рекламу у блогеров"><span>Покупаем рекламу у блогеров</span></label>
+        <label class="opt"><input type="radio" name="q7" value="Только платная реклама, таргет"><span>Только платная реклама, таргет</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-k="Средний чек" data-type="radio" data-req="1">
+      <h2>Средний чек покупки</h2>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="до 3 000 ₽"><span>до 3 000 ₽</span></label>
+        <label class="opt"><input type="radio" name="q8" value="3 000 - 15 000 ₽"><span>3 000 - 15 000 ₽</span></label>
+        <label class="opt"><input type="radio" name="q8" value="15 000 - 100 000 ₽"><span>15 000 - 100 000 ₽</span></label>
+        <label class="opt"><input type="radio" name="q8" value="больше 100 000 ₽"><span>больше 100 000 ₽</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-k="Главная задача" data-type="radio" data-req="1">
+      <h2>Что нужно в первую очередь?</h2>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q9" value="Заявки на услугу или консультацию"><span>Заявки на услугу или консультацию</span></label>
+        <label class="opt"><input type="radio" name="q9" value="Продажи товара"><span>Продажи товара</span></label>
+        <label class="opt"><input type="radio" name="q9" value="Установки приложения"><span>Установки приложения</span></label>
+        <label class="opt"><input type="radio" name="q9" value="Личный бренд и узнаваемость"><span>Личный бренд и узнаваемость</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-k="Бюджет на тест" data-type="radio" data-req="1">
+      <h2>Бюджет на первый тест</h2>
+      <p class="muted">Отвечайте честно, от этого зависит, что мы предложим и предложим ли вообще.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q10" value="до 2 500 $"><span>до 2 500 $</span></label>
+        <label class="opt"><input type="radio" name="q10" value="2 500 - 4 000 $"><span>2 500 - 4 000 $</span></label>
+        <label class="opt"><input type="radio" name="q10" value="больше 4 000 $"><span>больше 4 000 $</span></label>
+        <label class="opt"><input type="radio" name="q10" value="пока не определился"><span>Пока не определился</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-k="Контакты" data-type="contact" data-req="1">
+      <h2>Куда прислать разбор</h2>
+      <p class="muted">Пришлем тип персонажа, заголовки и пример ролика. Ничего не звоним без вашего согласия.</p>
+      <input type="text" name="name" placeholder="Как к вам обращаться">
+      <input type="text" name="contact" placeholder="Telegram @ник или почта">
+      <label class="fl">Что важно показать в ролике, особенности товара, ограничения (по желанию)</label>
+      <textarea name="note" placeholder="Например: нельзя обещать лечебный эффект, важно показать товар в руках"></textarea>
+      <p class="muted" style="font-size:14px; margin-top:12px">Фото товара пришлите в Telegram после заявки, мы напишем первыми.</p>
+    </div>
+
+    <p class="err" id="err">Ответьте на вопрос, чтобы продолжить.</p>
+
+    <div class="nav">
+      <button type="button" class="btn ghost" id="prev" style="display:none">Назад</button>
+      <button type="button" class="btn" id="next">Дальше</button>
+      <button type="button" class="skip" id="skip" style="display:none">Пропустить</button>
+    </div>
+  </form>
+
+  <div class="card done" id="done">
+    <div class="tick">✓</div>
+    <h2>Спасибо, данные приняты</h2>
+    <p class="muted">В ближайшее время мы с ними ознакомимся и пришлем вам подбор персонажа и пример ролика под ваш бизнес.</p>
+    <div class="what">
+      <b>Что будет дальше</b>
+      <ul>
+        <li>Смотрим ваш продукт, соцсети и нишу</li>
+        <li>Подбираем тип персонажа и три заголовка под вашу аудиторию</li>
+        <li>Присылаем пример ролика и честный вердикт по нише</li>
+      </ul>
+    </div>
+    <a class="btn" href="https://t.me/Sychinnikov_work">Написать в Telegram сейчас</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">Salescast · внешний трафик через ИИ-персонажей · <a href="../">на главную</a></div>
+</footer>
+
+<script>
+(function(){
+  var form=document.getElementById('f');
+  var qs=Array.prototype.slice.call(form.querySelectorAll('.q'));
+  var bar=document.getElementById('bar'), barlab=document.getElementById('barlab');
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), skip=document.getElementById('skip');
+  var err=document.getElementById('err'), done=document.getElementById('done');
+  var i=0, sending=false;
+
+  form.addEventListener('change', function(e){
+    var box=e.target.closest('.opt'); if(!box) return;
+    var q=e.target.closest('.q');
+    if(e.target.type==='radio'){ q.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel')}); }
+    box.classList.toggle('sel', e.target.checked);
+    err.classList.remove('on');
+    if(e.target.type==='radio'){ setTimeout(go1, 220); }
+  });
+
+  function paint(){
+    qs.forEach(function(q,n){ q.classList.toggle('on', n===i); });
+    bar.style.width=((i)/qs.length*100)+'%';
+    barlab.textContent='Вопрос '+(i+1)+' из '+qs.length;
+    prev.style.display = i>0 ? '' : 'none';
+    var q=qs[i];
+    skip.style.display = q.dataset.req==='0' ? '' : 'none';
+    next.textContent = i===qs.length-1 ? 'Отправить' : 'Дальше';
+    var first=q.querySelector('input[type=text], textarea');
+    if(first && window.innerWidth>760) setTimeout(function(){ first.focus(); },60);
+  }
+
+  function value(q){
+    var t=q.dataset.type;
+    if(t==='radio'){ var r=q.querySelector('input:checked'); return r?r.value:''; }
+    if(t==='checkbox'){ return Array.prototype.slice.call(q.querySelectorAll('input:checked')).map(function(c){return c.value}).join(', '); }
+    if(t==='contact'){
+      var n=q.querySelector('[name=name]').value.trim(), c=q.querySelector('[name=contact]').value.trim();
+      return c ? (n?n+' · ':'')+c : '';
+    }
+    var f=q.querySelector('input[type=text]'); return f?f.value.trim():'';
+  }
+
+  function ok(q){ return q.dataset.req==='0' || value(q)!==''; }
+
+  function go1(){
+    var q=qs[i];
+    if(!ok(q)){ err.classList.add('on'); return; }
+    err.classList.remove('on');
+    if(i===qs.length-1){ send(); return; }
+    i++; paint();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  next.addEventListener('click', go1);
+  skip.addEventListener('click', function(){ if(i<qs.length-1){ i++; paint(); } });
+  prev.addEventListener('click', function(){ if(i>0){ i--; paint(); err.classList.remove('on'); } });
+  form.addEventListener('keydown', function(e){
+    if(e.key==='Enter' && e.target.tagName!=='TEXTAREA'){ e.preventDefault(); go1(); }
+  });
+
+  function send(){
+    if(sending) return; sending=true;
+    next.disabled=true; next.textContent='Отправляем...';
+    var lines=[], contactQ=qs[qs.length-1];
+    qs.forEach(function(q){ lines.push(q.dataset.k+': '+(value(q)||'не указано')); });
+    var note=contactQ.querySelector('[name=note]').value.trim();
+    if(note) lines.push('Комментарий: '+note);
+    var contact=contactQ.querySelector('[name=contact]').value.trim();
+    var name=contactQ.querySelector('[name=name]').value.trim();
+    var payload={
+      subject:'Salescast: подбор персонажа',
+      from_name:'Salescast',
+      name: name || 'Заявка с квиза Salescast',
+      replyto: contact.indexOf('@')===0 ? '' : contact,
+      message: lines.join('\n'),
+      page: location.pathname,
+      referrer: document.referrer || '',
+      utm: location.search || '',
+      botcheck: form.querySelector('[name=botcheck]').value
+    };
+    fetch('/founderfinance/api/lead', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    }).then(function(r){ finish(); }).catch(function(){ finish(); });
+  }
+
+  function finish(){
+    form.style.display='none';
+    document.querySelector('.bar').style.display='none';
+    barlab.style.display='none';
+    done.classList.add('on');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  paint();
+})();
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(109611431, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109611431" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html>
