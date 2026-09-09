@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Salescast — бизнес-процессы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F1; --card:#FFFFFF; --sunk:#F5EFE6;
+  --ink:#1C1917; --ink2:#5D554C; --ink3:#8C8177;
+  --line:#E8DFD2; --line2:#F0E9DE;
+  --acc:#E2452A; --acc-soft:#FCEDE9;
+  --ochre:#F0A02B; --ochre-soft:#FDF3E2;
+  --teal:#12665A; --teal-soft:#E6F0ED;
+  --blue:#4A6485; --blue-soft:#EEF1F7;
+  --danger:#9B2C2C; --danger-soft:#F8EAEA;
+  --ok:#2F6F4F; --ok-soft:#EAF1EC;
+  --sans:"Golos Text",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --disp:"Unbounded",var(--sans);
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+
+header.hd{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;gap:20px;height:56px}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
+.brand .mark{width:19px;height:19px;flex:0 0 19px}
+.hd nav{display:flex;gap:16px;margin-left:auto;font-size:13.5px}
+.hd nav a{color:var(--ink2);text-decoration:none}
+.hd nav a:hover{color:var(--acc)}
+
+.hero{padding:44px 0 28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em}
+.lead{font-size:17px;color:var(--ink2);max-width:70ch;margin:0 0 22px}
+.src{display:flex;flex-wrap:wrap;gap:8px}
+.src span{font-family:var(--mono);font-size:11.4px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:5px 10px;color:var(--ink3)}
+
+section{padding:36px 0}
+section+section{border-top:1px solid var(--line2)}
+h2{font-family:var(--disp);font-weight:600;font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+.smeta{font-size:13.8px;color:var(--ink3);margin:0 0 22px;max-width:80ch}
+
+/* легенда */
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:10px}
+.lg{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start}
+.lg .sw{width:26px;height:20px;border-radius:5px;flex:0 0 26px;margin-top:2px;border:1.4px solid}
+.lg .tx{font-size:13.2px;color:var(--ink2);line-height:1.42}
+.lg .tx b{color:var(--ink);display:block;font-size:13.4px}
+.sw.a{background:var(--teal-soft);border-color:var(--teal)}
+.sw.s{background:var(--ochre-soft);border-color:#C08417}
+.sw.n{background:#fff;border-color:#B9AC99}
+.sw.k{background:var(--blue-soft);border-color:var(--blue)}
+.sw.c{background:var(--sunk);border-color:var(--ink3)}
+.sw.new{background:var(--teal-soft);border-color:var(--teal);border-style:dashed}
+.sw.hot{background:var(--ochre-soft);border-color:#C0392B;border-width:2px}
+
+/* карта процессов */
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:11px}
+.mp{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:block;text-decoration:none}
+.mp .zn{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.05em}
+.mp h3{font-family:var(--disp);font-size:15.4px;font-weight:600;margin:5px 0 6px}
+.mp p{margin:0;font-size:13px;color:var(--ink3);line-height:1.45}
+.mp .st{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10.6px;padding:3px 8px;border-radius:5px}
+.st.done{background:var(--ok-soft);color:var(--ok)}
+.st.wait{background:var(--sunk);color:var(--ink3)}
+.st.risk{background:var(--danger-soft);color:var(--danger)}
+.mp.live{border-color:#CBDFDA;box-shadow:0 1px 0 rgba(18,102,90,.06)}
+.mp.live:hover{border-color:var(--teal)}
+
+/* процесс */
+.proc{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.proc>.ph{padding:18px 22px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.ph .zn{font-family:var(--mono);font-size:11px;color:var(--acc);letter-spacing:.06em;text-transform:uppercase}
+.ph h3{font-family:var(--disp);font-size:19px;font-weight:600;margin:6px 0 5px}
+.ph p{margin:0;font-size:13.6px;color:var(--ink2)}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.facts span{font-family:var(--mono);font-size:11px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:4px 9px;color:var(--ink2)}
+.facts span b{color:var(--ink)}
+
+.pbody{padding:6px 22px 20px}
+details{border-top:1px solid var(--line2)}
+details>summary{list-style:none;cursor:pointer;padding:14px 0 13px;display:flex;align-items:center;gap:11px;font-size:14.6px;color:var(--ink);font-weight:500}
+details>summary::-webkit-details-marker{display:none}
+details>summary .pm{width:21px;height:21px;flex:0 0 21px;border-radius:6px;border:1px solid var(--line);background:var(--sunk);position:relative}
+details>summary .pm::before,details>summary .pm::after{content:"";position:absolute;background:var(--ink2);left:50%;top:50%;transform:translate(-50%,-50%)}
+details>summary .pm::before{width:9px;height:1.5px}
+details>summary .pm::after{width:1.5px;height:9px;transition:opacity .15s}
+details[open]>summary .pm::after{opacity:0}
+details[open]>summary{color:var(--acc)}
+details[open]>summary .pm{border-color:var(--acc);background:var(--acc-soft)}
+details[open]>summary .pm::before,details[open]>summary .pm::after{background:var(--acc)}
+summary .hint{margin-left:auto;font-family:var(--mono);font-size:10.8px;color:var(--ink3);font-weight:400}
+summary .hint::after{content:"раскрыть"}
+details[open] summary .hint::after{content:"свернуть"}
+.dbody{padding:2px 0 20px 32px;font-size:14.4px;color:var(--ink2);max-width:88ch}
+.dbody h4{font-family:var(--disp);font-size:14.6px;font-weight:600;color:var(--ink);margin:20px 0 8px}
+.dbody h4:first-child{margin-top:4px}
+.dbody p{margin:0 0 11px}
+.dbody ul{margin:0 0 12px;padding-left:19px}
+.dbody li{margin-bottom:6px}
+.dbody b{color:var(--ink)}
+.q{border-left:3px solid var(--ochre);padding:2px 0 2px 13px;color:var(--ink);font-style:italic;margin:0 0 12px}
+.warn{background:var(--danger-soft);border:1px solid #EBD2D2;border-left:4px solid var(--danger);border-radius:10px;padding:12px 16px;font-size:13.8px;color:#7A2626;margin:0 0 13px}
+.fix{background:var(--ok-soft);border:1px solid #CFE0D5;border-left:4px solid var(--ok);border-radius:10px;padding:12px 16px;font-size:13.8px;color:#2B5C43;margin:0 0 13px}
+table{width:100%;border-collapse:collapse;font-size:13.4px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 14px}
+th{text-align:left;font-family:var(--mono);font-size:10.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:9px 12px;background:var(--sunk);border-bottom:1px solid var(--line)}
+td{padding:9px 12px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--ink2)}
+tr:last-child td{border-bottom:0}
+td b{color:var(--ink)}
+.who{font-family:var(--mono);font-size:10.8px;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.who.a{background:var(--teal-soft);color:var(--teal)}
+.who.s{background:var(--ochre-soft);color:#8A5A0F}
+.who.n{background:var(--sunk);color:var(--ink2)}
+.who.k{background:var(--blue-soft);color:var(--blue)}
+.who.q{background:var(--danger-soft);color:var(--danger)}
+
+/* схема */
+.schemebar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:14px 0 4px;border-top:1px solid var(--line2)}
+.btn{font-family:var(--sans);font-size:13.4px;font-weight:500;padding:9px 16px;border-radius:9px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:#0E5147;border-color:#0E5147}
+.btn.ghost{background:var(--card);color:var(--ink2);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--acc);color:var(--acc);background:var(--card)}
+.btn svg{width:14px;height:14px}
+.scheme{display:none;margin:14px 0 4px}
+.scheme.on{display:block}
+.scheme .frame{border:1px solid var(--line);border-radius:12px;background:#FDFBF7;overflow:auto;-webkit-overflow-scrolling:touch}
+.scheme .frame img{display:block;max-width:none;height:auto}
+.scheme .cap{font-size:12.4px;color:var(--ink3);margin:9px 2px 0;display:flex;gap:14px;flex-wrap:wrap}
+
+/* модалка */
+.modal{position:fixed;inset:0;z-index:120;background:rgba(28,25,23,.82);display:none;padding:22px}
+.modal.on{display:flex;flex-direction:column}
+.modal .mh{display:flex;align-items:center;gap:14px;color:#F5EFE6;font-size:14px;padding:0 4px 12px}
+.modal .mh b{font-family:var(--disp);font-weight:600}
+.modal .mh .sp{margin-left:auto;display:flex;gap:8px}
+.modal button.mb{font-family:var(--mono);font-size:13px;padding:7px 13px;border-radius:8px;border:1px solid rgba(245,239,230,.3);background:rgba(255,255,255,.07);color:#F5EFE6;cursor:pointer}
+.modal button.mb:hover{background:rgba(255,255,255,.16)}
+.modal .mbody{flex:1;overflow:auto;background:#FDFBF7;border-radius:12px}
+.modal .mbody img{display:block;max-width:none;transform-origin:0 0}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.8px;color:var(--ink3)}
+footer a{color:var(--ink2)}
+@media(max-width:760px){.hd nav a:not(.back){display:none}.dbody{padding-left:0}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a href="/salescast/" class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 1.5 22.5 12 12 22.5 1.5 12 12 1.5Z" fill="var(--acc)"/><path d="M10 8.4 16 12l-6 3.6V8.4Z" fill="#fff"/></svg>
+      Salescast
+    </a>
+    <nav>
+      <a href="#karta">Карта</a>
+      <a href="#model">Модель</a>
+      <a href="#scenariy">Сценарий</a>
+      <a href="/salescast/zony/">Зоны</a>
+      <a href="/salescast/" class="back">← Контур</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Архив процессов · BPMN 2.0</p>
+    <h1>Бизнес-процессы</h1>
+    <p class="lead">Как производство работает на самом деле, а не как записано в таблице. Каждый процесс это текстовое описание под плюсом и схема в нотации BPMN 2.0 с дорожками по ролям. Схему можно открыть на весь экран или скачать файлом и открыть в bpmn.io, Camunda или draw.io.</p>
+    <div class="src">
+      <span>основа: таблица зон, 41 задача, 01.09</span>
+      <span>факты: созвон с Настей 09.09</span>
+      <span>факты: разбор сценариев с Софией 09.09</span>
+      <span>решения: созвоны 07 и 08.09</span>
+      <span>разобрано 2 зоны из 7</span>
+    </div>
+  </div>
+</div>
+
+<section id="kak-chitat">
+  <div class="wrap">
+    <h2>Как читать схемы</h2>
+    <p class="smeta">Дорожка это роль, а не человек: когда роль поменяет исполнителя, схема останется прежней. Шаги, которых сегодня в процессе нет и которые мы добавляем, отмечены пунктиром и плюсом. Место, где процесс встает, отмечено красным.</p>
+    <div class="legend">
+      <div class="lg"><div class="sw a"></div><div class="tx"><b>Андрей · управление</b>вход в процесс, ТЗ, сроки, приемка исполнения, деньги и сервисы</div></div>
+      <div class="lg"><div class="sw s"></div><div class="tx"><b>София · качество</b>вкус и содержание: модель, хуки, сценарии, разговор с клиентом</div></div>
+      <div class="lg"><div class="sw n"></div><div class="tx"><b>Настя · производство</b>модели, голоса, сценарии, референсы. Сегодня еще и оживление</div></div>
+      <div class="lg"><div class="sw k"></div><div class="tx"><b>Ксюша · оживление</b>штамповка роликов в HeyGen по инструкции, роль передается с Насти</div></div>
+      <div class="lg"><div class="sw c"></div><div class="tx"><b>Клиент</b>отдельный пул, связь только пунктирными сообщениями</div></div>
+      <div class="lg"><div class="sw new"></div><div class="tx"><b>Пунктир и плюс</b>шага сегодня нет, добавляем. Это и есть работа на ближайшие недели</div></div>
+      <div class="lg"><div class="sw hot"></div><div class="tx"><b>Красная рамка</b>узкое место: здесь процесс стоит прямо сейчас</div></div>
+      <div class="lg"><div class="sw c" style="border-radius:50%;border-width:2px"></div><div class="tx"><b>Двойной круг</b>ожидание: приход сценариев или срок в сутки на приемку</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="karta">
+  <div class="wrap">
+    <h2>Карта процессов</h2>
+    <p class="smeta">Семь зон из таблицы Софии плюс этап продаж. Две зоны прошли разбор с исполнителем и описаны схемами, остальные пока существуют только строчками в таблице с ответственными.</p>
+    <div class="map">
+      <a class="mp live" href="#model">
+        <div class="zn">Зона 1 · 10 задач</div>
+        <h3>Модель и голос</h3>
+        <p>Персонаж, голос, аватарка аккаунта. Один раз на клиента, дальше на этом штампуются все ролики месяца.</p>
+        <span class="st done">разобран с Настей 09.09</span>
+      </a>
+      <a class="mp live" href="#scenariy">
+        <div class="zn">Зона 2 · 6 задач</div>
+        <h3>Сценарий</h3>
+        <p>Референсы, хуки, тексты, интеграции. По оценке Насти это 65 процентов результата.</p>
+        <span class="st done">разобран с Настей и Софией 09.09</span>
+      </a>
+      <div class="mp">
+        <div class="zn">Зона 3 · 4 задачи</div>
+        <h3>Монтаж</h3>
+        <p>Кирилл: субтитры, перекрытия, вставки, передача на выкладку. Утверждает София.</p>
+        <span class="st wait">в очереди на разбор</span>
+      </div>
+      <div class="mp">
+        <div class="zn">Зона 4 · 6 задач</div>
+        <h3>Публикации</h3>
+        <p>Аккаунты, прогрев, ежедневная выкладка, ответы на комментарии, боты по кодовому слову.</p>
+        <span class="st risk">настоящий потолок компании</span>
+      </div>
+      <div class="mp">
+        <div class="zn">Зона 5 · 2 задачи</div>
+        <h3>Аналитика</h3>
+        <p>Недельный сбор цифр и отчет клиенту. Программа за 20 000 в месяц умерла, считается руками.</p>
+        <span class="st risk">процесса нет</span>
+      </div>
+      <div class="mp">
+        <div class="zn">Зона 6 · 5 задач</div>
+        <h3>Общий менеджмент</h3>
+        <p>План команде, ежедневный контроль, себестоимость и нагрузка, оптимизация.</p>
+        <span class="st wait">строится в CRM</span>
+      </div>
+      <div class="mp">
+        <div class="zn">Зона 7 · 4 задачи</div>
+        <h3>Коммуникация с клиентом</h3>
+        <p>Договоры и акты, добиться ТЗ, недельный созвон, продать следующий месяц.</p>
+        <span class="st wait">в очереди на разбор</span>
+      </div>
+      <div class="mp">
+        <div class="zn">Этап продаж · 4 задачи</div>
+        <h3>Продажи</h3>
+        <p>Первичный созвон, оффер, договор и счет, бриф. В таблице у всех четырех строк ответственного не было.</p>
+        <span class="st wait">забрал Андрей</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОЦЕСС 1 -->
+<section id="model">
+  <div class="wrap">
+    <div class="proc">
+      <div class="ph">
+        <div class="zn">Процесс 1 · зона 1 таблицы</div>
+        <h3>Модель и голос</h3>
+        <p>От подписанного договора до исходников у монтажера. Создание персонажа делается один раз на клиента, дальше идет поток роликов.</p>
+        <div class="facts">
+          <span>шагов <b>21</b></span>
+          <span>ролей <b>4 + клиент</b></span>
+          <span>модель <b>≈2 часа</b></span>
+          <span>оживление <b>20-25 роликов ≈ 1,5 ч</b></span>
+          <span>добавляем шагов <b>5</b></span>
+        </div>
+      </div>
+      <div class="pbody">
+
+        <details>
+          <summary><span class="pm"></span>Как это работает: подробное описание<span class="hint"></span></summary>
+          <div class="dbody">
+
+            <h4>Что это за процесс</h4>
+            <p>Создание виртуального персонажа: внешность, голос и аватарка для аккаунта. Делается один раз на клиента и дальше не меняется, поэтому ошибка здесь стоит месяца работы. По оценке Насти модель, голос и качество дают <b>35 процентов результата</b>, остальные 65 приходятся на сценарий.</p>
+            <p>Ключевой фактор провала она назвала прямо: неестественность. <span class="q">Плохая картинка. Когда модель неестественная, максимально пластиковая, и голос. Голос там особенно выдаёт. Если выдаётся, что это ИИ, во-первых, Instagram это не продвигает. Во-вторых, люди это не смотрят.</span></p>
+
+            <h4>Как задумано в таблице</h4>
+            <table>
+              <tr><th>Задача</th><th style="width:150px">Кто</th></tr>
+              <tr><td>Поставить ТЗ на разработку модели</td><td><span class="who s">София</span></td></tr>
+              <tr><td>Поставить ТЗ на имя и упаковку аккаунтов</td><td><span class="who a">Андрей</span></td></tr>
+              <tr><td>Сделать модель</td><td><span class="who n">Настя</span></td></tr>
+              <tr><td>Утвердить модель и внести правки</td><td><span class="who s">София</span></td></tr>
+              <tr><td>Согласовать модель с клиентом и передать правки</td><td><span class="who s">София</span></td></tr>
+              <tr><td>Сделать голоса</td><td><span class="who n">Настя</span></td></tr>
+              <tr><td>Согласовать с клиентом голоса</td><td><span class="who s">София</span></td></tr>
+              <tr><td>Оживлять моделей в HeyGen</td><td><span class="who k">Ксюша</span></td></tr>
+              <tr><td>Отслушивать на предмет ошибок в озвучке</td><td><span class="who a">Андрей</span></td></tr>
+              <tr><td>Передать исходники в монтаж</td><td><span class="who n">Настя</span></td></tr>
+            </table>
+            <p>В исходной таблице строка про оживление стояла с пометкой «делала Настя, но сейчас хз». Роль закрыта решением 08.09: оживление уходит Ксюше, Настя обучает.</p>
+
+            <h4>Как идет по факту</h4>
+            <ul>
+              <li><b>ТЗ не существует.</b> Вводная приходит устно одной фразой. Дословно Настя: <span class="q">Вот прямо чёткого ТЗ мне никогда не приходило. Ну вот там нам надо сделать сейчас стоматолога. Сделай стоматолога мужчину. И я сажусь, делаю там стоматолога мужчину.</span></li>
+              <li><b>Аналитика продукта на этом шаге не нужна.</b> Что за компания и что она продает, выясняется только на этапе сценария. Для модели достаточно тематики.</li>
+              <li><b>Все решения по образу принимает Настя сама:</b> фон под тематику, пол, количество аватаров, несколько локаций и ракурсов. Если клиент дал фото человека, модель делается с фото, если нет, образ подбирается с нуля.</li>
+              <li><b>Технология:</b> сейчас только GPT, до этого перебрали много сервисов. Качество Настя считает хорошим.</li>
+              <li><b>Модель утверждается дважды:</b> у Софии по вкусу и у клиента.</li>
+              <li><b>Голос делается в HeyGen.</b> ElevenLabs Настя считает нужным подключить, но обучение от Димы по моделям и голосам ей так и не передали, доступа к ElevenLabs нет.</li>
+              <li><b>Оживление пока на Насте.</b> Пачка из 20-25 роликов занимает полтора часа только на прослушивание ударений.</li>
+              <li><b>Аватарку для аккаунта</b> Настя отдает по запросу публикатора, ТЗ на упаковку профиля нет. Она же считает получающиеся шапки профиля слабыми, София считает, что на результат это не влияет.</li>
+            </ul>
+
+            <h4>Где ломается</h4>
+            <div class="warn">
+              <b>1. Производство узнает о клиенте последним.</b> Клиника уже была на подписании, когда Настя сказала: «я ещё про этого клиента вообще ничего не знаю, то есть никакой информации у меня нет». Процесса заведения клиента в производство не существует.
+            </div>
+            <div class="warn">
+              <b>2. Обратная связь от клиента идет мимо Софии.</b> Там, где нет Димы, Настю добавляют в чат клиента, и она сама отправляет модели и принимает правки. Для Софии это стало новостью на созвоне: «Это с кем? Что-то это интересная информация». Пока клиенты адекватные и правок нет. При первой реальной претензии отвечать перед клиентом будет некому.
+            </div>
+            <div class="warn">
+              <b>3. Оживление привязано к человеку, а не к инструкции.</b> Настя назвала это сама: новому человеку надо отдать готовую инструкцию, а не посадить его в HeyGen разбираться. С Софией этот момент не обсуждался.
+            </div>
+            <div class="warn">
+              <b>4. Токены HeyGen.</b> Расход посчитать нельзя: зависит от модели, длины сценария и еще десятка факторов. Докупить по частям нельзя, только апгрейд тарифа. Пополнение с ошибкой встает на сутки, и все производство ждет.
+            </div>
+
+            <h4>Что меняем</h4>
+            <div class="fix">
+              На схеме эти шаги отмечены пунктиром и плюсом. Их сегодня в процессе нет.
+              <ul style="margin:9px 0 0">
+                <li><b>Бриф и карточка клиента.</b> Собирает Андрей сразу после подписания: ниша, продукт, ЦА, кодовое слово, запреты. Это вход, которого нет.</li>
+                <li><b>ТЗ на модель ставится задачей в CRM</b>, а не голосом в чате. У задачи есть срок и она видна всем.</li>
+                <li><b>Приемка озвучки уходит к Андрею.</b> Ударения и ошибки это исполнение, а не вкус. Вкус остается Софии.</li>
+                <li><b>Инструкция по оживлению пишется до передачи Ксюше</b>, иначе роль не передается, а просто меняет фамилию.</li>
+                <li><b>Баланс токенов проверяется до старта пачки</b>, а не в момент, когда генерация встала.</li>
+              </ul>
+            </div>
+
+            <h4>Нормативы</h4>
+            <ul>
+              <li>Модель новому клиенту: <b>около 2 часов</b>, один раз.</li>
+              <li>Оживление 20-25 роликов: <b>1-1,5 часа</b>.</li>
+              <li>Ролики на месяц одному клиенту: <b>около 3 дней</b>.</li>
+              <li>Емкость Насти целиком: <b>300-350 видео в месяц</b> при плане 240.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="schemebar">
+          <button class="btn" data-toggle="sch-model">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
+            Открыть схему BPMN
+          </button>
+          <button class="btn ghost" data-full="model" data-title="Процесс 1. Модель и голос">Во весь экран</button>
+          <a class="btn ghost" href="model.bpmn" download>Скачать .bpmn</a>
+          <a class="btn ghost" href="https://demo.bpmn.io/new" target="_blank" rel="noopener">Открыть bpmn.io</a>
+        </div>
+
+        <div class="scheme" id="sch-model">
+          <div class="frame"><img src="model.svg" alt="BPMN-схема процесса: модель и голос" loading="lazy"></div>
+          <div class="cap">
+            <span>Схема прокручивается вправо</span>
+            <span>Пунктир с плюсом: шага сегодня нет</span>
+            <span>Файл .bpmn открывается в bpmn.io и Camunda</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОЦЕСС 2 -->
+<section id="scenariy">
+  <div class="wrap">
+    <div class="proc">
+      <div class="ph">
+        <div class="zn">Процесс 2 · зона 2 таблицы</div>
+        <h3>Сценарий</h3>
+        <p>От базы знаний ниши до сценариев, ушедших в оживление. Здесь же находится узкое горлышко всей компании.</p>
+        <div class="facts">
+          <span>шагов <b>18</b></span>
+          <span>ролей <b>3 + клиент</b></span>
+          <span>30 сценариев <b>≈1,5 часа</b></span>
+          <span>вес в результате <b>65%</b></span>
+          <span>добавляем шагов <b>7</b></span>
+        </div>
+      </div>
+      <div class="pbody">
+
+        <details>
+          <summary><span class="pm"></span>Как это работает: подробное описание<span class="hint"></span></summary>
+          <div class="dbody">
+
+            <h4>Что это за процесс</h4>
+            <p>Контент, на котором держится результат клиента. По оценке Насти <b>сценарий дает 65 процентов залета</b>, и этому есть техническая причина: HeyGen не умеет повторять движения, аватар статичный. <span class="q">У нас здесь чисто статичный аватар, который сидит, что-то рассказывает.</span> Значит визуальными приемами удерживать зрителя нечем, все держится на тексте.</p>
+
+            <h4>Как задумано в таблице</h4>
+            <table>
+              <tr><th>Задача</th><th style="width:150px">Кто</th></tr>
+              <tr><td>Дать ТЗ на написание сценариев</td><td><span class="who s">София</span></td></tr>
+              <tr><td>Организовать процесс сбора референсов</td><td><span class="who a">Андрей</span></td></tr>
+              <tr><td>Написать сценарии</td><td><span class="who n">Настя</span></td></tr>
+              <tr><td>Внести правки в сценарии</td><td><span class="who s">София</span></td></tr>
+              <tr><td>Согласовать сценарии с клиентом</td><td><span class="who q">по таблице Настя</span></td></tr>
+              <tr><td>Передать сценарии в оживление</td><td><span class="who n">Настя</span></td></tr>
+            </table>
+            <p><b>Одна строка таблицы не подтвердилась на созвоне.</b> Согласование сценариев с клиентом записано на Настю, но она сознательно от него отказалась: писать готова, отвечать перед клиентом нет. Причина названа честно: не хватает опыта. Значит эта строка остается на Софии, и в схеме она стоит в ее дорожке.</p>
+
+            <h4>Как идет по факту</h4>
+            <ul>
+              <li><b>ТЗ размыто и приходит из двух мест.</b> Настя была на созвоне с клиентом и получила его рекомендации, потом от Софии пришли другие. Структура поменялась дважды, пять сценариев зависли: <span class="q">Мне вчера сказали, что это тяжело, можно просто как-то по-другому. Я сделала эту структуру, и я до сих пор не получила по ней ответа.</span></li>
+              <li><b>Референсы ищет Настя.</b> Заходит в Instagram, находит залетевший ролик с монтажом, отсекает неразговорные форматы и прикрепляет референс к сценарию, чтобы монтажер видел, что и где добавить.</li>
+              <li><b>Все живет в чатах Телеграма.</b> Сценарии, референсы, правки. Системы хранения нет.</li>
+              <li><b>Сценарии пишутся в Клоде</b>, в проекте Софии. Аккаунт один на всех за 20 евро, лимиты общие.</li>
+              <li><b>Ошибка, вскрытая 09.09:</b> обучающий чат один, а сценарии писались в новом. Клод знания между чатами не переносит, и сценарии вышли написанными в холодную. Все они переписываются заново.</li>
+              <li><b>Готовая пачка уходит Софии и ждет.</b> По стоматологу три дня. По Лувире выкладка не началась вообще.</li>
+            </ul>
+
+            <h4>Где ломается</h4>
+            <div class="warn">
+              <b>Узкое горлышко компании: приемка сценариев.</b> Названо Настей на созвоне одним словом: «София тормозит». Признано Софией дословно: <span class="q">Это потому что я не утвердила. Это правда. Я три дня не могла это утвердить.</span> И масштаб на будущее: <span class="q">Если таких клиентов будет даже не десять, а условно шесть, я буду каждый день по 2-3 часа времени тратить на это. Я абсолютно этого не хочу.</span>
+            </div>
+            <div class="warn">
+              <b>Брак ловится поздно.</b> Проверка идет на готовых сценариях, то есть после того, как в них вложен труд. Отсюда переписывание целыми пачками вместо правки одной строки.
+            </div>
+            <div class="warn">
+              <b>База знаний не собрана.</b> Материал за пять месяцев по стоматологии лежит кусками: залетевшие сценарии по Олегу, до него по Дмитрию и Васе, писали Филипп и Настя, часть в чужом аккаунте Клода. В проект загружено всего 10 залетевших сценариев.
+            </div>
+            <div class="warn">
+              <b>Интеграции повторяются.</b> Правило Филиппа: одинаковая интеграция в каждом ролике убивает конверсию в кодовое слово. Нужно около пяти вариантов и чередование.
+            </div>
+
+            <h4>Что меняем</h4>
+            <div class="fix">
+              <ul style="margin:0">
+                <li><b>Сначала 20 хуков, потом сценарий.</b> Правило введено 09.09 и распространяется на всех клиентов. Дословно София: «Ты начинаешь писать сценарий только после того, как я тебе окнула хук». Утвердить 20 хуков быстрее, чем прочитать 20 готовых сценариев, и брак ловится до того, как в него вложен труд.</li>
+                <li><b>Срок приемки одни сутки.</b> Задача с дедлайном в CRM, просрочка видна всем, поднимает Андрей. На схеме это таймер и ветка эскалации.</li>
+                <li><b>Регламент подбора референсов.</b> Куда заходить, какие запросы писать в том числе на английском, сколько собрать, как отличить трендовый формат от дешевого. Содержание дает София, упаковывает Андрей.</li>
+                <li><b>База знаний ниши в Клоде тремя блоками:</b> хуки по нише, фактура для середины ролика, рекламные интеграции. Структуру описал Дима, по оценке Софии это уже 80 процентов обучения сценариста.</li>
+                <li><b>Один чат внутри проекта.</b> Чат не меняется, иначе обучение теряется.</li>
+                <li><b>Пять вариантов интеграции с чередованием.</b></li>
+                <li><b>Работаем пачками по 20 с разбором залетевших.</b> Следующая пачка пишется с учетом того, что сработало. Это же ускоряет обучение базы хуков.</li>
+              </ul>
+            </div>
+
+            <h4>Почему это лечит горлышко, а не прячет его</h4>
+            <p>Приемка остается за Софией, потому что вкус это ее зона по соглашению. Но объем приемки падает: она смотрит хуки, а не тексты целиком, и делает это по стандарту, а не заново каждый раз. Дальше по этому же стандарту заходит второй сценарист, и найм перестает упираться в человека, который умеет писать «как София».</p>
+
+            <h4>Нормативы</h4>
+            <ul>
+              <li>30 сценариев вместе с поиском референсов: <b>1,5 часа</b>.</li>
+              <li>Пачка 60 сценариев с референсами: <b>2 дня</b>.</li>
+              <li>Референсы на новую нишу: <b>50 штук</b> в таблицу со ссылкой и градацией «понимаю, как сделать» или «не берусь».</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="schemebar">
+          <button class="btn" data-toggle="sch-scen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
+            Открыть схему BPMN
+          </button>
+          <button class="btn ghost" data-full="scenariy" data-title="Процесс 2. Сценарий">Во весь экран</button>
+          <a class="btn ghost" href="scenariy.bpmn" download>Скачать .bpmn</a>
+          <a class="btn ghost" href="https://demo.bpmn.io/new" target="_blank" rel="noopener">Открыть bpmn.io</a>
+        </div>
+
+        <div class="scheme" id="sch-scen">
+          <div class="frame"><img src="scenariy.svg" alt="BPMN-схема процесса: сценарий" loading="lazy"></div>
+          <div class="cap">
+            <span>Схема прокручивается вправо</span>
+            <span>Красная рамка: узкое горлышко</span>
+            <span>Файл .bpmn открывается в bpmn.io и Camunda</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dalshe">
+  <div class="wrap">
+    <h2>Что дальше</h2>
+    <p class="smeta">Порядок разбора остальных зон выбран по одному правилу: сначала то, что мешает деньгам сегодня, потом то, что помешает на масштабе.</p>
+    <div class="map">
+      <div class="mp">
+        <div class="zn">Следующий</div>
+        <h3>Зона 4. Публикации</h3>
+        <p>Настоящий потолок компании: схема один публикатор на один аккаунт с отдельным устройством. На трех клиентов это 15-30 человек, которых надо нанимать и контролировать.</p>
+        <span class="st risk">приоритет 1</span>
+      </div>
+      <div class="mp">
+        <div class="zn">Дальше</div>
+        <h3>Зона 5. Аналитика</h3>
+        <p>Это то, что клиент видит каждую неделю, и то, чего сейчас нет. Программа умерла, цифры считаются руками.</p>
+        <span class="st risk">приоритет 2</span>
+      </div>
+      <div class="mp">
+        <div class="zn">Дальше</div>
+        <h3>Зона 3. Монтаж</h3>
+        <p>Процесс работает и человек заменяем. Разбирается ради нормативов и передачи второму монтажеру.</p>
+        <span class="st wait">приоритет 3</span>
+      </div>
+      <div class="mp">
+        <div class="zn">Дальше</div>
+        <h3>Зоны 6 и 7 плюс продажи</h3>
+        <p>Менеджмент собирается в CRM по ходу первого общего клиента, продажи описываются на своей воронке.</p>
+        <span class="st wait">по ходу клиента</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="modal">
+  <div class="mh">
+    <b id="mtitle">Схема</b>
+    <span id="mzoom" style="font-family:var(--mono);font-size:12px;opacity:.7">100%</span>
+    <div class="sp">
+      <button class="mb" data-zoom="-">−</button>
+      <button class="mb" data-zoom="+">+</button>
+      <button class="mb" data-zoom="fit">вписать</button>
+      <button class="mb" id="mclose">закрыть ✕</button>
+    </div>
+  </div>
+  <div class="mbody"><img id="mimg" src="" alt=""></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Собрано 09.09.2026 по таблице зон от 01.09 и созвонам 07-09.09 ·
+    <a href="/salescast/zony/">Зоны и оргструктура</a> ·
+    <a href="/salescast/proizvodstvo/">Производство</a> ·
+    <a href="/salescast/">Контур Salescast</a>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('[data-toggle]').forEach(function(b){
+  b.addEventListener('click', function(){
+    var el = document.getElementById(b.dataset.toggle);
+    var on = el.classList.toggle('on');
+    b.innerHTML = b.innerHTML.replace(on ? 'Открыть схему BPMN' : 'Свернуть схему', on ? 'Свернуть схему' : 'Открыть схему BPMN');
+    if (on) el.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+});
+
+var modal = document.getElementById('modal'), mimg = document.getElementById('mimg'),
+    mtitle = document.getElementById('mtitle'), mzoom = document.getElementById('mzoom'), scale = 1;
+
+function applyScale(){ mimg.style.transform = 'scale(' + scale + ')'; mzoom.textContent = Math.round(scale*100) + '%'; }
+function fit(){
+  var box = modal.querySelector('.mbody');
+  if (!mimg.naturalWidth) return;
+  scale = Math.min(1, (box.clientWidth - 20) / mimg.naturalWidth);
+  applyScale();
+}
+document.querySelectorAll('[data-full]').forEach(function(b){
+  b.addEventListener('click', function(){
+    mimg.src = b.dataset.full + '.svg';
+    mtitle.textContent = b.dataset.title;
+    modal.classList.add('on');
+    mimg.onload = fit;
+    if (mimg.complete) fit();
+  });
+});
+document.getElementById('mclose').addEventListener('click', function(){ modal.classList.remove('on'); });
+modal.addEventListener('click', function(e){ if (e.target === modal) modal.classList.remove('on'); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') modal.classList.remove('on'); });
+document.querySelectorAll('[data-zoom]').forEach(function(b){
+  b.addEventListener('click', function(){
+    var z = b.dataset.zoom;
+    if (z === 'fit') { fit(); return; }
+    scale = Math.min(3, Math.max(0.15, scale + (z === '+' ? 0.2 : -0.2)));
+    applyScale();
+  });
+});
+</script>
+</body>
+</html>
