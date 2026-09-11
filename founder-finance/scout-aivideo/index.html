@@ -316,7 +316,8 @@ var S = {
   labels: true,
   showNoise: false,
   showComp: false,
-  hideDone: false
+  hideDone: false,
+  since: null              // ?since=ГГГГ-ММ-ДД — только с активностью не раньше даты
 };
 
 // Пометки живут в браузере: карта пересобирается каждый прогон, и класть в нее
@@ -384,8 +385,22 @@ function start() {
                  (p.why || '')).toLowerCase();
   });
 
+  // Фильтр «новое с даты»: ?since=ГГГГ-ММ-ДД. Приходит из /day-open — открывает
+  // карту сразу на том, что появилось после прошлого просмотра.
+  try {
+    var _sp = new URLSearchParams(location.search);
+    S.since = _sp.get('since') || null;
+  } catch (e) { S.since = null; }
+
   var w = DATA.window || {};
-  slot('window').textContent = 'окно ' + human(w.from) + ' — ' + human(w.to);
+  var winTxt = 'окно ' + human(w.from) + ' — ' + human(w.to);
+  if (S.since) {
+    winTxt += ' · <b style="color:#E0B84C">новое с ' + human(S.since) + '</b>' +
+              ' <a href="./" style="color:#8a8a7a">показать всё</a>';
+    slot('window').innerHTML = winTxt;
+  } else {
+    slot('window').textContent = winTxt;
+  }
   var s = DATA.stats || {};
   slot('k.hot').textContent = s.hot || 0;
   slot('k.a').textContent = s.a || 0;
@@ -416,6 +431,7 @@ function visible() {
   var tierOn = anyOn(S.tiers), roleOn = anyOn(S.roles);
   return DATA.people.filter(function (p) {
     if (!p.classified) return false;
+    if (S.since && (p.last || '') < S.since) return false;
     if (S.hot && !p.hot) return false;
     if (S.neighbor && !p.neighbor) return false;
     if (S.env && (p.envs || []).indexOf(S.env) === -1) return false;
