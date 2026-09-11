@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions-montazh" targetNamespace="http://bpmn.io/schema/bpmn">
+<bpmn:collaboration id="collab-montazh">
+<bpmn:participant id="pool-salescast" name="Salescast" processRef="proc-montazh" />
+</bpmn:collaboration>
+<bpmn:process id="proc-montazh" isExecutable="false">
+<bpmn:laneSet id="laneset-1">
+<bpmn:lane id="lane-andrei" name="Андрей · управление">
+<bpmn:flowNodeRef>task-kontrol</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>end-mont</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-sofia" name="София · качество">
+<bpmn:flowNodeRef>task-ok-tz</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>gw-tz</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>task-priemka-mont</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>gw-mont</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-nastya" name="Настя · производство">
+<bpmn:flowNodeRef>start-scen</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>task-tz-mont</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>catch-12</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>task-doslat</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>task-galochki</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>gw-plan</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-ksyusha" name="Ксюша · оживление">
+<bpmn:flowNodeRef>catch-ozhiv</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>task-papka</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-kirill" name="Кирилл · монтаж">
+<bpmn:flowNodeRef>task-montazh</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>task-v-papku</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-pub" name="Публикатор · выкладка">
+<bpmn:flowNodeRef>task-vylozhit</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>task-otchet</bpmn:flowNodeRef>
+</bpmn:lane>
+</bpmn:laneSet>
+<bpmn:startEvent id="start-scen" name="Сценарии пачки утверждены (из процесса 2)"><bpmn:outgoing>flow-0</bpmn:outgoing></bpmn:startEvent>
+<bpmn:userTask id="task-tz-mont" name="Написать ТЗ на монтаж в таблице (по референсу; сейчас только Лувира)"><bpmn:incoming>flow-0</bpmn:incoming><bpmn:incoming>flow-4</bpmn:incoming><bpmn:outgoing>flow-1</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="task-ok-tz" name="Утвердить ТЗ на монтаж галочкой (ждет да Софии)"><bpmn:incoming>flow-1</bpmn:incoming><bpmn:outgoing>flow-2</bpmn:outgoing></bpmn:userTask>
+<bpmn:exclusiveGateway id="gw-tz" name="ТЗ ок?"><bpmn:incoming>flow-2</bpmn:incoming><bpmn:outgoing>flow-3</bpmn:outgoing><bpmn:outgoing>flow-4</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:intermediateCatchEvent id="catch-ozhiv" name="Ролики дня оживлены (из процесса 1)"><bpmn:incoming>flow-3</bpmn:incoming><bpmn:incoming>flow-18</bpmn:incoming><bpmn:outgoing>flow-5</bpmn:outgoing><bpmn:timerEventDefinition id="timer-catch-ozhiv" /></bpmn:intermediateCatchEvent>
+<bpmn:userTask id="task-papka" name="Положить исходники, рефы и ТЗ в папку дня (до 12:00; сейчас в Телеграм)"><bpmn:incoming>flow-5</bpmn:incoming><bpmn:outgoing>flow-6</bpmn:outgoing></bpmn:userTask>
+<bpmn:intermediateCatchEvent id="catch-12" name="12:00, папка пустая (таймер)"><bpmn:outgoing>flow-7</bpmn:outgoing><bpmn:timerEventDefinition id="timer-catch-12" /></bpmn:intermediateCatchEvent>
+<bpmn:userTask id="task-doslat" name="Дослать исходники самой (Настя отвечает за Ксюшу)"><bpmn:incoming>flow-7</bpmn:incoming><bpmn:outgoing>flow-8</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="task-montazh" name="Смонтировать по ТЗ (субтитры, вставки, обложка)"><bpmn:incoming>flow-6</bpmn:incoming><bpmn:incoming>flow-8</bpmn:incoming><bpmn:incoming>flow-13</bpmn:incoming><bpmn:outgoing>flow-9</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="task-v-papku" name="Положить готовые видео в папку месяца (сейчас шлет в рабочий чат)"><bpmn:incoming>flow-9</bpmn:incoming><bpmn:outgoing>flow-10</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="task-priemka-mont" name="Принять монтаж и обложку (сейчас не всегда, правки задним числом)"><bpmn:incoming>flow-10</bpmn:incoming><bpmn:outgoing>flow-11</bpmn:outgoing></bpmn:userTask>
+<bpmn:exclusiveGateway id="gw-mont" name="Ок?"><bpmn:incoming>flow-11</bpmn:incoming><bpmn:outgoing>flow-12</bpmn:outgoing><bpmn:outgoing>flow-13</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:userTask id="task-vylozhit" name="Скачать из папки и выложить (1 аккаунт = 1 устройство)"><bpmn:incoming>flow-12</bpmn:incoming><bpmn:outgoing>flow-14</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="task-otchet" name="Отчет к 19:00: дата, клиент, сколько, ссылка (сейчас бывает к полуночи)"><bpmn:incoming>flow-14</bpmn:incoming><bpmn:outgoing>flow-15</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="task-galochki" name="Сверить файлы и поставить галочки («смонтировано» и «выложено»)"><bpmn:incoming>flow-15</bpmn:incoming><bpmn:outgoing>flow-16</bpmn:outgoing></bpmn:userTask>
+<bpmn:exclusiveGateway id="gw-plan" name="План месяца закрыт?"><bpmn:incoming>flow-16</bpmn:incoming><bpmn:outgoing>flow-17</bpmn:outgoing><bpmn:outgoing>flow-18</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:userTask id="task-kontrol" name="Сверить объем по договору (таблица клиента, отчет клиенту)"><bpmn:incoming>flow-17</bpmn:incoming><bpmn:outgoing>flow-19</bpmn:outgoing></bpmn:userTask>
+<bpmn:endEvent id="end-mont" name="Объем месяца выложен"><bpmn:incoming>flow-19</bpmn:incoming></bpmn:endEvent>
+<bpmn:sequenceFlow id="flow-0" sourceRef="start-scen" targetRef="task-tz-mont" />
+<bpmn:sequenceFlow id="flow-1" sourceRef="task-tz-mont" targetRef="task-ok-tz" />
+<bpmn:sequenceFlow id="flow-2" sourceRef="task-ok-tz" targetRef="gw-tz" />
+<bpmn:sequenceFlow id="flow-3" name="да" sourceRef="gw-tz" targetRef="catch-ozhiv" />
+<bpmn:sequenceFlow id="flow-4" name="правки" sourceRef="gw-tz" targetRef="task-tz-mont" />
+<bpmn:sequenceFlow id="flow-5" sourceRef="catch-ozhiv" targetRef="task-papka" />
+<bpmn:sequenceFlow id="flow-6" sourceRef="task-papka" targetRef="task-montazh" />
+<bpmn:sequenceFlow id="flow-7" sourceRef="catch-12" targetRef="task-doslat" />
+<bpmn:sequenceFlow id="flow-8" name="исходники" sourceRef="task-doslat" targetRef="task-montazh" />
+<bpmn:sequenceFlow id="flow-9" sourceRef="task-montazh" targetRef="task-v-papku" />
+<bpmn:sequenceFlow id="flow-10" sourceRef="task-v-papku" targetRef="task-priemka-mont" />
+<bpmn:sequenceFlow id="flow-11" sourceRef="task-priemka-mont" targetRef="gw-mont" />
+<bpmn:sequenceFlow id="flow-12" name="да" sourceRef="gw-mont" targetRef="task-vylozhit" />
+<bpmn:sequenceFlow id="flow-13" name="правки" sourceRef="gw-mont" targetRef="task-montazh" />
+<bpmn:sequenceFlow id="flow-14" sourceRef="task-vylozhit" targetRef="task-otchet" />
+<bpmn:sequenceFlow id="flow-15" sourceRef="task-otchet" targetRef="task-galochki" />
+<bpmn:sequenceFlow id="flow-16" sourceRef="task-galochki" targetRef="gw-plan" />
+<bpmn:sequenceFlow id="flow-17" name="да" sourceRef="gw-plan" targetRef="task-kontrol" />
+<bpmn:sequenceFlow id="flow-18" name="нет, следующий день" sourceRef="gw-plan" targetRef="catch-ozhiv" />
+<bpmn:sequenceFlow id="flow-19" sourceRef="task-kontrol" targetRef="end-mont" />
+</bpmn:process>
+<bpmndi:BPMNDiagram id="diagram-montazh">
+<bpmndi:BPMNPlane id="plane-montazh" bpmnElement="collab-montazh">
+<bpmndi:BPMNShape id="pool-salescast_di" bpmnElement="pool-salescast" isHorizontal="true"><dc:Bounds x="0" y="8" width="3030" height="816" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-andrei_di" bpmnElement="lane-andrei" isHorizontal="true"><dc:Bounds x="34" y="8" width="2996" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-sofia_di" bpmnElement="lane-sofia" isHorizontal="true"><dc:Bounds x="34" y="144" width="2996" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-nastya_di" bpmnElement="lane-nastya" isHorizontal="true"><dc:Bounds x="34" y="280" width="2996" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-ksyusha_di" bpmnElement="lane-ksyusha" isHorizontal="true"><dc:Bounds x="34" y="416" width="2996" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-kirill_di" bpmnElement="lane-kirill" isHorizontal="true"><dc:Bounds x="34" y="552" width="2996" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-pub_di" bpmnElement="lane-pub" isHorizontal="true"><dc:Bounds x="34" y="688" width="2996" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="start-scen_di" bpmnElement="start-scen"><dc:Bounds x="124" y="329" width="38" height="38" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-tz-mont_di" bpmnElement="task-tz-mont"><dc:Bounds x="236" y="311" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-ok-tz_di" bpmnElement="task-ok-tz"><dc:Bounds x="398" y="175" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="gw-tz_di" bpmnElement="gw-tz"><dc:Bounds x="606" y="189" width="46" height="46" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="catch-ozhiv_di" bpmnElement="catch-ozhiv"><dc:Bounds x="772" y="465" width="38" height="38" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-papka_di" bpmnElement="task-papka"><dc:Bounds x="884" y="447" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="catch-12_di" bpmnElement="catch-12"><dc:Bounds x="1096" y="329" width="38" height="38" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-doslat_di" bpmnElement="task-doslat"><dc:Bounds x="1208" y="311" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-montazh_di" bpmnElement="task-montazh"><dc:Bounds x="1370" y="583" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-v-papku_di" bpmnElement="task-v-papku"><dc:Bounds x="1532" y="583" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-priemka-mont_di" bpmnElement="task-priemka-mont"><dc:Bounds x="1694" y="175" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="gw-mont_di" bpmnElement="gw-mont"><dc:Bounds x="1902" y="189" width="46" height="46" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-vylozhit_di" bpmnElement="task-vylozhit"><dc:Bounds x="2018" y="719" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-otchet_di" bpmnElement="task-otchet"><dc:Bounds x="2180" y="719" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-galochki_di" bpmnElement="task-galochki"><dc:Bounds x="2342" y="311" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="gw-plan_di" bpmnElement="gw-plan"><dc:Bounds x="2550" y="325" width="46" height="46" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="task-kontrol_di" bpmnElement="task-kontrol"><dc:Bounds x="2666" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="end-mont_di" bpmnElement="end-mont"><dc:Bounds x="2878" y="57" width="38" height="38" /></bpmndi:BPMNShape>
+<bpmndi:BPMNEdge id="flow-0_di" bpmnElement="flow-0"><di:waypoint x="162" y="348" /><di:waypoint x="236" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-1_di" bpmnElement="flow-1"><di:waypoint x="374" y="348" /><di:waypoint x="386" y="348" /><di:waypoint x="386" y="212" /><di:waypoint x="398" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-2_di" bpmnElement="flow-2"><di:waypoint x="536" y="212" /><di:waypoint x="606" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-3_di" bpmnElement="flow-3"><di:waypoint x="652" y="212" /><di:waypoint x="712" y="212" /><di:waypoint x="712" y="484" /><di:waypoint x="772" y="484" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-4_di" bpmnElement="flow-4"><di:waypoint x="629" y="235" /><di:waypoint x="629" y="847" /><di:waypoint x="305" y="847" /><di:waypoint x="305" y="385" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-5_di" bpmnElement="flow-5"><di:waypoint x="810" y="484" /><di:waypoint x="884" y="484" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-6_di" bpmnElement="flow-6"><di:waypoint x="1022" y="484" /><di:waypoint x="1196" y="484" /><di:waypoint x="1196" y="620" /><di:waypoint x="1370" y="620" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-7_di" bpmnElement="flow-7"><di:waypoint x="1134" y="348" /><di:waypoint x="1208" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-8_di" bpmnElement="flow-8"><di:waypoint x="1346" y="348" /><di:waypoint x="1358" y="348" /><di:waypoint x="1358" y="620" /><di:waypoint x="1370" y="620" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-9_di" bpmnElement="flow-9"><di:waypoint x="1508" y="620" /><di:waypoint x="1532" y="620" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-10_di" bpmnElement="flow-10"><di:waypoint x="1670" y="620" /><di:waypoint x="1682" y="620" /><di:waypoint x="1682" y="212" /><di:waypoint x="1694" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-11_di" bpmnElement="flow-11"><di:waypoint x="1832" y="212" /><di:waypoint x="1902" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-12_di" bpmnElement="flow-12"><di:waypoint x="1948" y="212" /><di:waypoint x="1983" y="212" /><di:waypoint x="1983" y="756" /><di:waypoint x="2018" y="756" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-13_di" bpmnElement="flow-13"><di:waypoint x="1925" y="235" /><di:waypoint x="1925" y="858" /><di:waypoint x="1439" y="858" /><di:waypoint x="1439" y="657" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-14_di" bpmnElement="flow-14"><di:waypoint x="2156" y="756" /><di:waypoint x="2180" y="756" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-15_di" bpmnElement="flow-15"><di:waypoint x="2318" y="756" /><di:waypoint x="2330" y="756" /><di:waypoint x="2330" y="348" /><di:waypoint x="2342" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-16_di" bpmnElement="flow-16"><di:waypoint x="2480" y="348" /><di:waypoint x="2550" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-17_di" bpmnElement="flow-17"><di:waypoint x="2596" y="348" /><di:waypoint x="2631" y="348" /><di:waypoint x="2631" y="76" /><di:waypoint x="2666" y="76" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-18_di" bpmnElement="flow-18"><di:waypoint x="2573" y="371" /><di:waypoint x="2573" y="869" /><di:waypoint x="791" y="869" /><di:waypoint x="791" y="503" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-19_di" bpmnElement="flow-19"><di:waypoint x="2804" y="76" /><di:waypoint x="2878" y="76" /></bpmndi:BPMNEdge>
+</bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

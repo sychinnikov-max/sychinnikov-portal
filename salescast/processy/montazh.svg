@@ -1,0 +1,174 @@
+<svg viewBox="0 0 3030 878" width="3030" height="878" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, -apple-system, system-ui, sans-serif" role="img">
+<defs>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 z" fill="#77706A"/></marker>
+<marker id="arrM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 z" fill="#8C8177"/></marker>
+</defs>
+<rect x="0" y="0" width="3030" height="878" fill="#FDFBF7"/>
+<rect x="0" y="8" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="8" width="34" height="136" fill="#E6F0ED" stroke="#E1D7C8"/>
+<text transform="translate(21.0,76.0) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="600" fill="#12665A">Андрей · управление</text>
+<rect x="0" y="144" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="144" width="34" height="136" fill="#FDF3E2" stroke="#E1D7C8"/>
+<text transform="translate(21.0,212.0) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="600" fill="#8A5A0F">София · качество</text>
+<rect x="0" y="280" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="280" width="34" height="136" fill="#FFFFFF" stroke="#E1D7C8"/>
+<text transform="translate(21.0,348.0) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="600" fill="#3A342D">Настя · производство</text>
+<rect x="0" y="416" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="416" width="34" height="136" fill="#EEF1F7" stroke="#E1D7C8"/>
+<text transform="translate(21.0,484.0) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="600" fill="#3B5470">Ксюша · оживление</text>
+<rect x="0" y="552" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="552" width="34" height="136" fill="#F2F0F5" stroke="#E1D7C8"/>
+<text transform="translate(21.0,620.0) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="600" fill="#544566">Кирилл · монтаж</text>
+<rect x="0" y="688" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="688" width="34" height="136" fill="#F1F5EC" stroke="#E1D7C8"/>
+<text transform="translate(21.0,756.0) rotate(-90)" text-anchor="middle" font-size="10.5" font-weight="600" fill="#4A6339">Публикатор · выкладка</text>
+<path d="M162 348 L236 348" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M374 348 L386 348 L386 212 L398 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M536 212 L606 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M652 212 L712 212 L712 484 L772 484" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<rect x="749" y="469" width="19" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="759" y="478" text-anchor="middle" font-size="8.8" fill="#8C8177">да</text>
+<path d="M629 235 L629 847 L305 847 L305 385" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<rect x="635" y="244" width="40" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="655" y="253" text-anchor="middle" font-size="8.8" fill="#8C8177">правки</text>
+<path d="M810 484 L884 484" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1022 484 L1196 484 L1196 620 L1370 620" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1134 348 L1208 348" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1346 348 L1358 348 L1358 620 L1370 620" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<rect x="1309" y="605" width="57" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="1338" y="614" text-anchor="middle" font-size="8.8" fill="#8C8177">исходники</text>
+<path d="M1508 620 L1532 620" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1670 620 L1682 620 L1682 212 L1694 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1832 212 L1902 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1948 212 L1983 212 L1983 756 L2018 756" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<rect x="1995" y="741" width="19" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="2005" y="750" text-anchor="middle" font-size="8.8" fill="#8C8177">да</text>
+<path d="M1925 235 L1925 858 L1439 858 L1439 657" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<rect x="1931" y="244" width="40" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="1951" y="253" text-anchor="middle" font-size="8.8" fill="#8C8177">правки</text>
+<path d="M2156 756 L2180 756" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2318 756 L2330 756 L2330 348 L2342 348" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2480 348 L2550 348" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2596 348 L2631 348 L2631 76 L2666 76" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<rect x="2643" y="61" width="19" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="2653" y="70" text-anchor="middle" font-size="8.8" fill="#8C8177">да</text>
+<path d="M2573 371 L2573 869 L791 869 L791 503" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<rect x="2544" y="380" width="111" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="2599" y="389" text-anchor="middle" font-size="8.8" fill="#8C8177">нет, следующий день</text>
+<path d="M2804 76 L2878 76" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<circle cx="143" cy="348" r="19" fill="#fff" stroke="#2F6F4F" stroke-width="1.8"/>
+<text x="143" y="380" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">Сценарии пачки</text>
+<text x="143" y="391" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">утверждены</text>
+<text x="143" y="402" text-anchor="middle" font-size="8.3" fill="#8C8177">из процесса 2</text>
+<g class="nd" data-id="task-tz-mont">
+<rect x="236" y="311" width="138" height="74" rx="9" fill="#FFFFFF" stroke="#B9AC99" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="305" y="345" text-anchor="middle" font-size="10.6" fill="#3A342D" font-weight="500">Написать ТЗ на</text>
+<text x="305" y="358" text-anchor="middle" font-size="10.6" fill="#3A342D" font-weight="500">монтаж в таблице</text>
+<text x="305" y="397" text-anchor="middle" font-size="8.6" fill="#8C8177">по референсу; сейчас</text>
+<text x="305" y="406" text-anchor="middle" font-size="8.6" fill="#8C8177">только Лувира</text>
+<circle cx="365" cy="320" r="7.5" fill="#12665A"/>
+<text x="365" y="324" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<g class="nd" data-id="task-ok-tz">
+<rect x="398" y="175" width="138" height="74" rx="9" fill="#FDF3E2" stroke="#C08417" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="467" y="209" text-anchor="middle" font-size="10.6" fill="#8A5A0F" font-weight="500">Утвердить ТЗ на</text>
+<text x="467" y="222" text-anchor="middle" font-size="10.6" fill="#8A5A0F" font-weight="500">монтаж галочкой</text>
+<text x="467" y="261" text-anchor="middle" font-size="8.6" fill="#8C8177">ждет да Софии</text>
+<circle cx="527" cy="184" r="7.5" fill="#12665A"/>
+<text x="527" y="188" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<polygon points="629,189 652,212 629,235 606,212" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M622 205 L636 219 M636 205 L622 219" stroke="#5D554C" stroke-width="1.8"/>
+<text x="629" y="183" text-anchor="middle" font-size="9.4" fill="#5D554C">ТЗ ок?</text>
+<circle cx="791" cy="484" r="19" fill="#fff" stroke="#4A6485" stroke-width="1.6"/>
+<circle cx="791" cy="484" r="15" fill="none" stroke="#4A6485" stroke-width="1.2"/>
+<text x="791" y="516" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">Ролики дня</text>
+<text x="791" y="527" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">оживлены</text>
+<text x="791" y="538" text-anchor="middle" font-size="8.3" fill="#8C8177">из процесса 1</text>
+<g class="nd" data-id="task-papka">
+<rect x="884" y="447" width="138" height="74" rx="9" fill="#EEF1F7" stroke="#4A6485" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="953" y="474" text-anchor="middle" font-size="10.6" fill="#3B5470" font-weight="500">Положить исходники,</text>
+<text x="953" y="488" text-anchor="middle" font-size="10.6" fill="#3B5470" font-weight="500">рефы и ТЗ в папку</text>
+<text x="953" y="500" text-anchor="middle" font-size="10.6" fill="#3B5470" font-weight="500">дня</text>
+<text x="953" y="533" text-anchor="middle" font-size="8.6" fill="#8C8177">до 12:00; сейчас в</text>
+<text x="953" y="542" text-anchor="middle" font-size="8.6" fill="#8C8177">Телеграм</text>
+<circle cx="1013" cy="456" r="7.5" fill="#12665A"/>
+<text x="1013" y="460" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<circle cx="1115" cy="348" r="19" fill="#fff" stroke="#B9AC99" stroke-width="1.6"/>
+<circle cx="1115" cy="348" r="15" fill="none" stroke="#B9AC99" stroke-width="1.2"/>
+<text x="1115" y="380" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">12:00, папка</text>
+<text x="1115" y="391" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">пустая</text>
+<text x="1115" y="402" text-anchor="middle" font-size="8.3" fill="#8C8177">таймер</text>
+<g class="nd" data-id="task-doslat">
+<rect x="1208" y="311" width="138" height="74" rx="9" fill="#FFFFFF" stroke="#B9AC99" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="1277" y="345" text-anchor="middle" font-size="10.6" fill="#3A342D" font-weight="500">Дослать исходники</text>
+<text x="1277" y="358" text-anchor="middle" font-size="10.6" fill="#3A342D" font-weight="500">самой</text>
+<text x="1277" y="397" text-anchor="middle" font-size="8.6" fill="#8C8177">Настя отвечает за Ксюшу</text>
+<circle cx="1337" cy="320" r="7.5" fill="#12665A"/>
+<text x="1337" y="324" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<g class="nd" data-id="task-montazh">
+<rect x="1370" y="583" width="138" height="74" rx="9" fill="#F2F0F5" stroke="#6B5F7A" stroke-width="1.3"/>
+<text x="1439" y="624" text-anchor="middle" font-size="10.6" fill="#544566" font-weight="500">Смонтировать по ТЗ</text>
+<text x="1439" y="669" text-anchor="middle" font-size="8.6" fill="#8C8177">субтитры, вставки, обложка</text>
+</g>
+<g class="nd" data-id="task-v-papku">
+<rect x="1532" y="583" width="138" height="74" rx="9" fill="#F2F0F5" stroke="#6B5F7A" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="1601" y="617" text-anchor="middle" font-size="10.6" fill="#544566" font-weight="500">Положить готовые</text>
+<text x="1601" y="630" text-anchor="middle" font-size="10.6" fill="#544566" font-weight="500">видео в папку месяца</text>
+<text x="1601" y="669" text-anchor="middle" font-size="8.6" fill="#8C8177">сейчас шлет в рабочий чат</text>
+<circle cx="1661" cy="592" r="7.5" fill="#12665A"/>
+<text x="1661" y="596" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<g class="nd" data-id="task-priemka-mont">
+<rect x="1694" y="175" width="138" height="74" rx="9" fill="#FDF3E2" stroke="#C0392B" stroke-width="1.6"/>
+<text x="1763" y="209" text-anchor="middle" font-size="10.6" fill="#8A5A0F" font-weight="500">Принять монтаж и</text>
+<text x="1763" y="222" text-anchor="middle" font-size="10.6" fill="#8A5A0F" font-weight="500">обложку</text>
+<text x="1763" y="261" text-anchor="middle" font-size="8.6" fill="#8C8177">сейчас не всегда, правки</text>
+<text x="1763" y="270" text-anchor="middle" font-size="8.6" fill="#8C8177">задним числом</text>
+</g>
+<polygon points="1925,189 1948,212 1925,235 1902,212" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M1918 205 L1932 219 M1932 205 L1918 219" stroke="#5D554C" stroke-width="1.8"/>
+<text x="1925" y="183" text-anchor="middle" font-size="9.4" fill="#5D554C">Ок?</text>
+<g class="nd" data-id="task-vylozhit">
+<rect x="2018" y="719" width="138" height="74" rx="9" fill="#F1F5EC" stroke="#5E7B4A" stroke-width="1.3"/>
+<text x="2087" y="753" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">Скачать из папки и</text>
+<text x="2087" y="766" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">выложить</text>
+<text x="2087" y="805" text-anchor="middle" font-size="8.6" fill="#8C8177">1 аккаунт = 1 устройство</text>
+</g>
+<g class="nd" data-id="task-otchet">
+<rect x="2180" y="719" width="138" height="74" rx="9" fill="#F1F5EC" stroke="#5E7B4A" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="2249" y="746" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">Отчет к 19:00: дата,</text>
+<text x="2249" y="760" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">клиент, сколько,</text>
+<text x="2249" y="772" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">ссылка</text>
+<text x="2249" y="805" text-anchor="middle" font-size="8.6" fill="#8C8177">сейчас бывает к полуночи</text>
+<circle cx="2309" cy="728" r="7.5" fill="#12665A"/>
+<text x="2309" y="732" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<g class="nd" data-id="task-galochki">
+<rect x="2342" y="311" width="138" height="74" rx="9" fill="#FFFFFF" stroke="#B9AC99" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="2411" y="345" text-anchor="middle" font-size="10.6" fill="#3A342D" font-weight="500">Сверить файлы и</text>
+<text x="2411" y="358" text-anchor="middle" font-size="10.6" fill="#3A342D" font-weight="500">поставить галочки</text>
+<text x="2411" y="397" text-anchor="middle" font-size="8.6" fill="#8C8177">«смонтировано» и</text>
+<text x="2411" y="406" text-anchor="middle" font-size="8.6" fill="#8C8177">«выложено»</text>
+<circle cx="2471" cy="320" r="7.5" fill="#12665A"/>
+<text x="2471" y="324" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<polygon points="2573,325 2596,348 2573,371 2550,348" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M2566 341 L2580 355 M2580 341 L2566 355" stroke="#5D554C" stroke-width="1.8"/>
+<text x="2573" y="309" text-anchor="middle" font-size="9.4" fill="#5D554C">План месяца</text>
+<text x="2573" y="319" text-anchor="middle" font-size="9.4" fill="#5D554C">закрыт?</text>
+<g class="nd" data-id="task-kontrol">
+<rect x="2666" y="39" width="138" height="74" rx="9" fill="#E6F0ED" stroke="#12665A" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="2735" y="73" text-anchor="middle" font-size="10.6" fill="#12665A" font-weight="500">Сверить объем по</text>
+<text x="2735" y="86" text-anchor="middle" font-size="10.6" fill="#12665A" font-weight="500">договору</text>
+<text x="2735" y="125" text-anchor="middle" font-size="8.6" fill="#8C8177">таблица клиента, отчет</text>
+<text x="2735" y="134" text-anchor="middle" font-size="8.6" fill="#8C8177">клиенту</text>
+<circle cx="2795" cy="48" r="7.5" fill="#12665A"/>
+<text x="2795" y="52" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<circle cx="2897" cy="76" r="19" fill="#fff" stroke="#9B2C2C" stroke-width="3.2"/>
+<text x="2897" y="108" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">Объем месяца</text>
+<text x="2897" y="119" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">выложен</text>
+</svg>
