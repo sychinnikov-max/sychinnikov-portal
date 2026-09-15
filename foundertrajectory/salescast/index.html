@@ -376,6 +376,86 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
 .rv{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease}
 .rv.in{opacity:1; transform:none}
 @media(prefers-reduced-motion:reduce){ .rv{opacity:1; transform:none} }
+
+/* мобильная версия: короче, десктоп не трогаем */
+@media(min-width:761px){ .m-only{display:none!important} }
+@media(max-width:760px){ .d-only{display:none!important} }
+.vsm{margin-top:18px; border:1px solid var(--line); border-radius:18px; overflow:hidden; background:var(--surface); box-shadow:var(--sh)}
+.vsm-h, .vsm-r{display:grid; grid-template-columns:27% 34% 39%}
+.vsm-h > *, .vsm-r > *{padding:10px 9px; font-size:13px; line-height:1.3}
+.vsm-h{background:var(--sunk)}
+.vsm-h b{font:700 12px/1.2 "Unbounded",sans-serif; letter-spacing:-.01em}
+.vsm-h b.us{background:var(--deep); color:#fff}
+.vsm-r{border-top:1px solid #EFECE3}
+.vsm-r .t{font-weight:600; color:var(--ink)}
+.vsm-r .n{color:var(--muted)}
+.vsm-r .y{background:var(--deep); color:#fff; font-weight:600; border-top:1px solid var(--deep-line); margin-top:-1px}
+@media(max-width:760px){
+  section{padding-top:34px; padding-bottom:34px}
+  h2{font-size:25px; margin-bottom:8px}
+  .rv{opacity:1; transform:none}
+  /* первый экран */
+  .hero .hint{display:none}
+  .feed{height:34vh}
+  .hero-stats{margin-top:16px; padding-top:14px}
+  /* зачем и как работаем: заголовок и цифра */
+  #zachem .card > p, #kak .card > p{display:none}
+  .tiles{row-gap:10px !important; margin-top:18px !important}
+  .tiles .card{display:block !important; margin-bottom:0 !important; padding:16px}
+  .cic{width:34px; height:34px; border-radius:10px; margin-bottom:10px}
+  .cic .ic{width:18px; height:18px}
+  .tiles .card h3{font-size:16px; margin-bottom:0}
+  .kpi{margin-top:10px; padding-top:10px}
+  .kpi b{font-size:20px}
+  .kpi span{font-size:13px}
+  #kak .tiles{grid-template-columns:1fr 1fr !important; gap:10px}
+  #kak .card h3{font-size:14px}
+  #kak .kpi small{display:none}
+  #kak .rule p{display:none}
+  #kak .rule h3{font-size:17px !important; margin:0}
+  #kak .rule > div + div p:first-child{display:block; margin:0 !important}
+  #kak .card[style]{padding:14px 16px}
+  /* кейсы: карусель, без описаний */
+  #keysy > .wrap > .lead{display:none}
+  .cases{grid-template-columns:none !important; grid-auto-flow:column; grid-auto-columns:86%; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:12px; padding-bottom:6px; margin-top:16px !important}
+  .case{scroll-snap-align:start; padding:14px}
+  .case-desc, .case-open{display:none}
+  .shots{grid-template-columns:1fr; margin-bottom:12px}
+  .shots img + img{display:none}
+  .shots img, .shots.one img{max-height:190px; width:100%; max-width:none; object-fit:cover; object-position:top center}
+  .case-head{margin-bottom:10px}
+  .case-row{margin-bottom:10px}
+  .case-row b{font-size:15px}
+  /* персонажи */
+  .reel-note ul{display:none}
+  .reel-note h3{display:none}
+  .reel-stat{margin-bottom:14px}
+  .experts-h{margin-top:30px; margin-bottom:14px}
+  .experts-h p{display:none}
+  /* что входит: карусель без списков */
+  #sostav{padding-top:34px; padding-bottom:34px}
+  .pin-lead{display:none}
+  .pin-view{grid-auto-flow:column; grid-auto-columns:84%; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:12px; padding-bottom:6px; margin-top:14px}
+  .pin-card{scroll-snap-align:start; padding:20px}
+  .pc-list{display:none}
+  .pc-big{font-size:90px; bottom:-16px}
+  .pin-card h3{font-size:22px}
+  .pin-card p{margin:0}
+  /* сравнение */
+  #sravnenie .lead{display:none}
+  /* кому подходит: заголовки */
+  .dirs{gap:10px !important; margin-top:16px !important}
+  .dir{padding:16px}
+  .dir ul{display:none}
+  .dir .tag{margin-bottom:8px}
+  .dirs.three .dir h3{font-size:17px !important; margin:0}
+  #komu .card{margin-top:12px !important; padding:16px}
+  /* цены и подбор */
+  #ceny .lead, #ceny .ticks{display:none}
+  .mg-list{display:none}
+  .magnet .lead{font-size:15px}
+  details{padding:13px 14px; margin-bottom:8px}
+}
 </style>
 </head>
 <body>
@@ -702,7 +782,7 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
     <p class="kicker">Сравнение</p>
     <h2>UGC-креаторы или сетка персонажей</h2>
     <p class="lead">Сравнили по шести пунктам: кто делает работу и что будет после залета.</p>
-    <div class="vs rv">
+    <div class="vs rv d-only">
       <div class="vs-head">
         <div class="vs-col them"><span class="vs-ic"><svg class="ic"><use href="#i-video"/></svg></span><b>Живые UGC-креаторы</b><span class="sub">ролик под заказ</span></div>
         <div class="vs-mid"><span class="vs-badge">VS</span></div>
@@ -738,6 +818,15 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
         <div class="vs-topic"><span class="ti"><svg class="ic"><use href="#i-chart"/></svg></span><b>Результат</b></div>
         <div class="vs-cell us" data-l="Salescast"><span class="mk"><svg class="ic"><use href="#i-check"/></svg></span>Кодовые слова и отчет по заявкам</div>
       </div>
+    </div>
+    <div class="vsm m-only">
+      <div class="vsm-h"><span></span><b>Креаторы</b><b class="us">Salescast</b></div>
+      <div class="vsm-r"><span class="t">Поиск людей</span><span class="n">Ищете сами</span><span class="y">5 персонажей сразу</span></div>
+      <div class="vsm-r"><span class="t">Сценарии</span><span class="n">Пишете сами</span><span class="y">По залетевшим роликам</span></div>
+      <div class="vsm-r"><span class="t">После залета</span><span class="n">Поднимают ставку</span><span class="y">Не торгуется и не уходит</span></div>
+      <div class="vsm-r"><span class="t">Аккаунты</span><span class="n">Ведете сами</span><span class="y">Заводим и ведем мы</span></div>
+      <div class="vsm-r"><span class="t">Сроки</span><span class="n">По графику креатора</span><span class="y">Публикации через 14 дней</span></div>
+      <div class="vsm-r"><span class="t">Результат</span><span class="n">Считаете сами</span><span class="y">Отчет по кодовым словам</span></div>
     </div>
   </div>
 </section>
@@ -975,7 +1064,7 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
 })();
 (function(){
   /* цифры отсчитываются, когда появляются на экране, и заново при каждом возвращении */
-  var els=document.querySelectorAll('.hero-stats b, .kpi b, .metrics b, .reel-stat b');
+  var els=document.querySelectorAll('.hero-stats b');
   if(!els.length) return;
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var RE=/\d(?:[\d \u00a0]*\d)?(?:,\d+)?/g;
