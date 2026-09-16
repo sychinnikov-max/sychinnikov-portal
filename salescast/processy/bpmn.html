@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Salescast — схема в редакторе BPMN</title>
+<title>Salescast: схема в редакторе BPMN</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bpmn-js@18.28.0/dist/assets/diagram-js.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bpmn-js@18.28.0/dist/assets/bpmn-js.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bpmn-js@18.28.0/dist/assets/bpmn-font/css/bpmn-embedded.css">
@@ -41,6 +41,7 @@ main{position:relative;flex:1;min-height:0}
 .hint{padding:7px 16px;font-size:12.5px;color:var(--ink3);background:var(--card);border-top:1px solid var(--line)}
 .hint b{color:var(--ink2);font-weight:500}
 .hint.dirty b{color:var(--acc)}
+@media(max-width:600px){.bar{gap:8px;padding:8px 10px}.tabs a{padding:4px 8px;font-size:12.5px}.tools{margin-left:0}}
 </style>
 </head>
 <body>
@@ -48,9 +49,14 @@ main{position:relative;flex:1;min-height:0}
 <header class="bar">
   <a class="back" href="./">← Процессы</a>
   <nav class="tabs">
-    <a data-f="model" href="?f=model">1. Модель и голос</a>
-    <a data-f="scenariy" href="?f=scenariy">2. Сценарий</a>
-    <a data-f="montazh" href="?f=montazh">3. Монтаж и выкладка</a>
+    <a data-f="prodazha" href="?f=prodazha">0. Продажа</a>
+    <a data-f="start" href="?f=start">1. Старт</a>
+    <a data-f="model" href="?f=model">2. Модель</a>
+    <a data-f="scenariy" href="?f=scenariy">3. Сценарий</a>
+    <a data-f="iskhodniki" href="?f=iskhodniki">4. Исходники</a>
+    <a data-f="montazh" href="?f=montazh">5. Монтаж</a>
+    <a data-f="vykladka" href="?f=vykladka">6. Выкладка</a>
+    <a data-f="prodlenie" href="?f=prodlenie">7. Продление</a>
   </nav>
   <div class="tools">
     <span id="zoom"></span>
@@ -71,13 +77,18 @@ main{position:relative;flex:1;min-height:0}
 <script src="https://cdn.jsdelivr.net/npm/bpmn-js@18.28.0/dist/bpmn-modeler.production.min.js"></script>
 <script>
 var FILES = {
-  model:    'Процесс 1. Модель и голос',
-  scenariy: 'Процесс 2. Сценарий',
-  montazh:  'Процесс 3. Монтаж и выкладка'
+  prodazha:   'Процесс 0. Продажа и договор',
+  start:      'Процесс 1. Старт работы с новым клиентом',
+  model:      'Процесс 2. Модель и голос',
+  scenariy:   'Процесс 3. Сценарий',
+  iskhodniki: 'Процесс 4. Исходники',
+  montazh:    'Процесс 5. Монтаж',
+  vykladka:   'Процесс 6. Выкладка',
+  prodlenie:  'Процесс 7. Отчет, закрытие и продление'
 };
 var f = new URLSearchParams(location.search).get('f');
-if (!FILES[f]) f = 'model';
-document.title = 'Salescast — ' + FILES[f];
+if (!FILES[f]) f = 'prodazha';
+document.title = 'Salescast: ' + FILES[f];
 document.querySelectorAll('.tabs a').forEach(function(a){ if (a.dataset.f === f) a.classList.add('on'); });
 
 var msg = document.getElementById('msg'), hint = document.getElementById('hint'),
@@ -116,7 +127,7 @@ if (typeof BpmnJS === 'undefined') {
     document.getElementById('save').textContent = 'Скачать .bpmn с правками';
   });
 
-  fetch(f + '.bpmn?v=0911', { credentials: 'same-origin' })
+  fetch(f + '.bpmn?v=0916', { credentials: 'same-origin' })
     .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
     .then(function(xml){ return modeler.importXML(xml); })
     .then(function(){ msg.hidden = true; startView(); showZoom(); })

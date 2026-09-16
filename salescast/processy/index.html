@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Salescast — бизнес-процессы</title>
+<title>Salescast: бизнес-процессы</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:68px}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6}
 .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
 a{color:inherit}
@@ -34,21 +34,26 @@ header.hd{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.93);back
 .brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
 .brand .mark{width:19px;height:19px;flex:0 0 19px}
 .hd nav{display:flex;gap:16px;margin-left:auto;font-size:13.5px}
-.hd nav a{color:var(--ink2);text-decoration:none}
+.hd nav a{color:var(--ink2);text-decoration:none;white-space:nowrap}
 .hd nav a:hover{color:var(--acc)}
 
 .hero{padding:44px 0 28px;border-bottom:1px solid var(--line)}
 .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
-h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4vw,40px);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em}
 .lead{font-size:17px;color:var(--ink2);max-width:70ch;margin:0 0 22px}
 .src{display:flex;flex-wrap:wrap;gap:8px}
 .src span{font-family:var(--mono);font-size:11.4px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:5px 10px;color:var(--ink3)}
 .src span.nw{border-color:#CBDFDA;color:var(--teal);background:var(--teal-soft)}
+.jump{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 0}
+.jump a{font-size:13px;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 11px;color:var(--ink2)}
+.jump a b{font-family:var(--mono);font-weight:500;color:var(--acc);margin-right:5px}
+.jump a:hover{border-color:var(--acc);color:var(--acc)}
 
 section{padding:36px 0}
 section+section{border-top:1px solid var(--line2)}
 h2{font-family:var(--disp);font-weight:600;font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
 .smeta{font-size:13.8px;color:var(--ink3);margin:0 0 22px;max-width:80ch}
+.sub{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin:22px 0 10px}
 
 /* легенда */
 .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:10px}
@@ -56,83 +61,93 @@ h2{font-family:var(--disp);font-weight:600;font-size:22px;margin:0 0 6px;letter-
 .lg .sw{width:26px;height:20px;border-radius:5px;flex:0 0 26px;margin-top:2px;border:1.4px solid}
 .lg .tx{font-size:13.2px;color:var(--ink2);line-height:1.42}
 .lg .tx b{color:var(--ink);display:block;font-size:13.4px}
-.sw.a{background:var(--teal-soft);border-color:var(--teal)}
-.sw.s{background:var(--ochre-soft);border-color:#C08417}
-.sw.n{background:#fff;border-color:#B9AC99}
-.sw.k{background:var(--blue-soft);border-color:var(--blue)}
-.sw.m{background:#F2F0F5;border-color:#6B5F7A}
-.sw.p{background:#F1F5EC;border-color:#5E7B4A}
-.sw.c{background:var(--sunk);border-color:var(--ink3)}
 .sw.new{background:var(--teal-soft);border-color:var(--teal);border-style:dashed}
 .sw.hot{background:var(--ochre-soft);border-color:#C0392B;border-width:2px}
+.sw.ev{background:#fff;border-color:var(--ink3);border-radius:50%;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4.4px var(--ink3)}
+.sw.msg{background:none;border:0;border-top:1.6px dashed var(--ink3);border-radius:0;height:0;margin-top:11px}
+.sw.call{background:#fff;border-color:#B9AC99;position:relative}
+.sw.call::after{content:"→";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink2);line-height:1}
 
 /* карта процессов */
+.cycle{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 18px;font-size:13px;color:var(--ink3)}
+.cycle a{text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--ink2);white-space:nowrap}
+.cycle a:hover{border-color:var(--acc);color:var(--acc)}
+.cycle a.back{background:var(--teal-soft);border-color:#CBDFDA;color:var(--teal)}
 .map{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:11px}
 .mp{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:block;text-decoration:none}
 .mp .zn{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.05em}
 .mp h3{font-family:var(--disp);font-size:15.4px;font-weight:600;margin:5px 0 6px}
-.mp p{margin:0;font-size:13px;color:var(--ink3);line-height:1.45}
-.mp .st{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10.6px;padding:3px 8px;border-radius:5px}
-.st.done{background:var(--ok-soft);color:var(--ok)}
-.st.wait{background:var(--sunk);color:var(--ink3)}
-.st.risk{background:var(--danger-soft);color:var(--danger)}
+.mp p{margin:0 0 4px;font-size:13px;color:var(--ink3);line-height:1.45}
+.mp p b{color:var(--ink2);font-weight:500}
+.mp .st{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:10.6px;padding:3px 8px;border-radius:5px;background:var(--teal-soft);color:var(--teal)}
 .mp.live{border-color:#CBDFDA;box-shadow:0 1px 0 rgba(18,102,90,.06)}
 .mp.live:hover{border-color:var(--teal)}
+.note{font-size:14px;color:var(--ink2);max-width:88ch;margin:16px 0 0}
+.note b{color:var(--ink)}
+
+/* кто что делает */
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:11px;margin:0 0 14px}
+.pc{background:var(--card);border:1px solid var(--line);border-left:4px solid;border-radius:12px;padding:14px 16px}
+.pc h3{font-family:var(--disp);font-size:15.4px;font-weight:600;margin:0 0 6px}
+.pc p{margin:0;font-size:13.8px;color:var(--ink2);line-height:1.5}
+.pc.a{border-left-color:var(--teal)} .pc.a h3{color:var(--teal)}
+.pc.s{border-left-color:#C08417} .pc.s h3{color:#8A5A0F}
+.pc.mg{border-left-color:#9A5B73} .pc.mg h3{color:#7A4459}
 
 /* процесс */
-.proc{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.proc{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .proc>.ph{padding:18px 22px;background:var(--sunk);border-bottom:1px solid var(--line)}
 .ph .zn{font-family:var(--mono);font-size:11px;color:var(--acc);letter-spacing:.06em;text-transform:uppercase}
 .ph h3{font-family:var(--disp);font-size:19px;font-weight:600;margin:6px 0 5px}
-.ph p{margin:0;font-size:13.6px;color:var(--ink2)}
-.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.ph p{margin:0 0 6px;font-size:13.8px;color:var(--ink2);max-width:92ch}
+.ph p b{color:var(--ink)}
+.roles{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .facts span{font-family:var(--mono);font-size:11px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:4px 9px;color:var(--ink2)}
 .facts span b{color:var(--ink)}
 
-.pbody{padding:6px 22px 20px}
-details{border-top:1px solid var(--line2)}
-details>summary{list-style:none;cursor:pointer;padding:14px 0 13px;display:flex;align-items:center;gap:11px;font-size:14.6px;color:var(--ink);font-weight:500}
-details>summary::-webkit-details-marker{display:none}
-details>summary .pm{width:21px;height:21px;flex:0 0 21px;border-radius:6px;border:1px solid var(--line);background:var(--sunk);position:relative}
-details>summary .pm::before,details>summary .pm::after{content:"";position:absolute;background:var(--ink2);left:50%;top:50%;transform:translate(-50%,-50%)}
-details>summary .pm::before{width:9px;height:1.5px}
-details>summary .pm::after{width:1.5px;height:9px;transition:opacity .15s}
-details[open]>summary .pm::after{opacity:0}
-details[open]>summary{color:var(--acc)}
-details[open]>summary .pm{border-color:var(--acc);background:var(--acc-soft)}
-details[open]>summary .pm::before,details[open]>summary .pm::after{background:var(--acc)}
-summary .hint{margin-left:auto;font-family:var(--mono);font-size:10.8px;color:var(--ink3);font-weight:400}
-summary .hint::after{content:"раскрыть"}
-details[open] summary .hint::after{content:"свернуть"}
-.dbody{padding:2px 0 20px 32px;font-size:14.4px;color:var(--ink2);max-width:88ch}
-.dbody h4{font-family:var(--disp);font-size:14.6px;font-weight:600;color:var(--ink);margin:20px 0 8px}
-.dbody h4:first-child{margin-top:4px}
-.dbody p{margin:0 0 11px}
-.dbody ul{margin:0 0 12px;padding-left:19px}
-.dbody li{margin-bottom:6px}
-.dbody b{color:var(--ink)}
-.q{border-left:3px solid var(--ochre);padding:2px 0 2px 13px;color:var(--ink);font-style:italic;margin:0 0 12px}
-.warn{background:var(--danger-soft);border:1px solid #EBD2D2;border-left:4px solid var(--danger);border-radius:10px;padding:12px 16px;font-size:13.8px;color:#7A2626;margin:0 0 13px}
-.fix{background:var(--ok-soft);border:1px solid #CFE0D5;border-left:4px solid var(--ok);border-radius:10px;padding:12px 16px;font-size:13.8px;color:#2B5C43;margin:0 0 13px}
-.upd{background:var(--teal-soft);border:1px solid #CBDFDA;border-left:4px solid var(--teal);border-radius:10px;padding:12px 16px;font-size:13.8px;color:#164C44;margin:0 0 13px}
-.open{background:var(--ochre-soft);border:1px solid #F0DDB8;border-left:4px solid #C08417;border-radius:10px;padding:12px 16px;font-size:13.8px;color:#6E4A10;margin:0 0 13px}
+.pbody{padding:6px 22px 20px;font-size:14.4px;color:var(--ink2)}
+.pbody h4{font-family:var(--disp);font-size:14.6px;font-weight:600;color:var(--ink);margin:18px 0 9px}
+.pbody p{margin:0 0 11px;max-width:92ch}
+.pbody b{color:var(--ink)}
+.warn{background:var(--danger-soft);border:1px solid #EBD2D2;border-left:4px solid var(--danger);border-radius:10px;padding:10px 16px;font-size:13.8px;color:#7A2626;margin:0 0 13px}
+.warn ul{margin:0;padding-left:18px}
+.warn li{margin:3px 0}
+.open{background:var(--ochre-soft);border:1px solid #F0DDB8;border-left:4px solid #C08417;border-radius:10px;padding:10px 16px;font-size:13.8px;color:#6E4A10;margin:0 0 13px}
 table{width:100%;border-collapse:collapse;font-size:13.4px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 14px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
 th{text-align:left;font-family:var(--mono);font-size:10.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:9px 12px;background:var(--sunk);border-bottom:1px solid var(--line)}
 td{padding:9px 12px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--ink2)}
 tr:last-child td{border-bottom:0}
 td b{color:var(--ink)}
-.who{font-family:var(--mono);font-size:10.8px;padding:2px 7px;border-radius:5px;white-space:nowrap;display:inline-block;margin:1px 0}
+.steps td.k{width:36%}
+.who{font-family:var(--mono);font-size:10.8px;padding:2px 7px;border-radius:5px;white-space:nowrap;display:inline-block;margin:1px 0;line-height:1.5}
 .who.a{background:var(--teal-soft);color:var(--teal)}
 .who.s{background:var(--ochre-soft);color:#8A5A0F}
-.who.n{background:var(--sunk);color:var(--ink2)}
-.who.k{background:var(--blue-soft);color:var(--blue)}
+.who.n{background:#fff;color:#3A342D;box-shadow:inset 0 0 0 1px #D9CFC0}
+.who.k{background:var(--blue-soft);color:#3B5470}
 .who.m{background:#F2F0F5;color:#544566}
 .who.p{background:#F1F5EC;color:#4A6339}
-.who.q{background:var(--danger-soft);color:var(--danger)}
+.who.t{background:#EAF3F5;color:#2F6470}
+.who.mg{background:#F9EEF2;color:#7A4459}
+.who.c{background:var(--sunk);color:#5D554C;box-shadow:inset 0 0 0 1px #E1D7C8}
+a.qn{font-family:var(--mono);font-size:10.8px;padding:2px 7px;border-radius:5px;display:inline-block;margin:1px 0;line-height:1.5;background:var(--danger-soft);color:var(--danger);text-decoration:none}
+a.qn:hover{background:#F1D9D9}
+.plus{display:inline-flex;width:15px;height:15px;border-radius:50%;background:var(--teal);color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;vertical-align:1px;margin:0 2px;line-height:1}
+
+/* команда и вопросы */
+.rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.rules li{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:13.8px;color:var(--ink2);line-height:1.5}
+.rules li b{color:var(--ink)}
+.qs{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.qs li{display:flex;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line2);font-size:14px;color:var(--ink2);line-height:1.5}
+.qs li:last-child{border-bottom:0}
+.qs li b{color:var(--ink)}
+.qs .num{font-family:var(--mono);font-size:11.5px;flex:0 0 26px;height:22px;border-radius:6px;background:var(--danger-soft);color:var(--danger);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.qs li:target{background:var(--ochre-soft)}
 
 /* схема */
-.schemebar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:14px 0 4px;border-top:1px solid var(--line2)}
+.schemebar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:14px 0 4px;border-top:1px solid var(--line2);margin-top:6px}
 .btn{font-family:var(--sans);font-size:13.4px;font-weight:500;padding:9px 16px;border-radius:9px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .btn:hover{background:#0E5147;border-color:#0E5147}
 .btn.ghost{background:var(--card);color:var(--ink2);border-color:var(--line)}
@@ -140,14 +155,14 @@ td b{color:var(--ink)}
 .btn svg{width:14px;height:14px}
 .scheme{display:none;margin:14px 0 4px}
 .scheme.on{display:block}
-.scheme .frame{border:1px solid var(--line);border-radius:12px;background:#FDFBF7;overflow:auto;-webkit-overflow-scrolling:touch}
+.scheme .frame{border:1px solid var(--line);border-radius:12px;background:#FDFBF7;overflow:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 .scheme .frame img{display:block;max-width:none;height:auto}
 .scheme .cap{font-size:12.4px;color:var(--ink3);margin:9px 2px 0;display:flex;gap:14px;flex-wrap:wrap}
 
 /* модалка */
 .modal{position:fixed;inset:0;z-index:120;background:rgba(28,25,23,.82);display:none;padding:22px}
 .modal.on{display:flex;flex-direction:column}
-.modal .mh{display:flex;align-items:center;gap:14px;color:#F5EFE6;font-size:14px;padding:0 4px 12px}
+.modal .mh{display:flex;align-items:center;gap:14px;color:#F5EFE6;font-size:14px;padding:0 4px 12px;flex-wrap:wrap}
 .modal .mh b{font-family:var(--disp);font-weight:600}
 .modal .mh .sp{margin-left:auto;display:flex;gap:8px}
 .modal button.mb{font-family:var(--mono);font-size:13px;padding:7px 13px;border-radius:8px;border:1px solid rgba(245,239,230,.3);background:rgba(255,255,255,.07);color:#F5EFE6;cursor:pointer}
@@ -155,262 +170,296 @@ td b{color:var(--ink)}
 .modal .mbody{flex:1;overflow:auto;background:#FDFBF7;border-radius:12px}
 .modal .mbody img{display:block;max-width:none;transform-origin:0 0}
 footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:12.8px;color:var(--ink3)}
-footer a{color:var(--ink2)}
-@media(max-width:760px){.hd nav a:not(.back){display:none}.dbody{padding-left:0}}
+
+@media(max-width:860px){.hd nav{display:none}}
+@media(max-width:600px){
+  .wrap{padding:0 16px}
+  .hero{padding:30px 0 22px}
+  .lead{font-size:15.5px}
+  section{padding:28px 0}
+  .proc>.ph{padding:15px 16px}
+  .pbody{padding:4px 16px 16px}
+  .modal{padding:10px}
+  .steps tr,.stack tr{display:block;border-bottom:1px solid var(--line2);padding:8px 12px}
+  .steps tr:last-child,.stack tr:last-child{border-bottom:0}
+  .steps tr:first-child,.stack tr:first-child{display:none}
+  .steps td,.stack td{display:block;border:0;padding:2px 0;width:auto}
+  .steps td.k{width:auto;padding-top:4px}
+  .stack td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-top:4px}
+  .who,a.qn{white-space:normal}
+}
+
+.pc.n{border-left-color:#B9AC99} .pc.n h3{color:#3A342D}
+.gloss{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 18px}
+.gloss li{font-size:13.4px;color:var(--ink2);line-height:1.45;padding:5px 0;border-bottom:1px solid var(--line2)}
+.gloss li b{color:var(--ink)}
 </style>
 </head>
 <body>
-
 <header class="hd">
   <div class="wrap">
-    <a href="/salescast/" class="brand">
+    <a href="#top" class="brand">
       <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 1.5 22.5 12 12 22.5 1.5 12 12 1.5Z" fill="var(--acc)"/><path d="M10 8.4 16 12l-6 3.6V8.4Z" fill="#fff"/></svg>
       Salescast
     </a>
     <nav>
       <a href="#karta">Карта</a>
-      <a href="#model">Модель</a>
-      <a href="#scenariy">Сценарий</a>
-      <a href="#montazh">Монтаж и выкладка</a>
-      <a href="/salescast/zony/">Зоны</a>
-      <a href="/salescast/" class="back">← Контур</a>
+      <a href="#kto">Кто что делает</a>
+      <a href="#prodazha">Процессы</a>
+      <a href="#komanda">Команда</a>
+      <a href="#voprosy">Вопросы Софии</a>
     </nav>
   </div>
 </header>
 
-<div class="hero">
+<div class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow">Архив процессов · BPMN 2.0 · обновлено 11.09</p>
-    <h1>Бизнес-процессы</h1>
-    <p class="lead">Как производство работает на самом деле, а не как записано в таблице. Каждый процесс это текстовое описание под плюсом и схема в нотации BPMN 2.0 с дорожками по ролям. Схему можно открыть на весь экран или скачать файлом и открыть в bpmn.io, Camunda или draw.io.</p>
+    <p class="eyebrow">Архив процессов · BPMN 2.0 · обновлено 16.09.2026</p>
+    <h1>Salescast: бизнес-процессы</h1>
+    <p class="lead">Полный цикл контракта: от первого разговора с клиентом до продления, после которого цикл начинается снова. Восемь процессов, у каждого текст и схема по ролям. Собрано по созвону Андрея и Софии 15.09 к совместному проходу, Софией еще не просмотрено. Спорное и неизвестное помечено «вопрос Софии» с номером из списка в конце.</p>
     <div class="src">
-      <span>основа: таблица зон, 41 задача, 01.09</span>
-      <span>факты: созвон с Настей 09.09</span>
-      <span>факты: разбор сценариев с Софией 09.09</span>
-      <span class="nw">сверка по схемам: созвон с Настей 11.09</span>
-      <span class="nw">правки Софии: чат 11.09</span>
-      <span>решения: созвоны 07 и 08.09</span>
-      <span>описано 3 процесса, зоны 1-4</span>
+      <span>соглашение партнеров 08.09</span><span class="nw">созвон Андрея и Софии 15.09</span><span>созвоны с Настей 11.09, 14.09 и 15.09</span><span>решения 09.09 и 14.09</span><span>договор первого общего клиента (только форма и сроки)</span>
     </div>
+    <nav class="jump" aria-label="Процессы"><a href="#prodazha"><b>0</b>Продажа и договор</a><a href="#start"><b>1</b>Старт работы с новым клиентом</a><a href="#model"><b>2</b>Модель и голос</a><a href="#scenariy"><b>3</b>Сценарий</a><a href="#iskhodniki"><b>4</b>Исходники</a><a href="#montazh"><b>5</b>Монтаж</a><a href="#vykladka"><b>6</b>Выкладка</a><a href="#prodlenie"><b>7</b>Отчет, закрытие и продление</a><a href="#voprosy"><b>?</b>Вопросы Софии</a></nav>
   </div>
 </div>
-
 <section id="kak-chitat">
   <div class="wrap">
     <h2>Как читать схемы</h2>
-    <p class="smeta">Дорожка это роль, а не человек: когда роль поменяет исполнителя, схема останется прежней. Шаги, которых сегодня в процессе нет и которые мы добавляем, отмечены пунктиром и плюсом. Место, где процесс встает, отмечено красным.</p>
+    <p class="smeta"><b>Дорожка это роль, а не человек:</b> в подписи роль и кто ее сейчас выполняет. В скобках у шага источник; 15.09 было два созвона: с Настей и с Софией.</p>
     <div class="legend">
-      <div class="lg"><div class="sw a"></div><div class="tx"><b>Андрей · управление</b>вход клиента, бриф, CRM, папки и таблица, сроки, деньги и сервисы, контроль объема</div></div>
-      <div class="lg"><div class="sw s"></div><div class="tx"><b>София · качество</b>хуки, сценарии, ТЗ на монтаж, приемка монтажа, спорные правки клиента</div></div>
-      <div class="lg"><div class="sw n"></div><div class="tx"><b>Настя · производство</b>модели и голоса напрямую с клиентом, сценарии, референсы, ТЗ на монтаж. Руководитель Ксюши с 11.09</div></div>
-      <div class="lg"><div class="sw k"></div><div class="tx"><b>Ксюша · оживление</b>ролики дня в HeyGen, ударения, исходники в папку до 12:00. Под Настей, сама с 14.09</div></div>
-      <div class="lg"><div class="sw m"></div><div class="tx"><b>Кирилл · монтаж</b>субтитры, вставки по ТЗ, обложка, готовое видео в папку месяца</div></div>
-      <div class="lg"><div class="sw p"></div><div class="tx"><b>Публикатор · выкладка</b>ролик из папки в аккаунт, отчет к 19:00. Один аккаунт, одно устройство</div></div>
-      <div class="lg"><div class="sw c"></div><div class="tx"><b>Клиент</b>отдельный пул, связь только пунктирными сообщениями</div></div>
-      <div class="lg"><div class="sw new"></div><div class="tx"><b>Пунктир и плюс</b>шага сегодня нет, добавляем. Это и есть работа на ближайшие недели</div></div>
-      <div class="lg"><div class="sw hot"></div><div class="tx"><b>Красная рамка</b>узкое место или риск: здесь процесс стоит или может встать</div></div>
-      <div class="lg"><div class="sw c" style="border-radius:50%;border-width:2px"></div><div class="tx"><b>Двойной круг</b>ожидание: приход сценариев или роликов, срок в сутки, контроль в 12:00</div></div>
+      <div class="lg"><div class="sw new"></div><div class="tx"><b>Пунктир и плюс:</b> шага сегодня нет, мы его добавляем.</div></div>
+      <div class="lg"><div class="sw hot"></div><div class="tx"><b>Красная рамка:</b> процесс встает (восклицательный знак) или может встать.</div></div>
+      <div class="lg"><div class="sw ev"></div><div class="tx"><b>Двойной круг:</b> ожидание или срок. <b>Второй старт:</b> отдельная ветка со своим поводом.</div></div>
+      <div class="lg"><div class="sw call"></div><div class="tx"><b>«→ процесс N»:</b> запуск другого процесса. <b>«Вдвоем»:</b> в дорожке того, кто организует.</div></div>
+      <div class="lg"><div class="sw msg"></div><div class="tx"><b>Пунктирная стрелка:</b> сообщение клиенту или от него. <b>Полукруг на линии:</b> линии не связаны.</div></div>
     </div>
+    <p class="sub">Дорожки на схемах</p>
+    <div class="legend">
+      <div class="lg"><div class="sw" style="background:#F5EFE6;border-color:#8C8177"></div><div class="tx"><b>Клиент</b>сейчас: заказчик по договору</div></div>
+      <div class="lg"><div class="sw" style="background:#F9EEF2;border-color:#9A5B73"></div><div class="tx"><b>Менеджер клиента</b>сейчас: Андрей, до найма (соглашение, п. 3.7)</div></div>
+      <div class="lg"><div class="sw" style="background:#E6F0ED;border-color:#12665A"></div><div class="tx"><b>Управление</b>сейчас: Андрей</div></div>
+      <div class="lg"><div class="sw" style="background:#FDF3E2;border-color:#C08417"></div><div class="tx"><b>Продукт и качество</b>сейчас: София</div></div>
+      <div class="lg"><div class="sw" style="background:#FFFFFF;border-color:#B9AC99"></div><div class="tx"><b>Производство</b>сейчас: Настя</div></div>
+      <div class="lg"><div class="sw" style="background:#EEF1F7;border-color:#4A6485"></div><div class="tx"><b>Помощник по исходникам</b>сейчас: Ксюша</div></div>
+      <div class="lg"><div class="sw" style="background:#F2F0F5;border-color:#6B5F7A"></div><div class="tx"><b>Монтажеры, может быть несколько</b>сейчас: Кирилл</div></div>
+      <div class="lg"><div class="sw" style="background:#F1F5EC;border-color:#5E7B4A"></div><div class="tx"><b>Публикаторы, свои под проект</b>сейчас: набираем под проект</div></div>
+      <div class="lg"><div class="sw" style="background:#EAF3F5;border-color:#3F7F8C"></div><div class="tx"><b>Техспец воронок</b>сейчас: Владимир, по задачам</div></div>
+    </div>
+    <p class="sub">Словарь</p>
+    <ul class="gloss">
+      <li><b>Исходник:</b> ролик с оживленным аватаром и голосом до монтажа.</li>
+      <li><b>Оживление:</b> генерация видео, где аватар говорит текст сценария.</li>
+      <li><b>Хук:</b> первая фраза ролика, которая удерживает зрителя.</li>
+      <li><b>Залет:</b> ролик, который набрал много просмотров.</li>
+      <li><b>Упаковка:</b> имя, описание, заголовки и аватарка аккаунта.</li>
+      <li><b>Прогрев:</b> подписки, просмотры и лайки с нового аккаунта до выкладки.</li>
+      <li><b>Квиз:</b> опрос клиента, куда ведет призыв в конце ролика.</li>
+      <li><b>Кодовое слово:</b> зритель пишет его в сообщения и попадает в воронку.</li>
+      <li><b>УПД:</b> универсальный передаточный документ, вместо акта.</li>
+    </ul>
   </div>
 </section>
-
 <section id="karta">
   <div class="wrap">
     <h2>Карта процессов</h2>
-    <p class="smeta">Семь зон из таблицы Софии плюс этап продаж. Зоны 1 и 2 сверены с исполнителем по схемам, зоны 3 и 4 разобраны на созвоне 11.09 и собраны в один процесс, потому что монтаж и выкладка идут одной цепочкой через папки.</p>
+    <p class="smeta">Восемь процессов идут по кругу: продление снова проходит процесс 0, продажу и договор.</p>
     <div class="map">
+      <a class="mp live" href="#prodazha">
+        <div class="zn">Процесс 0</div>
+        <h3>Продажа и договор</h3>
+        <p><b>Вход:</b> лид или согласованное продление</p>
+        <p><b>Выход:</b> деньги на счете</p>
+        <span class="st">Андрей; встречи и продукт София</span>
+      </a>
+      <a class="mp live" href="#start">
+        <div class="zn">Процесс 1</div>
+        <h3>Старт работы с новым клиентом</h3>
+        <p><b>Вход:</b> деньги пришли</p>
+        <p><b>Выход:</b> за две недели готовы аватары, сценарий, монтаж, первые ролики, аккаунты</p>
+        <span class="st">Андрей; план Настя</span>
+      </a>
       <a class="mp live" href="#model">
-        <div class="zn">Зона 1 · процесс 1</div>
+        <div class="zn">Процесс 2</div>
         <h3>Модель и голос</h3>
-        <p>Персонаж, голос, аватарка аккаунта и ежедневное оживление роликов. Модель и голос теперь целиком у Насти.</p>
-        <span class="st done">сверен с Настей 11.09</span>
+        <p><b>Вход:</b> проект стартовал</p>
+        <p><b>Выход:</b> утвержденные аватары и голоса</p>
+        <span class="st">Настя; ТЗ и утверждение София</span>
       </a>
       <a class="mp live" href="#scenariy">
-        <div class="zn">Зона 2 · процесс 2</div>
+        <div class="zn">Процесс 3</div>
         <h3>Сценарий</h3>
-        <p>Референсы, хуки в таблице, сценарии пачками по 10-15, интеграции. По оценке Насти это 65 процентов результата.</p>
-        <span class="st done">сверен с Настей 11.09</span>
+        <p><b>Вход:</b> утвержденные аватары, план выкладки</p>
+        <p><b>Выход:</b> сценарии на неделю с ТЗ на монтаж</p>
+        <span class="st">Настя; утверждает София</span>
+      </a>
+      <a class="mp live" href="#iskhodniki">
+        <div class="zn">Процесс 4</div>
+        <h3>Исходники</h3>
+        <p><b>Вход:</b> одобренные сценарии</p>
+        <p><b>Выход:</b> исходник на Диске, ссылка в таблице к 11:00</p>
+        <span class="st">Настя; делает Ксюша</span>
       </a>
       <a class="mp live" href="#montazh">
-        <div class="zn">Зоны 3 и 4 · процесс 3</div>
-        <h3>Монтаж и выкладка</h3>
-        <p>ТЗ на монтаж, исходники и готовые видео через папки на Диске, выкладка к 19:00, галочки в таблице клиента.</p>
-        <span class="st risk">разобран 11.09, ждет да Софии</span>
+        <div class="zn">Процесс 5</div>
+        <h3>Монтаж</h3>
+        <p><b>Вход:</b> ссылка и ТЗ в таблице</p>
+        <p><b>Выход:</b> проверенный ролик к 15-16 часам</p>
+        <span class="st">монтажер; проверяет Настя</span>
       </a>
-      <div class="mp">
-        <div class="zn">Зона 4 · найм и аккаунты</div>
-        <h3>Контур публикаторов</h3>
-        <p>Один публикатор, один аккаунт, одно устройство. Найм, прогрев, блокировки, боты по кодовому слову.</p>
-        <span class="st risk">настоящий потолок компании</span>
+      <a class="mp live" href="#vykladka">
+        <div class="zn">Процесс 6</div>
+        <h3>Выкладка</h3>
+        <p><b>Вход:</b> дата старта из плана, ролики в папке</p>
+        <p><b>Выход:</b> объем выложен, факт сверен</p>
+        <span class="st">публикаторы; контроль Настя</span>
+      </a>
+      <a class="mp live" href="#prodlenie">
+        <div class="zn">Процесс 7</div>
+        <h3>Отчет, закрытие и продление</h3>
+        <p><b>Вход:</b> идет выкладка</p>
+        <p><b>Выход:</b> новый договор или закрытый контракт</p>
+        <span class="st">Андрей; София по продукту</span>
+      </a>
+    </div>
+    <p class="note"><b>Ритм.</b> Процессы 1 и 2 один раз на период, внутри двух недель подготовки. Дальше по плану: сценарии на неделю вперед, исходники и монтаж каждый день на завтра, выкладка каждый день. Допсоглашение на новый период подписывается не позже чем за 10 дней до конца срока (договор).</p>
+  </div>
+</section>
+<section id="kto">
+  <div class="wrap">
+    <h2>Кто что делает</h2>
+    <p class="smeta">Коротко по людям. Подробно по шагам в каждом процессе ниже.</p>
+    <div class="people">
+      <div class="pc a"><h3>Андрей</h3><p><b>Управление:</b> квалификация, договор и счет, учет денег, утверждение плана выкладки (или София), найм публикаторов, замена аккаунтов, разбор отклонений, регламенты, продление. <b>Пока нет менеджера клиента:</b> чат, бриф, показ аватаров и голосов, отчеты, напоминания об оплате, акт.</p></div>
+      <div class="pc s"><h3>София</h3><p><b>Продажа:</b> встречи и экспертная часть, две недели подготовки в сроках, цена вдвоем, проверка договора. <b>В работе:</b> список старта, регламент и база референсов, ТЗ на аватары, утверждения в пн, ср, пт (аватары, голоса, сценарии, монтаж), тема квиза, подключается в чате, если клиент недоволен, продуктовая часть продления.</p></div>
+      <div class="pc n"><h3>Настя</h3><p><b>Производство:</b> план выкладки, референсы, модели, голоса, сценарии на неделю, ТЗ на монтаж и упаковку, инструкция аватара, задачи Ксюше, токены HeyGen, проверка роликов. <b>Контроль:</b> исходники к 11:00, ролики к 15-16, факт выкладки; отклонения пишет Андрею. В чате клиента первые сценарии и мелкие правки. Объем роли пересматриваем через месяц: <a class="qn" href="#q-21">вопрос Софии, п. 21</a>.</p></div>
+    </div>
+    <p class="sub">Все остальные</p>
+    <div class="tw"><table class="stack">
+      <tr><th style="width:17%">Роль</th><th style="width:19%">Кто сейчас</th><th>Получает</th><th>Отдает</th></tr>
+      <tr><td><span class="who mg">Менеджер клиента</span></td><td data-l="Кто сейчас">Андрей, до найма (<a class="qn" href="#q-1">п. 1</a>)</td><td data-l="Получает">клиента после оплаты, записи встреч, цифры недели</td><td data-l="Отдает">чат, бриф, показ аватаров и голосов, отчеты, акт</td></tr>
+      <tr><td><span class="who k">Помощник по исходникам</span></td><td data-l="Кто сейчас">Ксюша, под Настей</td><td data-l="Получает">сценарии и ТЗ от Насти, инструкцию аватара, задачу в CRM</td><td data-l="Отдает">проверенные исходники на Диске, ссылку в таблице к 11:00</td></tr>
+      <tr><td><span class="who m">Монтажеры</span></td><td data-l="Кто сейчас">Кирилл; нужен резервный</td><td data-l="Получает">ссылку и ТЗ в таблице к 11:00, правки Насти и Софии</td><td data-l="Отдает">ролик в папке к 15-16 часам, на завтра, отметку «монтаж»</td></tr>
+      <tr><td><span class="who p">Публикаторы проекта</span></td><td data-l="Кто сейчас">свои под проект, со своими устройствами</td><td data-l="Получает">ТЗ на упаковку, инструкцию прогрева, ролики, плановые даты</td><td data-l="Отдает">готовые аккаунты, выложенные ролики, отчет за день, сообщения о блокировке</td></tr>
+      <tr><td><span class="who t">Техспец воронок</span></td><td data-l="Кто сейчас">Владимир, по задачам</td><td data-l="Получает">задачу от Андрея, заблокированный аккаунт</td><td data-l="Отдает">воронку, слово для призыва, чистку воронки (<a class="qn" href="#q-17">п. 17</a>)</td></tr>
+      <tr><td><span class="who c">Клиент</span></td><td data-l="Кто сейчас">заказчик по договору</td><td data-l="Получает">КП, договор и счет, чат, первые сценарии, отчеты и акт</td><td data-l="Отдает">оплату, ответы, квиз, обратную связь, подпись акта, решение о продлении</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- ПРОЦЕСС 0 -->
+<section id="prodazha">
+  <div class="wrap">
+    <div class="proc">
+      <div class="ph">
+        <div class="zn">Процесс 0</div>
+        <h3>Продажа и договор</h3>
+        <p><b>Зачем:</b> довести клиента до оплаты с договором, где есть число роликов, даты старта и конца и две недели подготовки. До оплаты работу не начинаем (11.09).</p>
+        <p><b>Вход:</b> заявка, знакомство или согласованное продление. <b>Выход:</b> деньги пришли, дальше процесс 1.</p>
+        <div class="roles"><span class="who c">Клиент</span><span class="who mg">Менеджер клиента</span><span class="who a">Андрей</span><span class="who s">София</span></div>
+        <div class="facts"><span>шагов на схеме <b>15</b></span><span>ролей <b>3 + клиент</b></span><span>добавляем шагов <b>6</b></span></div>
       </div>
-      <div class="mp">
-        <div class="zn">Зона 5 · 2 задачи</div>
-        <h3>Аналитика</h3>
-        <p>Недельный сбор цифр и отчет клиенту. Программа за 20 000 в месяц умерла, считается руками.</p>
-        <span class="st risk">процесса нет</span>
-      </div>
-      <div class="mp">
-        <div class="zn">Зона 6 · 5 задач</div>
-        <h3>Общий менеджмент</h3>
-        <p>План команде, ежедневный контроль, себестоимость и нагрузка. С 11.09 задачи команды идут через CRM.</p>
-        <span class="st wait">строится в CRM на клинике</span>
-      </div>
-      <div class="mp">
-        <div class="zn">Зона 7 · 4 задачи</div>
-        <h3>Коммуникация с клиентом</h3>
-        <p>Договоры и акты, добиться ТЗ, недельный созвон, продать следующий месяц.</p>
-        <span class="st wait">в очереди на разбор</span>
-      </div>
-      <div class="mp">
-        <div class="zn">Этап продаж · 4 задачи</div>
-        <h3>Продажи</h3>
-        <p>Первичный созвон, оффер, договор и счет, бриф. В таблице у всех четырех строк ответственного не было.</p>
-        <span class="st wait">забрал Андрей</span>
+      <div class="pbody">
+        <h4>Шаги и кто делает</h4>
+        <div class="tw"><table class="steps">
+          <tr><th>Шаг</th><th>Кто</th></tr>
+          <tr><td>Квалифицировать: покупатель, куда трафик, бюджет</td><td class="k"><span class="who a">Андрей</span></td></tr>
+          <tr><td>Встреча с клиентом: задача, продукт, сомнения. Встречу записываем <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who s">София</span>; запись настраивает <span class="who a">Андрей</span> (созвон с Софией 15.09); <a class="qn" href="#q-2">п. 2</a></td></tr>
+          <tr><td>Заложить в сроки две недели подготовки <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Проверить место в команде <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span></td></tr>
+          <tr><td>Разобрать нишу вдвоем: законность контента, пометка ИИ <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span> и <span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>КП: примеры образов, заголовков, один пример сценария</td><td class="k"><a class="qn" href="#q-2">вопрос Софии, п. 2</a></td></tr>
+          <tr><td>Цена и состав пакета вдвоем</td><td class="k"><span class="who a">Андрей</span> и <span class="who s">София</span></td></tr>
+          <tr><td>Договор или допсоглашение: число роликов, даты старта и конца, подготовка</td><td class="k"><span class="who a">Андрей</span></td></tr>
+          <tr><td>Проверить и поправить договор</td><td class="k"><span class="who s">София</span></td></tr>
+          <tr><td>Подписать со стороны исполнителя, отправить договор и счет</td><td class="k">партнер, на чье юрлицо договор</td></tr>
+          <tr><td>Срок оплаты прошел: напомнить; оплаты нет: не начинаем</td><td class="k"><span class="who mg">менеджер клиента</span>; <a class="qn" href="#q-3">п. 3</a></td></tr>
+          <tr><td>Подтвердить поступление денег <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k">партнер, на чей счет пришли; <a class="qn" href="#q-3">п. 3</a></td></tr>
+          <tr><td>Сделка «оплачен» в CRM, операция в отчет о движении денег <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span> (созвон с Софией 15.09)</td></tr>
+        </table></div>
+        <h4>Где ломается</h4>
+        <div class="warn"><ul>
+          <li>Договоренности Софии с клиентом (темы аватаров, квиз) доходили до Андрея позже: встречи не записывались (созвон с Софией 15.09).</li>
+          <li>Договор первого общего клиента прошел несколько редакций за день, в CRM осталась первая (09.09).</li>
+          <li>Мощность: по оценке Софии еще двух новых клиентов команда сейчас не выдержит (созвон с Софией 15.09).</li>
+        </ul></div>
+        <div class="open">Вопросы Софии: <a class="qn" href="#q-2">п. 2</a>, <a class="qn" href="#q-3">п. 3</a></div>
+
+        <div class="schemebar">
+          <button class="btn" data-toggle="sch-prodazha">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
+            Открыть схему BPMN
+          </button>
+          <button class="btn ghost" data-full="prodazha" data-title="Процесс 0. Продажа и договор">Во весь экран</button>
+          <a class="btn ghost" href="prodazha.bpmn?v=0916" download="prodazha.bpmn">Скачать .bpmn</a>
+          <a class="btn ghost" href="bpmn.html?f=prodazha" target="_blank" rel="noopener">Открыть в просмотрщике bpmn.io</a>
+        </div>
+
+        <div class="scheme" id="sch-prodazha">
+          <div class="frame"><img src="prodazha.svg?v=0916" alt="BPMN-схема: Процесс 0. Продажа и договор" loading="lazy"></div>
+          <div class="cap"><span>Схема прокручивается вправо</span></div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
 <!-- ПРОЦЕСС 1 -->
-<section id="model">
+<section id="start">
   <div class="wrap">
     <div class="proc">
       <div class="ph">
-        <div class="zn">Процесс 1 · зона 1 таблицы</div>
-        <h3>Модель и голос</h3>
-        <p>От подписанного договора до оживленных роликов дня. Персонаж делается один раз на клиента, дальше каждый день идет оживление роликов, которые уходят на выкладку.</p>
-        <div class="facts">
-          <span>шагов <b>20</b></span>
-          <span>ролей <b>4 + клиент</b></span>
-          <span>модель <b>≈2 часа</b></span>
-          <span>ударения <b>20-25 роликов ≈ 1,5 ч</b></span>
-          <span>добавляем шагов <b>6</b></span>
-          <span>сверено <b>11.09</b></span>
-        </div>
+        <div class="zn">Процесс 1</div>
+        <h3>Старт работы с новым клиентом</h3>
+        <p><b>Зачем:</b> за две недели довести проект до старта выкладки. Срок называем при продаже, он с запасом: быстрее лучше, но не торопим и не затягиваем (созвон с Софией 15.09). Пример: в договоре первого клиента две недели подготовки плюс выкладка, всего 40 дней.</p>
+        <p><b>Вход:</b> деньги пришли. <b>Выход:</b> утвержденные аватары, сценарий и монтаж, ролики на пару дней, упакованные и прогретые аккаунты. Дальше процесс 6.</p>
+        <div class="roles"><span class="who c">Клиент</span><span class="who mg">Менеджер клиента</span><span class="who a">Андрей</span><span class="who s">София</span><span class="who t">Техспец</span><span class="who p">Публикаторы</span><span class="who n">Настя</span></div>
+        <div class="facts"><span>шагов на схеме <b>16</b></span><span>ролей <b>6 + клиент</b></span><span>добавляем шагов <b>8</b></span><span>узкие места и риски <b>1</b></span></div>
       </div>
       <div class="pbody">
-
-        <details>
-          <summary><span class="pm"></span>Как это работает: подробное описание<span class="hint"></span></summary>
-          <div class="dbody">
-
-            <h4>Что это за процесс</h4>
-            <p>Создание виртуального персонажа: внешность, голос и аватарка для аккаунта, плюс ежедневное оживление роликов в HeyGen. Персонаж делается один раз на клиента, поэтому ошибка здесь стоит месяца работы. По оценке Насти модель, голос и качество дают <b>35 процентов результата</b>, остальные 65 приходятся на сценарий.</p>
-            <p>Ключевой фактор провала она назвала прямо: неестественность. <span class="q">Плохая картинка. Когда модель неестественная, максимально пластиковая, и голос. Голос там особенно выдаёт. Если выдаётся, что это ИИ, во-первых, Instagram это не продвигает. Во-вторых, люди это не смотрят.</span></p>
-
-            <h4>Что изменилось 11.09</h4>
-            <div class="upd">
-              Схему прошли с Настей по шагам. Главное: <b>модель и голос Настя делает, принимает по качеству и согласует с клиентом сама</b>, в чате клиента напрямую. <b>Ударения слушает Ксюша</b> в каждом ролике, а не Андрей. <b>ТЗ на имя и упаковку аккаунта</b> Настя дает публикаторам сама. <b>За токенами следит Настя</b>, пополняет Андрей по задаче в CRM. Ксюша работает под Настей, и за ее результат Настя отвечает перед Андреем.
-            </div>
-
-            <h4>Кто что делает теперь</h4>
-            <div class="tw"><table>
-              <tr><th>Шаг</th><th style="width:170px">Кто</th></tr>
-              <tr><td>Бриф и карточка клиента, чат с клиентом, проект в CRM, папки и таблица клиента</td><td><span class="who a">Андрей</span></td></tr>
-              <tr><td>Задача на модель в CRM со сроком</td><td><span class="who a">Андрей</span></td></tr>
-              <tr><td>Модель: по фото клиента или подбор образа, генерация в GPT, приемка по качеству</td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Отправить модель клиенту и собрать правки</td><td><span class="who n">Настя</span> напрямую</td></tr>
-              <tr><td>Спорная правка клиента, которая вредит результату</td><td><span class="who s">София</span></td></tr>
-              <tr><td>Голос в HeyGen и согласование с клиентом</td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Аватарка и ТЗ на имя и упаковку аккаунта для публикаторов</td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Инструкция по оживлению</td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Остаток токенов, задача на пополнение в CRM</td><td><span class="who n">Настя</span> → <span class="who a">Андрей</span></td></tr>
-              <tr><td>Оживление роликов дня и прослушка ударений</td><td><span class="who k">Ксюша</span></td></tr>
-            </table></div>
-
-            <h4>Как было задумано в таблице 01.09</h4>
-            <div class="tw"><table>
-              <tr><th>Задача</th><th style="width:170px">Кто по таблице</th><th style="width:170px">Кто по факту 11.09</th></tr>
-              <tr><td>Поставить ТЗ на разработку модели</td><td><span class="who s">София</span></td><td><span class="who a">Андрей</span> задачей в CRM</td></tr>
-              <tr><td>Поставить ТЗ на имя и упаковку аккаунтов</td><td><span class="who a">Андрей</span></td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Сделать модель</td><td><span class="who n">Настя</span></td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Утвердить модель и внести правки</td><td><span class="who s">София</span></td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Согласовать модель с клиентом</td><td><span class="who s">София</span></td><td><span class="who n">Настя</span>, спорное <span class="who s">София</span></td></tr>
-              <tr><td>Сделать голоса</td><td><span class="who n">Настя</span></td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Согласовать с клиентом голоса</td><td><span class="who s">София</span></td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Оживлять моделей в HeyGen</td><td>«делала Настя, но сейчас хз»</td><td><span class="who k">Ксюша</span></td></tr>
-              <tr><td>Отслушивать на предмет ошибок в озвучке</td><td><span class="who a">Андрей</span></td><td><span class="who k">Ксюша</span></td></tr>
-              <tr><td>Передать исходники в монтаж</td><td><span class="who n">Настя</span></td><td><span class="who k">Ксюша</span>, процесс 3</td></tr>
-            </table></div>
-
-            <h4>Как идет по факту</h4>
-            <ul>
-              <li><b>Все решения по образу принимает Настя:</b> фон под тематику, пол, количество аватаров, несколько локаций и ракурсов. Если клиент дал фото человека, модель делается с фото, если нет, образ подбирается с нуля.</li>
-              <li><b>Технология:</b> модели в GPT, голос в HeyGen. ElevenLabs не подключен, обучение от Димы по моделям и голосам не передано.</li>
-              <li><b>Ударения живут в каждом ролике отдельно.</b> Настя: «к каждому сценарию там свои ошибки могут вылезти, а могут вообще не вылезти». Поэтому их слушает тот, кто оживляет, а не тот, кто делал голос.</li>
-              <li><b>Оживляется только то, что идет на выкладку дня.</b> Сценарии пишутся заранее, а ролики генерируются по мере выкладки, в среднем по два в день на клиента.</li>
-              <li><b>Ксюша стартует сама с понедельника 14.09.</b> На выходных Настя вводит ее в работу.</li>
-            </ul>
-
-            <h4>HeyGen: что решили 11.09</h4>
-            <div class="upd">
-              <ul style="margin:0">
-                <li><b>Покупаем 5 000 кредитов</b> на основной аккаунт, в расчете 20 токенов на ролик (решение Андрея в чате, 14:00). План на ближайший месяц около 240 видео (София).</li>
-                <li><b>Перерасход:</b> докупаем до 7 500 доплатой разницы или подключаем второй аккаунт. Бизнес-тариф сейчас не нужен (Настя).</li>
-                <li><b>Порог тревоги:</b> Настя предупреждает примерно за 40 роликов до конца, задачей Андрею в CRM на следующий рабочий день.</li>
-                <li><b>Оплата:</b> сейчас проводит София, со следующей недели виртуальная карта Андрея для сервисов команды.</li>
-                <li><b>Два аккаунта с одинаковыми аватарами</b> остаются страховкой. Аккаунт на каждого клиента не делаем.</li>
-              </ul>
-            </div>
-
-            <h4>Где ломается</h4>
-            <div class="warn">
-              <b>1. Токены кончаются в день простоя.</b> 11.09 генерация встала снова. София: <span class="q">пишет опять день в день... вдруг я занята или не на связи, и все процессы встают.</span> Андрей на созвоне: это как станок на конвейере, сломался один, стоит все производство.
-            </div>
-            <div class="warn">
-              <b>2. Расход на ролик не сходится.</b> Настя: в среднем 15 токенов, бывает 11-13, максимум 20 на длинном сценарии. София: <span class="q">не 15 токенов на видео, раньше было 30.</span> На созвоне Настя говорила, что остаток сгорает в конце месяца, в чате, что переносится на следующий период. Андрей проверяет расход по факту после первой покупки.
-            </div>
-            <div class="warn">
-              <b>3. София выходит из приемки модели.</b> Решение 11.09 убрало ее из ветки модели и голоса. 09.09 прямой контакт Насти с клиентом был для нее новостью, и она считала это риском: «когда начинаются проблемы, тогда уже весь вопрос». Поэтому в схеме оставлена ветка «спорная правка» на Софию: правки клиента, которые вредят результату, не берем.
-            </div>
-            <div class="warn">
-              <b>4. Кто шлет модели клиенту в клинике, не сведено.</b> По решению 11.09 это Настя, а София в тот же день написала клиенту, что на следующей неделе сама пришлет аватаров на утверждение.
-            </div>
-            <div class="warn">
-              <b>5. Шаблона брифа нет.</b> София 11.09: <span class="q">на этом этапе должно быть шаблонное что-то для брифа.</span> Папка «_Шаблон клиента» на Диске пустая.
-            </div>
-
-            <h4>Что добавляем</h4>
-            <div class="fix">
-              На схеме эти шаги отмечены пунктиром и плюсом.
-              <ul style="margin:9px 0 0">
-                <li><b>Бриф и карточка клиента по шаблону.</b> Ниша, продукт, темы, кодовое слово, запреты. По клинике темы уже названы: алкоголь и депрессия с тревожными расстройствами, плюс квизы.</li>
-                <li><b>Контур клиента в первый день:</b> чат (клиент, его менеджер, София, Андрей, Настя), проект в CRM с чек-листом, папки на Диске по месяцам, таблица клиента.</li>
-                <li><b>Задача на модель в CRM со сроком</b>, а не голосом в чате.</li>
-                <li><b>Спорные правки клиента через Софию.</b></li>
-                <li><b>Инструкция по оживлению</b> пишется Настей до того, как Ксюша работает сама.</li>
-                <li><b>Пополнение HeyGen задачей в CRM</b> со сроком на следующий рабочий день.</li>
-              </ul>
-            </div>
-
-            <h4>Нормативы</h4>
-            <ul>
-              <li>Модель новому клиенту: <b>около 2 часов</b>, один раз.</li>
-              <li>Прослушка ударений 20-25 роликов: <b>1-1,5 часа</b>.</li>
-              <li>Ролики на месяц одному клиенту: <b>около 3 дней</b>, если HeyGen оплачен.</li>
-              <li>Расход HeyGen: <b>11-20 токенов на ролик</b> по Насте, до 30 по Софии. Проверяется.</li>
-              <li>Емкость Насти целиком: <b>300-350 видео в месяц</b> при плане 240.</li>
-            </ul>
-          </div>
-        </details>
+        <h4>Шаги и кто делает</h4>
+        <p>После утверждения плана аккаунты, продукт и воронка идут параллельно.</p>
+        <div class="tw"><table class="steps">
+          <tr><th>Шаг</th><th>Кто</th></tr>
+          <tr><td>Завести клиента в работу, общий чат: Андрей, София, Настя на подхвате <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who mg">менеджер клиента</span>, сейчас <span class="who a">Андрей</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Попросить у Софии список для старта Насти</td><td class="k"><span class="who a">Андрей</span> (созвон с Настей 15.09)</td></tr>
+          <tr><td>Список старта по шаблону запуска в CRM <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who s">София</span></td></tr>
+          <tr><td>Бриф из записей встреч, контекст по клиенту в одно место <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who mg">менеджер клиента</span>; бриф у Андрея (14.09); <a class="qn" href="#q-4">п. 4</a></td></tr>
+          <tr><td>Составить план выкладки на период: даты старта и конца, ролики, аккаунты <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span> (созвон с Настей 15.09); нагрузка: <a class="qn" href="#q-21">п. 21</a></td></tr>
+          <tr><td>Утвердить план, дальше он не меняется; дату старта Настя знает заранее <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span> или <span class="who s">София</span> (созвон с Настей 15.09); запуск разом или по этапам решает <span class="who a">Андрей</span> (созвон с Софией 15.09); <a class="qn" href="#q-6">п. 6</a></td></tr>
+          <tr><td><b>Аккаунты.</b> Набрать публикаторов, число по устройствам</td><td class="k"><span class="who a">Андрей</span> (найм, соглашение); <a class="qn" href="#q-14">п. 14</a></td></tr>
+          <tr><td>Создать аккаунты: своя почта, одно устройство</td><td class="k"><span class="who p">публикатор</span>; <a class="qn" href="#q-16">п. 16</a></td></tr>
+          <tr><td>Упаковать: имя, описание, заголовки, аватарка</td><td class="k"><span class="who p">публикатор</span>; ТЗ пишет <span class="who n">Настя</span></td></tr>
+          <tr><td>Прогреть: подписки на похожие аккаунты, просмотр около 10 минут, лайки</td><td class="k"><span class="who p">публикатор</span>; <a class="qn" href="#q-15">п. 15</a></td></tr>
+          <tr><td><b>Продукт.</b> Процесс 2 и сценарии первой недели</td><td class="k"><span class="who n">Настя</span>; утверждает <span class="who s">София</span></td></tr>
+          <tr><td><b>Воронка.</b> У первого клиента квиз делает клиент; тему София утверждает вместе с ним, предлагает свои варианты <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who s">София</span> (созвон с Софией 15.09); <a class="qn" href="#q-17">п. 17</a></td></tr>
+          <tr><td>Воронка наша: кодовое слово, автоответ, бот</td><td class="k"><span class="who t">техспец</span> по задаче Андрея</td></tr>
+          <tr><td><b>Сборка.</b> Ролики на пару дней (процессы 4 и 5) <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span></td></tr>
+          <tr><td>Проверить готовность по списку двух недель <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span></td></tr>
+        </table></div>
+        <p><b>При продлении</b> повторяется план выкладки нового периода. Что еще: <a class="qn" href="#q-7">вопрос Софии, п. 7</a>.</p>
+        <h4>Где ломается</h4>
+        <div class="warn"><ul>
+          <li>Сроки клиента не доходили до производства: знали объем, но не дату конца, о старте выкладки говорили накануне (созвон с Настей 15.09).</li>
+          <li>Договоренности с клиентом были только у Софии, встречи не записывались (созвон с Софией 15.09).</li>
+          <li>Публикаторов набираем под каждый проект, это самая тяжелая часть запуска (14.09, созвон с Софией 15.09).</li>
+        </ul></div>
+        <div class="open">Вопросы Софии: <a class="qn" href="#q-1">п. 1</a>, <a class="qn" href="#q-4">п. 4</a>, <a class="qn" href="#q-5">п. 5</a>, <a class="qn" href="#q-6">п. 6</a>, <a class="qn" href="#q-7">п. 7</a>, <a class="qn" href="#q-14">п. 14</a>, <a class="qn" href="#q-15">п. 15</a>, <a class="qn" href="#q-16">п. 16</a>, <a class="qn" href="#q-17">п. 17</a>, <a class="qn" href="#q-21">п. 21</a></div>
 
         <div class="schemebar">
-          <button class="btn" data-toggle="sch-model">
+          <button class="btn" data-toggle="sch-start">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
             Открыть схему BPMN
           </button>
-          <button class="btn ghost" data-full="model" data-title="Процесс 1. Модель и голос">Во весь экран</button>
-          <a class="btn ghost" href="model.bpmn" download>Скачать .bpmn</a>
-          <a class="btn ghost" href="bpmn.html?f=model" target="_blank" rel="noopener">Открыть в редакторе bpmn.io</a>
+          <button class="btn ghost" data-full="start" data-title="Процесс 1. Старт работы с новым клиентом">Во весь экран</button>
+          <a class="btn ghost" href="start.bpmn?v=0916" download="start.bpmn">Скачать .bpmn</a>
+          <a class="btn ghost" href="bpmn.html?f=start" target="_blank" rel="noopener">Открыть в просмотрщике bpmn.io</a>
         </div>
 
-        <div class="scheme" id="sch-model">
-          <div class="frame"><img src="model.svg?v=0911" alt="BPMN-схема процесса: модель и голос" loading="lazy"></div>
-          <div class="cap">
-            <span>Схема прокручивается вправо</span>
-            <span>Пунктир с плюсом: шага сегодня нет</span>
-            <span>Редактор bpmn.io открывается прямо на портале</span>
-          </div>
+        <div class="scheme" id="sch-start">
+          <div class="frame"><img src="start.svg?v=0916" alt="BPMN-схема: Процесс 1. Старт работы с новым клиентом" loading="lazy"></div>
+          <div class="cap"><span>Схема прокручивается вправо</span></div>
         </div>
 
       </div>
@@ -419,108 +468,52 @@ footer a{color:var(--ink2)}
 </section>
 
 <!-- ПРОЦЕСС 2 -->
-<section id="scenariy">
+<section id="model">
   <div class="wrap">
     <div class="proc">
       <div class="ph">
-        <div class="zn">Процесс 2 · зона 2 таблицы</div>
-        <h3>Сценарий</h3>
-        <p>От базы знаний ниши до сценариев, ушедших в оживление. Здесь же находится узкое горлышко всей компании.</p>
-        <div class="facts">
-          <span>шагов <b>14</b></span>
-          <span>ролей <b>3 + клиент</b></span>
-          <span>30 сценариев <b>≈1,5 часа</b></span>
-          <span>пачка <b>10-15</b></span>
-          <span>вес в результате <b>65%</b></span>
-          <span>добавляем шагов <b>6</b></span>
-        </div>
+        <div class="zn">Процесс 2</div>
+        <h3>Модель и голос</h3>
+        <p><b>Зачем:</b> один раз на клиента сделать персонажей: внешность, голос, аватарка, инструкция для оживления. Со сбора референсов начинается вся работа над проектом (созвон с Софией 15.09).</p>
+        <p><b>Вход:</b> проект стартовал. <b>Выход:</b> аватары и голоса утверждены. Дальше процессы 3 и 4.</p>
+        <div class="roles"><span class="who c">Клиент</span><span class="who mg">Менеджер клиента</span><span class="who s">София</span><span class="who n">Настя</span></div>
+        <div class="facts"><span>шагов на схеме <b>10</b></span><span>ролей <b>3 + клиент</b></span><span>добавляем шагов <b>4</b></span></div>
       </div>
       <div class="pbody">
-
-        <details>
-          <summary><span class="pm"></span>Как это работает: подробное описание<span class="hint"></span></summary>
-          <div class="dbody">
-
-            <h4>Что это за процесс</h4>
-            <p>Контент, на котором держится результат клиента. По оценке Насти <b>сценарий дает 65 процентов залета</b>, и этому есть техническая причина: HeyGen не умеет повторять движения, аватар статичный. <span class="q">У нас здесь чисто статичный аватар, который сидит, что-то рассказывает.</span> Значит визуальными приемами удерживать зрителя нечем, все держится на тексте.</p>
-
-            <h4>Что изменилось 11.09</h4>
-            <div class="upd">
-              <ul style="margin:0">
-                <li><b>Проект в Клоде на каждого аватара</b>, а не только на клиента. Внутри методичка под требования клиента. Меняется методичка, значит создается новый проект, а старый удаляется. Сбой 09.09 был разовым: архив обновили в действующем проекте вместо нового.</li>
-                <li><b>Хуки и заголовки утверждаются в Google Таблице.</b> Предложение Насти: хук и заголовок в строку, София ставит галочку, где не поставила, Настя переделывает. Таблица одна, клиенты по листам, там же референсы. За основу берем ее текущую таблицу «Сценарии, сентябрь».</li>
-                <li><b>Сценарии пишутся пачками по 10-15</b> и заранее, оживляется только то, что идет на выкладку дня. Если что-то залетело, следующая пачка делает упор на это.</li>
-                <li><b>Клиент утверждает сценарии не везде.</b> Лемус да, это ведет Дима. Лувира и стоматология нет. Поэтому в схеме развилка «клиент утверждает?».</li>
-                <li><b>Регламента подбора референсов нет.</b> Настя: <span class="q">Да, этого сейчас нет, без этого очень тяжело.</span> Андрей на созвоне: просить инструменты для работы нормально, руководители обязаны их дать.</li>
-                <li><b>Таблицу клиенту не показываем.</b> Позиция Софии: процесс внутри команды не выстроен, и видение клиента будет сбивать. За результат отвечаем мы и настаиваем на своих решениях.</li>
-              </ul>
-            </div>
-
-            <h4>Правка Софии: рабочий Клод отдельно от личного</h4>
-            <div class="fix">
-              Сейчас сценарии пишутся с личного аккаунта Софии за 20 долларов, лимит кончается за пару запросов. Ее позиция 11.09: <span class="q">мне не очень ок, что у сотрудников доступ к моему личному Клоду, я там обсуждаю все подряд.</span> Решение: этот аккаунт переводится на тариф за 100 долларов и становится общим рабочим, где только работа. Себе София заводит личный отдельно.
-            </div>
-
-            <h4>Как было задумано в таблице 01.09</h4>
-            <div class="tw"><table>
-              <tr><th>Задача</th><th style="width:170px">Кто по таблице</th><th style="width:170px">Кто по факту 11.09</th></tr>
-              <tr><td>Дать ТЗ на написание сценариев</td><td><span class="who s">София</span></td><td><span class="who s">София</span>, через утверждение хуков</td></tr>
-              <tr><td>Организовать процесс сбора референсов</td><td><span class="who a">Андрей</span></td><td><span class="who a">Андрей</span> упаковка, <span class="who s">София</span> содержание</td></tr>
-              <tr><td>Написать сценарии</td><td><span class="who n">Настя</span></td><td><span class="who n">Настя</span></td></tr>
-              <tr><td>Внести правки в сценарии</td><td><span class="who s">София</span></td><td><span class="who s">София</span> в таблице</td></tr>
-              <tr><td>Согласовать сценарии с клиентом</td><td><span class="who q">Настя</span></td><td><span class="who s">София</span>, где клиент утверждает</td></tr>
-              <tr><td>Передать сценарии в оживление</td><td><span class="who n">Настя</span></td><td><span class="who n">Настя</span> → <span class="who k">Ксюша</span></td></tr>
-            </table></div>
-
-            <h4>Где ломается</h4>
-            <div class="warn">
-              <b>Узкое горлышко компании: приемка сценариев.</b> Признано Софией 09.09 дословно: <span class="q">Это потому что я не утвердила. Это правда. Я три дня не могла это утвердить.</span> И масштаб: <span class="q">Если таких клиентов будет даже не десять, а условно шесть, я буду каждый день по 2-3 часа времени тратить на это.</span> Галочки в таблице ускоряют приемку, но срок в сутки и контроль просрочки в CRM пока не запущены.
-            </div>
-            <div class="warn">
-              <b>База знаний не собрана.</b> Материал за пять месяцев по стоматологии лежит кусками, часть в чужом аккаунте Клода. В проект загружено всего 10 залетевших сценариев.
-            </div>
-            <div class="warn">
-              <b>Лимит Клода.</b> 11.09 София: «я сделала всего пару запросов и все, он уже закончился», при том что Насте в тот же день садиться писать сценарии.
-            </div>
-
-            <h4>Что меняем</h4>
-            <div class="fix">
-              <ul style="margin:0">
-                <li><b>Сначала 20 хуков и заголовки в таблицу, потом сценарий.</b> София отмечает галочками, срок одни сутки.</li>
-                <li><b>Срок приемки пачки одни сутки.</b> Задача в CRM, просрочку поднимает Андрей. На схеме таймер и ветка эскалации.</li>
-                <li><b>Регламент подбора референсов.</b> Куда заходить, какие запросы, в том числе на английском, сколько собрать, как отличить трендовый формат от дешевого. Содержание София, упаковка Андрей.</li>
-                <li><b>База знаний ниши в Клоде тремя блоками:</b> хуки, фактура для середины ролика, рекламные интеграции.</li>
-                <li><b>Пять вариантов интеграции с чередованием.</b> Одинаковая интеграция в каждом ролике убивает конверсию в кодовое слово.</li>
-                <li><b>Пачки с разбором залетевших.</b> Следующая пачка пишется с учетом того, что сработало.</li>
-              </ul>
-            </div>
-
-            <h4>Нормативы</h4>
-            <ul>
-              <li>30 сценариев вместе с поиском референсов: <b>1,5 часа</b>.</li>
-              <li>Пачка 60 сценариев с референсами: <b>2 дня</b>.</li>
-              <li>Референсы на новую нишу: <b>30-50 штук</b> в таблицу со ссылкой и градацией «понимаю, как сделать» или «не берусь».</li>
-            </ul>
-          </div>
-        </details>
+        <h4>Шаги и кто делает</h4>
+        <div class="tw"><table class="steps">
+          <tr><th>Шаг</th><th>Кто</th></tr>
+          <tr><td>Регламент сбора референсов, один раз: разговорный ролик, человек в кадре говорит <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Поднять базу референсов прошлых проектов <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Собрать около 50 роликов, половина англоязычных, 1-2 часа</td><td class="k"><span class="who n">Настя</span>; <a class="qn" href="#q-9">п. 9</a></td></tr>
+          <tr><td>Отсмотреть референсы, дать ТЗ на аватары: сколько, мужчины и женщины, образ <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Модель: фото по одному на аватар</td><td class="k"><span class="who n">Настя</span></td></tr>
+          <tr><td>Голос: живые голоса, загрузить в ElevenLabs</td><td class="k"><span class="who n">Настя</span>; <a class="qn" href="#q-9">п. 9</a></td></tr>
+          <tr><td>Утвердить аватаров и голоса; не ок: переделать</td><td class="k"><span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Показ клиенту решаем по клиенту: сначала картинка, потом голоса; правки идут в модель <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who mg">менеджер клиента</span> (созвон с Софией 15.09); <a class="qn" href="#q-8">п. 8</a></td></tr>
+          <tr><td>Аватарка аккаунта для публикаторов</td><td class="k"><span class="who n">Настя</span></td></tr>
+          <tr><td>Инструкция аватара для оживления</td><td class="k"><span class="who n">Настя</span>; <a class="qn" href="#q-9">п. 9</a></td></tr>
+        </table></div>
+        <h4>Где ломается</h4>
+        <div class="warn"><ul>
+          <li>Критериев поиска референсов нет, старая таблица критериев избыточна (созвон с Софией 15.09).</li>
+          <li>Базы референсов по прошлым проектам нет, поиск каждый раз заново (созвон с Софией 15.09).</li>
+        </ul></div>
+        <div class="open">Вопросы Софии: <a class="qn" href="#q-8">п. 8</a>, <a class="qn" href="#q-9">п. 9</a></div>
 
         <div class="schemebar">
-          <button class="btn" data-toggle="sch-scen">
+          <button class="btn" data-toggle="sch-model">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
             Открыть схему BPMN
           </button>
-          <button class="btn ghost" data-full="scenariy" data-title="Процесс 2. Сценарий">Во весь экран</button>
-          <a class="btn ghost" href="scenariy.bpmn" download>Скачать .bpmn</a>
-          <a class="btn ghost" href="bpmn.html?f=scenariy" target="_blank" rel="noopener">Открыть в редакторе bpmn.io</a>
+          <button class="btn ghost" data-full="model" data-title="Процесс 2. Модель и голос">Во весь экран</button>
+          <a class="btn ghost" href="model.bpmn?v=0916" download="model.bpmn">Скачать .bpmn</a>
+          <a class="btn ghost" href="bpmn.html?f=model" target="_blank" rel="noopener">Открыть в просмотрщике bpmn.io</a>
         </div>
 
-        <div class="scheme" id="sch-scen">
-          <div class="frame"><img src="scenariy.svg?v=0911" alt="BPMN-схема процесса: сценарий" loading="lazy"></div>
-          <div class="cap">
-            <span>Схема прокручивается вправо</span>
-            <span>Красная рамка: узкое горлышко</span>
-            <span>Редактор bpmn.io открывается прямо на портале</span>
-          </div>
+        <div class="scheme" id="sch-model">
+          <div class="frame"><img src="model.svg?v=0916" alt="BPMN-схема: Процесс 2. Модель и голос" loading="lazy"></div>
+          <div class="cap"><span>Схема прокручивается вправо</span></div>
         </div>
 
       </div>
@@ -529,107 +522,157 @@ footer a{color:var(--ink2)}
 </section>
 
 <!-- ПРОЦЕСС 3 -->
+<section id="scenariy">
+  <div class="wrap">
+    <div class="proc">
+      <div class="ph">
+        <div class="zn">Процесс 3</div>
+        <h3>Сценарий</h3>
+        <p><b>Зачем:</b> закрыть сценариями план выкладки неделя за неделей. Все сразу не пишем: смотрим на результаты роликов (созвон с Софией 15.09).</p>
+        <p><b>Вход:</b> аватары и план выкладки. <b>Выход:</b> одобренные сценарии на неделю с ТЗ на монтаж, дальше процесс 4.</p>
+        <div class="roles"><span class="who c">Клиент</span><span class="who a">Андрей</span><span class="who s">София</span><span class="who n">Настя</span></div>
+        <div class="facts"><span>шагов на схеме <b>9</b></span><span>ролей <b>3 + клиент</b></span><span>добавляем шагов <b>4</b></span><span>узкие места и риски <b>1</b></span></div>
+      </div>
+      <div class="pbody">
+        <h4>Шаги и кто делает</h4>
+        <div class="tw"><table class="steps">
+          <tr><th>Шаг</th><th>Кто</th></tr>
+          <tr><td>Взять из плана выкладки, сколько роликов на какую неделю</td><td class="k"><span class="who n">Настя</span></td></tr>
+          <tr><td>Хуки и заголовки (правило 09.09: 20 хуков)</td><td class="k"><span class="who n">Настя</span>; <a class="qn" href="#q-10">п. 10</a></td></tr>
+          <tr><td>Сценарии на неделю вперед, к каждому референс</td><td class="k"><span class="who n">Настя</span></td></tr>
+          <tr><td>ТЗ на монтаж к каждому сценарию <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Принять пачку в пн, ср или пт</td><td class="k"><span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Рискованные утверждения (здоровье, доход, конкуренты) вдвоем <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span> и <span class="who s">София</span></td></tr>
+          <tr><td>Первые 2-3 сценария в чат клиента, мелкие правки внести <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Клиент пишет «все плохо»: объяснить; переделка: назад в сценарии <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Отметить «одобрено» в таблице</td><td class="k"><a class="qn" href="#q-10">вопрос Софии, п. 10</a></td></tr>
+          <tr><td>Период не покрыт: следующая неделя по плану</td><td class="k"><span class="who n">Настя</span></td></tr>
+        </table></div>
+        <h4>Где ломается</h4>
+        <div class="warn"><ul>
+          <li>Утверждения Софии шли по несколько раз в день, это узкое место компании (созвон с Софией 15.09).</li>
+          <li>Таблица росла по мере сценариев, без плана на период (созвон с Настей 15.09).</li>
+        </ul></div>
+        <div class="open">Вопросы Софии: <a class="qn" href="#q-10">п. 10</a></div>
+
+        <div class="schemebar">
+          <button class="btn" data-toggle="sch-scenariy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
+            Открыть схему BPMN
+          </button>
+          <button class="btn ghost" data-full="scenariy" data-title="Процесс 3. Сценарий">Во весь экран</button>
+          <a class="btn ghost" href="scenariy.bpmn?v=0916" download="scenariy.bpmn">Скачать .bpmn</a>
+          <a class="btn ghost" href="bpmn.html?f=scenariy" target="_blank" rel="noopener">Открыть в просмотрщике bpmn.io</a>
+        </div>
+
+        <div class="scheme" id="sch-scenariy">
+          <div class="frame"><img src="scenariy.svg?v=0916" alt="BPMN-схема: Процесс 3. Сценарий" loading="lazy"></div>
+          <div class="cap"><span>Схема прокручивается вправо</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОЦЕСС 4 -->
+<section id="iskhodniki">
+  <div class="wrap">
+    <div class="proc">
+      <div class="ph">
+        <div class="zn">Процесс 4</div>
+        <h3>Исходники</h3>
+        <p><b>Зачем:</b> каждый день иметь проверенные исходники на пару дней вперед, у монтажера к 11:00, без ручной пересылки.</p>
+        <p><b>Вход:</b> одобренные сценарии и ТЗ. <b>Выход:</b> исходник на Google Диске, ссылка в таблице. Дальше процесс 5.</p>
+        <div class="roles"><span class="who a">Андрей</span><span class="who n">Настя</span><span class="who k">Ксюша</span></div>
+        <div class="facts"><span>шагов на схеме <b>10</b></span><span>ролей <b>3</b></span><span>добавляем шагов <b>3</b></span><span>узкие места и риски <b>1</b></span></div>
+      </div>
+      <div class="pbody">
+        <h4>Шаги и кто делает</h4>
+        <div class="tw"><table class="steps">
+          <tr><th>Шаг</th><th>Кто</th></tr>
+          <tr><td>Сценарии и ТЗ помощнику задачей в CRM со сроком</td><td class="k"><span class="who n">Настя</span> (11.09)</td></tr>
+          <tr><td>Проверить остаток токенов HeyGen, предупредить примерно за 40 роликов</td><td class="k"><span class="who n">Настя</span></td></tr>
+          <tr><td>Пополнить HeyGen до следующего рабочего дня</td><td class="k"><span class="who a">Андрей</span></td></tr>
+          <tr><td>Оживить аватаров и собрать аудио на пару дней вперед</td><td class="k"><span class="who k">Ксюша</span> (созвон с Настей 15.09)</td></tr>
+          <tr><td>Проверить ударения, мимику, артефакты; ошибки: перегенерировать</td><td class="k"><span class="who k">Ксюша</span> (созвон с Настей 15.09)</td></tr>
+          <tr><td>Выгрузить исходник на Google Диск <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who k">Ксюша</span>; механику продумывает <span class="who a">Андрей</span> (созвон с Настей 15.09)</td></tr>
+          <tr><td>Ссылка и ТЗ в таблицу, отметка «видео готово» <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who k">Ксюша</span></td></tr>
+          <tr><td>К 11:00 проверить таблицу; пусто: написать Андрею <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span> (созвон с Настей 15.09); <span class="who a">Андрей</span> разбирает; <a class="qn" href="#q-13">п. 13</a></td></tr>
+        </table></div>
+        <h4>Где ломается</h4>
+        <div class="warn"><ul>
+          <li>Токены кончались в день простоя (11.09).</li>
+          <li>Исходники уходили монтажеру сообщением в Телеграм вручную (созвон с Настей 15.09).</li>
+        </ul></div>
+        <div class="open">Вопросы Софии: <a class="qn" href="#q-13">п. 13</a></div>
+
+        <div class="schemebar">
+          <button class="btn" data-toggle="sch-iskhodniki">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
+            Открыть схему BPMN
+          </button>
+          <button class="btn ghost" data-full="iskhodniki" data-title="Процесс 4. Исходники">Во весь экран</button>
+          <a class="btn ghost" href="iskhodniki.bpmn?v=0916" download="iskhodniki.bpmn">Скачать .bpmn</a>
+          <a class="btn ghost" href="bpmn.html?f=iskhodniki" target="_blank" rel="noopener">Открыть в просмотрщике bpmn.io</a>
+        </div>
+
+        <div class="scheme" id="sch-iskhodniki">
+          <div class="frame"><img src="iskhodniki.svg?v=0916" alt="BPMN-схема: Процесс 4. Исходники" loading="lazy"></div>
+          <div class="cap"><span>Схема прокручивается вправо</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОЦЕСС 5 -->
 <section id="montazh">
   <div class="wrap">
     <div class="proc">
       <div class="ph">
-        <div class="zn">Процесс 3 · зоны 3 и 4 таблицы</div>
-        <h3>Монтаж и выкладка</h3>
-        <p>От утвержденных сценариев до выложенного ролика и галочки в таблице клиента. Разобран с Настей 11.09. Новая схема передачи через папки на Диске ждет да Софии.</p>
-        <div class="facts">
-          <span>шагов <b>11</b></span>
-          <span>ролей <b>6</b></span>
-          <span>исходники <b>до 12:00</b></span>
-          <span>выкладка <b>до 19:00</b></span>
-          <span>добавляем шагов <b>8</b></span>
-        </div>
+        <div class="zn">Процесс 5</div>
+        <h3>Монтаж</h3>
+        <p><b>Зачем:</b> получить ролик по ТЗ, в срок и с запасом, проверенный до выкладки.</p>
+        <p><b>Вход:</b> ссылка и ТЗ в таблице к 11:00. <b>Выход:</b> проверенный ролик в папке к 15-16 часам.</p>
+        <div class="roles"><span class="who a">Андрей</span><span class="who s">София</span><span class="who n">Настя</span><span class="who m">Монтажер</span></div>
+        <div class="facts"><span>шагов на схеме <b>9</b></span><span>ролей <b>4</b></span><span>добавляем шагов <b>6</b></span><span>узкие места и риски <b>1</b></span></div>
       </div>
       <div class="pbody">
-
-        <details>
-          <summary><span class="pm"></span>Как это работает: подробное описание<span class="hint"></span></summary>
-          <div class="dbody">
-
-            <h4>Что это за процесс</h4>
-            <p>Цепочка, по которой оживленный ролик становится выложенным: ТЗ на монтаж, исходники, монтаж, приемка, выкладка, отчет и отметка в таблице. В нем участвуют шесть ролей, и до 11.09 все передачи шли через чаты в Телеграме, поэтому никто, кроме последнего в цепочке, не знал, дошел ли ролик до аккаунта.</p>
-
-            <h4>Как было задумано в таблице 01.09</h4>
-            <div class="tw"><table>
-              <tr><th>Задача</th><th style="width:200px">Кто</th></tr>
-              <tr><td>Поставить ТЗ на количество монтажа в день и неделю, передать рефы</td><td><span class="who a">Андрей</span></td></tr>
-              <tr><td>Смонтировать</td><td><span class="who m">Кирилл</span></td></tr>
-              <tr><td>Утвердить и внести правки в монтаж и обложку</td><td><span class="who s">София</span></td></tr>
-              <tr><td>Передать на выкладку</td><td><span class="who m">Кирилл</span></td></tr>
-              <tr><td>Порядок выкладки, найм и обучение публикаторов, описания и ответы, боты, ежедневный контроль</td><td><span class="who a">Андрей</span></td></tr>
-              <tr><td>Ежедневная публикация</td><td><span class="who p">публикатор</span></td></tr>
-            </table></div>
-
-            <h4>Как идет по факту</h4>
-            <ul>
-              <li><b>Исходники уходят монтажеру сообщением в Телеграм.</b> Сообщение собирается из пунктов таблицы: сценарий, у Аргимакса еще заголовок и ТЗ. Раньше отправляла Настя, с 14.09 Ксюша.</li>
-              <li><b>ТЗ на монтаж Настя пишет только по Лувире:</b> референс и что куда вставить. По остальным клиентам его дает София.</li>
-              <li><b>Кирилл монтирует</b> (субтитры, вставки, перекрытия, обложка) и отправляет готовое в рабочий чат без клиента.</li>
-              <li><b>Оттуда публикатор выкладывает.</b> Лиза или Ксюша, один аккаунт на одно устройство.</li>
-              <li><b>Финальный монтаж проверяется не всегда.</b> По детскому стоматологу правки пришли уже после монтажа, и ТЗ переделывали заново.</li>
-              <li><b>Отчет публикатора</b> приходит в Телеграм: ссылки и «два из двух выложено сегодня». Иногда к 22:00 или к полуночи.</li>
-              <li><b>Факт выкладки не подтверждает никто.</b> Настя: <span class="q">я никак не узнавала. Я просто знала, что они закрыли план за месяц, ставила галочки.</span> Монтажеры и публикаторы галочки в таблице не ставили.</li>
-              <li><b>Чатов много.</b> Настя: <span class="q">эти бесконечные чаты, их там, наверное, уже десяток, это очень неудобно.</span></li>
-            </ul>
-
-            <h4>Где ломается</h4>
-            <div class="warn">
-              <b>1. Двойная работа по монтажу.</b> Когда правки появляются после монтажа, переделываются и ТЗ, и сам ролик. Если ТЗ утвердить до монтажа, правка стоит одну строку.
-            </div>
-            <div class="warn">
-              <b>2. Нет срока ни на одной передаче.</b> Исходники приходят поздно, выкладка сдвигается на вечер, проверить день к концу рабочего времени невозможно.
-            </div>
-            <div class="warn">
-              <b>3. Объем по договору никто не сверяет по факту.</b> Сколько роликов выложено клиенту за месяц, видно только из переписки.
-            </div>
-
-            <h4>Что предлагаем (ждет да Софии)</h4>
-            <div class="fix">
-              <ul style="margin:0">
-                <li><b>ТЗ на монтаж по той же схеме, что хуки:</b> Настя пишет в таблице, София утверждает галочкой, дальше Кириллу. Настя согласилась: «так будет 100% удобнее».</li>
-                <li><b>Папки клиента на Диске по месяцам.</b> Ксюша кладет в папку дня исходники, референсы и ТЗ одним комплектом, чтобы ТЗ ехало вместе с исходником (просьба Насти 11.09). Кирилл кладет готовые видео в папку месяца. Публикатор скачивает оттуда. Настя: «это не заморочка, это удобно».</li>
-                <li><b>Исходники до 12:00.</b> Не пришли, подключается Настя и досылает сама. Она отвечает за Ксюшу.</li>
-                <li><b>Выкладка дня закрыта к 19:00.</b> Отчет: дата, клиент, сколько выложено, ссылка на папку. Это предложение Насти, чтобы проверять день в рабочее время.</li>
-                <li><b>Галочки «смонтировано» и «выложено»</b> ставит Настя, сверив число файлов в папке. Проверка занимает секунды, а не разбор чатов.</li>
-                <li><b>Таблицу клиента и автоматизацию строит Андрей</b> и сверяет объем по договору. Настя отвечает за качество и скорость.</li>
-              </ul>
-            </div>
-
-            <div class="open">
-              <b>Открыто.</b> Кто на выкладке после перехода Ксюши на оживление: только Лиза или Ксюша тоже. Вопрос Софии задан 11.09. И второе: остается ли приемка готового монтажа за Софией, если ТЗ она утверждает заранее. В схеме приемка оставлена по таблице 01.09 и отмечена риском.
-            </div>
-
-            <h4>Правила выкладки, которые не меняются</h4>
-            <ul>
-              <li>Один публикатор, один аккаунт, одна почта, одно устройство. Несколько аккаунтов на одном устройстве блокируют.</li>
-              <li>Ролики с ленты не удаляем никогда.</li>
-              <li>Для товарных клиентов в описании каждого ролика артикул.</li>
-              <li>Выкладку на выходные готовим заранее, отложенными публикациями. Команда работает пять через два.</li>
-            </ul>
-          </div>
-        </details>
+        <h4>Шаги и кто делает</h4>
+        <div class="tw"><table class="steps">
+          <tr><th>Шаг</th><th>Кто</th></tr>
+          <tr><td>Забрать исходник и ТЗ по таблице <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who m">монтажер</span></td></tr>
+          <tr><td>Смонтировать по ТЗ: субтитры, вставки, обложка; сдать к 15-16 часам</td><td class="k"><span class="who m">монтажер</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Готовое в папку, отметка «монтаж»; всегда на завтра <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who m">монтажер</span>; запас считаем в плане: <a class="qn" href="#q-13">п. 13</a></td></tr>
+          <tr><td>Проверить ролик по ТЗ, дать правки монтажеру <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span> (созвон с Настей 15.09, созвон с Софией 15.09)</td></tr>
+          <tr><td>Первые ролики по клиенту: утвердить монтаж и обложку</td><td class="k"><span class="who s">София</span> (соглашение); <a class="qn" href="#q-11">п. 11</a></td></tr>
+          <tr><td>К 15-16 часам проверить папку; не сдано: написать Андрею <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span> (созвон с Настей 15.09)</td></tr>
+          <tr><td>Разобрать с монтажером, записать срок в регламент <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span></td></tr>
+          <tr><td>Монтажер выпал: объем на резервного; цель: несколько монтажеров <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span> (созвон с Софией 15.09); <a class="qn" href="#q-11">п. 11</a></td></tr>
+        </table></div>
+        <h4>Где ломается</h4>
+        <div class="warn"><ul>
+          <li>ТЗ по одному проекту не выполнено ни в одном ролике (созвон с Настей 15.09).</li>
+          <li>Ролики приходили поздно. По словам Софии, исходники приходили к обеду или к 15-16 часам (созвон с Софией 15.09); по созвону с Настей, по одному проекту исходники ушли в 9:00, а ролик пришел к 20-21 часу. Причина: <a class="qn" href="#q-11">п. 11</a>.</li>
+          <li>Один монтажер без резерва: если выпадет, производство встает (созвон с Софией 15.09).</li>
+        </ul></div>
+        <div class="open">Вопросы Софии: <a class="qn" href="#q-11">п. 11</a>, <a class="qn" href="#q-13">п. 13</a></div>
 
         <div class="schemebar">
-          <button class="btn" data-toggle="sch-mont">
+          <button class="btn" data-toggle="sch-montazh">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
             Открыть схему BPMN
           </button>
-          <button class="btn ghost" data-full="montazh" data-title="Процесс 3. Монтаж и выкладка">Во весь экран</button>
-          <a class="btn ghost" href="montazh.bpmn" download>Скачать .bpmn</a>
-          <a class="btn ghost" href="bpmn.html?f=montazh" target="_blank" rel="noopener">Открыть в редакторе bpmn.io</a>
+          <button class="btn ghost" data-full="montazh" data-title="Процесс 5. Монтаж">Во весь экран</button>
+          <a class="btn ghost" href="montazh.bpmn?v=0916" download="montazh.bpmn">Скачать .bpmn</a>
+          <a class="btn ghost" href="bpmn.html?f=montazh" target="_blank" rel="noopener">Открыть в просмотрщике bpmn.io</a>
         </div>
 
-        <div class="scheme" id="sch-mont">
-          <div class="frame"><img src="montazh.svg?v=0911" alt="BPMN-схема процесса: монтаж и выкладка" loading="lazy"></div>
-          <div class="cap">
-            <span>Схема прокручивается вправо</span>
-            <span>Двойной круг «12:00»: контроль исходников</span>
-            <span>Редактор bpmn.io открывается прямо на портале</span>
-          </div>
+        <div class="scheme" id="sch-montazh">
+          <div class="frame"><img src="montazh.svg?v=0916" alt="BPMN-схема: Процесс 5. Монтаж" loading="lazy"></div>
+          <div class="cap"><span>Схема прокручивается вправо</span></div>
         </div>
 
       </div>
@@ -637,65 +680,169 @@ footer a{color:var(--ink2)}
   </div>
 </section>
 
-<section id="pravila">
+<!-- ПРОЦЕСС 6 -->
+<section id="vykladka">
   <div class="wrap">
-    <h2>Как работает команда с 11.09</h2>
-    <p class="smeta">Правила, которые проговорены с Настей на созвоне и касаются всех трех процессов.</p>
-    <div class="map">
-      <div class="mp">
-        <div class="zn">Структура</div>
-        <h3>Андрей → Настя → Ксюша</h3>
-        <p>Настя отвечает перед Андреем, Ксюша работает под Настей, и за ее результат спрос с Насти. Задачи Ксюше Настя ставит в CRM.</p>
+    <div class="proc">
+      <div class="ph">
+        <div class="zn">Процесс 6</div>
+        <h3>Выкладка</h3>
+        <p><b>Зачем:</b> каждый день выкладывать ролики по плану и видеть факт, а не узнавать о пропуске от клиента.</p>
+        <p><b>Вход:</b> дата старта из плана, ролики в папке. <b>Выход:</b> объем по договору выложен, факт сверен. Дальше процесс 7.</p>
+        <div class="roles"><span class="who a">Андрей</span><span class="who n">Настя</span><span class="who t">Техспец</span><span class="who p">Публикаторы</span></div>
+        <div class="facts"><span>шагов на схеме <b>9</b></span><span>ролей <b>4</b></span><span>добавляем шагов <b>5</b></span><span>узкие места и риски <b>1</b></span></div>
       </div>
-      <div class="mp">
-        <div class="zn">Источник правды</div>
-        <h3>Задача в CRM</h3>
-        <p>В чате только «открой задачу» и «готово». Обсуждения и идеи на еженедельном созвоне. Первый клиент по новому порядку это клиника.</p>
-      </div>
-      <div class="mp">
-        <div class="zn">Режим</div>
-        <h3>Пять через два</h3>
-        <p>Выходные без задач в CRM, срочное пишем в Телеграм. Отпросилась в будний день, отработала на выходных.</p>
-      </div>
-      <div class="mp">
-        <div class="zn">Сервисы</div>
-        <h3>HeyGen и Клод</h3>
-        <p>Токены предупреждаем заранее, пополнение задачей Андрею. Клод рабочий общий, личные аккаунты отдельно.</p>
+      <div class="pbody">
+        <h4>Шаги и кто делает</h4>
+        <div class="tw"><table class="steps">
+          <tr><th>Шаг</th><th>Кто</th></tr>
+          <tr><td>Взять ролики дня из папки <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who p">публикатор</span></td></tr>
+          <tr><td>Выложить по плановым датам; с ленты не удаляем</td><td class="k"><span class="who p">публикатор</span>; сколько в день: <a class="qn" href="#q-12">п. 12</a></td></tr>
+          <tr><td>Аккаунт заблокирован: сообщить; устройство больше не используем</td><td class="k"><span class="who p">публикатор</span> (созвон с Софией 15.09)</td></tr>
+          <tr><td>Решить замену аккаунта, поставить задачу техспецу <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span>; кто и в какой срок: <a class="qn" href="#q-16">п. 16</a></td></tr>
+          <tr><td>Новый аккаунт: создать, упаковать, прогреть</td><td class="k"><span class="who p">публикатор</span></td></tr>
+          <tr><td>Почистить воронку заблокированного аккаунта</td><td class="k"><span class="who t">техспец</span>; <a class="qn" href="#q-17">п. 17</a></td></tr>
+          <tr><td>Отчет за день: ссылки в столбец «Выкладка факт» <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who p">публикатор</span> (созвон с Настей 15.09); к какому часу: <a class="qn" href="#q-12">п. 12</a></td></tr>
+          <tr><td>Сверить факт с планом; позже Телеграм-бот <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span> (созвон с Настей 15.09); <a class="qn" href="#q-21">п. 21</a></td></tr>
+          <tr><td>Отклонение: написать Андрею, он разбирает <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span> (созвон с Настей 15.09); <span class="who a">Андрей</span></td></tr>
+        </table></div>
+        <h4>Где ломается</h4>
+        <div class="warn"><ul>
+          <li>Факт выкладки никто не подтверждал: отметки ставились по закрытию плана (11.09).</li>
+          <li>О пропусках выкладки узнавали из жалоб клиента (созвон с Настей 15.09).</li>
+          <li>Правила устройств и блокировок публикаторам озвучены, но не проверяются (созвон с Софией 15.09).</li>
+        </ul></div>
+        <div class="open">Вопросы Софии: <a class="qn" href="#q-12">п. 12</a>, <a class="qn" href="#q-16">п. 16</a>, <a class="qn" href="#q-17">п. 17</a>, <a class="qn" href="#q-21">п. 21</a></div>
+
+        <div class="schemebar">
+          <button class="btn" data-toggle="sch-vykladka">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
+            Открыть схему BPMN
+          </button>
+          <button class="btn ghost" data-full="vykladka" data-title="Процесс 6. Выкладка">Во весь экран</button>
+          <a class="btn ghost" href="vykladka.bpmn?v=0916" download="vykladka.bpmn">Скачать .bpmn</a>
+          <a class="btn ghost" href="bpmn.html?f=vykladka" target="_blank" rel="noopener">Открыть в просмотрщике bpmn.io</a>
+        </div>
+
+        <div class="scheme" id="sch-vykladka">
+          <div class="frame"><img src="vykladka.svg?v=0916" alt="BPMN-схема: Процесс 6. Выкладка" loading="lazy"></div>
+          <div class="cap"><span>Схема прокручивается вправо</span></div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
-<section id="dalshe">
+<!-- ПРОЦЕСС 7 -->
+<section id="prodlenie">
   <div class="wrap">
-    <h2>Что дальше</h2>
-    <p class="smeta">Порядок выбран по одному правилу: сначала то, что мешает деньгам сегодня, потом то, что помешает на масштабе.</p>
-    <div class="map">
-      <div class="mp">
-        <div class="zn">Сейчас</div>
-        <h3>Клиника по новому порядку</h3>
-        <p>Первый клиент, который проходит все три процесса с брифом, чатом, CRM, папками и таблицей. На нем проверяем схемы на живых людях.</p>
-        <span class="st risk">приоритет 1</span>
+    <div class="proc">
+      <div class="ph">
+        <div class="zn">Процесс 7</div>
+        <h3>Отчет, закрытие и продление</h3>
+        <p><b>Зачем:</b> вести клиента по неделям, заранее продать следующий период, закрыть обязательства. Цель: вести клиента не один месяц, ко второму периоду нужен результат (созвон с Софией 15.09).</p>
+        <p><b>Вход:</b> идет выкладка; объем выложен (процесс 6). <b>Выход:</b> новый договор (в процесс 0) или закрытый контракт.</p>
+        <div class="roles"><span class="who c">Клиент</span><span class="who mg">Менеджер клиента</span><span class="who a">Андрей</span><span class="who s">София</span><span class="who n">Настя</span></div>
+        <div class="facts"><span>шагов на схеме <b>14</b></span><span>ролей <b>4 + клиент</b></span><span>добавляем шагов <b>10</b></span></div>
       </div>
-      <div class="mp">
-        <div class="zn">Следующий</div>
-        <h3>Контур публикаторов</h3>
-        <p>Настоящий потолок компании: один публикатор на один аккаунт с отдельным устройством. На трех клиентов это 15-30 человек, которых надо нанимать и контролировать.</p>
-        <span class="st risk">приоритет 2</span>
-      </div>
-      <div class="mp">
-        <div class="zn">Дальше</div>
-        <h3>Зона 5. Аналитика</h3>
-        <p>Это то, что клиент видит каждую неделю, и то, чего сейчас нет. Программа умерла, цифры считаются руками.</p>
-        <span class="st wait">приоритет 3</span>
-      </div>
-      <div class="mp">
-        <div class="zn">Дальше</div>
-        <h3>Зоны 6 и 7 плюс продажи</h3>
-        <p>Менеджмент собирается в CRM по ходу клиники, продажи описываются на своей воронке.</p>
-        <span class="st wait">по ходу клиента</span>
+      <div class="pbody">
+        <h4>Шаги и кто делает</h4>
+        <div class="tw"><table class="steps">
+          <tr><th>Шаг</th><th>Кто</th></tr>
+          <tr><td><b>Неделя.</b> Цифры недели: просмотры, кодовые слова <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span> (соглашение); <a class="qn" href="#q-18">п. 18</a></td></tr>
+          <tr><td>Отчет или созвон клиенту, собрать вопросы <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who mg">менеджер клиента</span>; <span class="who s">София</span> по продукту (соглашение)</td></tr>
+          <tr><td>Вопросы по продукту передать Софии, по контенту Насте <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who mg">менеджер клиента</span></td></tr>
+          <tr><td><b>Продление.</b> Допсоглашение за 10 дней до конца срока (договор), разговор раньше</td><td class="k"><span class="who a">Андрей</span>; <a class="qn" href="#q-20">п. 20</a></td></tr>
+          <tr><td>Собрать цифры периода <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span></td></tr>
+          <tr><td>Что сработало: форматы и сценарии <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who n">Настя</span></td></tr>
+          <tr><td>Продуктовая часть нового периода</td><td class="k"><span class="who s">София</span> (соглашение)</td></tr>
+          <tr><td>Состав, цена и что продать сверху, вдвоем <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span> и <span class="who s">София</span> (соглашение, созвон с Софией 15.09)</td></tr>
+          <tr><td>Созвон с клиентом: итоги и новый период <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span>, <span class="who s">София</span> по продукту</td></tr>
+          <tr><td>Продлевает: допсоглашение и счет в работу, дальше процесс 0</td><td class="k"><span class="who a">Андрей</span></td></tr>
+          <tr><td><b>Закрытие.</b> Итоговый отчет после всего объема</td><td class="k"><span class="who mg">менеджер клиента</span> (соглашение); <a class="qn" href="#q-18">п. 18</a></td></tr>
+          <tr><td>Акт или УПД в течение 5 рабочих дней по факту</td><td class="k"><span class="who a">Андрей</span>, подпись партнера по юрлицу; <a class="qn" href="#q-19">п. 19</a></td></tr>
+          <tr><td>Отправить отчет и акт <span class="plus" title="шага сегодня нет, добавляем">+</span>; клиент подписывает за 5 рабочих дней или дает отказ</td><td class="k"><span class="who mg">менеджер клиента</span>; <a class="qn" href="#q-19">п. 19</a></td></tr>
+          <tr><td>Новый период не идет: передать клиенту аккаунты и доступы <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k">по договору; <a class="qn" href="#q-16">п. 16</a></td></tr>
+          <tr><td>Внести клиента в базу, греть дальше <span class="plus" title="шага сегодня нет, добавляем">+</span></td><td class="k"><span class="who a">Андрей</span> и <span class="who s">София</span> (созвон с Софией 15.09)</td></tr>
+        </table></div>
+        <h4>Где ломается</h4>
+        <div class="warn"><ul>
+          <li>Отчет: по соглашению еженедельно, по договору первого общего клиента один отчет после всего объема.</li>
+          <li>Акты без периода и числа роликов бухгалтерия клиента возвращала на переделку.</li>
+          <li>Результат не гарантируется (договор).</li>
+          <li>Базы всех, с кем общались, пока нет (созвон с Софией 15.09).</li>
+        </ul></div>
+        <div class="open">Вопросы Софии: <a class="qn" href="#q-16">п. 16</a>, <a class="qn" href="#q-18">п. 18</a>, <a class="qn" href="#q-19">п. 19</a>, <a class="qn" href="#q-20">п. 20</a></div>
+
+        <div class="schemebar">
+          <button class="btn" data-toggle="sch-prodlenie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/></svg>
+            Открыть схему BPMN
+          </button>
+          <button class="btn ghost" data-full="prodlenie" data-title="Процесс 7. Отчет, закрытие и продление">Во весь экран</button>
+          <a class="btn ghost" href="prodlenie.bpmn?v=0916" download="prodlenie.bpmn">Скачать .bpmn</a>
+          <a class="btn ghost" href="bpmn.html?f=prodlenie" target="_blank" rel="noopener">Открыть в просмотрщике bpmn.io</a>
+        </div>
+
+        <div class="scheme" id="sch-prodlenie">
+          <div class="frame"><img src="prodlenie.svg?v=0916" alt="BPMN-схема: Процесс 7. Отчет, закрытие и продление" loading="lazy"></div>
+          <div class="cap"><span>Схема прокручивается вправо</span></div>
+        </div>
+
       </div>
     </div>
+  </div>
+</section>
+
+<section id="komanda">
+  <div class="wrap">
+    <h2>Как работает команда</h2>
+    <p class="smeta">Правила, которые касаются всех процессов.</p>
+    <ul class="rules">
+      <li><b>Подчинение:</b> Андрей → Настя → Ксюша (14.09). Внутренний процесс нового проекта, роли и зоны определяет Андрей (созвон с Настей 15.09).</li>
+      <li><b>Чат клиента: Андрей, София, Настя,</b> остальные в нем не участвуют. По клиенту Андрей спрашивает Софию в личке (созвон с Софией 15.09). Рабочие вопросы команды в общих чатах, правда в задаче CRM со сроком (08.09, 14.09).</li>
+      <li><b>Утверждения Софии:</b> пн, ср, пт, по возможности раз в день. Запрос в другой день это ошибка планирования того, кто просит (созвон с Софией 15.09).</li>
+      <li><b>Запас роликов:</b> нужно два в день, делаем три, запас на выходные; день в день не делаем (созвон с Софией 15.09).</li>
+      <li><b>У клиента не просим</b> фото и голос для вымышленных аватаров, почты и номера для аккаунтов (созвон с Софией 15.09).</li>
+      <li><b>Одна таблица на всех клиентов,</b> клиенты по листам, столбец «Выкладка факт» (созвон с Настей 15.09). Клиенту таблицу не показываем.</li>
+      <li><b>Пять через два:</b> производство в выходные не работает, публикация идет (созвон с Настей 15.09).</li>
+      <li><b>Регламент это текущая практика:</b> через неделю меняем одно правило; лист «Инструкция, регламент работы» в таблице есть (созвон с Настей 15.09).</li>
+      <li><b>Деньги проекта:</b> Андрей ведет отчет о движении денег с первой оплаты, София сообщает о каждом расходе, деньги, которые партнер забирает себе, считаются выводом дивидендов (созвон с Софией 15.09).</li>
+      <li><b>Ниша клиента:</b> законность контента проверяем; поставить пометку ИИ, если нужно, не проблема (созвон с Софией 15.09).</li>
+      <li><b>Созвон команды</b> про роли предложен на 18.09: <a class="qn" href="#q-22">вопрос Софии, п. 22</a>.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="voprosy">
+  <div class="wrap">
+    <h2>Что решить с Софией</h2>
+    <p class="smeta">Открытые вопросы; номер совпадает со ссылками «вопрос Софии, п. N» в тексте. Что закрыл созвон 15.09, уже стоит в шагах процессов и в правилах команды.</p>
+    <ol class="qs">
+      <li id="q-1"><span class="num">1</span><div><b>Менеджер клиента:</b> когда и при каком условии нанимаем; до найма это Андрей (соглашение, п. 3.7).</div></li>
+      <li id="q-2"><span class="num">2</span><div><b>Продажа:</b> кто ведет встречи с новыми лидами (по факту София, по соглашению Андрей); кто готовит и утверждает КП.</div></li>
+      <li id="q-3"><span class="num">3</span><div><b>Деньги:</b> как узнаем о поступлении; кто и сколько раз напоминает об оплате; кто нумерует счета и акты.</div></li>
+      <li id="q-4"><span class="num">4</span><div><b>Бриф:</b> кто вытаскивает бриф из записи встречи; где лежит контекст по клиенту.</div></li>
+      <li id="q-5"><span class="num">5</span><div><b>Две недели подготовки:</b> в договоре первого клиента срок идет со дня после последнего из событий: оплата или материалы. Берем как стандарт?</div></li>
+      <li id="q-6"><span class="num">6</span><div><b>План выкладки:</b> кто утверждает, Андрей или София; согласует ли София, сколько аватаров и роликов когда стартуют.</div></li>
+      <li id="q-7"><span class="num">7</span><div><b>Старт продления:</b> что меняется, кроме плана выкладки: аватары, аккаунты, публикаторы.</div></li>
+      <li id="q-8"><span class="num">8</span><div><b>Показ клиенту:</b> каким клиентам показываем аватаров и голоса; согласуем ли смонтированные ролики.</div></li>
+      <li id="q-9"><span class="num">9</span><div><b>Модель:</b> кто собирает референсы (не обязательно Настя, гипотеза Софии); нужны ли оживленные пробы, если клиенту сначала показываем картинку; кто вносит инструкцию аватара; второй сервис голоса.</div></li>
+      <li id="q-10"><span class="num">10</span><div><b>Сценарии:</b> хуки утверждаем в чате или в таблице; кто ставит «одобрено».</div></li>
+      <li id="q-11"><span class="num">11</span><div><b>Монтаж:</b> делим ли приемку: первые ролики София, остальные Настя; причина поздних роликов (процесс 5); дневная норма; кто резервный.</div></li>
+      <li id="q-12"><span class="num">12</span><div><b>Выкладка по дням:</b> на тесте одна публикация в день: на аккаунт или всего; к какому часу выкладка и отчет; у первого клиента 5 или 10 аккаунтов.</div></li>
+      <li id="q-13"><span class="num">13</span><div><b>Исходники и запас:</b> досылает ли Настя исходники сама, если к 11:00 пусто; кто считает запас роликов в плане.</div></li>
+      <li id="q-14"><span class="num">14</span><div><b>Публикаторы:</b> кто отбирает и обучает; платим ли команде за приведенного (предложение Софии); где создаем почты. Где покупать аккаунты: ответ получен 15.09, внести в инструкцию.</div></li>
+      <li id="q-15"><span class="num">15</span><div><b>Прогрев:</b> по правилу чата 24.06 два дня (подписки, лайки, комментарии); 15.09 срок не назван: подтвердить.</div></li>
+      <li id="q-16"><span class="num">16</span><div><b>Блокировки и доступы:</b> кто решает о замене аккаунта и в какой срок; где хранить доступы; кто и когда передает их клиенту.</div></li>
+      <li id="q-17"><span class="num">17</span><div><b>Воронка:</b> у первого клиента квиз делает клиент, как у остальных; нужен ли тогда техспец; как часто проверять воронки.</div></li>
+      <li id="q-18"><span class="num">18</span><div><b>Отчет клиенту:</b> еженедельно (соглашение) или в конце (договор первого клиента); какие цифры; кто собирает.</div></li>
+      <li id="q-19"><span class="num">19</span><div><b>Акт:</b> готовит Андрей, подписывает партнер по юрлицу (соглашение): так ли; кто отправляет.</div></li>
+      <li id="q-20"><span class="num">20</span><div><b>Продление:</b> за сколько дней начинать разговор; допсоглашение или помесячный счет.</div></li>
+      <li id="q-21"><span class="num">21</span><div><b>Роль Насти:</b> как называть для команды; что из контроля (план, сроки 11:00 и 15-16, сверка выкладки) берет сейчас, а что через месяц.</div></li>
+      <li id="q-22"><span class="num">22</span><div><b>Созвон команды 18.09:</b> проводим или объявляем роли сообщением.</div></li>
+    </ol>
   </div>
 </section>
 
@@ -710,15 +857,12 @@ footer a{color:var(--ink2)}
       <button class="mb" id="mclose">закрыть ✕</button>
     </div>
   </div>
-  <div class="mbody"><img id="mimg" src="" alt=""></div>
+  <div class="mbody"><img id="mimg" alt=""></div>
 </div>
 
 <footer>
   <div class="wrap">
-    Собрано 09.09.2026, обновлено 11.09.2026 по созвону с Настей и чату с Софией ·
-    <a href="/salescast/zony/">Зоны и оргструктура</a> ·
-    <a href="/salescast/proizvodstvo/">Производство</a> ·
-    <a href="/salescast/">Контур Salescast</a>
+    Собрано 09.09.2026, обновлено 16.09.2026 по созвону Андрея и Софии 15.09 к совместному проходу, Софией еще не просмотрено. Открытых вопросов: 22.
   </div>
 </footer>
 
@@ -735,7 +879,7 @@ document.querySelectorAll('[data-toggle]').forEach(function(b){
 var modal = document.getElementById('modal'), mimg = document.getElementById('mimg'),
     mtitle = document.getElementById('mtitle'), mzoom = document.getElementById('mzoom'), scale = 1;
 
-function applyScale(){ mimg.style.transform = 'scale(' + scale + ')'; mzoom.textContent = Math.round(scale*100) + '%'; }
+function applyScale(){ if (mimg.naturalWidth) mimg.style.width = Math.round(mimg.naturalWidth * scale) + 'px'; mzoom.textContent = Math.round(scale*100) + '%'; }
 function fit(){
   var box = modal.querySelector('.mbody');
   if (!mimg.naturalWidth) return;
@@ -744,7 +888,7 @@ function fit(){
 }
 document.querySelectorAll('[data-full]').forEach(function(b){
   b.addEventListener('click', function(){
-    mimg.src = b.dataset.full + '.svg?v=0911';
+    mimg.src = b.dataset.full + '.svg?v=0916';
     mtitle.textContent = b.dataset.title;
     modal.classList.add('on');
     mimg.onload = fit;

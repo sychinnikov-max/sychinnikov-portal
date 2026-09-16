@@ -1,0 +1,166 @@
+<svg viewBox="0 0 3030 708" width="3030" height="708" xmlns="http://www.w3.org/2000/svg" font-family="Golos Text, -apple-system, system-ui, sans-serif" role="img">
+<defs>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 z" fill="#77706A"/></marker>
+<marker id="arrM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 z" fill="#8C8177"/></marker>
+</defs>
+<rect x="0" y="0" width="3030" height="708" fill="#FDFBF7"/>
+<rect x="0" y="8" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="8" width="34" height="136" fill="#E6F0ED" stroke="#E1D7C8"/>
+<text transform="translate(15.0,76.0) rotate(-90)" text-anchor="middle" font-size="10" font-weight="600" fill="#12665A">Управление</text>
+<text transform="translate(27.0,76.0) rotate(-90)" text-anchor="middle" font-size="9" font-weight="400" fill="#12665A">сейчас Андрей</text>
+<rect x="0" y="144" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="144" width="34" height="136" fill="#FFFFFF" stroke="#E1D7C8"/>
+<text transform="translate(15.0,212.0) rotate(-90)" text-anchor="middle" font-size="10" font-weight="600" fill="#3A342D">Производство</text>
+<text transform="translate(27.0,212.0) rotate(-90)" text-anchor="middle" font-size="9" font-weight="400" fill="#3A342D">сейчас Настя</text>
+<rect x="0" y="280" width="3030" height="136" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="280" width="34" height="136" fill="#EAF3F5" stroke="#E1D7C8"/>
+<text transform="translate(15.0,348.0) rotate(-90)" text-anchor="middle" font-size="10" font-weight="600" fill="#2F6470">Техспец воронок</text>
+<text transform="translate(27.0,348.0) rotate(-90)" text-anchor="middle" font-size="9" font-weight="400" fill="#2F6470">сейчас Владимир</text>
+<rect x="0" y="416" width="3030" height="292" fill="none" stroke="#E1D7C8" stroke-width="1"/>
+<rect x="0" y="416" width="34" height="292" fill="#F1F5EC" stroke="#E1D7C8"/>
+<text transform="translate(15.0,562.0) rotate(-90)" text-anchor="middle" font-size="10" font-weight="600" fill="#4A6339">Публикаторы</text>
+<text transform="translate(27.0,562.0) rotate(-90)" text-anchor="middle" font-size="9" font-weight="400" fill="#4A6339">свои под проект</text>
+<path d="M162 586 L282 586" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M328 586 L448 586" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M486 586 L560 586" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M698 586 L722 586" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M860 586 L930 586" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M976 586 L1740 586" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M953 563 L953 484 L1046 484" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1184 484 L1196 484 L1196 76 L1208 76" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1346 76 L1416 76" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1439 99 L1439 484 L1532 484" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1462 76 L1497 76 L1497 348 L1532 348" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1670 348 L1744 348" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1670 484 L1763 484 L1763 563" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1786 586 L1856 586" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1994 586 L2006 586 L2006 212 L2018 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2156 212 L2226 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2272 212 L2550 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2249 189 L2249 76 L2342 76" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2480 76 L2573 76 L2573 189" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2596 212 L2712 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2758 212 L2878 212" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M2735 235 L2735 666 L270 666 L270 586 L282 586" fill="none" stroke="#77706A" stroke-width="1.4" marker-end="url(#arr)"/>
+<circle cx="143" cy="586" r="19" fill="#fff" stroke="#2F6F4F" stroke-width="1.8"/>
+<text x="143" y="618" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">Старт выкладки</text>
+<text x="143" y="629" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">по плану</text>
+<text x="143" y="640" text-anchor="middle" font-size="8.3" fill="#8C8177">дата из процесса 1</text>
+<polygon points="305,563 328,586 305,609 282,586" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M298 579 L312 593 M312 579 L298 593" stroke="#5D554C" stroke-width="1.8"/>
+<circle cx="467" cy="586" r="19" fill="#fff" stroke="#5E7B4A" stroke-width="1.6"/>
+<circle cx="467" cy="586" r="15" fill="none" stroke="#5E7B4A" stroke-width="1.2"/>
+<text x="467" y="618" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">День</text>
+<text x="467" y="629" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">выкладки</text>
+<text x="467" y="640" text-anchor="middle" font-size="8.3" fill="#8C8177">по плану</text>
+<g class="nd" data-id="p6-vzyat">
+<rect x="560" y="549" width="138" height="74" rx="9" fill="#F1F5EC" stroke="#5E7B4A" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="629" y="583" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">Взять ролики дня из</text>
+<text x="629" y="596" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">папки</text>
+<text x="629" y="635" text-anchor="middle" font-size="8.6" fill="#8C8177">сейчас из рабочего чата</text>
+<circle cx="689" cy="558" r="7.5" fill="#12665A"/>
+<text x="689" y="562" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<g class="nd" data-id="p6-vylozhit">
+<rect x="722" y="549" width="138" height="74" rx="9" fill="#F1F5EC" stroke="#5E7B4A" stroke-width="1.3"/>
+<text x="791" y="583" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">Выложить ролики по</text>
+<text x="791" y="596" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">плановым датам</text>
+<text x="791" y="635" text-anchor="middle" font-size="8.6" fill="#8C8177">на тесте одна публикация в</text>
+<text x="791" y="644" text-anchor="middle" font-size="8.6" fill="#8C8177">день</text>
+</g>
+<polygon points="953,563 976,586 953,609 930,586" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M946 579 L960 593 M960 579 L946 593" stroke="#5D554C" stroke-width="1.8"/>
+<text x="953" y="621" text-anchor="middle" font-size="9.4" fill="#5D554C">Аккаунты</text>
+<text x="953" y="631" text-anchor="middle" font-size="9.4" fill="#5D554C">работают?</text>
+<g class="nd" data-id="p6-blok">
+<rect x="1046" y="447" width="138" height="74" rx="9" fill="#F1F5EC" stroke="#C0392B" stroke-width="1.6"/>
+<text x="1115" y="481" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">Сообщить о</text>
+<text x="1115" y="494" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">блокировке</text>
+<text x="1115" y="533" text-anchor="middle" font-size="8.6" fill="#8C8177">устройство больше не</text>
+<text x="1115" y="542" text-anchor="middle" font-size="8.6" fill="#8C8177">используем</text>
+</g>
+<g class="nd" data-id="p6-zamena">
+<rect x="1208" y="39" width="138" height="74" rx="9" fill="#E6F0ED" stroke="#12665A" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="1277" y="66" text-anchor="middle" font-size="10.6" fill="#12665A" font-weight="500">Решить замену</text>
+<text x="1277" y="80" text-anchor="middle" font-size="10.6" fill="#12665A" font-weight="500">аккаунта, задача</text>
+<text x="1277" y="92" text-anchor="middle" font-size="10.6" fill="#12665A" font-weight="500">техспецу</text>
+<text x="1277" y="125" text-anchor="middle" font-size="8.6" fill="#8C8177">кто и в какой срок: вопрос</text>
+<text x="1277" y="134" text-anchor="middle" font-size="8.6" fill="#8C8177">Софии</text>
+<circle cx="1337" cy="48" r="7.5" fill="#12665A"/>
+<text x="1337" y="52" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<polygon points="1439,53 1462,76 1439,99 1416,76" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M1430 76 H1448 M1439 67 V85" stroke="#5D554C" stroke-width="2"/>
+<g class="nd" data-id="p6-novyi">
+<rect x="1532" y="447" width="138" height="74" rx="9" fill="#F1F5EC" stroke="#5E7B4A" stroke-width="1.3"/>
+<text x="1601" y="474" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">Новый аккаунт:</text>
+<text x="1601" y="488" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">создать, упаковать,</text>
+<text x="1601" y="500" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">прогреть</text>
+<text x="1601" y="533" text-anchor="middle" font-size="8.6" fill="#8C8177">своя почта, свое</text>
+<text x="1601" y="542" text-anchor="middle" font-size="8.6" fill="#8C8177">устройство</text>
+</g>
+<g class="nd" data-id="p6-voronka">
+<rect x="1532" y="311" width="138" height="74" rx="9" fill="#EAF3F5" stroke="#3F7F8C" stroke-width="1.3"/>
+<text x="1601" y="338" text-anchor="middle" font-size="10.6" fill="#2F6470" font-weight="500">Почистить воронку</text>
+<text x="1601" y="352" text-anchor="middle" font-size="10.6" fill="#2F6470" font-weight="500">заблокированного</text>
+<text x="1601" y="364" text-anchor="middle" font-size="10.6" fill="#2F6470" font-weight="500">аккаунта</text>
+<text x="1601" y="397" text-anchor="middle" font-size="8.6" fill="#8C8177">как часто проверять:</text>
+<text x="1601" y="406" text-anchor="middle" font-size="8.6" fill="#8C8177">вопрос Софии</text>
+</g>
+<circle cx="1763" cy="348" r="19" fill="#fff" stroke="#9B2C2C" stroke-width="3.2"/>
+<text x="1763" y="380" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">Воронка</text>
+<text x="1763" y="391" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">почищена</text>
+<polygon points="1763,563 1786,586 1763,609 1740,586" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M1756 579 L1770 593 M1770 579 L1756 593" stroke="#5D554C" stroke-width="1.8"/>
+<g class="nd" data-id="p6-otchet">
+<rect x="1856" y="549" width="138" height="74" rx="9" fill="#F1F5EC" stroke="#5E7B4A" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="1925" y="576" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">Отчет за день,</text>
+<text x="1925" y="590" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">ссылки в «Выкладка</text>
+<text x="1925" y="602" text-anchor="middle" font-size="10.6" fill="#4A6339" font-weight="500">факт»</text>
+<text x="1925" y="635" text-anchor="middle" font-size="8.6" fill="#8C8177">к какому часу: вопрос</text>
+<text x="1925" y="644" text-anchor="middle" font-size="8.6" fill="#8C8177">Софии</text>
+<circle cx="1985" cy="558" r="7.5" fill="#12665A"/>
+<text x="1985" y="562" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<g class="nd" data-id="p6-sverka">
+<rect x="2018" y="175" width="138" height="74" rx="9" fill="#FFFFFF" stroke="#B9AC99" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="2087" y="209" text-anchor="middle" font-size="10.6" fill="#3A342D" font-weight="500">Сверить факт</text>
+<text x="2087" y="222" text-anchor="middle" font-size="10.6" fill="#3A342D" font-weight="500">выкладки с планом</text>
+<text x="2087" y="261" text-anchor="middle" font-size="8.6" fill="#8C8177">созвон с Настей 15.09</text>
+<circle cx="2147" cy="184" r="7.5" fill="#12665A"/>
+<text x="2147" y="188" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<polygon points="2249,189 2272,212 2249,235 2226,212" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M2242 205 L2256 219 M2256 205 L2242 219" stroke="#5D554C" stroke-width="1.8"/>
+<text x="2249" y="247" text-anchor="middle" font-size="9.4" fill="#5D554C">По плану?</text>
+<g class="nd" data-id="p6-otkl">
+<rect x="2342" y="39" width="138" height="74" rx="9" fill="#E6F0ED" stroke="#12665A" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="2411" y="66" text-anchor="middle" font-size="10.6" fill="#12665A" font-weight="500">Разобрать</text>
+<text x="2411" y="80" text-anchor="middle" font-size="10.6" fill="#12665A" font-weight="500">отклонение,</text>
+<text x="2411" y="92" text-anchor="middle" font-size="10.6" fill="#12665A" font-weight="500">настроить роль</text>
+<circle cx="2471" cy="48" r="7.5" fill="#12665A"/>
+<text x="2471" y="52" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">+</text>
+</g>
+<polygon points="2573,189 2596,212 2573,235 2550,212" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M2566 205 L2580 219 M2580 205 L2566 219" stroke="#5D554C" stroke-width="1.8"/>
+<polygon points="2735,189 2758,212 2735,235 2712,212" fill="#fff" stroke="#8C8177" stroke-width="1.4"/>
+<path d="M2728 205 L2742 219 M2742 205 L2728 219" stroke="#5D554C" stroke-width="1.8"/>
+<text x="2735" y="173" text-anchor="middle" font-size="9.4" fill="#5D554C">Объем</text>
+<text x="2735" y="183" text-anchor="middle" font-size="9.4" fill="#5D554C">выложен?</text>
+<circle cx="2897" cy="212" r="19" fill="#fff" stroke="#9B2C2C" stroke-width="3.2"/>
+<text x="2897" y="244" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">Объем по</text>
+<text x="2897" y="255" text-anchor="middle" font-size="9.6" fill="#5D554C" font-weight="500">договору выложен</text>
+<text x="2897" y="266" text-anchor="middle" font-size="8.3" fill="#8C8177">→ процесс 7</text>
+<rect x="981" y="572" width="18" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="990" y="581" text-anchor="middle" font-size="8.8" fill="#8C8177">да</text>
+<rect x="958" y="542" width="24" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="970" y="551" text-anchor="middle" font-size="8.8" fill="#8C8177">нет</text>
+<rect x="2277" y="198" width="18" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="2286" y="207" text-anchor="middle" font-size="8.8" fill="#8C8177">да</text>
+<rect x="2254" y="174" width="112" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="2310" y="183" text-anchor="middle" font-size="8.8" fill="#8C8177">нет: написать Андрею</text>
+<rect x="2763" y="198" width="18" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="2772" y="207" text-anchor="middle" font-size="8.8" fill="#8C8177">да</text>
+<rect x="2740" y="243" width="107" height="12" rx="3" fill="#FBF7F1" opacity=".92"/>
+<text x="2793" y="252" text-anchor="middle" font-size="8.8" fill="#8C8177">нет, следующий день</text>
+</svg>

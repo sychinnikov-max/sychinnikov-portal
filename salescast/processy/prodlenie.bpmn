@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions-prodlenie" targetNamespace="http://bpmn.io/schema/bpmn">
+<bpmn:collaboration id="collab-prodlenie">
+<bpmn:participant id="pool-salescast" name="Salescast" processRef="proc-prodlenie" />
+<bpmn:participant id="pool-client" name="Клиент" processRef="proc-client-prodlenie" />
+<bpmn:messageFlow id="msg-0" name="цифры недели" sourceRef="p7-w-send" targetRef="p7-w-cl" />
+<bpmn:messageFlow id="msg-1" name="вопросы" sourceRef="p7-w-cl" targetRef="p7-w-send" />
+<bpmn:messageFlow id="msg-2" name="итоги" sourceRef="p7-sozvon" targetRef="p7-cl-r" />
+<bpmn:messageFlow id="msg-3" name="решение" sourceRef="p7-cl-r" targetRef="p7-sozvon" />
+<bpmn:messageFlow id="msg-4" name="отчет и акт" sourceRef="p7-send" targetRef="p7-cl-akt" />
+<bpmn:messageFlow id="msg-5" name="ответ" sourceRef="p7-cl-akt" targetRef="p7-send" />
+</bpmn:collaboration>
+<bpmn:process id="proc-prodlenie" isExecutable="false">
+<bpmn:laneSet id="laneset-1">
+<bpmn:lane id="lane-menedzher" name="Менеджер клиента · сейчас Андрей">
+<bpmn:flowNodeRef>p7-w-send</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-w-vopr</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-w-end</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-otchet</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-send</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-gw-akt</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-gw-final</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-end-new</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-dostupy</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-upravlenie" name="Управление · сейчас Андрей">
+<bpmn:flowNodeRef>p7-w-start</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-w-cifry</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-p-start</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-cifry</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-predl</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-sozvon</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-gw-prodl</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-end-net</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-dop</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-end-prodl</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-c-start</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-akt</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-baza</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p7-end-close</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-kachestvo" name="Продукт и качество · сейчас София">
+<bpmn:flowNodeRef>p7-expert</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-proizvodstvo" name="Производство · сейчас Настя">
+<bpmn:flowNodeRef>p7-razbor</bpmn:flowNodeRef>
+</bpmn:lane>
+</bpmn:laneSet>
+<bpmn:startEvent id="p7-w-start" name="Неделя выкладки"><bpmn:documentation>частота: вопрос Софии</bpmn:documentation><bpmn:outgoing>flow-0</bpmn:outgoing></bpmn:startEvent>
+<bpmn:userTask id="p7-w-cifry" name="Цифры недели: просмотры, кодовые слова"><bpmn:documentation>соглашение</bpmn:documentation><bpmn:incoming>flow-0</bpmn:incoming><bpmn:outgoing>flow-1</bpmn:outgoing></bpmn:userTask>
+<bpmn:sendTask id="p7-w-send" name="Отчет или созвон клиенту, собрать вопросы"><bpmn:documentation>София подключается по продукту</bpmn:documentation><bpmn:incoming>flow-1</bpmn:incoming><bpmn:outgoing>flow-2</bpmn:outgoing></bpmn:sendTask>
+<bpmn:userTask id="p7-w-vopr" name="Вопросы по продукту Софии, по контенту Насте"><bpmn:incoming>flow-2</bpmn:incoming><bpmn:outgoing>flow-3</bpmn:outgoing></bpmn:userTask>
+<bpmn:endEvent id="p7-w-end" name="Неделя закрыта"><bpmn:incoming>flow-3</bpmn:incoming></bpmn:endEvent>
+<bpmn:startEvent id="p7-p-start" name="Пора говорить о продлении"><bpmn:documentation>за сколько дней: вопрос Софии</bpmn:documentation><bpmn:outgoing>flow-4</bpmn:outgoing></bpmn:startEvent>
+<bpmn:userTask id="p7-cifry" name="Собрать цифры периода"><bpmn:documentation>просмотры, кодовые слова</bpmn:documentation><bpmn:incoming>flow-4</bpmn:incoming><bpmn:outgoing>flow-5</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p7-razbor" name="Что сработало: форматы и сценарии"><bpmn:incoming>flow-5</bpmn:incoming><bpmn:outgoing>flow-6</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p7-expert" name="Продуктовая часть нового периода"><bpmn:documentation>соглашение</bpmn:documentation><bpmn:incoming>flow-6</bpmn:incoming><bpmn:outgoing>flow-7</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p7-predl" name="Состав, цена и что продать сверху, вдвоем"><bpmn:documentation>организует Андрей</bpmn:documentation><bpmn:incoming>flow-7</bpmn:incoming><bpmn:outgoing>flow-8</bpmn:outgoing></bpmn:userTask>
+<bpmn:sendTask id="p7-sozvon" name="Созвон с клиентом: итоги и новый период"><bpmn:documentation>цель: вести клиента не один месяц</bpmn:documentation><bpmn:incoming>flow-8</bpmn:incoming><bpmn:outgoing>flow-9</bpmn:outgoing></bpmn:sendTask>
+<bpmn:exclusiveGateway id="p7-gw-prodl" name="Продлевает?"><bpmn:incoming>flow-9</bpmn:incoming><bpmn:outgoing>flow-10</bpmn:outgoing><bpmn:outgoing>flow-11</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:endEvent id="p7-end-net" name="Без продления"><bpmn:documentation>закрытие по объему</bpmn:documentation><bpmn:incoming>flow-11</bpmn:incoming></bpmn:endEvent>
+<bpmn:userTask id="p7-dop" name="Допсоглашение и счет в работу"><bpmn:documentation>подписать за 10 дней до конца</bpmn:documentation><bpmn:incoming>flow-10</bpmn:incoming><bpmn:outgoing>flow-12</bpmn:outgoing></bpmn:userTask>
+<bpmn:endEvent id="p7-end-prodl" name="Новый договор в процесс 0"><bpmn:incoming>flow-12</bpmn:incoming></bpmn:endEvent>
+<bpmn:startEvent id="p7-c-start" name="Объем выложен"><bpmn:documentation>из процесса 6</bpmn:documentation><bpmn:outgoing>flow-13</bpmn:outgoing></bpmn:startEvent>
+<bpmn:userTask id="p7-otchet" name="Итоговый отчет: просмотры и кодовые слова"><bpmn:documentation>соглашение</bpmn:documentation><bpmn:incoming>flow-13</bpmn:incoming><bpmn:outgoing>flow-14</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p7-akt" name="Акт или УПД по факту услуг"><bpmn:documentation>5 рабочих дней по договору</bpmn:documentation><bpmn:incoming>flow-14</bpmn:incoming><bpmn:incoming>flow-18</bpmn:incoming><bpmn:outgoing>flow-15</bpmn:outgoing></bpmn:userTask>
+<bpmn:sendTask id="p7-send" name="Отправить отчет и акт, получить ответ"><bpmn:documentation>кто отправляет: вопрос Софии</bpmn:documentation><bpmn:incoming>flow-15</bpmn:incoming><bpmn:outgoing>flow-16</bpmn:outgoing></bpmn:sendTask>
+<bpmn:exclusiveGateway id="p7-gw-akt" name="Акт подписан?"><bpmn:incoming>flow-16</bpmn:incoming><bpmn:outgoing>flow-17</bpmn:outgoing><bpmn:outgoing>flow-18</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:exclusiveGateway id="p7-gw-final" name="Новый период идет?"><bpmn:incoming>flow-17</bpmn:incoming><bpmn:outgoing>flow-19</bpmn:outgoing><bpmn:outgoing>flow-20</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:endEvent id="p7-end-new" name="Новый период идет"><bpmn:documentation>старт по процессу 1</bpmn:documentation><bpmn:incoming>flow-19</bpmn:incoming></bpmn:endEvent>
+<bpmn:userTask id="p7-dostupy" name="Передать клиенту аккаунты и доступы"><bpmn:documentation>кто и когда: вопрос Софии</bpmn:documentation><bpmn:incoming>flow-20</bpmn:incoming><bpmn:outgoing>flow-21</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p7-baza" name="Внести клиента в базу, греть дальше"><bpmn:documentation>Андрей и София</bpmn:documentation><bpmn:incoming>flow-21</bpmn:incoming><bpmn:outgoing>flow-22</bpmn:outgoing></bpmn:userTask>
+<bpmn:endEvent id="p7-end-close" name="Контракт закрыт"><bpmn:incoming>flow-22</bpmn:incoming></bpmn:endEvent>
+<bpmn:sequenceFlow id="flow-0" sourceRef="p7-w-start" targetRef="p7-w-cifry" />
+<bpmn:sequenceFlow id="flow-1" sourceRef="p7-w-cifry" targetRef="p7-w-send" />
+<bpmn:sequenceFlow id="flow-2" sourceRef="p7-w-send" targetRef="p7-w-vopr" />
+<bpmn:sequenceFlow id="flow-3" sourceRef="p7-w-vopr" targetRef="p7-w-end" />
+<bpmn:sequenceFlow id="flow-4" sourceRef="p7-p-start" targetRef="p7-cifry" />
+<bpmn:sequenceFlow id="flow-5" sourceRef="p7-cifry" targetRef="p7-razbor" />
+<bpmn:sequenceFlow id="flow-6" sourceRef="p7-razbor" targetRef="p7-expert" />
+<bpmn:sequenceFlow id="flow-7" sourceRef="p7-expert" targetRef="p7-predl" />
+<bpmn:sequenceFlow id="flow-8" sourceRef="p7-predl" targetRef="p7-sozvon" />
+<bpmn:sequenceFlow id="flow-9" sourceRef="p7-sozvon" targetRef="p7-gw-prodl" />
+<bpmn:sequenceFlow id="flow-10" name="да" sourceRef="p7-gw-prodl" targetRef="p7-dop" />
+<bpmn:sequenceFlow id="flow-11" name="нет" sourceRef="p7-gw-prodl" targetRef="p7-end-net" />
+<bpmn:sequenceFlow id="flow-12" sourceRef="p7-dop" targetRef="p7-end-prodl" />
+<bpmn:sequenceFlow id="flow-13" sourceRef="p7-c-start" targetRef="p7-otchet" />
+<bpmn:sequenceFlow id="flow-14" sourceRef="p7-otchet" targetRef="p7-akt" />
+<bpmn:sequenceFlow id="flow-15" sourceRef="p7-akt" targetRef="p7-send" />
+<bpmn:sequenceFlow id="flow-16" sourceRef="p7-send" targetRef="p7-gw-akt" />
+<bpmn:sequenceFlow id="flow-17" name="да" sourceRef="p7-gw-akt" targetRef="p7-gw-final" />
+<bpmn:sequenceFlow id="flow-18" name="отказ, правки" sourceRef="p7-gw-akt" targetRef="p7-akt" />
+<bpmn:sequenceFlow id="flow-19" name="да" sourceRef="p7-gw-final" targetRef="p7-end-new" />
+<bpmn:sequenceFlow id="flow-20" name="нет" sourceRef="p7-gw-final" targetRef="p7-dostupy" />
+<bpmn:sequenceFlow id="flow-21" sourceRef="p7-dostupy" targetRef="p7-baza" />
+<bpmn:sequenceFlow id="flow-22" sourceRef="p7-baza" targetRef="p7-end-close" />
+</bpmn:process>
+<bpmn:process id="proc-client-prodlenie" isExecutable="false">
+<bpmn:task id="p7-w-cl" name="Получить отчет, задать вопросы" />
+<bpmn:task id="p7-cl-r" name="Решить о продлении" />
+<bpmn:task id="p7-cl-akt" name="Подписать акт или дать отказ" />
+</bpmn:process>
+<bpmndi:BPMNDiagram id="diagram-prodlenie">
+<bpmndi:BPMNPlane id="plane-prodlenie" bpmnElement="collab-prodlenie">
+<bpmndi:BPMNShape id="pool-salescast_di" bpmnElement="pool-salescast" isHorizontal="true"><dc:Bounds x="0" y="144" width="3840" height="802" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-menedzher_di" bpmnElement="lane-menedzher" isHorizontal="true"><dc:Bounds x="34" y="144" width="3806" height="238" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-upravlenie_di" bpmnElement="lane-upravlenie" isHorizontal="true"><dc:Bounds x="34" y="382" width="3806" height="238" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-kachestvo_di" bpmnElement="lane-kachestvo" isHorizontal="true"><dc:Bounds x="34" y="620" width="3806" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-proizvodstvo_di" bpmnElement="lane-proizvodstvo" isHorizontal="true"><dc:Bounds x="34" y="756" width="3806" height="190" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="pool-client_di" bpmnElement="pool-client" isHorizontal="true"><dc:Bounds x="0" y="8" width="3840" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-w-start_di" bpmnElement="p7-w-start"><dc:Bounds x="124" y="431" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="95" y="472" width="97" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-w-cifry_di" bpmnElement="p7-w-cifry"><dc:Bounds x="236" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-w-send_di" bpmnElement="p7-w-send"><dc:Bounds x="398" y="175" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-w-cl_di" bpmnElement="p7-w-cl"><dc:Bounds x="398" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-w-vopr_di" bpmnElement="p7-w-vopr"><dc:Bounds x="560" y="175" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-w-end_di" bpmnElement="p7-w-end"><dc:Bounds x="772" y="193" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="772" y="234" width="37" height="22" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-p-start_di" bpmnElement="p7-p-start"><dc:Bounds x="934" y="431" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="886" y="472" width="133" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-cifry_di" bpmnElement="p7-cifry"><dc:Bounds x="1046" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-razbor_di" bpmnElement="p7-razbor"><dc:Bounds x="1208" y="787" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-expert_di" bpmnElement="p7-expert"><dc:Bounds x="1370" y="651" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-predl_di" bpmnElement="p7-predl"><dc:Bounds x="1532" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-sozvon_di" bpmnElement="p7-sozvon"><dc:Bounds x="1694" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-cl-r_di" bpmnElement="p7-cl-r"><dc:Bounds x="1694" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-gw-prodl_di" bpmnElement="p7-gw-prodl"><dc:Bounds x="1902" y="427" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="1897" y="413" width="56" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-end-net_di" bpmnElement="p7-end-net"><dc:Bounds x="1906" y="533" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="1884" y="574" width="83" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-dop_di" bpmnElement="p7-dop"><dc:Bounds x="2018" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-end-prodl_di" bpmnElement="p7-end-prodl"><dc:Bounds x="2230" y="431" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="2215" y="472" width="69" height="22" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-c-start_di" bpmnElement="p7-c-start"><dc:Bounds x="2392" y="431" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="2381" y="472" width="60" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-otchet_di" bpmnElement="p7-otchet"><dc:Bounds x="2504" y="175" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-akt_di" bpmnElement="p7-akt"><dc:Bounds x="2666" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-send_di" bpmnElement="p7-send"><dc:Bounds x="2828" y="175" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-cl-akt_di" bpmnElement="p7-cl-akt"><dc:Bounds x="2828" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-gw-akt_di" bpmnElement="p7-gw-akt"><dc:Bounds x="3036" y="189" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="3036" y="165" width="46" height="21" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-gw-final_di" bpmnElement="p7-gw-final"><dc:Bounds x="3198" y="189" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="3190" y="165" width="61" height="21" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-end-new_di" bpmnElement="p7-end-new"><dc:Bounds x="3364" y="193" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="3339" y="234" width="87" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-dostupy_di" bpmnElement="p7-dostupy"><dc:Bounds x="3314" y="277" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-baza_di" bpmnElement="p7-baza"><dc:Bounds x="3476" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p7-end-close_di" bpmnElement="p7-end-close"><dc:Bounds x="3688" y="431" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="3686" y="472" width="42" height="22" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNEdge id="flow-0_di" bpmnElement="flow-0"><di:waypoint x="162" y="450" /><di:waypoint x="236" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-1_di" bpmnElement="flow-1"><di:waypoint x="374" y="450" /><di:waypoint x="386" y="450" /><di:waypoint x="386" y="212" /><di:waypoint x="398" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-2_di" bpmnElement="flow-2"><di:waypoint x="536" y="212" /><di:waypoint x="560" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-3_di" bpmnElement="flow-3"><di:waypoint x="698" y="212" /><di:waypoint x="772" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-4_di" bpmnElement="flow-4"><di:waypoint x="972" y="450" /><di:waypoint x="1046" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-5_di" bpmnElement="flow-5"><di:waypoint x="1184" y="450" /><di:waypoint x="1196" y="450" /><di:waypoint x="1196" y="824" /><di:waypoint x="1208" y="824" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-6_di" bpmnElement="flow-6"><di:waypoint x="1346" y="824" /><di:waypoint x="1358" y="824" /><di:waypoint x="1358" y="688" /><di:waypoint x="1370" y="688" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-7_di" bpmnElement="flow-7"><di:waypoint x="1508" y="688" /><di:waypoint x="1520" y="688" /><di:waypoint x="1520" y="450" /><di:waypoint x="1532" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-8_di" bpmnElement="flow-8"><di:waypoint x="1670" y="450" /><di:waypoint x="1694" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-9_di" bpmnElement="flow-9"><di:waypoint x="1832" y="450" /><di:waypoint x="1902" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-10_di" bpmnElement="flow-10"><di:waypoint x="1948" y="450" /><di:waypoint x="2018" y="450" /><bpmndi:BPMNLabel><dc:Bounds x="1953" y="436" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-11_di" bpmnElement="flow-11"><di:waypoint x="1925" y="473" /><di:waypoint x="1925" y="533" /><bpmndi:BPMNLabel><dc:Bounds x="1930" y="481" width="24" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-12_di" bpmnElement="flow-12"><di:waypoint x="2156" y="450" /><di:waypoint x="2230" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-13_di" bpmnElement="flow-13"><di:waypoint x="2430" y="450" /><di:waypoint x="2467" y="450" /><di:waypoint x="2467" y="212" /><di:waypoint x="2504" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-14_di" bpmnElement="flow-14"><di:waypoint x="2642" y="212" /><di:waypoint x="2735" y="212" /><di:waypoint x="2735" y="413" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-15_di" bpmnElement="flow-15"><di:waypoint x="2804" y="450" /><di:waypoint x="2816" y="450" /><di:waypoint x="2816" y="212" /><di:waypoint x="2828" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-16_di" bpmnElement="flow-16"><di:waypoint x="2966" y="212" /><di:waypoint x="3036" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-17_di" bpmnElement="flow-17"><di:waypoint x="3082" y="212" /><di:waypoint x="3198" y="212" /><bpmndi:BPMNLabel><dc:Bounds x="3087" y="198" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-18_di" bpmnElement="flow-18"><di:waypoint x="3059" y="235" /><di:waypoint x="3059" y="904" /><di:waypoint x="2654" y="904" /><di:waypoint x="2654" y="450" /><di:waypoint x="2666" y="450" /><bpmndi:BPMNLabel><dc:Bounds x="3064" y="243" width="76" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-19_di" bpmnElement="flow-19"><di:waypoint x="3244" y="212" /><di:waypoint x="3364" y="212" /><bpmndi:BPMNLabel><dc:Bounds x="3249" y="198" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-20_di" bpmnElement="flow-20"><di:waypoint x="3221" y="235" /><di:waypoint x="3221" y="314" /><di:waypoint x="3314" y="314" /><bpmndi:BPMNLabel><dc:Bounds x="3226" y="243" width="24" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-21_di" bpmnElement="flow-21"><di:waypoint x="3452" y="314" /><di:waypoint x="3464" y="314" /><di:waypoint x="3464" y="450" /><di:waypoint x="3476" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-22_di" bpmnElement="flow-22"><di:waypoint x="3614" y="450" /><di:waypoint x="3688" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-0_di" bpmnElement="msg-0"><di:waypoint x="467" y="175" /><di:waypoint x="467" y="113" /><bpmndi:BPMNLabel><dc:Bounds x="392" y="161" width="70" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-1_di" bpmnElement="msg-1"><di:waypoint x="493" y="113" /><di:waypoint x="493" y="175" /><bpmndi:BPMNLabel><dc:Bounds x="498" y="121" width="44" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-2_di" bpmnElement="msg-2"><di:waypoint x="1763" y="413" /><di:waypoint x="1763" y="113" /><bpmndi:BPMNLabel><dc:Bounds x="1724" y="391" width="34" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-3_di" bpmnElement="msg-3"><di:waypoint x="1789" y="113" /><di:waypoint x="1789" y="413" /><bpmndi:BPMNLabel><dc:Bounds x="1794" y="121" width="44" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-4_di" bpmnElement="msg-4"><di:waypoint x="2897" y="175" /><di:waypoint x="2897" y="113" /><bpmndi:BPMNLabel><dc:Bounds x="2827" y="161" width="65" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-5_di" bpmnElement="msg-5"><di:waypoint x="2923" y="113" /><di:waypoint x="2923" y="175" /><bpmndi:BPMNLabel><dc:Bounds x="2928" y="121" width="34" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+</bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

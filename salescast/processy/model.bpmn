@@ -3,183 +3,120 @@
 <bpmn:collaboration id="collab-model">
 <bpmn:participant id="pool-salescast" name="Salescast" processRef="proc-model" />
 <bpmn:participant id="pool-client" name="Клиент" processRef="proc-client-model" />
-<bpmn:messageFlow id="msg-0" name="модель на согласование" sourceRef="task-send-m" targetRef="task-client-m" />
-<bpmn:messageFlow id="msg-1" name="ответ клиента" sourceRef="task-client-m" targetRef="task-send-m" />
-<bpmn:messageFlow id="msg-2" name="голос на согласование" sourceRef="task-send-g" targetRef="task-client-g" />
+<bpmn:messageFlow id="msg-0" name="аватар и голоса" sourceRef="p2-send" targetRef="p2-cl" />
+<bpmn:messageFlow id="msg-1" name="ответ" sourceRef="p2-cl" targetRef="p2-send" />
 </bpmn:collaboration>
 <bpmn:process id="proc-model" isExecutable="false">
 <bpmn:laneSet id="laneset-1">
-<bpmn:lane id="lane-andrei" name="Андрей · управление">
-<bpmn:flowNodeRef>start-dogovor</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-brief</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-kontur</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-tz-model</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-popoln</bpmn:flowNodeRef>
+<bpmn:lane id="lane-menedzher" name="Менеджер клиента · сейчас Андрей">
+<bpmn:flowNodeRef>p2-send</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-gw-otv</bpmn:flowNodeRef>
 </bpmn:lane>
-<bpmn:lane id="lane-sofia" name="София · качество">
-<bpmn:flowNodeRef>task-spor</bpmn:flowNodeRef>
+<bpmn:lane id="lane-kachestvo" name="Продукт и качество · сейчас София">
+<bpmn:flowNodeRef>p2-reglament</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-baza</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-tz</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-den</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-utv</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-gw-ok</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-gw-cl</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-cl-j</bpmn:flowNodeRef>
 </bpmn:lane>
-<bpmn:lane id="lane-nastya" name="Настя · производство">
-<bpmn:flowNodeRef>gw-foto</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-po-foto</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-podbor</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>gw-foto-join</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-generate</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-priemka-m</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-send-m</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>gw-client-m</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-golos</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-send-g</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>gw-par-split</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-avatarka</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-tz-akk</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-instr</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>gw-par-join</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-tokeny</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>gw-tokeny</bpmn:flowNodeRef>
-</bpmn:lane>
-<bpmn:lane id="lane-ksyusha" name="Ксюша · оживление">
-<bpmn:flowNodeRef>catch-scen</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-ozhiv</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>task-udar</bpmn:flowNodeRef>
-<bpmn:flowNodeRef>end-model</bpmn:flowNodeRef>
+<bpmn:lane id="lane-proizvodstvo" name="Производство · сейчас Настя">
+<bpmn:flowNodeRef>p2-start</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-ref</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-model</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-golos</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-avatarka</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-instr</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p2-end</bpmn:flowNodeRef>
 </bpmn:lane>
 </bpmn:laneSet>
-<bpmn:startEvent id="start-dogovor" name="Договор подписан, оплата пришла"><bpmn:outgoing>flow-0</bpmn:outgoing></bpmn:startEvent>
-<bpmn:userTask id="task-brief" name="Собрать бриф и карточку клиента (шаблон брифа: ниша, продукт, темы, запреты)"><bpmn:incoming>flow-0</bpmn:incoming><bpmn:outgoing>flow-1</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-kontur" name="Завести чат, проект в CRM, папки и таблицу (чат: клиент, его менеджер, София, Андрей, Настя)"><bpmn:incoming>flow-1</bpmn:incoming><bpmn:outgoing>flow-2</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-tz-model" name="Поставить Насте задачу в CRM на модель (со сроком, сейчас устно)"><bpmn:incoming>flow-2</bpmn:incoming><bpmn:outgoing>flow-3</bpmn:outgoing></bpmn:userTask>
-<bpmn:exclusiveGateway id="gw-foto" name="Клиент дал фото?"><bpmn:incoming>flow-3</bpmn:incoming><bpmn:outgoing>flow-4</bpmn:outgoing><bpmn:outgoing>flow-5</bpmn:outgoing></bpmn:exclusiveGateway>
-<bpmn:userTask id="task-po-foto" name="Сделать модель по фото клиента"><bpmn:incoming>flow-4</bpmn:incoming><bpmn:outgoing>flow-6</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-podbor" name="Подобрать образ, фон, ракурсы"><bpmn:incoming>flow-5</bpmn:incoming><bpmn:outgoing>flow-7</bpmn:outgoing></bpmn:userTask>
-<bpmn:exclusiveGateway id="gw-foto-join" name=""><bpmn:incoming>flow-6</bpmn:incoming><bpmn:incoming>flow-7</bpmn:incoming><bpmn:outgoing>flow-8</bpmn:outgoing></bpmn:exclusiveGateway>
-<bpmn:userTask id="task-generate" name="Сгенерировать варианты модели в GPT (≈2 часа на клиента)"><bpmn:incoming>flow-8</bpmn:incoming><bpmn:incoming>flow-13</bpmn:incoming><bpmn:incoming>flow-15</bpmn:incoming><bpmn:outgoing>flow-9</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-priemka-m" name="Принять модель по качеству (решение 11.09: без Софии)"><bpmn:incoming>flow-9</bpmn:incoming><bpmn:outgoing>flow-10</bpmn:outgoing></bpmn:userTask>
-<bpmn:sendTask id="task-send-m" name="Отправить модель клиенту в чат (напрямую, решение 11.09)"><bpmn:incoming>flow-10</bpmn:incoming><bpmn:outgoing>flow-11</bpmn:outgoing></bpmn:sendTask>
-<bpmn:exclusiveGateway id="gw-client-m" name="Ответ клиента?"><bpmn:incoming>flow-11</bpmn:incoming><bpmn:outgoing>flow-12</bpmn:outgoing><bpmn:outgoing>flow-13</bpmn:outgoing><bpmn:outgoing>flow-14</bpmn:outgoing></bpmn:exclusiveGateway>
-<bpmn:userTask id="task-spor" name="Решить спорную правку клиента (правки во вред результату не берем)"><bpmn:incoming>flow-14</bpmn:incoming><bpmn:outgoing>flow-15</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-golos" name="Сделать голос в HeyGen (ElevenLabs не подключен)"><bpmn:incoming>flow-12</bpmn:incoming><bpmn:outgoing>flow-16</bpmn:outgoing></bpmn:userTask>
-<bpmn:sendTask id="task-send-g" name="Согласовать голос с клиентом (напрямую, решение 11.09)"><bpmn:incoming>flow-16</bpmn:incoming><bpmn:outgoing>flow-17</bpmn:outgoing></bpmn:sendTask>
-<bpmn:parallelGateway id="gw-par-split" name=""><bpmn:incoming>flow-17</bpmn:incoming><bpmn:outgoing>flow-18</bpmn:outgoing><bpmn:outgoing>flow-19</bpmn:outgoing><bpmn:outgoing>flow-20</bpmn:outgoing></bpmn:parallelGateway>
-<bpmn:userTask id="task-avatarka" name="Сделать аватарку для аккаунта (сейчас лицо на белом фоне)"><bpmn:incoming>flow-18</bpmn:incoming><bpmn:outgoing>flow-21</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-tz-akk" name="Дать публикаторам ТЗ на имя и упаковку (было на Андрее, забрала Настя)"><bpmn:incoming>flow-19</bpmn:incoming><bpmn:outgoing>flow-22</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-instr" name="Описать инструкцию по оживлению (условие передачи Ксюше)"><bpmn:incoming>flow-20</bpmn:incoming><bpmn:outgoing>flow-23</bpmn:outgoing></bpmn:userTask>
-<bpmn:parallelGateway id="gw-par-join" name=""><bpmn:incoming>flow-21</bpmn:incoming><bpmn:incoming>flow-22</bpmn:incoming><bpmn:incoming>flow-23</bpmn:incoming><bpmn:outgoing>flow-24</bpmn:outgoing></bpmn:parallelGateway>
-<bpmn:intermediateCatchEvent id="catch-scen" name="Сценарии дня утверждены (из процесса 2)"><bpmn:incoming>flow-24</bpmn:incoming><bpmn:outgoing>flow-25</bpmn:outgoing><bpmn:timerEventDefinition id="timer-catch-scen" /></bpmn:intermediateCatchEvent>
-<bpmn:userTask id="task-tokeny" name="Проверить остаток токенов HeyGen (порог ≈40 роликов)"><bpmn:incoming>flow-25</bpmn:incoming><bpmn:outgoing>flow-26</bpmn:outgoing></bpmn:userTask>
-<bpmn:exclusiveGateway id="gw-tokeny" name="Хватит?"><bpmn:incoming>flow-26</bpmn:incoming><bpmn:outgoing>flow-27</bpmn:outgoing><bpmn:outgoing>flow-28</bpmn:outgoing></bpmn:exclusiveGateway>
-<bpmn:userTask id="task-popoln" name="Пополнить HeyGen по задаче в CRM (срок: следующий рабочий день)"><bpmn:incoming>flow-28</bpmn:incoming><bpmn:outgoing>flow-29</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-ozhiv" name="Оживить ролики дня в HeyGen (только то, что идет на выкладку)"><bpmn:incoming>flow-27</bpmn:incoming><bpmn:incoming>flow-29</bpmn:incoming><bpmn:outgoing>flow-30</bpmn:outgoing></bpmn:userTask>
-<bpmn:userTask id="task-udar" name="Прослушать ударения и поправить (20-25 роликов ≈ 1,5 ч)"><bpmn:incoming>flow-30</bpmn:incoming><bpmn:outgoing>flow-31</bpmn:outgoing></bpmn:userTask>
-<bpmn:endEvent id="end-model" name="Ролики готовы к монтажу (→ процесс 3)"><bpmn:incoming>flow-31</bpmn:incoming></bpmn:endEvent>
-<bpmn:sequenceFlow id="flow-0" sourceRef="start-dogovor" targetRef="task-brief" />
-<bpmn:sequenceFlow id="flow-1" sourceRef="task-brief" targetRef="task-kontur" />
-<bpmn:sequenceFlow id="flow-2" sourceRef="task-kontur" targetRef="task-tz-model" />
-<bpmn:sequenceFlow id="flow-3" sourceRef="task-tz-model" targetRef="gw-foto" />
-<bpmn:sequenceFlow id="flow-4" name="да" sourceRef="gw-foto" targetRef="task-po-foto" />
-<bpmn:sequenceFlow id="flow-5" name="нет" sourceRef="gw-foto" targetRef="task-podbor" />
-<bpmn:sequenceFlow id="flow-6" sourceRef="task-po-foto" targetRef="gw-foto-join" />
-<bpmn:sequenceFlow id="flow-7" sourceRef="task-podbor" targetRef="gw-foto-join" />
-<bpmn:sequenceFlow id="flow-8" sourceRef="gw-foto-join" targetRef="task-generate" />
-<bpmn:sequenceFlow id="flow-9" sourceRef="task-generate" targetRef="task-priemka-m" />
-<bpmn:sequenceFlow id="flow-10" sourceRef="task-priemka-m" targetRef="task-send-m" />
-<bpmn:sequenceFlow id="flow-11" sourceRef="task-send-m" targetRef="gw-client-m" />
-<bpmn:sequenceFlow id="flow-12" name="утвердил" sourceRef="gw-client-m" targetRef="task-golos" />
-<bpmn:sequenceFlow id="flow-13" name="правки" sourceRef="gw-client-m" targetRef="task-generate" />
-<bpmn:sequenceFlow id="flow-14" name="спорная" sourceRef="gw-client-m" targetRef="task-spor" />
-<bpmn:sequenceFlow id="flow-15" sourceRef="task-spor" targetRef="task-generate" />
-<bpmn:sequenceFlow id="flow-16" sourceRef="task-golos" targetRef="task-send-g" />
-<bpmn:sequenceFlow id="flow-17" sourceRef="task-send-g" targetRef="gw-par-split" />
-<bpmn:sequenceFlow id="flow-18" sourceRef="gw-par-split" targetRef="task-avatarka" />
-<bpmn:sequenceFlow id="flow-19" sourceRef="gw-par-split" targetRef="task-tz-akk" />
-<bpmn:sequenceFlow id="flow-20" sourceRef="gw-par-split" targetRef="task-instr" />
-<bpmn:sequenceFlow id="flow-21" sourceRef="task-avatarka" targetRef="gw-par-join" />
-<bpmn:sequenceFlow id="flow-22" sourceRef="task-tz-akk" targetRef="gw-par-join" />
-<bpmn:sequenceFlow id="flow-23" sourceRef="task-instr" targetRef="gw-par-join" />
-<bpmn:sequenceFlow id="flow-24" sourceRef="gw-par-join" targetRef="catch-scen" />
-<bpmn:sequenceFlow id="flow-25" sourceRef="catch-scen" targetRef="task-tokeny" />
-<bpmn:sequenceFlow id="flow-26" sourceRef="task-tokeny" targetRef="gw-tokeny" />
-<bpmn:sequenceFlow id="flow-27" name="да" sourceRef="gw-tokeny" targetRef="task-ozhiv" />
-<bpmn:sequenceFlow id="flow-28" name="нет" sourceRef="gw-tokeny" targetRef="task-popoln" />
-<bpmn:sequenceFlow id="flow-29" sourceRef="task-popoln" targetRef="task-ozhiv" />
-<bpmn:sequenceFlow id="flow-30" sourceRef="task-ozhiv" targetRef="task-udar" />
-<bpmn:sequenceFlow id="flow-31" sourceRef="task-udar" targetRef="end-model" />
+<bpmn:startEvent id="p2-start" name="Проект стартовал"><bpmn:documentation>из процесса 1</bpmn:documentation><bpmn:outgoing>flow-0</bpmn:outgoing></bpmn:startEvent>
+<bpmn:userTask id="p2-reglament" name="Регламент сбора референсов, один раз"><bpmn:documentation>критерий: разговорный ролик</bpmn:documentation><bpmn:incoming>flow-0</bpmn:incoming><bpmn:outgoing>flow-1</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p2-baza" name="Поднять базу референсов прошлых проектов"><bpmn:documentation>чтобы не искать заново</bpmn:documentation><bpmn:incoming>flow-1</bpmn:incoming><bpmn:outgoing>flow-2</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p2-ref" name="Собрать около 50 разговорных роликов"><bpmn:documentation>кто собирает: вопрос Софии</bpmn:documentation><bpmn:incoming>flow-2</bpmn:incoming><bpmn:outgoing>flow-3</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p2-tz" name="Отсмотреть референсы, дать ТЗ на аватары"><bpmn:documentation>сколько, мужчины и женщины, образ</bpmn:documentation><bpmn:incoming>flow-3</bpmn:incoming><bpmn:outgoing>flow-4</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p2-model" name="Модель: фото, по одному на аватар"><bpmn:documentation>три варианта, если договорились</bpmn:documentation><bpmn:incoming>flow-4</bpmn:incoming><bpmn:incoming>flow-10</bpmn:incoming><bpmn:incoming>flow-15</bpmn:incoming><bpmn:outgoing>flow-5</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p2-golos" name="Голос: найти живой голос, загрузить в сервис"><bpmn:documentation>второй сервис: вопрос Софии</bpmn:documentation><bpmn:incoming>flow-5</bpmn:incoming><bpmn:outgoing>flow-6</bpmn:outgoing></bpmn:userTask>
+<bpmn:intermediateCatchEvent id="p2-den" name="День утверждений"><bpmn:documentation>пн, ср, пт</bpmn:documentation><bpmn:incoming>flow-6</bpmn:incoming><bpmn:outgoing>flow-7</bpmn:outgoing><bpmn:timerEventDefinition id="timer-p2-den" /></bpmn:intermediateCatchEvent>
+<bpmn:userTask id="p2-utv" name="Утвердить аватаров и голоса"><bpmn:documentation>созвон с Софией 15.09</bpmn:documentation><bpmn:incoming>flow-7</bpmn:incoming><bpmn:outgoing>flow-8</bpmn:outgoing></bpmn:userTask>
+<bpmn:exclusiveGateway id="p2-gw-ok" name="Ок?"><bpmn:incoming>flow-8</bpmn:incoming><bpmn:outgoing>flow-9</bpmn:outgoing><bpmn:outgoing>flow-10</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:exclusiveGateway id="p2-gw-cl" name="Показываем клиенту?"><bpmn:incoming>flow-9</bpmn:incoming><bpmn:outgoing>flow-11</bpmn:outgoing><bpmn:outgoing>flow-12</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:sendTask id="p2-send" name="Показать клиенту: сначала картинка, потом голоса"><bpmn:documentation>решаем по клиенту</bpmn:documentation><bpmn:incoming>flow-12</bpmn:incoming><bpmn:outgoing>flow-13</bpmn:outgoing></bpmn:sendTask>
+<bpmn:exclusiveGateway id="p2-gw-otv" name="Ответ?"><bpmn:incoming>flow-13</bpmn:incoming><bpmn:outgoing>flow-14</bpmn:outgoing><bpmn:outgoing>flow-15</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:exclusiveGateway id="p2-cl-j" name=""><bpmn:incoming>flow-11</bpmn:incoming><bpmn:incoming>flow-14</bpmn:incoming><bpmn:outgoing>flow-16</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:userTask id="p2-avatarka" name="Аватарка аккаунта по утвержденному персонажу"><bpmn:documentation>→ публикаторам, процесс 1</bpmn:documentation><bpmn:incoming>flow-16</bpmn:incoming><bpmn:outgoing>flow-17</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p2-instr" name="Инструкция аватара для оживления"><bpmn:documentation>кто вносит в таблицу: вопрос Софии</bpmn:documentation><bpmn:incoming>flow-17</bpmn:incoming><bpmn:outgoing>flow-18</bpmn:outgoing></bpmn:userTask>
+<bpmn:endEvent id="p2-end" name="Персонаж утвержден"><bpmn:documentation>→ процессы 3 и 4</bpmn:documentation><bpmn:incoming>flow-18</bpmn:incoming></bpmn:endEvent>
+<bpmn:sequenceFlow id="flow-0" sourceRef="p2-start" targetRef="p2-reglament" />
+<bpmn:sequenceFlow id="flow-1" sourceRef="p2-reglament" targetRef="p2-baza" />
+<bpmn:sequenceFlow id="flow-2" sourceRef="p2-baza" targetRef="p2-ref" />
+<bpmn:sequenceFlow id="flow-3" sourceRef="p2-ref" targetRef="p2-tz" />
+<bpmn:sequenceFlow id="flow-4" sourceRef="p2-tz" targetRef="p2-model" />
+<bpmn:sequenceFlow id="flow-5" sourceRef="p2-model" targetRef="p2-golos" />
+<bpmn:sequenceFlow id="flow-6" sourceRef="p2-golos" targetRef="p2-den" />
+<bpmn:sequenceFlow id="flow-7" sourceRef="p2-den" targetRef="p2-utv" />
+<bpmn:sequenceFlow id="flow-8" sourceRef="p2-utv" targetRef="p2-gw-ok" />
+<bpmn:sequenceFlow id="flow-9" name="да" sourceRef="p2-gw-ok" targetRef="p2-gw-cl" />
+<bpmn:sequenceFlow id="flow-10" name="нет, переделать" sourceRef="p2-gw-ok" targetRef="p2-model" />
+<bpmn:sequenceFlow id="flow-11" name="нет" sourceRef="p2-gw-cl" targetRef="p2-cl-j" />
+<bpmn:sequenceFlow id="flow-12" name="да" sourceRef="p2-gw-cl" targetRef="p2-send" />
+<bpmn:sequenceFlow id="flow-13" sourceRef="p2-send" targetRef="p2-gw-otv" />
+<bpmn:sequenceFlow id="flow-14" name="утвердил" sourceRef="p2-gw-otv" targetRef="p2-cl-j" />
+<bpmn:sequenceFlow id="flow-15" name="правки" sourceRef="p2-gw-otv" targetRef="p2-model" />
+<bpmn:sequenceFlow id="flow-16" sourceRef="p2-cl-j" targetRef="p2-avatarka" />
+<bpmn:sequenceFlow id="flow-17" sourceRef="p2-avatarka" targetRef="p2-instr" />
+<bpmn:sequenceFlow id="flow-18" sourceRef="p2-instr" targetRef="p2-end" />
 </bpmn:process>
 <bpmn:process id="proc-client-model" isExecutable="false">
-<bpmn:task id="task-client-m" name="Посмотреть модель, дать правки" />
-<bpmn:task id="task-client-g" name="Утвердить голос" />
+<bpmn:task id="p2-cl" name="Посмотреть, дать реакцию или правки" />
 </bpmn:process>
 <bpmndi:BPMNDiagram id="diagram-model">
 <bpmndi:BPMNPlane id="plane-model" bpmnElement="collab-model">
-<bpmndi:BPMNShape id="pool-salescast_di" bpmnElement="pool-salescast" isHorizontal="true"><dc:Bounds x="0" y="144" width="4002" height="748" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="lane-andrei_di" bpmnElement="lane-andrei" isHorizontal="true"><dc:Bounds x="34" y="144" width="3968" height="136" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="lane-sofia_di" bpmnElement="lane-sofia" isHorizontal="true"><dc:Bounds x="34" y="280" width="3968" height="136" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="lane-nastya_di" bpmnElement="lane-nastya" isHorizontal="true"><dc:Bounds x="34" y="416" width="3968" height="340" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="lane-ksyusha_di" bpmnElement="lane-ksyusha" isHorizontal="true"><dc:Bounds x="34" y="756" width="3968" height="136" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="pool-client_di" bpmnElement="pool-client" isHorizontal="true"><dc:Bounds x="0" y="8" width="4002" height="136" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="start-dogovor_di" bpmnElement="start-dogovor"><dc:Bounds x="124" y="193" width="38" height="38" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-brief_di" bpmnElement="task-brief"><dc:Bounds x="236" y="175" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-kontur_di" bpmnElement="task-kontur"><dc:Bounds x="398" y="175" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-tz-model_di" bpmnElement="task-tz-model"><dc:Bounds x="560" y="175" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="gw-foto_di" bpmnElement="gw-foto"><dc:Bounds x="768" y="563" width="46" height="46" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-po-foto_di" bpmnElement="task-po-foto"><dc:Bounds x="884" y="447" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-podbor_di" bpmnElement="task-podbor"><dc:Bounds x="884" y="549" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="gw-foto-join_di" bpmnElement="gw-foto-join"><dc:Bounds x="1092" y="563" width="46" height="46" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-generate_di" bpmnElement="task-generate"><dc:Bounds x="1208" y="549" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-priemka-m_di" bpmnElement="task-priemka-m"><dc:Bounds x="1370" y="549" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-send-m_di" bpmnElement="task-send-m"><dc:Bounds x="1532" y="549" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-client-m_di" bpmnElement="task-client-m"><dc:Bounds x="1532" y="39" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="gw-client-m_di" bpmnElement="gw-client-m"><dc:Bounds x="1740" y="563" width="46" height="46" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-spor_di" bpmnElement="task-spor"><dc:Bounds x="1856" y="311" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-golos_di" bpmnElement="task-golos"><dc:Bounds x="2018" y="549" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-send-g_di" bpmnElement="task-send-g"><dc:Bounds x="2180" y="549" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-client-g_di" bpmnElement="task-client-g"><dc:Bounds x="2180" y="39" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="gw-par-split_di" bpmnElement="gw-par-split"><dc:Bounds x="2388" y="563" width="46" height="46" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-avatarka_di" bpmnElement="task-avatarka"><dc:Bounds x="2504" y="447" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-tz-akk_di" bpmnElement="task-tz-akk"><dc:Bounds x="2504" y="549" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-instr_di" bpmnElement="task-instr"><dc:Bounds x="2504" y="651" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="gw-par-join_di" bpmnElement="gw-par-join"><dc:Bounds x="2712" y="563" width="46" height="46" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="catch-scen_di" bpmnElement="catch-scen"><dc:Bounds x="2878" y="805" width="38" height="38" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-tokeny_di" bpmnElement="task-tokeny"><dc:Bounds x="2990" y="549" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="gw-tokeny_di" bpmnElement="gw-tokeny"><dc:Bounds x="3198" y="563" width="46" height="46" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-popoln_di" bpmnElement="task-popoln"><dc:Bounds x="3314" y="175" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-ozhiv_di" bpmnElement="task-ozhiv"><dc:Bounds x="3476" y="787" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="task-udar_di" bpmnElement="task-udar"><dc:Bounds x="3638" y="787" width="138" height="74" /></bpmndi:BPMNShape>
-<bpmndi:BPMNShape id="end-model_di" bpmnElement="end-model"><dc:Bounds x="3850" y="805" width="38" height="38" /></bpmndi:BPMNShape>
-<bpmndi:BPMNEdge id="flow-0_di" bpmnElement="flow-0"><di:waypoint x="162" y="212" /><di:waypoint x="236" y="212" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-1_di" bpmnElement="flow-1"><di:waypoint x="374" y="212" /><di:waypoint x="398" y="212" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-2_di" bpmnElement="flow-2"><di:waypoint x="536" y="212" /><di:waypoint x="560" y="212" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-3_di" bpmnElement="flow-3"><di:waypoint x="698" y="212" /><di:waypoint x="733" y="212" /><di:waypoint x="733" y="586" /><di:waypoint x="768" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-4_di" bpmnElement="flow-4"><di:waypoint x="814" y="586" /><di:waypoint x="849" y="586" /><di:waypoint x="849" y="484" /><di:waypoint x="884" y="484" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-5_di" bpmnElement="flow-5"><di:waypoint x="814" y="586" /><di:waypoint x="884" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-6_di" bpmnElement="flow-6"><di:waypoint x="1022" y="484" /><di:waypoint x="1057" y="484" /><di:waypoint x="1057" y="586" /><di:waypoint x="1092" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-7_di" bpmnElement="flow-7"><di:waypoint x="1022" y="586" /><di:waypoint x="1092" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-8_di" bpmnElement="flow-8"><di:waypoint x="1138" y="586" /><di:waypoint x="1208" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-9_di" bpmnElement="flow-9"><di:waypoint x="1346" y="586" /><di:waypoint x="1370" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-10_di" bpmnElement="flow-10"><di:waypoint x="1508" y="586" /><di:waypoint x="1532" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-11_di" bpmnElement="flow-11"><di:waypoint x="1670" y="586" /><di:waypoint x="1740" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-12_di" bpmnElement="flow-12"><di:waypoint x="1786" y="586" /><di:waypoint x="2018" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-13_di" bpmnElement="flow-13"><di:waypoint x="1763" y="609" /><di:waypoint x="1763" y="915" /><di:waypoint x="1277" y="915" /><di:waypoint x="1277" y="623" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-14_di" bpmnElement="flow-14"><di:waypoint x="1786" y="586" /><di:waypoint x="1821" y="586" /><di:waypoint x="1821" y="348" /><di:waypoint x="1856" y="348" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-15_di" bpmnElement="flow-15"><di:waypoint x="1925" y="385" /><di:waypoint x="1925" y="926" /><di:waypoint x="1277" y="926" /><di:waypoint x="1277" y="623" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-16_di" bpmnElement="flow-16"><di:waypoint x="2156" y="586" /><di:waypoint x="2180" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-17_di" bpmnElement="flow-17"><di:waypoint x="2318" y="586" /><di:waypoint x="2388" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-18_di" bpmnElement="flow-18"><di:waypoint x="2434" y="586" /><di:waypoint x="2469" y="586" /><di:waypoint x="2469" y="484" /><di:waypoint x="2504" y="484" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-19_di" bpmnElement="flow-19"><di:waypoint x="2434" y="586" /><di:waypoint x="2504" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-20_di" bpmnElement="flow-20"><di:waypoint x="2434" y="586" /><di:waypoint x="2469" y="586" /><di:waypoint x="2469" y="688" /><di:waypoint x="2504" y="688" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-21_di" bpmnElement="flow-21"><di:waypoint x="2642" y="484" /><di:waypoint x="2677" y="484" /><di:waypoint x="2677" y="586" /><di:waypoint x="2712" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-22_di" bpmnElement="flow-22"><di:waypoint x="2642" y="586" /><di:waypoint x="2712" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-23_di" bpmnElement="flow-23"><di:waypoint x="2642" y="688" /><di:waypoint x="2677" y="688" /><di:waypoint x="2677" y="586" /><di:waypoint x="2712" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-24_di" bpmnElement="flow-24"><di:waypoint x="2758" y="586" /><di:waypoint x="2818" y="586" /><di:waypoint x="2818" y="824" /><di:waypoint x="2878" y="824" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-25_di" bpmnElement="flow-25"><di:waypoint x="2916" y="824" /><di:waypoint x="2953" y="824" /><di:waypoint x="2953" y="586" /><di:waypoint x="2990" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-26_di" bpmnElement="flow-26"><di:waypoint x="3128" y="586" /><di:waypoint x="3198" y="586" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-27_di" bpmnElement="flow-27"><di:waypoint x="3244" y="586" /><di:waypoint x="3360" y="586" /><di:waypoint x="3360" y="824" /><di:waypoint x="3476" y="824" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-28_di" bpmnElement="flow-28"><di:waypoint x="3244" y="586" /><di:waypoint x="3279" y="586" /><di:waypoint x="3279" y="212" /><di:waypoint x="3314" y="212" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-29_di" bpmnElement="flow-29"><di:waypoint x="3452" y="212" /><di:waypoint x="3464" y="212" /><di:waypoint x="3464" y="824" /><di:waypoint x="3476" y="824" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-30_di" bpmnElement="flow-30"><di:waypoint x="3614" y="824" /><di:waypoint x="3638" y="824" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="flow-31_di" bpmnElement="flow-31"><di:waypoint x="3776" y="824" /><di:waypoint x="3850" y="824" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="msg-0_di" bpmnElement="msg-0"><di:waypoint x="1601" y="549" /><di:waypoint x="1601" y="113" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="msg-1_di" bpmnElement="msg-1"><di:waypoint x="1627" y="113" /><di:waypoint x="1627" y="549" /></bpmndi:BPMNEdge>
-<bpmndi:BPMNEdge id="msg-2_di" bpmnElement="msg-2"><di:waypoint x="2249" y="549" /><di:waypoint x="2249" y="113" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNShape id="pool-salescast_di" bpmnElement="pool-salescast" isHorizontal="true"><dc:Bounds x="0" y="144" width="2706" height="462" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-menedzher_di" bpmnElement="lane-menedzher" isHorizontal="true"><dc:Bounds x="34" y="144" width="2672" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-kachestvo_di" bpmnElement="lane-kachestvo" isHorizontal="true"><dc:Bounds x="34" y="280" width="2672" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-proizvodstvo_di" bpmnElement="lane-proizvodstvo" isHorizontal="true"><dc:Bounds x="34" y="416" width="2672" height="190" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="pool-client_di" bpmnElement="pool-client" isHorizontal="true"><dc:Bounds x="0" y="8" width="2706" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-start_di" bpmnElement="p2-start"><dc:Bounds x="124" y="465" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="113" y="506" width="60" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-reglament_di" bpmnElement="p2-reglament"><dc:Bounds x="236" y="311" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-baza_di" bpmnElement="p2-baza"><dc:Bounds x="398" y="311" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-ref_di" bpmnElement="p2-ref"><dc:Bounds x="560" y="447" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-tz_di" bpmnElement="p2-tz"><dc:Bounds x="722" y="311" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-model_di" bpmnElement="p2-model"><dc:Bounds x="884" y="447" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-golos_di" bpmnElement="p2-golos"><dc:Bounds x="1046" y="447" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-den_di" bpmnElement="p2-den"><dc:Bounds x="1258" y="329" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="1248" y="370" width="58" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-utv_di" bpmnElement="p2-utv"><dc:Bounds x="1370" y="311" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-gw-ok_di" bpmnElement="p2-gw-ok"><dc:Bounds x="1578" y="325" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="1593" y="311" width="15" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-gw-cl_di" bpmnElement="p2-gw-cl"><dc:Bounds x="1740" y="325" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="1738" y="374" width="51" height="21" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-send_di" bpmnElement="p2-send"><dc:Bounds x="1856" y="175" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-cl_di" bpmnElement="p2-cl"><dc:Bounds x="1856" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-gw-otv_di" bpmnElement="p2-gw-otv"><dc:Bounds x="2064" y="189" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="2072" y="175" width="31" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-cl-j_di" bpmnElement="p2-cl-j"><dc:Bounds x="2064" y="325" width="46" height="46" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-avatarka_di" bpmnElement="p2-avatarka"><dc:Bounds x="2180" y="447" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-instr_di" bpmnElement="p2-instr"><dc:Bounds x="2342" y="447" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p2-end_di" bpmnElement="p2-end"><dc:Bounds x="2554" y="465" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="2536" y="506" width="74" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNEdge id="flow-0_di" bpmnElement="flow-0"><di:waypoint x="162" y="484" /><di:waypoint x="199" y="484" /><di:waypoint x="199" y="348" /><di:waypoint x="236" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-1_di" bpmnElement="flow-1"><di:waypoint x="374" y="348" /><di:waypoint x="398" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-2_di" bpmnElement="flow-2"><di:waypoint x="536" y="348" /><di:waypoint x="548" y="348" /><di:waypoint x="548" y="484" /><di:waypoint x="560" y="484" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-3_di" bpmnElement="flow-3"><di:waypoint x="698" y="484" /><di:waypoint x="710" y="484" /><di:waypoint x="710" y="348" /><di:waypoint x="722" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-4_di" bpmnElement="flow-4"><di:waypoint x="860" y="348" /><di:waypoint x="953" y="348" /><di:waypoint x="953" y="447" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-5_di" bpmnElement="flow-5"><di:waypoint x="1022" y="484" /><di:waypoint x="1046" y="484" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-6_di" bpmnElement="flow-6"><di:waypoint x="1184" y="484" /><di:waypoint x="1221" y="484" /><di:waypoint x="1221" y="348" /><di:waypoint x="1258" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-7_di" bpmnElement="flow-7"><di:waypoint x="1296" y="348" /><di:waypoint x="1370" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-8_di" bpmnElement="flow-8"><di:waypoint x="1508" y="348" /><di:waypoint x="1578" y="348" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-9_di" bpmnElement="flow-9"><di:waypoint x="1624" y="348" /><di:waypoint x="1740" y="348" /><bpmndi:BPMNLabel><dc:Bounds x="1629" y="334" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-10_di" bpmnElement="flow-10"><di:waypoint x="1601" y="371" /><di:waypoint x="1601" y="564" /><di:waypoint x="872" y="564" /><di:waypoint x="872" y="484" /><di:waypoint x="884" y="484" /><bpmndi:BPMNLabel><dc:Bounds x="1606" y="379" width="86" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-11_di" bpmnElement="flow-11"><di:waypoint x="1786" y="348" /><di:waypoint x="2064" y="348" /><bpmndi:BPMNLabel><dc:Bounds x="1791" y="334" width="24" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-12_di" bpmnElement="flow-12"><di:waypoint x="1763" y="325" /><di:waypoint x="1763" y="212" /><di:waypoint x="1856" y="212" /><bpmndi:BPMNLabel><dc:Bounds x="1768" y="310" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-13_di" bpmnElement="flow-13"><di:waypoint x="1994" y="212" /><di:waypoint x="2064" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-14_di" bpmnElement="flow-14"><di:waypoint x="2087" y="235" /><di:waypoint x="2087" y="325" /><bpmndi:BPMNLabel><dc:Bounds x="2032" y="243" width="50" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-15_di" bpmnElement="flow-15"><di:waypoint x="2110" y="212" /><di:waypoint x="2122" y="212" /><di:waypoint x="2122" y="564" /><di:waypoint x="872" y="564" /><di:waypoint x="872" y="484" /><di:waypoint x="884" y="484" /><bpmndi:BPMNLabel><dc:Bounds x="2127" y="220" width="39" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-16_di" bpmnElement="flow-16"><di:waypoint x="2087" y="371" /><di:waypoint x="2087" y="484" /><di:waypoint x="2180" y="484" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-17_di" bpmnElement="flow-17"><di:waypoint x="2318" y="484" /><di:waypoint x="2342" y="484" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-18_di" bpmnElement="flow-18"><di:waypoint x="2480" y="484" /><di:waypoint x="2554" y="484" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-0_di" bpmnElement="msg-0"><di:waypoint x="1925" y="175" /><di:waypoint x="1925" y="113" /><bpmndi:BPMNLabel><dc:Bounds x="1834" y="161" width="86" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-1_di" bpmnElement="msg-1"><di:waypoint x="1951" y="113" /><di:waypoint x="1951" y="175" /><bpmndi:BPMNLabel><dc:Bounds x="1956" y="121" width="34" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
 </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
 </bpmn:definitions>

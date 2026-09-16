@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions-prodazha" targetNamespace="http://bpmn.io/schema/bpmn">
+<bpmn:collaboration id="collab-prodazha">
+<bpmn:participant id="pool-salescast" name="Salescast" processRef="proc-prodazha" />
+<bpmn:participant id="pool-client" name="Клиент" processRef="proc-client-prodazha" />
+<bpmn:messageFlow id="msg-0" name="встреча" sourceRef="p0-vstrecha" targetRef="p0-cl-vstr" />
+<bpmn:messageFlow id="msg-1" name="КП" sourceRef="p0-send-kp" targetRef="p0-cl-kp" />
+<bpmn:messageFlow id="msg-2" name="ответ" sourceRef="p0-cl-kp" targetRef="p0-send-kp" />
+<bpmn:messageFlow id="msg-3" name="договор и счет" sourceRef="p0-send-dog" targetRef="p0-cl-dog" />
+<bpmn:messageFlow id="msg-4" name="ответ" sourceRef="p0-cl-dog" targetRef="p0-send-dog" />
+<bpmn:messageFlow id="msg-5" name="напоминание" sourceRef="p0-napomn" targetRef="p0-cl-opl" />
+</bpmn:collaboration>
+<bpmn:process id="proc-prodazha" isExecutable="false">
+<bpmn:laneSet id="laneset-1">
+<bpmn:lane id="lane-menedzher" name="Менеджер клиента · сейчас Андрей">
+<bpmn:flowNodeRef>p0-napomn</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-srok2</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-gw-opl2</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-end-net</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-upravlenie" name="Управление · сейчас Андрей">
+<bpmn:flowNodeRef>p0-start</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-kval</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-gw-kval</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-end-ne</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-moshch</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-nisha</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-kp</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-cena</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-send-kp</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-gw-kp</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-start-prod</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-end-otkaz</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-dogovor</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-podpis</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-send-dog</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-gw-pravki</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-srok-opl</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-gw-opl</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-podtv</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-uchet</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-end</bpmn:flowNodeRef>
+</bpmn:lane>
+<bpmn:lane id="lane-kachestvo" name="Продукт и качество · сейчас София">
+<bpmn:flowNodeRef>p0-vstrecha</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-sroki</bpmn:flowNodeRef>
+<bpmn:flowNodeRef>p0-proverka</bpmn:flowNodeRef>
+</bpmn:lane>
+</bpmn:laneSet>
+<bpmn:startEvent id="p0-start" name="Лид: заявка или знакомство"><bpmn:outgoing>flow-0</bpmn:outgoing></bpmn:startEvent>
+<bpmn:userTask id="p0-kval" name="Квалифицировать клиента"><bpmn:documentation>покупатель, куда трафик, бюджет</bpmn:documentation><bpmn:incoming>flow-0</bpmn:incoming><bpmn:outgoing>flow-1</bpmn:outgoing></bpmn:userTask>
+<bpmn:exclusiveGateway id="p0-gw-kval" name="Подходит?"><bpmn:incoming>flow-1</bpmn:incoming><bpmn:outgoing>flow-2</bpmn:outgoing><bpmn:outgoing>flow-3</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:endEvent id="p0-end-ne" name="Не берем, причину говорим"><bpmn:incoming>flow-3</bpmn:incoming></bpmn:endEvent>
+<bpmn:sendTask id="p0-vstrecha" name="Встреча с записью: задача, продукт, сомнения"><bpmn:documentation>запись настраивает Андрей</bpmn:documentation><bpmn:incoming>flow-2</bpmn:incoming><bpmn:outgoing>flow-4</bpmn:outgoing></bpmn:sendTask>
+<bpmn:userTask id="p0-sroki" name="Заложить в сроки две недели подготовки"><bpmn:documentation>созвон с Софией 15.09</bpmn:documentation><bpmn:incoming>flow-4</bpmn:incoming><bpmn:outgoing>flow-5</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p0-moshch" name="Проверить место в команде"><bpmn:documentation>по оценке Софии еще двух клиентов не выдержим</bpmn:documentation><bpmn:incoming>flow-5</bpmn:incoming><bpmn:outgoing>flow-6</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p0-nisha" name="Разобрать нишу вдвоем: законность, пометка ИИ"><bpmn:documentation>поставить пометку ИИ не проблема</bpmn:documentation><bpmn:incoming>flow-6</bpmn:incoming><bpmn:outgoing>flow-7</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p0-kp" name="Собрать КП: образы, заголовки, пример сценария"><bpmn:documentation>кто готовит: вопрос Софии</bpmn:documentation><bpmn:incoming>flow-7</bpmn:incoming><bpmn:outgoing>flow-8</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p0-cena" name="Утвердить цену и состав вдвоем"><bpmn:documentation>без согласия сделка не начинается</bpmn:documentation><bpmn:incoming>flow-8</bpmn:incoming><bpmn:outgoing>flow-9</bpmn:outgoing></bpmn:userTask>
+<bpmn:sendTask id="p0-send-kp" name="Отправить КП, ответить на вопросы"><bpmn:documentation>одна цена за систему</bpmn:documentation><bpmn:incoming>flow-9</bpmn:incoming><bpmn:outgoing>flow-10</bpmn:outgoing></bpmn:sendTask>
+<bpmn:exclusiveGateway id="p0-gw-kp" name="Берет?"><bpmn:incoming>flow-10</bpmn:incoming><bpmn:outgoing>flow-11</bpmn:outgoing><bpmn:outgoing>flow-12</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:startEvent id="p0-start-prod" name="Продление"><bpmn:documentation>из процесса 7</bpmn:documentation><bpmn:outgoing>flow-13</bpmn:outgoing></bpmn:startEvent>
+<bpmn:endEvent id="p0-end-otkaz" name="Отказ"><bpmn:incoming>flow-12</bpmn:incoming></bpmn:endEvent>
+<bpmn:userTask id="p0-dogovor" name="Договор: ролики, даты старта и конца, подготовка"><bpmn:documentation>вход для плана выкладки</bpmn:documentation><bpmn:incoming>flow-11</bpmn:incoming><bpmn:incoming>flow-13</bpmn:incoming><bpmn:incoming>flow-18</bpmn:incoming><bpmn:outgoing>flow-14</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p0-proverka" name="Проверить и поправить договор"><bpmn:documentation>статусы документа, 09.09</bpmn:documentation><bpmn:incoming>flow-14</bpmn:incoming><bpmn:outgoing>flow-15</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p0-podpis" name="Подписать со стороны исполнителя"><bpmn:documentation>партнер, на чье юрлицо договор</bpmn:documentation><bpmn:incoming>flow-15</bpmn:incoming><bpmn:outgoing>flow-16</bpmn:outgoing></bpmn:userTask>
+<bpmn:sendTask id="p0-send-dog" name="Отправить договор и счет, получить ответ"><bpmn:documentation>предоплата по договору</bpmn:documentation><bpmn:incoming>flow-16</bpmn:incoming><bpmn:outgoing>flow-17</bpmn:outgoing></bpmn:sendTask>
+<bpmn:exclusiveGateway id="p0-gw-pravki" name="Правки к договору?"><bpmn:incoming>flow-17</bpmn:incoming><bpmn:outgoing>flow-18</bpmn:outgoing><bpmn:outgoing>flow-19</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:intermediateCatchEvent id="p0-srok-opl" name="Срок оплаты"><bpmn:documentation>по договору</bpmn:documentation><bpmn:incoming>flow-19</bpmn:incoming><bpmn:outgoing>flow-20</bpmn:outgoing><bpmn:timerEventDefinition id="timer-p0-srok-opl" /></bpmn:intermediateCatchEvent>
+<bpmn:exclusiveGateway id="p0-gw-opl" name="Оплачено?"><bpmn:incoming>flow-20</bpmn:incoming><bpmn:outgoing>flow-21</bpmn:outgoing><bpmn:outgoing>flow-22</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:sendTask id="p0-napomn" name="Напомнить клиенту об оплате"><bpmn:documentation>кто и сколько раз: вопрос Софии</bpmn:documentation><bpmn:incoming>flow-22</bpmn:incoming><bpmn:outgoing>flow-23</bpmn:outgoing></bpmn:sendTask>
+<bpmn:intermediateCatchEvent id="p0-srok2" name="Новый срок"><bpmn:incoming>flow-23</bpmn:incoming><bpmn:outgoing>flow-24</bpmn:outgoing><bpmn:timerEventDefinition id="timer-p0-srok2" /></bpmn:intermediateCatchEvent>
+<bpmn:exclusiveGateway id="p0-gw-opl2" name="Оплачено?"><bpmn:incoming>flow-24</bpmn:incoming><bpmn:outgoing>flow-25</bpmn:outgoing><bpmn:outgoing>flow-26</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:endEvent id="p0-end-net" name="Оплаты нет"><bpmn:documentation>до оплаты не начинаем</bpmn:documentation><bpmn:incoming>flow-26</bpmn:incoming></bpmn:endEvent>
+<bpmn:userTask id="p0-podtv" name="Подтвердить поступление денег"><bpmn:documentation>как узнаем: вопрос Софии</bpmn:documentation><bpmn:incoming>flow-21</bpmn:incoming><bpmn:incoming>flow-25</bpmn:incoming><bpmn:outgoing>flow-27</bpmn:outgoing></bpmn:userTask>
+<bpmn:userTask id="p0-uchet" name="Сделка «оплачен» в CRM, операция в отчет о деньгах"><bpmn:documentation>отчет ведет Андрей с первой оплаты</bpmn:documentation><bpmn:incoming>flow-27</bpmn:incoming><bpmn:outgoing>flow-28</bpmn:outgoing></bpmn:userTask>
+<bpmn:endEvent id="p0-end" name="Деньги пришли"><bpmn:documentation>→ процесс 1</bpmn:documentation><bpmn:incoming>flow-28</bpmn:incoming></bpmn:endEvent>
+<bpmn:sequenceFlow id="flow-0" sourceRef="p0-start" targetRef="p0-kval" />
+<bpmn:sequenceFlow id="flow-1" sourceRef="p0-kval" targetRef="p0-gw-kval" />
+<bpmn:sequenceFlow id="flow-2" name="да" sourceRef="p0-gw-kval" targetRef="p0-vstrecha" />
+<bpmn:sequenceFlow id="flow-3" name="нет" sourceRef="p0-gw-kval" targetRef="p0-end-ne" />
+<bpmn:sequenceFlow id="flow-4" sourceRef="p0-vstrecha" targetRef="p0-sroki" />
+<bpmn:sequenceFlow id="flow-5" sourceRef="p0-sroki" targetRef="p0-moshch" />
+<bpmn:sequenceFlow id="flow-6" sourceRef="p0-moshch" targetRef="p0-nisha" />
+<bpmn:sequenceFlow id="flow-7" sourceRef="p0-nisha" targetRef="p0-kp" />
+<bpmn:sequenceFlow id="flow-8" sourceRef="p0-kp" targetRef="p0-cena" />
+<bpmn:sequenceFlow id="flow-9" sourceRef="p0-cena" targetRef="p0-send-kp" />
+<bpmn:sequenceFlow id="flow-10" sourceRef="p0-send-kp" targetRef="p0-gw-kp" />
+<bpmn:sequenceFlow id="flow-11" name="да" sourceRef="p0-gw-kp" targetRef="p0-dogovor" />
+<bpmn:sequenceFlow id="flow-12" name="нет" sourceRef="p0-gw-kp" targetRef="p0-end-otkaz" />
+<bpmn:sequenceFlow id="flow-13" sourceRef="p0-start-prod" targetRef="p0-dogovor" />
+<bpmn:sequenceFlow id="flow-14" sourceRef="p0-dogovor" targetRef="p0-proverka" />
+<bpmn:sequenceFlow id="flow-15" sourceRef="p0-proverka" targetRef="p0-podpis" />
+<bpmn:sequenceFlow id="flow-16" sourceRef="p0-podpis" targetRef="p0-send-dog" />
+<bpmn:sequenceFlow id="flow-17" sourceRef="p0-send-dog" targetRef="p0-gw-pravki" />
+<bpmn:sequenceFlow id="flow-18" name="правки" sourceRef="p0-gw-pravki" targetRef="p0-dogovor" />
+<bpmn:sequenceFlow id="flow-19" name="нет" sourceRef="p0-gw-pravki" targetRef="p0-srok-opl" />
+<bpmn:sequenceFlow id="flow-20" sourceRef="p0-srok-opl" targetRef="p0-gw-opl" />
+<bpmn:sequenceFlow id="flow-21" name="да" sourceRef="p0-gw-opl" targetRef="p0-podtv" />
+<bpmn:sequenceFlow id="flow-22" name="нет" sourceRef="p0-gw-opl" targetRef="p0-napomn" />
+<bpmn:sequenceFlow id="flow-23" sourceRef="p0-napomn" targetRef="p0-srok2" />
+<bpmn:sequenceFlow id="flow-24" sourceRef="p0-srok2" targetRef="p0-gw-opl2" />
+<bpmn:sequenceFlow id="flow-25" name="да" sourceRef="p0-gw-opl2" targetRef="p0-podtv" />
+<bpmn:sequenceFlow id="flow-26" name="нет" sourceRef="p0-gw-opl2" targetRef="p0-end-net" />
+<bpmn:sequenceFlow id="flow-27" sourceRef="p0-podtv" targetRef="p0-uchet" />
+<bpmn:sequenceFlow id="flow-28" sourceRef="p0-uchet" targetRef="p0-end" />
+</bpmn:process>
+<bpmn:process id="proc-client-prodazha" isExecutable="false">
+<bpmn:task id="p0-cl-vstr" name="Рассказать задачу, продукт, куда ведем" />
+<bpmn:task id="p0-cl-kp" name="Решить по КП" />
+<bpmn:task id="p0-cl-dog" name="Подписать и оплатить или дать правки" />
+<bpmn:task id="p0-cl-opl" name="Оплатить" />
+</bpmn:process>
+<bpmndi:BPMNDiagram id="diagram-prodazha">
+<bpmndi:BPMNPlane id="plane-prodazha" bpmnElement="collab-prodazha">
+<bpmndi:BPMNShape id="pool-salescast_di" bpmnElement="pool-salescast" isHorizontal="true"><dc:Bounds x="0" y="144" width="4002" height="666" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-menedzher_di" bpmnElement="lane-menedzher" isHorizontal="true"><dc:Bounds x="34" y="144" width="3968" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-upravlenie_di" bpmnElement="lane-upravlenie" isHorizontal="true"><dc:Bounds x="34" y="280" width="3968" height="340" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lane-kachestvo_di" bpmnElement="lane-kachestvo" isHorizontal="true"><dc:Bounds x="34" y="620" width="3968" height="190" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="pool-client_di" bpmnElement="pool-client" isHorizontal="true"><dc:Bounds x="0" y="8" width="4002" height="136" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-start_di" bpmnElement="p0-start"><dc:Bounds x="124" y="431" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="106" y="472" width="74" height="22" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-kval_di" bpmnElement="p0-kval"><dc:Bounds x="236" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-gw-kval_di" bpmnElement="p0-gw-kval"><dc:Bounds x="444" y="427" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="444" y="413" width="46" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-end-ne_di" bpmnElement="p0-end-ne"><dc:Bounds x="448" y="533" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="427" y="574" width="80" height="22" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-vstrecha_di" bpmnElement="p0-vstrecha"><dc:Bounds x="560" y="651" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-cl-vstr_di" bpmnElement="p0-cl-vstr"><dc:Bounds x="560" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-sroki_di" bpmnElement="p0-sroki"><dc:Bounds x="722" y="651" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-moshch_di" bpmnElement="p0-moshch"><dc:Bounds x="884" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-nisha_di" bpmnElement="p0-nisha"><dc:Bounds x="1046" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-kp_di" bpmnElement="p0-kp"><dc:Bounds x="1208" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-cena_di" bpmnElement="p0-cena"><dc:Bounds x="1370" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-send-kp_di" bpmnElement="p0-send-kp"><dc:Bounds x="1532" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-cl-kp_di" bpmnElement="p0-cl-kp"><dc:Bounds x="1532" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-gw-kp_di" bpmnElement="p0-gw-kp"><dc:Bounds x="1740" y="427" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="1748" y="413" width="31" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-start-prod_di" bpmnElement="p0-start-prod"><dc:Bounds x="1744" y="329" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="1733" y="370" width="60" height="21" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-end-otkaz_di" bpmnElement="p0-end-otkaz"><dc:Bounds x="1744" y="533" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="1750" y="574" width="26" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-dogovor_di" bpmnElement="p0-dogovor"><dc:Bounds x="1856" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-proverka_di" bpmnElement="p0-proverka"><dc:Bounds x="2018" y="651" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-podpis_di" bpmnElement="p0-podpis"><dc:Bounds x="2180" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-send-dog_di" bpmnElement="p0-send-dog"><dc:Bounds x="2342" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-cl-dog_di" bpmnElement="p0-cl-dog"><dc:Bounds x="2342" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-gw-pravki_di" bpmnElement="p0-gw-pravki"><dc:Bounds x="2550" y="427" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="2545" y="403" width="56" height="21" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-srok-opl_di" bpmnElement="p0-srok-opl"><dc:Bounds x="2716" y="431" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="2706" y="472" width="58" height="21" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-gw-opl_di" bpmnElement="p0-gw-opl"><dc:Bounds x="2874" y="427" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="2874" y="476" width="46" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-napomn_di" bpmnElement="p0-napomn"><dc:Bounds x="2990" y="175" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-cl-opl_di" bpmnElement="p0-cl-opl"><dc:Bounds x="2990" y="39" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-srok2_di" bpmnElement="p0-srok2"><dc:Bounds x="3202" y="193" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="3194" y="234" width="53" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-gw-opl2_di" bpmnElement="p0-gw-opl2"><dc:Bounds x="3360" y="189" width="46" height="46" /><bpmndi:BPMNLabel><dc:Bounds x="3360" y="175" width="46" height="11" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-end-net_di" bpmnElement="p0-end-net"><dc:Bounds x="3526" y="193" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="3497" y="234" width="97" height="21" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-podtv_di" bpmnElement="p0-podtv"><dc:Bounds x="3476" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-uchet_di" bpmnElement="p0-uchet"><dc:Bounds x="3638" y="413" width="138" height="74" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="p0-end_di" bpmnElement="p0-end"><dc:Bounds x="3850" y="431" width="38" height="38" /><bpmndi:BPMNLabel><dc:Bounds x="3835" y="472" width="69" height="21" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNEdge id="flow-0_di" bpmnElement="flow-0"><di:waypoint x="162" y="450" /><di:waypoint x="236" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-1_di" bpmnElement="flow-1"><di:waypoint x="374" y="450" /><di:waypoint x="444" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-2_di" bpmnElement="flow-2"><di:waypoint x="490" y="450" /><di:waypoint x="525" y="450" /><di:waypoint x="525" y="688" /><di:waypoint x="560" y="688" /><bpmndi:BPMNLabel><dc:Bounds x="495" y="436" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-3_di" bpmnElement="flow-3"><di:waypoint x="467" y="473" /><di:waypoint x="467" y="533" /><bpmndi:BPMNLabel><dc:Bounds x="472" y="481" width="24" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-4_di" bpmnElement="flow-4"><di:waypoint x="698" y="688" /><di:waypoint x="722" y="688" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-5_di" bpmnElement="flow-5"><di:waypoint x="860" y="688" /><di:waypoint x="872" y="688" /><di:waypoint x="872" y="450" /><di:waypoint x="884" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-6_di" bpmnElement="flow-6"><di:waypoint x="1022" y="450" /><di:waypoint x="1046" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-7_di" bpmnElement="flow-7"><di:waypoint x="1184" y="450" /><di:waypoint x="1208" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-8_di" bpmnElement="flow-8"><di:waypoint x="1346" y="450" /><di:waypoint x="1370" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-9_di" bpmnElement="flow-9"><di:waypoint x="1508" y="450" /><di:waypoint x="1532" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-10_di" bpmnElement="flow-10"><di:waypoint x="1670" y="450" /><di:waypoint x="1740" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-11_di" bpmnElement="flow-11"><di:waypoint x="1786" y="450" /><di:waypoint x="1856" y="450" /><bpmndi:BPMNLabel><dc:Bounds x="1791" y="436" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-12_di" bpmnElement="flow-12"><di:waypoint x="1763" y="473" /><di:waypoint x="1763" y="533" /><bpmndi:BPMNLabel><dc:Bounds x="1768" y="481" width="24" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-13_di" bpmnElement="flow-13"><di:waypoint x="1782" y="348" /><di:waypoint x="1925" y="348" /><di:waypoint x="1925" y="413" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-14_di" bpmnElement="flow-14"><di:waypoint x="1994" y="450" /><di:waypoint x="2006" y="450" /><di:waypoint x="2006" y="688" /><di:waypoint x="2018" y="688" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-15_di" bpmnElement="flow-15"><di:waypoint x="2156" y="688" /><di:waypoint x="2168" y="688" /><di:waypoint x="2168" y="450" /><di:waypoint x="2180" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-16_di" bpmnElement="flow-16"><di:waypoint x="2318" y="450" /><di:waypoint x="2342" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-17_di" bpmnElement="flow-17"><di:waypoint x="2480" y="450" /><di:waypoint x="2550" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-18_di" bpmnElement="flow-18"><di:waypoint x="2573" y="473" /><di:waypoint x="2573" y="768" /><di:waypoint x="1844" y="768" /><di:waypoint x="1844" y="450" /><di:waypoint x="1856" y="450" /><bpmndi:BPMNLabel><dc:Bounds x="2578" y="481" width="39" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-19_di" bpmnElement="flow-19"><di:waypoint x="2596" y="450" /><di:waypoint x="2716" y="450" /><bpmndi:BPMNLabel><dc:Bounds x="2601" y="436" width="24" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-20_di" bpmnElement="flow-20"><di:waypoint x="2754" y="450" /><di:waypoint x="2874" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-21_di" bpmnElement="flow-21"><di:waypoint x="2920" y="450" /><di:waypoint x="3476" y="450" /><bpmndi:BPMNLabel><dc:Bounds x="2925" y="436" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-22_di" bpmnElement="flow-22"><di:waypoint x="2897" y="427" /><di:waypoint x="2897" y="212" /><di:waypoint x="2990" y="212" /><bpmndi:BPMNLabel><dc:Bounds x="2902" y="410" width="24" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-23_di" bpmnElement="flow-23"><di:waypoint x="3128" y="212" /><di:waypoint x="3202" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-24_di" bpmnElement="flow-24"><di:waypoint x="3240" y="212" /><di:waypoint x="3360" y="212" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-25_di" bpmnElement="flow-25"><di:waypoint x="3383" y="235" /><di:waypoint x="3383" y="450" /><di:waypoint x="3476" y="450" /><bpmndi:BPMNLabel><dc:Bounds x="3388" y="243" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-26_di" bpmnElement="flow-26"><di:waypoint x="3406" y="212" /><di:waypoint x="3526" y="212" /><bpmndi:BPMNLabel><dc:Bounds x="3411" y="198" width="24" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-27_di" bpmnElement="flow-27"><di:waypoint x="3614" y="450" /><di:waypoint x="3638" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="flow-28_di" bpmnElement="flow-28"><di:waypoint x="3776" y="450" /><di:waypoint x="3850" y="450" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-0_di" bpmnElement="msg-0"><di:waypoint x="629" y="651" /><di:waypoint x="629" y="113" /><bpmndi:BPMNLabel><dc:Bounds x="580" y="631" width="44" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-1_di" bpmnElement="msg-1"><di:waypoint x="1601" y="413" /><di:waypoint x="1601" y="113" /><bpmndi:BPMNLabel><dc:Bounds x="1578" y="391" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-2_di" bpmnElement="msg-2"><di:waypoint x="1627" y="113" /><di:waypoint x="1627" y="413" /><bpmndi:BPMNLabel><dc:Bounds x="1632" y="121" width="34" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-3_di" bpmnElement="msg-3"><di:waypoint x="2411" y="413" /><di:waypoint x="2411" y="113" /><bpmndi:BPMNLabel><dc:Bounds x="2325" y="391" width="81" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-4_di" bpmnElement="msg-4"><di:waypoint x="2437" y="113" /><di:waypoint x="2437" y="413" /><bpmndi:BPMNLabel><dc:Bounds x="2442" y="121" width="34" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="msg-5_di" bpmnElement="msg-5"><di:waypoint x="3059" y="175" /><di:waypoint x="3059" y="113" /><bpmndi:BPMNLabel><dc:Bounds x="2989" y="161" width="65" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+</bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>
