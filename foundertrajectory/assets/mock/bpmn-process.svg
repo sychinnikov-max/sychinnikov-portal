@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" role="img">
+<title>Регламент процесса, схема в стандартной нотации: четыре дорожки участников</title>
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+<path d="M0.5,1 L9,5 L0.5,9 z" fill="#6B6257"/>
+</marker>
+</defs>
+
+<rect width="1000" height="560" fill="#F4EFE4"/>
+
+<text x="24" y="33" font-family="Playfair Display, Georgia, serif" font-size="20" fill="#241F18">Регламент процесса, схема в стандартной нотации</text>
+<text x="976" y="33" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#8A8175">данные демонстрационные</text>
+<line x1="24" y1="46" x2="976" y2="46" stroke="#D8CDBA" stroke-width="1" shape-rendering="crispEdges"/>
+
+<rect x="24" y="64" width="34" height="448" fill="#EAE3D5"/>
+<rect x="24" y="64" width="952" height="448" fill="none" stroke="#D8CDBA" stroke-width="1" shape-rendering="crispEdges"/>
+<line x1="58" y1="64" x2="58" y2="512" stroke="#D8CDBA" stroke-width="1" shape-rendering="crispEdges"/>
+<line x1="24" y1="176" x2="976" y2="176" stroke="#D8CDBA" stroke-width="1" shape-rendering="crispEdges"/>
+<line x1="24" y1="288" x2="976" y2="288" stroke="#D8CDBA" stroke-width="1" shape-rendering="crispEdges"/>
+<line x1="24" y1="400" x2="976" y2="400" stroke="#D8CDBA" stroke-width="1" shape-rendering="crispEdges"/>
+
+<g font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257" letter-spacing="0.6" text-anchor="middle">
+<text transform="translate(45,120) rotate(-90)">продажи</text>
+<text transform="translate(45,232) rotate(-90)">производство</text>
+<text transform="translate(45,344) rotate(-90)">склад</text>
+<text transform="translate(45,456) rotate(-90)">руководитель</text>
+</g>
+
+<g fill="none" stroke="#6B6257" stroke-width="1.4" marker-end="url(#ah)">
+<path d="M115,120 L134,120"/>
+<path d="M186,145 L186,319"/>
+<path d="M238,344 L254,344 L254,120 L268,120"/>
+<path d="M372,120 L388,120"/>
+<path d="M436,120 L505,120"/>
+<path d="M412,144 L412,431"/>
+<path d="M360,456 L330,456 L330,145"/>
+<path d="M520,135 L520,186 L490,186 L490,207"/>
+<path d="M564,232 L586,232"/>
+<path d="M690,232 L712,232"/>
+<path d="M760,232 L790,232 L790,344 L810,344"/>
+<path d="M736,208 L736,196 L545,196 L545,207"/>
+<path d="M862,319 L862,145"/>
+<path d="M914,120 L936,120"/>
+<path d="M464,456 L604,456"/>
+</g>
+
+<circle cx="100" cy="120" r="15" fill="#F4EFE4" stroke="#4E7A3E" stroke-width="1.8"/>
+<circle cx="520" cy="120" r="15" fill="#F4EFE4" stroke="#9A7328" stroke-width="1.4"/>
+<circle cx="520" cy="120" r="11" fill="none" stroke="#9A7328" stroke-width="1.4"/>
+<path d="M520,113.5 L526,124 L514,124 z" fill="none" stroke="#9A7328" stroke-width="1.5" stroke-linejoin="round"/>
+<circle cx="952" cy="120" r="16" fill="#F4EFE4" stroke="#241F18" stroke-width="3.6"/>
+<circle cx="620" cy="456" r="16" fill="#F4EFE4" stroke="#A85338" stroke-width="3.6"/>
+
+<g fill="#EAE3D5" stroke="#D8CDBA" stroke-width="1">
+<rect x="134" y="95" width="104" height="50" rx="6"/>
+<rect x="268" y="95" width="104" height="50" rx="6"/>
+<rect x="810" y="95" width="104" height="50" rx="6"/>
+<rect x="460" y="207" width="104" height="50" rx="6"/>
+<rect x="586" y="207" width="104" height="50" rx="6"/>
+<rect x="134" y="319" width="104" height="50" rx="6"/>
+<rect x="810" y="319" width="104" height="50" rx="6"/>
+<rect x="360" y="431" width="104" height="50" rx="6"/>
+</g>
+
+<g fill="#F4EFE4" stroke="#9A7328" stroke-width="1.6">
+<path d="M412,96 L436,120 L412,144 L388,120 z"/>
+<path d="M736,208 L760,232 L736,256 L712,232 z"/>
+</g>
+
+<g font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#241F18" text-anchor="middle">
+<text x="186" y="124">заказ принят</text>
+<text x="320" y="117">счет и</text>
+<text x="320" y="131">предоплата</text>
+<text x="862" y="117">закрывающие</text>
+<text x="862" y="131">документы</text>
+<text x="512" y="229">запуск в</text>
+<text x="512" y="243">производство</text>
+<text x="638" y="229">контроль</text>
+<text x="638" y="243">качества</text>
+<text x="186" y="334">проверка</text>
+<text x="186" y="348">наличия</text>
+<text x="186" y="362">на складе</text>
+<text x="862" y="348">отгрузка</text>
+<text x="412" y="446">решение</text>
+<text x="412" y="460">руководителя</text>
+<text x="412" y="474">по отсрочке</text>
+</g>
+
+<g font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">
+<text x="100" y="157" text-anchor="middle">заказ получен</text>
+<text x="520" y="86" text-anchor="middle">сигнал из банка</text>
+<text x="952" y="157" text-anchor="middle">закрыт</text>
+<text x="620" y="493" text-anchor="middle">заказ отменен</text>
+<text x="412" y="86" text-anchor="middle">проверка оплаты</text>
+<text x="718" y="272" text-anchor="middle">результат контроля</text>
+</g>
+
+<g font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">
+<text x="468" y="102" text-anchor="middle">предоплата</text>
+<text x="468" y="114" text-anchor="middle">пришла</text>
+<text x="420" y="168">нет</text>
+<text x="798" y="306">принято</text>
+<text x="640" y="190" text-anchor="middle">брак</text>
+<text x="338" y="388">согласовано</text>
+<text x="534" y="448" text-anchor="middle">не согласовано</text>
+</g>
+</svg>

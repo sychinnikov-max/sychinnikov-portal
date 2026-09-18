@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" width="720" height="560" role="img">
+<title>Панель собственника, неделя 38: деньги, люди, решения недели и накопленный остаток на восемь недель вперед</title>
+
+<rect x="0" y="0" width="720" height="560" fill="#F4EFE4"/>
+
+<!-- ШАПКА -->
+<text x="24" y="34" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" fill="#241F18">Панель собственника, неделя 38, 14 по 20 сентября 2026</text>
+<text x="696" y="34" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">данные демонстрационные</text>
+<line x1="24" y1="48" x2="696" y2="48" stroke="#D8CDBA" stroke-width="1"/>
+
+<!-- ============ БЛОК 1: ДЕНЬГИ ============ -->
+<rect x="24" y="64" width="328" height="228" fill="none" stroke="#D8CDBA" stroke-width="1"/>
+<text x="40" y="90" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#241F18">Деньги</text>
+<text x="336" y="90" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">месяц, факт на 18 сентября</text>
+<line x1="24" y1="100" x2="352" y2="100" stroke="#D8CDBA" stroke-width="1"/>
+
+<!-- прибыль: ниже плана, красная засечка -->
+<rect x="40" y="116" width="3" height="58" fill="#A85338"/>
+<text x="54" y="144" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="25" fill="#241F18">14 940</text>
+<text x="54" y="162" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#6B6257">чистая прибыль, евро</text>
+<text x="54" y="177" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10.5" fill="#A85338">план 15 700, минус 760</text>
+
+<!-- выручка: ниже плана, красная засечка -->
+<rect x="190" y="116" width="3" height="58" fill="#A85338"/>
+<text x="204" y="144" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="25" fill="#241F18">78 400</text>
+<text x="204" y="162" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#6B6257">выручка, евро</text>
+<text x="204" y="177" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10.5" fill="#A85338">план 82 000, минус 3 600</text>
+
+<!-- деньги на счетах: плана нет, засечка нейтральная -->
+<rect x="40" y="196" width="3" height="58" fill="#8A8175"/>
+<text x="54" y="224" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="25" fill="#241F18">17 100</text>
+<text x="54" y="242" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#6B6257">деньги на счетах</text>
+<text x="54" y="257" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10.5" fill="#8A8175">евро, на 18 сентября</text>
+
+<!-- рентабельность: ровно на уровне плана, засечка нейтральная -->
+<rect x="190" y="196" width="3" height="58" fill="#8A8175"/>
+<text x="204" y="224" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="25" fill="#241F18">19,1</text>
+<text x="270" y="224" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">процента</text>
+<text x="204" y="242" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#6B6257">рентабельность</text>
+<text x="204" y="257" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10.5" fill="#8A8175">факт равен плану 19,1</text>
+
+<line x1="24" y1="270" x2="352" y2="270" stroke="#D8CDBA" stroke-width="1"/>
+<text x="40" y="285" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">банк 9 400, карта 5 100, наличные 2 600</text>
+
+<!-- ============ БЛОК 2: ЛЮДИ ============ -->
+<rect x="368" y="64" width="328" height="228" fill="none" stroke="#D8CDBA" stroke-width="1"/>
+<text x="384" y="90" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#241F18">Люди</text>
+<text x="680" y="90" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">выполнение плана месяца</text>
+<line x1="368" y1="100" x2="696" y2="100" stroke="#D8CDBA" stroke-width="1"/>
+
+<g font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">
+  <text x="384" y="118">руководитель продаж</text>
+  <text x="384" y="145">руководитель производства</text>
+  <text x="384" y="172">мастер участка</text>
+  <text x="384" y="199">руководитель финансов</text>
+  <text x="384" y="226">бухгалтер</text>
+  <text x="384" y="253">менеджер по продажам</text>
+</g>
+<g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" fill="#241F18" text-anchor="end">
+  <text x="680" y="118">96</text>
+  <text x="680" y="145">103</text>
+  <text x="680" y="172">103</text>
+  <text x="680" y="199">105</text>
+  <text x="680" y="226">102</text>
+  <text x="680" y="253">90</text>
+</g>
+<!-- дорожка: вся ширина 296 это 110 процентов -->
+<g fill="#EAE3D5">
+  <rect x="384" y="123" width="296" height="6"/>
+  <rect x="384" y="150" width="296" height="6"/>
+  <rect x="384" y="177" width="296" height="6"/>
+  <rect x="384" y="204" width="296" height="6"/>
+  <rect x="384" y="231" width="296" height="6"/>
+  <rect x="384" y="258" width="296" height="6"/>
+</g>
+<rect x="384" y="123" width="258.3" height="6" fill="#A85338"/>
+<rect x="384" y="150" width="277.2" height="6" fill="#4E7A3E"/>
+<rect x="384" y="177" width="277.2" height="6" fill="#4E7A3E"/>
+<rect x="384" y="204" width="282.5" height="6" fill="#4E7A3E"/>
+<rect x="384" y="231" width="274.5" height="6" fill="#4E7A3E"/>
+<rect x="384" y="258" width="242.2" height="6" fill="#A85338"/>
+<!-- засечка плана: 100 процентов -->
+<g stroke="#8A8175" stroke-width="1">
+  <line x1="653.1" y1="121" x2="653.1" y2="131"/>
+  <line x1="653.1" y1="148" x2="653.1" y2="158"/>
+  <line x1="653.1" y1="175" x2="653.1" y2="185"/>
+  <line x1="653.1" y1="202" x2="653.1" y2="212"/>
+  <line x1="653.1" y1="229" x2="653.1" y2="239"/>
+  <line x1="653.1" y1="256" x2="653.1" y2="266"/>
+</g>
+<line x1="368" y1="272" x2="696" y2="272" stroke="#D8CDBA" stroke-width="1"/>
+<text x="384" y="287" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">показано 6 ролей из 9</text>
+<text x="680" y="287" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">засечка это план</text>
+
+<!-- ============ БЛОК 3: РЕШЕНИЯ НЕДЕЛИ ============ -->
+<rect x="24" y="308" width="328" height="228" fill="none" stroke="#D8CDBA" stroke-width="1"/>
+<text x="40" y="334" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#241F18">Решения недели</text>
+<text x="336" y="334" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">14 по 20 сентября 2026</text>
+<line x1="24" y1="344" x2="352" y2="344" stroke="#D8CDBA" stroke-width="1"/>
+
+<!-- решение 1 -->
+<rect x="24" y="352" width="328" height="56" fill="#EAE3D5"/>
+<text x="40" y="370" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#6B6257">Р-036</text>
+<rect x="254" y="357" width="82" height="18" fill="none" stroke="#A85338" stroke-width="1"/>
+<text x="295" y="370" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#A85338">просрочено</text>
+<text x="40" y="388" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">Свести отчет о движении денег за август</text>
+<text x="40" y="404" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">бухгалтер, срок 15 сентября</text>
+
+<!-- решение 2 -->
+<text x="40" y="430" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#6B6257">Р-039</text>
+<rect x="260" y="417" width="76" height="18" fill="none" stroke="#4E7A3E" stroke-width="1"/>
+<text x="298" y="430" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#4E7A3E">выполнено</text>
+<text x="40" y="448" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">Поднять цену на монтаж на 8 процентов</text>
+<text x="40" y="464" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">руководитель продаж, 16 сентября</text>
+
+<!-- решение 3 -->
+<rect x="24" y="472" width="328" height="56" fill="#EAE3D5"/>
+<text x="40" y="490" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#6B6257">Р-041</text>
+<rect x="266" y="477" width="70" height="18" fill="none" stroke="#B08A2E" stroke-width="1"/>
+<text x="301" y="490" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#B08A2E">в работе</text>
+<text x="40" y="508" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">Закрыть вакансию мастера участка</text>
+<text x="40" y="524" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">собственник, срок 18 сентября</text>
+
+<!-- ============ БЛОК 4: ДЕНЬГИ НА 8 НЕДЕЛЬ ============ -->
+<rect x="368" y="308" width="328" height="228" fill="none" stroke="#D8CDBA" stroke-width="1"/>
+<text x="384" y="334" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#241F18">Деньги на 8 недель</text>
+<text x="680" y="334" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">на конец недели, евро</text>
+<line x1="368" y1="344" x2="696" y2="344" stroke="#D8CDBA" stroke-width="1"/>
+
+<!-- столбцы: высота пропорциональна накопленному остатку -->
+<g fill="#4E7A3E">
+  <rect x="390.5" y="418.79" width="24" height="47.21"/>
+  <rect x="427.5" y="449.77" width="24" height="16.23"/>
+  <rect x="501.5" y="439.45" width="24" height="26.55"/>
+  <rect x="538.5" y="422.48" width="24" height="43.52"/>
+  <rect x="575.5" y="435.76" width="24" height="30.24"/>
+  <rect x="612.5" y="385.60" width="24" height="80.40"/>
+  <rect x="649.5" y="362.00" width="24" height="104.00"/>
+</g>
+<rect x="464.5" y="466" width="24" height="9.59" fill="#A85338"/>
+
+<!-- нулевая линия -->
+<line x1="384" y1="466" x2="674" y2="466" stroke="#8A8175" stroke-width="1"/>
+<text x="678" y="470" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" fill="#8A8175">0</text>
+
+<!-- подписи значений: первый, минимальный, последний -->
+<text x="402.5" y="412" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#6B6257">3 200</text>
+<text x="661.5" y="356" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#6B6257">7 050</text>
+<text x="476.5" y="490" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#A85338">минус 650</text>
+
+<g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175" text-anchor="middle">
+  <text x="402.5" y="506">1</text>
+  <text x="439.5" y="506">2</text>
+  <text x="476.5" y="506" fill="#A85338">3</text>
+  <text x="513.5" y="506">4</text>
+  <text x="550.5" y="506">5</text>
+  <text x="587.5" y="506">6</text>
+  <text x="624.5" y="506">7</text>
+  <text x="661.5" y="506">8</text>
+</g>
+<text x="384" y="524" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#A85338">разрыв на неделе 3, не хватает 650 евро</text>
+</svg>

@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 624" width="900" height="624" role="img">
+<title>Матрица приемки внедренности: девять инструментов по семи критериям с итогом в процентах и планкой 80 процентов</title>
+<rect x="0" y="0" width="900" height="624" fill="#F4EFE4"/>
+<text x="28" y="40" font-family="Playfair Display, Georgia, serif" font-size="23" fill="#241F18">Приемка: внедрено или нет</text>
+<text x="28" y="62" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#8A8175">компания в примере, сентябрь 2026</text>
+<text x="872" y="40" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">данные демонстрационные</text>
+<path transform="translate(694,54) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="704" y="58" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#6B6257">есть</text>
+<path transform="translate(752,54) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<text x="762" y="58" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#6B6257">частично</text>
+<path transform="translate(832,54) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<text x="842" y="58" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#6B6257">нет</text>
+<rect x="28" y="80" width="844" height="318" fill="#F4EFE4" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="28" y="80" width="844" height="30" fill="#EAE3D5"/>
+<line x1="28" y1="110.5" x2="872" y2="110.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="100" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">инструмент</text>
+<text x="299.0" y="100" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">1</text>
+<text x="361.0" y="100" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">2</text>
+<text x="423.0" y="100" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">3</text>
+<text x="485.0" y="100" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">4</text>
+<text x="547.0" y="100" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">5</text>
+<text x="609.0" y="100" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">6</text>
+<text x="671.0" y="100" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">7</text>
+<text x="862" y="100" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">итог</text>
+<rect x="29" y="110" width="842" height="32" fill="#4E7A3E" fill-opacity="0.085"/>
+<rect x="29" y="110" width="3" height="32" fill="#4E7A3E" fill-opacity="0.75"/>
+<text x="44" y="130.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">оргструктура</text>
+<path transform="translate(299.0,126.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,126.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(423.0,126.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(485.0,126.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(547.0,126.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(609.0,126.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(671.0,126.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="716" y="123.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="123.0" width="100.0" height="6" fill="#4E7A3E" fill-opacity="0.85"/>
+<text x="862" y="130.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#4E7A3E">100%</text>
+<rect x="29" y="142" width="842" height="32" fill="#4E7A3E" fill-opacity="0.085"/>
+<rect x="29" y="142" width="3" height="32" fill="#4E7A3E" fill-opacity="0.75"/>
+<line x1="28" y1="142.5" x2="872" y2="142.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="162.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">показатели по ролям</text>
+<path transform="translate(299.0,158.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,158.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(423.0,158.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(485.0,158.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(547.0,158.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(609.0,158.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(671.0,158.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="716" y="155.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="155.0" width="92.9" height="6" fill="#4E7A3E" fill-opacity="0.85"/>
+<text x="862" y="162.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#4E7A3E">93%</text>
+<rect x="29" y="174" width="842" height="32" fill="#4E7A3E" fill-opacity="0.085"/>
+<rect x="29" y="174" width="3" height="32" fill="#4E7A3E" fill-opacity="0.75"/>
+<line x1="28" y1="174.5" x2="872" y2="174.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="194.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">реестр решений</text>
+<path transform="translate(299.0,190.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,190.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(423.0,190.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(485.0,190.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(547.0,190.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(609.0,190.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(671.0,190.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<rect x="716" y="187.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="187.0" width="85.7" height="6" fill="#4E7A3E" fill-opacity="0.85"/>
+<text x="862" y="194.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#4E7A3E">86%</text>
+<rect x="29" y="206" width="842" height="32" fill="#4E7A3E" fill-opacity="0.085"/>
+<rect x="29" y="206" width="3" height="32" fill="#4E7A3E" fill-opacity="0.75"/>
+<line x1="28" y1="206.5" x2="872" y2="206.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="226.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">протокол встречи</text>
+<path transform="translate(299.0,222.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,222.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(423.0,222.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(485.0,222.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<path transform="translate(547.0,222.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(609.0,222.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(671.0,222.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="716" y="219.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="219.0" width="85.7" height="6" fill="#4E7A3E" fill-opacity="0.85"/>
+<text x="862" y="226.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#4E7A3E">86%</text>
+<rect x="29" y="238" width="842" height="32" fill="#A85338" fill-opacity="0.085"/>
+<rect x="29" y="238" width="3" height="32" fill="#A85338" fill-opacity="0.75"/>
+<line x1="28" y1="238.5" x2="872" y2="238.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="258.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">разбор бизнес-задачи</text>
+<path transform="translate(299.0,254.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,254.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(423.0,254.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(485.0,254.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(547.0,254.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(609.0,254.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(671.0,254.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="716" y="251.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="251.0" width="78.6" height="6" fill="#A85338" fill-opacity="0.85"/>
+<text x="862" y="258.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#A85338">79%</text>
+<rect x="29" y="270" width="842" height="32" fill="#A85338" fill-opacity="0.085"/>
+<rect x="29" y="270" width="3" height="32" fill="#A85338" fill-opacity="0.75"/>
+<line x1="28" y1="270.5" x2="872" y2="270.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="290.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">дорожная карта</text>
+<path transform="translate(299.0,286.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,286.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(423.0,286.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(485.0,286.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(547.0,286.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(609.0,286.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(671.0,286.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="716" y="283.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="283.0" width="71.4" height="6" fill="#A85338" fill-opacity="0.85"/>
+<text x="862" y="290.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#A85338">71%</text>
+<rect x="29" y="302" width="842" height="32" fill="#A85338" fill-opacity="0.085"/>
+<rect x="29" y="302" width="3" height="32" fill="#A85338" fill-opacity="0.75"/>
+<line x1="28" y1="302.5" x2="872" y2="302.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="322.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">регламенты процессов</text>
+<path transform="translate(299.0,318.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,318.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(423.0,318.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(485.0,318.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(547.0,318.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<path transform="translate(609.0,318.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(671.0,318.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="716" y="315.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="315.0" width="64.3" height="6" fill="#A85338" fill-opacity="0.85"/>
+<text x="862" y="322.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#A85338">64%</text>
+<rect x="29" y="334" width="842" height="32" fill="#A85338" fill-opacity="0.085"/>
+<rect x="29" y="334" width="3" height="32" fill="#A85338" fill-opacity="0.75"/>
+<line x1="28" y1="334.5" x2="872" y2="334.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="354.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">платежный календарь</text>
+<path transform="translate(299.0,350.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,350.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(423.0,350.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(485.0,350.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(547.0,350.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(609.0,350.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<path transform="translate(671.0,350.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="716" y="347.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="347.0" width="57.1" height="6" fill="#A85338" fill-opacity="0.85"/>
+<text x="862" y="354.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#A85338">57%</text>
+<rect x="29" y="366" width="842" height="32" fill="#A85338" fill-opacity="0.085"/>
+<rect x="29" y="366" width="3" height="32" fill="#A85338" fill-opacity="0.75"/>
+<line x1="28" y1="366.5" x2="872" y2="366.5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="386.5" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">отчет о прибыли</text>
+<path transform="translate(299.0,382.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(361.0,382.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(423.0,382.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(485.0,382.0) scale(1.0)" d="M -4.2 0.2 L -1.2 3.4 L 4.6 -3.8" fill="none" stroke="#4E7A3E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path transform="translate(547.0,382.0) scale(1.0)" d="M -5 1.2 Q -2.5 -3.4 0 0.2 Q 2.5 3.8 5 -0.8" fill="none" stroke="#B08A2E" stroke-width="1.9" stroke-linecap="round"/>
+<path transform="translate(609.0,382.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<path transform="translate(671.0,382.0) scale(1.0)" d="M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6" fill="none" stroke="#A85338" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="716" y="379.0" width="100" height="6" fill="#D8CDBA"/>
+<rect x="716" y="379.0" width="50.0" height="6" fill="#A85338" fill-opacity="0.85"/>
+<text x="862" y="386.5" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" font-weight="600" fill="#A85338">50%</text>
+<line x1="268.5" y1="80" x2="268.5" y2="398" stroke="#D8CDBA" stroke-width="1" stroke-opacity="1"/>
+<line x1="330.5" y1="80" x2="330.5" y2="398" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.65"/>
+<line x1="392.5" y1="80" x2="392.5" y2="398" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.65"/>
+<line x1="454.5" y1="80" x2="454.5" y2="398" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.65"/>
+<line x1="516.5" y1="80" x2="516.5" y2="398" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.65"/>
+<line x1="578.5" y1="80" x2="578.5" y2="398" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.65"/>
+<line x1="640.5" y1="80" x2="640.5" y2="398" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.65"/>
+<line x1="702.5" y1="80" x2="702.5" y2="398" stroke="#D8CDBA" stroke-width="1" stroke-opacity="1"/>
+<line x1="28" y1="238.5" x2="872" y2="238.5" stroke="#9A7328" stroke-width="1.4" stroke-dasharray="6 4"/>
+<rect x="28" y="412" width="844" height="30" fill="#EAE3D5" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="44" y1="427.5" x2="76" y2="427.5" stroke="#9A7328" stroke-width="1.4" stroke-dasharray="6 4"/>
+<text x="86" y="431" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#241F18">планка приемки 80 процентов</text>
+<text x="862" y="431" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#9A7328">внедрено 4 из 9</text>
+<rect x="28" y="458" width="844" height="104" fill="#EAE3D5" stroke="#D8CDBA" stroke-width="1"/>
+<text x="44" y="480" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">семь критериев приемки, расшифровка номеров из шапки таблицы</text>
+<text x="44" y="502" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#241F18"><tspan font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#9A7328" font-weight="600">1</tspan><tspan dx="8">инструмент создан</tspan></text>
+<text x="326" y="502" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#241F18"><tspan font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#9A7328" font-weight="600">2</tspan><tspan dx="8">заполнен данными</tspan></text>
+<text x="608" y="502" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#241F18"><tspan font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#9A7328" font-weight="600">3</tspan><tspan dx="8">у него есть хозяин</tspan></text>
+<text x="44" y="524" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#241F18"><tspan font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#9A7328" font-weight="600">4</tspan><tspan dx="8">обновляется в срок</tspan></text>
+<text x="326" y="524" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#241F18"><tspan font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#9A7328" font-weight="600">5</tspan><tspan dx="8">по нему принимаются решения</tspan></text>
+<text x="608" y="524" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#241F18"><tspan font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#9A7328" font-weight="600">6</tspan><tspan dx="8">работает без собственника</tspan></text>
+<text x="44" y="546" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#241F18"><tspan font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#9A7328" font-weight="600">7</tspan><tspan dx="8">результат виден в цифрах</tspan></text>
+<text x="28" y="586" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">Инструмент считается внедренным только выше планки, а все, что ниже планки, это работа в процессе, а не результат.</text>
+<text x="28" y="604" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">итог это доля выполненных критериев из семи, частичное выполнение считается за половину</text>
+</svg>

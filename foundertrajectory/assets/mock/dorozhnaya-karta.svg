@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" role="img">
+<title>Дорожная карта компании в примере: девять задач на тринадцать недель с ответственными, сроками и вехами</title>
+<style>
+.s{font-family:Manrope, -apple-system, Segoe UI, sans-serif}
+.m{font-family:IBM Plex Mono, ui-monospace, monospace}
+.hd{font-size:15px;fill:#241F18;letter-spacing:.06em}
+.sub{font-size:11px;fill:#8A8175}
+.col{font-size:11px;fill:#8A8175;letter-spacing:.08em}
+.wk{font-size:11px;fill:#8A8175}
+.mo{font-size:11px;fill:#9A7328;letter-spacing:.08em}
+.grp{font-size:13px;font-weight:600;fill:#241F18}
+.task{font-size:13px;fill:#241F18}
+.who{font-size:12px;fill:#6B6257}
+.due{font-size:13px;fill:#6B6257}
+.ms{font-size:11px;fill:#6B6257}
+.lg{font-size:11px;fill:#6B6257}
+.note{font-size:11px;fill:#8A8175}
+</style>
+<defs>
+<pattern id="wip" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<rect width="7" height="7" fill="#F4EFE4"/><rect width="3.5" height="7" fill="#B08A2E"/>
+</pattern>
+</defs>
+<rect x="0" y="0" width="1000" height="600" fill="#F4EFE4"/>
+<text class="m hd" x="20" y="34">Дорожная карта, компания в примере</text>
+<text class="m sub" x="980" y="34" text-anchor="end">данные демонстрационные</text>
+<line x1="20" y1="52" x2="980" y2="52" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s col" x="32" y="72">задача</text>
+<text class="s col" x="262" y="72">ответственный</text>
+<text class="s col" x="422" y="72">срок</text>
+<text class="m mo" x="489" y="72">август</text>
+<text class="m mo" x="603" y="72">сентябрь</text>
+<text class="m mo" x="755" y="72">октябрь</text>
+<text class="m mo" x="907" y="72">ноябрь</text>
+<line x1="600" y1="60" x2="600" y2="448" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="752" y1="60" x2="752" y2="448" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="904" y1="60" x2="904" y2="448" stroke="#D8CDBA" stroke-width="1"/>
+<text class="m wk" x="505" y="94" text-anchor="middle">17.08</text>
+<text class="m wk" x="543" y="94" text-anchor="middle">24.08</text>
+<text class="m wk" x="581" y="94" text-anchor="middle">31.08</text>
+<text class="m wk" x="619" y="94" text-anchor="middle">07.09</text>
+<text class="m wk" x="657" y="94" text-anchor="middle">14.09</text>
+<text class="m wk" x="695" y="94" text-anchor="middle">21.09</text>
+<text class="m wk" x="733" y="94" text-anchor="middle">28.09</text>
+<text class="m wk" x="771" y="94" text-anchor="middle">05.10</text>
+<text class="m wk" x="809" y="94" text-anchor="middle">12.10</text>
+<text class="m wk" x="847" y="94" text-anchor="middle">19.10</text>
+<text class="m wk" x="885" y="94" text-anchor="middle">26.10</text>
+<text class="m wk" x="923" y="94" text-anchor="middle">02.11</text>
+<text class="m wk" x="961" y="94" text-anchor="middle">09.11</text>
+<line x1="20" y1="104" x2="980" y2="104" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="20" y="104" width="960" height="28" fill="#EAE3D5"/>
+<rect x="20" y="104" width="3" height="28" fill="#9A7328"/>
+<text class="s grp" x="32" y="123">Структура и решения</text>
+<line x1="20" y1="132" x2="980" y2="132" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s task" x="32" y="153">Аудит структуры и процессов</text>
+<text class="s who" x="262" y="153">собственник</text>
+<text class="m due" x="422" y="153">28.08</text>
+<line x1="20" y1="164" x2="980" y2="164" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="20" y="164" width="960" height="32" fill="#EAE3D5" fill-opacity="0.55"/>
+<text class="s task" x="32" y="185">Карта зон ответственности</text>
+<text class="s who" x="262" y="185">собственник</text>
+<text class="m due" x="422" y="185">11.09</text>
+<line x1="20" y1="196" x2="980" y2="196" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s task" x="32" y="217">Оргструктура и подчинение</text>
+<text class="s who" x="262" y="217">собственник</text>
+<text class="m due" x="422" y="217">25.09</text>
+<line x1="20" y1="228" x2="980" y2="228" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="20" y="228" width="960" height="32" fill="#EAE3D5" fill-opacity="0.55"/>
+<text class="s task" x="32" y="249">Показатели для каждой роли</text>
+<text class="s who" x="262" y="249">руководитель финансов</text>
+<text class="m due" x="422" y="249">02.10</text>
+<line x1="20" y1="260" x2="980" y2="260" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="20" y="260" width="960" height="28" fill="#EAE3D5"/>
+<rect x="20" y="260" width="3" height="28" fill="#9A7328"/>
+<text class="s grp" x="32" y="279">Процессы и передача</text>
+<line x1="20" y1="288" x2="980" y2="288" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s task" x="32" y="309">Панель показателей на неделю</text>
+<text class="s who" x="262" y="309">руководитель финансов</text>
+<text class="m due" x="422" y="309">09.10</text>
+<line x1="20" y1="320" x2="980" y2="320" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="20" y="320" width="960" height="32" fill="#EAE3D5" fill-opacity="0.55"/>
+<text class="s task" x="32" y="341">Регламент работы с заказом</text>
+<text class="s who" x="262" y="341">мастер участка</text>
+<text class="m due" x="422" y="341">23.10</text>
+<line x1="20" y1="352" x2="980" y2="352" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s task" x="32" y="373">Сценарии разговора и воронка</text>
+<text class="s who" x="262" y="373">руководитель продаж</text>
+<text class="m due" x="422" y="373">23.10</text>
+<line x1="20" y1="384" x2="980" y2="384" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="20" y="384" width="960" height="32" fill="#EAE3D5" fill-opacity="0.55"/>
+<text class="s task" x="32" y="405">Недельный разбор показателей</text>
+<text class="s who" x="262" y="405">собственник</text>
+<text class="m due" x="422" y="405">06.11</text>
+<line x1="20" y1="416" x2="980" y2="416" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s task" x="32" y="437">Передача текущего управления</text>
+<text class="s who" x="262" y="437">собственник</text>
+<text class="m due" x="422" y="437">13.11</text>
+<line x1="20" y1="448" x2="980" y2="448" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="486" y1="104" x2="486" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="524" y1="104" x2="524" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="562" y1="104" x2="562" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="600" y1="104" x2="600" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="638" y1="104" x2="638" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="676" y1="104" x2="676" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="714" y1="104" x2="714" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="752" y1="104" x2="752" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="790" y1="104" x2="790" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="828" y1="104" x2="828" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="866" y1="104" x2="866" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="904" y1="104" x2="904" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="942" y1="104" x2="942" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="980" y1="104" x2="980" y2="448" stroke="#D8CDBA" stroke-width="1" stroke-opacity="0.7"/>
+<line x1="250" y1="104" x2="250" y2="448" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="410" y1="104" x2="410" y2="448" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="470" y1="104" x2="470" y2="448" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="488" y="141" width="63" height="14" rx="2" fill="#4E7A3E"/>
+<rect x="526" y="173" width="101" height="14" rx="2" fill="#4E7A3E"/>
+<rect x="602" y="205" width="101" height="14" rx="2" fill="url(#wip)" stroke="#B08A2E" stroke-width="1"/>
+<rect x="640" y="237" width="101" height="14" rx="2" fill="url(#wip)" stroke="#B08A2E" stroke-width="1"/>
+<rect x="678" y="297" width="101" height="14" rx="2" fill="none" stroke="#9A7328" stroke-width="1"/>
+<rect x="716" y="329" width="139" height="14" rx="2" fill="none" stroke="#9A7328" stroke-width="1"/>
+<rect x="754" y="361" width="101" height="14" rx="2" fill="none" stroke="#9A7328" stroke-width="1"/>
+<rect x="792" y="393" width="139" height="14" rx="2" fill="none" stroke="#9A7328" stroke-width="1"/>
+<rect x="868" y="425" width="101" height="14" rx="2" fill="none" stroke="#9A7328" stroke-width="1"/>
+<line x1="662.429" y1="104" x2="662.429" y2="450" stroke="#A85338" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="626.429" y="452" width="72" height="20" rx="3" fill="#F4EFE4" stroke="#A85338" stroke-width="1"/>
+<text class="m" x="662.429" y="466" text-anchor="middle" font-size="11" fill="#A85338">сегодня</text>
+<line x1="20" y1="484" x2="980" y2="484" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s col" x="32" y="506">вехи</text>
+<path d="M 551 496 l 8 8 l -8 8 l -8 -8 z" fill="#4E7A3E" stroke="#4E7A3E" stroke-width="1.5"/>
+<line x1="551" y1="512" x2="551" y2="519" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s ms" x="551" y="531" text-anchor="middle">аудит закрыт</text>
+<path d="M 779 496 l 8 8 l -8 8 l -8 -8 z" fill="#F4EFE4" stroke="#9A7328" stroke-width="1.5"/>
+<line x1="779" y1="512" x2="770" y2="519" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s ms" x="770" y="531" text-anchor="end">показатели работают</text>
+<path d="M 855 496 l 8 8 l -8 8 l -8 -8 z" fill="#F4EFE4" stroke="#9A7328" stroke-width="1.5"/>
+<line x1="855" y1="512" x2="864" y2="519" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s ms" x="864" y="531" text-anchor="start">регламенты сданы</text>
+<line x1="20" y1="541" x2="980" y2="541" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="20" y="549" width="26" height="10" rx="2" fill="#4E7A3E"/>
+<text class="s lg" x="52" y="558">выполнено</text>
+<rect x="160" y="549" width="26" height="10" rx="2" fill="url(#wip)" stroke="#B08A2E" stroke-width="1"/>
+<text class="s lg" x="192" y="558">в работе</text>
+<rect x="290" y="549" width="26" height="10" rx="2" fill="none" stroke="#9A7328" stroke-width="1"/>
+<text class="s lg" x="322" y="558">впереди</text>
+<text class="m note" x="980" y="558" text-anchor="end">задач: 9, выполнено: 2, в работе: 2, впереди: 5</text>
+<text class="s note" x="20" y="581">срок всегда стоит на пятницу, полоса заканчивается в тот же день, недели считаются с понедельника, линия «сегодня» стоит на 18.09.2026, это пятая неделя карты</text>
+</svg>

@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img">
+<title>Неделя встык и неделя с воздухом после наведения порядка</title>
+<rect x="0" y="0" width="1000" height="300" fill="#F4EFE4"/>
+<rect x="0" y="0" width="420" height="300" fill="#14120F"/>
+<text x="24" y="30" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">сейчас</text>
+<text x="24" y="52" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#C6B99F">неделя собственника</text>
+<text x="90" y="68" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">пн</text>
+<text x="158" y="68" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">вт</text>
+<text x="226" y="68" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">ср</text>
+<text x="294" y="68" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">чт</text>
+<text x="362" y="68" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">пт</text>
+<text x="50" y="91" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">09</text>
+<text x="50" y="113" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">10</text>
+<text x="50" y="135" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">11</text>
+<text x="50" y="157" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">12</text>
+<text x="50" y="179" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">13</text>
+<text x="50" y="201" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">14</text>
+<text x="50" y="223" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">15</text>
+<text x="50" y="245" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">16</text>
+<text x="50" y="267" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">17</text>
+<g stroke="#9B8E79" stroke-opacity="0.35" stroke-width="1">
+<line x1="56" y1="76" x2="396" y2="76"/>
+<line x1="56" y1="98" x2="396" y2="98"/>
+<line x1="56" y1="120" x2="396" y2="120"/>
+<line x1="56" y1="142" x2="396" y2="142"/>
+<line x1="56" y1="164" x2="396" y2="164"/>
+<line x1="56" y1="186" x2="396" y2="186"/>
+<line x1="56" y1="208" x2="396" y2="208"/>
+<line x1="56" y1="230" x2="396" y2="230"/>
+<line x1="56" y1="252" x2="396" y2="252"/>
+<line x1="56" y1="274" x2="396" y2="274"/>
+<line x1="56" y1="76" x2="56" y2="274"/>
+<line x1="124" y1="76" x2="124" y2="274"/>
+<line x1="192" y1="76" x2="192" y2="274"/>
+<line x1="260" y1="76" x2="260" y2="274"/>
+<line x1="328" y1="76" x2="328" y2="274"/>
+<line x1="396" y1="76" x2="396" y2="274"/>
+</g>
+<g fill="#C48870" stroke="#14120F" stroke-width="1">
+<rect x="56" y="76" width="68" height="44"/>
+<rect x="56" y="120" width="68" height="66"/>
+<rect x="56" y="186" width="68" height="44"/>
+<rect x="56" y="230" width="68" height="44"/>
+<rect x="124" y="76" width="68" height="66"/>
+<rect x="124" y="142" width="68" height="44"/>
+<rect x="124" y="208" width="68" height="66"/>
+<rect x="192" y="76" width="68" height="44"/>
+<rect x="192" y="120" width="68" height="44"/>
+<rect x="192" y="164" width="68" height="66"/>
+<rect x="192" y="230" width="68" height="44"/>
+<rect x="260" y="76" width="68" height="88"/>
+<rect x="260" y="164" width="68" height="44"/>
+<rect x="260" y="208" width="68" height="44"/>
+<rect x="328" y="76" width="68" height="66"/>
+<rect x="328" y="142" width="68" height="44"/>
+<rect x="328" y="186" width="68" height="44"/>
+</g>
+<text x="24" y="286" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#9B8E79">41 час из 45 занят встречами</text>
+<line x1="420" y1="0" x2="420" y2="300" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="420" y1="146" x2="420" y2="154" stroke="#9A7328" stroke-width="3"/>
+<text x="444" y="30" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">через три месяца</text>
+<text x="976" y="30" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">данные демонстрационные</text>
+<text x="444" y="52" font-family="Playfair Display, Georgia, serif" font-size="16" fill="#241F18">неделя собственника</text>
+<text x="529" y="68" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">пн</text>
+<text x="628" y="68" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">вт</text>
+<text x="727" y="68" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">ср</text>
+<text x="826" y="68" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">чт</text>
+<text x="925" y="68" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">пт</text>
+<text x="474" y="91" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">09</text>
+<text x="474" y="113" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">10</text>
+<text x="474" y="135" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">11</text>
+<text x="474" y="157" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">12</text>
+<text x="474" y="179" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">13</text>
+<text x="474" y="201" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">14</text>
+<text x="474" y="223" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">15</text>
+<text x="474" y="245" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">16</text>
+<text x="474" y="267" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">17</text>
+<g stroke="#D8CDBA" stroke-width="1">
+<line x1="480" y1="76" x2="975" y2="76"/>
+<line x1="480" y1="98" x2="975" y2="98"/>
+<line x1="480" y1="120" x2="975" y2="120"/>
+<line x1="480" y1="142" x2="975" y2="142"/>
+<line x1="480" y1="164" x2="975" y2="164"/>
+<line x1="480" y1="186" x2="975" y2="186"/>
+<line x1="480" y1="208" x2="975" y2="208"/>
+<line x1="480" y1="230" x2="975" y2="230"/>
+<line x1="480" y1="252" x2="975" y2="252"/>
+<line x1="480" y1="274" x2="975" y2="274"/>
+<line x1="480" y1="76" x2="480" y2="274"/>
+<line x1="579" y1="76" x2="579" y2="274"/>
+<line x1="678" y1="76" x2="678" y2="274"/>
+<line x1="777" y1="76" x2="777" y2="274"/>
+<line x1="876" y1="76" x2="876" y2="274"/>
+<line x1="975" y1="76" x2="975" y2="274"/>
+</g>
+<rect x="483" y="98" width="93" height="66" fill="#EAE3D5" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="483" y="98" width="3" height="66" fill="#9A7328"/>
+<text x="495" y="112" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" fill="#8A8175">10:00</text>
+<text x="495" y="126" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">недельная</text>
+<text x="495" y="138" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">сверка</text>
+<text x="495" y="150" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">показателей</text>
+<rect x="681" y="98" width="93" height="44" fill="#EAE3D5" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="681" y="98" width="3" height="44" fill="#9A7328"/>
+<text x="693" y="110" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" fill="#8A8175">10:00</text>
+<text x="693" y="122" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">разбор</text>
+<text x="693" y="133" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">бизнес-задачи</text>
+<rect x="780" y="76" width="93" height="44" fill="#EAE3D5" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="780" y="76" width="3" height="44" fill="#9A7328"/>
+<text x="792" y="88" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" fill="#8A8175">09:00</text>
+<text x="792" y="100" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">планерка</text>
+<text x="792" y="111" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">производства</text>
+<rect x="582" y="208" width="93" height="44" fill="#EAE3D5" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="582" y="208" width="3" height="44" fill="#9A7328"/>
+<text x="594" y="220" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" fill="#8A8175">15:00</text>
+<text x="594" y="232" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">разговор</text>
+<text x="594" y="243" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10" fill="#241F18">один на один</text>
+<text x="444" y="286" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">операционная работа 9 часов из 45</text>
+</svg>

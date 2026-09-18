@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" role="img">
+<title>Оргструктура компании в примере: три уровня подчинения, у каждой роли результат и показатель с планом и фактом</title>
+<style>
+.s{font-family:Manrope, -apple-system, Segoe UI, sans-serif}
+.m{font-family:IBM Plex Mono, ui-monospace, monospace}
+.role{font-size:13px;font-weight:600;fill:#241F18}
+.res{font-size:13px;fill:#6B6257}
+.lab{font-size:11px;fill:#8A8175}
+.num{font-size:13px;fill:#6B6257}
+.fact{font-size:13px;font-weight:600}
+.res2{font-size:11px;fill:#6B6257}
+.lab2{font-size:10px;fill:#8A8175;letter-spacing:.04em}
+.num2{font-size:12px;fill:#6B6257}
+.fact2{font-size:12px;font-weight:600}
+.hd{font-size:15px;fill:#241F18;letter-spacing:.06em}
+.sub{font-size:11px;fill:#8A8175}
+.note{font-size:11px;fill:#8A8175}
+.lg{font-size:11px;fill:#6B6257}
+</style>
+<rect x="0" y="0" width="900" height="560" fill="#F4EFE4"/>
+<text class="m hd" x="24" y="34">Оргструктура, сентябрь 2026</text>
+<text class="m sub" x="876" y="34" text-anchor="end">данные демонстрационные</text>
+<line x1="24" y1="50" x2="876" y2="50" stroke="#D8CDBA" stroke-width="1"/>
+<g>
+<rect x="300" y="74" width="300" height="88" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="300" y="74" width="3" height="88" fill="#A85338"/>
+<text class="s role" x="316" y="96">собственник</text>
+<text class="s res" x="316" y="117">прибыль 15 700 евро в месяц</text>
+<line x1="316" y1="128" x2="588" y2="128" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab" x="316" y="149">план<tspan class="m num" dx="6">15 700</tspan></text>
+<text class="s lab" x="588" y="149" text-anchor="end">факт<tspan class="m fact" dx="6" fill="#A85338">14 940</tspan></text>
+</g>
+<g>
+<rect x="32" y="210" width="260" height="88" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="32" y="210" width="3" height="88" fill="#A85338"/>
+<text class="s role" x="46" y="232">руководитель продаж</text>
+<text class="s res" x="46" y="253">выручка 82 000 евро в месяц</text>
+<line x1="46" y1="264" x2="282" y2="264" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab" x="46" y="285">план<tspan class="m num" dx="6">82 000</tspan></text>
+<text class="s lab" x="282" y="285" text-anchor="end">факт<tspan class="m fact" dx="6" fill="#A85338">78 400</tspan></text>
+</g>
+<g>
+<rect x="320" y="210" width="260" height="88" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="320" y="210" width="3" height="88" fill="#4E7A3E"/>
+<text class="s role" x="334" y="232">руководитель производства</text>
+<text class="s res" x="334" y="253">отгрузка 980 заказов в месяц</text>
+<line x1="334" y1="264" x2="570" y2="264" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab" x="334" y="285">план<tspan class="m num" dx="6">980</tspan></text>
+<text class="s lab" x="570" y="285" text-anchor="end">факт<tspan class="m fact" dx="6" fill="#4E7A3E">1 010</tspan></text>
+</g>
+<g>
+<rect x="608" y="210" width="260" height="88" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="608" y="210" width="3" height="88" fill="#4E7A3E"/>
+<text class="s role" x="622" y="232">руководитель финансов</text>
+<text class="s res" x="622" y="253">сбор оплат 74 000 евро в месяц</text>
+<line x1="622" y1="264" x2="858" y2="264" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab" x="622" y="285">план<tspan class="m num" dx="6">74 000</tspan></text>
+<text class="s lab" x="858" y="285" text-anchor="end">факт<tspan class="m fact" dx="6" fill="#4E7A3E">78 000</tspan></text>
+</g>
+<g>
+<rect x="24" y="346" width="160" height="110" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="24" y="346" width="3" height="110" fill="#A85338"/>
+<text class="s role" x="36" y="366">менеджер</text>
+<text class="s role" x="36" y="382">по продажам</text>
+<text class="s res2" x="36" y="400">выручка новых клиентов</text>
+<line x1="36" y1="410" x2="172" y2="410" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab2" x="36" y="427">план</text>
+<text class="m num2" x="172" y="427" text-anchor="end">46 000</text>
+<text class="s lab2" x="36" y="444">факт</text>
+<text class="m fact2" x="172" y="444" text-anchor="end" fill="#A85338">41 200</text>
+</g>
+<g>
+<rect x="197" y="346" width="160" height="110" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="197" y="346" width="3" height="110" fill="#4E7A3E"/>
+<text class="s role" x="209" y="366">менеджер</text>
+<text class="s role" x="209" y="382">по базе</text>
+<text class="s res2" x="209" y="400">повторные продажи</text>
+<line x1="209" y1="410" x2="345" y2="410" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab2" x="209" y="427">план</text>
+<text class="m num2" x="345" y="427" text-anchor="end">36 000</text>
+<text class="s lab2" x="209" y="444">факт</text>
+<text class="m fact2" x="345" y="444" text-anchor="end" fill="#4E7A3E">37 200</text>
+</g>
+<g>
+<rect x="370" y="346" width="160" height="110" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="370" y="346" width="3" height="110" fill="#4E7A3E"/>
+<text class="s role" x="382" y="366">мастер участка</text>
+<text class="s res2" x="382" y="400">собрано заказов</text>
+<line x1="382" y1="410" x2="518" y2="410" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab2" x="382" y="427">план</text>
+<text class="m num2" x="518" y="427" text-anchor="end">600</text>
+<text class="s lab2" x="382" y="444">факт</text>
+<text class="m fact2" x="518" y="444" text-anchor="end" fill="#4E7A3E">620</text>
+</g>
+<g>
+<rect x="543" y="346" width="160" height="110" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="543" y="346" width="3" height="110" fill="#4E7A3E"/>
+<text class="s role" x="555" y="366">кладовщик</text>
+<text class="s res2" x="555" y="400">отгружено заказов</text>
+<line x1="555" y1="410" x2="691" y2="410" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab2" x="555" y="427">план</text>
+<text class="m num2" x="691" y="427" text-anchor="end">380</text>
+<text class="s lab2" x="555" y="444">факт</text>
+<text class="m fact2" x="691" y="444" text-anchor="end" fill="#4E7A3E">390</text>
+</g>
+<g>
+<rect x="716" y="346" width="160" height="110" fill="#FFFFFF" fill-opacity="0.55" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="716" y="346" width="3" height="110" fill="#4E7A3E"/>
+<text class="s role" x="728" y="366">бухгалтер</text>
+<text class="s res2" x="728" y="400">закрыто документов</text>
+<line x1="728" y1="410" x2="864" y2="410" stroke="#D8CDBA" stroke-width="1"/>
+<text class="s lab2" x="728" y="427">план</text>
+<text class="m num2" x="864" y="427" text-anchor="end">320</text>
+<text class="s lab2" x="728" y="444">факт</text>
+<text class="m fact2" x="864" y="444" text-anchor="end" fill="#4E7A3E">326</text>
+</g>
+<line x1="450" y1="162" x2="450" y2="186" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="162" y1="186" x2="738" y2="186" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="162" y1="186" x2="162" y2="210" stroke="#D8CDBA" stroke-width="1"/>
+<circle cx="162" cy="210" r="2.5" fill="#9A7328"/>
+<line x1="450" y1="186" x2="450" y2="210" stroke="#D8CDBA" stroke-width="1"/>
+<circle cx="450" cy="210" r="2.5" fill="#9A7328"/>
+<line x1="738" y1="186" x2="738" y2="210" stroke="#D8CDBA" stroke-width="1"/>
+<circle cx="738" cy="210" r="2.5" fill="#9A7328"/>
+<circle cx="450" cy="162" r="2.5" fill="#9A7328"/>
+<line x1="162" y1="298" x2="162" y2="322" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="104" y1="322" x2="277" y2="322" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="104" y1="322" x2="104" y2="346" stroke="#D8CDBA" stroke-width="1"/>
+<circle cx="104" cy="346" r="2.5" fill="#9A7328"/>
+<line x1="277" y1="322" x2="277" y2="346" stroke="#D8CDBA" stroke-width="1"/>
+<circle cx="277" cy="346" r="2.5" fill="#9A7328"/>
+<line x1="450" y1="298" x2="450" y2="322" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="450" y1="322" x2="623" y2="322" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="450" y1="322" x2="450" y2="346" stroke="#D8CDBA" stroke-width="1"/>
+<circle cx="450" cy="346" r="2.5" fill="#9A7328"/>
+<line x1="623" y1="322" x2="623" y2="346" stroke="#D8CDBA" stroke-width="1"/>
+<circle cx="623" cy="346" r="2.5" fill="#9A7328"/>
+<line x1="738" y1="298" x2="738" y2="322" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="738" y1="322" x2="796" y2="322" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="796" y1="322" x2="796" y2="346" stroke="#D8CDBA" stroke-width="1"/>
+<circle cx="796" cy="346" r="2.5" fill="#9A7328"/>
+<line x1="24" y1="474" x2="876" y2="474" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="24" y="483" width="10" height="10" fill="#4E7A3E"/>
+<text class="s lg" x="40" y="492">факт не ниже плана</text>
+<rect x="184" y="483" width="10" height="10" fill="#A85338"/>
+<text class="s lg" x="200" y="492">факт ниже плана</text>
+<text class="m note" x="876" y="492" text-anchor="end">уровни подчинения: 3, ролей: 9</text>
+<text class="s note" x="24" y="514">собственник: план 15 700, факт 14 940, отставание 760 евро. Продажи: план 46 000 плюс 36 000 равно 82 000, факт 41 200 плюс 37 200 равно 78 400.</text>
+<text class="s note" x="24" y="532">производство: план 600 плюс 380 равно 980, факт 620 плюс 390 равно 1 010. Люди указаны ролями, имена не используются.</text>
+</svg>

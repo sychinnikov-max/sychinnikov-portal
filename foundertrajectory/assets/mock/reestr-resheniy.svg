@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 646" width="1000" height="646" role="img">
+<title>Реестр управленческих решений за сентябрь 2026: срок, статус, результат и влияние на цифры</title>
+<rect x="0" y="0" width="1000" height="646" fill="#F4EFE4"/>
+<text x="24" y="44" font-family="Playfair Display, Georgia, serif" font-size="24" fill="#241F18">Реестр управленческих решений, сентябрь 2026</text>
+<text x="976" y="44" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#8A8175">данные демонстрационные</text>
+<line x1="24" y1="58" x2="976" y2="58" stroke="#9A7328" stroke-width="1"/>
+<rect x="24" y="70" width="952" height="510" fill="none" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="24" y="70" width="952" height="42" fill="#EAE3D5"/>
+<line x1="24" y1="112" x2="976" y2="112" stroke="#D8CDBA" stroke-width="1"/>
+<text x="34" y="96" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">номер</text>
+<text x="96" y="96" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">решение</text>
+<text x="286" y="96" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">ответственный</text>
+<text x="451.0" y="96" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">срок план</text>
+<text x="521.0" y="96" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">срок факт</text>
+<text x="601.0" y="96" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">статус</text>
+<text x="658" y="96" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">результат</text>
+<text x="794" y="96" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#6B6257">влияние на цифры</text>
+<text x="34" y="135" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-033</text>
+<text x="96" y="135" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">пересчитать нормы расхода</text>
+<text x="286" y="135" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">мастер участка</text>
+<text x="451.0" y="135" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">05.09</text>
+<text x="521.0" y="135" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">05.09</text>
+<rect x="562.0" y="119" width="78" height="22" fill="#4E7A3E"/>
+<text x="601.0" y="134" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">выполнено</text>
+<text x="658" y="135" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">нормы пересчитаны</text>
+<text x="794" y="127" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10.5" fill="#8A8175">себестоимость, процент</text>
+<text x="794" y="141" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#241F18">было 44,5, стало 42,0</text>
+<line x1="24" y1="148" x2="976" y2="148" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<rect x="25" y="148" width="950" height="36" fill="#EAE3D5" opacity="0.5"/>
+<text x="34" y="171" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-034</text>
+<text x="96" y="171" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">сменить канал заявок</text>
+<text x="286" y="171" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">руководитель продаж</text>
+<text x="451.0" y="171" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">08.09</text>
+<text x="521.0" y="171" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">11.09</text>
+<rect x="562.0" y="155" width="78" height="22" fill="#4E7A3E"/>
+<text x="601.0" y="170" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">выполнено</text>
+<text x="658" y="171" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">канал перезапущен</text>
+<text x="794" y="163" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10.5" fill="#8A8175">стоимость заявки, евро</text>
+<text x="794" y="177" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#241F18">было 52, стало 46</text>
+<line x1="24" y1="184" x2="976" y2="184" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<text x="34" y="207" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-035</text>
+<text x="96" y="207" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">ввести недельный план</text>
+<text x="286" y="207" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">руководитель продаж</text>
+<text x="451.0" y="207" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">10.09</text>
+<text x="521.0" y="207" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">10.09</text>
+<rect x="562.0" y="191" width="78" height="22" fill="#4E7A3E"/>
+<text x="601.0" y="206" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">выполнено</text>
+<text x="658" y="207" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">план принят</text>
+<line x1="794" y1="203" x2="806" y2="203" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="207" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="24" y1="220" x2="976" y2="220" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<rect x="25" y="220" width="950" height="36" fill="#EAE3D5" opacity="0.5"/>
+<text x="34" y="243" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-036</text>
+<text x="96" y="243" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">закрыть вторую смену</text>
+<text x="286" y="243" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">мастер участка</text>
+<text x="451.0" y="243" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">12.09</text>
+<text x="521.0" y="243" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">14.09</text>
+<rect x="562.0" y="227" width="78" height="22" fill="#4E7A3E"/>
+<text x="601.0" y="242" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">выполнено</text>
+<text x="658" y="243" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">смена закрыта</text>
+<text x="794" y="235" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="10.5" fill="#8A8175">фонд оплаты, евро</text>
+<text x="794" y="249" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#241F18">было 9 800, стало 8 100</text>
+<line x1="24" y1="256" x2="976" y2="256" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<text x="34" y="279" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-037</text>
+<text x="96" y="279" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">поднять цены на монтаж</text>
+<text x="286" y="279" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">собственник</text>
+<text x="451.0" y="279" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">15.09</text>
+<text x="521.0" y="279" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">15.09</text>
+<rect x="562.0" y="263" width="78" height="22" fill="#4E7A3E"/>
+<text x="601.0" y="278" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">выполнено</text>
+<text x="658" y="279" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">цены подняты</text>
+<line x1="794" y1="275" x2="806" y2="275" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="279" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="24" y1="292" x2="976" y2="292" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<rect x="25" y="292" width="950" height="36" fill="#EAE3D5" opacity="0.5"/>
+<text x="34" y="315" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-038</text>
+<text x="96" y="315" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">ввести лимит на закупку</text>
+<text x="286" y="315" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">бухгалтер</text>
+<text x="451.0" y="315" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">15.09</text>
+<text x="521.0" y="315" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">17.09</text>
+<rect x="562.0" y="299" width="78" height="22" fill="#4E7A3E"/>
+<text x="601.0" y="314" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">выполнено</text>
+<text x="658" y="315" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">лимит установлен</text>
+<line x1="794" y1="311" x2="806" y2="311" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="315" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="24" y1="328" x2="976" y2="328" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<text x="34" y="351" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-039</text>
+<text x="96" y="351" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">собрать акты за квартал</text>
+<text x="286" y="351" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">бухгалтер</text>
+<text x="451.0" y="351" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">16.09</text>
+<text x="521.0" y="351" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">18.09</text>
+<rect x="562.0" y="335" width="78" height="22" fill="#4E7A3E"/>
+<text x="601.0" y="350" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">выполнено</text>
+<text x="658" y="351" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">акты собраны</text>
+<line x1="794" y1="347" x2="806" y2="347" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="351" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="24" y1="364" x2="976" y2="364" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<rect x="25" y="364" width="950" height="36" fill="#EAE3D5" opacity="0.5"/>
+<text x="34" y="387" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-040</text>
+<text x="96" y="387" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">запустить учет по заказам</text>
+<text x="286" y="387" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">мастер участка</text>
+<text x="451.0" y="387" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">30.09</text>
+<line x1="515.0" y1="383" x2="527.0" y2="383" stroke="#8A8175" stroke-width="1"/>
+<rect x="562.0" y="371" width="78" height="22" fill="#B08A2E"/>
+<text x="601.0" y="386" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">в работе</text>
+<text x="658" y="387" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">идет сбор данных</text>
+<line x1="794" y1="383" x2="806" y2="383" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="387" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="24" y1="400" x2="976" y2="400" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<text x="34" y="423" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-041</text>
+<text x="96" y="423" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">описать процесс отгрузки</text>
+<text x="286" y="423" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">кладовщик</text>
+<text x="451.0" y="423" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">26.09</text>
+<line x1="515.0" y1="419" x2="527.0" y2="419" stroke="#8A8175" stroke-width="1"/>
+<rect x="562.0" y="407" width="78" height="22" fill="#B08A2E"/>
+<text x="601.0" y="422" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">в работе</text>
+<text x="658" y="423" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">черновик готов</text>
+<line x1="794" y1="419" x2="806" y2="419" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="423" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="24" y1="436" x2="976" y2="436" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<rect x="25" y="436" width="950" height="36" fill="#EAE3D5" opacity="0.5"/>
+<text x="34" y="459" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-042</text>
+<text x="96" y="459" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">нанять второго мастера</text>
+<text x="286" y="459" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">собственник</text>
+<text x="451.0" y="459" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#241F18">30.09</text>
+<line x1="515.0" y1="455" x2="527.0" y2="455" stroke="#8A8175" stroke-width="1"/>
+<rect x="562.0" y="443" width="78" height="22" fill="#B08A2E"/>
+<text x="601.0" y="458" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">в работе</text>
+<text x="658" y="459" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">идет подбор</text>
+<line x1="794" y1="455" x2="806" y2="455" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="459" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="24" y1="472" x2="976" y2="472" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<text x="34" y="495" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-043</text>
+<text x="96" y="495" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">пересмотреть график смен</text>
+<text x="286" y="495" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">мастер участка</text>
+<text x="451.0" y="495" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#A85338">15.09</text>
+<line x1="515.0" y1="491" x2="527.0" y2="491" stroke="#8A8175" stroke-width="1"/>
+<rect x="562.0" y="479" width="78" height="22" fill="#A85338"/>
+<text x="601.0" y="494" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">просрочено</text>
+<text x="658" y="495" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">не начато</text>
+<line x1="794" y1="491" x2="806" y2="491" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="495" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="24" y1="508" x2="976" y2="508" stroke="#D8CDBA" stroke-width="1" opacity="0.7"/>
+<rect x="25" y="508" width="950" height="36" fill="#EAE3D5" opacity="0.5"/>
+<text x="34" y="531" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12" fill="#6B6257">Р-044</text>
+<text x="96" y="531" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12.5" fill="#241F18">закрыть второй склад</text>
+<text x="286" y="531" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#6B6257">собственник</text>
+<text x="451.0" y="531" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" fill="#A85338">12.09</text>
+<line x1="515.0" y1="527" x2="527.0" y2="527" stroke="#8A8175" stroke-width="1"/>
+<rect x="562.0" y="515" width="78" height="22" fill="#A85338"/>
+<text x="601.0" y="530" text-anchor="middle" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#F4EFE4">просрочено</text>
+<text x="658" y="531" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11.5" fill="#241F18">нет решения</text>
+<line x1="794" y1="527" x2="806" y2="527" stroke="#8A8175" stroke-width="1"/>
+<text x="814" y="531" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">эффект не посчитан</text>
+<line x1="84" y1="70" x2="84" y2="544" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="274" y1="70" x2="274" y2="544" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="416" y1="70" x2="416" y2="544" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="486" y1="70" x2="486" y2="544" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="556" y1="70" x2="556" y2="544" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="646" y1="70" x2="646" y2="544" stroke="#D8CDBA" stroke-width="1"/>
+<line x1="782" y1="70" x2="782" y2="544" stroke="#D8CDBA" stroke-width="1"/>
+<rect x="25" y="544" width="950" height="35" fill="#EAE3D5"/>
+<line x1="24" y1="544" x2="976" y2="544" stroke="#D8CDBA" stroke-width="1"/>
+<text x="36" y="567" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#241F18">решений за месяц 12, доведено до конца 7, доля 58 процентов</text>
+<text x="964" y="567" text-anchor="end" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="12" fill="#6B6257">в работе 3, просрочено 2, эффект посчитан у 3 решений</text>
+<text x="24" y="604" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">сегодня 18 сентября 2026, сроки указаны как день и месяц, красная дата означает, что срок прошел, а решение не закрыто</text>
+<text x="24" y="622" font-family="Manrope, -apple-system, Segoe UI, sans-serif" font-size="11" fill="#8A8175">все двенадцать решений относятся к сентябрю, эффект считается только после того, как показатель успел отреагировать</text>
+</svg>
