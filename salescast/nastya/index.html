@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>АЛКОСПАС: дорожная карта запуска</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F1; --card:#FFFFFF; --sunk:#F5EFE6;
+  --ink:#1C1917; --ink2:#5D554C; --ink3:#8C8177;
+  --line:#E8DFD2; --line2:#F0E9DE;
+  --acc:#E2452A; --acc-soft:#FCEDE9;
+  --ochre:#F0A02B; --ochre-soft:#FDF3E2;
+  --teal:#12665A; --teal-soft:#E6F0ED;
+  --blue:#4A6485; --blue-soft:#EEF1F7;
+  --danger:#9B2C2C; --danger-soft:#F8EAEA;
+  --sans:"Golos Text",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --disp:"Unbounded",var(--sans);
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:66px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+img{max-width:100%}
+
+header.hd{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;gap:18px;height:54px}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
+.brand .mark{width:19px;height:19px;flex:0 0 19px}
+.hd nav{display:flex;gap:15px;margin-left:auto;font-size:13.5px;overflow-x:auto}
+.hd nav a{color:var(--ink2);text-decoration:none;white-space:nowrap}
+.hd nav a:hover{color:var(--acc)}
+
+.hero{padding:40px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(25px,4vw,37px);line-height:1.13;margin:0 0 14px;letter-spacing:-.01em}
+.lead{font-size:17px;color:var(--ink2);max-width:66ch;margin:0 0 20px}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px;margin:0 0 6px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.fact b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin:0 0 5px}
+.fact span{font-size:15.5px;font-weight:500}
+.fact.hot{background:var(--acc-soft);border-color:#F3C9BF}
+.fact.hot span{color:var(--acc)}
+
+section{padding:34px 0}
+section+section{border-top:1px solid var(--line2)}
+h2{font-family:var(--disp);font-weight:600;font-size:21px;margin:0 0 8px;letter-spacing:-.01em}
+.smeta{font-size:13.8px;color:var(--ink3);margin:0 0 20px;max-width:78ch}
+h3{font-family:var(--disp);font-weight:600;font-size:16px;margin:0 0 4px}
+
+/* таймлайн шагов */
+.step{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px 19px;margin:0 0 12px}
+.step .top{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin:0 0 10px}
+.step .num{font-family:var(--mono);font-size:12px;font-weight:500;color:#fff;background:var(--ink);border-radius:6px;padding:3px 8px;flex:0 0 auto}
+.step .when{font-family:var(--mono);font-size:11.5px;color:var(--teal);background:var(--teal-soft);border:1px solid #CBDFDA;border-radius:6px;padding:3px 9px;margin-left:auto;white-space:nowrap}
+.step ol,.step ul{margin:0;padding-left:20px}
+.step li{margin:0 0 5px}
+.step li:last-child{margin-bottom:0}
+.step p{margin:0 0 9px}
+.step p:last-child{margin-bottom:0}
+.out{margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);font-size:14.2px;color:var(--ink2)}
+.out b{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:500;display:block;margin:0 0 3px}
+.warn{background:var(--danger-soft);border:1px solid #E9CFCF;border-radius:9px;padding:11px 13px;margin:11px 0 0;font-size:14.4px;color:#5C2222}
+.note{background:var(--ochre-soft);border:1px solid #F2DDB4;border-radius:9px;padding:11px 13px;margin:11px 0 0;font-size:14.4px}
+
+/* правила */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(252px,1fr));gap:11px}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.rule h4{margin:0 0 5px;font-size:14.6px;font-weight:600}
+.rule p{margin:0;font-size:14.2px;color:var(--ink2)}
+
+/* ритм дня */
+.rhythm{background:var(--sunk);border:1px solid var(--line);border-radius:13px;padding:17px 19px}
+.rhythm ul{margin:0;padding-left:20px}
+.rhythm li{margin:0 0 6px}
+.rhythm li:last-child{margin-bottom:0}
+.rhythm code{font-family:var(--mono);font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+
+/* чеклист */
+.check{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:9px}
+.check li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px 11px 38px;position:relative;font-size:14.6px}
+.check li::before{content:"";position:absolute;left:13px;top:13px;width:14px;height:14px;border:1.6px solid var(--acc);border-radius:4px}
+
+/* схемы */
+.diag{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px;margin:0 0 12px}
+.diag figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin:0 0 10px}
+.diag .box{overflow-x:auto;background:var(--sunk);border-radius:9px;padding:10px}
+.diag img{display:block;min-width:620px}
+
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--ink3);font-size:13.6px}
+@media (max-width:640px){
+  .hd nav{display:none}
+  .step .when{margin-left:0}
+}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 1.5 22.5 12 12 22.5 1.5 12 12 1.5Z" fill="var(--acc)"/><path d="M10 8.4 16 12l-6 3.6V8.4Z" fill="#fff"/></svg>
+      Salescast
+    </a>
+    <nav>
+      <a href="#shagi">Шаги</a>
+      <a href="#ritm">Ритм дня</a>
+      <a href="#pravila">Правила</a>
+      <a href="#gotovnost">Готовность</a>
+      <a href="#shemy">Схемы</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">Рабочая страница Насти · проект стартовал 18.09.2026</p>
+    <h1>АЛКОСПАС: дорожная карта запуска</h1>
+    <p class="lead">Оплата пришла 18 сентября, проект в работе. Здесь по шагам: что делаем, в какие даты и что на выходе каждого шага. Ниже ритм рабочего дня, правила без исключений и схемы процессов.</p>
+    <div class="facts">
+      <div class="fact"><b>Клиент</b><span>Наркологическая клиника, Москва</span></div>
+      <div class="fact"><b>Объем</b><span>5 персонажей, 50 роликов</span></div>
+      <div class="fact"><b>Площадка</b><span>Instagram, только Reels</span></div>
+      <div class="fact hot"><b>Подготовка</b><span>19.09 - 02.10</span></div>
+      <div class="fact hot"><b>Публикации</b><span>03.10 - 28.10</span></div>
+      <div class="fact"><b>Аккаунтов</b><span>5, по числу персонажей</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="shagi">
+  <div class="wrap">
+    <h2>Девять шагов запуска</h2>
+    <p class="smeta">Подготовка идет 14 дней, публикации 26 дней, всего 40 дней по договору. Производство работает пять через два, публикация идет и в выходные: запас роликов готовим в пятницу.</p>
+
+    <div class="step">
+      <div class="top"><span class="num">1</span><h3>План выкладки</h3><span class="when">19.09</span></div>
+      <p>Первое, что нужно от Насти. В плане:</p>
+      <ol>
+        <li>даты старта и конца выкладки по каждому персонажу;</li>
+        <li>сколько роликов в день на аккаунт;</li>
+        <li>все пятеро стартуют разом или по этапам;</li>
+        <li>где запас на выходные.</li>
+      </ol>
+      <div class="out"><b>На выходе</b>План уходит Андрею на утверждение. После утверждения он не меняется, дальше все считаем от него.</div>
+    </div>
+
+    <div class="step">
+      <div class="top"><span class="num">2</span><h3>Референсы</h3><span class="when">19-22.09</span></div>
+      <p>Около 50 разговорных роликов, половина англоязычных, человек в кадре говорит. По темам клиента: алкогольная зависимость, депрессия и тревожные расстройства.</p>
+      <div class="out"><b>На выходе</b>София отсматривает подборку и дает ТЗ на аватаров: сколько мужчин и женщин, какие образы.</div>
+    </div>
+
+    <div class="step">
+      <div class="top"><span class="num">3</span><h3>Персонажи и голоса</h3><span class="when">22-25.09</span></div>
+      <ol>
+        <li>5 моделей, по одному варианту на аватара;</li>
+        <li>локации только живые, в ИИ не генерируем;</li>
+        <li>голоса живые, загружаем в ElevenLabs;</li>
+        <li>первые версии оживления по 5-10 секунд с любым текстом;</li>
+        <li>аватарки для аккаунтов;</li>
+        <li>инструкция аватара для Ксюши: как собран и как повторять.</li>
+      </ol>
+      <div class="out"><b>На выходе</b>София утверждает в среду 24.09. Клиенту персонажей показывает Андрей в чате, всегда в сравнении, а не по одному. Правки идут в модель.</div>
+    </div>
+
+    <div class="step">
+      <div class="top"><span class="num">4</span><h3>Сценарии первой недели</h3><span class="when">25-26.09</span></div>
+      <ol>
+        <li>20 хуков, из них выбираем заголовки;</li>
+        <li>сценарии на неделю вперед, к каждому референс;</li>
+        <li>ТЗ на монтаж к каждому сценарию.</li>
+      </ol>
+      <div class="warn">Клиника это тема здоровья. Обещания вылечить, гарантии результата и сравнения с конкурентами согласуются с Андреем и Софией отдельно, до отправки.</div>
+      <div class="out"><b>На выходе</b>Пачка уходит Софии в пятницу 26.09, ее утверждения только пн, ср, пт. Первые 2-3 сценария Настя присылает в чат клиента и вносит мелкие правки сама.</div>
+    </div>
+
+    <div class="step">
+      <div class="top"><span class="num">5</span><h3>Аккаунты</h3><span class="when">22.09 - 01.10</span></div>
+      <p>Идет параллельно с продуктом. Публикаторов набирает Андрей, аккаунты создают и прогревают они.</p>
+      <p>От Насти: ТЗ на упаковку 5 аккаунтов (имя, описание, заголовки, аватарка) и проверка, что упаковали по ТЗ.</p>
+      <div class="note">Правила без исключений: один аккаунт, одна почта, одно устройство. Прогрев два дня: 10-15 подписок, 15-20 лайков, 5-10 комментариев в день. У клиента не просим ни фото, ни голоса, ни почты, ни номера: аккаунты его, доступы передаем в конце.</div>
+    </div>
+
+    <div class="step">
+      <div class="top"><span class="num">6</span><h3>Исходники, монтаж, запас</h3><span class="when">29.09 - 02.10</span></div>
+      <ol>
+        <li>сценарии и ТЗ Ксюше задачей в CRM со сроком;</li>
+        <li>Ксюша оживляет и собирает аудио на пару дней вперед, проверяет ударения и артефакты;</li>
+        <li>исходник на Google Диск, ссылка и ТЗ в таблицу к 11:00;</li>
+        <li>монтаж забирает по таблице и сдает ролик к 15-16 часам, всегда на завтра;</li>
+        <li>Настя проверяет ролик по ТЗ и дает правки монтажу, первые ролики утверждает София.</li>
+      </ol>
+      <div class="note">Токены HeyGen: предупредить Андрея примерно за 40 роликов до конца, пополнение к следующему рабочему дню.</div>
+      <div class="out"><b>На выходе</b>К 02.10 запас роликов на 2-3 дня публикаций.</div>
+    </div>
+
+    <div class="step">
+      <div class="top"><span class="num">7</span><h3>Готовность к старту</h3><span class="when">02.10</span></div>
+      <p>Сверяем по списку в разделе <a href="#gotovnost">Готовность</a>. Если чего-то нет, отклонение идет Андрею, а не клиенту.</p>
+    </div>
+
+    <div class="step">
+      <div class="top"><span class="num">8</span><h3>Публикации</h3><span class="when">03.10 - 28.10</span></div>
+      <p>Ежедневный ритм ниже. Сценарии держим на неделю вперед, пачки Софии в пн, ср, пт. Публикаторы пишут ссылки в столбец «Выкладка факт», Настя сверяет факт с планом.</p>
+      <div class="out"><b>На выходе</b>Весь объем 50 роликов выложен, факт сверен с планом.</div>
+    </div>
+
+    <div class="step">
+      <div class="top"><span class="num">9</span><h3>Цифры и закрытие</h3><span class="when">15.10 и 28.10</span></div>
+      <ol>
+        <li>к 15.10 промежуточные цифры по просмотрам: до 18.10 решается продление;</li>
+        <li>после 28.10 итог: просмотры по всему объему и обращения по кодовым словам.</li>
+      </ol>
+      <div class="out"><b>На выходе</b>Отчет клиенту собирает Андрей по цифрам от производства.</div>
+    </div>
+  </div>
+</section>
+
+<section id="ritm">
+  <div class="wrap">
+    <h2>Ритм рабочего дня на публикациях</h2>
+    <p class="smeta">Действует с 03.10. День в день не работаем: всегда готовим на завтра.</p>
+    <div class="rhythm">
+      <ul>
+        <li><code>к 11:00</code> исходники и ТЗ у монтажа, ссылка в таблице. Пусто: Настя пишет Андрею.</li>
+        <li><code>15-16 часов</code> готовый ролик в папке с отметкой «монтаж». Нет ролика: Настя пишет Андрею.</li>
+        <li><code>по плану</code> публикаторы выкладывают ролики дня и пишут ссылки в столбец «Выкладка факт».</li>
+        <li><code>вечер</code> Настя сверяет факт с планом. Отклонение идет Андрею, он разбирает.</li>
+        <li><code>пн, ср, пт</code> пачки сценариев и монтажа на утверждение Софии.</li>
+        <li><code>пятница</code> запас роликов на выходные: нужно два в день, делаем три.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="pravila">
+  <div class="wrap">
+    <h2>Правила без исключений</h2>
+    <p class="smeta">Это текущая практика команды. Меняем не больше одного правила в неделю, изменения идут в лист «Инструкция, регламент работы».</p>
+    <div class="rules">
+      <div class="rule"><h4>Утверждения Софии по расписанию</h4><p>Только пн, ср, пт, по возможности один раз в день. Просьба в другой день это сбитое планирование у того, кто просит.</p></div>
+      <div class="rule"><h4>Отклонения идут Андрею</h4><p>Сроки, простои, блокировки, сорванный монтаж. Клиенту об этом не пишем.</p></div>
+      <div class="rule"><h4>Один аккаунт, одно устройство</h4><p>Своя почта на аккаунт. Заблокированное устройство больше не используем.</p></div>
+      <div class="rule"><h4>Ролики с ленты не удаляем</h4><p>Никогда, даже слабые по просмотрам.</p></div>
+      <div class="rule"><h4>Таблицу клиенту не показываем</h4><p>Одна таблица на всех клиентов, клиенты по листам. Наружу идут только сценарии, ролики и отчеты.</p></div>
+      <div class="rule"><h4>В чате клиента от производства только сценарии</h4><p>Первые 2-3 сценария и мелкие правки. Остальное ведет Андрей.</p></div>
+      <div class="rule"><h4>Пять через два</h4><p>Производство в выходные не работает, публикация идет. Запас готовим заранее.</p></div>
+      <div class="rule"><h4>Клиента не грузим техникой</h4><p>Фото, голоса, почты и номера для аккаунтов у него не просим.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gotovnost">
+  <div class="wrap">
+    <h2>Готовность к 02.10</h2>
+    <p class="smeta">Проверяем вместе перед стартом публикаций.</p>
+    <ul class="check">
+      <li>5 персонажей и их голоса утверждены Софией</li>
+      <li>Персонажи показаны клиенту и согласованы</li>
+      <li>5 аккаунтов созданы, упакованы по ТЗ и прогреты</li>
+      <li>Сценарии первой недели одобрены</li>
+      <li>Ролики на 2-3 дня публикаций лежат в папке</li>
+      <li>План выкладки с датами у клиента</li>
+      <li>Квиз клиента готов: на него ведет призыв в роликах</li>
+      <li>Инструкция аватара передана Ксюше</li>
+    </ul>
+  </div>
+</section>
+
+<section id="shemy">
+  <div class="wrap">
+    <h2>Схемы процессов</h2>
+    <p class="smeta">Те же шаги в виде схем по ролям: дорожки Управление, Продукт и качество, Производство, исполнители. Схему можно тянуть в сторону, если не влезает в экран.</p>
+
+    <figure class="diag"><figcaption>Процесс 1. Старт работы с новым клиентом</figcaption><div class="box"><img src="start.svg" alt="Схема процесса старта работы с новым клиентом"></div></figure>
+    <figure class="diag"><figcaption>Процесс 2. Модель и голос</figcaption><div class="box"><img src="model.svg" alt="Схема процесса создания модели и голоса"></div></figure>
+    <figure class="diag"><figcaption>Процесс 3. Сценарий</figcaption><div class="box"><img src="scenariy.svg" alt="Схема процесса написания сценариев"></div></figure>
+    <figure class="diag"><figcaption>Процесс 4. Исходники</figcaption><div class="box"><img src="iskhodniki.svg" alt="Схема процесса подготовки исходников"></div></figure>
+    <figure class="diag"><figcaption>Процесс 5. Монтаж</figcaption><div class="box"><img src="montazh.svg" alt="Схема процесса монтажа"></div></figure>
+    <figure class="diag"><figcaption>Процесс 6. Выкладка</figcaption><div class="box"><img src="vykladka.svg" alt="Схема процесса выкладки"></div></figure>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Дорожная карта собрана 18.09.2026 по договору проекта и процессам команды. Даты считаются от поступления оплаты 18.09. Если материалы клиента задержатся, даты сдвигаются: об этом предупреждает Андрей.
+  </div>
+</footer>
+</body>
+</html>
