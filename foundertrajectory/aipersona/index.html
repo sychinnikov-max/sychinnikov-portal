@@ -194,6 +194,9 @@ p{margin:0 0 12px}
 .dir ul{margin:8px 0 0; padding-left:0; list-style:none}
 .dir li{position:relative; padding-left:24px; margin-bottom:11px; font-size:17px; color:var(--ink-2); line-height:1.45}
 .dir li:before{content:""; position:absolute; left:2px; top:9px; width:8px; height:8px; border-radius:50%; background:var(--acc)}
+.dirs.two-wide{margin-top:24px}
+.dirs.two-wide .dir li{margin-bottom:14px}
+.dirs.two-wide .dir li b{color:var(--ink)}
 .dirs.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .dirs.three .dir h3{font-size:19px !important}
 @media(max-width:940px){ .dirs.three{grid-template-columns:1fr} }
@@ -203,11 +206,8 @@ p{margin:0 0 12px}
 .nofit li:before{content:""; position:absolute; left:2px; top:9px; width:8px; height:8px; border-radius:50%; background:var(--acc-2)}
 
 /* пары человек и аватар */
-.pairs{display:grid; grid-template-columns:1fr 1fr .58fr; gap:14px; margin:20px auto 0; max-width:1140px; align-items:start}
-.duo.one{grid-template-columns:1fr}
-.duo.one .phone{max-height:340px; width:auto; margin:0 auto}
-@media(max-width:1000px){ .pairs{grid-template-columns:1fr 1fr} .pair.solo{grid-column:span 2; max-width:420px; margin:0 auto} }
-@media(max-width:700px){ .pair.solo{grid-column:auto; max-width:none} }
+.pairs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:20px auto 0; max-width:1140px; align-items:start}
+@media(max-width:1000px){ .pairs{grid-template-columns:1fr} .pairs > .pair{max-width:460px; margin:0 auto; width:100%} }
 @media(max-width:940px){ .pairs{grid-template-columns:1fr} }
 .pair{margin:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:12px}
 .duo{display:grid; grid-template-columns:1fr 1fr; gap:10px}
@@ -246,6 +246,11 @@ p{margin:0 0 12px}
 .metrics b{display:block; font-size:clamp(15px,2.2vw,21px); font-weight:800; letter-spacing:-.04em; line-height:1.05; white-space:nowrap}
 .metrics span{display:block; font-size:13px; color:var(--muted); margin-top:6px; line-height:1.3}
 .case-desc{margin:16px 0 0; font-size:16px; color:var(--ink-2); line-height:1.5}
+.hero-line{margin:14px 0 0; font-size:17px; color:var(--ink-2); line-height:1.4}
+.hero-line b{color:var(--ink); font-weight:800; font-size:19px}
+.shotfig{margin:14px 0 0}
+.shotfig img{width:100%; max-height:168px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:14px; background:#fff}
+.shotfig figcaption{margin-top:8px; font-size:13.5px; color:var(--muted); line-height:1.35}
 .case-desc a{color:var(--acc)}
 @media(max-width:420px){ .metrics div{padding:12px 4px} .metrics b{font-size:13px} .metrics span{font-size:11px} }
 .funnel{list-style:none; margin:0; padding:0; display:grid; gap:8px}
@@ -263,6 +268,18 @@ p{margin:0 0 12px}
 /* цены и заявка */
 .req{display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; margin-top:28px}
 @media(max-width:860px){ .req{grid-template-columns:1fr; gap:22px} }
+.ptable{border:1px solid var(--line); border-radius:var(--r); overflow:hidden; background:var(--surface)}
+.ph-row{display:grid; grid-template-columns:minmax(0,1.5fr) 1fr 1fr; align-items:center; border-top:1px solid var(--line)}
+.ph-row:first-child{border-top:0}
+.ph-row > span{padding:12px 14px; font-size:16px; color:var(--ink-2); text-align:center}
+.ph-row > span:first-child{text-align:left; color:var(--ink); font-weight:600}
+.ph-row.head > span{padding:16px 14px; font-size:13px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.06em}
+.ph-row.head b{display:block; margin-top:6px; font-size:23px; color:var(--ink); font-weight:800; letter-spacing:-.03em; text-transform:none}
+.ph-row.head .col-b{background:rgba(124,58,237,.07)}
+.ph-row .hl-cell{color:var(--acc); font-weight:700}
+.ph-row > span:last-child{background:rgba(124,58,237,.04)}
+@media(max-width:560px){ .ph-row{grid-template-columns:minmax(0,1.35fr) 1fr 1fr} .ph-row > span{padding:10px 7px; font-size:14px} .ph-row.head b{font-size:17px; margin-top:4px} .ph-row.head > span{font-size:11px; padding:12px 7px} }
+@media(max-width:380px){ .ph-row.head b{font-size:15.5px} .ph-row > span{font-size:13.5px} }
 .price{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:18px; margin-bottom:12px}
 .price.main{border-color:var(--acc); background:#fff; box-shadow:var(--shadow-acc)}
 .price .tag{display:inline-flex; background:rgba(124,58,237,.1); color:var(--acc); border-radius:999px; padding:5px 12px; font-size:12px; font-weight:600; margin-bottom:12px}
@@ -485,7 +502,7 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
           <div class="phone"><video src="media/para-1-chelovek.mp4" poster="media/para-1-chelovek.jpg" muted loop playsinline preload="none"></video><span class="lab">Человек</span></div>
           <div class="phone"><video src="media/para-1-avatar.mp4" poster="media/para-1-avatar.jpg" muted loop playsinline preload="none"></video><span class="lab">Аватар</span></div>
         </div>
-        <figcaption><b>Собственник бренда товаров для гигиены полости рта</b>Свой блог на 100 тысяч и штатная команда креаторов, аватар работает вместе с ними.</figcaption>
+        <figcaption><b>Собственник бренда, свой блог на 100 тысяч</b>У него штатная команда креаторов, и аватар работает вместе с ней.</figcaption>
       </figure>
       <figure class="pair rv">
         <div class="duo">
@@ -494,11 +511,12 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
         </div>
         <figcaption><b>Собственница салона красоты</b>Аватар ведет контент салона вместо владелицы.</figcaption>
       </figure>
-      <figure class="pair solo rv">
-        <div class="duo one">
-          <div class="phone"><video src="media/para-3-avatar.mp4" poster="media/para-3-avatar.jpg" muted loop playsinline preload="none"></video><span class="lab">Персонаж</span></div>
+      <figure class="pair rv">
+        <div class="duo">
+          <div class="phone"><img src="media/para-3-chelovek.jpg" alt="Реальное фото эксперта зубной ниши"><span class="lab">Человек</span></div>
+          <div class="phone"><video src="media/para-3-avatar.mp4" poster="media/para-3-avatar.jpg" muted loop playsinline preload="none"></video><span class="lab">Аватар</span></div>
         </div>
-        <figcaption><b>Персонаж, которого нет</b>Создан с нуля: лицо, голос, характер. Живого прототипа нет, продает товары для зубов.</figcaption>
+        <figcaption><b>Эксперт в зубной нише</b>Аватар ведет продажи бренда, сам эксперт в кадре не снимается.</figcaption>
       </figure>
     </div>
     
@@ -525,27 +543,21 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
 
 <section id="test" style="padding-top:0">
   <div class="wrap">
-    <p class="kicker">Почему объем</p>
-    <h2>Один ролик это лотерея, тест это <span class="it">система</span></h2>
-    <div class="dirs" style="margin-top:24px">
+    <p class="kicker">Почему это работает</p>
+    <h2>Почему у нашей команды получаются <span class="hl">крутые результаты</span></h2>
+    <div class="dirs two-wide">
       <div class="dir rv">
-        <span class="tag">01 · Арифметика старта</span>
-        <h3>Что происходит на первых роликах</h3>
         <ul>
-          <li>За первые 10 роликов видно: залетает или нет</li>
-          <li>Первые пять-семь роликов дают 100-200 просмотров. Это норма старта, а не провал</li>
-          <li>Часть аккаунтов блокируется, поэтому ведем несколько сразу</li>
-          <li>Судить о результате можно от 30 роликов</li>
+          <li><b>Заголовок и первая секунда решают все.</b> Их мы пишем отдельно и переписываем по несколько раз, а не дописываем в конце, когда ролик уже собран.</li>
+          <li><b>Не выдумываем, а берем то, что уже выстрелило.</b> Ищем форматы, которые залетели в вашей и в зарубежных нишах, и переносим на вашу тему.</li>
+          <li><b>Аватар не должен выглядеть как реклама.</b> Мимику, голос и подачу доводим до живого человека, иначе ролик пролистывают на второй секунде.</li>
         </ul>
       </div>
       <div class="dir rv">
-        <span class="tag">02 · За счет чего результат</span>
-        <h3>Почему у команды шанс выше</h3>
         <ul>
-          <li>Заголовок и первая секунда решают все. Прорабатываем их отдельно, а не в конце</li>
-          <li>Работаем от референсов: берем то, что уже залетело, и переносим на вашу тему</li>
-          <li>Аватар и голос должны смотреться естественно, иначе ролик не досматривают</li>
-          <li>Перебор вариантов: несколько аватаров и подач сразу, чтобы найти связку</li>
+          <li><b>Запускаем несколько аватаров сразу.</b> Разные лица, разные подачи, разные заголовки. Так связка находится за недели, а не за полгода.</li>
+          <li><b>Каждый день, без пропусков.</b> Алгоритмы любят регулярность, а у эксперта она всегда ломается о клиентов и практику. У нас не ломается.</li>
+          <li><b>Ведет команда, а не один человек.</b> Сценарист, монтажер, публикатор и аналитик на вашем проекте, вы утверждаете смыслы раз в неделю.</li>
         </ul>
       </div>
     </div>
@@ -556,7 +568,7 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   <div class="wrap">
     <p class="kicker">Кейс</p>
     <h2>Что формат дал виртуальному эксперту в теме отношений</h2>
-    <p class="lead">Цифры из кабинета, а не на глаз. Проект партнерского контура, показываем с разрешения.</p>
+    <p class="lead">Проект партнерского контура, показываем с разрешения.</p>
     <div class="cases">
       <div class="case rv">
         <div class="case-head">
@@ -564,13 +576,16 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
           <span class="id"><b>Виртуальный эксперт, тема отношений</b><span>Женская аудитория 30+</span></span>
           <span class="pl">Партнерский контур</span>
         </div>
+        <p class="hero-line"><b>331 тысяча подписчиков за 2 месяца</b> с нуля, без рекламного бюджета</p>
         <div class="metrics">
           <div><b>85&nbsp;000</b><span>кодовых слов от зрителей</span></div>
           <div><b>50&nbsp;000</b><span>лидов зашли в воронку</span></div>
           <div><b>896&nbsp;451&nbsp;₽</b><span>продаж за месяц</span></div>
         </div>
-        <p class="case-desc">Столько же трафика в таргете стоило бы около 10 млн ₽: органический просмотр выходит в 30-50 копеек, и вы не упираетесь в рекламный бюджет. Механика та же, что у аватара эксперта: ежедневные ролики, кодовое слово в каждом, зритель пишет его сам и попадает в базу.</p>
-        <p class="case-desc" style="margin-top:10px">Это верхний результат, а не среднее: такие аккаунты находятся перебором. Аккаунт открыт: <a href="https://instagram.com/vvedenskaya.valery" target="_blank" rel="noopener">vvedenskaya.valery</a>.</p>
+        <figure class="shotfig">
+          <img src="media/keys-prodazhi.jpg" alt="Выгрузка продаж по продуктам из кабинета">
+          <figcaption>Выгрузка продаж из кабинета, а не цифры на глаз</figcaption>
+        </figure>
       </div>
       <div class="case rv">
         <div class="case-head">
@@ -583,9 +598,13 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
           <li><span class="fi"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg></span><b>Кодовое слово в директ или в бот</b><span class="bar"></span></li>
           <li><span class="fi"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg></span><b>Заявки и оплаты</b><span class="bar"></span></li>
         </ul>
-        <p class="case-desc">Не отчитываемся одними просмотрами. Видно, какой ролик и аватар привел людей в воронку и что было дальше.</p>
+        <figure class="shotfig">
+          <img src="media/keys-kabinet.jpg" alt="Кабинет: воронки по кодовому слову и контакты">
+          <figcaption>Кабинет: сколько человек написали кодовое слово и попали в воронку</figcaption>
+        </figure>
       </div>
     </div>
+    
     <div class="cta-row">
       <a class="btn big" href="https://t.me/beymsofi" target="_blank" rel="noopener">Написать в Telegram<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <a class="btn ghost big" href="#ceny" data-mode="price">Цены и что входит</a>
@@ -646,17 +665,15 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
     <p class="lead">В обе цены входит все: аватар и голос, сценарии, монтаж, аккаунты, ежедневная выкладка, воронка, аналитика.</p>
     <div class="req">
       <div>
-        <div class="price main rv">
-          <span class="tag">Старт</span>
-          <b class="sum">90 000 ₽</b>
-          <p>Один аккаунт, два ваших аватара, 30 роликов. Минимальный объем, на котором видно результат.</p>
+        <div class="ptable">
+          <div class="ph-row head"><span></span><span class="col-a">Старт<b>90 000 ₽</b></span><span class="col-b">Тест<b>150 000 ₽</b></span></div>
+          <div class="ph-row"><span>Аватары</span><span>2</span><span>5</span></div>
+          <div class="ph-row"><span>Роликов в месяц</span><span>30</span><span>50</span></div>
+          <div class="ph-row"><span>Сценарии, монтаж, выкладка</span><span>да</span><span>да</span></div>
+          <div class="ph-row"><span>Воронка и аналитика</span><span>да</span><span>да</span></div>
+          <div class="ph-row"><span>Шанс найти рабочую связку</span><span>ниже</span><span class="hl-cell">выше</span></div>
         </div>
-        <div class="price rv">
-          <span class="tag">Тест · выше шанс найти связку</span>
-          <b class="sum">150 000 ₽</b>
-          <p>Пять аватаров по 10 роликов. Проверяем разные подачи сразу, чтобы найти связку, которая залетает.</p>
-        </div>
-        <p class="hint" style="max-width:none">Оба пакета это примерно месяц работы: подготовка, дальше ежедневная выкладка.</p>
+        <p class="hint" style="max-width:none">Оба пакета это примерно месяц работы: подготовка, дальше ежедневная выкладка. Разница только в числе аватаров: чем их больше, тем быстрее находится связка, которая залетает.</p>
         <ul class="ticks">
           <li>Несколько вопросов про вашу тему и продукт</li>
           <li>3-5 примеров роликов в вашей нише</li>
