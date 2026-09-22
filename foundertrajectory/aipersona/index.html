@@ -360,8 +360,8 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   .tiles .card{display:block !important; margin-bottom:0 !important; padding:16px}
   .cic{width:34px; height:34px; border-radius:11px; margin-bottom:10px}
   .cic .ic{width:18px; height:18px}
-  .tiles .card h3{font-size:16px; margin-bottom:6px}
-  .tiles .card p{font-size:14px}
+  .tiles .card h3{font-size:17px; margin-bottom:6px}
+  .tiles .card p{font-size:15px}
   #kak .tiles{grid-template-columns:1fr 1fr !important; gap:10px}
   #kak .card > p{display:none}
   #kak .card h3{font-size:14px}
@@ -381,7 +381,8 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   .nofit{padding:16px}
   .pairs{gap:10px; margin-top:16px}
   .pair{padding:10px}
-  .pair figcaption{font-size:12.5px}
+  .pair figcaption{font-size:13.5px}
+  .pair figcaption b{font-size:13.5px}
   #primery .lead{font-size:15px}
   .cases{grid-template-columns:none !important; grid-auto-flow:column; grid-auto-columns:88%; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:12px; padding-bottom:6px; margin-top:16px !important; align-items:start}
   .case{scroll-snap-align:start; padding:14px}
@@ -389,7 +390,19 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   .case-desc{font-size:13.5px}
   .mg-list li{padding:10px 0 10px 30px; font-size:15px}
   .mg-list li .ic{top:12px; width:18px; height:18px}
-  .you li{font-size:15px}
+  .you li{font-size:15.5px; margin-bottom:10px}
+  .dirs.two-wide .dir li{font-size:16px; margin-bottom:12px; line-height:1.35}
+  .dirs.three .dir li{font-size:14.5px}
+  .nofit li{font-size:15.5px; margin-bottom:9px}
+  .ticks li{font-size:15.5px; margin-bottom:9px}
+  .shotfig figcaption{font-size:13px}
+  .lead{max-width:none}
+  .mg-grid h3{font-size:19px !important; margin-bottom:12px !important}
+  .work{grid-template-columns:repeat(auto-fit,minmax(132px,1fr)); gap:12px 14px}
+  .work > div{grid-template-columns:18px minmax(0,1fr); column-gap:9px}
+  .work .ic{width:17px; height:17px; grid-row:auto; margin-top:1px}
+  .work b{font-size:15.5px}
+  .hint{font-size:14.5px; margin-top:12px}
   .price{padding:16px}
   .tgbox{padding:16px}
   details{padding:13px 14px; margin-bottom:8px}
@@ -432,17 +445,18 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   <span class="aura" aria-hidden="true"></span>
   <div class="wrap hero-grid">
     <div class="hero-tx">
-      <p class="pill-top"><i></i>AI Persona · для экспертов, наставников и предпринимателей</p>
+      <p class="pill-top"><i></i>AI Persona · для экспертов<span class="d-only">, наставников</span> и предпринимателей</p>
       <h1>Ваш <span class="hl">аватар</span> ведет блог<br>вместо вас</h1>
-      <p class="lead">Делаем ИИ-копию эксперта: ваша внешность, ваш голос, ваши смыслы. Сценарии, монтаж, аккаунты и ежедневная выкладка на нас.</p>
+      <p class="lead d-only">Делаем ИИ-копию эксперта: ваша внешность, ваш голос, ваши смыслы. Сценарии, монтаж, аккаунты и ежедневная выкладка на нас.</p>
+      <p class="lead m-only">Ваша внешность, ваш голос, ваши смыслы. Сценарии, монтаж и ежедневная выкладка на нас.</p>
       <div class="cta-row">
         <a class="btn big" href="https://t.me/beymsofi" target="_blank" rel="noopener">Написать в Telegram<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn ghost big" href="#ceny" data-mode="price">Цены и что входит</a>
       </div>
       <div class="hero-stats">
-        <div><b>0 съемок</b><span>вставать перед камерой не нужно</span></div>
-        <div><b>30+ роликов</b><span>минимальный объем в месяц</span></div>
-        <div><b>90 000 ₽</b><span>пакет «Старт», все включено</span></div>
+        <div><b>0 съемок</b><span><span class="d-only">вставать перед камерой не нужно</span><span class="m-only">камера не нужна</span></span></div>
+        <div><b>30+ роликов</b><span><span class="d-only">минимальный объем в месяц</span><span class="m-only">минимум в месяц</span></span></div>
+        <div><b>90 000 ₽</b><span><span class="d-only">пакет «Старт», все включено</span><span class="m-only">пакет «Старт»</span></span></div>
       </div>
     </div>
     <div class="feed-box">
@@ -456,12 +470,11 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   <div class="wrap">
     <p class="kicker">Знакомо</p>
     <h2>Снимать надо, а времени и желания <span class="it">нет</span></h2>
-    <p class="lead">Одно и то же от экспертов, у которых уже есть практика и что продавать.</p>
+    <p class="lead d-only">Одно и то же от экспертов, у которых уже есть практика и что продавать.</p>
     <div class="tiles" style="margin-top:28px">
-      <div class="card rv"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg></span><h3>Камера каждый день</h3><p>Вставать перед ней ежедневно вы не готовы, и все откладывается.</p></div>
+      <div class="card rv"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg></span><h3>Камера каждый день</h3><p><span class="d-only">Вставать перед ней ежедневно вы не готовы, и все откладывается.</span><span class="m-only">Ежедневно вы к этому не готовы.</span></p></div>
       <div class="card rv"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Темы кончаются быстрее сил</h3><p>Придумывать, о чем снимать, тяжелее самой съемки.</p></div>
-      <div class="card rv"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Пробовали, и тишина</h3><p>Сняли 10-15 роликов, просмотров почти нет. Дело в объеме и формате.</p></div>
-      <div class="card rv"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg></span><h3>Чужая аудитория чужой и остается</h3><p>Блогер поднимает ставку и уходит, подписчики остаются его.</p></div>
+      <div class="card rv"><span class="cic"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Пробовали, и тишина</h3><p>Сняли 10-15 роликов, просмотров почти нет.<span class="d-only"> Дело в объеме и формате.</span></p></div>
     </div>
   </div>
 </section>
@@ -471,7 +484,8 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
     <div class="wrap">
       <p class="kicker">Что это такое</p>
       <h2>Не вымышленный блогер, а ваша <span class="hl">цифровая копия</span></h2>
-      <p class="lead">Аватар выглядит как вы и говорит вашим голосом. Снимает короткие ролики по вашей теме, ведет аккаунт и зовет людей в вашу воронку.</p>
+      <p class="lead d-only">Аватар выглядит как вы и говорит вашим голосом. Снимает короткие ролики по вашей теме, ведет аккаунт и зовет людей в вашу воронку.</p>
+      <p class="lead m-only">Выглядит как вы, говорит вашим голосом, ведет аккаунт и приводит людей в вашу воронку.</p>
       <div class="mg-grid">
         <div>
           <h3 style="font-size:24px; margin-bottom:18px">Что нужно от вас</h3>
@@ -479,22 +493,21 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
             <li>Фото и запись голоса на старте</li>
             <li>Смыслы: то, что вы и так говорите клиентам</li>
             <li>Согласование сценариев раз в неделю</li>
-            <li>Все. Больше ничего не требуется</li>
+            <li class="d-only">Все. Больше ничего не требуется</li>
           </ul>
         </div>
         <div>
           <h3 style="font-size:24px; margin-bottom:18px">Что входит в работу</h3>
           <div class="work">
-            <div><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg><b>Аватар и голос</b><span>мимика, жесты, клон голоса</span></div>
-            <div><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg><b>Сценарии</b><span>идеи, темы, структура</span></div>
-            <div><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg><b>Монтаж</b><span>ритм, субтитры, обложки</span></div>
-            <div><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg><b>Сетка аккаунтов</b><span>создание и прогрев</span></div>
-            <div><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><b>Выкладка</b><span>каждый день, по графику</span></div>
-            <div><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg><b>Воронка</b><span>кодовое слово в директ</span></div>
-            <div><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg><b>Аналитика</b><span>охваты, переходы, заявки</span></div>
+            <div><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg><b>Аватар и голос</b><span class="d-only">мимика, жесты, клон голоса</span></div>
+            <div><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg><b>Сценарии</b><span class="d-only">идеи, темы, структура</span></div>
+            <div><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg><b>Монтаж</b><span class="d-only">ритм, субтитры, обложки</span></div>
+            <div><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg><b>Сетка аккаунтов</b><span class="d-only">создание и прогрев</span></div>
+            <div><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><b>Выкладка</b><span class="d-only">каждый день, по графику</span></div>
+            <div><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg><b>Воронка</b><span class="d-only">кодовое слово в директ</span></div>
+            <div><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg><b>Аналитика</b><span class="d-only">охваты, переходы, заявки</span></div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   </section>
@@ -511,21 +524,21 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
           <div class="phone"><video src="media/para-1-chelovek.mp4" poster="media/para-1-chelovek.jpg" muted loop playsinline preload="none"></video><span class="lab">Человек</span></div>
           <div class="phone"><video src="media/para-1-avatar.mp4" poster="media/para-1-avatar.jpg" muted loop playsinline preload="none"></video><span class="lab">Аватар</span></div>
         </div>
-        <figcaption><b>Собственник бренда, свой блог на 100 тысяч</b>У него штатная команда креаторов, и аватар работает вместе с ней.</figcaption>
+        <figcaption><b>Собственник бренда, свой блог на 100 тысяч</b><span class="d-only">У него штатная команда креаторов, и аватар работает вместе с ней.</span></figcaption>
       </figure>
       <figure class="pair rv">
         <div class="duo">
           <div class="phone"><img src="media/para-2-chelovek.jpg" alt="Реальное фото собственницы салона красоты"><span class="lab">Человек</span></div>
           <div class="phone"><video src="media/para-2-avatar.mp4" poster="media/para-2-avatar.jpg" muted loop playsinline preload="none"></video><span class="lab">Аватар</span></div>
         </div>
-        <figcaption><b>Собственница салона красоты</b>Аватар ведет контент салона вместо владелицы.</figcaption>
+        <figcaption><b>Собственница салона красоты</b><span class="d-only">Аватар ведет контент салона вместо владелицы.</span></figcaption>
       </figure>
       <figure class="pair rv">
         <div class="duo">
           <div class="phone"><img src="media/para-3-chelovek.jpg" alt="Реальное фото эксперта зубной ниши"><span class="lab">Человек</span></div>
           <div class="phone"><video src="media/para-3-avatar.mp4" poster="media/para-3-avatar.jpg" muted loop playsinline preload="none"></video><span class="lab">Аватар</span></div>
         </div>
-        <figcaption><b>Эксперт в зубной нише</b>Аватар ведет продажи бренда, сам эксперт в кадре не снимается.</figcaption>
+        <figcaption><b>Эксперт в зубной нише</b><span class="d-only">Аватар ведет продажи бренда, сам эксперт в кадре не снимается.</span></figcaption>
       </figure>
     </div>
     
@@ -557,16 +570,16 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
     <div class="dirs two-wide">
       <div class="dir rv">
         <ul>
-          <li><b>Заголовок и первая секунда решают все.</b> Их мы пишем отдельно и переписываем по несколько раз, а не дописываем в конце, когда ролик уже собран.</li>
-          <li><b>Не выдумываем, а берем то, что уже выстрелило.</b> Ищем форматы, которые залетели в вашей и в зарубежных нишах, и переносим на вашу тему.</li>
-          <li><b>Аватар не должен выглядеть как реклама.</b> Мимику, голос и подачу доводим до живого человека, иначе ролик пролистывают на второй секунде.</li>
+          <li><b>Заголовок и первая секунда решают все.</b><span class="d-only"> Их мы пишем отдельно и переписываем по несколько раз, а не дописываем в конце, когда ролик уже собран.</span></li>
+          <li><b>Не выдумываем, а берем то, что уже выстрелило.</b><span class="d-only"> Ищем форматы, которые залетели в вашей и в зарубежных нишах, и переносим на вашу тему.</span></li>
+          <li><b>Аватар не должен выглядеть как реклама.</b><span class="d-only"> Мимику, голос и подачу доводим до живого человека, иначе ролик пролистывают на второй секунде.</span></li>
         </ul>
       </div>
       <div class="dir rv">
         <ul>
-          <li><b>Запускаем несколько аватаров сразу.</b> Разные лица, разные подачи, разные заголовки. Так связка находится за недели, а не за полгода.</li>
-          <li><b>Каждый день, без пропусков.</b> Алгоритмы любят регулярность, а у эксперта она всегда ломается о клиентов и практику. У нас не ломается.</li>
-          <li><b>Ведет команда, а не один человек.</b> Сценарист, монтажер, публикатор и аналитик на вашем проекте, вы утверждаете смыслы раз в неделю.</li>
+          <li><b>Запускаем несколько аватаров сразу.</b><span class="d-only"> Разные лица, разные подачи, разные заголовки. Так связка находится за недели, а не за полгода.</span></li>
+          <li><b>Каждый день, без пропусков.</b><span class="d-only"> Алгоритмы любят регулярность, а у эксперта она всегда ломается о клиентов и практику. У нас не ломается.</span></li>
+          <li><b>Ведет команда, а не один человек.</b><span class="d-only"> Сценарист, монтажер, публикатор и аналитик на вашем проекте, вы утверждаете смыслы раз в неделю.</span></li>
         </ul>
       </div>
     </div>
@@ -577,7 +590,8 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   <div class="wrap">
     <p class="kicker">Аккаунты</p>
     <h2>Столько подписчиков <span class="hl">за 1-2 месяца</span> с нуля</h2>
-    <p class="lead">Живые аккаунты ИИ-персонажей и аудитория, которую они собрали. Это не годы работы: первые один-два месяца с нуля, без рекламного бюджета.</p>
+    <p class="lead d-only">Живые аккаунты ИИ-персонажей и аудитория, которую они собрали. Это не годы работы: первые один-два месяца с нуля, без рекламного бюджета.</p>
+    <p class="lead m-only">Живые аккаунты наших персонажей. Это не годы работы, а первые один-два месяца с нуля.</p>
     <div class="akk">
       <a class="akk-card rv" href="https://www.instagram.com/vvedenskaya.valery/" target="_blank" rel="noopener">
         <img src="media/akk-3.jpg" alt="Аккаунт виртуального эксперта: 344 тысячи подписчиков">
@@ -592,7 +606,7 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
         <span class="akk-foot"><b>137 тыс подписчиков</b><span>психолог</span><i>Смотреть аккаунт →</i></span>
       </a>
     </div>
-    <p class="pairs-note">Персонажей ведет наша команда. Аккаунты открыты, зайдите и посмотрите ленту.</p>
+    <p class="pairs-note">Персонажей ведет наша команда. Аккаунты открыты<span class="d-only">, зайдите и посмотрите ленту</span>.</p>
   </div>
 </section>
 
@@ -616,13 +630,13 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
         </div>
         <figure class="shotfig">
           <img src="media/keys-prodazhi.jpg" alt="Выгрузка продаж по продуктам из кабинета">
-          <figcaption>Выгрузка продаж из кабинета, а не цифры на глаз</figcaption>
+          <figcaption>Выгрузка продаж из кабинета<span class="d-only">, а не цифры на глаз</span></figcaption>
         </figure>
       </div>
       <div class="case rv">
         <div class="case-head">
           <span class="av"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></span>
-          <span class="id"><b>Что вы видите в отчете</b><span>Путь от ролика до заявки</span></span>
+          <span class="id"><b>Что вы видите в отчете</b><span class="d-only">Путь от ролика до заявки</span></span>
         </div>
         <ul class="funnel">
           <li><span class="fi"><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg></span><b>Ролики выложены по графику</b><span class="bar"></span></li>
@@ -632,7 +646,7 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
         </ul>
         <figure class="shotfig">
           <img src="media/keys-kabinet.jpg" alt="Кабинет: воронки по кодовому слову и контакты">
-          <figcaption>Кабинет: сколько человек написали кодовое слово и попали в воронку</figcaption>
+          <figcaption>Кабинет<span class="d-only">: сколько человек написали кодовое слово и попали в воронку</span><span class="m-only">: кодовые слова и воронка</span></figcaption>
         </figure>
       </div>
     </div>
@@ -681,10 +695,10 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
     <div class="card rv nofit">
       <h3>Кому не подойдет</h3>
       <ul>
-        <li>После ролика человеку некуда прийти и нечего купить</li>
+        <li><span class="d-only">После ролика человеку некуда прийти и нечего купить</span><span class="m-only">Нечего купить после просмотра</span></li>
         <li>Ценность работы надо показывать руками в кадре</li>
         <li>Вам нужны гарантии по просмотрам и продажам</li>
-        <li>Вы ждете результата с пяти роликов</li>
+        <li class="d-only">Вы ждете результата с пяти роликов</li>
       </ul>
     </div>
   </div>
@@ -694,7 +708,8 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   <div class="wrap">
     <p class="kicker">Цены</p>
     <h2>Два пакета, оба <span class="hl">под ключ</span></h2>
-    <p class="lead">В обе цены входит все: аватар и голос, сценарии, монтаж, аккаунты, ежедневная выкладка, воронка, аналитика.</p>
+    <p class="lead d-only">В обе цены входит все: аватар и голос, сценарии, монтаж, аккаунты, ежедневная выкладка, воронка, аналитика.</p>
+    <p class="lead m-only">В обе цены входит все: от аватара и сценариев до выкладки и аналитики.</p>
     <div class="req">
       <div>
         <div class="ptable">
@@ -705,11 +720,11 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
           <div class="ph-row"><span>Воронка и аналитика</span><span>да</span><span>да</span></div>
           <div class="ph-row"><span>Шанс найти рабочую связку</span><span>ниже</span><span class="hl-cell">выше</span></div>
         </div>
-        <p class="hint" style="max-width:none">Оба пакета это примерно месяц работы. Чем больше аватаров, тем быстрее находится связка, которая залетает.</p>
+        <p class="hint" style="max-width:none"><span class="d-only">Оба пакета это примерно месяц работы. Чем больше аватаров, тем быстрее находится связка, которая залетает.</span><span class="m-only">Оба пакета это месяц работы. Больше аватаров - быстрее находится связка.</span></p>
         <ul class="ticks">
           <li>Несколько вопросов про вашу тему и продукт</li>
           <li>3-5 примеров роликов в вашей нише</li>
-          <li>Созвон: какой аватар и форматы подойдут, сроки и состав работ</li>
+          <li>Созвон: какой аватар и форматы подойдут<span class="d-only">, сроки и состав работ</span></li>
           <li>Договорились: рабочий чат и договор</li>
         </ul>
       </div>
@@ -758,14 +773,14 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
     <p class="kicker">Вопросы</p>
     <h2>Что обычно спрашивают</h2>
     <div style="margin-top:22px">
-      <details><summary>Будет видно, что это ИИ?</summary><p>Кто-то заметит. На результат это влияет меньше, чем тема и подача: смотрят за пользу. Аватар не выдает себя за другого человека, это вы: ваше лицо и ваш голос.</p></details>
-      <details><summary>Сколько времени это отнимет у меня?</summary><p>На старте фото и запись голоса, дальше согласование смыслов и утверждение сценариев. Съемок нет, аккаунт вести самому не нужно. Это и есть главное: вам не приходится открывать еще один рабочий цикл.</p></details>
-      <details><summary>А если за 30 роликов ничего не залетит?</summary><p>Такое бывает, и мы это не прячем. Гарантий по цифрам не даем принципиально: обещаем объем работы и сроки. Оплата идет за этот объем, а не за просмотры, и мы говорим об этом до старта. Если не залетело, вы получаете разбор по цифрам: какие заголовки, форматы и подачи не сработали и что меняем. Дальше решаете сами, продолжать или остановиться. Поэтому мы и не продаем пакеты, по которым нельзя сделать вывод.</p></details>
-      <details><summary>Можно взять один аватар и десять роликов, чтобы попробовать?</summary><p>Можно, но это лотерея. На первых пяти-семи роликах новый аккаунт набирает 100-200 просмотров, часть аккаунтов блокируется. Суждение о результате дает объем от 30 роликов, поэтому минимальный пакет такой.</p></details>
-      <details><summary>А если аккаунт заблокируют?</summary><p>Блокировка это нормальный расход, а не форс-мажор. Поэтому мы и запускаем несколько аватаров и аккаунтов, а не один. Работаем по правилам площадок, спорные формулировки согласуем заранее.</p></details>
-      <details><summary>Подойдет ли моя тема?</summary><p>Напишите нишу и что продаете, посмотрим и ответим честно. Если формат вашей теме не подходит, так и скажем, это бесплатно. Если подходит, пришлем 3-5 примеров роликов именно в вашей нише.</p></details>
-      <details><summary>Чем это лучше, чем нанять блогера или снимать самому?</summary><p>Блогер после залета поднимает ставку и уходит, а аудитория остается его. Съемки самому это ежедневная дисциплина поверх вашей основной работы. Аватар принадлежит вашему проекту, говорит вашими смыслами, не срывает сроки и не торгуется.</p></details>
-      <details><summary>Можно посмотреть живые аккаунты?</summary><p>Покажем на созвоне. Часть проектов под NDA, показываем то, что разрешено показывать.</p></details>
+      <details><summary>Будет видно, что это ИИ?</summary><p>Кто-то заметит.<span class="d-only"> На результат это влияет меньше, чем тема и подача: смотрят за пользу.</span> Аватар не выдает себя за другого человека, это вы: ваше лицо и ваш голос.</p></details>
+      <details><summary>Сколько времени это отнимет у меня?</summary><p>На старте фото и запись голоса, дальше согласование смыслов и утверждение сценариев. Съемок нет, аккаунт вести самому не нужно.<span class="d-only"> Это и есть главное: вам не приходится открывать еще один рабочий цикл.</span></p></details>
+      <details><summary>А если за 30 роликов ничего не залетит?</summary><p>Такое бывает, и мы это не прячем. Гарантий по цифрам не даем принципиально: обещаем объем работы и сроки.<span class="d-only"> Оплата идет за этот объем, а не за просмотры, и мы говорим об этом до старта.</span> Если не залетело, вы получаете разбор по цифрам: какие заголовки, форматы и подачи не сработали и что меняем.<span class="d-only"> Дальше решаете сами, продолжать или остановиться. Поэтому мы и не продаем пакеты, по которым нельзя сделать вывод.</span></p></details>
+      <details><summary>Можно взять один аватар и десять роликов, чтобы попробовать?</summary><p>Можно, но это лотерея.<span class="d-only"> На первых пяти-семи роликах новый аккаунт набирает 100-200 просмотров, часть аккаунтов блокируется.</span> Суждение о результате дает объем от 30 роликов, поэтому минимальный пакет такой.</p></details>
+      <details><summary>А если аккаунт заблокируют?</summary><p>Блокировка это нормальный расход, а не форс-мажор. Поэтому мы и запускаем несколько аватаров и аккаунтов, а не один.<span class="d-only"> Работаем по правилам площадок, спорные формулировки согласуем заранее.</span></p></details>
+      <details><summary>Подойдет ли моя тема?</summary><p>Напишите нишу и что продаете, посмотрим и ответим честно.<span class="d-only"> Если формат вашей теме не подходит, так и скажем, это бесплатно.</span> Если подходит, пришлем 3-5 примеров роликов именно в вашей нише.</p></details>
+      <details><summary>Чем это лучше, чем нанять блогера или снимать самому?</summary><p>Блогер после залета поднимает ставку и уходит, а аудитория остается его. Съемки самому это ежедневная дисциплина поверх вашей основной работы. Аватар принадлежит вашему проекту<span class="d-only">, говорит вашими смыслами, не срывает сроки и не торгуется</span>.</p></details>
+      <details class="d-only"><summary>Можно посмотреть живые аккаунты?</summary><p>Покажем на созвоне. Часть проектов под NDA, показываем то, что разрешено показывать.</p></details>
     </div>
   </div>
 </section>
@@ -774,7 +789,7 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
   <div class="wrap">
     <div class="darkbox rv">
       <h2>Расскажите про свою тему,<br>дальше посмотрим вместе</h2>
-      <p>Напишите пару строк: ниша, что продаете, что уже пробовали. Посмотрим, подходит ли формат, и пришлем примеры роликов в вашей нише. Разбор бесплатный.</p>
+      <p><span class="d-only">Напишите пару строк: ниша, что продаете, что уже пробовали. Посмотрим, подходит ли формат, и пришлем примеры роликов в вашей нише. Разбор бесплатный.</span><span class="m-only">Ниша, что продаете, что уже пробовали. Посмотрим и пришлем примеры роликов в вашей нише. Бесплатно.</span></p>
       <div class="cta-row">
         <a class="btn acc big" href="https://t.me/beymsofi" target="_blank" rel="noopener">Написать в Telegram<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn ghost-light big" href="#ceny" data-mode="price">Оставить заявку на сайте</a>
