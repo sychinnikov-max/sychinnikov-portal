@@ -203,14 +203,11 @@ p{margin:0 0 12px}
 .nofit li:before{content:""; position:absolute; left:2px; top:9px; width:8px; height:8px; border-radius:50%; background:var(--acc-2)}
 
 /* пары человек и аватар */
-.virt{display:grid; grid-template-columns:136px minmax(0,1fr); gap:22px; align-items:center; background:#141414; border:1px solid var(--deep-line); border-radius:var(--r); padding:13px 18px; margin-top:16px}
-.virt h3{color:#fff}
-.virt .kicker{color:#A78BFA}
-.virt p{margin:8px 0 0; color:#B4B4B0; font-size:17px; line-height:1.45}
-.virt p.mut{font-size:14.5px; color:#8A8A86; margin-top:8px}
-.virt .phone{width:136px}
-@media(max-width:700px){ .virt{grid-template-columns:1fr; justify-items:center; text-align:center} }
-.pairs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:22px auto 0; max-width:880px}
+.pairs{display:grid; grid-template-columns:1fr 1fr .58fr; gap:14px; margin:20px auto 0; max-width:1140px; align-items:start}
+.duo.one{grid-template-columns:1fr}
+.duo.one .phone{max-height:340px; width:auto; margin:0 auto}
+@media(max-width:1000px){ .pairs{grid-template-columns:1fr 1fr} .pair.solo{grid-column:span 2; max-width:420px; margin:0 auto} }
+@media(max-width:700px){ .pair.solo{grid-column:auto; max-width:none} }
 @media(max-width:940px){ .pairs{grid-template-columns:1fr} }
 .pair{margin:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:12px}
 .duo{display:grid; grid-template-columns:1fr 1fr; gap:10px}
@@ -473,15 +470,6 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
         </div>
       </div>
       </div>
-      <div class="virt rv">
-      <div class="phone"><video src="media/para-3-avatar.mp4" poster="media/para-3-avatar.jpg" muted loop playsinline preload="none"></video></div>
-      <div>
-        <p class="kicker" style="margin-bottom:8px">Второй путь</p>
-        <h3 style="font-size:24px">А это персонаж, которого нет</h3>
-        <p>Если показывать себя не хочется, персонажа создаем с нуля: лицо, голос, характер, тема.</p>
-        <p class="mut">Этот продает товары для зубов. Живого прототипа у него нет.</p>
-      </div>
-    </div>
     </div>
   </section>
 </div>
@@ -505,6 +493,12 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
           <div class="phone"><video src="media/para-2-avatar.mp4" poster="media/para-2-avatar.jpg" muted loop playsinline preload="none"></video><span class="lab">Аватар</span></div>
         </div>
         <figcaption><b>Собственница салона красоты</b>Аватар ведет контент салона вместо владелицы.</figcaption>
+      </figure>
+      <figure class="pair solo rv">
+        <div class="duo one">
+          <div class="phone"><video src="media/para-3-avatar.mp4" poster="media/para-3-avatar.jpg" muted loop playsinline preload="none"></video><span class="lab">Персонаж</span></div>
+        </div>
+        <figcaption><b>Персонаж, которого нет</b>Создан с нуля: лицо, голос, характер. Живого прототипа нет, продает товары для зубов.</figcaption>
       </figure>
     </div>
     
