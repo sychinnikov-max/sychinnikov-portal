@@ -24,7 +24,7 @@
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:66px}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:110px}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55}
 .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 a{color:inherit}
@@ -37,7 +37,7 @@ header.hd{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.94);back
 .hd nav a:hover{color:var(--acc)}
 .hd nav a.back{color:var(--ink3)}
 
-.hero{padding:34px 0 22px;border-bottom:1px solid var(--line)}
+.hero{padding:30px 0 20px;border-bottom:1px solid var(--line)}
 .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}
 h1{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3.6vw,34px);line-height:1.13;margin:0 0 10px;letter-spacing:-.01em}
 .lead{font-size:16px;color:var(--ink2);max-width:80ch;margin:0 0 18px}
@@ -53,17 +53,38 @@ h1{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3.6vw,34px);line
 .fresh{font-family:var(--mono);font-size:11.5px;color:var(--ink3);margin-top:14px;line-height:1.6}
 .fresh b{color:var(--ink2);font-weight:500}
 
-section{padding:32px 0}
+/* вкладки */
+.tabs{position:sticky;top:54px;z-index:40;background:rgba(251,247,241,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:6px;align-items:flex-end;height:50px;overflow-x:auto}
+.tab{border:0;background:transparent;font-family:var(--disp);font-size:13.5px;font-weight:600;color:var(--ink3);padding:12px 14px 13px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink);border-bottom-color:var(--acc)}
+.tab .cnt{font-family:var(--mono);font-size:11px;font-weight:500;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:1px 7px;color:var(--ink2)}
+.tab .cnt.bad{background:var(--danger);color:#fff;border-color:var(--danger)}
+.tab .cnt.warn{background:var(--ochre-soft);color:var(--ochre);border-color:var(--ochre-line)}
+.tabs .src{margin-left:auto;font-size:12.5px;color:var(--ink3);white-space:nowrap;padding-bottom:14px}
+.tabs .src a{color:var(--ink2)}
+.pane{display:none}
+.pane.on{display:block}
+.subnav{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink3);padding:14px 0 0}
+.subnav a{text-decoration:none;color:var(--ink2);border-bottom:1px dotted var(--ink3)}
+
+section{padding:30px 0}
 section+section{border-top:1px solid var(--line2)}
 h2{font-family:var(--disp);font-weight:600;font-size:20px;margin:0 0 6px;letter-spacing:-.01em}
 .smeta{font-size:13.5px;color:var(--ink3);margin:0 0 18px;max-width:86ch}
 h3{font-family:var(--disp);font-weight:600;font-size:14.5px;margin:0 0 10px}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
 .muted{color:var(--ink3)}
 .mono{font-family:var(--mono);font-size:12.5px}
 .empty{color:var(--ink3);font-size:14px;padding:8px 0}
+
+/* ссылки в исходник */
+a.src{color:inherit;text-decoration:none;border-bottom:1px solid #D9CDBB;transition:border-color .12s,color .12s}
+a.src:hover{color:var(--acc);border-color:var(--acc)}
+a.src::after{content:"↗";font-family:var(--mono);font-size:10px;color:var(--ink3);margin-left:4px;vertical-align:super}
+a.src:hover::after{color:var(--acc)}
 
 /* значки статусов */
 .badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;letter-spacing:.02em;padding:2px 8px;border-radius:6px;border:1px solid transparent;white-space:nowrap}
@@ -112,7 +133,9 @@ h3{font-family:var(--disp);font-weight:600;font-size:14.5px;margin:0 0 10px}
 .gantt .who{font-size:10.5px;fill:var(--ink3);font-family:var(--mono)}
 .gantt .ph{font-family:var(--disp);font-size:11px;font-weight:600;fill:var(--ink2)}
 .gantt .ax{font-family:var(--mono);font-size:10px;fill:var(--ink3)}
-.gantt .row:hover rect.bar{stroke:var(--ink);stroke-width:1.2}
+.gantt a{cursor:pointer}
+.gantt a:hover .lbl{fill:var(--acc);text-decoration:underline}
+.gantt a:hover rect.bar{stroke:var(--ink);stroke-width:1.2}
 
 /* фильтры */
 .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px;font-size:13px}
@@ -123,13 +146,12 @@ h3{font-family:var(--disp);font-weight:600;font-size:14.5px;margin:0 0 10px}
 /* команда */
 .people{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px}
 .person{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px}
-.person h3{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.person h3{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .person h3 .pill{margin-left:auto}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px;margin:0 0 10px}
 .kv .k{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase;align-self:center}
 .kv .v b{font-weight:600}
 .kv .v .bad{color:var(--danger);font-weight:600}
-.kv .v .warn{color:var(--ochre);font-weight:600}
 .bar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--sunk);gap:2px;margin:6px 0 8px}
 .bar i{display:block;height:100%}
 .bar i.done{background:var(--ok)} .bar i.work{background:var(--blue)} .bar i.late{background:var(--danger)} .bar i.none{background:#D9D0C4}
@@ -137,7 +159,31 @@ h3{font-family:var(--disp);font-weight:600;font-size:14.5px;margin:0 0 10px}
 .holds li{padding:6px 0;border-top:1px solid var(--line2);display:flex;gap:8px;align-items:baseline}
 .holds li:first-child{border-top:0}
 .holds .t{flex:1}
-.holds a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--ink3)}
+
+/* CRM: корневые карточки */
+.roots{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px}
+.root{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+.root .rh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+.root .rh h3{margin:0;font-size:13.5px}
+.root .rh .due{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-left:auto;white-space:nowrap}
+.root .prog{height:6px;border-radius:3px;background:var(--sunk);overflow:hidden;margin:6px 0 10px}
+.root .prog i{display:block;height:100%;background:var(--ok)}
+.sub{margin:0;padding:0;list-style:none;font-size:13.3px}
+.sub li{display:grid;grid-template-columns:16px 1fr auto;gap:8px;align-items:baseline;padding:5px 0;border-top:1px solid var(--line2)}
+.sub li:first-child{border-top:0}
+.sub li.done{color:var(--ink3)}
+.sub li.late .d{color:var(--danger);font-weight:600}
+.sub li.today .d{color:var(--acc);font-weight:600}
+.sub .cb{width:13px;height:13px;border:1.5px solid var(--ink3);border-radius:3px;display:inline-block;position:relative;top:1px}
+.sub li.done .cb{background:var(--ok);border-color:var(--ok)}
+.sub li.done .cb::after{content:"";position:absolute;left:3px;top:0;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.sub li.late .cb{border-color:var(--danger)}
+.sub .d{font-family:var(--mono);font-size:11px;color:var(--ink3);white-space:nowrap}
+.owner-h{display:flex;align-items:baseline;gap:12px;margin:22px 0 10px;flex-wrap:wrap}
+.owner-h h3{margin:0;font-size:16px}
+.owner-h .m{font-size:13px;color:var(--ink2)}
+.owner-h .m b{font-weight:600}
+.owner-h .m .bad{color:var(--danger);font-weight:600}
 
 /* проверки */
 .checks{margin:0;padding:0;list-style:none}
@@ -156,10 +202,7 @@ h3{font-family:var(--disp);font-weight:600;font-size:14.5px;margin:0 0 10px}
 .win .w.now{background:var(--teal-soft);border-color:#CBDFDA}
 .win .w ul{margin:0;padding-left:16px}
 
-/* клиент */
 .cv-note{font-size:13.5px;color:var(--ink2);padding:0 0 0 14px;border-left:2px solid var(--line);margin:0 0 8px}
-
-/* чаты */
 .warnbox{background:var(--ochre-soft);border:1px solid var(--ochre-line);border-radius:10px;padding:12px 14px;font-size:14px;margin:0 0 12px}
 .grid-cal{display:grid;gap:2px;font-family:var(--mono);font-size:10.5px}
 .grid-cal div{padding:4px 3px;text-align:center;background:var(--sunk);border-radius:3px;min-width:34px}
@@ -170,7 +213,7 @@ h3{font-family:var(--disp);font-weight:600;font-size:14.5px;margin:0 0 10px}
 footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--ink3);font-size:13.4px}
 footer a{color:var(--ink2)}
 .err{background:var(--danger-soft);border:1px solid var(--danger-line);border-radius:10px;padding:14px 16px;color:#5C2222;margin:24px 0}
-@media (max-width:760px){.grid2{grid-template-columns:1fr}.hd nav{display:none}}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}.hd nav{display:none}.tabs .src{display:none}}
 </style>
 </head>
 <body>
@@ -181,17 +224,12 @@ footer a{color:var(--ink2)}
       Salescast
     </a>
     <nav>
-      <a href="#segodnya">Сегодня</a>
-      <a href="#dinamika">Динамика</a>
-      <a href="#karta">Карта</a>
-      <a href="#komanda">Команда</a>
-      <a href="#sofia">Приемка</a>
-      <a href="#klient">Клиент видит</a>
-      <a href="#proverki">Проверки</a>
-      <a href="#chaty">Чаты</a>
-      <a href="#vykladka">Выкладка</a>
-      <a href="#istoriya">История</a>
+      <a href="#segodnya">Сводка</a>
+      <a href="#karta">Дорожная карта</a>
+      <a href="#crm">CRM</a>
+      <a href="#lyudi">Люди и проверки</a>
       <a class="back" href="/salescast/nastya/">Карта Насти</a>
+      <a class="back" href="/salescast/">Salescast</a>
     </nav>
   </div>
 </header>
@@ -204,13 +242,12 @@ footer a{color:var(--ink2)}
 'use strict';
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const MONTHS = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
 const WD = ['пн','вт','ср','чт','пт','сб','вс'];
 const d2 = (iso) => { if (!iso) return ''; const [y,m,d] = iso.split('-'); return d + '.' + m; };
 const dwd = (iso) => { if (!iso) return ''; const dt = new Date(iso + 'T00:00:00'); return d2(iso) + ' ' + WD[(dt.getDay()+6)%7]; };
 const dayDiff = (a, b) => Math.round((Date.parse(a + 'T00:00:00Z') - Date.parse(b + 'T00:00:00Z')) / 86400000);
-const plural = (n, a, b, c) => { n = Math.abs(n); const m10 = n % 10, m100 = n % 100; if (m10 === 1 && m100 !== 11) return a; if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return b; return c; };
-const dn = (n) => n + ' ' + plural(n, 'день', 'дня', 'дней');
+const link = (url, text, title) => url ? `<a class="src" href="${esc(url)}" target="_blank" rel="noopener" title="${esc(title || 'Открыть исходник')}">${text}</a>` : text;
+const fmtDT = (d) => d ? `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}` : '';
 
 function statusClass(w) {
   if (w.done || w.status === 'Готово') return 'done';
@@ -220,25 +257,24 @@ function statusClass(w) {
   if (w.status === 'Заблокировано') return 'block';
   return 'none';
 }
+const stBadge = (st) => `<span class="badge ${st === 'Готово' ? 'done' : st === 'В работе' ? 'work' : st === 'На утверждении' ? 'appr' : st === 'Заблокировано' ? 'block' : 'none'}">${esc(st)}</span>`;
 function statusBadge(w) {
   const c = statusClass(w);
-  if (c === 'late') return `<span class="badge late">просрочка ${w.overdue_days} дн.</span> <span class="badge ${w.status === 'В работе' ? 'work' : w.status === 'На утверждении' ? 'appr' : 'none'}">${esc(w.status)}</span>`;
-  const lbl = c === 'done' ? 'готово' : esc(w.status);
-  return `<span class="badge ${c}">${lbl}</span>${w.due_today ? ' <span class="badge today">срок сегодня</span>' : ''}`;
+  if (c === 'late') return `<span class="badge late">просрочка ${w.overdue_days} дн.</span> ${stBadge(w.status)}`;
+  return `${c === 'done' ? '<span class="badge done">готово</span>' : stBadge(w.status)}${w.due_today ? ' <span class="badge today">срок сегодня</span>' : ''}`;
 }
-function stat(n, label, cls, small) {
-  return `<div class="stat ${cls || ''}"><div class="n">${n}${small ? `<small>${small}</small>` : ''}</div><div class="l">${label}</div></div>`;
-}
+const stat = (n, label, cls, small) => `<div class="stat ${cls || ''}"><div class="n">${n}${small ? `<small>${small}</small>` : ''}</div><div class="l">${label}</div></div>`;
 
+// ============================================================ отрисовка
 function render(S) {
-  const cal = S.calendar, sm = S.summary, P = S.project;
-  const src = S.sources || {};
+  const cal = S.calendar, sm = S.summary, P = S.project, src = S.sources || {};
   const bookMod = src.book && src.book.modified ? new Date(src.book.modified) : null;
-  const fmtDT = (d) => d ? `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}` : '';
   const built = new Date(S.built_at);
-
-  const overdueAll = (sm.works_overdue || 0) + (sm.weeek_overdue || 0);
-  const todayAll = (sm.works_today || 0) + (sm.weeek_today || 0);
+  const SL = S.sheet_links || {};
+  const subs = [];
+  (S.weeek.roots || []).forEach(r => (r.subtasks || []).forEach(s => { if (!s.error) subs.push(Object.assign({}, s, { root: r })); }));
+  const crmOver = subs.filter(s => s.overdue_days > 0), crmToday = subs.filter(s => s.due_today);
+  const planOver = S.works.filter(w => w.overdue_days > 0), planToday = S.works.filter(w => w.due_today);
 
   let h = `<div class="wrap">
   <div class="hero" id="segodnya">
@@ -248,93 +284,153 @@ function render(S) {
       До дня готовности 02.10: <b>${cal.days_to_prep_end}</b> дн. До старта публикаций 03.10: <b>${cal.days_to_pub_start}</b> дн.
       До среза по просмотрам 15.10: <b>${cal.days_to_cut}</b> дн.</p>
     <div class="stats">
-      ${stat(`${sm.works_done}<small>/ ${sm.works_total}</small>`, 'работ готово в листе «План»', sm.works_done ? 'ok' : '')}
-      ${stat(sm.works_in_work, 'работ в работе или на утверждении', '')}
-      ${stat(overdueAll, 'просрочено: план + Weeek', overdueAll ? 'bad' : 'ok')}
-      ${stat(todayAll, 'сроков сегодня: план + Weeek', todayAll ? 'warn' : '')}
-      ${stat(`${sm.weeek_done == null ? '?' : sm.weeek_done}<small>/ ${sm.weeek_total == null ? '?' : sm.weeek_total}</small>`, 'подзадач закрыто в Weeek', '')}
-      ${stat(cal.prep_rate_needed == null ? '·' : cal.prep_rate_needed, `нужный темп: работ подготовки в рабочий день (осталось ${cal.prep_left} на ${cal.prep_workdays_left} дн.)`, cal.prep_rate_needed > 2 ? 'warn' : '')}
+      ${stat(`${sm.works_done}<small>/ ${sm.works_total}</small>`, 'работ готово в дорожной карте', sm.works_done ? 'ok' : '')}
+      ${stat(planOver.length, 'просрочено в дорожной карте', planOver.length ? 'bad' : 'ok')}
+      ${stat(planToday.length, 'сроков сегодня в дорожной карте', planToday.length ? 'warn' : '')}
+      ${stat(`${sm.weeek_done == null ? '?' : sm.weeek_done}<small>/ ${sm.weeek_total == null ? '?' : sm.weeek_total}</small>`, 'подзадач закрыто в CRM', '')}
+      ${stat(crmOver.length, 'просрочено в CRM', crmOver.length ? 'bad' : 'ok')}
+      ${stat(crmToday.length, 'сроков сегодня в CRM', crmToday.length ? 'warn' : '')}
+      ${stat(cal.prep_rate_needed == null ? '·' : cal.prep_rate_needed, `нужный темп подготовки: работ в рабочий день (осталось ${cal.prep_left} на ${cal.prep_workdays_left} дн.)`, cal.prep_rate_needed > 2 ? 'warn' : '')}
     </div>
     <div class="fresh">Снимок собран <b>${fmtDT(built)}</b> · книга «План клиника» правлена <b>${bookMod ? fmtDT(bookMod) : (src.book && src.book.error ? 'не прочитано' : '?')}</b>${src.book && src.book.modified_by ? ` (${esc(src.book.modified_by)})` : ''} · Weeek прочитан <b>${src.weeek && src.weeek.fetched_at ? fmtDT(new Date(src.weeek.fetched_at)) : 'нет'}</b>${src.weeek && src.weeek.error ? ` · <span style="color:var(--danger)">${esc(src.weeek.error)}</span>` : ''}${src.sheet && src.sheet.error ? ` · <span style="color:var(--danger)">${esc(src.sheet.error)}</span>` : ''}</div>
-  </div>`;
+  </div></div>`;
 
-  // ---------------- сегодня и просрочено
-  h += `<section><h2>Что горит</h2><p class="smeta">Сроки сегодня и все, что уже просрочено, из обоих источников. Владелец назван так, как стоит в плане.</p>
+  // вкладки
+  const cnt = (n, cls) => `<span class="cnt ${n ? cls : ''}">${n}</span>`;
+  h += `<div class="tabs"><div class="wrap">
+    <button class="tab" data-tab="karta">Дорожная карта ${cnt(planOver.length + planToday.length, planOver.length ? 'bad' : 'warn')}</button>
+    <button class="tab" data-tab="crm">CRM Weeek ${cnt(crmOver.length + crmToday.length, crmOver.length ? 'bad' : 'warn')}</button>
+    <button class="tab" data-tab="lyudi">Люди и проверки ${cnt(S.checks.filter(c => c.level === 'bad').length, 'bad')}</button>
+    <span class="src" id="tabsrc"></span>
+  </div></div>`;
+
+  // ------------------------------------------------------------ ВКЛАДКА: дорожная карта
+  h += `<div class="pane" id="pane-karta" data-src="${esc(SL['План'] || P.sheet_url)}" data-srclabel="книга «План клиника», лист «План»"><div class="wrap" id="karta">
+  <div class="subnav"><a href="#k-gorit">Горит</a><a href="#k-dinamika">Динамика</a><a href="#k-gantt">Гант</a><a href="#k-spisok">Список работ</a><a href="#k-sofia">Приемка Софии</a><a href="#k-klient">Клиент видит</a><a href="#k-vykladka">Выкладка</a></div>
+  <section id="k-gorit"><h2>Что горит в дорожной карте</h2><p class="smeta">Работы листа «План». Клик по названию открывает строку в книге.</p>
   <div class="grid2">
-    <div class="panel"><h3>Просрочено: ${S.overdue_items.length}</h3>${S.overdue_items.length ? `<table class="tbl"><tr><th>Дн.</th><th>Что</th><th>Кто</th><th>Срок</th></tr>${S.overdue_items.map(x => `<tr class="late"><td class="num">${x.overdue_days}</td><td>${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title)} <span class="pill">${esc(x.src)} ${esc(x.n)}</span>${x.status ? ` <span class="badge ${x.status === 'В работе' ? 'work' : x.status === 'На утверждении' ? 'appr' : 'none'}">${esc(x.status)}</span>` : ''}</td><td>${esc(x.who)}</td><td class="num">${dwd(x.due)}</td></tr>`).join('')}</table>` : '<p class="empty">Просрочек нет.</p>'}</div>
-    <div class="panel"><h3>Срок сегодня, ${dwd(cal.today)}: ${S.today_items.length}</h3>${S.today_items.length ? `<table class="tbl"><tr><th>Кто</th><th>Что</th></tr>${S.today_items.map(x => `<tr class="today"><td>${esc(x.who)}</td><td>${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title)} <span class="pill">${esc(x.src)} ${esc(x.n)}</span>${x.status ? ` <span class="badge ${x.status === 'В работе' ? 'work' : x.status === 'На утверждении' ? 'appr' : x.status === 'Готово' ? 'done' : 'none'}">${esc(x.status)}</span>` : ''}</td></tr>`).join('')}</table>` : '<p class="empty">На сегодня сроков нет.</p>'}</div>
-  </div></section>`;
+    <div class="panel"><h3>Просрочено: ${planOver.length}</h3>${planOver.length ? `<table class="tbl"><tr><th>Дн.</th><th>Работа</th><th>Кто</th><th>Срок</th></tr>${planOver.sort((a,b)=>b.overdue_days-a.overdue_days).map(w => `<tr class="late"><td class="num">${w.overdue_days}</td><td>${link(w.url, `№ ${w.n} ${esc(w.task)}`, 'Строка в листе «План»')} ${stBadge(w.status)}</td><td>${esc(w.who)}</td><td class="num">${dwd(w.due)}</td></tr>`).join('')}</table>` : '<p class="empty">Просрочек нет.</p>'}</div>
+    <div class="panel"><h3>Срок сегодня, ${dwd(cal.today)}: ${planToday.length}</h3>${planToday.length ? `<table class="tbl"><tr><th>Кто</th><th>Работа</th></tr>${planToday.map(w => `<tr class="today"><td>${esc(w.who)}</td><td>${link(w.url, `№ ${w.n} ${esc(w.task)}`, 'Строка в листе «План»')} ${stBadge(w.status)}</td></tr>`).join('')}</table>` : '<p class="empty">На сегодня сроков нет.</p>'}</div>
+  </div></section>
 
-  // ---------------- динамика
-  h += `<section id="dinamika"><h2>Динамика</h2><p class="smeta">Сколько работ должно быть закрыто по срокам плана к каждому дню и сколько закрыто на самом деле. Факт берется из ежедневных снимков: линия растет с первого снимка, раньше данных нет.</p>
-  <div class="panel">${burnupChart(S.burnup, cal.today)}
-    <div class="rate">${phaseTiles(S.phases)}</div>
-  </div></section>`;
+  <section id="k-dinamika"><h2>Динамика</h2><p class="smeta">Сколько работ должно быть закрыто по срокам плана к каждому дню и сколько закрыто на самом деле. Факт берется из ежедневных снимков: линия растет с первого снимка, раньше данных нет.</p>
+  <div class="panel">${burnupChart(S.burnup, cal.today)}<div class="rate">${phaseTiles(S.phases)}</div></div></section>
 
-  // ---------------- карта
-  h += `<section id="karta"><h2>Дорожная карта: ${sm.works_total} работ по фазам</h2><p class="smeta">Полоса от старта до срока, цвет это статус. Красный хвост после срока показывает, сколько дней работа висит. Вертикальная линия это сегодня.</p>
+  <section id="k-gantt"><h2>Гант: ${sm.works_total} работ по фазам</h2><p class="smeta">Полоса от старта до срока, цвет это статус. Красный хвост после срока показывает, сколько дней работа висит. Клик по строке открывает ее в книге.</p>
   <div class="panel"><div class="legend"><span><i class="sw" style="background:var(--ok)"></i>готово</span><span><i class="sw" style="background:var(--blue)"></i>в работе</span><span><i class="sw" style="background:#E8B85A"></i>на утверждении</span><span><i class="sw" style="background:#D9D0C4"></i>не начато</span><span><i class="sw" style="background:var(--danger)"></i>просрочка</span></div>
-  <div class="gantt">${gantt(S.works, S.phases, cal.today)}</div></div>
-  <div class="panel" style="margin-top:14px"><h3>Список работ</h3>
-    <div class="filters" id="filters"></div>
-    <div class="tblwrap"><table class="tbl" id="works"></table></div>
-  </div></section>`;
+  <div class="gantt">${gantt(S.works, S.phases, cal.today)}</div></div></section>
 
-  // ---------------- команда
-  h += `<section id="komanda"><h2>Команда: кто как идет</h2><p class="smeta">Две линии учета: работы листа «План» (ставит команда) и подзадачи Weeek (закрывает исполнитель). Сдвиг это разница между сроком и днем закрытия: в Weeek по дате закрытия, в плане по дню, когда снимок впервые увидел «Готово».</p>
-  <div class="people">${S.people.map(personCard).join('')}</div></section>`;
+  <section id="k-spisok"><h2>Список работ</h2><p class="smeta">Тот же лист «План» построчно, с фильтрами. Название работы ведет в ее строку.</p>
+  <div class="panel"><div class="filters" id="filters"></div><div class="tblwrap"><table class="tbl" id="works"></table></div></div></section>`;
 
-  // ---------------- приемка Софии
   const sf = S.sofia || {windows: [], off_window: []};
-  h += `<section id="sofia"><h2>Приемка Софии: окна ПН, СР, ПТ</h2><p class="smeta">Узкое место номер один по опыту действующих клиентов. Здесь ее ближайшие окна и что по плану стоит на каждое. Срок, поставленный на ВТ или ЧТ, это сбитое планирование по ADR-021.</p>
-  <div class="panel"><div class="win">${sf.windows.map(w => `<div class="w ${w.date === cal.today ? 'now' : ''}"><b>${dwd(w.date)}${w.date === cal.today ? ' · сегодня' : ''}</b>${w.items.length ? `<ul>${w.items.map(i => `<li>№ ${i.n} ${esc(i.title)} <span class="badge ${i.status === 'Готово' ? 'done' : i.status === 'В работе' ? 'work' : 'none'}">${esc(i.status)}</span></li>`).join('')}</ul>` : '<span class="muted">по плану ничего</span>'}</div>`).join('')}</div>
-  ${sf.off_window.length ? `<p class="cv-note" style="margin-top:12px;border-color:var(--ochre)">Сроки Софии вне окон: ${sf.off_window.map(o => `№ ${o.n} ${esc(o.title)} (${dwd(o.due)})`).join('; ')}</p>` : ''}
+  h += `<section id="k-sofia"><h2>Приемка Софии: окна ПН, СР, ПТ</h2><p class="smeta">Узкое место номер один по опыту действующих клиентов. Ближайшие окна и что по плану стоит на каждое. Срок на ВТ или ЧТ это сбитое планирование по ADR-021.</p>
+  <div class="panel"><div class="win">${sf.windows.map(w => `<div class="w ${w.date === cal.today ? 'now' : ''}"><b>${dwd(w.date)}${w.date === cal.today ? ' · сегодня' : ''}</b>${w.items.length ? `<ul>${w.items.map(i => `<li>${link(i.url, `№ ${i.n} ${esc(i.title)}`)} ${stBadge(i.status)}</li>`).join('')}</ul>` : '<span class="muted">по плану ничего</span>'}</div>`).join('')}</div>
+  ${sf.off_window.length ? `<p class="cv-note" style="margin-top:12px;border-color:var(--ochre)">Сроки Софии вне окон: ${sf.off_window.map(o => `${link(o.url, `№ ${o.n} ${esc(o.title)}`)} (${dwd(o.due)})`).join('; ')}</p>` : ''}
   </div></section>`;
 
-  // ---------------- клиент видит
   const cv = S.client_view || {};
-  h += `<section id="klient"><h2>Что сейчас видит клиент</h2><p class="smeta">Зеркало витрины «Клиенту»: она считается формулами из листа «План», поэтому любой честный статус команды клиент видит в ту же минуту. Красным то, где дата прошла, а статус для клиента не изменился.</p>`;
+  h += `<section id="k-klient"><h2>Что сейчас видит клиент</h2><p class="smeta">Зеркало ${link(cv.url, 'листа «Клиенту»')}: он считается формулами из листа «План», поэтому любой честный статус команды клиент видит в ту же минуту. Красным то, где дата прошла, а статус для клиента не изменился.</p>`;
   if (cv.error) h += `<div class="err">${esc(cv.error)}</div>`;
   else h += `<div class="grid2">
-    <div class="panel"><h3>Этапы, данные на ${esc(cv.as_of || '')}</h3><table class="tbl">${(cv.stages || []).map(s => { const late = s.start_iso && s.start_iso < cal.today && s.status === 'Запланировано'; return `<tr class="${late ? 'late' : s.status === 'Готово' ? 'done' : ''}"><td class="num">${s.n}</td><td>${esc(s.stage)}<br><span class="muted" style="font-size:12.5px">${esc(s.what)}</span></td><td class="num">${esc(s.start)}${s.end && s.end !== s.start ? '<br>' + esc(s.end) : ''}</td><td><span class="badge ${s.status === 'Готово' ? 'done' : s.status === 'В работе' ? 'work' : late ? 'late' : 'none'}">${esc(s.status)}</span></td></tr>`; }).join('')}</table></div>
-    <div class="panel"><h3>Что клиент должен нам</h3><table class="tbl">${(cv.needs || []).map(n => { const late = n.due_iso && n.due_iso < cal.today && n.status !== 'Получено'; return `<tr class="${late ? 'late' : ''}"><td>${esc(n.what)}<br><span class="muted" style="font-size:12.5px">${esc(n.why)}</span></td><td class="num">${esc(n.due)}</td><td><span class="badge ${n.status === 'Ждем от вас' ? 'appr' : 'none'}">${esc(n.status)}</span></td></tr>`; }).join('')}</table>
+    <div class="panel"><h3>Этапы, данные на ${esc(cv.as_of || '')}</h3><table class="tbl">${(cv.stages || []).map(s => { const late = s.start_iso && s.start_iso < cal.today && s.status === 'Запланировано'; return `<tr class="${late ? 'late' : s.status === 'Готово' ? 'done' : ''}"><td class="num">${s.n}</td><td>${link(s.url, esc(s.stage), 'Строка в листе «Клиенту»')}<br><span class="muted" style="font-size:12.5px">${esc(s.what)}</span></td><td class="num">${esc(s.start)}${s.end && s.end !== s.start ? '<br>' + esc(s.end) : ''}</td><td><span class="badge ${s.status === 'Готово' ? 'done' : s.status === 'В работе' ? 'work' : late ? 'late' : 'none'}">${esc(s.status)}</span></td></tr>`; }).join('')}</table></div>
+    <div class="panel"><h3>Что клиент должен нам</h3><table class="tbl">${(cv.needs || []).map(n => { const late = n.due_iso && n.due_iso < cal.today && n.status !== 'Получено'; return `<tr class="${late ? 'late' : ''}"><td>${link(n.url, esc(n.what), 'Строка в листе «Клиенту»')}<br><span class="muted" style="font-size:12.5px">${esc(n.why)}</span></td><td class="num">${esc(n.due)}</td><td><span class="badge ${n.status === 'Ждем от вас' ? 'appr' : 'none'}">${esc(n.status)}</span></td></tr>`; }).join('')}</table>
     <h3 style="margin-top:16px">Что важно знать (как написано клиенту)</h3>${(cv.notes || []).map(n => `<p class="cv-note">${esc(n)}</p>`).join('')}</div>
   </div>`;
   h += `</section>`;
 
-  // ---------------- проверки
-  h += `<section id="proverki"><h2>Проверки</h2><p class="smeta">Правила, которые снимок проверяет сам при каждой сборке. Порядок: сначала проблемы.</p>
-  <div class="panel"><ul class="checks">${S.checks.map(c => `<li><span class="ic ${c.level}">${c.level === 'ok' ? '✓' : c.level === 'bad' ? '!' : c.level === 'warn' ? '!' : '?'}</span><div class="t"><b>${esc(c.title)}</b><span>${esc(c.detail)}</span><small>источник: ${esc(c.source)}</small></div></li>`).join('')}</ul></div></section>`;
+  const vk = S.vykladka || {};
+  h += `<section id="k-vykladka"><h2>Выкладка: 50 роликов, ${d2(P.pub_start)} по ${d2(P.pub_end)}</h2><p class="smeta">${link(vk.url, 'Лист «Выкладка»')}: план по персонажам и факт из столбца «Выложено факт». Просмотры к 15.10 и итог тянутся из тех же строк. До 03.10 здесь только план.</p>`;
+  if (vk.error) h += `<div class="err">${esc(vk.error)}</div>`;
+  else h += `<div class="panel"><table class="tbl"><tr><th>Персонаж</th><th>Тема</th><th>Аккаунт</th><th>Роликов</th><th>Начало</th><th>Конец</th><th>Факт</th><th>Просм. 15.10</th><th>Просм. итог</th><th>Статус</th></tr>
+    ${(vk.personas || []).map(p => `<tr><td>${link(p.url, esc(p.persona), 'Строка в листе «Выкладка»')}</td><td>${esc(p.theme) || '<span class="muted">не задана</span>'}</td><td>${p.account ? `<a href="${esc(p.account)}" target="_blank" rel="noopener">ссылка</a>` : '<span class="muted">нет</span>'}</td><td class="num">${esc(p.videos)}</td><td class="num">${esc(p.start)}</td><td class="num">${esc(p.end)}</td><td class="num">${esc(p.fact) || '0'}</td><td class="num">${esc(p.views_15) || '·'}</td><td class="num">${esc(p.views_total) || '·'}</td><td>${stBadge(p.status)}</td></tr>`).join('')}
+    <tr><td colspan="6"><b>Итого выложено</b></td><td class="num"><b>${esc(vk.fact_total) || '0'}</b> из ${P.videos}</td><td colspan="3"></td></tr></table>
+    ${vk.grid && vk.grid.dates && vk.grid.dates.length ? `<h3 style="margin-top:16px">Календарная сетка: номер ролика по дням, нагрузка производства</h3><div class="tblwrap"><div class="grid-cal" style="grid-template-columns:110px repeat(${vk.grid.dates.length},1fr)"><div class="h"></div>${vk.grid.dates.map(d => `<div class="h ${d.startsWith(d2(cal.today)) ? 'on' : ''}">${esc(d)}</div>`).join('')}${vk.grid.rows.map(r => `<div class="h" style="text-align:left">${esc(r.name)}</div>${r.cells.map(c => `<div class="${/^Ролик|^Нараст/.test(r.name) ? 'sum' : c ? 'on' : ''}">${esc(c)}</div>`).join('')}`).join('')}</div></div>` : ''}
+  </div>`;
+  h += `</section></div></div>`;
 
-  // ---------------- чаты
+  // ------------------------------------------------------------ ВКЛАДКА: CRM
+  h += `<div class="pane" id="pane-crm" data-src="${esc(P.weeek_url)}" data-srclabel="Weeek, проект «Управление»"><div class="wrap" id="crm">
+  <div class="subnav"><a href="#c-gorit">Горит</a><a href="#c-nastya">Настя</a><a href="#c-sofia">София</a><a href="#c-andrey">Андрей</a><a href="#c-zakryto">Закрыто</a></div>
+  <section id="c-gorit"><h2>Что горит в CRM</h2><p class="smeta">Подзадачи Weeek по плану от 21.09: корневая карточка это этап, подзадачи это чек-лист со сроками. Клик открывает карточку в Weeek.</p>
+  <div class="grid2">
+    <div class="panel"><h3>Просрочено: ${crmOver.length}</h3>${crmOver.length ? `<table class="tbl"><tr><th>Дн.</th><th>Подзадача</th><th>Кто</th><th>Срок</th></tr>${crmOver.sort((a,b)=>b.overdue_days-a.overdue_days).map(s => `<tr class="late"><td class="num">${s.overdue_days}</td><td>${link(s.url, esc(s.title), 'Карточка в Weeek')}<br><span class="muted" style="font-size:12px">${esc(s.root.label)}</span></td><td>${esc(s.owner)}</td><td class="num">${dwd(s.due)}</td></tr>`).join('')}</table>` : '<p class="empty">Просрочек нет.</p>'}</div>
+    <div class="panel"><h3>Срок сегодня, ${dwd(cal.today)}: ${crmToday.length}</h3>${crmToday.length ? `<table class="tbl"><tr><th>Кто</th><th>Подзадача</th></tr>${crmToday.map(s => `<tr class="today"><td>${esc(s.owner)}</td><td>${link(s.url, esc(s.title), 'Карточка в Weeek')}<br><span class="muted" style="font-size:12px">${esc(s.root.label)}</span></td></tr>`).join('')}</table>` : '<p class="empty">На сегодня сроков нет.</p>'}</div>
+  </div></section>`;
+
+  const owners = [['Настя', 'c-nastya'], ['София', 'c-sofia'], ['Андрей', 'c-andrey']];
+  h += `<section><h2>Карточки по людям</h2><p class="smeta">Чек-листы как они лежат в Weeek. Галочка это закрытая подзадача, дата справа это срок; у закрытых показан день закрытия и сдвиг против срока.</p>`;
+  owners.forEach(([name, id]) => {
+    const roots = (S.weeek.roots || []).filter(r => r.owner === name);
+    const mine = subs.filter(s => s.owner === name);
+    const done = mine.filter(s => s.done).length, over = mine.filter(s => s.overdue_days > 0).length, tod = mine.filter(s => s.due_today).length, wk = mine.filter(s => s.due_week).length;
+    const slips = mine.filter(s => s.slip_days != null).map(s => s.slip_days);
+    const slipAvg = slips.length ? (slips.reduce((a,b)=>a+b,0) / slips.length).toFixed(1) : null;
+    h += `<div class="owner-h" id="${id}"><h3>${esc(name)}</h3><span class="m"><b>${done}</b> из ${mine.length} закрыто · ${over ? `<span class="bad">просрочено ${over}</span>` : 'просрочек нет'} · сегодня ${tod} · на неделе ${wk} · сдвиг ${slipAvg == null ? '<span class="muted">пока нечего мерить</span>' : `<b>${slipAvg > 0 ? '+' : ''}${slipAvg} дн.</b> по ${slips.length}`}</span></div>
+    <div class="roots">${roots.map(rootCard).join('')}</div>`;
+  });
+  h += `</section>`;
+
+  const closed = subs.filter(s => s.done).sort((a,b) => (b.completed_at || '').localeCompare(a.completed_at || ''));
+  h += `<section id="c-zakryto"><h2>Закрыто в CRM: ${closed.length}</h2><p class="smeta">Кто и когда закрыл, и насколько это разошлось со сроком. Единственное место, где сдвиг считается по дате из самой системы.</p>
+  <div class="panel">${closed.length ? `<table class="tbl"><tr><th>Закрыто</th><th>Подзадача</th><th>Кто</th><th>Срок</th><th>Сдвиг</th></tr>${closed.map(s => `<tr class="done"><td class="num">${s.completed_at ? fmtDT(new Date(s.completed_at)) : '?'}</td><td>${link(s.url, esc(s.title), 'Карточка в Weeek')}<br><span class="muted" style="font-size:12px">${esc(s.root.label)}</span></td><td>${esc(s.owner)}</td><td class="num">${dwd(s.due)}</td><td class="num">${s.slip_days == null ? '·' : (s.slip_days > 0 ? `<span style="color:var(--danger);font-weight:600">+${s.slip_days} дн.</span>` : s.slip_days === 0 ? 'в срок' : `${s.slip_days} дн.`)}</td></tr>`).join('')}</table>` : '<p class="empty">Пока ни одной закрытой подзадачи.</p>'}</div></section>
+  </div></div>`;
+
+  // ------------------------------------------------------------ ВКЛАДКА: люди и проверки
+  h += `<div class="pane" id="pane-lyudi" data-src="" data-srclabel=""><div class="wrap" id="lyudi">
+  <div class="subnav"><a href="#l-komanda">Команда</a><a href="#l-proverki">Проверки</a><a href="#l-chaty">Чаты</a><a href="#l-istoriya">История</a></div>
+  <section id="l-komanda"><h2>Команда: кто как идет</h2><p class="smeta">Обе линии учета вместе: работы дорожной карты (ставит команда) и подзадачи CRM (закрывает исполнитель). Сдвиг это разница между сроком и днем закрытия: в CRM по дате закрытия, в карте по дню, когда снимок впервые увидел «Готово».</p>
+  <div class="people">${S.people.map(personCard).join('')}</div></section>
+
+  <section id="l-proverki"><h2>Проверки</h2><p class="smeta">Правила, которые снимок проверяет сам при каждой сборке. Порядок: сначала проблемы. Где есть строка в книге, заголовок ведет в нее.</p>
+  <div class="panel"><ul class="checks">${S.checks.map(c => `<li><span class="ic ${c.level}">${c.level === 'ok' ? '✓' : c.level === 'na' ? '?' : '!'}</span><div class="t"><b>${link(c.url, esc(c.title))}</b><span>${esc(c.detail)}</span><small>источник: ${esc(c.source)}</small></div></li>`).join('')}</ul></div></section>`;
+
   const cs = S.chat_signals || {};
-  h += `<section id="chaty"><h2>Сигналы из чатов</h2><p class="smeta">Тайминги команды по правилам листа «Правила»: исходник к 11:00, ролик к 15-16, отчет публикатора в день выкладки, ответ Софии на приемку.</p>
+  h += `<section id="l-chaty"><h2>Сигналы из чатов</h2><p class="smeta">Тайминги команды по правилам листа «Правила»: исходник к 11:00, ролик к 15-16, отчет публикатора в день выкладки, ответ Софии на приемку.</p>
   <div class="panel">${cs.status === 'нет источника' ? `<div class="warnbox"><b>Данных нет.</b> ${esc(cs.detail)}</div>
     <table class="tbl"><tr><th>Чат</th><th>Что будет считаться</th></tr>${(cs.wanted || []).map(w => `<tr><td>${esc(w.chat)}</td><td>${esc(w.measure)}</td></tr>`).join('')}</table>
     <p class="cv-note" style="margin-top:12px">${esc(cs.how)}</p>` : '<p class="empty">Раздел появится, когда чаты подключены.</p>'}</div></section>`;
 
-  // ---------------- выкладка
-  const vk = S.vykladka || {};
-  h += `<section id="vykladka"><h2>Выкладка: 50 роликов, ${d2(P.pub_start)} по ${d2(P.pub_end)}</h2><p class="smeta">План по персонажам и факт из столбца «Выложено факт». Просмотры к 15.10 и итог тянутся из тех же строк. До 03.10 здесь только план.</p>`;
-  if (vk.error) h += `<div class="err">${esc(vk.error)}</div>`;
-  else h += `<div class="panel"><table class="tbl"><tr><th>Персонаж</th><th>Тема</th><th>Аккаунт</th><th>Роликов</th><th>Начало</th><th>Конец</th><th>Факт</th><th>Просм. 15.10</th><th>Просм. итог</th><th>Статус</th></tr>
-    ${(vk.personas || []).map(p => `<tr><td>${esc(p.persona)}</td><td>${esc(p.theme) || '<span class="muted">не задана</span>'}</td><td>${p.account ? `<a href="${esc(p.account)}" target="_blank" rel="noopener">ссылка</a>` : '<span class="muted">нет</span>'}</td><td class="num">${esc(p.videos)}</td><td class="num">${esc(p.start)}</td><td class="num">${esc(p.end)}</td><td class="num">${esc(p.fact) || '0'}</td><td class="num">${esc(p.views_15) || '·'}</td><td class="num">${esc(p.views_total) || '·'}</td><td><span class="badge ${p.status === 'Готово' ? 'done' : p.status === 'В работе' ? 'work' : 'none'}">${esc(p.status)}</span></td></tr>`).join('')}
-    <tr><td colspan="6"><b>Итого выложено</b></td><td class="num"><b>${esc(vk.fact_total) || '0'}</b> из ${P.videos}</td><td colspan="3"></td></tr></table>
-    ${vk.grid && vk.grid.dates && vk.grid.dates.length ? `<h3 style="margin-top:16px">Календарная сетка: номер ролика по дням, нагрузка производства</h3><div class="tblwrap"><div class="grid-cal" style="grid-template-columns:110px repeat(${vk.grid.dates.length},1fr)"><div class="h"></div>${vk.grid.dates.map(d => `<div class="h ${d.startsWith(d2(cal.today)) ? 'on' : ''}">${esc(d)}</div>`).join('')}${vk.grid.rows.map(r => `<div class="h" style="text-align:left">${esc(r.name)}</div>${r.cells.map(c => `<div class="${/^Ролик|^Нараст/.test(r.name) ? 'sum' : c ? 'on' : ''}">${esc(c)}</div>`).join('')}`).join('')}</div></div>` : ''}
-  </div>`;
-  h += `</section>`;
+  h += `<section id="l-istoriya"><h2>История снимков</h2><p class="smeta">По одной строке на день. Так видно, движется ли что-то между сборками.</p>
+  <div class="panel"><div class="tblwrap"><table class="tbl"><tr><th>Дата</th><th>Готово в карте</th><th>В работе</th><th>Просрочено в карте</th><th>Закрыто в CRM</th><th>Просрочено в CRM</th></tr>
+  ${S.history.slice().reverse().map(r => `<tr><td class="num">${dwd(r.date)}</td><td class="num">${r.works_done} / ${r.works_total}</td><td class="num">${r.works_in_work}</td><td class="num">${r.works_overdue}</td><td class="num">${r.weeek_done == null ? '?' : r.weeek_done} / ${r.weeek_total == null ? '?' : r.weeek_total}</td><td class="num">${r.weeek_overdue == null ? '?' : r.weeek_overdue}</td></tr>`).join('')}</table></div></div></section>
+  </div></div>`;
 
-  // ---------------- история
-  h += `<section id="istoriya"><h2>История снимков</h2><p class="smeta">По одной строке на день. Так видно, движется ли что-то между сборками.</p>
-  <div class="panel"><div class="tblwrap"><table class="tbl"><tr><th>Дата</th><th>Готово в плане</th><th>В работе</th><th>Просрочено в плане</th><th>Закрыто в Weeek</th><th>Просрочено в Weeek</th></tr>
-  ${S.history.slice().reverse().map(r => `<tr><td class="num">${dwd(r.date)}</td><td class="num">${r.works_done} / ${r.works_total}</td><td class="num">${r.works_in_work}</td><td class="num">${r.works_overdue}</td><td class="num">${r.weeek_done == null ? '?' : r.weeek_done} / ${r.weeek_total == null ? '?' : r.weeek_total}</td><td class="num">${r.weeek_overdue == null ? '?' : r.weeek_overdue}</td></tr>`).join('')}</table></div></div></section>`;
-
-  h += `</div><footer><div class="wrap">Источники: <a href="${esc(P.sheet_url)}" target="_blank" rel="noopener">книга «План клиника»</a> (читается, не правится) · <a href="${esc(P.weeek_url)}" target="_blank" rel="noopener">Weeek, проект «Управление»</a> · <a href="${esc(P.client_file_url)}" target="_blank" rel="noopener">файл клиента</a>.
+  h += `<footer><div class="wrap">Источники: <a href="${esc(P.sheet_url)}" target="_blank" rel="noopener">книга «План клиника»</a> (читается, не правится) · <a href="${esc(P.weeek_url)}" target="_blank" rel="noopener">Weeek, проект «Управление»</a> · <a href="${esc(P.client_file_url)}" target="_blank" rel="noopener">файл клиента</a>.
   Снимок собирает <span class="mono">.scripts/salescast-dashboard/build.py</span> три раза в день (08:30, 12:30, 17:30) и кладет в хранилище портала за Access. Архив дня: <span class="mono">?d=ГГГГ-ММ-ДД</span>.</div></footer>`;
 
   $('#app').innerHTML = h;
-  worksTable(S.works, S.people.map(p => p.name), cal.today);
+  worksTable(S.works);
   wireChart();
+  wireTabs();
+}
+
+// ---------------- вкладки
+function wireTabs() {
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  const panes = { karta: $('#pane-karta'), crm: $('#pane-crm'), lyudi: $('#pane-lyudi') };
+  const srcEl = $('#tabsrc');
+  function show(name, scrollTo) {
+    if (!panes[name]) name = 'karta';
+    tabs.forEach(t => t.classList.toggle('on', t.dataset.tab === name));
+    Object.keys(panes).forEach(k => panes[k].classList.toggle('on', k === name));
+    const p = panes[name];
+    srcEl.innerHTML = p.dataset.src ? `исходник: <a href="${p.dataset.src}" target="_blank" rel="noopener">${p.dataset.srclabel}</a> ↗` : '';
+    try { localStorage.setItem('alkospas-tab', name); } catch (e) {}
+    if (scrollTo) { const el = document.getElementById(scrollTo); if (el) el.scrollIntoView({ block: 'start' }); }
+  }
+  const tabOfAnchor = (id) => id === 'karta' || id.startsWith('k-') ? 'karta' : id === 'crm' || id.startsWith('c-') ? 'crm' : id === 'lyudi' || id.startsWith('l-') ? 'lyudi' : null;
+  tabs.forEach(t => t.addEventListener('click', () => { history.replaceState(null, '', '#' + t.dataset.tab); show(t.dataset.tab); window.scrollTo({ top: $('.tabs').offsetTop - 54 }); }));
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const id = a.getAttribute('href').slice(1); const tab = tabOfAnchor(id);
+    if (!tab) return;
+    e.preventDefault(); history.replaceState(null, '', '#' + id); show(tab, id === tab ? null : id);
+  });
+  const hash = location.hash.slice(1);
+  let saved = null; try { saved = localStorage.getItem('alkospas-tab'); } catch (e) {}
+  const t0 = tabOfAnchor(hash) || saved || 'karta';
+  show(t0, hash && hash !== t0 ? hash : null);
 }
 
 // ---------------- фазы
@@ -352,12 +448,10 @@ function burnupChart(b, today) {
   const ti = b.dates.indexOf(today);
   let s = `<div class="legend"><span><i class="dash" style="border-color:var(--blue)"></i>план: работ со сроком не позже дня</span><span><i style="border-color:var(--acc)"></i>факт: работ со статусом «Готово»</span></div>`;
   s += `<div class="chart" id="burnup"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Работы по плану и по факту">`;
-  // сетка
   for (let v = 0; v <= max; v += 10) {
     s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#EFE8DD" stroke-width="1"/><text x="${L - 6}" y="${y(v) + 3.5}" text-anchor="end" font-size="10" font-family="JetBrains Mono,monospace" fill="#8C8177">${v}</text>`;
   }
   s += `<line x1="${L}" x2="${W - R}" y1="${y(max)}" y2="${y(max)}" stroke="#EFE8DD"/><text x="${L - 6}" y="${y(max) + 3.5}" text-anchor="end" font-size="10" font-family="JetBrains Mono,monospace" fill="#8C8177">${max}</text>`;
-  // ось дат: каждые 7 дней плюс ключевые
   const keys = { '2026-10-02': 'готовность', '2026-10-15': 'срез', '2026-10-28': 'конец' };
   const keyIdx = Object.keys(keys).map(k => b.dates.indexOf(k)).filter(i => i >= 0);
   const nearKey = (i) => keyIdx.some(k => Math.abs(k - i) <= 2) || (ti >= 0 && Math.abs(ti - i) <= 2);
@@ -369,12 +463,11 @@ function burnupChart(b, today) {
       if (key) s += `<text x="${x(i)}" y="${H - B + 26}" text-anchor="middle" font-size="9.5" font-family="Golos Text,sans-serif" fill="#5D554C">${key}</text>`;
     }
   });
-  if (ti >= 0) s += `<text x="${x(ti)}" y="${H - B + 14}" text-anchor="middle" font-size="10" font-family="JetBrains Mono,monospace" fill="#E2452A">${d2(b.dates[ti])}</text>`;
-  // сегодня
-  if (ti >= 0) s += `<line x1="${x(ti)}" x2="${x(ti)}" y1="${T}" y2="${H - B}" stroke="#E2452A" stroke-width="1.2" stroke-dasharray="4 3"/><text x="${x(ti) + 4}" y="${T + 10}" font-size="10" font-family="JetBrains Mono,monospace" fill="#E2452A">сегодня</text>`;
-  // план
+  if (ti >= 0) {
+    s += `<line x1="${x(ti)}" x2="${x(ti)}" y1="${T}" y2="${H - B}" stroke="#E2452A" stroke-width="1.2" stroke-dasharray="4 3"/><text x="${x(ti) + 4}" y="${T + 10}" font-size="10" font-family="JetBrains Mono,monospace" fill="#E2452A">сегодня</text>`;
+    s += `<text x="${x(ti)}" y="${H - B + 14}" text-anchor="middle" font-size="10" font-family="JetBrains Mono,monospace" fill="#E2452A">${d2(b.dates[ti])}</text>`;
+  }
   s += `<path d="${b.planned.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ')}" fill="none" stroke="var(--blue)" stroke-width="2" stroke-dasharray="6 4" stroke-linejoin="round"/>`;
-  // факт
   const pts = b.actual.map((v, i) => v == null ? null : [x(i), y(v), v, i]).filter(Boolean);
   if (pts.length) {
     s += `<path d="${pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ')}" fill="none" stroke="var(--acc)" stroke-width="2.2" stroke-linejoin="round"/>`;
@@ -382,10 +475,7 @@ function burnupChart(b, today) {
     const last = pts[pts.length - 1];
     s += `<text x="${(last[0] + 8).toFixed(1)}" y="${(last[1] + 4).toFixed(1)}" font-size="11" font-weight="600" font-family="Golos Text,sans-serif" fill="#1C1917">факт ${last[2]}</text>`;
   }
-  if (ti >= 0) {
-    s += `<text x="${(x(ti) + 8).toFixed(1)}" y="${(y(b.planned[ti]) - 6).toFixed(1)}" font-size="11" font-family="Golos Text,sans-serif" fill="#1C1917">план ${b.planned[ti]}</text>`;
-  }
-  s += `<rect id="bu-hit" x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent"/>`;
+  if (ti >= 0) s += `<text x="${(x(ti) + 8).toFixed(1)}" y="${(y(b.planned[ti]) - 6).toFixed(1)}" font-size="11" font-family="Golos Text,sans-serif" fill="#1C1917">план ${b.planned[ti]}</text>`;
   s += `<line id="bu-cross" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="#1C1917" stroke-width="1" opacity="0"/>`;
   s += `</svg><div class="tip" id="bu-tip"></div></div>`;
   window.__BU = { b, L, R, W, T, B, H, n, max };
@@ -393,8 +483,8 @@ function burnupChart(b, today) {
 }
 function wireChart() {
   const c = window.__BU; if (!c) return;
-  const box = document.getElementById('burnup'); const svg = box.querySelector('svg');
-  const tip = document.getElementById('bu-tip'); const cross = document.getElementById('bu-cross');
+  const box = document.getElementById('burnup'); if (!box) return;
+  const svg = box.querySelector('svg'); const tip = document.getElementById('bu-tip'); const cross = document.getElementById('bu-cross');
   const x = (i) => c.L + (c.W - c.L - c.R) * i / (c.n - 1);
   svg.addEventListener('mousemove', (e) => {
     const r = svg.getBoundingClientRect(); const px = (e.clientX - r.left) * c.W / r.width;
@@ -417,13 +507,9 @@ function gantt(works, phases, today) {
   const x = (iso) => LBL + (W - LBL - 10) * dayDiff(iso, start) / days;
   const rows = [];
   let yy = TOP;
-  phases.forEach(p => {
-    rows.push({ ph: p, y: yy }); yy += PH;
-    works.filter(w => w.phase === p.name).forEach(w => { rows.push({ w, y: yy }); yy += RH; });
-  });
+  phases.forEach(p => { rows.push({ ph: p, y: yy }); yy += PH; works.filter(w => w.phase === p.name).forEach(w => { rows.push({ w, y: yy }); yy += RH; }); });
   const H = yy + 8;
   let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Дорожная карта">`;
-  // недельная сетка
   for (let i = 0; i <= days; i++) {
     const d = new Date(Date.parse(start + 'T00:00:00Z') + i * 86400000);
     const iso = d.toISOString().slice(0, 10);
@@ -431,7 +517,7 @@ function gantt(works, phases, today) {
     if (wd === 5 || wd === 6) s += `<rect x="${x(iso)}" y="${TOP - 4}" width="${(W - LBL - 10) / days}" height="${H - TOP}" fill="#F6F1EA"/>`;
     if (wd === 0) { s += `<line x1="${x(iso)}" x2="${x(iso)}" y1="${TOP - 4}" y2="${H}" stroke="#EADFD0"/>${nearKey(iso) ? '' : `<text class="ax" x="${x(iso) + 3}" y="${TOP - 24}">${d2(iso)}</text>`}`; }
   }
-  KEYS.forEach(([iso, l], k) => {
+  KEYS.forEach(([iso, l]) => {
     const row = (l === 'старт' || l === 'п.5.5') ? TOP - 10 : TOP - 24;
     s += `<line x1="${x(iso)}" x2="${x(iso)}" y1="${TOP - 4}" y2="${H}" stroke="#B9A88F" stroke-dasharray="3 3"/><text class="ax" x="${x(iso) + 3}" y="${row}" fill="#5D554C">${d2(iso)} ${l}</text>`;
   });
@@ -440,16 +526,17 @@ function gantt(works, phases, today) {
     const w = r.w, c = statusClass(w);
     const fill = { done: '#2F6F4F', work: '#3B6FD1', appr: '#E8B85A', none: '#D9D0C4', block: '#9B2C2C', late: w.status === 'В работе' ? '#3B6FD1' : w.status === 'На утверждении' ? '#E8B85A' : '#D9D0C4' }[c];
     const s0 = w.start || w.due, s1 = w.due || w.start;
-    const title = `№ ${w.n} ${w.task} · ${w.who} · ${d2(w.start)}–${d2(w.due)} · ${w.status}${w.overdue_days ? ` · просрочка ${w.overdue_days} дн.` : ''}`;
-    s += `<g class="row"><title>${esc(title)}</title>`;
-    s += `<text class="lbl" x="8" y="${r.y + 13.5}">${esc(String(w.n).padStart(2, ' '))}. ${esc(w.task.length > 40 ? w.task.slice(0, 39) + '…' : w.task)}</text><text class="who" x="${LBL - 8}" y="${r.y + 13.5}" text-anchor="end">${esc(w.who.length > 12 ? w.who.slice(0, 11) + '…' : w.who)}</text>`;
+    const title = `№ ${w.n} ${w.task} · ${w.who} · ${d2(w.start)}–${d2(w.due)} · ${w.status}${w.overdue_days ? ` · просрочка ${w.overdue_days} дн.` : ''} · открыть строку в книге`;
+    s += w.url ? `<a href="${esc(w.url)}" target="_blank" rel="noopener"><g class="row"><title>${esc(title)}</title>` : `<g class="row"><title>${esc(title)}</title>`;
+    s += `<rect x="0" y="${r.y}" width="${W}" height="${RH}" fill="transparent"/>`;
+    s += `<text class="lbl" x="8" y="${r.y + 13.5}">${w.n}. ${esc(w.task.length > 40 ? w.task.slice(0, 39) + '…' : w.task)}</text><text class="who" x="${LBL - 8}" y="${r.y + 13.5}" text-anchor="end">${esc(w.who.length > 12 ? w.who.slice(0, 11) + '…' : w.who)}</text>`;
     if (s0 && s1) {
       const x0 = x(s0), x1 = Math.max(x(s1) + (W - LBL - 10) / days, x0 + 3);
       s += `<rect class="bar" x="${x0.toFixed(1)}" y="${r.y + 4}" width="${(x1 - x0).toFixed(1)}" height="${RH - 8}" rx="3" fill="${fill}" ${c === 'late' ? 'stroke="#9B2C2C" stroke-width="1.5"' : ''}/>`;
       if (w.overdue_days > 0) s += `<rect x="${x1.toFixed(1)}" y="${r.y + 6}" width="${(x(today) - x1).toFixed(1)}" height="${RH - 12}" fill="#9B2C2C" opacity=".85"/><text class="who" x="${(x(today) + 4).toFixed(1)}" y="${r.y + 13.5}" fill="#9B2C2C">+${w.overdue_days}</text>`;
       if (w.due_today) s += `<circle cx="${x1.toFixed(1)}" cy="${r.y + RH / 2}" r="3.5" fill="#E2452A"/>`;
     }
-    s += `</g>`;
+    s += w.url ? `</g></a>` : `</g>`;
   });
   s += `<line x1="${x(today)}" x2="${x(today)}" y1="${TOP - 4}" y2="${H}" stroke="#E2452A" stroke-width="1.4"/><text class="ax" x="${x(today) + 3}" y="${TOP - 10}" fill="#E2452A" font-weight="600">сегодня ${d2(today)}</text>`;
   s += `<text class="ax" x="${LBL}" y="${TOP - 24}" text-anchor="end" fill="#8C8177">недели ·</text>`;
@@ -458,9 +545,9 @@ function gantt(works, phases, today) {
 }
 
 // ---------------- таблица работ с фильтрами
-function worksTable(works, people, today) {
+function worksTable(works) {
   const F = { person: null, prob: false };
-  const fl = document.getElementById('filters');
+  const fl = document.getElementById('filters'); if (!fl) return;
   const persons = ['Настя', 'София', 'Ксюша', 'Андрей', 'Кирилл', 'Публикаторы', 'Клиент'].filter(p => works.some(w => w.people.includes(p)));
   fl.innerHTML = `<button class="chip on" data-p="">все</button>` + persons.map(p => `<button class="chip" data-p="${esc(p)}">${esc(p)}</button>`).join('') + `<button class="chip prob" id="chip-prob">только проблемы</button><span class="muted" style="margin-left:auto" id="count"></span>`;
   const draw = () => {
@@ -472,7 +559,7 @@ function worksTable(works, people, today) {
     list.forEach(w => {
       if (w.phase !== ph) { ph = w.phase; h += `<tr class="ph"><td colspan="8">${esc(ph)}</td></tr>`; }
       const cls = w.overdue_days > 0 ? 'late' : w.due_today ? 'today' : w.done ? 'done' : '';
-      h += `<tr class="${cls}"><td class="num">${w.n}</td><td>${esc(w.task)}<br><span class="muted" style="font-size:12.3px">${esc(w.done_def)}</span></td><td>${esc(w.who)}</td><td class="num">${dwd(w.start)}</td><td class="num">${dwd(w.due)}${w.days_left != null && w.days_left > 0 && w.days_left <= 7 ? `<br><span class="muted">через ${w.days_left}</span>` : ''}</td><td>${statusBadge(w)}</td><td class="num">${esc(w.depends.join(', '))}</td><td class="muted" style="font-size:12.5px">${esc(w.comment)}</td></tr>`;
+      h += `<tr class="${cls}"><td class="num">${w.n}</td><td>${link(w.url, esc(w.task), `Строка ${w.row} листа «План»`)}<br><span class="muted" style="font-size:12.3px">${esc(w.done_def)}</span></td><td>${esc(w.who)}</td><td class="num">${dwd(w.start)}</td><td class="num">${dwd(w.due)}${w.days_left != null && w.days_left > 0 && w.days_left <= 7 ? `<br><span class="muted">через ${w.days_left}</span>` : ''}</td><td>${statusBadge(w)}</td><td class="num">${esc(w.depends.join(', '))}</td><td class="muted" style="font-size:12.5px">${esc(w.comment)}</td></tr>`;
     });
     tbl.innerHTML = h;
     document.getElementById('count').textContent = `${list.length} из ${works.length}`;
@@ -486,24 +573,34 @@ function worksTable(works, people, today) {
   draw();
 }
 
+// ---------------- CRM: корневая карточка с чек-листом
+function rootCard(r) {
+  const subs = (r.subtasks || []).filter(s => !s.error);
+  const done = subs.filter(s => s.done).length;
+  const pct = subs.length ? Math.round(done / subs.length * 100) : 0;
+  return `<div class="root"><div class="rh"><h3>${link(r.url, esc(r.title || r.label), 'Корневая карточка в Weeek')}</h3><span class="due">${r.due ? 'до ' + d2(r.due) : ''} · ${done}/${subs.length}</span></div>
+    <div class="prog"><i style="width:${pct}%"></i></div>
+    ${r.error ? `<p class="empty">${esc(r.error)}</p>` : ''}
+    <ul class="sub">${subs.map(s => `<li class="${s.done ? 'done' : s.overdue_days > 0 ? 'late' : s.due_today ? 'today' : ''}"><span class="cb"></span><span>${link(s.url, esc(s.title), 'Карточка в Weeek')}</span><span class="d">${s.done ? (s.completed_at ? 'закр. ' + d2(s.completed_at.slice(0,10)) + (s.slip_days > 0 ? ` (+${s.slip_days})` : '') : 'закрыто') : (s.overdue_days > 0 ? `+${s.overdue_days} дн. · ` : s.due_today ? 'сегодня · ' : '') + dwd(s.due)}</span></li>`).join('')}</ul></div>`;
+}
+
 // ---------------- карточка человека
 function personCard(p) {
   const w = p.works, k = p.weeek;
-  const tot = Math.max(w.total, 1);
   const late = w.overdue, done = w.done, work = w.in_work, none = Math.max(w.total - done - work - late, 0);
   const seg = (n, cls) => n ? `<i class="${cls}" style="flex:${n}" title="${n}"></i>` : '';
   const slip = (s, n) => s == null ? '<span class="muted">пока нечего мерить</span>' : `<b class="${s > 0 ? 'bad' : ''}">${s > 0 ? '+' : ''}${s} дн.</b> <span class="muted">по ${n}</span>`;
   return `<div class="person"><h3>${esc(p.name)} ${k.in_crm ? '' : '<span class="pill">нет в Weeek</span>'}${w.overdue || k.overdue ? `<span class="pill" style="background:var(--danger-soft);color:var(--danger);border-color:var(--danger-line)">просрочено ${w.overdue + k.overdue}</span>` : (w.today + k.today ? `<span class="pill" style="background:var(--acc-soft);color:var(--acc)">сегодня ${w.today + k.today}</span>` : '')}</h3>
     <div class="kv">
-      <span class="k">План</span><span class="v"><b>${w.done}</b> из ${w.total} готово · в работе ${w.in_work} · ${w.overdue ? `<span class="bad">просрочено ${w.overdue}</span>` : 'просрочек нет'} · сегодня ${w.today} · на неделе ${w.week}</span>
+      <span class="k">Карта</span><span class="v"><b>${w.done}</b> из ${w.total} готово · в работе ${w.in_work} · ${w.overdue ? `<span class="bad">просрочено ${w.overdue}</span>` : 'просрочек нет'} · сегодня ${w.today} · на неделе ${w.week}</span>
       <span class="k">сдвиг</span><span class="v">${slip(w.slip_avg, w.slip_n)}</span>
-      ${k.total ? `<span class="k">Weeek</span><span class="v"><b>${k.done}</b> из ${k.total} закрыто · ${k.overdue ? `<span class="bad">просрочено ${k.overdue}</span>` : 'просрочек нет'} · сегодня ${k.today} · на неделе ${k.week}</span>
+      ${k.total ? `<span class="k">CRM</span><span class="v"><b>${k.done}</b> из ${k.total} закрыто · ${k.overdue ? `<span class="bad">просрочено ${k.overdue}</span>` : 'просрочек нет'} · сегодня ${k.today} · на неделе ${k.week}</span>
       <span class="k">сдвиг</span><span class="v">${slip(k.slip_avg, k.slip_n)}</span>` : ''}
     </div>
     <div class="bar">${seg(done, 'done')}${seg(work, 'work')}${seg(late, 'late')}${seg(none, 'none')}</div>
     <div class="legend" style="font-size:11.5px;margin-bottom:10px"><span><i class="sw" style="background:var(--ok)"></i>готово ${done}</span><span><i class="sw" style="background:var(--blue)"></i>в работе ${work}</span><span><i class="sw" style="background:var(--danger)"></i>просрочено ${late}</span><span><i class="sw" style="background:#D9D0C4"></i>не начато ${none}</span></div>
-    ${p.holds.length ? `<h3 style="font-size:12.5px;margin:6px 0 4px">Держит сейчас</h3><ul class="holds">${p.holds.map(x => `<li><span class="badge ${x.overdue_days ? 'late' : 'today'}">${x.overdue_days ? '+' + x.overdue_days : 'сегодня'}</span><span class="t">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title)}</span><span class="pill">${esc(x.src)} ${esc(x.n)}</span></li>`).join('')}</ul>` : `<p class="empty" style="font-size:13px">Сегодня и просроченного ничего нет.</p>`}
-    ${p.next.length ? `<h3 style="font-size:12.5px;margin:10px 0 4px">Дальше по плану</h3><ul class="holds">${p.next.map(x => `<li><span class="pill">${dwd(x.due)}</span><span class="t">№ ${x.n} ${esc(x.title)}</span></li>`).join('')}</ul>` : ''}
+    ${p.holds.length ? `<h3 style="font-size:12.5px;margin:6px 0 4px">Держит сейчас</h3><ul class="holds">${p.holds.map(x => `<li><span class="badge ${x.overdue_days ? 'late' : 'today'}">${x.overdue_days ? '+' + x.overdue_days : 'сегодня'}</span><span class="t">${link(x.url, esc(x.title), x.src === 'Weeek' ? 'Карточка в Weeek' : 'Строка в листе «План»')}</span><span class="pill">${x.src === 'Weeek' ? 'CRM' : 'карта'} ${esc(x.n)}</span></li>`).join('')}</ul>` : `<p class="empty" style="font-size:13px">Сегодня и просроченного ничего нет.</p>`}
+    ${p.next.length ? `<h3 style="font-size:12.5px;margin:10px 0 4px">Дальше по карте</h3><ul class="holds">${p.next.map(x => `<li><span class="pill">${dwd(x.due)}</span><span class="t">${link(x.url, `№ ${x.n} ${esc(x.title)}`, 'Строка в листе «План»')}</span></li>`).join('')}</ul>` : ''}
   </div>`;
 }
 
