@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Конструктор КП: AI Persona и Daily Persona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== утвержденный шаблон КП (как в predlozhenie-*.html) ===== */
+:root{
+  --ground:#FFFFFF; --surface:#F5F5F4; --sunk:#EFEEEC;
+  --ink:#0A0A0A; --ink-2:#44443F; --muted:#6B6B6B;
+  --line:#E5E4E2; --acc:#7C3AED; --acc-2:#FF6B5C; --acc-deep:#5B21B6;
+  --grad:linear-gradient(135deg,#7C3AED 0%,#FF6B5C 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4 portrait; margin:0}
+html{background:#D8D7D4}
+body{font-family:'Inter','Onest',-apple-system,'Helvetica Neue',Arial,sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; font-size:12pt}
+.page{width:210mm; height:297mm; background:var(--ground); padding:20mm 18mm 20mm; position:relative; overflow:hidden;
+  display:flex; flex-direction:column; page-break-after:always; margin:0 auto 8mm}
+.page:last-child{page-break-after:auto}
+.page::before{content:''; position:absolute; top:-90mm; right:-70mm; width:200mm; height:200mm; border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,.11) 0%,rgba(255,107,92,.06) 45%,transparent 70%)}
+h1,h2,h3,.num,.pkg-name,.term b,.step b,.sn b{font-family:'Onest','Inter',sans-serif}
+.top{display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2}
+.brand{display:flex; align-items:center; gap:8px; font-family:'Onest',sans-serif; font-weight:800; font-size:15pt; letter-spacing:-.02em}
+.dot{width:9px; height:9px; border-radius:50%; background:var(--grad)}
+.tag{font-size:9pt; font-weight:600; color:var(--acc-deep); background:rgba(124,58,237,.09); border:1px solid rgba(124,58,237,.18); padding:5px 13px; border-radius:100px}
+h1{font-size:27pt; line-height:1.07; font-weight:800; letter-spacing:-.03em; margin-top:14mm; position:relative; z-index:2}
+h1 .hl{color:var(--acc)}
+h2{font-size:17pt; font-weight:800; letter-spacing:-.02em; margin-top:11mm; position:relative; z-index:2}
+h2.tight{margin-top:7mm; font-size:14pt}
+.lead{font-size:11.5pt; line-height:1.5; color:var(--ink-2); margin-top:6mm; max-width:160mm; position:relative; z-index:2}
+.facts{display:grid; grid-template-columns:1fr 1fr 1fr; gap:4mm; margin-top:7mm; position:relative; z-index:2}
+.fact{background:var(--surface); border-radius:12px; padding:5.5mm 5mm}
+.fact b{display:block; font-family:'Onest',sans-serif; font-size:19pt; font-weight:800; letter-spacing:-.02em; line-height:1}
+.fact span{display:block; font-size:9pt; color:var(--muted); line-height:1.35; margin-top:2.5mm}
+.cards{display:grid; grid-template-columns:1fr 1fr; gap:6mm; margin-top:6mm; position:relative; z-index:2}
+.cards.one{grid-template-columns:1fr; max-width:95mm}
+.card{background:var(--ground); border:1.2px solid var(--line); border-radius:14px; padding:7mm 6.5mm 6mm; position:relative}
+.card.hero{border:1.6px solid transparent; background:linear-gradient(#fff,#fff) padding-box, var(--grad) border-box}
+.badge{position:absolute; top:-9px; left:7mm; background:var(--grad); color:#fff; font-family:'Onest',sans-serif; font-size:7.5pt; font-weight:700; padding:4px 10px; border-radius:100px}
+.pkg-name{font-size:10.5pt; font-weight:700; color:var(--muted)}
+.num{font-size:24pt; font-weight:800; letter-spacing:-.03em; margin-top:3px; line-height:1}
+.card.hero .num{color:var(--acc)}
+.per{font-size:8.5pt; color:var(--muted); margin-top:4px}
+.rows{margin-top:6mm; border-top:1px solid var(--line)}
+.row{display:flex; justify-content:space-between; align-items:baseline; gap:5mm; padding:2.6mm 0; border-bottom:1px solid var(--sunk); font-size:10pt}
+.row:last-child{border-bottom:0}
+.row span:first-child{color:var(--ink-2)}
+.row b{font-family:'Onest',sans-serif; font-size:11.5pt; font-weight:700}
+.card.hero .row b{color:var(--acc-deep)}
+.split{display:grid; grid-template-columns:1fr 1fr; gap:5mm; margin-top:4mm; position:relative; z-index:2}
+.col{background:var(--surface); border-radius:12px; padding:5mm}
+.col b{display:block; font-family:'Onest',sans-serif; font-size:11.5pt; font-weight:700}
+.col span{display:block; font-size:9.5pt; line-height:1.45; color:var(--ink-2); margin-top:2.5mm}
+.note{margin-top:5mm; font-size:9.5pt; line-height:1.45; color:var(--muted); position:relative; z-index:2}
+.list{list-style:none; margin-top:4mm; position:relative; z-index:2}
+.list li{padding:2.6mm 0 2.6mm 9mm; border-bottom:1px solid var(--sunk); position:relative; font-size:11pt; line-height:1.4}
+.list li:first-child{padding-top:0}
+.list li b{font-family:'Onest',sans-serif; font-weight:700}
+.list li i{display:block; font-style:normal; font-size:9.5pt; color:var(--muted); margin-top:2px; line-height:1.4}
+.list li::before{content:''; position:absolute; left:0; top:3.6mm; width:9px; height:9px; border-radius:50%; background:var(--grad)}
+.list li:first-child::before{top:1.5mm}
+.terms{display:grid; grid-template-columns:1fr 1fr; gap:3.5mm; margin-top:4mm; position:relative; z-index:2}
+.term{background:var(--surface); border-radius:12px; padding:5mm}
+.term b{display:block; font-size:11pt; font-weight:700}
+.term span{font-size:9pt; color:var(--muted); line-height:1.4; display:block; margin-top:2px}
+.steps{margin-top:5mm; position:relative; z-index:2}
+.sn{display:flex; gap:5mm; padding:2.5mm 0; border-bottom:1px solid var(--sunk)}
+.sn em{flex:0 0 auto; width:9.5mm; height:9.5mm; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-style:normal;
+  font-family:'Onest',sans-serif; font-weight:800; font-size:12pt; color:var(--acc-deep)}
+.sn div b{display:block; font-family:'Onest',sans-serif; font-size:11.5pt; font-weight:700}
+.sn div span{display:block; font-size:9.5pt; color:var(--ink-2); line-height:1.45; margin-top:1.5mm}
+.honest{margin-top:4mm; padding:4.5mm 6mm; border-radius:12px; background:var(--surface); border-left:4px solid var(--acc); position:relative; z-index:2}
+.honest b{display:block; font-family:'Onest',sans-serif; font-size:12pt; font-weight:700}
+.honest span{display:block; font-size:10pt; line-height:1.5; color:var(--ink-2); margin-top:3mm}
+.foot{margin-top:auto; padding-top:9mm; border-top:1px solid var(--line); display:flex; justify-content:space-between; font-size:8.5pt; color:var(--muted); position:relative; z-index:2}
+.cta{margin-top:4mm; padding:5.5mm; border-radius:14px; background:var(--grad); color:#fff; position:relative; z-index:2}
+.cta b{display:block; font-family:'Onest',sans-serif; font-size:15pt; font-weight:800; letter-spacing:-.02em}
+.cta span{display:block; font-size:10.5pt; line-height:1.5; margin-top:3mm; opacity:.95}
+.cta .tg{font-weight:700; opacity:1; margin-top:3.5mm}
+
+/* ===== конструктор (на экране) ===== */
+.app{display:grid; grid-template-columns:400px 1fr; min-height:100vh}
+.panel{background:#fff; border-right:1px solid var(--line); padding:22px 22px 60px; position:sticky; top:0; height:100vh; overflow-y:auto; font-size:14px}
+.panel h1{font-size:19px; margin:0 0 4px; letter-spacing:-.02em}
+.panel .sub{color:var(--muted); font-size:13px; line-height:1.45; margin-bottom:16px}
+.q{margin:16px 0 0}
+.q > b{display:block; font-family:'Onest',sans-serif; font-size:14px; margin-bottom:8px}
+.q > b small{font-weight:500; color:var(--muted); font-family:'Inter',sans-serif}
+.opts{display:flex; flex-wrap:wrap; gap:6px}
+.opts label{cursor:pointer}
+.opts input{position:absolute; opacity:0; pointer-events:none}
+.opts span{display:inline-block; padding:7px 11px; border:1px solid var(--line); border-radius:100px; font-size:13px; line-height:1.2; background:#fff; transition:all .12s}
+.opts input:checked + span{background:var(--ink); color:#fff; border-color:var(--ink)}
+.opts label:hover span{border-color:var(--ink)}
+.txt{width:100%; border:1px solid var(--line); border-radius:10px; padding:9px 11px; font:400 14px/1.4 'Inter',sans-serif; margin-top:2px}
+textarea.txt{min-height:62px; resize:vertical}
+.warn{margin-top:14px; padding:10px 12px; border-radius:10px; background:#FFF4E5; border:1px solid #F5C98B; color:#7A4A00; font-size:12.5px; line-height:1.45; display:none}
+.warn.on{display:block}
+.warn p + p{margin-top:6px}
+.actions{display:flex; gap:8px; margin-top:18px; flex-wrap:wrap}
+.btn{display:inline-block; border:0; cursor:pointer; background:var(--grad); color:#fff; font:700 14px/1 'Onest',sans-serif; padding:12px 16px; border-radius:100px; text-decoration:none}
+.btn.ghost{background:#fff; color:var(--ink); border:1px solid var(--line)}
+.hint{font-size:12px; color:var(--muted); line-height:1.45; margin-top:10px}
+.preview{padding:28px 0 40px; overflow-x:auto}
+@media(max-width:1100px){ .app{grid-template-columns:1fr} .panel{position:static; height:auto; border-right:0; border-bottom:1px solid var(--line)} .preview{zoom:.6} }
+@media print{
+  html,body{background:#fff}
+  .panel{display:none}
+  .app{display:block}
+  .preview{padding:0; zoom:1}
+  .page{margin:0}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<form class="panel" id="f" onsubmit="return false">
+  <h1>Конструктор КП</h1>
+  <p class="sub">Семь вопросов, и КП собирается по утвержденному шаблону: три листа A4. Цены только из утвержденных сеток. Бренд и валюта ставятся по стране клиента.</p>
+
+  <div class="q"><b>1. Страна клиента</b><div class="opts" data-name="country"></div></div>
+  <div class="q"><b>2. Направление</b><div class="opts" data-name="niche"></div></div>
+  <div class="q"><b>3. Что хочет клиент</b><div class="opts" data-name="goal"></div></div>
+  <div class="q"><b>4. Кто в кадре</b><div class="opts" data-name="face"></div></div>
+  <div class="q"><b>5. Язык роликов</b><div class="opts" data-name="lang"></div></div>
+  <div class="q"><b>6. Что предлагаем на старт</b><div class="opts" data-name="pack"></div></div>
+  <div class="q"><b>7. Кто ведет клиента</b><div class="opts" data-name="contact"></div></div>
+
+  <div class="q"><b>Клиент <small>(необязательно)</small></b>
+    <input class="txt" name="client" placeholder="Название компании или имя, для шапки">
+  </div>
+  <div class="q"><b>Задача клиента своими словами <small>(необязательно)</small></b>
+    <textarea class="txt" name="pain" placeholder="Например: в анкетах 2 000 женщин и 400 мужчин, нужны мужчины из Европы"></textarea>
+  </div>
+  <div class="q"><b>Бренд <small>(обычно ставится сам)</small></b><div class="opts" data-name="brand"></div></div>
+
+  <div class="warn" id="warn"></div>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="window.print()">Сохранить PDF</button>
+    <button type="button" class="btn ghost" id="copy">Ссылка на эти ответы</button>
+  </div>
+  <p class="hint">Сохранить PDF: в окне печати выбрать «Сохранить как PDF», поля «Нет», масштаб 100%. Перед отправкой клиенту проверить цену и формулировки: конструктор не заменяет согласование с Софией по нестандартным случаям.</p>
+</form>
+<main class="preview" id="out"></main>
+</div>
+
+<script>
+/* ===== ответы: варианты ===== */
+var Q = {
+  country: [['ru','Россия'],['eu','ЕС и Великобритания'],['us','США'],['other','Другая страна']],
+  niche: [['stomat','Стоматология и клиники'],['bad','БАДы и здоровье'],['mp','Товар на маркетплейсе'],['app','Мобильное приложение'],['school','Онлайн-школа'],['dating','Агентство знакомств'],['expert','Эксперт и личный бренд'],['other','Другое']],
+  goal: [['leads','Заявки и обращения'],['sales','Продажи товара'],['installs','Установки и подписки'],['webinar','Регистрации и продажи курса'],['base','Новые клиенты в базу'],['reach','Охват и узнаваемость']],
+  face: [['virtual','Виртуальные персонажи'],['real','Аватары их сотрудников'],['mix','Смешанно']],
+  lang: [['ru','Русский'],['en','Английский'],['other','Другой язык']],
+  pack: [['both','Два варианта'],['p30','Только проверка 30'],['p50','Только 50 роликов']],
+  contact: [['andrei','Андрей'],['sofia','София']],
+  brand: [['auto','Авто'],['aip','AI Persona'],['dp','Daily Persona']]
+};
+var DEF = {country:'ru', niche:'mp', goal:'sales', face:'virtual', lang:'ru', pack:'both', contact:'andrei', brand:'auto'};
+
+/* ===== утвержденные цены ===== */
+/* Рубли: 120 000 за 30 и 170 000 за 50, цифры Софии 23.09 (market/pricing-stomatologiya.md).
+   Евро: 1 500 за 30 и 2 400 за 50, КП брачному агентству 24.09. */
+var PRICE = {rub:{p30:'120 000 ₽', p50:'170 000 ₽'}, eur:{p30:'1 500 €', p50:'2 400 €'}};
+
+/* ===== тексты по направлениям ===== */
+var NICHE = {
+  stomat:{tag:'Стоматологическая клиника', who:'врачей', one:'врач', h1a:'Ваши врачи', h1b:'в Reels и TikTok каждый день',
+    lead:'Ролики, где врач простыми словами отвечает на вопросы пациентов, собирают просмотры и ведут людей на запись. Врач не снимает, не пишет тексты и не ведет аккаунт.',
+    where:'на запись в клинику: кодовое слово, квиз или сообщение администратору',
+    theme:'вопросы пациентов: страхи перед лечением, уход, цены и сроки, как выбрать врача'},
+  bad:{tag:'БАДы и здоровье', who:'ведущих', one:'ведущий', h1a:'Покупатели для ваших БАДов', h1b:'из коротких видео',
+    lead:'Ведущий рассказывает о здоровье и привычках так, что ролик досматривают, а в конце ведет к вашему продукту. Съемок и блогеров нет, ролики выходят каждый день.',
+    where:'в карточку на маркетплейсе или в бот с подбором продукта',
+    theme:'образовательный контент о здоровье и привычках, без обещаний лечения'},
+  mp:{tag:'Товар на маркетплейсе', who:'ведущих', one:'ведущий', h1a:'Внешний трафик', h1b:'в вашу карточку на маркетплейсе',
+    lead:'Ведущие рассказывают о задаче, которую решает ваш товар, и ведут зрителя в карточку. Покупатель привык покупать на маркетплейсе, поэтому трафик идет туда, а не на сайт.',
+    where:'в карточку товара на маркетплейсе, по артикулу или кодовому слову',
+    theme:'задача покупателя, которую решает товар, сравнения и частые ошибки'},
+  app:{tag:'Мобильное приложение', who:'ведущих', one:'ведущий', h1a:'Ваше приложение', h1b:'в Reels и TikTok каждый день',
+    lead:'Ведущие рассказывают о задаче, которую решает приложение, и ведут зрителя по вашей ссылке, промокоду или диплинку. Результат видно в вашей атрибуции, а не на слово.',
+    where:'в стор по вашей ссылке, промокоду или диплинку',
+    theme:'задача пользователя, которую решает приложение, и привычки вокруг нее'},
+  school:{tag:'Онлайн-школа', who:'экспертов', one:'эксперт', h1a:'Регистрации в вашу воронку', h1b:'из коротких видео',
+    lead:'Эксперт в роликах разбирает вопросы вашей аудитории и зовет на бесплатный шаг: вебинар, гайд или бота. Дальше человек идет по вашей воронке.',
+    where:'в вашу воронку: бот, вебинар или гайд по кодовому слову',
+    theme:'вопросы вашей аудитории и разборы типичных ошибок'},
+  dating:{tag:'Агентство знакомств', who:'ведущих', one:'ведущий', h1a:'Новые анкеты', h1b:'в вашу базу',
+    lead:'Ведущие говорят об отношениях и знакомствах так, что ролики досматривают, а в конце приглашают к вам. Мы не выдаем ведущих за ваших клиентов и не придумываем истории.',
+    where:'в анкету или в переписку с вашим менеджером',
+    theme:'отношения, знакомства, чего на самом деле ищут люди'},
+  expert:{tag:'Эксперт и личный бренд', who:'аватаров', one:'аватар', h1a:'Ваш аватар', h1b:'ведет блог вместо вас',
+    lead:'Цифровая копия эксперта выходит в роликах каждый день: внешность и голос ваши, съемок нет. Вы утверждаете темы и сценарии, остальное делаем мы.',
+    where:'в вашу воронку: бот, консультация или продукт по кодовому слову',
+    theme:'ваша экспертиза, ответы на частые вопросы, разборы'},
+  other:{tag:'Предложение', who:'ведущих', one:'ведущий', h1a:'Внешний трафик', h1b:'из коротких видео каждый день',
+    lead:'Ведущие рассказывают о задаче, которую решает ваш продукт, и ведут зрителя к вам. Без съемок, блогеров и вашего времени.',
+    where:'туда, где вы продаете: сайт, бот, карточка или заявка',
+    theme:'задача вашего клиента и то, как продукт ее решает'}
+};
+var GOAL = {
+  leads:{fact:'заявки', rep:'сколько людей посмотрело каждое видео и сколько человек обратилось по кодовым словам', no:'конкретное число заявок в первый месяц'},
+  sales:{fact:'продажи', rep:'просмотры каждого видео и переходы в карточку по артикулу или кодовому слову', no:'конкретный объем продаж в первый месяц'},
+  installs:{fact:'установки', rep:'просмотры каждого видео и установки по вашей ссылке, промокоду или диплинку', no:'гарантированное число установок'},
+  webinar:{fact:'регистрации', rep:'просмотры каждого видео и регистрации в воронку по кодовым словам', no:'конкретное число регистраций и продаж курса'},
+  base:{fact:'новые клиенты', rep:'сколько людей посмотрело каждое видео и сколько человек к вам обратилось', no:'конкретное число новых анкет в первый месяц'},
+  reach:{fact:'охват', rep:'просмотры, подписчики и досмотры по каждому видео и аккаунту', no:'конкретный охват: первый месяц бывает очень разным'}
+};
+
+/* ===== утилиты ===== */
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function val(n){ var f=document.getElementById('f'); var el=f.querySelector('[name='+n+']:checked')||f.querySelector('[name='+n+']'); return el?el.value:''; }
+function build(){
+  var f=document.getElementById('f');
+  Object.keys(Q).forEach(function(k){
+    var box=f.querySelector('[data-name='+k+']');
+    box.innerHTML=Q[k].map(function(o){return '<label><input type="radio" name="'+k+'" value="'+o[0]+'"><span>'+o[1]+'</span></label>';}).join('');
+  });
+  var p=new URLSearchParams(location.hash.slice(1));
+  Object.keys(Q).forEach(function(k){
+    var v=p.get(k)||DEF[k]; var el=f.querySelector('[name='+k+'][value="'+v+'"]')||f.querySelector('[name='+k+']'); el.checked=true;
+  });
+  ['client','pain'].forEach(function(k){ if(p.get(k)) f.querySelector('[name='+k+']').value=p.get(k); });
+  f.addEventListener('input',render); f.addEventListener('change',render);
+  document.getElementById('copy').addEventListener('click',function(){
+    var s=new URLSearchParams(); Object.keys(Q).forEach(function(k){s.set(k,val(k));});
+    ['client','pain'].forEach(function(k){var v=f.querySelector('[name='+k+']').value.trim(); if(v) s.set(k,v);});
+    var url=location.href.split('#')[0]+'#'+s.toString();
+    history.replaceState(null,'',url);
+    try{ navigator.clipboard.writeText(url); this.textContent='Ссылка скопирована'; }catch(e){ this.textContent='Ссылка в адресной строке'; }
+  });
+  render();
+}
+
+function render(){
+  var a={}; Object.keys(Q).forEach(function(k){a[k]=val(k);});
+  var f=document.getElementById('f');
+  var client=f.querySelector('[name=client]').value.trim(), pain=f.querySelector('[name=pain]').value.trim();
+  var ru = a.country==='ru';
+  var brand = a.brand==='aip' ? 'AI Persona' : a.brand==='dp' ? 'Daily Persona' : (ru ? 'AI Persona' : 'Daily Persona');
+  var cur = ru ? 'rub' : 'eur';
+  var west = !ru;
+  var n = NICHE[a.niche], g = GOAL[a.goal];
+  var langTxt = a.lang==='en' ? 'на английском' : a.lang==='other' ? 'на языке вашей аудитории' : 'на русском';
+  var realFaces = a.face==='real', mix = a.face==='mix';
+  var faceNoun = realFaces ? (a.niche==='stomat' ? 'аватары ваших врачей' : 'аватары ваших сотрудников') : mix ? 'аватары сотрудников и виртуальные ведущие' : 'виртуальные ведущие';
+  var tag = client ? (n.tag+' · '+client) : n.tag;
+  var foot = brand+' · короткие видео и ведение аккаунтов для брендов и бизнеса';
+
+  /* предупреждения для того, кто собирает КП */
+  var w=[];
+  if(west && (a.niche==='bad' || a.niche==='stomat')) w.push('ЕС и США: персонаж не играет врача и не рекомендует БАД (регламент ЕС 1924/2006, правила FTC). Обещания лечения и похудения запрещены. Пометка ИИ обязательна (AI Act, ст. 50).');
+  if(west && brand==='Daily Persona' && a.country!=='ru') w.push('Западный контур: договор и счет от автономо Виктории в евро. Проверить, что юрлицо клиента не российское и не белорусское (санкции ЕС, ст. 5n).');
+  if(ru && brand==='Daily Persona') w.push('Российский клиент под брендом Daily Persona: по решению 14.09 российские компании ведет контур AI Persona. Проверить, нужен ли этот бренд.');
+  if(realFaces || mix) w.push('Аватары реальных людей: нужно письменное согласие каждого на использование внешности и голоса. Пункт уже стоит в условиях КП.');
+  if(a.lang==='en' && ru) w.push('Английский контент для российского клиента: уточнить у Софии, есть ли сценарист и публикаторы под английский.');
+  if(a.lang!=='ru' && !ru) w.push('Контент не на русском: по решению 14.09 английский запускаем оплаченным пилотом. Проверить мощность производства под язык с Софией.');
+  var warn=document.getElementById('warn'); warn.innerHTML=w.map(function(x){return '<p>⚠️ '+esc(x)+'</p>';}).join(''); warn.classList.toggle('on',w.length>0);
+
+  /* лист 1 */
+  var h1 = esc(n.h1a)+'<br><span class="hl">'+esc(n.h1b)+'</span>';
+  if(a.niche==='stomat' && !realFaces && !mix) h1='Виртуальные врачи<br><span class="hl">ведут аккаунты клиники</span>';
+  if(a.niche==='stomat' && realFaces) h1='Аватары ваших врачей<br><span class="hl">ведут аккаунты</span> за них';
+  if(a.niche==='stomat' && west) h1='Ваша клиника<br><span class="hl">в Reels и TikTok каждый день</span>';
+  var lead = pain ? esc(pain)+' Это и есть задача, под которую собрано это предложение.' : esc(n.lead);
+  if(a.niche==='stomat' && west) lead='Ведущие простыми словами отвечают на вопросы пациентов и ведут людей на запись. Ведущий не изображает врача и не дает медицинских обещаний, в каждом ролике стоит пометка ИИ.';
+
+  var howFace = realFaces
+    ? '<li><b>Делаем цифровую копию сотрудника</b><i>Внешность и голос берем из короткого исходного материала. Сотрудник не снимает, не пишет тексты и не ведет аккаунт</i></li>'
+    : mix
+    ? '<li><b>Собираем состав ведущих</b><i>Часть из них цифровые копии ваших сотрудников, часть виртуальные ведущие. Так быстрее видно, кто цепляет вашу аудиторию</i></li>'
+    : '<li><b>Создаем ведущих</b><i>Лицо, голос и манеру собирает нейросеть, на видео ведущий выглядит как живой человек. Он не устает, не уходит и не просит гонорар за съемку</i></li>';
+  var p1 = '<section class="page"><div class="top"><div class="brand"><span class="dot"></span>'+esc(brand).replace(' ','&nbsp;')+'</div><div class="tag">'+esc(tag)+'</div></div>'
+    + '<h1>'+h1+'</h1><p class="lead">'+lead+'</p>'
+    + '<div class="facts"><div class="fact"><b>0</b><span>дней съемок с вашей стороны</span></div><div class="fact"><b>'+(a.pack==='p50'?'50':'30+')+'</b><span>роликов в месяц '+langTxt+'</span></div><div class="fact"><b>до 14</b><span>дней до первых публикаций</span></div></div>'
+    + '<h2 class="tight">Как мы это делаем, простыми словами</h2><ul class="list">'+howFace
+    + '<li><b>Ролики выходят каждый день</b><i>Короткие вертикальные видео '+langTxt+'. Темы: '+esc(n.theme)+'</i></li>'
+    + '<li><b>Аккаунты ведем мы</b><i>Создаем, оформляем, прогреваем и публикуем. Аккаунты принадлежат вам, от вас не нужно ни одного действия</i></li>'
+    + '<li><b>Люди, которых зацепило, идут к вам</b><i>Ведем их '+esc(n.where)+'. Дальше ваша обычная работа</i></li></ul>'
+    + '<div class="foot"><span>'+esc(foot)+'</span><span>Лист 1 из 3</span></div></section>';
+
+  /* лист 2 */
+  var P = PRICE[cur];
+  var who = realFaces ? (a.niche==='stomat'?'врача':'сотрудника') : n.one==='врач' ? 'ведущих' : 'ведущих';
+  var c30 = '<div class="card hero"><div class="badge">Рекомендуем начать с этого</div><div class="pkg-name">Проверка · 30 роликов в месяц</div><div class="num">'+P.p30+'</div><div class="per">3 '+(realFaces?'аватара':'ведущих')+', 3 аккаунта</div><div class="rows"><div class="row"><span>'+(realFaces?'Аватаров':'Ведущих')+' на экране</span><b>3</b></div><div class="row"><span>Роликов на каждого</span><b>10</b></div></div></div>';
+  var c50 = '<div class="card'+(a.pack==='p50'?' hero':'')+'">'+(a.pack==='p50'?'<div class="badge">Больше попыток найти рабочий формат</div>':'')+'<div class="pkg-name">Работа · 50 роликов в месяц</div><div class="num">'+P.p50+'</div><div class="per">5 '+(realFaces?'аватаров':'ведущих')+', 5 аккаунтов</div><div class="rows"><div class="row"><span>'+(realFaces?'Аватаров':'Ведущих')+' на экране</span><b>5</b></div><div class="row"><span>Роликов на каждого</span><b>10</b></div></div></div>';
+  var cards = a.pack==='p30' ? '<div class="cards one">'+c30+'</div>' : a.pack==='p50' ? '<div class="cards one">'+c50+'</div>' : '<div class="cards">'+c30+c50+'</div>';
+  var h2p = a.pack==='both' ? 'Два варианта на первый месяц' : 'Состав и цена первого месяца';
+  var incl = [
+    ['Ведущие и их голоса', realFaces ? 'Цифровые копии создаем по исходному материалу и показываем до старта. В работу идут только согласованные' : 'Создаем и показываем вам до начала работы. В эфир идут только те, кого вы одобрили'],
+    ['Сценарии и производство всех роликов '+langTxt, 'Придумываем, пишем, озвучиваем и монтируем мы. Первые сценарии показываем вам'+(west?'. На каждом ролике пометка ИИ, как требует закон ЕС об ИИ':'')],
+    ['Аккаунты и ежедневная публикация', 'Создаем, оформляем и прогреваем аккаунты, публикуем каждый день. Аккаунты ваши, доступы отдаем по первому слову'],
+    ['Замена заблокированных аккаунтов за наш счет', 'Блокировки случаются, особенно в темах про здоровье, заводим новый аккаунт своими силами'],
+    ['Отчет в конце месяца', g.rep.charAt(0).toUpperCase()+g.rep.slice(1)]
+  ];
+  var p2 = '<section class="page"><div class="top"><div class="brand"><span class="dot"></span>'+esc(brand).replace(' ','&nbsp;')+'</div><div class="tag">Состав и цена</div></div>'
+    + '<h2>'+h2p+'</h2>'+cards
+    + '<h2 class="tight">Почему '+(realFaces?'аватаров':'ведущих')+' несколько, а не один</h2><div class="split">'
+    + '<div class="col"><b>Никто заранее не знает, кто зайдет</b><span>Одних зрителей цепляет один типаж, других другой. Угадывать мы не будем: запускаем несколько '+(realFaces?'аватаров':'ведущих')+' одновременно, у каждого свой аккаунт.</span></div>'
+    + '<div class="col"><b>Через месяц видно по цифрам</b><span>У каждого аккаунта свои просмотры и свои '+esc(g.fact)+'. В конце месяца видно, что сработало. Дальше усиливаем это и убираем остальное.</span></div></div>'
+    + '<h2 class="tight">Что входит в цену, без доплат</h2><ul class="list">'
+    + incl.map(function(x){return '<li><b>'+esc(x[0])+'</b><i>'+esc(x[1])+'</i></li>';}).join('')+'</ul>'
+    + '<div class="foot"><span>'+esc(foot)+'</span><span>Лист 2 из 3</span></div></section>';
+
+  /* лист 3 */
+  var pay = ru ? ['Оплата по счету','100% предоплата, НДС не облагается, работаем по УСН'] : ['Оплата в евро','по инвойсу, до начала работ, одним платежом'];
+  var t4 = (realFaces||mix) ? ['Согласие сотрудников','письменное согласие каждого, чье лицо и голос используем'] : ['От вас нужен один человек','тот, кто отвечает на обращения. Больше вашего участия не требуется'];
+  var tg = a.contact==='sofia' ? '@beymsofi' : '@Sychinnikov_work';
+  var name = a.contact==='sofia' ? 'София' : 'Андрей';
+  var p3 = '<section class="page"><div class="top"><div class="brand"><span class="dot"></span>'+esc(brand).replace(' ','&nbsp;')+'</div><div class="tag">Сроки и порядок работы</div></div>'
+    + '<h2>Как проходит первый месяц</h2><div class="steps">'
+    + '<div class="sn"><em>1</em><div><b>Разговор на полчаса</b><span>Вы рассказываете о продукте и аудитории, мы уточняем, куда вести людей: '+esc(n.where)+'</span></div></div>'
+    + '<div class="sn"><em>2</em><div><b>Показываем '+(realFaces?'аватары':'ведущих')+'</b><span>Вы смотрите лица и слушаете голоса. Что не нравится, меняем. В работу идут только одобренные вами</span></div></div>'
+    + '<div class="sn"><em>3</em><div><b>Готовим ролики и аккаунты</b><span>До 14 дней с момента оплаты'+(realFaces?' и получения материалов':'')+'. Первые сценарии покажем вам</span></div></div>'
+    + '<div class="sn"><em>4</em><div><b>26 дней публикаций и отчет</b><span>Ролики выходят каждый день. В конце месяца присылаем цифры и вместе решаем, что усилить</span></div></div></div>'
+    + '<div class="terms"><div class="term"><b>40 дней</b><span>весь первый месяц: до 14 дней подготовка и 26 дней публикаций</span></div>'
+    + '<div class="term"><b>'+pay[0]+'</b><span>'+pay[1]+'</span></div>'
+    + '<div class="term"><b>Аккаунты ваши</b><span>аккаунты принадлежат вам, мы ими только управляем. Доступы передаем по первому требованию</span></div>'
+    + '<div class="term"><b>'+t4[0]+'</b><span>'+t4[1]+'</span></div></div>'
+    + '<div class="honest"><b>Что мы обещаем и чего не обещаем</b><span>Мы обещаем объем работы и показываем цифры: сколько роликов вышло, '+esc(g.rep)+'. Мы не обещаем '+esc(g.no)+': честной цифры здесь не назовет никто, а первый месяц нужен, чтобы понять, какой '+(realFaces?'аватар':'ведущий')+' и какая тема приводят нужных вам людей. Поэтому и предлагаем начать с проверки.</span></div>'
+    + '<div class="cta"><b>Готовы начать с проверки</b><span>Скажите, какой вариант ближе, и мы назначим разговор на полчаса. После него выставим счет и начнем готовить '+(realFaces?'аватаров':'ведущих')+'.</span><span class="tg">'+name+', Telegram: '+tg+'</span></div>'
+    + '<div class="foot"><span>'+esc(foot)+'</span><span>Лист 3 из 3</span></div></section>';
+
+  document.getElementById('out').innerHTML = p1+p2+p3;
+  document.title = brand+'. Предложение: '+(client||n.tag);
+  setTimeout(function(){ checkOverflow(w); }, 60);
+}
+
+/* лист переполнен, если подвал вытолкнуло за край листа */
+function checkOverflow(w){
+  var bad=[];
+  document.querySelectorAll('#out .page').forEach(function(pg,i){
+    var foot=pg.querySelector('.foot');
+    if(foot && foot.getBoundingClientRect().bottom > pg.getBoundingClientRect().bottom + 1) bad.push(i+1);
+  });
+  document.body.setAttribute('data-overflow', bad.join(',') || 'none');
+  if(bad.length){
+    var warn=document.getElementById('warn');
+    warn.innerHTML += '<p>⚠️ Не помещается на лист '+bad.join(', ')+'. Сократите текст задачи клиента или выберите один вариант на старт.</p>';
+    warn.classList.add('on');
+  }
+}
+build();
+</script>
+</body>
+</html>
