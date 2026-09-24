@@ -127,8 +127,8 @@ async function toMail(env, lead) {
   }
 }
 
-export async function onRequestPost({ request, env }) {
-  if (!sameOriginOk(request)) return json({ error: 'чужой источник' }, 403);
+async function handlePost({ request, env }, allowedOrigin) {
+  if (!allowedOrigin && !sameOriginOk(request)) return json({ error: 'чужой источник' }, 403);
 
   const raw = await request.text();
   if (raw.length > MAX_BODY) return json({ error: 'слишком большая заявка' }, 413);
@@ -178,6 +178,54 @@ export async function onRequestPost({ request, env }) {
 
 // Журнал заявок для Клода с Мака. Открытым его оставлять нельзя: внутри почты
 // живых людей. Читается тем же токеном, что доска Fishok.
+// Лендинги Daily Persona живут на своем домене (с 24.09.2026) и шлют заявки сюда
+// же, кросс-доменно. Разрешены только эти источники. Страницы шлют text/plain,
+// чтобы браузер не делал предварительный OPTIONS; он все равно поддержан.
+const CORS_ORIGINS = new Set([
+  'https://dailypersona.com',
+  'https://www.dailypersona.com',
+  'https://dailypersona.pages.dev',
+]);
+
+function corsOrigin(request) {
+  const origin = request.headers.get('Origin');
+  if (!origin) return null;
+  if (CORS_ORIGINS.has(origin)) return origin;
+  try {
+    // превью-сборки проекта: <хеш>.dailypersona.pages.dev
+    if (new URL(origin).hostname.endsWith('.dailypersona.pages.dev')) return origin;
+  } catch (e) { /* кривой Origin просто не разрешаем */ }
+  return null;
+}
+
+function withCors(response, origin) {
+  if (!origin) return response;
+  const r = new Response(response.body, response);
+  r.headers.set('Access-Control-Allow-Origin', origin);
+  r.headers.set('Vary', 'Origin');
+  return r;
+}
+
+export async function onRequestOptions({ request }) {
+  const origin = corsOrigin(request);
+  if (!origin) return new Response(null, { status: 403 });
+  return new Response(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '86400',
+      'Vary': 'Origin',
+    },
+  });
+}
+
+export async function onRequestPost(context) {
+  const origin = corsOrigin(context.request);
+  return withCors(await handlePost(context, origin), origin);
+}
+
 export async function onRequestGet({ request, env }) {
   const m = (request.headers.get('Authorization') || '').match(/^Bearer\s+(.+)$/i);
   const tok = m ? m[1].trim() : '';

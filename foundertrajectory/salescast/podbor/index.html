@@ -3,9 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23E2452A%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-family=%27Arial,sans-serif%27 font-weight=%27700%27 font-size=%2738%27 text-anchor=%27middle%27 fill=%27white%27%3ES%3C/text%3E%3C/svg%3E">
-<title>Подбор ИИ-персонажа под вашу нишу - Salescast</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%2316150F%27/%3E%3Ccircle cx=%2732%27 cy=%2715%27 r=%275%27 fill=%27%23E2452A%27/%3E%3Ctext x=%2732%27 y=%2750%27 font-family=%27Arial,sans-serif%27 font-weight=%27700%27 font-size=%2727%27 text-anchor=%27middle%27 fill=%27%23F8F6F1%27%3EDP%3C/text%3E%3C/svg%3E">
+<title>Подбор ИИ-персонажа под вашу нишу - Daily Persona</title>
 <meta name="description" content="Короткие вопросы о вашем бизнесе. В ответ присылаем тип персонажа под нишу, три темы роликов и совет, куда вести трафик.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daily Persona">
+<meta property="og:title" content="Подбор ИИ-персонажа под вашу нишу: Daily Persona">
+<meta property="og:description" content="Короткие вопросы о бизнесе. В ответ присылаем тип персонажа под нишу, три темы роликов и совет, куда вести трафик.">
+<meta property="og:image" content="https://dailypersona.com/og/og-main.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +40,9 @@ p{margin:0 0 12px}
 .top .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px}
 .logo{font-family:"Unbounded",sans-serif; font-weight:700; font-size:19px; letter-spacing:-.03em; text-decoration:none}
 .logo i{color:var(--acc); font-style:normal}
+.logo .dot{display:inline-block; width:9px; height:9px; border-radius:50%; background:var(--acc); margin-right:9px; vertical-align:middle; position:relative; top:-2px}
+.logo{white-space:nowrap}
+@media(max-width:420px){ .logo{font-size:16.5px} .logo .dot{width:8px; height:8px; margin-right:7px} }
 .back{font-size:14px; color:var(--muted); text-decoration:none}
 
 .head{padding:38px 0 20px}
@@ -86,7 +97,7 @@ footer{padding:34px 0 48px; color:var(--muted); font-size:14px}
 
 <div class="top">
   <div class="wrap">
-    <a class="logo" href="../">Sales<i>cast</i></a>
+    <a class="logo" href="../"><span class="dot" aria-hidden="true"></span>Daily Persona</a>
     <a class="back" href="../">← на главную</a>
   </div>
 </div>
@@ -231,10 +242,11 @@ footer{padding:34px 0 48px; color:var(--muted); font-size:14px}
 </div>
 
 <footer>
-  <div class="wrap">Salescast · внешний трафик через ИИ-персонажей · <a href="../">на главную</a></div>
+  <div class="wrap">Daily Persona · внешний трафик через ИИ-персонажей · <a href="../">на главную</a></div>
 </footer>
 
 <script>
+var LEAD_URL=(/(^|\.)sychinnikov\.com$/.test(location.hostname)?'':'https://sychinnikov.com')+'/founderfinance/api/lead';
 (function(){
   var form=document.getElementById('f');
   var qs=Array.prototype.slice.call(form.querySelectorAll('.q'));
@@ -303,9 +315,9 @@ footer{padding:34px 0 48px; color:var(--muted); font-size:14px}
     var contact=contactQ.querySelector('[name=contact]').value.trim();
     var name=contactQ.querySelector('[name=name]').value.trim();
     var payload={
-      subject:'Salescast: подбор персонажа',
-      from_name:'Salescast',
-      name: name || 'Заявка с квиза Salescast',
+      subject:'Daily Persona: подбор персонажа',
+      from_name:'Daily Persona',
+      name: name || 'Заявка с квиза Daily Persona',
       replyto: contact.indexOf('@')===0 ? '' : contact,
       message: lines.join('\n'),
       page: location.pathname,
@@ -313,8 +325,8 @@ footer{padding:34px 0 48px; color:var(--muted); font-size:14px}
       utm: location.search || '',
       botcheck: form.querySelector('[name=botcheck]').value
     };
-    fetch('/founderfinance/api/lead', {
-      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    fetch(LEAD_URL, {
+      method:'POST', headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:JSON.stringify(payload)
     }).then(function(r){ finish(); }).catch(function(){ finish(); });
   }
 

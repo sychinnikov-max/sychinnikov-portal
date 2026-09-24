@@ -838,6 +838,7 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
 </footer>
 
 <script>
+var LEAD_URL=(/(^|\.)sychinnikov\.com$/.test(location.hostname)?'':'https://sychinnikov.com')+'/founderfinance/api/lead';
 (function(){
   var nav=document.getElementById('nav');
   var onScroll=function(){ nav.classList.toggle('stuck', window.scrollY>8); };
@@ -937,8 +938,8 @@ footer a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,
         method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
       }).then(function(r){ if(r && r.ok){ finish(); return; } fail(); }, fail);
     }
-    fetch('/founderfinance/api/lead', {
-      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    fetch(LEAD_URL, {
+      method:'POST', headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:JSON.stringify(payload)
     }).then(function(r){ if(r && r.ok){ finish(); return; } return backup(); }, backup);
   });
 })();
