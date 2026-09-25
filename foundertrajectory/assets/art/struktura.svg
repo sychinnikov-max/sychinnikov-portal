@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" fill="none" stroke="#D9B872" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9 z" fill="#D9B872" stroke="none"/></marker></defs>
+<circle cx="400.0" cy="90.0" r="18.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="108.0" x2="400.0" y2="140.0" opacity="0.50"/>
+<line x1="400.0" y1="108.0" x2="400.0" y2="140.0" opacity="0.50"/>
+<line x1="400.0" y1="108.0" x2="400.0" y2="140.0" opacity="0.50"/>
+<line x1="220.0" y1="140.0" x2="580.0" y2="140.0" opacity="0.50"/>
+<line x1="220.0" y1="140.0" x2="220.0" y2="178.0" opacity="0.50"/>
+<rect x="160.0" y="178.0" width="120.0" height="44.0" rx="10" opacity="0.90"/>
+<line x1="220.0" y1="222.0" x2="220.0" y2="256.0" opacity="0.45"/>
+<line x1="182.0" y1="256.0" x2="258.0" y2="256.0" opacity="0.45"/>
+<line x1="182.0" y1="256.0" x2="182.0" y2="282.0" opacity="0.45"/>
+<rect x="148.0" y="282.0" width="68.0" height="32.0" rx="8" opacity="0.70"/>
+<line x1="258.0" y1="256.0" x2="258.0" y2="282.0" opacity="0.45"/>
+<rect x="224.0" y="282.0" width="68.0" height="32.0" rx="8" opacity="0.70"/>
+<line x1="400.0" y1="140.0" x2="400.0" y2="178.0" opacity="0.50"/>
+<rect x="340.0" y="178.0" width="120.0" height="44.0" rx="10" opacity="0.90"/>
+<line x1="400.0" y1="222.0" x2="400.0" y2="256.0" opacity="0.45"/>
+<line x1="362.0" y1="256.0" x2="438.0" y2="256.0" opacity="0.45"/>
+<line x1="362.0" y1="256.0" x2="362.0" y2="282.0" opacity="0.45"/>
+<rect x="328.0" y="282.0" width="68.0" height="32.0" rx="8" opacity="0.70"/>
+<line x1="438.0" y1="256.0" x2="438.0" y2="282.0" opacity="0.45"/>
+<rect x="404.0" y="282.0" width="68.0" height="32.0" rx="8" opacity="0.70"/>
+<line x1="580.0" y1="140.0" x2="580.0" y2="178.0" opacity="0.50"/>
+<rect x="520.0" y="178.0" width="120.0" height="44.0" rx="10" opacity="0.90"/>
+<line x1="580.0" y1="222.0" x2="580.0" y2="256.0" opacity="0.45"/>
+<line x1="542.0" y1="256.0" x2="618.0" y2="256.0" opacity="0.45"/>
+<line x1="542.0" y1="256.0" x2="542.0" y2="282.0" opacity="0.45"/>
+<rect x="508.0" y="282.0" width="68.0" height="32.0" rx="8" opacity="0.70"/>
+<line x1="618.0" y1="256.0" x2="618.0" y2="282.0" opacity="0.45"/>
+<rect x="584.0" y="282.0" width="68.0" height="32.0" rx="8" opacity="0.70"/>
+<path d="M110,470 C260,470 300,420 420,440 S620,500 700,450" opacity="0.55" stroke-dasharray="4 8"/>
+<circle cx="110.0" cy="470.0" r="7.0" opacity="0.80" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="250.0" cy="455.0" r="7.0" opacity="0.80" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="400.0" cy="437.0" r="7.0" opacity="0.80" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="560.0" cy="466.0" r="7.0" opacity="0.80" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="700.0" cy="450.0" r="7.0" opacity="0.80" fill="#D9B872" fill-opacity=".10"/>
+<line x1="700.0" y1="450.0" x2="700.0" y2="400.0" opacity="0.80"/>
+<polygon points="700,400 742,412 700,424" opacity=".8" fill="#D9B872" fill-opacity=".15"/>
+<circle cx="700.0" cy="110.0" r="26.0" opacity="0.60"/>
+<circle cx="700.0" cy="110.0" r="3.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<polygon points="700,84 706,110 700,136 694,110" opacity=".7" fill="#D9B872" fill-opacity=".15"/>
+<polygon points="674,110 700,104 726,110 700,116" opacity=".5"/>
+<line x1="80.0" y1="560.0" x2="80.0" y2="552.0" opacity="0.40"/>
+<line x1="102.0" y1="560.0" x2="102.0" y2="570.0" opacity="0.40"/>
+<line x1="124.0" y1="560.0" x2="124.0" y2="570.0" opacity="0.40"/>
+<line x1="146.0" y1="560.0" x2="146.0" y2="552.0" opacity="0.40"/>
+<line x1="168.0" y1="560.0" x2="168.0" y2="570.0" opacity="0.40"/>
+<line x1="190.0" y1="560.0" x2="190.0" y2="570.0" opacity="0.40"/>
+<line x1="70.0" y1="560.0" x2="200.0" y2="560.0" opacity="0.40"/>
+</svg>

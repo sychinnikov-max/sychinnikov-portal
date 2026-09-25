@@ -45,105 +45,98 @@
 {"@type":"Offer","name":"Финансовый контур","description":"Вместе с финансовым директором: управленческий учет, контроль чистой прибыли, платежный календарь, финмодель"}]}}
 </script>
 <style>
-/* ===== Страница от 25.09.2026: три уровня участия, схемы вместо текста ===== */
+/* ===== Версия от 25.09.2026 (вечер): лендинг-презентация, рисунки на фоне ===== */
 
-/* кому это */
-.xfit{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--hair-gold);border-radius:16px;overflow:hidden;background:var(--card);margin-top:22px}
-.xfit>div{padding:24px 26px;border-right:1px solid var(--hair)}
-.xfit>div:last-child{border-right:none}
-.xfit b{display:block;font-family:var(--fd);font-weight:600;font-size:21px;color:var(--gold);line-height:1.2;margin-bottom:8px}
-.xfit span{font-size:15px;color:var(--ink-muted);line-height:1.5}
-@media(max-width:820px){.xfit{grid-template-columns:1fr}.xfit>div{border-right:none;border-bottom:1px solid var(--hair);padding:18px 20px}.xfit>div:last-child{border-bottom:none}}
+/* первый экран: рисунок под кнопками */
+.hero{position:relative;overflow:hidden}
+.hero .inner{position:relative;z-index:1}
+.heroart{position:absolute;left:clamp(24px,4vw,60px);bottom:-96px;width:min(40vw,520px);opacity:.3;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 34%,#000 52%,transparent 66%);mask-image:linear-gradient(180deg,transparent 0%,#000 34%,#000 52%,transparent 66%)}
+@media(max-width:960px){.heroart{display:none}}
 
-/* три уровня: глубина растет вниз */
-.xlevels{display:grid;gap:12px;margin-top:40px}
-.xlevel{--w:34%;position:relative;display:grid;grid-template-columns:60px 1fr 1.55fr;gap:28px;align-items:center;padding:28px 30px 30px;background:var(--card);border:1px solid var(--hair);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;transition:border-color .25s ease,transform .25s ease}
-.xlevel:hover{border-color:var(--hair-gold);transform:translateY(-2px)}
-.xlevel::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:var(--w);background:linear-gradient(90deg,var(--gold),color-mix(in oklab,var(--gold) 30%,transparent))}
-.xlevel .n{font-family:var(--fm);font-size:14px;color:var(--gold);letter-spacing:.14em}
-.xlevel .t{font-family:var(--fd);font-weight:600;font-size:clamp(22px,2.1vw,28px);line-height:1.15}
-.xlevel .w{font-family:var(--fm);font-size:12.5px;color:var(--ink-dim);letter-spacing:.05em;margin-top:8px;line-height:1.4}
-.xlevel .d{font-size:16.5px;color:var(--ink-muted);line-height:1.55}
-.xlevel .d b{color:var(--ink);font-weight:600}
-@media(max-width:820px){.xlevel{grid-template-columns:1fr;gap:8px;padding:22px 20px 24px}.xlevel .d{margin-top:6px}}
+/* было и станет */
+.ba{display:grid;grid-template-columns:1fr minmax(170px,250px) 1fr;gap:clamp(20px,3vw,48px);align-items:center;margin-top:36px}
+.ba .art{width:100%;opacity:.7;display:block}
+.bh{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:6px}
+.bh.gold{color:var(--gold)}
+.bl{list-style:none;margin:0;padding:0}
+.bl li{padding:13px 0;border-top:1px solid var(--hair);font-size:16.5px;line-height:1.5;color:var(--ink-muted)}
+.bl li:last-child{border-bottom:1px solid var(--hair)}
+.bl li b{color:var(--ink);font-weight:600}
+.bl.after li{color:var(--ink)}
+.bl.after li b{color:var(--gold-bright)}
+@media(max-width:900px){.ba{grid-template-columns:1fr;gap:18px}.ba .art{max-width:240px;margin:0 auto;opacity:.55}}
 
-/* уровень: текст и схема */
-.xsplit{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,4vw,60px);align-items:center;margin-top:36px}
-@media(max-width:900px){.xsplit{grid-template-columns:1fr;gap:26px}}
-.fig{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:18px 18px 10px;margin:0}
-.fig figcaption{font-family:var(--fm);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);padding:10px 4px 6px;line-height:1.4}
-.xth{display:grid;grid-template-columns:168px 1fr;gap:20px;padding:16px 0;border-top:1px solid var(--hair);align-items:start}
-.xth:last-of-type{border-bottom:1px solid var(--hair)}
-.xth b{font-family:var(--fd);font-weight:600;font-size:19px;color:var(--ink);line-height:1.25}
-.xth span{font-size:16px;color:var(--ink-muted);line-height:1.55}
-@media(max-width:560px){.xth{grid-template-columns:1fr;gap:5px;padding:13px 0}}
-.xres{margin-top:22px;padding:18px 22px;border-left:3px solid var(--gold);background:color-mix(in oklab,var(--gold) 7%,transparent);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.55}
-.xres b{color:var(--gold-bright);font-weight:600}
+/* три ступени */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--hair-gold);border-radius:16px;overflow:hidden;margin-top:34px;background:var(--card)}
+.step{display:block;padding:24px 26px 26px;border-right:1px solid var(--hair);text-decoration:none;color:inherit;transition:background .2s ease}
+.step:last-child{border-right:none}
+.step:hover{background:color-mix(in oklab,var(--gold) 7%,transparent)}
+.step .n{font-family:var(--fm);font-size:12.5px;color:var(--gold);letter-spacing:.14em}
+.step .t{font-family:var(--fd);font-weight:600;font-size:22px;margin-top:8px;line-height:1.2}
+.step .w{font-size:14.5px;color:var(--ink-muted);margin-top:8px;line-height:1.45}
+@media(max-width:820px){.steps{grid-template-columns:1fr}.step{border-right:none;border-bottom:1px solid var(--hair);padding:18px 20px}.step:last-child{border-bottom:none}}
 
-/* дорожная карта: на телефоне список */
-.xroad{margin-top:36px}
-.xsteps{list-style:none;counter-reset:s;display:grid;gap:8px;margin-top:18px;padding:0}
-.xsteps li{counter-increment:s;display:flex;gap:12px;align-items:center;font-size:15px;padding:10px 14px;background:var(--card);border:1px solid var(--hair);border-radius:12px}
-.xsteps li::before{content:counter(s);font-family:var(--fm);font-size:12px;color:var(--gold);width:22px;height:22px;border:1px solid var(--hair-gold);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
-.xsteps li em{margin-left:auto;font-style:normal;font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid var(--hair-gold);border-radius:999px;padding:3px 8px;white-space:nowrap}
+/* уровень: текст и рисунок рядом */
+.zz{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,72px);align-items:center}
+.zz.rev .artcol{order:-1}
+.artcol{display:flex;justify-content:center;align-items:center}
+.artcol img{width:100%;max-width:560px;opacity:.62;display:block;
+  -webkit-mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);mask-image:radial-gradient(closest-side,#000 58%,transparent 100%)}
+@media(max-width:900px){.zz{grid-template-columns:1fr;gap:6px}.zz.rev .artcol{order:0}.artcol img{max-width:320px;opacity:.5}}
+.lvl-tag{font-family:var(--fm);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.lvl-tag span{color:var(--ink-dim);letter-spacing:.04em;text-transform:none;font-size:13px}
+.kv{list-style:none;margin:26px 0 0;padding:0}
+.kv li{display:grid;grid-template-columns:164px 1fr;gap:18px;padding:13px 0;border-top:1px solid var(--hair);align-items:start}
+.kv li:last-child{border-bottom:1px solid var(--hair)}
+.kv b{font-family:var(--fd);font-weight:600;font-size:18.5px;color:var(--ink);line-height:1.25}
+.kv span{font-size:16px;color:var(--ink-muted);line-height:1.55}
+@media(max-width:560px){.kv li{grid-template-columns:1fr;gap:4px;padding:12px 0}}
+.out{margin-top:22px;padding:16px 20px;border-left:3px solid var(--gold);background:color-mix(in oklab,var(--gold) 7%,transparent);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.55}
+.out b{color:var(--gold-bright);font-weight:600}
+.lead-in.sm{font-size:16.5px;margin-top:16px;color:var(--ink-muted)}
 
-/* плитки со схемами */
-.xtiles{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
-.xtile{background:var(--card);border:1px solid var(--hair);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s ease,transform .25s ease}
-.xtile:hover{border-color:var(--hair-gold);transform:translateY(-3px)}
-.xtile .pic{padding:16px 16px 4px;background:linear-gradient(180deg,color-mix(in oklab,var(--gold) 5%,var(--card)),var(--card))}
-.xtile .cap{padding:8px 22px 22px}
-.xtile .cap b{display:block;font-family:var(--fd);font-weight:600;font-size:21px;margin-bottom:6px}
-.xtile .cap span{font-size:15.5px;color:var(--ink-muted);line-height:1.5}
-@media(max-width:820px){.xtiles{grid-template-columns:1fr}}
-
-/* финансы: две панели и четыре тезиса */
-.xfin{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
-@media(max-width:820px){.xfin{grid-template-columns:1fr}}
-.xrow{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:34px}
-.xrow>div{border-top:1px solid var(--hair-gold);padding-top:14px}
-.xrow b{display:block;font-family:var(--fd);font-weight:600;font-size:19px;margin-bottom:6px}
-.xrow span{font-size:15.5px;color:var(--ink-muted);line-height:1.5}
-@media(max-width:900px){.xrow{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.xrow{grid-template-columns:1fr;gap:16px}}
+/* опыт и кейсы */
+.proof{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,4vw,64px);margin-top:36px;align-items:start}
+.who{list-style:none;margin:0;padding:0}
+.who li{padding:10px 0 10px 22px;position:relative;font-size:16.5px;color:var(--ink-muted);line-height:1.5}
+.who li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.who li b{color:var(--ink);font-weight:600}
+.case{display:grid;grid-template-columns:1fr auto;gap:22px;padding:18px 0;border-top:1px solid var(--hair);align-items:center}
+.case:last-of-type{border-bottom:1px solid var(--hair)}
+.case .cn{font-family:var(--fd);font-weight:600;font-size:19px;line-height:1.25}
+.case .cd{font-size:15.5px;color:var(--ink-muted);margin-top:5px;line-height:1.5}
+.case .cr{font-family:var(--fd);font-weight:700;font-size:clamp(22px,2vw,28px);color:var(--gold);white-space:nowrap;text-align:right;line-height:1.1}
+.case .cr small{display:block;font-family:var(--fb);font-weight:500;font-size:12.5px;color:var(--ink-dim);white-space:normal;margin-top:4px;max-width:150px;margin-left:auto}
+.morelink{display:inline-block;margin-top:18px;color:var(--gold);text-decoration:none;font-weight:600;font-size:15.5px}
+.morelink:hover{text-decoration:underline}
+@media(max-width:900px){.proof{grid-template-columns:1fr;gap:20px}}
+@media(max-width:560px){.case{grid-template-columns:1fr;gap:8px}.case .cr{text-align:left}.case .cr small{margin-left:0}}
 
 /* AI */
-.xai{margin:36px 0 0;background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:22px 22px 12px}
-.xpills{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-.xpills span{font-size:15px;padding:10px 16px;border:1px solid var(--hair-gold);border-radius:999px;color:var(--ink);background:color-mix(in oklab,var(--gold) 6%,transparent);line-height:1.3}
-@media(max-width:760px){.xpills span{font-size:14px;padding:9px 13px}}
+.flowmini{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin-top:26px;padding:20px 22px;border:1px solid var(--hair);border-radius:16px;background:var(--card)}
+.flowmini .fh{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:9px}
+.flowmini .fc{display:flex;flex-wrap:wrap;gap:6px}
+.flowmini .fc span{font-size:13.5px;padding:6px 11px;border:1px solid var(--hair-gold);border-radius:999px;color:var(--ink);line-height:1.3}
+.flowmini .fa{font-family:var(--fd);font-size:30px;color:var(--gold);text-align:center;line-height:1}
+@media(max-width:760px){.flowmini{grid-template-columns:1fr;gap:12px}.flowmini .fa{transform:rotate(90deg)}}
+.pts{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:10px}
+.pts li{padding-left:22px;position:relative;font-size:16.5px;color:var(--ink-muted);line-height:1.5}
+.pts li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.pts li b{color:var(--ink);font-weight:600}
+
+/* как начать */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:34px}
+.how>div{border-top:1px solid var(--hair-gold);padding-top:16px}
+.how .n{font-family:var(--fm);font-size:13px;color:var(--gold);letter-spacing:.14em}
+.how b{display:block;font-family:var(--fd);font-weight:600;font-size:21px;margin:8px 0 6px;line-height:1.2}
+.how span{font-size:16px;color:var(--ink-muted);line-height:1.5}
+@media(max-width:820px){.how{grid-template-columns:1fr;gap:18px}}
 
 /* блок «напишите мне» */
 .xcontact{display:flex;flex-direction:column;gap:12px;margin-top:22px}
 .xcontact .line{font-size:15.5px;color:var(--ink-muted)}
 .xcontact .line a{color:var(--gold);text-decoration:none}
-.xcontact .line b{color:var(--ink);font-weight:600}
-
-/* ===== схемы (инлайн SVG в палитре сайта) ===== */
-.sch{width:100%;height:auto;display:block}
-.sch .ln{stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.sch .ln.soft{stroke:color-mix(in oklab,var(--gold) 50%,transparent)}
-.sch .ln.dash{stroke-dasharray:4 5}
-.sch .ln.ok{stroke:var(--ok)}
-.sch .ln.thick{stroke-width:3}
-.sch .bx{fill:var(--surface-2);stroke:color-mix(in oklab,var(--gold) 55%,transparent);stroke-width:1.3}
-.sch .bx.hi{fill:color-mix(in oklab,var(--gold) 18%,var(--surface-2));stroke:var(--gold)}
-.sch .dot{fill:var(--surface-2);stroke:var(--ink-dim);stroke-width:1.3}
-.sch .tx{font-family:var(--fb);font-size:14px;fill:var(--ink);font-weight:500}
-.sch .tx.mu{fill:var(--ink-muted);font-weight:400}
-.sch .tx.sm{font-size:12.5px}
-.sch .tx.big{font-family:var(--fd);font-size:19px;font-weight:600}
-.sch .lb{font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;fill:var(--gold)}
-.sch .lb.dim{fill:var(--ink-dim)}
-.sch .fok{fill:var(--ok)} .sch .fno{fill:var(--no)}
-.sch .grid{stroke:var(--hair);stroke-width:1;fill:none}
-.sch .tag{fill:var(--gold)} .sch .tagt{font-family:var(--fm);font-size:9.5px;fill:#14100A;font-weight:500;letter-spacing:.06em}
-.sch .bar{fill:color-mix(in oklab,var(--gold) 72%,transparent)}
-.sch .bar.plan{fill:color-mix(in oklab,var(--gold) 22%,transparent);stroke:var(--gold);stroke-width:1.2}
-.draw{stroke-dasharray:1400;stroke-dashoffset:1400}
-.rv.in .draw{animation:xdraw 1.8s cubic-bezier(.22,.9,.3,1) forwards}
-@keyframes xdraw{to{stroke-dashoffset:0}}
-@media(max-width:760px),(prefers-reduced-motion:reduce){.draw{stroke-dasharray:none;stroke-dashoffset:0;animation:none}}
 </style>
 </head>
 <body data-variant="home">
@@ -152,16 +145,19 @@
   <a class="brand" href="/foundertrajectory/">Андрей<b>·</b>Сычинников</a>
   <button class="navtoggle" id="navtoggle" aria-label="Меню">Меню</button>
   <nav class="nlinks" id="nlinks">
+    <a href="#rezultat">Результат</a>
     <a href="#urovni">Три уровня</a>
-    <a href="#ai">AI в работе</a>
-    <a href="/foundertrajectory/keysy/">Кейсы</a>
+    <a href="#keysy">Кейсы</a>
+    <a href="#ai">AI</a>
     <a href="/foundertrajectory/o-sebe/">О себе</a>
     <a class="ncta" href="#cta">Написать мне</a>
   </nav>
 </div></header>
 
 <!-- ПЕРВЫЙ ЭКРАН -->
-<section class="hero"><div class="inner">
+<section class="hero">
+  <img class="heroart" src="/foundertrajectory/assets/art/struktura.svg" alt="" aria-hidden="true">
+  <div class="inner">
   <div class="herorow">
     <div>
       <div class="eyebrow d-only">Подключаюсь к собственнику компании до 50 человек</div>
@@ -181,18 +177,37 @@
       </div>
     </div>
   </div>
-</div></section>
+  </div>
+</section>
 
-<!-- КОМУ ЭТО -->
-<section class="band alt"><div class="inner pad sm">
-  <div class="rv">
-    <h2 class="h3">Кому это полезно</h2>
-    <div class="xfit">
-      <div><b>До 50 человек в штате</b><span>Компания уже работает: есть команда, клиенты и обороты.</span></div>
-      <div><b>Решения принимаете вы</b><span>Вы собственник, сами на встречах и сами проводите изменения через команду.</span></div>
-      <div><b>Нужна система, а не руки</b><span>Хотите, чтобы компания работала по правилам, а не по вашим напоминаниям.</span></div>
+<!-- БЫЛО И СТАНЕТ -->
+<section class="band alt" id="rezultat"><div class="inner pad">
+  <div class="sect-head rv">
+    <h2 class="h2">Что меняется в компании</h2>
+    <p class="sub">Компания до 50 человек уже работает: есть команда, клиенты и обороты. Не хватает системы, которая работает без собственника.</p>
+  </div>
+  <div class="ba rv">
+    <div>
+      <div class="bh">Сейчас</div>
+      <ul class="bl">
+        <li><b>Все держится на вас.</b> Без вашего контроля бизнес встает.</li>
+        <li><b>Не с кого спросить.</b> Зоны размыты, показателей нет.</li>
+        <li><b>Обороты растут,</b> а денег больше не становится.</li>
+        <li><b>Кассовый разрыв</b> приходит внезапно, планировать невозможно.</li>
+      </ul>
+    </div>
+    <img class="art" src="/foundertrajectory/assets/art/model.svg" alt="" aria-hidden="true" loading="lazy">
+    <div>
+      <div class="bh gold">После работы</div>
+      <ul class="bl after">
+        <li><b>Задачи у исполнителей,</b> часть решений принимается без вас.</li>
+        <li><b>У каждой роли</b> зона, показатель и отчет раз в неделю.</li>
+        <li><b>Чистая прибыль</b> считается по правилу и растет на тех же оборотах.</li>
+        <li><b>Платежный календарь</b> на восемь недель, разрыв виден заранее.</li>
+      </ul>
     </div>
   </div>
+  <div class="takeaway rv">Дело не в людях. В компании нет системы управления: процессов, показателей и контроля. <b>Я ставлю ее вместе с вами и оставляю в документах.</b></div>
 </div></section>
 
 <!-- ТРИ УРОВНЯ -->
@@ -200,387 +215,138 @@
   <div class="sect-head rv">
     <div class="eyebrow">Три уровня участия</div>
     <h2 class="h2" style="margin-top:14px">Подключаюсь на той глубине, которая нужна вам</h2>
-    <p class="sub">Любой уровень отдельно или вместе. Условия обсуждаем после первого разговора.</p>
+    <p class="sub">Любой уровень отдельно или вместе. Глубина растет от первого к третьему, условия обсуждаем после первого разговора.</p>
   </div>
-  <div class="xlevels rv">
-    <a class="xlevel" href="#nastavnichestvo" style="--w:34%">
-      <div class="n">01</div>
-      <div><div class="t">Наставничество</div><div class="w">час в неделю с собственником</div></div>
-      <div class="d"><b>Дорожная карта, реестр решений, новая модель управления.</b> Вы стратег и контролер результата, задачи уходят исполнителям.</div>
-    </a>
-    <a class="xlevel" href="#processy" style="--w:67%">
-      <div class="n">02</div>
-      <div><div class="t">Операционное участие</div><div class="w">со мной операционный менеджер</div></div>
-      <div class="d"><b>Пересобираем структуру и процессы.</b> Оргструктура, регламенты в BPMN 2.0, KPI по ролям, план внедрения.</div>
-    </a>
-    <a class="xlevel" href="#finansy" style="--w:100%">
-      <div class="n">03</div>
-      <div><div class="t">Финансовый контур</div><div class="w">со мной финансовый директор</div></div>
-      <div class="d"><b>Управленческий учет и контроль чистой прибыли.</b> Платежный календарь, финмодель, кассовый разрыв виден заранее.</div>
-    </a>
+  <div class="steps rv">
+    <a class="step" href="#nastavnichestvo"><div class="n">01</div><div class="t">Наставничество</div><div class="w">Час в неделю с собственником. Дорожная карта, решения, модель управления.</div></a>
+    <a class="step" href="#processy"><div class="n">02</div><div class="t">Операционное участие</div><div class="w">Со мной операционный менеджер. Оргструктура, процессы, KPI, внедрение.</div></a>
+    <a class="step" href="#finansy"><div class="n">03</div><div class="t">Финансовый контур</div><div class="w">Со мной финансовый директор. Учет, чистая прибыль, платежный календарь.</div></a>
   </div>
 </div></section>
 
-<!-- УРОВЕНЬ 1: НАСТАВНИЧЕСТВО -->
+<!-- УРОВЕНЬ 1 -->
 <section class="band alt" id="nastavnichestvo"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="eyebrow">Уровень 01</div>
-    <h2 class="h2" style="margin-top:14px">Наставничество: вы стратег, а не диспетчер</h2>
-  </div>
-  <div class="xsplit">
+  <div class="zz">
     <div class="rv">
-      <div class="xth"><b>Дорожная карта</b><span>Куда идет компания и что меняем в каком порядке. Одна страница, по ней сверяемся каждую неделю.</span></div>
-      <div class="xth"><b>Реестр решений</b><span>Каждое решение записано: что, кто, к какому сроку. Ничего не живет в памяти.</span></div>
-      <div class="xth"><b>Модель управления</b><span>На каждую задачу есть исполнитель. Вы ставите цель и принимаете результат.</span></div>
-      <div class="xth"><b>Ритм</b><span>Сессия раз в неделю, выжимка решений в тот же день, касание по делу в середине недели.</span></div>
-      <div class="xres"><b>На выходе:</b> цифры приходят готовыми, часть решений принимается без вас, компания перестает держаться на вас.</div>
+      <div class="lvl-tag">Уровень 01 <span>час в неделю с собственником</span></div>
+      <h2 class="h2" style="margin-top:14px">Наставничество: вы стратег, а не диспетчер</h2>
+      <p class="lead-in sm">Сессия раз в неделю. В тот же день выжимка решений одним сообщением, в середине недели касание по делу.</p>
+      <ul class="kv">
+        <li><b>Дорожная карта</b><span>Куда идет компания и что меняем в каком порядке. Одна страница, по ней сверяемся каждую неделю.</span></li>
+        <li><b>Реестр решений</b><span>Что решили, кто делает, к какому сроку. Ничего не живет в памяти.</span></li>
+        <li><b>Модель управления</b><span>На каждую задачу есть исполнитель. Вы ставите цель и принимаете результат.</span></li>
+        <li><b>Пороги решений</b><span>Что команда решает сама, а что идет к вам. Граница названа и записана.</span></li>
+      </ul>
+      <div class="out"><b>На выходе:</b> цифры приходят готовыми, часть решений принимается без вас, компания перестает держаться на вас.</div>
     </div>
-    <figure class="fig rv">
-      <svg class="sch" viewBox="0 0 520 300" role="img" aria-label="Схема: сейчас все задачи идут через собственника, после у каждой задачи есть исполнитель">
-        <defs><marker id="arA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9 z" fill="#D9B872"/></marker></defs>
-        <text class="lb dim" x="125" y="30" text-anchor="middle">Сейчас</text>
-        <text class="lb" x="395" y="30" text-anchor="middle">После</text>
-        <line class="grid" x1="260" y1="22" x2="260" y2="284"/>
-        <!-- сейчас: все через собственника -->
-        <line class="ln soft" x1="62.9" y1="89" x2="103.9" y2="135.9" marker-end="url(#arA)"/>
-        <line class="ln soft" x1="187.1" y1="89" x2="146.1" y2="135.9" marker-end="url(#arA)"/>
-        <line class="ln soft" x1="47" y1="160" x2="93" y2="160" marker-end="url(#arA)"/>
-        <line class="ln soft" x1="203" y1="160" x2="157" y2="160" marker-end="url(#arA)"/>
-        <line class="ln soft" x1="62.9" y1="231" x2="103.9" y2="184.1" marker-end="url(#arA)"/>
-        <line class="ln soft" x1="187.1" y1="231" x2="146.1" y2="184.1" marker-end="url(#arA)"/>
-        <circle class="dot" cx="55" cy="80" r="10"/><circle class="dot" cx="195" cy="80" r="10"/>
-        <circle class="dot" cx="35" cy="160" r="10"/><circle class="dot" cx="215" cy="160" r="10"/>
-        <circle class="dot" cx="55" cy="240" r="10"/><circle class="dot" cx="195" cy="240" r="10"/>
-        <circle class="bx hi" cx="125" cy="160" r="26"/>
-        <text class="tx" x="125" y="165" text-anchor="middle">Вы</text>
-        <text class="tx sm mu" x="125" y="284" text-anchor="middle">все задачи идут через вас</text>
-        <!-- после: цель и контроль, исполнители на местах -->
-        <circle class="bx hi" cx="395" cy="84" r="22"/>
-        <text class="tx" x="395" y="89" text-anchor="middle">Вы</text>
-        <text class="tx sm mu" x="366" y="89" text-anchor="end">цель и контроль</text>
-        <line class="ln" x1="395" y1="106" x2="330" y2="148" marker-end="url(#arA)"/>
-        <line class="ln" x1="395" y1="106" x2="395" y2="148" marker-end="url(#arA)"/>
-        <line class="ln" x1="395" y1="106" x2="460" y2="148" marker-end="url(#arA)"/>
-        <rect class="bx" x="295" y="150" width="70" height="30" rx="7"/>
-        <rect class="bx" x="360" y="150" width="70" height="30" rx="7"/>
-        <rect class="bx" x="425" y="150" width="70" height="30" rx="7"/>
-        <text class="tx sm" x="330" y="170" text-anchor="middle">Продажи</text>
-        <text class="tx sm" x="395" y="170" text-anchor="middle">Операции</text>
-        <text class="tx sm" x="460" y="170" text-anchor="middle">Деньги</text>
-        <line class="ln soft" x1="330" y1="180" x2="314" y2="220"/><line class="ln soft" x1="330" y1="180" x2="346" y2="220"/>
-        <line class="ln soft" x1="395" y1="180" x2="379" y2="220"/><line class="ln soft" x1="395" y1="180" x2="411" y2="220"/>
-        <line class="ln soft" x1="460" y1="180" x2="444" y2="220"/><line class="ln soft" x1="460" y1="180" x2="476" y2="220"/>
-        <circle class="dot" cx="314" cy="228" r="8"/><circle class="dot" cx="346" cy="228" r="8"/>
-        <circle class="dot" cx="379" cy="228" r="8"/><circle class="dot" cx="411" cy="228" r="8"/>
-        <circle class="dot" cx="444" cy="228" r="8"/><circle class="dot" cx="476" cy="228" r="8"/>
-        <text class="tx sm mu" x="395" y="284" text-anchor="middle">у каждой задачи есть исполнитель</text>
-      </svg>
-      <figcaption>Модель управления: было и стало</figcaption>
-    </figure>
-  </div>
-
-  <!-- дорожная карта наставничества -->
-  <div class="xroad rv">
-    <figure class="fig d-only">
-      <svg class="sch" viewBox="0 0 900 175" role="img" aria-label="Дорожная карта наставничества: шесть шагов, три из них закрываются зафиксированным решением">
-        <defs><marker id="arB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9 z" fill="#D9B872"/></marker></defs>
-        <polygon class="bx hi" points="46,22 54,30 46,38 38,30"/>
-        <text class="tx sm mu" x="64" y="34">решение, которое фиксируем в реестре</text>
-        <line class="ln soft" x1="40" y1="100" x2="872" y2="100" marker-end="url(#arB)"/>
-        <!-- решения над шагами 2, 4, 5 -->
-        <polygon class="bx hi" points="238,44 250,56 238,68 226,56"/><line class="ln soft dash" x1="238" y1="68" x2="238" y2="90"/>
-        <polygon class="bx hi" points="534,44 546,56 534,68 522,56"/><line class="ln soft dash" x1="534" y1="68" x2="534" y2="90"/>
-        <polygon class="bx hi" points="682,44 694,56 682,68 670,56"/><line class="ln soft dash" x1="682" y1="68" x2="682" y2="90"/>
-        <!-- шаги -->
-        <circle class="bx hi" cx="90" cy="100" r="9"/>
-        <circle class="bx" cx="238" cy="100" r="9"/>
-        <circle class="bx" cx="386" cy="100" r="9"/>
-        <circle class="bx" cx="534" cy="100" r="9"/>
-        <circle class="bx" cx="682" cy="100" r="9"/>
-        <circle class="bx hi" cx="830" cy="100" r="9"/>
-        <text class="tx sm" x="90" y="136" text-anchor="middle">Точка А</text>
-        <text class="tx sm" x="238" y="136" text-anchor="middle">Кто что видит</text>
-        <text class="tx sm" x="386" y="136" text-anchor="middle">Передача учета</text>
-        <text class="tx sm" x="534" y="136" text-anchor="middle">Зоны и KPI</text>
-        <text class="tx sm" x="682" y="136" text-anchor="middle">Пороги решений</text>
-        <text class="tx sm" x="830" y="136" text-anchor="middle">Свод и выход</text>
-        <text class="tx sm mu" x="90" y="156" text-anchor="middle">цифры как есть</text>
-        <text class="tx sm mu" x="830" y="156" text-anchor="middle">было, стало, дальше</text>
-      </svg>
-      <figcaption>Дорожная карта: шесть шагов, каждый со своим артефактом</figcaption>
-    </figure>
-    <div class="m-only">
-      <div class="eyebrow">Дорожная карта: шесть шагов</div>
-      <ol class="xsteps">
-        <li>Точка А: цифры как есть</li>
-        <li>Кто что видит <em>решение</em></li>
-        <li>Передача учета</li>
-        <li>Зоны и KPI <em>решение</em></li>
-        <li>Пороги решений <em>решение</em></li>
-        <li>Свод и выход: было, стало, дальше</li>
-      </ol>
-    </div>
+    <div class="artcol rv"><img src="/foundertrajectory/assets/art/karta.svg" alt="" aria-hidden="true" loading="lazy"></div>
   </div>
 </div></section>
 
-<!-- УРОВЕНЬ 2: ОПЕРАЦИОННОЕ УЧАСТИЕ -->
+<!-- УРОВЕНЬ 2 -->
 <section class="band" id="processy"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="eyebrow">Уровень 02</div>
-    <h2 class="h2" style="margin-top:14px">Операционное участие: структура и процессы</h2>
-    <p class="sub">Захожу в операционку вместе с операционным менеджером. Пересобираем управление и описываем его так, чтобы оно работало без нас.</p>
+  <div class="zz rev">
+    <div class="rv">
+      <div class="lvl-tag">Уровень 02 <span>со мной операционный менеджер</span></div>
+      <h2 class="h2" style="margin-top:14px">Операционное участие: структура и процессы</h2>
+      <p class="lead-in sm">Захожу в операционку и пересобираю управление вместе с вашей командой. Описываем его так, чтобы оно работало без нас.</p>
+      <ul class="kv">
+        <li><b>Оргструктура</b><span>Кто за что отвечает. У каждой роли свой результат и свой показатель.</span></li>
+        <li><b>Процессы BPMN 2.0</b><span>Как идет работа от заявки до денег, по ролям и шагам. Новый человек входит по схеме, а не по пересказу.</span></li>
+        <li><b>KPI и отчетность</b><span>План и факт по каждой роли, каждую неделю. Спрашивать есть с кого.</span></li>
+        <li><b>План внедрения</b><span>Что, когда и кто. Диаграмма Ганта и контроль исполнения решений.</span></li>
+      </ul>
+      <div class="out"><b>На выходе:</b> система в документах, схемах и таблицах. Работает после нашего выхода.</div>
+    </div>
+    <div class="artcol rv"><img src="/foundertrajectory/assets/art/processy.svg" alt="" aria-hidden="true" loading="lazy"></div>
   </div>
-  <div class="xtiles rv">
-
-    <div class="xtile">
-      <div class="pic">
-        <svg class="sch" viewBox="0 0 360 214" role="img" aria-label="Оргструктура: собственник, три направления, у каждой роли показатель">
-          <rect class="bx hi" x="120" y="14" width="120" height="30" rx="7"/>
-          <text class="tx sm" x="180" y="34" text-anchor="middle">Собственник</text>
-          <line class="ln soft" x1="180" y1="44" x2="180" y2="64"/>
-          <line class="ln soft" x1="70" y1="64" x2="290" y2="64"/>
-          <line class="ln soft" x1="70" y1="64" x2="70" y2="84"/><line class="ln soft" x1="180" y1="64" x2="180" y2="84"/><line class="ln soft" x1="290" y1="64" x2="290" y2="84"/>
-          <rect class="bx" x="22" y="84" width="96" height="30" rx="7"/>
-          <rect class="bx" x="132" y="84" width="96" height="30" rx="7"/>
-          <rect class="bx" x="242" y="84" width="96" height="30" rx="7"/>
-          <text class="tx sm" x="70" y="104" text-anchor="middle">Продажи</text>
-          <text class="tx sm" x="180" y="104" text-anchor="middle">Операции</text>
-          <text class="tx sm" x="290" y="104" text-anchor="middle">Финансы</text>
-          <rect class="tag" x="92" y="76" width="30" height="15" rx="7.5"/><text class="tagt" x="107" y="87" text-anchor="middle">KPI</text>
-          <rect class="tag" x="202" y="76" width="30" height="15" rx="7.5"/><text class="tagt" x="217" y="87" text-anchor="middle">KPI</text>
-          <rect class="tag" x="312" y="76" width="30" height="15" rx="7.5"/><text class="tagt" x="327" y="87" text-anchor="middle">KPI</text>
-          <line class="ln soft" x1="70" y1="114" x2="70" y2="134"/><line class="ln soft" x1="44" y1="134" x2="96" y2="134"/><line class="ln soft" x1="44" y1="134" x2="44" y2="150"/><line class="ln soft" x1="96" y1="134" x2="96" y2="150"/>
-          <line class="ln soft" x1="180" y1="114" x2="180" y2="134"/><line class="ln soft" x1="154" y1="134" x2="206" y2="134"/><line class="ln soft" x1="154" y1="134" x2="154" y2="150"/><line class="ln soft" x1="206" y1="134" x2="206" y2="150"/>
-          <line class="ln soft" x1="290" y1="114" x2="290" y2="134"/><line class="ln soft" x1="264" y1="134" x2="316" y2="134"/><line class="ln soft" x1="264" y1="134" x2="264" y2="150"/><line class="ln soft" x1="316" y1="134" x2="316" y2="150"/>
-          <rect class="bx" x="24" y="150" width="40" height="24" rx="6"/><rect class="bx" x="76" y="150" width="40" height="24" rx="6"/>
-          <rect class="bx" x="134" y="150" width="40" height="24" rx="6"/><rect class="bx" x="186" y="150" width="40" height="24" rx="6"/>
-          <rect class="bx" x="244" y="150" width="40" height="24" rx="6"/><rect class="bx" x="296" y="150" width="40" height="24" rx="6"/>
-          <text class="tx sm mu" x="44" y="167" text-anchor="middle">роль</text><text class="tx sm mu" x="96" y="167" text-anchor="middle">роль</text>
-          <text class="tx sm mu" x="154" y="167" text-anchor="middle">роль</text><text class="tx sm mu" x="206" y="167" text-anchor="middle">роль</text>
-          <text class="tx sm mu" x="264" y="167" text-anchor="middle">роль</text><text class="tx sm mu" x="316" y="167" text-anchor="middle">роль</text>
-          <text class="tx sm mu" x="180" y="204" text-anchor="middle">у каждой роли результат и показатель</text>
-        </svg>
-      </div>
-      <div class="cap"><b>Оргструктура</b><span>Кто за что отвечает. У каждой роли свой результат и свой показатель.</span></div>
-    </div>
-
-    <div class="xtile">
-      <div class="pic">
-        <svg class="sch" viewBox="0 0 360 224" role="img" aria-label="Процесс в нотации BPMN 2.0: две дорожки, задачи, развилка, конец">
-          <defs><marker id="arC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9 z" fill="#D9B872"/></marker></defs>
-          <rect class="grid" x="10" y="20" width="340" height="180"/>
-          <rect x="10" y="20" width="34" height="180" fill="color-mix(in oklab,var(--gold) 6%,transparent)"/>
-          <line class="grid" x1="44" y1="20" x2="44" y2="200"/>
-          <line class="grid" x1="10" y1="110" x2="350" y2="110"/>
-          <text class="tx sm mu" transform="rotate(-90 27 65)" x="27" y="65" text-anchor="middle">Продажи</text>
-          <text class="tx sm mu" transform="rotate(-90 27 155)" x="27" y="155" text-anchor="middle">Склад</text>
-          <circle class="ln" cx="66" cy="65" r="9"/>
-          <line class="ln soft" x1="75" y1="65" x2="88" y2="65" marker-end="url(#arC)"/>
-          <rect class="bx" x="90" y="49" width="76" height="32" rx="8"/><text class="tx sm" x="128" y="70" text-anchor="middle">Заявка</text>
-          <line class="ln soft" x1="166" y1="65" x2="182" y2="65" marker-end="url(#arC)"/>
-          <polygon class="bx hi" points="200,49 216,65 200,81 184,65"/>
-          <line class="ln" x1="195" y1="60" x2="205" y2="70"/><line class="ln" x1="205" y1="60" x2="195" y2="70"/>
-          <text class="tx sm mu" x="224" y="55">да</text>
-          <line class="ln soft" x1="216" y1="65" x2="238" y2="65" marker-end="url(#arC)"/>
-          <rect class="bx" x="240" y="49" width="76" height="32" rx="8"/><text class="tx sm" x="278" y="70" text-anchor="middle">Счет</text>
-          <text class="tx sm mu" x="207" y="122">нет</text>
-          <line class="ln soft" x1="200" y1="81" x2="200" y2="144" marker-end="url(#arC)"/>
-          <circle class="ln thick" cx="200" cy="155" r="9"/>
-          <line class="ln soft" x1="278" y1="81" x2="278" y2="137" marker-end="url(#arC)"/>
-          <rect class="bx" x="240" y="139" width="76" height="32" rx="8"/><text class="tx sm" x="278" y="160" text-anchor="middle">Отгрузка</text>
-          <line class="ln soft" x1="316" y1="155" x2="326" y2="155" marker-end="url(#arC)"/>
-          <circle class="ln thick" cx="337" cy="155" r="8"/>
-          <text class="tx sm mu" x="180" y="217" text-anchor="middle">от заявки до отгрузки, по ролям и шагам</text>
-        </svg>
-      </div>
-      <div class="cap"><b>Процессы в BPMN 2.0</b><span>Как идет работа от заявки до денег. Новый человек входит по схеме, а не по пересказу.</span></div>
-    </div>
-
-    <div class="xtile">
-      <div class="pic">
-        <svg class="sch" viewBox="0 0 360 214" role="img" aria-label="Диаграмма Ганта: пять работ на восемь недель, отметка сегодня">
-          <text class="tx sm mu" x="132" y="30" text-anchor="middle">1</text><text class="tx sm mu" x="161" y="30" text-anchor="middle">2</text>
-          <text class="tx sm mu" x="190" y="30" text-anchor="middle">3</text><text class="tx sm mu" x="219" y="30" text-anchor="middle">4</text>
-          <text class="tx sm mu" x="248" y="30" text-anchor="middle">5</text><text class="tx sm mu" x="277" y="30" text-anchor="middle">6</text>
-          <text class="tx sm mu" x="306" y="30" text-anchor="middle">7</text><text class="tx sm mu" x="335" y="30" text-anchor="middle">8</text>
-          <text class="lb dim" x="12" y="30">Недели</text>
-          <line class="grid" x1="118" y1="38" x2="118" y2="188"/><line class="grid" x1="147" y1="38" x2="147" y2="188"/><line class="grid" x1="176" y1="38" x2="176" y2="188"/>
-          <line class="grid" x1="205" y1="38" x2="205" y2="188"/><line class="grid" x1="234" y1="38" x2="234" y2="188"/><line class="grid" x1="263" y1="38" x2="263" y2="188"/>
-          <line class="grid" x1="292" y1="38" x2="292" y2="188"/><line class="grid" x1="321" y1="38" x2="321" y2="188"/><line class="grid" x1="350" y1="38" x2="350" y2="188"/>
-          <text class="tx sm" x="12" y="56">Оргструктура</text>
-          <text class="tx sm" x="12" y="86">Процессы</text>
-          <text class="tx sm" x="12" y="116">KPI</text>
-          <text class="tx sm" x="12" y="146">Регламенты</text>
-          <text class="tx sm" x="12" y="176">Контроль</text>
-          <rect class="bar" x="118" y="45" width="87" height="14" rx="4"/>
-          <rect class="bar" x="147" y="75" width="70" height="14" rx="4"/><rect class="bar plan" x="217" y="75" width="46" height="14" rx="4"/>
-          <rect class="bar plan" x="205" y="105" width="87" height="14" rx="4"/>
-          <rect class="bar plan" x="263" y="135" width="87" height="14" rx="4"/>
-          <rect class="bar plan" x="292" y="165" width="58" height="14" rx="4"/>
-          <line class="ln dash" x1="217" y1="38" x2="217" y2="190"/>
-          <text class="tx sm mu" x="217" y="206" text-anchor="middle">сегодня</text>
-        </svg>
-      </div>
-      <div class="cap"><b>Диаграмма Ганта</b><span>План внедрения: что, когда и кто. Всегда видно, где мы сейчас.</span></div>
-    </div>
-
-    <div class="xtile">
-      <div class="pic">
-        <svg class="sch" viewBox="0 0 360 214" role="img" aria-label="Таблица KPI: роль, показатель, план и факт за неделю">
-          <text class="lb dim" x="16" y="34">Роль</text>
-          <text class="lb dim" x="104" y="34">Показатель</text>
-          <text class="lb dim" x="268" y="34" text-anchor="end">План</text>
-          <text class="lb dim" x="344" y="34" text-anchor="end">Факт</text>
-          <line class="grid" x1="16" y1="44" x2="344" y2="44"/>
-          <text class="tx sm" x="16" y="78">РОП</text><text class="tx sm mu" x="104" y="78">выручка, млн</text>
-          <text class="tx sm mu" x="268" y="78" text-anchor="end">1,0</text><text class="tx sm fok" x="344" y="78" text-anchor="end">1,12 ↑</text>
-          <line class="grid" x1="16" y1="96" x2="344" y2="96"/>
-          <text class="tx sm" x="16" y="118">Склад</text><text class="tx sm mu" x="104" y="118">отгрузки в срок</text>
-          <text class="tx sm mu" x="268" y="118" text-anchor="end">95%</text><text class="tx sm fno" x="344" y="118" text-anchor="end">91% ↓</text>
-          <line class="grid" x1="16" y1="136" x2="344" y2="136"/>
-          <text class="tx sm" x="16" y="158">Финансы</text><text class="tx sm mu" x="104" y="158">отчет к понедельнику</text>
-          <text class="tx sm mu" x="268" y="158" text-anchor="end">да</text><text class="tx sm fok" x="344" y="158" text-anchor="end">да</text>
-          <text class="tx sm mu" x="16" y="204">план и факт по каждой роли, каждую неделю</text>
-          <text class="lb dim" x="344" y="204" text-anchor="end">пример</text>
-        </svg>
-      </div>
-      <div class="cap"><b>KPI и отчетность</b><span>Показатели по ролям, план и факт каждую неделю. Спрашивать есть с кого.</span></div>
-    </div>
-
-  </div>
-  <div class="xres rv" style="max-width:760px"><b>Все остается у вас</b> в документах, схемах и таблицах и работает после нашего выхода.</div>
 </div></section>
 
-<!-- УРОВЕНЬ 3: ФИНАНСОВЫЙ КОНТУР -->
+<!-- УРОВЕНЬ 3 -->
 <section class="band alt" id="finansy"><div class="inner pad">
+  <div class="zz">
+    <div class="rv">
+      <div class="lvl-tag">Уровень 03 <span>со мной финансовый директор</span></div>
+      <h2 class="h2" style="margin-top:14px">Финансовый контур: чистая прибыль под контролем</h2>
+      <p class="lead-in sm">Ставлю регулярный финансовый менеджмент: цифры собираются каждую неделю без вашего участия, решения принимаются по ним.</p>
+      <ul class="kv">
+        <li><b>Учет</b><span>Движение денег и отчет о прибыли по одному правилу, каждую неделю.</span></li>
+        <li><b>Чистая прибыль</b><span>С зарплатой собственника внутри. Видно, сколько можно забрать.</span></li>
+        <li><b>Платежный календарь</b><span>На восемь недель вперед. Разрыв виден за недели, а не в день оплаты.</span></li>
+        <li><b>Планирование</b><span>Финмодель и сценарии. Решения по цифрам, а не по ощущению.</span></li>
+      </ul>
+      <div class="out"><b>На выходе:</b> кассовый разрыв виден заранее, прибыль планируется, деньги под контролем.</div>
+      <p class="note" style="margin-top:16px">В наставничестве считает ваш человек по моим шаблонам. В полном формате считает финансовый директор с моей стороны.</p>
+    </div>
+    <div class="artcol rv"><img src="/foundertrajectory/assets/art/dengi.svg" alt="" aria-hidden="true" loading="lazy"></div>
+  </div>
+</div></section>
+
+<!-- ОПЫТ И КЕЙСЫ -->
+<section class="band" id="keysy"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="eyebrow">Уровень 03</div>
-    <h2 class="h2" style="margin-top:14px">Финансовый контур: чистая прибыль под контролем</h2>
+    <h2 class="h2">Опыт и результаты</h2>
+    <p class="sub">Я не консультант со стороны: то, что ставлю у вас, сначала построил в собственной компании.</p>
   </div>
-  <div class="xfin rv">
-    <figure class="fig">
-      <svg class="sch" viewBox="0 0 520 250" role="img" aria-label="Платежный календарь на восемь недель: остаток уходит ниже нуля на пятой неделе, разрыв виден за четыре недели, после решения остаток остается положительным">
-        <text class="lb dim" x="40" y="30">Остаток на счете</text>
-        <line class="ln soft" x1="75" y1="66" x2="345" y2="66"/><line class="ln soft" x1="75" y1="60" x2="75" y2="72"/><line class="ln soft" x1="345" y1="60" x2="345" y2="72"/>
-        <text class="tx sm" x="210" y="56" text-anchor="middle">разрыв виден за четыре недели</text>
-        <line class="grid" x1="40" y1="150" x2="510" y2="150" style="stroke:var(--ink-dim)"/>
-        <text class="tx sm mu" x="30" y="154" text-anchor="end">0</text>
-        <polygon class="fno" points="277.5,150 315,170 375,180 435,150" style="opacity:.32"/>
-        <path class="ln draw" d="M75,100 L135,108 L195,122 L255,138 L315,170 L375,180 L435,150 L495,120"/>
-        <path class="ln ok dash" d="M255,138 L315,144 L375,140 L435,128 L495,112"/>
-        <line class="ln soft dash" x1="75" y1="76" x2="75" y2="150"/>
-        <text class="tx sm mu" x="75" y="170" text-anchor="middle">сегодня</text>
-        <text class="tx sm fno" x="345" y="204" text-anchor="middle">кассовый разрыв</text>
-        <text class="tx sm fok" x="498" y="100" text-anchor="end">после решения</text>
-        <text class="lb dim" x="40" y="236">Недели</text>
-        <text class="tx sm mu" x="75" y="236" text-anchor="middle">1</text><text class="tx sm mu" x="135" y="236" text-anchor="middle">2</text>
-        <text class="tx sm mu" x="195" y="236" text-anchor="middle">3</text><text class="tx sm mu" x="255" y="236" text-anchor="middle">4</text>
-        <text class="tx sm mu" x="315" y="236" text-anchor="middle">5</text><text class="tx sm mu" x="375" y="236" text-anchor="middle">6</text>
-        <text class="tx sm mu" x="435" y="236" text-anchor="middle">7</text><text class="tx sm mu" x="495" y="236" text-anchor="middle">8</text>
-      </svg>
-      <figcaption>Платежный календарь на восемь недель</figcaption>
-    </figure>
-    <figure class="fig">
-      <svg class="sch" viewBox="0 0 520 250" role="img" aria-label="Отчет о прибыли: из выручки вычитаются себестоимость и расходы, остается чистая прибыль">
-        <line class="grid" x1="30" y1="200" x2="500" y2="200" style="stroke:var(--ink-dim)"/>
-        <rect class="bar" x="50" y="60" width="80" height="140" rx="4"/>
-        <line class="ln soft dash" x1="130" y1="60" x2="170" y2="60"/>
-        <rect class="fno" x="170" y="60" width="80" height="60" rx="4" style="opacity:.55"/>
-        <line class="ln soft dash" x1="250" y1="120" x2="290" y2="120"/>
-        <rect class="fno" x="290" y="120" width="80" height="50" rx="4" style="opacity:.55"/>
-        <line class="ln soft dash" x1="370" y1="170" x2="410" y2="170"/>
-        <rect class="fok" x="410" y="170" width="80" height="30" rx="4" style="opacity:.8"/>
-        <text class="tx sm fok" x="450" y="156" text-anchor="middle">то, что можно забрать</text>
-        <text class="tx sm" x="90" y="224" text-anchor="middle">Выручка</text>
-        <text class="tx sm" x="210" y="224" text-anchor="middle">Себестоимость</text>
-        <text class="tx sm" x="330" y="224" text-anchor="middle">Расходы</text>
-        <text class="tx sm" x="450" y="224" text-anchor="middle">Чистая прибыль</text>
-      </svg>
-      <figcaption>Отчет о прибыли, каждый месяц по одному правилу</figcaption>
-    </figure>
+  <div class="proof">
+    <div class="rv">
+      <ul class="who">
+        <li><b>Бывший генеральный директор и собственник.</b> Команда больше 15 человек, выручка 1,4 млн евро в 2024 году.</li>
+        <li><b>Процессы в BPMN 2.0, KPI и регулярный финансовый менеджмент</b> сначала поставил у себя, потом у клиентов.</li>
+        <li><b>MBA.</b> Больше десяти лет в управлении бизнесом.</li>
+      </ul>
+    </div>
+    <div class="rv">
+      <div class="case">
+        <div><div class="cn">Производство, выручка 2 млн евро</div><div class="cd">Порядок в управлении, продажах и работе с партнерами. Веду собственника.</div></div>
+        <div class="cr">3 млн €<small>план на год</small></div>
+      </div>
+      <div class="case">
+        <div><div class="cn">Визовый центр</div><div class="cd">CRM, воронка партнеров, процессы внедрены в команду.</div></div>
+        <div class="cr">×1,5<small>поток лидов от партнеров за месяц</small></div>
+      </div>
+      <div class="case">
+        <div><div class="cn">Своя компания, электронная торговля</div><div class="cd">Финмодель показала, что бьет по прибыли. Себестоимость снижена на 3%.</div></div>
+        <div class="cr">+6 000 €<small>чистой прибыли за месяц</small></div>
+      </div>
+      <a class="morelink" href="/foundertrajectory/keysy/">Подробнее о кейсах →</a>
+    </div>
   </div>
-  <div class="xrow rv">
-    <div><b>Учет</b><span>Движение денег и отчет о прибыли собираются каждую неделю без вашего участия.</span></div>
-    <div><b>Чистая прибыль</b><span>Считается по одному правилу, с зарплатой собственника внутри. Видно, сколько можно забрать.</span></div>
-    <div><b>Платежный календарь</b><span>Кассовый разрыв виден за недели, а не в день оплаты. Решение принимается заранее.</span></div>
-    <div><b>Планирование</b><span>Финмодель и сценарии. Решения по цифрам, а не по ощущению.</span></div>
-  </div>
-  <p class="note rv" style="margin-top:26px">В наставничестве считает ваш человек по моим шаблонам. В полном формате считает финансовый директор с моей стороны.</p>
 </div></section>
 
 <!-- AI НА КАЖДОМ УРОВНЕ -->
 <section class="band deep" id="ai"><div class="inner pad">
+  <div class="zz rev">
+    <div class="rv">
+      <div class="eyebrow">На каждом уровне</div>
+      <h2 class="h2" style="margin-top:14px">Рядом со мной работает AI. Учу тому же вас</h2>
+      <p class="lead-in sm">Так устроена моя собственная работа, и так же я собираю систему у клиента.</p>
+      <div class="flowmini">
+        <div><div class="fh">Читает</div><div class="fc"><span>Чаты</span><span>Звонки</span><span>Почта</span><span>Таблицы</span><span>Задачи</span></div></div>
+        <div class="fa">→</div>
+        <div><div class="fh">Отдает</div><div class="fc"><span>Портал</span><span>Архив данных</span><span>Дорожная карта</span><span>Отчетность</span><span>Финмодель</span><span>КП</span></div></div>
+      </div>
+      <ul class="pts">
+        <li><b>Каждый звонок транскрибируется,</b> решения и задачи фиксируются в тот же день.</li>
+        <li><b>У вас свой портал:</b> архив данных, дорожная карта, отчетность, показатели.</li>
+        <li><b>Коммерческое предложение или страница с офером</b> под клиента собирается за час.</li>
+      </ul>
+      <div class="out"><b>Второй мозг.</b> Все мои рабочие чаты, письма и звонки он читает сам: ни одно сообщение не проходит мимо, ни одна договоренность не теряется. На каждом уровне показываю, как поставить то же самое у себя.</div>
+    </div>
+    <div class="artcol rv"><img src="/foundertrajectory/assets/art/mozg.svg" alt="" aria-hidden="true" loading="lazy"></div>
+  </div>
+</div></section>
+
+<!-- КАК НАЧАТЬ -->
+<section class="band" id="kak-nachat"><div class="inner pad">
   <div class="sect-head rv">
-    <div class="eyebrow">На каждом уровне</div>
-    <h2 class="h2" style="margin-top:14px">Рядом со мной работает AI. Учу тому же вас</h2>
-    <p class="sub">Так устроена моя собственная работа, и так же я собираю систему у клиента.</p>
+    <h2 class="h2">Как начать</h2>
   </div>
-  <figure class="xai rv d-only">
-    <svg class="sch" viewBox="0 0 1000 420" role="img" aria-label="Второй мозг: читает чаты, звонки, почту, таблицы и задачи, отдает портал, архив, дорожную карту, отчетность, финмодель и коммерческие предложения">
-      <defs><marker id="arD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9 z" fill="#D9B872"/></marker></defs>
-      <text class="lb dim" x="140" y="26" text-anchor="middle">Что читает</text>
-      <text class="lb dim" x="860" y="26" text-anchor="middle">Что получаете</text>
-      <path class="ln soft draw" d="M240,60 C320,60 320,210 400,210"/>
-      <path class="ln soft draw" d="M240,130 C320,130 320,210 400,210"/>
-      <path class="ln soft draw" d="M240,200 C320,200 320,210 400,210"/>
-      <path class="ln soft draw" d="M240,270 C320,270 320,210 400,210"/>
-      <path class="ln soft draw" d="M240,340 C320,340 320,210 400,210"/>
-      <rect class="bx" x="40" y="40" width="200" height="40" rx="10"/><text class="tx" x="140" y="65" text-anchor="middle">Чаты Telegram</text>
-      <rect class="bx" x="40" y="110" width="200" height="40" rx="10"/><text class="tx" x="140" y="135" text-anchor="middle">Звонки и встречи</text>
-      <rect class="bx" x="40" y="180" width="200" height="40" rx="10"/><text class="tx" x="140" y="205" text-anchor="middle">Почта и документы</text>
-      <rect class="bx" x="40" y="250" width="200" height="40" rx="10"/><text class="tx" x="140" y="275" text-anchor="middle">Таблицы и банк</text>
-      <rect class="bx" x="40" y="320" width="200" height="40" rx="10"/><text class="tx" x="140" y="345" text-anchor="middle">Задачи команды</text>
-      <path class="ln" d="M600,210 C680,210 680,45 758,45" marker-end="url(#arD)"/>
-      <path class="ln" d="M600,210 C680,210 680,110 758,110" marker-end="url(#arD)"/>
-      <path class="ln" d="M600,210 C680,210 680,175 758,175" marker-end="url(#arD)"/>
-      <path class="ln" d="M600,210 C680,210 680,240 758,240" marker-end="url(#arD)"/>
-      <path class="ln" d="M600,210 C680,210 680,305 758,305" marker-end="url(#arD)"/>
-      <path class="ln" d="M600,210 C680,210 680,370 758,370" marker-end="url(#arD)"/>
-      <rect class="bx hi" x="400" y="160" width="200" height="100" rx="16"/>
-      <text class="tx big" x="500" y="205" text-anchor="middle">Второй мозг</text>
-      <text class="tx sm mu" x="500" y="232" text-anchor="middle">AI, который помнит все</text>
-      <rect class="bx" x="760" y="25" width="200" height="40" rx="10"/><text class="tx" x="860" y="50" text-anchor="middle">Портал собственника</text>
-      <rect class="bx" x="760" y="90" width="200" height="40" rx="10"/><text class="tx" x="860" y="115" text-anchor="middle">Архив данных</text>
-      <rect class="bx" x="760" y="155" width="200" height="40" rx="10"/><text class="tx" x="860" y="180" text-anchor="middle">Дорожная карта и задачи</text>
-      <rect class="bx" x="760" y="220" width="200" height="40" rx="10"/><text class="tx" x="860" y="245" text-anchor="middle">Отчетность и KPI</text>
-      <rect class="bx" x="760" y="285" width="200" height="40" rx="10"/><text class="tx" x="860" y="310" text-anchor="middle">Финмодель и анализ</text>
-      <rect class="bx" x="760" y="350" width="200" height="40" rx="10"/><text class="tx" x="860" y="375" text-anchor="middle">КП и страница с офером</text>
-    </svg>
-  </figure>
-  <figure class="xai rv m-only">
-    <svg class="sch" viewBox="0 0 360 530" role="img" aria-label="Второй мозг: читает чаты, звонки, почту, таблицы и задачи, отдает портал, архив, дорожную карту, отчетность, финмодель и коммерческие предложения">
-      <defs><marker id="arE" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9 z" fill="#D9B872"/></marker></defs>
-      <text class="lb dim" x="180" y="18" text-anchor="middle">Что читает</text>
-      <rect class="bx" x="20" y="32" width="150" height="34" rx="9"/><text class="tx sm" x="95" y="54" text-anchor="middle">Чаты Telegram</text>
-      <rect class="bx" x="190" y="32" width="150" height="34" rx="9"/><text class="tx sm" x="265" y="54" text-anchor="middle">Звонки и встречи</text>
-      <rect class="bx" x="20" y="78" width="150" height="34" rx="9"/><text class="tx sm" x="95" y="100" text-anchor="middle">Почта и документы</text>
-      <rect class="bx" x="190" y="78" width="150" height="34" rx="9"/><text class="tx sm" x="265" y="100" text-anchor="middle">Таблицы и банк</text>
-      <rect class="bx" x="105" y="124" width="150" height="34" rx="9"/><text class="tx sm" x="180" y="146" text-anchor="middle">Задачи команды</text>
-      <line class="ln" x1="180" y1="166" x2="180" y2="200" marker-end="url(#arE)"/>
-      <rect class="bx hi" x="90" y="210" width="180" height="80" rx="14"/>
-      <text class="tx big" x="180" y="246" text-anchor="middle">Второй мозг</text>
-      <text class="tx sm mu" x="180" y="270" text-anchor="middle">AI, который помнит все</text>
-      <line class="ln" x1="180" y1="290" x2="180" y2="324" marker-end="url(#arE)"/>
-      <text class="lb dim" x="180" y="352" text-anchor="middle">Что получаете</text>
-      <rect class="bx" x="20" y="366" width="150" height="34" rx="9"/><text class="tx sm" x="95" y="388" text-anchor="middle">Портал собственника</text>
-      <rect class="bx" x="190" y="366" width="150" height="34" rx="9"/><text class="tx sm" x="265" y="388" text-anchor="middle">Архив данных</text>
-      <rect class="bx" x="20" y="412" width="150" height="34" rx="9"/><text class="tx sm" x="95" y="434" text-anchor="middle">Дорожная карта</text>
-      <rect class="bx" x="190" y="412" width="150" height="34" rx="9"/><text class="tx sm" x="265" y="434" text-anchor="middle">Отчетность и KPI</text>
-      <rect class="bx" x="20" y="458" width="150" height="34" rx="9"/><text class="tx sm" x="95" y="480" text-anchor="middle">Финмодель и анализ</text>
-      <rect class="bx" x="190" y="458" width="150" height="34" rx="9"/><text class="tx sm" x="265" y="480" text-anchor="middle">КП и офер за час</text>
-    </svg>
-  </figure>
-  <div class="xpills rv">
-    <span>Каждый звонок транскрибируется</span>
-    <span>Решения и задачи фиксируются в тот же день</span>
-    <span>Портал собственника с архивом данных</span>
-    <span>Дорожная карта обновляется сама</span>
-    <span>Отчетность по KPI без ручной сборки</span>
-    <span>Финмодель и анализ показателей</span>
-    <span>Коммерческое предложение за час</span>
-    <span>Страница с офером под клиента</span>
+  <div class="how rv">
+    <div><div class="n">01</div><b>Напишите</b><span>В Telegram или через форму ниже. Двух строк о ситуации достаточно.</span></div>
+    <div><div class="n">02</div><b>Разговор на час</b><span>Разбираю ситуацию, называю главную проблему и с чего начать. Выводы остаются у вас.</span></div>
+    <div><div class="n">03</div><b>Условия до старта</b><span>Предлагаю уровень, срок и одну сумму. Дальше решаете вы.</span></div>
   </div>
-  <div class="takeaway rv" style="max-width:none">Все мои рабочие чаты, письма и звонки читает мой второй мозг. Ни одно сообщение не проходит мимо, ни одна договоренность не теряется. <b>На каждом уровне показываю, как поставить то же самое у себя.</b></div>
 </div></section>
 
 <!-- НАПИШИТЕ МНЕ -->
@@ -633,6 +399,7 @@
     <div>
       <div class="fcol-h">Разделы</div>
       <ul class="fnav">
+        <li><a href="#rezultat">Что меняется</a></li>
         <li><a href="#urovni">Три уровня участия</a></li>
         <li><a href="#nastavnichestvo">Наставничество</a></li>
         <li><a href="#processy">Структура и процессы</a></li>

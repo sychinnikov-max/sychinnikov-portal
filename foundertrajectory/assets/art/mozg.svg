@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" fill="none" stroke="#D9B872" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1,1 L9,5 L1,9 z" fill="#D9B872" stroke="none"/></marker></defs>
+<circle cx="400.0" cy="300.0" r="42.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="400.0" cy="300.0" r="92.0" opacity="0.50"/>
+<circle cx="400.0" cy="300.0" r="142.0" opacity="0.35"/>
+<circle cx="479.7" cy="346.0" r="6.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="300.0" x2="479.7" y2="346.0" opacity="0.30"/>
+<circle cx="400.0" cy="392.0" r="6.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="300.0" x2="400.0" y2="392.0" opacity="0.30"/>
+<circle cx="320.3" cy="346.0" r="6.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="300.0" x2="320.3" y2="346.0" opacity="0.30"/>
+<circle cx="320.3" cy="254.0" r="6.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="300.0" x2="320.3" y2="254.0" opacity="0.30"/>
+<circle cx="400.0" cy="208.0" r="6.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="300.0" x2="400.0" y2="208.0" opacity="0.30"/>
+<circle cx="479.7" cy="254.0" r="6.0" opacity="0.90" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="300.0" x2="479.7" y2="254.0" opacity="0.30"/>
+<circle cx="542.0" cy="300.0" r="5.0" opacity="0.70" fill="#D9B872" fill-opacity=".10"/>
+<line x1="542.0" y1="300.0" x2="479.7" y2="346.0" opacity="0.30"/>
+<circle cx="500.4" cy="400.4" r="5.0" opacity="0.70" fill="#D9B872" fill-opacity=".10"/>
+<line x1="500.4" y1="400.4" x2="479.7" y2="346.0" opacity="0.30"/>
+<circle cx="400.0" cy="442.0" r="5.0" opacity="0.70" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="442.0" x2="400.0" y2="392.0" opacity="0.30"/>
+<circle cx="299.6" cy="400.4" r="5.0" opacity="0.70" fill="#D9B872" fill-opacity=".10"/>
+<line x1="299.6" y1="400.4" x2="320.3" y2="346.0" opacity="0.30"/>
+<circle cx="258.0" cy="300.0" r="5.0" opacity="0.70" fill="#D9B872" fill-opacity=".10"/>
+<line x1="258.0" y1="300.0" x2="320.3" y2="254.0" opacity="0.30"/>
+<circle cx="299.6" cy="199.6" r="5.0" opacity="0.70" fill="#D9B872" fill-opacity=".10"/>
+<line x1="299.6" y1="199.6" x2="320.3" y2="254.0" opacity="0.30"/>
+<circle cx="400.0" cy="158.0" r="5.0" opacity="0.70" fill="#D9B872" fill-opacity=".10"/>
+<line x1="400.0" y1="158.0" x2="400.0" y2="208.0" opacity="0.30"/>
+<circle cx="500.4" cy="199.6" r="5.0" opacity="0.70" fill="#D9B872" fill-opacity=".10"/>
+<line x1="500.4" y1="199.6" x2="479.7" y2="254.0" opacity="0.30"/>
+<line x1="479.7" y1="346.0" x2="400.0" y2="392.0" opacity="0.25"/>
+<line x1="400.0" y1="392.0" x2="320.3" y2="346.0" opacity="0.25"/>
+<line x1="320.3" y1="346.0" x2="320.3" y2="254.0" opacity="0.25"/>
+<line x1="320.3" y1="254.0" x2="400.0" y2="208.0" opacity="0.25"/>
+<line x1="400.0" y1="208.0" x2="479.7" y2="254.0" opacity="0.25"/>
+<line x1="479.7" y1="254.0" x2="479.7" y2="346.0" opacity="0.25"/>
+<rect x="80.0" y="120.0" width="90.0" height="56.0" rx="12" opacity="0.80"/>
+<path d="M110,176 L104,196 L128,176" opacity=".8"/>
+<line x1="98.0" y1="140.0" x2="152.0" y2="140.0" opacity="0.50"/>
+<line x1="98.0" y1="156.0" x2="136.0" y2="156.0" opacity="0.50"/>
+<rect x="80.0" y="232.0" width="90.0" height="60.0" rx="6" opacity="0.80"/>
+<path d="M80,232 L125,268 L170,232" opacity="0.80"/>
+<rect x="80.0" y="344.0" width="90.0" height="64.0" rx="4" opacity="0.80"/>
+<line x1="80.0" y1="365.0" x2="170.0" y2="365.0" opacity="0.50"/>
+<line x1="80.0" y1="387.0" x2="170.0" y2="387.0" opacity="0.50"/>
+<line x1="110.0" y1="344.0" x2="110.0" y2="408.0" opacity="0.50"/>
+<line x1="140.0" y1="344.0" x2="140.0" y2="408.0" opacity="0.50"/>
+<rect x="80.0" y="460.0" width="90.0" height="56.0" rx="8" opacity="0.80"/>
+<circle cx="125.0" cy="488.0" r="14.0" opacity="0.60"/>
+<line x1="118.0" y1="488.0" x2="132.0" y2="488.0" opacity="0.70"/>
+<path d="M180,148 C240,148 240,180 258,180" opacity="0.50" marker-end="url(#a)"/>
+<path d="M180,262 C240,262 240,240 258,240" opacity="0.50" marker-end="url(#a)"/>
+<path d="M180,376 C240,376 240,340 258,340" opacity="0.50" marker-end="url(#a)"/>
+<path d="M180,488 C240,488 240,420 258,420" opacity="0.50" marker-end="url(#a)"/>
+<rect x="630.0" y="120.0" width="90.0" height="64.0" rx="6" opacity="0.80"/>
+<line x1="630.0" y1="138.0" x2="720.0" y2="138.0" opacity="0.60"/>
+<circle cx="641.0" cy="129.0" r="3.0" opacity="0.80" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="652.0" cy="129.0" r="3.0" opacity="0.80" fill="#D9B872" fill-opacity=".10"/>
+<rect x="640" y="264" width="14" height="26" rx="3" opacity=".85" fill="#D9B872" fill-opacity=".2"/>
+<rect x="660" y="250" width="14" height="40" rx="3" opacity=".85" fill="#D9B872" fill-opacity=".2"/>
+<rect x="680" y="272" width="14" height="18" rx="3" opacity=".85" fill="#D9B872" fill-opacity=".2"/>
+<rect x="700" y="242" width="14" height="48" rx="3" opacity=".85" fill="#D9B872" fill-opacity=".2"/>
+<line x1="630.0" y1="292.0" x2="724.0" y2="292.0" opacity="0.60"/>
+<rect x="640.0" y="344.0" width="70.0" height="80.0" rx="4" opacity="0.80"/>
+<line x1="652.0" y1="362.0" x2="698.0" y2="362.0" opacity="0.50"/>
+<line x1="652.0" y1="376.0" x2="698.0" y2="376.0" opacity="0.50"/>
+<line x1="652.0" y1="390.0" x2="698.0" y2="390.0" opacity="0.50"/>
+<line x1="652.0" y1="404.0" x2="698.0" y2="404.0" opacity="0.50"/>
+<rect x="630.0" y="460.0" width="90.0" height="64.0" rx="6" opacity="0.80"/>
+<line x1="630.0" y1="478.0" x2="720.0" y2="478.0" opacity="0.60"/>
+<line x1="648.0" y1="470.0" x2="648.0" y2="462.0" opacity="0.60"/>
+<line x1="672.0" y1="470.0" x2="672.0" y2="462.0" opacity="0.60"/>
+<line x1="696.0" y1="470.0" x2="696.0" y2="462.0" opacity="0.60"/>
+<circle cx="652.0" cy="494.0" r="3.0" opacity="0.60" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="676.0" cy="494.0" r="3.0" opacity="0.60" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="700.0" cy="494.0" r="3.0" opacity="0.60" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="652.0" cy="510.0" r="3.0" opacity="0.60" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="676.0" cy="510.0" r="3.0" opacity="0.60" fill="#D9B872" fill-opacity=".10"/>
+<circle cx="700.0" cy="510.0" r="3.0" opacity="0.60" fill="#D9B872" fill-opacity=".10"/>
+<path d="M542,180 C560,180 560,152 620,152" opacity="0.50" marker-end="url(#a)"/>
+<path d="M542,240 C560,240 560,262 620,262" opacity="0.50" marker-end="url(#a)"/>
+<path d="M542,340 C560,340 560,384 620,384" opacity="0.50" marker-end="url(#a)"/>
+<path d="M542,420 C560,420 560,492 620,492" opacity="0.50" marker-end="url(#a)"/>
+</svg>
