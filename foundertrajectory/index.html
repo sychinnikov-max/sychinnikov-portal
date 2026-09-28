@@ -45,101 +45,354 @@
 {"@type":"Offer","name":"Финансовый контур","description":"Вместе с финансовым директором: управленческий учет, контроль чистой прибыли, платежный календарь, финмодель"}]}}
 </script>
 <style>
-/* ===== Версия от 25.09.2026 (вечер): лендинг-презентация, рисунки на фоне ===== */
+/* ==========================================================================
+   Версия 3 от 28.09.2026: объемные объекты, стекло, подсветка.
+   Все картинки из assets/art3 сделаны на чистом черном фоне и растворяются
+   в странице через mix-blend-mode: screen. Правило, без которого черный фон
+   становится видимым квадратом: элемент с .blend не должен лежать внутри
+   .band > .inner (там свой слой с z-index) и внутри элементов с transform или
+   opacity, если у ближайшего фона внутри них нет своей заливки. Поэтому
+   сцены секций стоят прямо в секции, а объекты внутри карточек лежат на
+   сплошном фоне карточки.
+   ========================================================================== */
+.blend{mix-blend-mode:screen}
+.soft-mask{-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent)}
+.card3{position:relative;border-radius:20px;background:linear-gradient(168deg,#28221A,#1C1813 74%);border:1px solid var(--hair);overflow:hidden}
 
-/* первый экран: рисунок под кнопками */
-.hero{position:relative;overflow:hidden}
-.hero .inner{position:relative;z-index:1}
-.heroart{position:absolute;left:clamp(24px,4vw,60px);bottom:-96px;width:min(40vw,520px);opacity:.3;pointer-events:none;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 34%,#000 52%,transparent 66%);mask-image:linear-gradient(180deg,transparent 0%,#000 34%,#000 52%,transparent 66%)}
-@media(max-width:960px){.heroart{display:none}}
+/* ---------- первый экран ---------- */
+.hero3 .inner{padding-top:clamp(20px,3.4vh,44px);padding-bottom:clamp(40px,6vh,84px)}
+.h3row{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(24px,3.6vw,60px);align-items:center}
+.hero3 h1{max-width:17.5ch}
+.h3stage{position:relative;width:min(100%,560px);margin-left:auto;padding:40px 58px 54px 74px}
+.h3halo{position:absolute;inset:4% 2% 8% 12%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,color-mix(in oklab,var(--gold) 34%,transparent),transparent 74%);
+  filter:blur(8px);animation:h3halo 8s ease-in-out infinite}
+@keyframes h3halo{0%,100%{opacity:.5;transform:scale(.95)}50%{opacity:1;transform:scale(1.05)}}
+.h3photo{position:relative;margin:0;border-radius:24px;overflow:hidden;aspect-ratio:4/5;
+  border:1px solid var(--hair-gold);box-shadow:0 44px 100px rgba(0,0,0,.6),0 0 0 6px color-mix(in oklab,var(--gold) 6%,transparent)}
+.h3photo img{width:100%;height:100%;object-fit:cover;object-position:center 16%;display:block}
+.h3photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px 30% 20px 24px;
+  background:linear-gradient(180deg,transparent,rgba(12,10,8,.93) 62%)}
+.h3photo figcaption b{display:block;font-weight:600;font-size:17px}
+.h3photo figcaption span{display:block;font-size:13.5px;color:var(--ink-muted);margin-top:4px;line-height:1.45}
+.h3item{position:absolute;width:clamp(128px,11vw,168px);display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.h3item.i1{top:-8px;right:-28px}
+.h3item.i2{top:25%;left:-10px}
+.h3item.i3{bottom:-6px;right:-20px}
+.h3obj{width:100%;aspect-ratio:1;animation:h3float 8s ease-in-out infinite;animation-delay:var(--d,0s)}
+.h3obj img{width:100%;height:100%;display:block;object-fit:contain}
+.h3lbl{margin-top:-22px;padding:8px 14px;border-radius:12px;text-align:center;white-space:nowrap;
+  background:color-mix(in oklab,var(--bg) 66%,transparent);border:1px solid var(--hair-gold);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  animation:h3float 8s ease-in-out infinite;animation-delay:var(--d,0s)}
+.h3lbl b{display:block;font-family:var(--fd);font-weight:600;font-size:16px;color:var(--gold-bright);line-height:1.2}
+.h3lbl span{display:block;font-size:12px;color:var(--ink-muted);margin-top:2px}
+@keyframes h3float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media(max-width:1180px){
+  .h3stage{padding:34px 44px 48px 58px}
+  .h3item{width:118px}
+  .h3lbl{padding:7px 11px}
+}
+@media(max-width:1024px){
+  .h3row{grid-template-columns:1fr}
+  .h3stage{margin:8px auto 0}
+}
 
-/* было и станет */
-.ba{display:grid;grid-template-columns:1fr minmax(170px,250px) 1fr;gap:clamp(20px,3vw,48px);align-items:center;margin-top:36px}
-.ba .art{width:100%;opacity:.7;display:block}
-.bh{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:6px}
-.bh.gold{color:var(--gold)}
-.bl{list-style:none;margin:0;padding:0}
-.bl li{padding:13px 0;border-top:1px solid var(--hair);font-size:16.5px;line-height:1.5;color:var(--ink-muted)}
-.bl li:last-child{border-bottom:1px solid var(--hair)}
-.bl li b{color:var(--ink);font-weight:600}
-.bl.after li{color:var(--ink)}
-.bl.after li b{color:var(--gold-bright)}
-@media(max-width:900px){.ba{grid-template-columns:1fr;gap:18px}.ba .art{max-width:240px;margin:0 auto;opacity:.55}}
+/* ---------- было и станет ---------- */
+.ba3{display:grid;grid-template-columns:1fr 70px 1fr;align-items:stretch;margin-top:40px}
+.bcard{display:flex;flex-direction:column}
+.bimg{position:relative;aspect-ratio:16/8.4;overflow:hidden}
+.bimg img{width:100%;height:100%;object-fit:cover;display:block;
+  -webkit-mask-image:linear-gradient(180deg,#000 52%,transparent 98%);mask-image:linear-gradient(180deg,#000 52%,transparent 98%)}
+.bcard.before .bimg img{filter:saturate(.8) brightness(.9)}
+.bbody{position:relative;padding:0 28px 30px}
+.btag{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+.bcard.after .btag{color:var(--gold-bright)}
+.bbody h3{font-family:var(--fd);font-weight:600;font-size:clamp(23px,2.2vw,30px);line-height:1.15;margin:8px 0 18px}
+.blist{list-style:none;margin:0;padding:0;display:grid;gap:13px}
+.blist li{position:relative;padding-left:34px;font-size:16px;line-height:1.5;color:var(--ink-muted)}
+.blist li::before{content:"";position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;border:1px solid}
+.blist.no li::before{border-color:color-mix(in oklab,var(--no) 60%,transparent);background:color-mix(in oklab,var(--no) 14%,transparent)}
+.blist.no li::after{content:"";position:absolute;left:6px;top:11px;width:9px;height:1.6px;background:var(--no)}
+.blist.ok li{color:var(--ink)}
+.blist.ok li::before{border-color:color-mix(in oklab,var(--ok) 60%,transparent);background:color-mix(in oklab,var(--ok) 14%,transparent)}
+.blist.ok li::after{content:"";position:absolute;left:8px;top:5px;width:5px;height:10px;border:solid var(--ok);border-width:0 1.7px 1.7px 0;transform:rotate(45deg)}
+.barrow{display:flex;align-items:center;justify-content:center}
+.barrow span{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;color:var(--gold-bright);
+  background:var(--card);border:1px solid var(--hair-gold);box-shadow:0 0 34px color-mix(in oklab,var(--gold) 22%,transparent)}
+@property --ga{syntax:'<angle>';inherits:false;initial-value:0deg}
+.bcard.after{border-color:var(--hair-gold);box-shadow:0 30px 80px rgba(0,0,0,.38),0 0 70px color-mix(in oklab,var(--gold) 11%,transparent)}
+.bcard.after::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:2;
+  background:conic-gradient(from var(--ga),transparent 0deg 240deg,var(--gold-bright) 300deg,transparent 350deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:gspin 7s linear infinite}
+@keyframes gspin{to{--ga:360deg}}
+.bnote{margin-top:36px;max-width:62ch;font-family:var(--fd);font-weight:500;font-size:clamp(21px,1.9vw,26px);line-height:1.35;color:var(--ink)}
+.bnote b{color:var(--gold-bright);font-weight:600}
+@media(max-width:900px){
+  .ba3{grid-template-columns:1fr}
+  .barrow{height:58px}
+  .barrow span{transform:rotate(90deg)}
+}
 
-/* три ступени */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--hair-gold);border-radius:16px;overflow:hidden;margin-top:34px;background:var(--card)}
-.step{display:block;padding:24px 26px 26px;border-right:1px solid var(--hair);text-decoration:none;color:inherit;transition:background .2s ease}
-.step:last-child{border-right:none}
-.step:hover{background:color-mix(in oklab,var(--gold) 7%,transparent)}
-.step .n{font-family:var(--fm);font-size:12.5px;color:var(--gold);letter-spacing:.14em}
-.step .t{font-family:var(--fd);font-weight:600;font-size:22px;margin-top:8px;line-height:1.2}
-.step .w{font-size:14.5px;color:var(--ink-muted);margin-top:8px;line-height:1.45}
-@media(max-width:820px){.steps{grid-template-columns:1fr}.step{border-right:none;border-bottom:1px solid var(--hair);padding:18px 20px}.step:last-child{border-bottom:none}}
+/* ---------- три уровня лестницей ---------- */
+.stairs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch;margin-top:40px}
+.stair{display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .3s ease,box-shadow .3s ease}
+.stair.s1{margin-top:120px}.stair.s2{margin-top:60px}
+.stair:hover{transform:translateY(-6px);border-color:var(--hair-gold);
+  box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 54px color-mix(in oklab,var(--gold) 13%,transparent)}
+.simg{height:200px;display:flex;align-items:center;justify-content:center;padding-top:8px}
+.simg img{height:100%;aspect-ratio:1;object-fit:contain;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.stair:hover .simg img{transform:translateY(-6px) scale(1.05)}
+.sbody{padding:0 26px 26px;display:flex;flex-direction:column;flex:1}
+.snum{font-family:var(--fm);font-size:12.5px;color:var(--gold);letter-spacing:.14em}
+.sname{font-family:var(--fd);font-weight:600;font-size:25px;line-height:1.15;margin-top:8px}
+.swho{font-family:var(--fm);font-size:12px;color:var(--ink-dim);margin-top:8px}
+.sbody p{font-size:15.5px;color:var(--ink-muted);line-height:1.5;margin-top:12px}
+.sdepth{display:flex;align-items:center;gap:5px;margin-top:auto;padding-top:18px}
+.sdepth i{width:28px;height:5px;border-radius:3px;background:color-mix(in oklab,var(--ink) 12%,transparent)}
+.sdepth i.on{background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));box-shadow:0 0 12px color-mix(in oklab,var(--gold) 55%,transparent)}
+.sdepth span{margin-left:8px;font-size:12.5px;color:var(--ink-dim)}
+.sgo{font-size:14px;font-weight:600;color:var(--gold);margin-top:14px}
+@media(max-width:860px){
+  .stairs{grid-template-columns:1fr;gap:12px}
+  .stair.s1,.stair.s2{margin-top:0}
+  .stair{flex-direction:row;align-items:stretch}
+  .simg{width:104px;height:104px;flex:none;align-self:center;padding:0;margin-left:6px}
+  .simg img{width:100%;height:100%}
+  .sbody{padding:18px 18px 18px 0}
+  .sname{font-size:21px}
+}
 
-/* уровень: текст и рисунок рядом */
-.zz{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,72px);align-items:center}
-.zz.rev .artcol{order:-1}
-.artcol{display:flex;justify-content:center;align-items:center}
-.artcol img{width:100%;max-width:560px;opacity:.62;display:block;
-  -webkit-mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);mask-image:radial-gradient(closest-side,#000 58%,transparent 100%)}
-@media(max-width:900px){.zz{grid-template-columns:1fr;gap:6px}.zz.rev .artcol{order:0}.artcol img{max-width:320px;opacity:.5}}
-.lvl-tag{font-family:var(--fm);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
-.lvl-tag span{color:var(--ink-dim);letter-spacing:.04em;text-transform:none;font-size:13px}
-.kv{list-style:none;margin:26px 0 0;padding:0}
-.kv li{display:grid;grid-template-columns:164px 1fr;gap:18px;padding:13px 0;border-top:1px solid var(--hair);align-items:start}
-.kv li:last-child{border-bottom:1px solid var(--hair)}
-.kv b{font-family:var(--fd);font-weight:600;font-size:18.5px;color:var(--ink);line-height:1.25}
-.kv span{font-size:16px;color:var(--ink-muted);line-height:1.55}
-@media(max-width:560px){.kv li{grid-template-columns:1fr;gap:4px;padding:12px 0}}
-.out{margin-top:22px;padding:16px 20px;border-left:3px solid var(--gold);background:color-mix(in oklab,var(--gold) 7%,transparent);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.55}
-.out b{color:var(--gold-bright);font-weight:600}
-.lead-in.sm{font-size:16.5px;margin-top:16px;color:var(--ink-muted)}
+/* ---------- уровни: сцена на фоне, стекло поверх ---------- */
+.lv{overflow:hidden}
+.lv .scene{position:absolute;top:0;bottom:0;right:0;width:min(66vw,1180px);pointer-events:none;mix-blend-mode:screen}
+.lv.lv-l .scene{right:auto;left:0}
+.lv .scene img{width:100%;height:100%;object-fit:cover;object-position:right center;display:block;
+  -webkit-mask-image:radial-gradient(ellipse 74% 80% at 62% 50%,#000 50%,transparent 100%);
+  mask-image:radial-gradient(ellipse 74% 80% at 62% 50%,#000 50%,transparent 100%)}
+.lv.lv-l .scene img{object-position:left center;
+  -webkit-mask-image:radial-gradient(ellipse 74% 80% at 38% 50%,#000 50%,transparent 100%);
+  mask-image:radial-gradient(ellipse 74% 80% at 38% 50%,#000 50%,transparent 100%)}
+.lv .scene::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(36% 44% at 64% 50%,color-mix(in oklab,var(--gold) 14%,transparent),transparent 70%);
+  animation:breathe 9s ease-in-out infinite}
+.lv.lv-l .scene::after{background:radial-gradient(36% 44% at 36% 50%,color-mix(in oklab,var(--gold) 14%,transparent),transparent 70%)}
+@keyframes breathe{0%,100%{opacity:.3}50%{opacity:.9}}
+.lvtext{position:relative;max-width:650px}
+.lv.lv-l .lvtext{margin-left:auto}
+.lvtag{font-family:var(--fm);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-bright);
+  display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.lvtag span{color:var(--ink-dim);letter-spacing:.04em;text-transform:none;font-size:13px}
+.lvlead{font-size:17px;color:var(--ink-muted);line-height:1.6;margin-top:16px;max-width:54ch}
+.gcards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.gcard{position:relative;padding:20px 20px 20px;border-radius:18px;
+  background:color-mix(in oklab,var(--card) 64%,transparent);border:1px solid var(--hair);
+  -webkit-backdrop-filter:blur(14px) saturate(1.15);backdrop-filter:blur(14px) saturate(1.15);
+  box-shadow:inset 0 1px 0 rgba(255,240,210,.05);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .3s ease,background .3s ease}
+.gcard:hover{transform:translateY(-3px);border-color:var(--hair-gold);background:color-mix(in oklab,var(--card) 78%,transparent)}
+.gcard .gi{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px;
+  font-family:var(--fm);font-size:12.5px;color:var(--gold-bright);border:1px solid var(--hair-gold);
+  background:color-mix(in oklab,var(--gold) 12%,transparent)}
+.gcard b{display:block;font-family:var(--fd);font-weight:600;font-size:19.5px;line-height:1.2}
+.gcard span{display:block;font-size:15px;color:var(--ink-muted);line-height:1.5;margin-top:7px}
+.out3{margin-top:16px;padding:18px 22px;border-radius:16px;font-size:16.5px;line-height:1.55;
+  background:linear-gradient(100deg,color-mix(in oklab,var(--gold) 14%,var(--card)),color-mix(in oklab,var(--card) 70%,transparent));
+  border:1px solid var(--hair-gold);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.out3 b{color:var(--gold-bright);font-weight:600}
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference) and (min-width:761px){
+    .lv .scene img{animation:drift linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+    @keyframes drift{from{transform:translateY(-5%) scale(1.08)}to{transform:translateY(5%) scale(1.08)}}
+  }
+}
 
-/* опыт и кейсы */
-.proof{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,4vw,64px);margin-top:36px;align-items:start}
-.who{list-style:none;margin:0;padding:0}
-.who li{padding:10px 0 10px 22px;position:relative;font-size:16.5px;color:var(--ink-muted);line-height:1.5}
-.who li::before{content:"";position:absolute;left:0;top:19px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
-.who li b{color:var(--ink);font-weight:600}
-.case{display:grid;grid-template-columns:1fr auto;gap:22px;padding:18px 0;border-top:1px solid var(--hair);align-items:center}
-.case:last-of-type{border-bottom:1px solid var(--hair)}
-.case .cn{font-family:var(--fd);font-weight:600;font-size:19px;line-height:1.25}
-.case .cd{font-size:15.5px;color:var(--ink-muted);margin-top:5px;line-height:1.5}
-.case .cr{font-family:var(--fd);font-weight:700;font-size:clamp(22px,2vw,28px);color:var(--gold);white-space:nowrap;text-align:right;line-height:1.1}
-.case .cr small{display:block;font-family:var(--fb);font-weight:500;font-size:12.5px;color:var(--ink-dim);white-space:normal;margin-top:4px;max-width:150px;margin-left:auto}
+/* ---------- финансовый контур: четыре блока по шагам ---------- */
+.fin .scene{bottom:auto;height:min(78%,760px)}
+.fsteps{margin-top:clamp(36px,4.6vw,64px)}
+.fline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}
+.fline::before{content:"";position:absolute;left:22px;right:4%;top:50%;height:1.5px;
+  background:linear-gradient(90deg,var(--gold-bright),color-mix(in oklab,var(--gold) 18%,transparent));
+  transform-origin:left;transform:scaleX(0);transition:transform 1.8s cubic-bezier(.2,.7,.2,1) .25s}
+.fsteps.in .fline::before{transform:scaleX(1)}
+.fnode{position:relative;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--fm);font-weight:500;font-size:14px;color:var(--gold-ink);
+  background:radial-gradient(circle at 35% 30%,var(--gold-bright),var(--gold-deep));
+  box-shadow:0 0 0 6px color-mix(in oklab,var(--surface) 85%,transparent),0 0 26px color-mix(in oklab,var(--gold) 45%,transparent)}
+.fblocks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.fblock{display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .3s ease,box-shadow .3s ease}
+.fblock:hover{transform:translateY(-5px);border-color:var(--hair-gold);
+  box-shadow:0 26px 60px rgba(0,0,0,.42),0 0 44px color-mix(in oklab,var(--gold) 12%,transparent)}
+.fimg{height:176px;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(56% 58% at 50% 56%,color-mix(in oklab,var(--gold) 9%,transparent),transparent 72%)}
+.fimg img{height:100%;aspect-ratio:1;object-fit:contain;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.fblock:hover .fimg img{transform:scale(1.06)}
+.fbody{padding:2px 22px 24px}
+.fbody b{display:block;font-family:var(--fd);font-weight:600;font-size:21px;line-height:1.2}
+.fbody span{display:block;font-size:15px;color:var(--ink-muted);line-height:1.5;margin-top:8px}
+.frow{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:16px;margin-top:16px;align-items:stretch}
+.frow .out3{margin-top:0}
+.fmode{border:1px dashed var(--hair-gold);border-radius:16px;padding:16px 20px;background:color-mix(in oklab,var(--card) 50%,transparent)}
+.fmode b{display:block;font-weight:600;font-size:15.5px}
+.fmode span{display:block;font-size:14.5px;color:var(--ink-muted);margin-top:4px;line-height:1.45}
+@media(max-width:1024px){
+  .fline{display:none}
+  .fblocks{grid-template-columns:1fr 1fr}
+  .frow{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .fblocks{grid-template-columns:1fr;gap:10px}
+  .fblock{flex-direction:row;align-items:center}
+  .fimg{width:108px;height:108px;flex:none}
+  .fbody{padding:14px 16px 14px 0}
+  .fbody b{font-size:19px}
+}
+
+/* ---------- опыт и результаты ---------- */
+.exp{display:grid;grid-template-columns:.78fr 1.22fr;gap:clamp(28px,4vw,60px);align-items:start;margin-top:38px}
+.stats{display:grid;gap:12px}
+.stat{padding:22px 24px;border-radius:18px;border:1px solid var(--hair-gold);
+  background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 10%,var(--card)),var(--card) 70%)}
+.stat .v{font-family:var(--fd);font-weight:700;font-size:clamp(34px,3.2vw,46px);line-height:1;color:var(--gold-bright)}
+.stat .l{font-size:15px;color:var(--ink-muted);margin-top:9px;line-height:1.45}
+.case3{display:grid;grid-template-columns:minmax(150px,auto) 1fr;gap:26px;align-items:center;padding:24px 26px;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .3s ease}
+.case3 + .case3{margin-top:12px}
+.case3:hover{transform:translateX(4px);border-color:var(--hair-gold)}
+.case3 .v{font-family:var(--fd);font-weight:700;font-size:clamp(30px,2.8vw,40px);line-height:1;color:var(--gold)}
+.case3 .v small{display:block;font-family:var(--fb);font-weight:500;font-size:12.5px;color:var(--ink-dim);margin-top:7px;line-height:1.35}
+.case3 b{display:block;font-family:var(--fd);font-weight:600;font-size:19.5px;line-height:1.25}
+.case3 .t span{display:block;font-size:15px;color:var(--ink-muted);margin-top:6px;line-height:1.5}
 .morelink{display:inline-block;margin-top:18px;color:var(--gold);text-decoration:none;font-weight:600;font-size:15.5px}
 .morelink:hover{text-decoration:underline}
-@media(max-width:900px){.proof{grid-template-columns:1fr;gap:20px}}
-@media(max-width:560px){.case{grid-template-columns:1fr;gap:8px}.case .cr{text-align:left}.case .cr small{margin-left:0}}
+@media(max-width:900px){.exp{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.stats{grid-template-columns:1fr}.case3{grid-template-columns:1fr;gap:12px}}
 
-/* AI */
-.flowmini{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin-top:26px;padding:20px 22px;border:1px solid var(--hair);border-radius:16px;background:var(--card)}
-.flowmini .fh{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:9px}
-.flowmini .fc{display:flex;flex-wrap:wrap;gap:6px}
-.flowmini .fc span{font-size:13.5px;padding:6px 11px;border:1px solid var(--hair-gold);border-radius:999px;color:var(--ink);line-height:1.3}
-.flowmini .fa{font-family:var(--fd);font-size:30px;color:var(--gold);text-align:center;line-height:1}
-@media(max-width:760px){.flowmini{grid-template-columns:1fr;gap:12px}.flowmini .fa{transform:rotate(90deg)}}
-.pts{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:10px}
-.pts li{padding-left:22px;position:relative;font-size:16.5px;color:var(--ink-muted);line-height:1.5}
-.pts li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
-.pts li b{color:var(--ink);font-weight:600}
+/* ---------- AI ---------- */
+.flow3{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin-top:28px;padding:22px;border-radius:20px;
+  background:color-mix(in oklab,var(--bg) 58%,transparent);border:1px solid var(--hair);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.flow3 .fh{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:10px}
+.flow3 .chips{display:flex;flex-wrap:wrap;gap:6px}
+.flow3 .chips span{font-size:13.5px;padding:6px 11px;border:1px solid var(--hair-gold);border-radius:999px;color:var(--ink);line-height:1.3;
+  animation:chipglow 7s ease-in-out infinite;animation-delay:calc(var(--i) * .55s)}
+@keyframes chipglow{0%,64%,100%{border-color:var(--hair-gold);box-shadow:none}74%{border-color:var(--gold-bright);box-shadow:0 0 18px color-mix(in oklab,var(--gold) 50%,transparent)}}
+.fcore{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;text-align:center;
+  font-family:var(--fd);font-weight:600;font-size:14.5px;line-height:1.15;color:var(--gold-ink);
+  background:radial-gradient(circle at 35% 30%,var(--gold-bright),var(--gold-deep));animation:corepulse 4.5s ease-in-out infinite}
+@keyframes corepulse{0%,100%{box-shadow:0 0 0 8px color-mix(in oklab,var(--gold) 12%,transparent),0 0 34px color-mix(in oklab,var(--gold) 36%,transparent)}
+  50%{box-shadow:0 0 0 15px color-mix(in oklab,var(--gold) 6%,transparent),0 0 64px color-mix(in oklab,var(--gold) 60%,transparent)}}
+.pts3{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:11px}
+.pts3 li{position:relative;padding-left:24px;font-size:16.5px;color:var(--ink-muted);line-height:1.5}
+.pts3 li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;background:var(--gold-bright);
+  box-shadow:0 0 10px color-mix(in oklab,var(--gold) 70%,transparent)}
+.pts3 li b{color:var(--ink);font-weight:600}
+@media(max-width:760px){
+  .flow3{grid-template-columns:1fr;gap:14px;padding:18px}
+  .fcore{margin:0 auto}
+}
 
-/* как начать */
-.how{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:34px}
-.how>div{border-top:1px solid var(--hair-gold);padding-top:16px}
-.how .n{font-family:var(--fm);font-size:13px;color:var(--gold);letter-spacing:.14em}
-.how b{display:block;font-family:var(--fd);font-weight:600;font-size:21px;margin:8px 0 6px;line-height:1.2}
-.how span{font-size:16px;color:var(--ink-muted);line-height:1.5}
-@media(max-width:820px){.how{grid-template-columns:1fr;gap:18px}}
+/* ---------- как начать ---------- */
+.steps3{list-style:none;margin:38px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative}
+.steps3::before{content:"";position:absolute;left:28px;right:16%;top:28px;height:1.5px;
+  background:linear-gradient(90deg,var(--gold-bright),color-mix(in oklab,var(--gold) 14%,transparent));
+  transform-origin:left;transform:scaleX(0);transition:transform 1.5s cubic-bezier(.2,.7,.2,1) .2s}
+.steps3.in::before{transform:scaleX(1)}
+.steps3 .sn{position:relative;z-index:1;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--fd);font-weight:700;font-size:22px;color:var(--gold-bright);background:var(--bg);
+  border:1px solid var(--hair-gold);box-shadow:0 0 30px color-mix(in oklab,var(--gold) 18%,transparent)}
+.steps3 b{display:block;font-family:var(--fd);font-weight:600;font-size:22px;margin:18px 0 8px}
+.steps3 .st{display:block;font-size:16px;color:var(--ink-muted);line-height:1.5}
+@media(max-width:820px){
+  .steps3{grid-template-columns:1fr;gap:22px}
+  .steps3::before{left:27px;right:auto;top:12px;bottom:12px;width:1.5px;height:auto;transform-origin:top;transform:scaleY(0)}
+  .steps3.in::before{transform:scaleY(1)}
+  .steps3 li{display:grid;grid-template-columns:56px 1fr;column-gap:16px}
+  .steps3 .sn{grid-row:1/3}
+  .steps3 b{margin:4px 0 4px}
+}
 
-/* блок «напишите мне» */
+/* ---------- напишите мне ---------- */
 .xcontact{display:flex;flex-direction:column;gap:12px;margin-top:22px}
 .xcontact .line{font-size:15.5px;color:var(--ink-muted)}
 .xcontact .line a{color:var(--gold);text-decoration:none}
+
+/* ---------- телефон ---------- */
+@media(max-width:760px){
+  /* первый экран: портрет карточкой, три объекта строкой */
+  .hero3 h1{max-width:none}
+  .h3stage{width:100%;padding:0;margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .h3halo{display:none}
+  .h3item{position:static;width:auto;order:1}
+  .h3obj{width:92px;animation:none}
+  .h3lbl{margin-top:-14px;padding:6px 6px;white-space:normal;width:100%;animation:none}
+  .h3lbl b{font-size:14.5px}
+  .h3lbl span{font-size:10.5px;line-height:1.3}
+  .h3photo{order:2;grid-column:1/-1;aspect-ratio:auto;display:flex;align-items:center;gap:14px;padding:12px;
+    border-radius:16px;background:var(--card);box-shadow:none;margin-top:10px}
+  .h3photo img{width:92px;height:108px;flex:none;border-radius:12px;object-position:center 12%}
+  .h3photo figcaption{position:static;padding:0;background:none}
+  .h3item.i1,.h3item.i2,.h3item.i3{top:auto;right:auto;bottom:auto;left:auto}
+  .h3photo figcaption b{font-size:15.5px}
+  .h3photo figcaption span{font-size:12.8px}
+
+  /* сцены уровней: баннером сверху, текст наезжает на затухание */
+  .lv .scene{position:relative;inset:auto;width:auto;height:auto;aspect-ratio:4/3;margin:0 0 -70px}
+  .lv .scene img,.lv.lv-l .scene img{-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 60%,transparent 100%);
+    mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 60%,transparent 100%)}
+  .fin .scene{height:auto}
+  .lvtext{max-width:none}
+  .lvlead{font-size:16px}
+  .gcards{grid-template-columns:1fr;gap:10px}
+  .gcard{padding:16px 18px;display:grid;grid-template-columns:32px 1fr;column-gap:14px}
+  .gcard .gi{grid-row:1/3;margin:0}
+  .gcard b{font-size:18px}
+  .gcard span{margin-top:3px}
+  .bbody{padding:0 20px 24px}
+  .bnote{font-size:19px;margin-top:26px}
+  .stat{padding:18px 20px}
+  .case3{padding:20px}
+}
+/* ---------- пока нет картинок: класс art-pending на body ----------
+   Пока не готовы все 14 картинок из assets/art3, места под объекты и сцены
+   скрыты, а сетки расширены, чтобы страница выглядела законченной.
+   Когда картинки лягут в assets/art3, класс art-pending с body убирается,
+   и раскладка возвращается к задуманной. */
+.art-pending .h3obj,.art-pending .bimg,.art-pending .simg,.art-pending .fimg,.art-pending .lv .scene{display:none}
+.art-pending .h3lbl{margin-top:0;padding:11px 18px}
+.art-pending .h3lbl b{font-size:17.5px}
+.art-pending .h3lbl span{font-size:12.5px}
+.art-pending .h3item{width:auto}
+.art-pending .h3item.i1{top:74px;right:-26px}
+.art-pending .h3item.i2{top:44%;left:14px}
+.art-pending .h3item.i3{bottom:128px;right:-20px}
+.art-pending .bbody{padding-top:30px}
+.art-pending .stair.s1{margin-top:72px}
+.art-pending .stair.s2{margin-top:36px}
+.art-pending .sbody{padding-top:26px}
+.art-pending .lvtext{max-width:none}
+.art-pending .lv.lv-l .lvtext{margin-left:0}
+.art-pending .lvtext > .rv:first-child{max-width:780px}
+.art-pending .gcards{grid-template-columns:repeat(4,1fr)}
+@media(min-width:761px){.art-pending .flow3{gap:28px;padding:24px 28px}}
+.art-pending .fbody{padding-top:24px}
+@media(max-width:1100px){.art-pending .gcards{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){
+  .art-pending .gcards{grid-template-columns:1fr}
+  .art-pending .h3item.i1,.art-pending .h3item.i2,.art-pending .h3item.i3{top:auto;right:auto;bottom:auto;left:auto}
+  .art-pending .h3lbl{padding:9px 6px}
+  .art-pending .h3lbl b{font-size:15px}
+  .art-pending .h3lbl span{font-size:10.5px}
+  .art-pending .stair.s1,.art-pending .stair.s2{margin-top:0}
+  .art-pending .sbody{padding:18px 20px}
+  .art-pending .fbody{padding:16px 18px}
+}
 </style>
 </head>
-<body data-variant="home">
+<body data-variant="home" class="art-pending">
 
 <header class="nav"><div class="inner">
   <a class="brand" href="/foundertrajectory/">Андрей<b>·</b>Сычинников</a>
@@ -155,59 +408,76 @@
 </div></header>
 
 <!-- ПЕРВЫЙ ЭКРАН -->
-<section class="hero">
-  <img class="heroart" src="/foundertrajectory/assets/art/struktura.svg" alt="" aria-hidden="true">
-  <div class="inner">
-  <div class="herorow">
+<section class="hero hero3"><div class="inner">
+  <div class="h3row">
     <div>
       <div class="eyebrow d-only">Подключаюсь к собственнику компании до 50 человек</div>
       <div class="eyebrow m-only">Собственникам компаний до 50 человек</div>
       <h1>Собираю управление компанией: люди, процессы, деньги</h1>
-      <p class="lead">Наставник и операционный партнер. Три уровня участия: от часа в неделю до финансового контура. На каждом шаге рядом мой AI.</p>
+      <p class="lead">Наставник и операционный партнер. Три уровня участия, от часа в неделю до финансового контура. На каждом шаге рядом мой AI.</p>
       <div class="actions">
         <a class="cta" href="#cta">Написать мне</a>
         <a class="cta ghost" href="#urovni">Три уровня участия</a>
       </div>
     </div>
-    <div class="heroportrait">
-      <img src="/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg" alt="Андрей Сычинников" fetchpriority="high">
-      <div class="cap">
-        <div class="c1">Андрей Сычинников</div>
-        <div class="c2">Бывший генеральный директор и собственник: команда больше 15 человек, выручка 1,4 млн евро в 2024 году. MBA.</div>
+    <div class="h3stage">
+      <div class="h3halo" aria-hidden="true"></div>
+      <figure class="h3photo">
+        <img src="/foundertrajectory/assets/people/andrei-sychinnikov/andrei-portrait-1100.jpg" alt="Андрей Сычинников" fetchpriority="high">
+        <figcaption><b>Андрей Сычинников</b><span>Бывший генеральный директор и собственник. MBA.</span></figcaption>
+      </figure>
+      <div class="h3item i1" style="--d:0s">
+        <div class="h3obj blend"><img class="soft-mask" src="/foundertrajectory/assets/art3/o-people.jpg" alt="" loading="lazy"></div>
+        <div class="h3lbl"><b>Люди</b><span>оргструктура и KPI</span></div>
+      </div>
+      <div class="h3item i2" style="--d:-2.7s">
+        <div class="h3obj blend"><img class="soft-mask" src="/foundertrajectory/assets/art3/o-process.jpg" alt="" loading="lazy"></div>
+        <div class="h3lbl"><b>Процессы</b><span>BPMN и регламенты</span></div>
+      </div>
+      <div class="h3item i3" style="--d:-5.3s">
+        <div class="h3obj blend"><img class="soft-mask" src="/foundertrajectory/assets/art3/o-money.jpg" alt="" loading="lazy"></div>
+        <div class="h3lbl"><b>Деньги</b><span>прибыль и календарь</span></div>
       </div>
     </div>
   </div>
-  </div>
-</section>
+</div></section>
 
 <!-- БЫЛО И СТАНЕТ -->
 <section class="band alt" id="rezultat"><div class="inner pad">
   <div class="sect-head rv">
     <h2 class="h2">Что меняется в компании</h2>
-    <p class="sub">Компания до 50 человек уже работает: есть команда, клиенты и обороты. Не хватает системы, которая работает без собственника.</p>
+    <p class="sub">Команда, клиенты и обороты уже есть. Не хватает системы, которая работает без собственника.</p>
   </div>
-  <div class="ba rv">
-    <div>
-      <div class="bh">Сейчас</div>
-      <ul class="bl">
-        <li><b>Все держится на вас.</b> Без вашего контроля бизнес встает.</li>
-        <li><b>Не с кого спросить.</b> Зоны размыты, показателей нет.</li>
-        <li><b>Обороты растут,</b> а денег больше не становится.</li>
-        <li><b>Кассовый разрыв</b> приходит внезапно, планировать невозможно.</li>
-      </ul>
-    </div>
-    <img class="art" src="/foundertrajectory/assets/art/model.svg" alt="" aria-hidden="true" loading="lazy">
-    <div>
-      <div class="bh gold">После работы</div>
-      <ul class="bl after">
-        <li><b>Задачи у исполнителей,</b> часть решений принимается без вас.</li>
-        <li><b>У каждой роли</b> зона, показатель и отчет раз в неделю.</li>
-        <li><b>Чистая прибыль</b> считается по правилу и растет на тех же оборотах.</li>
-        <li><b>Платежный календарь</b> на восемь недель, разрыв виден заранее.</li>
-      </ul>
-    </div>
+  <div class="ba3">
+    <article class="card3 bcard before rv">
+      <div class="bimg"><img class="blend" src="/foundertrajectory/assets/art3/s-before.jpg" alt="" loading="lazy"></div>
+      <div class="bbody">
+        <div class="btag">Сейчас</div>
+        <h3>Все сходится на вас</h3>
+        <ul class="blist no">
+          <li>Без вашего контроля бизнес встает</li>
+          <li>Зоны размыты, спросить не с кого</li>
+          <li>Обороты растут, а денег больше не становится</li>
+          <li>Кассовый разрыв приходит внезапно</li>
+        </ul>
+      </div>
+    </article>
+    <div class="barrow" aria-hidden="true"><span>→</span></div>
+    <article class="card3 bcard after rv">
+      <div class="bimg"><img class="blend" src="/foundertrajectory/assets/art3/s-after.jpg" alt="" loading="lazy"></div>
+      <div class="bbody">
+        <div class="btag">После работы</div>
+        <h3>Компания работает по системе</h3>
+        <ul class="blist ok">
+          <li>Задачи у исполнителей, часть решений принимается без вас</li>
+          <li>У каждой роли зона, показатель и отчет раз в неделю</li>
+          <li>Чистая прибыль растет на тех же оборотах</li>
+          <li>Платежный календарь на восемь недель, разрыв виден заранее</li>
+        </ul>
+      </div>
+    </article>
   </div>
-  <div class="takeaway rv">Дело не в людях. В компании нет системы управления: процессов, показателей и контроля. <b>Я ставлю ее вместе с вами и оставляю в документах.</b></div>
+  <p class="bnote rv">Дело не в людях: в компании нет системы управления. <b>Я ставлю ее вместе с вами и оставляю в документах.</b></p>
 </div></section>
 
 <!-- ТРИ УРОВНЯ -->
@@ -215,72 +485,121 @@
   <div class="sect-head rv">
     <div class="eyebrow">Три уровня участия</div>
     <h2 class="h2" style="margin-top:14px">Подключаюсь на той глубине, которая нужна вам</h2>
-    <p class="sub">Любой уровень отдельно или вместе. Глубина растет от первого к третьему, условия обсуждаем после первого разговора.</p>
+    <p class="sub">Любой уровень отдельно или вместе. Условия обсуждаем после первого разговора.</p>
   </div>
-  <div class="steps rv">
-    <a class="step" href="#nastavnichestvo"><div class="n">01</div><div class="t">Наставничество</div><div class="w">Час в неделю с собственником. Дорожная карта, решения, модель управления.</div></a>
-    <a class="step" href="#processy"><div class="n">02</div><div class="t">Операционное участие</div><div class="w">Со мной операционный менеджер. Оргструктура, процессы, KPI, внедрение.</div></a>
-    <a class="step" href="#finansy"><div class="n">03</div><div class="t">Финансовый контур</div><div class="w">Со мной финансовый директор. Учет, чистая прибыль, платежный календарь.</div></a>
+  <div class="stairs rv">
+    <a class="card3 stair s1" href="#nastavnichestvo">
+      <div class="simg"><img class="blend soft-mask" src="/foundertrajectory/assets/art3/o-compass.jpg" alt="" loading="lazy"></div>
+      <div class="sbody">
+        <div class="snum">01</div>
+        <div class="sname">Наставничество</div>
+        <div class="swho">час в неделю с собственником</div>
+        <p>Дорожная карта, реестр решений, новая модель управления.</p>
+        <div class="sdepth"><i class="on"></i><i></i><i></i><span>глубина участия</span></div>
+      </div>
+    </a>
+    <a class="card3 stair s2" href="#processy">
+      <div class="simg"><img class="blend soft-mask" src="/foundertrajectory/assets/art3/o-process.jpg" alt="" loading="lazy"></div>
+      <div class="sbody">
+        <div class="snum">02</div>
+        <div class="sname">Операционное участие</div>
+        <div class="swho">со мной операционный менеджер</div>
+        <p>Оргструктура, процессы в BPMN 2.0, KPI и план внедрения.</p>
+        <div class="sdepth"><i class="on"></i><i class="on"></i><i></i><span>глубина участия</span></div>
+      </div>
+    </a>
+    <a class="card3 stair s3" href="#finansy">
+      <div class="simg"><img class="blend soft-mask" src="/foundertrajectory/assets/art3/o-money.jpg" alt="" loading="lazy"></div>
+      <div class="sbody">
+        <div class="snum">03</div>
+        <div class="sname">Финансовый контур</div>
+        <div class="swho">со мной финансовый директор</div>
+        <p>Управленческий учет, чистая прибыль, платежный календарь.</p>
+        <div class="sdepth"><i class="on"></i><i class="on"></i><i class="on"></i><span>глубина участия</span></div>
+      </div>
+    </a>
   </div>
 </div></section>
 
 <!-- УРОВЕНЬ 1 -->
-<section class="band alt" id="nastavnichestvo"><div class="inner pad">
-  <div class="zz">
-    <div class="rv">
-      <div class="lvl-tag">Уровень 01 <span>час в неделю с собственником</span></div>
-      <h2 class="h2" style="margin-top:14px">Наставничество: вы стратег, а не диспетчер</h2>
-      <p class="lead-in sm">Сессия раз в неделю. В тот же день выжимка решений одним сообщением, в середине недели касание по делу.</p>
-      <ul class="kv">
-        <li><b>Дорожная карта</b><span>Куда идет компания и что меняем в каком порядке. Одна страница, по ней сверяемся каждую неделю.</span></li>
-        <li><b>Реестр решений</b><span>Что решили, кто делает, к какому сроку. Ничего не живет в памяти.</span></li>
-        <li><b>Модель управления</b><span>На каждую задачу есть исполнитель. Вы ставите цель и принимаете результат.</span></li>
-        <li><b>Пороги решений</b><span>Что команда решает сама, а что идет к вам. Граница названа и записана.</span></li>
-      </ul>
-      <div class="out"><b>На выходе:</b> цифры приходят готовыми, часть решений принимается без вас, компания перестает держаться на вас.</div>
+<section class="band alt lv" id="nastavnichestvo">
+  <div class="scene" aria-hidden="true"><img src="/foundertrajectory/assets/art3/s-roadmap.jpg" srcset="/foundertrajectory/assets/art3/s-roadmap-m.jpg 960w, /foundertrajectory/assets/art3/s-roadmap.jpg 1920w" sizes="(max-width:760px) 100vw, 66vw" alt="" loading="lazy"></div>
+  <div class="inner pad">
+    <div class="lvtext">
+      <div class="rv">
+        <div class="lvtag">Уровень 01 <span>час в неделю с собственником</span></div>
+        <h2 class="h2" style="margin-top:14px">Наставничество: вы стратег, а не диспетчер</h2>
+        <p class="lvlead">Сессия раз в неделю. В тот же день выжимка решений, в середине недели касание по делу.</p>
+      </div>
+      <div class="gcards rv">
+        <div class="gcard"><div class="gi">01</div><b>Дорожная карта</b><span>Куда идет компания и в каком порядке меняем. Одна страница, сверка каждую неделю.</span></div>
+        <div class="gcard"><div class="gi">02</div><b>Реестр решений</b><span>Что решили, кто делает, к какому сроку. Ничего не живет в памяти.</span></div>
+        <div class="gcard"><div class="gi">03</div><b>Модель управления</b><span>На каждую задачу есть исполнитель. Вы ставите цель и принимаете результат.</span></div>
+        <div class="gcard"><div class="gi">04</div><b>Пороги решений</b><span>Что команда решает сама, а что идет к вам. Граница записана.</span></div>
+      </div>
+      <div class="out3 rv"><b>На выходе:</b> цифры приходят готовыми, часть решений принимается без вас, компания перестает держаться на вас.</div>
     </div>
-    <div class="artcol rv"><img src="/foundertrajectory/assets/art/karta.svg" alt="" aria-hidden="true" loading="lazy"></div>
   </div>
-</div></section>
+</section>
 
 <!-- УРОВЕНЬ 2 -->
-<section class="band" id="processy"><div class="inner pad">
-  <div class="zz rev">
-    <div class="rv">
-      <div class="lvl-tag">Уровень 02 <span>со мной операционный менеджер</span></div>
-      <h2 class="h2" style="margin-top:14px">Операционное участие: структура и процессы</h2>
-      <p class="lead-in sm">Захожу в операционку и пересобираю управление вместе с вашей командой. Описываем его так, чтобы оно работало без нас.</p>
-      <ul class="kv">
-        <li><b>Оргструктура</b><span>Кто за что отвечает. У каждой роли свой результат и свой показатель.</span></li>
-        <li><b>Процессы BPMN 2.0</b><span>Как идет работа от заявки до денег, по ролям и шагам. Новый человек входит по схеме, а не по пересказу.</span></li>
-        <li><b>KPI и отчетность</b><span>План и факт по каждой роли, каждую неделю. Спрашивать есть с кого.</span></li>
-        <li><b>План внедрения</b><span>Что, когда и кто. Диаграмма Ганта и контроль исполнения решений.</span></li>
-      </ul>
-      <div class="out"><b>На выходе:</b> система в документах, схемах и таблицах. Работает после нашего выхода.</div>
+<section class="band lv lv-l" id="processy">
+  <div class="scene" aria-hidden="true"><img src="/foundertrajectory/assets/art3/s-process.jpg" srcset="/foundertrajectory/assets/art3/s-process-m.jpg 960w, /foundertrajectory/assets/art3/s-process.jpg 1920w" sizes="(max-width:760px) 100vw, 66vw" alt="" loading="lazy"></div>
+  <div class="inner pad">
+    <div class="lvtext">
+      <div class="rv">
+        <div class="lvtag">Уровень 02 <span>со мной операционный менеджер</span></div>
+        <h2 class="h2" style="margin-top:14px">Операционное участие: структура и процессы</h2>
+        <p class="lvlead">Захожу в операционку и пересобираю управление вместе с вашей командой. Описываем его так, чтобы оно работало без нас.</p>
+      </div>
+      <div class="gcards rv">
+        <div class="gcard"><div class="gi">01</div><b>Оргструктура</b><span>Кто за что отвечает. У каждой роли свой результат и свой показатель.</span></div>
+        <div class="gcard"><div class="gi">02</div><b>Процессы в BPMN 2.0</b><span>Путь от заявки до денег по ролям и шагам. Новый человек входит по схеме.</span></div>
+        <div class="gcard"><div class="gi">03</div><b>KPI и отчетность</b><span>План и факт по каждой роли, каждую неделю. Спрашивать есть с кого.</span></div>
+        <div class="gcard"><div class="gi">04</div><b>План внедрения</b><span>Что, когда и кто. Диаграмма Ганта и контроль исполнения решений.</span></div>
+      </div>
+      <div class="out3 rv"><b>На выходе:</b> система в документах, схемах и таблицах. Работает после нашего выхода.</div>
     </div>
-    <div class="artcol rv"><img src="/foundertrajectory/assets/art/processy.svg" alt="" aria-hidden="true" loading="lazy"></div>
   </div>
-</div></section>
+</section>
 
 <!-- УРОВЕНЬ 3 -->
-<section class="band alt" id="finansy"><div class="inner pad">
-  <div class="zz">
-    <div class="rv">
-      <div class="lvl-tag">Уровень 03 <span>со мной финансовый директор</span></div>
+<section class="band alt lv fin" id="finansy">
+  <div class="scene" aria-hidden="true"><img src="/foundertrajectory/assets/art3/s-finance.jpg" srcset="/foundertrajectory/assets/art3/s-finance-m.jpg 960w, /foundertrajectory/assets/art3/s-finance.jpg 1920w" sizes="(max-width:760px) 100vw, 66vw" alt="" loading="lazy"></div>
+  <div class="inner pad">
+    <div class="lvtext rv">
+      <div class="lvtag">Уровень 03 <span>со мной финансовый директор</span></div>
       <h2 class="h2" style="margin-top:14px">Финансовый контур: чистая прибыль под контролем</h2>
-      <p class="lead-in sm">Ставлю регулярный финансовый менеджмент: цифры собираются каждую неделю без вашего участия, решения принимаются по ним.</p>
-      <ul class="kv">
-        <li><b>Учет</b><span>Движение денег и отчет о прибыли по одному правилу, каждую неделю.</span></li>
-        <li><b>Чистая прибыль</b><span>С зарплатой собственника внутри. Видно, сколько можно забрать.</span></li>
-        <li><b>Платежный календарь</b><span>На восемь недель вперед. Разрыв виден за недели, а не в день оплаты.</span></li>
-        <li><b>Планирование</b><span>Финмодель и сценарии. Решения по цифрам, а не по ощущению.</span></li>
-      </ul>
-      <div class="out"><b>На выходе:</b> кассовый разрыв виден заранее, прибыль планируется, деньги под контролем.</div>
-      <p class="note" style="margin-top:16px">В наставничестве считает ваш человек по моим шаблонам. В полном формате считает финансовый директор с моей стороны.</p>
+      <p class="lvlead">Регулярный финансовый менеджмент в четыре шага. Цифры собираются каждую неделю без вашего участия, решения принимаются по ним.</p>
     </div>
-    <div class="artcol rv"><img src="/foundertrajectory/assets/art/dengi.svg" alt="" aria-hidden="true" loading="lazy"></div>
+    <div class="fsteps rv">
+      <div class="fline" aria-hidden="true"><div class="fnode">1</div><div class="fnode">2</div><div class="fnode">3</div><div class="fnode">4</div></div>
+      <div class="fblocks">
+        <article class="card3 fblock">
+          <div class="fimg"><img class="blend soft-mask" src="/foundertrajectory/assets/art3/o-ledger.jpg" alt="" loading="lazy"></div>
+          <div class="fbody"><b>Учет</b><span>Движение денег и отчет о прибыли по одному правилу, каждую неделю.</span></div>
+        </article>
+        <article class="card3 fblock">
+          <div class="fimg"><img class="blend soft-mask" src="/foundertrajectory/assets/art3/o-profit.jpg" alt="" loading="lazy"></div>
+          <div class="fbody"><b>Чистая прибыль</b><span>С зарплатой собственника внутри. Видно, сколько можно забрать.</span></div>
+        </article>
+        <article class="card3 fblock">
+          <div class="fimg"><img class="blend soft-mask" src="/foundertrajectory/assets/art3/o-calendar.jpg" alt="" loading="lazy"></div>
+          <div class="fbody"><b>Платежный календарь</b><span>На восемь недель вперед. Разрыв виден заранее, а не в день оплаты.</span></div>
+        </article>
+        <article class="card3 fblock">
+          <div class="fimg"><img class="blend soft-mask" src="/foundertrajectory/assets/art3/o-plan.jpg" alt="" loading="lazy"></div>
+          <div class="fbody"><b>Планирование</b><span>Финмодель и сценарии. Решения по цифрам, а не по ощущению.</span></div>
+        </article>
+      </div>
+    </div>
+    <div class="frow rv">
+      <div class="out3"><b>На выходе:</b> кассовый разрыв виден заранее, прибыль планируется, деньги под контролем.</div>
+      <div class="fmode"><b>В наставничестве</b><span>Считает ваш человек по моим шаблонам.</span></div>
+      <div class="fmode"><b>В полном формате</b><span>Считает финансовый директор с моей стороны.</span></div>
+    </div>
   </div>
-</div></section>
+</section>
 
 <!-- ОПЫТ И КЕЙСЫ -->
 <section class="band" id="keysy"><div class="inner pad">
@@ -288,26 +607,24 @@
     <h2 class="h2">Опыт и результаты</h2>
     <p class="sub">Я не консультант со стороны: то, что ставлю у вас, сначала построил в собственной компании.</p>
   </div>
-  <div class="proof">
-    <div class="rv">
-      <ul class="who">
-        <li><b>Бывший генеральный директор и собственник.</b> Команда больше 15 человек, выручка 1,4 млн евро в 2024 году.</li>
-        <li><b>Процессы в BPMN 2.0, KPI и регулярный финансовый менеджмент</b> сначала поставил у себя, потом у клиентов.</li>
-        <li><b>MBA.</b> Больше десяти лет в управлении бизнесом.</li>
-      </ul>
+  <div class="exp">
+    <div class="stats rv">
+      <div class="stat"><div class="v">15+</div><div class="l">человек в команде моей компании, где я был генеральным директором</div></div>
+      <div class="stat"><div class="v">1,4 млн €</div><div class="l">выручка этой компании в 2024 году</div></div>
+      <div class="stat"><div class="v">MBA</div><div class="l">и больше десяти лет в управлении бизнесом</div></div>
     </div>
     <div class="rv">
-      <div class="case">
-        <div><div class="cn">Производство, выручка 2 млн евро</div><div class="cd">Порядок в управлении, продажах и работе с партнерами. Веду собственника.</div></div>
-        <div class="cr">3 млн €<small>план на год</small></div>
+      <div class="card3 case3">
+        <div class="v">3 млн €<small>план на год</small></div>
+        <div class="t"><b>Производство, выручка 2 млн евро</b><span>Порядок в управлении, продажах и работе с партнерами. Веду собственника.</span></div>
       </div>
-      <div class="case">
-        <div><div class="cn">Визовый центр</div><div class="cd">CRM, воронка партнеров, процессы внедрены в команду.</div></div>
-        <div class="cr">×1,5<small>поток лидов от партнеров за месяц</small></div>
+      <div class="card3 case3">
+        <div class="v">×1,5<small>поток лидов от партнеров за месяц</small></div>
+        <div class="t"><b>Визовый центр</b><span>CRM, воронка партнеров, процессы внедрены в команду.</span></div>
       </div>
-      <div class="case">
-        <div><div class="cn">Своя компания, электронная торговля</div><div class="cd">Финмодель показала, что бьет по прибыли. Себестоимость снижена на 3%.</div></div>
-        <div class="cr">+6 000 €<small>чистой прибыли за месяц</small></div>
+      <div class="card3 case3">
+        <div class="v">+6 000 €<small>чистой прибыли за месяц</small></div>
+        <div class="t"><b>Своя компания, электронная торговля</b><span>Финмодель показала, что бьет по прибыли. Себестоимость снижена на 3%.</span></div>
       </div>
       <a class="morelink" href="/foundertrajectory/keysy/">Подробнее о кейсах →</a>
     </div>
@@ -315,38 +632,38 @@
 </div></section>
 
 <!-- AI НА КАЖДОМ УРОВНЕ -->
-<section class="band deep" id="ai"><div class="inner pad">
-  <div class="zz rev">
-    <div class="rv">
-      <div class="eyebrow">На каждом уровне</div>
-      <h2 class="h2" style="margin-top:14px">Рядом со мной работает AI. Учу тому же вас</h2>
-      <p class="lead-in sm">Так устроена моя собственная работа, и так же я собираю систему у клиента.</p>
-      <div class="flowmini">
-        <div><div class="fh">Читает</div><div class="fc"><span>Чаты</span><span>Звонки</span><span>Почта</span><span>Таблицы</span><span>Задачи</span></div></div>
-        <div class="fa">→</div>
-        <div><div class="fh">Отдает</div><div class="fc"><span>Портал</span><span>Архив данных</span><span>Дорожная карта</span><span>Отчетность</span><span>Финмодель</span><span>КП</span></div></div>
+<section class="band deep lv" id="ai">
+  <div class="scene" aria-hidden="true"><img src="/foundertrajectory/assets/art3/s-ai.jpg" srcset="/foundertrajectory/assets/art3/s-ai-m.jpg 960w, /foundertrajectory/assets/art3/s-ai.jpg 1920w" sizes="(max-width:760px) 100vw, 66vw" alt="" loading="lazy"></div>
+  <div class="inner pad">
+    <div class="lvtext">
+      <div class="rv">
+        <div class="eyebrow">На каждом уровне</div>
+        <h2 class="h2" style="margin-top:14px">Рядом со мной работает AI. Учу тому же вас</h2>
+        <p class="lvlead">Так устроена моя собственная работа, и так же я собираю систему у клиента.</p>
       </div>
-      <ul class="pts">
+      <div class="flow3 rv">
+        <div><div class="fh">Читает</div><div class="chips"><span style="--i:0">Чаты</span><span style="--i:1">Звонки</span><span style="--i:2">Почта</span><span style="--i:3">Таблицы</span><span style="--i:4">Задачи</span></div></div>
+        <div class="fcore">Второй<br>мозг</div>
+        <div><div class="fh">Отдает</div><div class="chips"><span style="--i:6">Портал</span><span style="--i:7">Архив данных</span><span style="--i:8">Дорожная карта</span><span style="--i:9">Отчетность</span><span style="--i:10">Финмодель</span><span style="--i:11">КП</span></div></div>
+      </div>
+      <ul class="pts3 rv">
         <li><b>Каждый звонок транскрибируется,</b> решения и задачи фиксируются в тот же день.</li>
         <li><b>У вас свой портал:</b> архив данных, дорожная карта, отчетность, показатели.</li>
         <li><b>Коммерческое предложение или страница с офером</b> под клиента собирается за час.</li>
       </ul>
-      <div class="out"><b>Второй мозг.</b> Все мои рабочие чаты, письма и звонки он читает сам: ни одно сообщение не проходит мимо, ни одна договоренность не теряется. На каждом уровне показываю, как поставить то же самое у себя.</div>
+      <div class="out3 rv"><b>Второй мозг.</b> Все мои рабочие чаты, письма и звонки он читает сам: ни одно сообщение не проходит мимо, ни одна договоренность не теряется. На каждом уровне показываю, как поставить то же самое у себя.</div>
     </div>
-    <div class="artcol rv"><img src="/foundertrajectory/assets/art/mozg.svg" alt="" aria-hidden="true" loading="lazy"></div>
   </div>
-</div></section>
+</section>
 
 <!-- КАК НАЧАТЬ -->
 <section class="band" id="kak-nachat"><div class="inner pad">
-  <div class="sect-head rv">
-    <h2 class="h2">Как начать</h2>
-  </div>
-  <div class="how rv">
-    <div><div class="n">01</div><b>Напишите</b><span>В Telegram или через форму ниже. Двух строк о ситуации достаточно.</span></div>
-    <div><div class="n">02</div><b>Разговор на час</b><span>Разбираю ситуацию, называю главную проблему и с чего начать. Выводы остаются у вас.</span></div>
-    <div><div class="n">03</div><b>Условия до старта</b><span>Предлагаю уровень, срок и одну сумму. Дальше решаете вы.</span></div>
-  </div>
+  <div class="sect-head rv"><h2 class="h2">Как начать</h2></div>
+  <ol class="steps3 rv">
+    <li><span class="sn">1</span><b>Напишите</b><span class="st">В Telegram или через форму ниже. Двух строк о ситуации достаточно.</span></li>
+    <li><span class="sn">2</span><b>Разговор на час</b><span class="st">Разбираю ситуацию, называю главную проблему и с чего начать. Выводы остаются у вас.</span></li>
+    <li><span class="sn">3</span><b>Условия до старта</b><span class="st">Предлагаю уровень, срок и одну сумму. Дальше решаете вы.</span></li>
+  </ol>
 </div></section>
 
 <!-- НАПИШИТЕ МНЕ -->
