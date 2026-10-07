@@ -321,9 +321,28 @@ nav.tabs a.tm.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .gml.lt{border-left-style:dotted;opacity:.6}
 .gantt.mini{min-width:640px}
 #mods-sel button:disabled{cursor:default;opacity:1}
+
+/* телефон: пульт собран под большой экран */
+.mob{display:none;background:var(--ochre-soft);border-bottom:1px solid color-mix(in srgb,var(--ochre) 35%,transparent);color:var(--ink2);font-size:13.5px;line-height:1.45;padding-top:env(safe-area-inset-top,0px)}
+.mob .wrap{display:flex;gap:10px;align-items:flex-start;padding-top:12px;padding-bottom:12px}
+.mob svg{flex:none;width:22px;height:22px;color:var(--ochre-ink);margin-top:1px}
+.mob p{margin:0}
+.mob b{color:var(--ink);font-weight:600}
+.mob .mb{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.mob button{font:inherit;font-size:13px;border-radius:8px;padding:6px 12px;cursor:pointer;border:1px solid color-mix(in srgb,var(--ochre) 45%,transparent);background:var(--card);color:var(--ink)}
+.mob button.x{background:transparent;color:var(--ink2)}
+@media (max-width:900px),(pointer:coarse) and (max-width:1024px){.mob{display:block}.mob[hidden]{display:none!important}}
+@media (max-width:600px){.mob .wrap{padding-left:16px;padding-right:16px}}
 </style>
 </head>
 <body>
+<div class="mob" id="mob" role="note"><div class="wrap">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12.5" rx="1.5"/><path d="M8.5 20h7M12 16.5V20"/></svg>
+  <div>
+    <p><b>Смотреть лучше с компьютера.</b> Пульт собран под большой экран, под телефон он не адаптирован: таблицы, схемы процессов и план внедрения здесь не помещаются. Откройте ссылку на ноутбуке или компьютере.</p>
+    <div class="mb"><button type="button" id="mob-copy">Скопировать ссылку</button><button type="button" class="x" id="mob-x">Все равно смотреть</button></div>
+  </div>
+</div></div>
 <header class="hd"><div class="wrap">
   <div class="row1">
     <span class="brand">Бриз<small>визовое бюро, Испания</small></span>
@@ -1012,6 +1031,15 @@ function renderPlan(){
 }
 
 renderPult(); renderDeals(); renderFin(); renderOrg(); renderPos(); renderProc(); renderSteps(); renderPlan(); route();
+
+// плашка для телефона: скопировать ссылку, чтобы открыть на компьютере
+document.getElementById('mob-copy').onclick = e => {
+  const b = e.currentTarget, url = location.href.split('#')[0];
+  const ok = () => { b.textContent = 'Ссылка скопирована'; };
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(ok, () => prompt('Ссылка', url));
+  else prompt('Ссылка', url);
+};
+document.getElementById('mob-x').onclick = () => { document.getElementById('mob').hidden = true; };
 </script>
 </body>
 </html>
