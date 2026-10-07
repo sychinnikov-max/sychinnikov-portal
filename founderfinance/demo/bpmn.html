@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Бриз: процессы в bpmn.io</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bpmn-js@18.28.0/dist/assets/diagram-js.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bpmn-js@18.28.0/dist/assets/bpmn-js.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bpmn-js@18.28.0/dist/assets/bpmn-font/css/bpmn-embedded.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F1; --card:#FFFFFF; --ink:#1C1917; --ink2:#5D554C; --ink3:#8C8177;
+  --line:#E8DFD2; --acc:#E2452A; --teal:#12665A; --danger:#9B2C2C;
+  --sans:"Golos Text",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;display:flex;flex-direction:column}
+.bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+.back{color:var(--ink2);text-decoration:none;white-space:nowrap}
+.back:hover{color:var(--acc)}
+.ttl{font-weight:600}
+.tools{display:flex;gap:6px;margin-left:auto;align-items:center}
+.tools button{font-family:var(--sans);font-size:13px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink2);cursor:pointer}
+.tools button:hover{border-color:var(--acc);color:var(--acc)}
+.tools button.pri{background:var(--teal);border-color:var(--teal);color:#fff}
+.tools button.pri:hover{background:#0E5147;border-color:#0E5147;color:#fff}
+#zoom{font-family:var(--mono);font-size:12px;color:var(--ink3);min-width:44px;text-align:right}
+main{position:relative;flex:1;min-height:0}
+#canvas{position:absolute;inset:0;background:#fff}
+.msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:14px 20px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--ink2);max-width:90%;text-align:center}
+.msg.err{color:var(--danger);border-color:var(--danger)}
+.hint{padding:7px 16px;font-size:12.5px;color:var(--ink3);background:var(--card);border-top:1px solid var(--line)}
+.hint b{color:var(--ink2);font-weight:500}
+.hint.dirty b{color:var(--acc)}
+@media(max-width:600px){.bar{gap:8px;padding:8px 10px}.tools{margin-left:0}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="back" id="back" href="index.html#processy">← Процессы</a>
+  <span class="ttl" id="ttl">Процесс</span>
+  <div class="tools">
+    <span id="zoom"></span>
+    <button data-z="-" title="Отдалить">−</button>
+    <button data-z="+" title="Приблизить">+</button>
+    <button data-z="fit">вписать</button>
+    <button id="save" class="pri">Скачать .bpmn</button>
+  </div>
+</header>
+
+<main>
+  <div id="canvas"></div>
+  <div class="msg" id="msg">Загружаю схему…</div>
+</main>
+
+<div class="hint" id="hint"><b>Схема открыта в редакторе bpmn.io.</b> Можно двигать, приближать и править. Правки живут только в этой вкладке: чтобы их сохранить, скачайте файл.</div>
+
+<script src="processy-bpmn.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bpmn-js@18.28.0/dist/bpmn-modeler.production.min.js"></script>
+<script>
+var msg = document.getElementById('msg'), hint = document.getElementById('hint'),
+    zoomEl = document.getElementById('zoom'), dirty = false;
+// Какой процесс открыть: bpmn.html?p=delo. Без параметра открывается процесс 1
+var KEY = (new URLSearchParams(location.search).get('p') || 'put').replace(/[^a-z0-9-]/g, '');
+var XML = (window.BR_BPMNS || {})[KEY];
+var CARD = {put: 'p1', partnery: 'p2', dozapros: 'p3', oplaty: 'p4', raschety: 'p5', zakrytie: 'p6'};
+document.getElementById('back').href = 'index.html#' + (CARD[KEY] || 'processy');
+if (window.BR_TITLES && window.BR_TITLES[KEY]) {
+  document.getElementById('ttl').textContent = window.BR_TITLES[KEY];
+  document.title = 'Бриз: ' + window.BR_TITLES[KEY];
+}
+
+function fail(text){ msg.textContent = text; msg.classList.add('err'); msg.hidden = false; }
+
+if (typeof BpmnJS === 'undefined') {
+  fail('Не загрузился движок bpmn.io с cdn.jsdelivr.net. Проверьте интернет или VPN и обновите страницу.');
+} else if (typeof XML !== 'string') {
+  fail('Нет схемы «' + KEY + '» в processy-bpmn.js рядом со страницей.');
+} else {
+  var modeler = new BpmnJS({ container: '#canvas', keyboard: { bindTo: document } });
+  var canvas = modeler.get('canvas');
+
+  function showZoom(){ zoomEl.textContent = Math.round(canvas.zoom() * 100) + '%'; }
+
+  // Схема длинная: вписанная целиком она мельчит текст. Стартуем по высоте от левого края.
+  function startView(){
+    canvas.zoom('fit-viewport');
+    var vb = canvas.viewbox();
+    if (vb.scale >= 0.6) return;
+    var s = Math.min(1, (vb.outer.height - 40) / vb.inner.height);
+    canvas.viewbox({
+      x: vb.inner.x - 120 / s,
+      y: vb.inner.y - 20 / s,
+      width: vb.outer.width / s,
+      height: vb.outer.height / s
+    });
+  }
+  modeler.on('canvas.viewbox.changed', showZoom);
+  modeler.on('commandStack.changed', function(){
+    if (dirty) return;
+    dirty = true;
+    hint.classList.add('dirty');
+    hint.innerHTML = '<b>Есть несохраненные правки.</b> Они пропадут при закрытии вкладки, скачайте файл.';
+    document.getElementById('save').textContent = 'Скачать .bpmn с правками';
+  });
+
+  modeler.importXML(XML)
+    .then(function(){ msg.hidden = true; startView(); showZoom(); })
+    .catch(function(e){ fail('Схема не открылась: ' + e.message); });
+
+  document.querySelectorAll('[data-z]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var z = b.dataset.z;
+      if (z === 'fit') canvas.zoom('fit-viewport');
+      else canvas.zoom(Math.min(4, Math.max(0.2, canvas.zoom() * (z === '+' ? 1.25 : 0.8))));
+    });
+  });
+
+  document.getElementById('save').addEventListener('click', function(){
+    modeler.saveXML({ format: true }).then(function(res){
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([res.xml], { type: 'application/xml' }));
+      a.download = 'briz-' + KEY + (dirty ? '-pravki' : '') + '.bpmn';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+    });
+  });
+
+  window.addEventListener('beforeunload', function(e){ if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+}
+</script>
+</body>
+</html>
