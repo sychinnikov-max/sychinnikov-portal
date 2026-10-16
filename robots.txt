@@ -9,6 +9,7 @@
 User-agent: *
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 Allow: /founderfinance/
 Allow: /koleso/
 
@@ -16,65 +17,82 @@ Allow: /koleso/
 User-agent: GPTBot
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: OAI-SearchBot
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: ChatGPT-User
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: ClaudeBot
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: anthropic-ai
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: Claude-Web
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: PerplexityBot
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: Perplexity-User
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: Google-Extended
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: Applebot-Extended
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: Bingbot
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: YandexAdditional
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: CCBot
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: Amazonbot
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: Meta-ExternalAgent
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 User-agent: cohere-ai
 Disallow: /
 Allow: /foundertrajectory/
+Allow: /llms.txt
 
 Sitemap: https://sychinnikov.com/foundertrajectory/sitemap.xml
+Sitemap: https://sychinnikov.com/sitemap.xml

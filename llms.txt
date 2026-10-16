@@ -1,65 +1,11 @@
-# Андрей Сычинников — sychinnikov.com
+# Андрей Сычинников: внешний операционный директор для собственника бизнеса в Европе
 
-> Приватный портал-дашборд Андрея Сычинникова. Не публичный сайт продукта. Operational Architect для русскоязычных стартапов pre-seed → Series A. Strategic Advisor / Hand of the King для founder-CEO (двукратно валидировано рынком — Кристапс/Fishok, Сергей/Octo). Бывший CEO, выручка 120 млн ₽ в 2024 без внешних инвестиций. База: Хихон, Испания. Cashflow-only режим активен с 2026-05-18 — беру платные проекты без принудительного equity-разговора до €8К/мес × 2 мес.
+> Андрей Сычинников (Andrei Sychinnikov), внешний операционный директор (fractional COO) для собственников компаний на 5-50 человек в Европе. Аудит компании за две недели, одна зона руками, управление, передача функций команде. ИИ на каждом шаге. Работа на русском, онлайн, база в Испании.
 
-Email: sychinnikov@gmail.com
+Публичная часть сайта: раздел Founder Trajectory. Остальные адреса на этом домене закрыты и не предназначены для индексации.
 
-## Главная
-
-- [Дашборд](https://sychinnikov.com/): задачи дня (канбан), прогресс Founder Trajectory (Гантт), финансы-снимок, звонки прошедшие + предстоящие, журнал решений
-
-## Задачи
-
-- [Матрица Эйзенхауэра](https://sychinnikov.com/tasks/): единый бэклог всех задач Андрея по 4 квадрантам (Q1-Q4). Оси «важно × срочно» через цели 90 дней и дедлайн ≤72ч. 5 вкладок: Сегодня · Неделя · Матрица · По контексту · Все. Бюджет часов недели, подсветка просрочек и старых задач. Источник: `tasks/backlog.md` в Claude-Context. Регенерация через `/triage` и `/tasks`.
-
-## Продукт
-
-- [Founder Trajectory](https://sychinnikov.com/founder-trajectory/): управляемая траектория для founder-CEO. 5 ступеней (Map → Audit → Reset → Advisor → Partner). Методология 8 контуров. 3-фазный Reset (Discovery → Architecture → Handover). Hard floor 3 мес на flagship.
-
-## Клиенты
-
-- [Активные клиенты](https://sychinnikov.com/clients/): Fishok (retainer €3.5К/мес, Латвия) и Octo Relocate (пауза до 17.06.2026, дедлайн решения по выходу)
-
-## Контакты
-
-- [Картотека](https://sychinnikov.com/contacts/): 18 контактов с relationship-логикой — кто, что им важно, что нужно сделать чтобы вывести отношения на следующий уровень. Группы: стратегические / активные / перспективные / спящие / закрытые сезона.
-
-## Финансы
-
-- [Финансовый дашборд](https://sychinnikov.com/finance/): план-факт май 2026 (+€1 439 прибыль), кошельки (6 счетов + крипта), фонды (подушка / США / equity-портфель), кредит РФ (переход на евро 02.08.2026)
-
-## Система
-
-- [AndreiOS](https://sychinnikov.com/system/): 4 субагента (mentor, trajectory-architect, finance-director, octo-advisor), slash-команды (/day-open, /day-close, /call, /intake, /finance), правила контекста, kill-switch, режим cashflow-only
-
-## Решения
-
-- [ADR-журнал](https://sychinnikov.com/decisions/): стратегические решения сверху-новые. Последние: пересборка портала, переименование sychinnikov→founder-trajectory, стандарт кейса v2, contacts v2, DDS-структура финансов, cashflow-only
-
-## Wisdom
-
-- [Источники мышления](https://sychinnikov.com/wisdom/): Маргулан Сейсембаев, Сергей Колесников, школа продуктовых архитекторов (Бейкер + Эннс + Вайс), Илья Балахнин (voice). Не путать с contacts — здесь те, кто формирует мышление, не те с кем общаюсь.
-
-## Лендинги (3 варианта оффера)
-
-- [Hand of the King — premium](https://sychinnikov.com/landing/hand/): dark mode, премиум-позиционирование
-- [Operational Architect — B2B](https://sychinnikov.com/landing/architect/): light mode, B2B-консалтинг
-- [Operating System — tech](https://sychinnikov.com/landing/system/): tech-эстетика, продуктовый угол
-
-## Три цели 90 дней (до 2026-08-20)
-
-1. Третий клиент (желательно через инкубатор Сергея — equity-кейс)
-2. Первая equity-позиция (Partnership Framework)
-3. €8 000-10 000/мес чистыми к 1 августа
-
-## Контекст
-
-- Языки: русский (родной), английский (рабочий), испанский (бытовой)
-- Юрисдикции: ЕС (Испания), готовлю переезд в США (2028, приоритет Флорида)
-- Семья: жена Вика, дочь Сара, сын, golden retriever
-- Долгосрочная цель: $10М+ к 2033 через equity-портфель из 6-10 долей в стартапах
-- Стиль работы: системное мышление, deep dive, AI-driven, без шаблонов
-
-## Контракт публичности
-
-Весь портал — приватный second-brain. Если что-то предназначено наружу — отдельный деплой на отдельном домене (например, будущий публичный лендинг Founder Trajectory из source-layer `founder-trajectory/website/`). Контент этого сайта — рабочая поверхность только для Андрея.
+- [Сайт: внешний операционный директор](https://sychinnikov.com/foundertrajectory/): кто, для кого, пять вопросов аудита, путь работы, что остается у компании, ИИ, частые вопросы, контакты
+- [Полное описание для языковых моделей](https://sychinnikov.com/foundertrajectory/llms.txt)
+- [Кейсы](https://sychinnikov.com/foundertrajectory/keysy/)
+- [LinkedIn](https://www.linkedin.com/in/sychinnikov/)
+- [Telegram @Sychinnikov_work](https://t.me/Sychinnikov_work)
