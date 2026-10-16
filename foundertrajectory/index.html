@@ -39,7 +39,7 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/109611431" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Андрей Сычинников","description":"Внешний операционный директор для собственника компании на 5-50 человек. Три уровня участия: наставничество (дорожная карта, реестр решений, модель управления), операционное участие (оргструктура, процессы BPMN 2.0, KPI, регламенты), финансовый контур (управленческий учет, чистая прибыль, платежный календарь, финмодель). На каждом уровне работа сопровождается AI.","founder":{"@type":"Person","name":"Андрей Сычинников","jobTitle":"Основатель агентства Founder Finance, внешний операционный директор","alumniOf":{"@type":"EducationalOrganization","name":"Русская школа управления"},"hasCredential":{"@type":"EducationalOccupationalCredential","name":"МВА Эксперт: Управление компанией","credentialCategory":"Диплом о профессиональной переподготовке, 250 академических часов, 2023"}},"availableLanguage":"ru","url":"https://sychinnikov.com/foundertrajectory/","hasOfferCatalog":{"@type":"OfferCatalog","name":"Уровни участия","itemListElement":[
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Андрей Сычинников","description":"Внешний операционный директор для собственника компании на 5-50 человек. Три уровня участия: наставничество (дорожная карта, реестр решений, модель управления), операционное участие (оргструктура, процессы BPMN 2.0, KPI, регламенты), финансовый контур (управленческий учет, чистая прибыль, платежный календарь, финмодель). На каждом уровне работа сопровождается AI.","founder":{"@type":"Person","name":"Андрей Сычинников","jobTitle":"Основатель Founder Trajectory, внешний операционный директор","alumniOf":{"@type":"EducationalOrganization","name":"Русская школа управления"},"hasCredential":{"@type":"EducationalOccupationalCredential","name":"МВА Эксперт: Управление компанией","credentialCategory":"Диплом о профессиональной переподготовке, 250 академических часов, 2023"}},"availableLanguage":"ru","url":"https://sychinnikov.com/foundertrajectory/","hasOfferCatalog":{"@type":"OfferCatalog","name":"Уровни участия","itemListElement":[
 {"@type":"Offer","name":"Наставничество","description":"Час в неделю с собственником: дорожная карта, реестр решений, новая модель управления"},
 {"@type":"Offer","name":"Операционное участие","description":"Вместе с операционным менеджером: оргструктура, процессы в BPMN 2.0, KPI, регламенты, план внедрения"},
 {"@type":"Offer","name":"Финансовый контур","description":"Вместе с финансовым директором: управленческий учет, контроль чистой прибыли, платежный календарь, финмодель"}]}}
@@ -405,6 +405,81 @@
 .credlinks a{color:var(--gold);text-decoration:none;font-weight:600;font-size:15.5px}
 .credlinks a:hover{text-decoration:underline}
 @media(max-width:900px){.cred{grid-template-columns:1fr;padding:18px}}
+
+/* ===== 16.10: видео на первом экране ===== */
+.vhero{position:relative;min-height:clamp(600px,calc(100vh - 74px),980px);display:flex;align-items:center;overflow:hidden;background:var(--bg);isolation:isolate}
+.vmedia{position:absolute;inset:0;z-index:-1;animation:vrise 1.4s ease-out both}
+@keyframes vrise{from{opacity:.3}to{opacity:1}}
+.vbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 50%}
+.vloop{visibility:hidden}
+.vhero.looping .vloop{visibility:visible}
+.vhero.looping #vintro{visibility:hidden}
+.vshade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(20,18,15,.95) 0%,rgba(20,18,15,.84) 26%,rgba(20,18,15,.34) 42%,rgba(20,18,15,0) 54%),
+  linear-gradient(180deg,rgba(20,18,15,.35) 0%,rgba(20,18,15,0) 18%,rgba(20,18,15,0) 72%,var(--bg) 100%)}
+.vhero .inner{width:100%;padding-top:clamp(40px,7vh,90px);padding-bottom:clamp(60px,10vh,120px)}
+.vcopy{max-width:610px}
+/* верхняя строка с золотым штрихом */
+.vhero .eyebrow{display:flex!important;align-items:center;gap:14px;letter-spacing:.2em;font-size:12.5px;color:var(--gold-bright)}
+.vhero .eyebrow::before{content:"";flex:0 0 34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.vhero .eyebrow.d-only{display:flex}
+@media(max-width:760px){.vhero .eyebrow.d-only{display:none!important}}
+@media(min-width:761px){.vhero .eyebrow.m-only{display:none!important}}
+.vhero h1{max-width:15ch;margin:18px 0 0;letter-spacing:-.015em;text-shadow:0 2px 28px rgba(0,0,0,.5)}
+.vhero h1 em{font-style:normal;background:linear-gradient(176deg,#F6E3B0 0%,#E2C27F 46%,#B98F4C 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.vhero .lead{margin:22px 0 0;max-width:46ch;color:color-mix(in oklab,var(--ink) 90%,transparent)}
+.vhero .actions{margin:32px 0 0;gap:14px;display:flex;flex-wrap:wrap;align-items:center}
+/* главная кнопка: золото с бликом и стрелкой */
+.vhero .vcta{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:14px;padding:17px 22px 17px 30px;border-radius:999px;font-size:17px;font-weight:700;letter-spacing:.01em;color:#1A140A;
+  background:linear-gradient(180deg,#F0D595 0%,#D7B26C 52%,#B68C4B 100%);
+  box-shadow:inset 0 1px 0 rgba(255,246,220,.75),inset 0 -1px 0 rgba(80,52,16,.35),0 0 0 1px rgba(255,226,160,.28),0 14px 34px -10px rgba(217,184,114,.65),0 2px 6px rgba(0,0,0,.35);
+  transition:transform .25s ease,box-shadow .25s ease}
+.vhero .vcta i{font-style:normal;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(26,20,10,.12);box-shadow:inset 0 0 0 1px rgba(26,20,10,.18);transition:transform .25s ease}
+.vhero .vcta::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);animation:vshine 5.5s ease-in-out 1.6s infinite}
+@keyframes vshine{0%,72%{left:-60%}100%{left:130%}}
+.vhero .vcta:hover{transform:translateY(-1px);background:linear-gradient(180deg,#F5DDA2 0%,#DDB974 52%,#BE9452 100%);box-shadow:inset 0 1px 0 rgba(255,246,220,.8),inset 0 -1px 0 rgba(80,52,16,.35),0 0 0 1px rgba(255,226,160,.35),0 18px 40px -10px rgba(217,184,114,.75),0 2px 6px rgba(0,0,0,.35)}
+.vhero .vcta:hover i{transform:translateX(3px)}
+/* вторая кнопка: стекло и тонкая золотая рамка */
+.vhero .vghost{display:inline-flex;align-items:center;padding:17px 28px;border-radius:999px;font-size:16.5px;font-weight:600;color:var(--gold-bright);
+  background:linear-gradient(180deg,rgba(255,240,205,.07),rgba(255,240,205,.015));border:1px solid rgba(217,184,114,.42);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,240,205,.08);transition:border-color .25s,background .25s}
+.vhero .vghost:hover{border-color:rgba(240,210,148,.75);background:linear-gradient(180deg,rgba(255,240,205,.12),rgba(255,240,205,.03))}
+/* три опоры: одна стеклянная панель */
+.vpillars{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);max-width:600px;position:relative;
+  border-radius:18px;border:1px solid rgba(217,184,114,.22);
+  background:linear-gradient(180deg,rgba(40,34,26,.62),rgba(20,18,15,.42));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,240,205,.06),0 20px 50px -24px rgba(0,0,0,.8)}
+.vpillars::before{content:"";position:absolute;left:22px;right:22px;top:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(240,210,148,.85),transparent)}
+.vpillars li{position:relative;display:flex;flex-direction:column;gap:6px;padding:18px 20px 19px 22px}
+.vpillars li + li::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:1px;background:linear-gradient(180deg,transparent,rgba(217,184,114,.35),transparent)}
+.vpillars i{font-style:normal;font-family:var(--fm);font-size:11.5px;letter-spacing:.16em;color:var(--gold)}
+.vpillars b{font-family:var(--fd);font-weight:600;font-size:19px;line-height:1.1;color:var(--ink)}
+.vpillars span{font-size:13.5px;line-height:1.35;color:var(--ink-muted)}
+/* кнопка в меню того же класса */
+.nav .ncta{border-radius:999px;border:1px solid rgba(217,184,114,.5);color:var(--gold-bright);background:linear-gradient(180deg,rgba(255,240,205,.06),rgba(255,240,205,0));transition:border-color .25s,background .25s}
+.nav .ncta:hover{border-color:rgba(240,210,148,.85);background:rgba(217,184,114,.1)}
+.vreplay{position:absolute;right:clamp(16px,3vw,40px);bottom:clamp(16px,4vh,40px);z-index:2;font:500 12.5px/1 var(--fm);letter-spacing:.1em;color:var(--ink-muted);background:rgba(20,18,15,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--hair);border-radius:999px;padding:10px 16px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .4s}
+.vreplay.on{opacity:1;pointer-events:auto}
+.vreplay:hover{color:var(--gold-bright);border-color:var(--hair-gold)}
+@media(prefers-reduced-motion:reduce){.vmedia{animation:none}.vbg{display:none}.vhero .vcta::after{animation:none;display:none}.vmedia{background:url('/foundertrajectory/assets/video/hero-v3s-poster-end.jpg') 68% 50%/cover no-repeat}}
+@media(max-width:760px){
+  .vhero{display:block;min-height:0}
+  .vmedia{position:relative;inset:auto;z-index:0;aspect-ratio:16/9}
+  .vbg{object-position:60% 50%}
+  .vshade{background:linear-gradient(180deg,rgba(20,18,15,0) 60%,var(--bg) 100%)}
+  .vreplay{bottom:12px;right:12px;padding:8px 12px}
+  .vhero .inner{padding-top:18px;padding-bottom:40px}
+  .vhero .eyebrow{letter-spacing:.11em;font-size:11px;gap:10px}
+  .vhero .eyebrow::before{flex-basis:20px}
+  .vhero h1{max-width:none}
+  .vhero .lead{color:var(--ink-muted)}
+  .vhero .actions{flex-direction:column;align-items:stretch}
+  .vhero .vcta,.vhero .vghost{justify-content:center}
+  .vpillars{margin-top:28px;grid-template-columns:repeat(3,1fr)}
+  .vpillars li{padding:14px 10px 15px 14px;gap:4px}
+  .vpillars b{font-size:16px}
+  .vpillars span{font-size:12px}
+}
 </style>
 </head>
 <body data-variant="home" class="art-pending">
@@ -422,40 +497,38 @@
   </nav>
 </div></header>
 
-<!-- ПЕРВЫЙ ЭКРАН -->
-<section class="hero hero3"><div class="inner">
-  <div class="h3row">
-    <div>
+<!-- ПЕРВЫЙ ЭКРАН: видео на фоне (16.10). Класс hero нужен site.js для липкой кнопки на телефоне -->
+<section class="hero vhero" id="top">
+  <div class="vmedia">
+    <video class="vbg" id="vintro" autoplay muted playsinline preload="auto" poster="/foundertrajectory/assets/video/hero-v3m-poster-start.jpg" aria-hidden="true">
+      <source src="/foundertrajectory/assets/video/hero-v3-intro-m-web.mp4" type="video/mp4">
+      <source src="/foundertrajectory/assets/video/hero-v3-intro-m-web.webm" type="video/webm">
+    </video>
+    <video class="vbg vloop" id="vloop" muted playsinline loop preload="none" poster="/foundertrajectory/assets/video/hero-v3s-poster-end.jpg" aria-hidden="true">
+      <source src="/foundertrajectory/assets/video/hero-v3-loop-hq.mp4" type="video/mp4">
+      <source src="/foundertrajectory/assets/video/hero-v3-loop-hq.webm" type="video/webm">
+    </video>
+    <div class="vshade" aria-hidden="true"></div>
+    <button class="vreplay" id="vreplay" type="button" aria-label="Проиграть видео с начала">↻ С начала</button>
+  </div>
+  <div class="inner">
+    <div class="vcopy">
       <div class="eyebrow d-only">Подключаюсь к собственнику компании на 5-50 человек</div>
       <div class="eyebrow m-only">Собственникам компаний на 5-50 человек</div>
-      <h1>Собираю управление компанией: люди, процессы, деньги</h1>
-      <p class="lead">Внешний операционный директор, основатель агентства Founder Finance. Три уровня участия, от часа в неделю до финансового контура. На каждом шаге рядом мой AI.</p>
+      <h1>Собираю управление компанией: <em>люди, процессы, деньги</em></h1>
+      <p class="lead">Внешний операционный директор, основатель Founder Trajectory. Три уровня участия, от часа в неделю до финансового контура. На каждом шаге рядом мой AI.</p>
       <div class="actions">
-        <a class="cta" href="#cta">Написать мне</a>
-        <a class="cta ghost" href="#urovni">Три уровня участия</a>
+        <a class="cta vcta" href="#cta"><span>Написать мне</span><i aria-hidden="true">→</i></a>
+        <a class="cta ghost vghost" href="#urovni">Три уровня участия</a>
       </div>
-    </div>
-    <div class="h3stage">
-      <div class="h3halo" aria-hidden="true"></div>
-      <figure class="h3photo">
-        <img src="/foundertrajectory/assets/people/andrei-sychinnikov/andrei-portrait-1100.jpg" alt="Андрей Сычинников" fetchpriority="high">
-        <figcaption><b>Андрей Сычинников</b><span>Основатель Founder Finance. Собственник с 2019 года.</span></figcaption>
-      </figure>
-      <div class="h3item i1" style="--d:0s">
-        <div class="h3obj blend"><img class="soft-mask" src="/foundertrajectory/assets/art3/o-people.jpg" alt="" loading="lazy"></div>
-        <div class="h3lbl"><b>Люди</b><span>оргструктура и KPI</span></div>
-      </div>
-      <div class="h3item i2" style="--d:-2.7s">
-        <div class="h3obj blend"><img class="soft-mask" src="/foundertrajectory/assets/art3/o-process.jpg" alt="" loading="lazy"></div>
-        <div class="h3lbl"><b>Процессы</b><span>BPMN и регламенты</span></div>
-      </div>
-      <div class="h3item i3" style="--d:-5.3s">
-        <div class="h3obj blend"><img class="soft-mask" src="/foundertrajectory/assets/art3/o-money.jpg" alt="" loading="lazy"></div>
-        <div class="h3lbl"><b>Деньги</b><span>прибыль и календарь</span></div>
-      </div>
+      <ul class="vpillars">
+        <li><i>01</i><b>Люди</b><span>оргструктура и KPI</span></li>
+        <li><i>02</i><b>Процессы</b><span>BPMN и регламенты</span></li>
+        <li><i>03</i><b>Деньги</b><span>прибыль и календарь</span></li>
+      </ul>
     </div>
   </div>
-</div></section>
+</section>
 
 <!-- БЫЛО И СТАНЕТ -->
 <section class="band alt" id="rezultat"><div class="inner pad">
@@ -780,5 +853,21 @@
 </div>
 
 <script src="/foundertrajectory/assets/site.js?v=20260807b"></script>
+<script>
+(function(){
+  var h=document.querySelector('.vhero'),a=document.getElementById('vintro'),l=document.getElementById('vloop'),b=document.getElementById('vreplay');
+  if(!h||!a||!l)return;
+  var warm=false;a.addEventListener('playing',function(){if(warm)return;warm=true;l.preload='auto';l.load()});
+  a.addEventListener('ended',function(){
+    l.currentTime=0;
+    var p=l.play();
+    var show=function(){h.classList.add('looping');if(b)b.classList.add('on')};
+    if(p&&p.then){p.then(show,show)}else{show()}
+  });
+  if(b)b.addEventListener('click',function(){
+    b.classList.remove('on');h.classList.remove('looping');l.pause();a.currentTime=0;a.play();
+  });
+})();
+</script>
 </body>
 </html>
