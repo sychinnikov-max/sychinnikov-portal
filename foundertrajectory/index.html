@@ -716,6 +716,17 @@ footer .fcta i{font-style:normal;display:inline-grid;place-items:center;width:26
 .nfaq-i p{margin:0;padding:0 20px 20px;color:var(--ink-muted);font-size:15.5px;line-height:1.6}
 @media(max-width:900px){.nfaq{grid-template-columns:1fr}}
 @media(max-width:760px){.nfaq-i summary{padding:16px}.nfaq-i h3{font-size:17px}.nfaq-i p{padding:0 16px 16px;font-size:15px}}
+
+/* ===== 17.10: облегченный режим для телефонов и планшетов (iOS Safari падал по памяти на эффектах) ===== */
+@media (max-width:1024px),(hover:none){
+  body::after{content:none!important;display:none!important}
+  .vpillars,.vhero .vghost,.vreplay,.npain,.nk-item,.nbound,.nflow2,.nflow,.fct,.chips span{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .npain,.nk-item,.nbound{background:linear-gradient(170deg,#2A241C,#1B1814)!important}
+  .vpillars{background:linear-gradient(180deg,rgba(40,34,26,.92),rgba(20,18,15,.88))!important}
+  .nflow2{background:linear-gradient(180deg,#221D16,#12100D)!important}
+  .nbg img{animation:none!important;transform:none!important}
+  .nf-orb circle[filter]{filter:none}
+}
 </style>
 </head>
 <body data-variant="home" class="art-pending">
