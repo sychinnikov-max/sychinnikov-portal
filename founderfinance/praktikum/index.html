@@ -40,7 +40,8 @@ h1{font:600 clamp(34px,6vw,56px)/1.08 'Playfair Display',Georgia,serif;letter-sp
 form{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
 form h2{font:600 26px/1.2 'Playfair Display',Georgia,serif;margin-bottom:6px}
 form .sub{color:var(--muted);font-size:15px;margin-bottom:20px}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.consent{margin-top:14px;font-size:13px;color:var(--muted)}
 label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--soft)}
 label.full{grid-column:1/-1}
 input,select{background:#12100D;border:1px solid #3A3328;border-radius:12px;color:var(--text);font:500 16px Manrope,Arial,sans-serif;padding:13px 14px;width:100%;-webkit-appearance:none;appearance:none}
@@ -99,30 +100,18 @@ input:focus,select:focus{outline:none;border-color:var(--gold)}
 
   <form id="gate" novalidate>
     <h2>Куда прислать запись и разбор</h2>
-    <p class="sub">Все поля обязательные. Таблицы сохраняются копией у вас, ваших цифр никто не увидит.</p>
+    <p class="sub">Три поля, и таблицы откроются. Таблицы сохраняются копией у вас, ваших цифр никто не увидит.</p>
     <div class="fields">
       <label>Имя<input name="name" autocomplete="name" required></label>
       <label>Telegram<input name="tg" placeholder="@username" autocomplete="off" required></label>
       <label>Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
-      <label>Чем занимается компания<input name="company" placeholder="сфера или название" required></label>
-      <label>Сколько человек в команде
-        <select name="team" required>
-          <option value="">выберите</option>
-          <option>только я</option>
-          <option>2-4</option>
-          <option>5-15</option>
-          <option>16-50</option>
-          <option>больше 50</option>
-        </select>
-      </label>
-      <label>Страна регистрации компании<input name="country" placeholder="например, Испания" required></label>
-      <label class="check"><input type="checkbox" name="agree" required><span>Согласен на обработку этих данных и на сообщение от Андрея Сычинникова в Telegram или на почту по теме практикума</span></label>
       <div class="hp" aria-hidden="true"><input name="botcheck" tabindex="-1" autocomplete="off"></div>
     </div>
     <div class="row">
       <button class="btn gold" type="submit" id="send">Получить таблицы</button>
       <span class="err" id="err" role="alert"></span>
     </div>
+    <p class="consent">Нажимая кнопку, вы соглашаетесь на обработку этих данных и на сообщение от Андрея Сычинникова в Telegram или на почту по теме практикума.</p>
   </form>
 
   <div class="done">
@@ -170,9 +159,8 @@ function val(n){ var el=form.elements[n]; return el ? String(el.value||"").trim(
 
 async function send(f){
   var message="[ПРАКТИКУМ «ТОЧКА РОСТА» · Ковчег 21.10 · таблицы]\n"+
-    "Имя: "+f.name+"\nTelegram: "+f.tg+"\nEmail: "+f.email+
-    "\nКомпания: "+f.company+"\nКоманда: "+f.team+"\nСтрана регистрации: "+f.country;
-  var data={access_key:FORM_KEY,subject:"Практикум 21.10: "+(f.company||f.name),from_name:"Практикум · таблицы",
+    "Имя: "+f.name+"\nTelegram: "+f.tg+"\nEmail: "+f.email;
+  var data={access_key:FORM_KEY,subject:"Практикум 21.10: "+f.name,from_name:"Практикум · таблицы",
     name:f.name,message:message,replyto:f.email};
   var payload={};
   Object.keys(data).forEach(function(k){ if(k!=="access_key") payload[k]=data[k]; });
@@ -194,17 +182,13 @@ form.addEventListener("submit",async function(e){
   e.preventDefault();
   err.textContent="";
   if(val("botcheck")){ unlock(); return; }
-  var f={name:val("name"),tg:val("tg"),email:val("email"),company:val("company"),team:val("team"),country:val("country")};
+  var f={name:val("name"),tg:val("tg"),email:val("email")};
   var miss=[];
   if(!f.name)miss.push("имя");
   if(!f.tg)miss.push("Telegram");
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email))miss.push("почту");
-  if(!f.company)miss.push("чем занимается компания");
-  if(!f.team)miss.push("размер команды");
-  if(!f.country)miss.push("страну");
   if(miss.length){ err.textContent="Заполните: "+miss.join(", "); return; }
   if(/[а-яё]/i.test(f.tg.replace(/^@/,""))){ err.textContent="Telegram пишется латиницей, например @username"; return; }
-  if(!form.elements.agree.checked){ err.textContent="Отметьте согласие на обработку данных"; return; }
   btn.disabled=true; btn.textContent="Отправляю...";
   await send(f);
   try{ localStorage.setItem(STORE,"1"); }catch(e){}
