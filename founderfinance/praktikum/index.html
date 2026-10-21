@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Инструменты практикума · Точка роста для бизнеса</title>
+<meta name="description" content="Калькулятор чистой прибыли и платежный календарь на 8 недель к практикуму Андрея Сычинникова">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#14120F;--card:#1E1A15;--line:#2E2820;--text:#F3EEE4;--soft:#D3CBBD;--muted:#B5AC9C;--gold:#D9B872;--ink:#14120F;--err:#E07A5F}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font:400 17px/1.55 Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:40px 20px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.brand{font:600 20px 'Playfair Display',Georgia,serif}
+.brand span{color:var(--gold)}
+.date{font:500 13px 'IBM Plex Mono',monospace;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.eyebrow{font:600 13px 'IBM Plex Mono',monospace;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin:40px 0 14px}
+h1{font:600 clamp(34px,6vw,56px)/1.08 'Playfair Display',Georgia,serif;letter-spacing:-.5px;max-width:760px}
+.lead{font-size:19px;color:var(--soft);max-width:680px;margin-top:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:10px}
+.tool .n{font:600 34px/1 'Playfair Display',Georgia,serif;color:var(--gold)}
+.tool h3{font-size:21px;font-weight:700}
+.tool p{color:var(--muted);font-size:16px}
+.tool .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:12px}
+.lock{font:500 13px 'IBM Plex Mono',monospace;color:var(--muted);letter-spacing:1px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:13px 22px;font:700 16px Manrope,Arial,sans-serif;text-decoration:none;border:1px solid var(--gold);cursor:pointer}
+.btn.gold{background:var(--gold);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--gold)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.unlocked .lock{display:none}
+.tool .acts a{display:none}
+.unlocked .tool .acts a{display:inline-flex}
+.unlocked .tool{border-color:var(--gold)}
+form{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
+form h2{font:600 26px/1.2 'Playfair Display',Georgia,serif;margin-bottom:6px}
+form .sub{color:var(--muted);font-size:15px;margin-bottom:20px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--soft)}
+label.full{grid-column:1/-1}
+input,select{background:#12100D;border:1px solid #3A3328;border-radius:12px;color:var(--text);font:500 16px Manrope,Arial,sans-serif;padding:13px 14px;width:100%;-webkit-appearance:none;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;background-size:6px 6px;background-repeat:no-repeat}
+input:focus,select:focus{outline:none;border-color:var(--gold)}
+.check{flex-direction:row;align-items:flex-start;gap:10px;grid-column:1/-1;font-size:14px;color:var(--muted)}
+.check input{width:20px;height:20px;flex:none;margin-top:2px;-webkit-appearance:checkbox;appearance:auto;accent-color:#D9B872}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:20px}
+.err{color:var(--err);font-size:15px;min-height:22px}
+.done{display:none;margin-top:28px;background:var(--card);border:1px solid var(--gold);border-radius:20px;padding:26px}
+.unlocked .done{display:block}
+.unlocked form{display:none}
+.done h2{font:600 26px/1.2 'Playfair Display',Georgia,serif;margin-bottom:8px}
+.done p{color:var(--soft)}
+.next{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.next .tool{gap:8px}
+.foot{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot a{color:var(--gold);text-decoration:none}
+@media (max-width:720px){.grid,.fields,.next{grid-template-columns:1fr}.wrap{padding-top:24px}.top{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="wrap" id="page">
+  <div class="top">
+    <div class="brand">Андрей Сычинников <span>·</span> Founder Trajectory</div>
+    <div class="date">Практикум · 21 октября</div>
+  </div>
+
+  <p class="eyebrow">Точка роста для бизнеса</p>
+  <h1>Два инструмента, по которым работаем на практикуме</h1>
+  <p class="lead">Оставьте контакты, и ссылки откроются сразу. Если вы за компьютером, откройте таблицы и заполняйте вместе со мной по ходу эфира.</p>
+
+  <div class="grid">
+    <div class="tool">
+      <div class="n">01</div>
+      <h3>Калькулятор чистой прибыли</h3>
+      <p>Из чего складывается прибыль и сколько бизнес заработал за месяц после всех расходов, включая вашу зарплату.</p>
+      <div class="acts">
+        <span class="lock">Откроется после формы</span>
+        <a class="btn gold" href="https://docs.google.com/spreadsheets/d/1ii6KzthkbQA9VEk9U-UcjHwLoJvKWbezUD0O60lUZVA/copy" target="_blank" rel="noopener">Копия в Google Таблицах</a>
+        <a class="btn ghost" href="/founderfinance/lead-magnet/calculator-upravlencheskaya-pribyl.xlsx" download>Excel</a>
+      </div>
+    </div>
+    <div class="tool">
+      <div class="n">02</div>
+      <h3>Платежный календарь на 8 недель</h3>
+      <p>Где через месяц будет кассовый разрыв и сколько денег можно вложить в рост без риска.</p>
+      <div class="acts">
+        <span class="lock">Откроется после формы</span>
+        <a class="btn gold" href="https://docs.google.com/spreadsheets/d/1slKkSpLLPCVhkZP3Rdzp9AQMARgXfD8OZl2wEAt-9Oo/copy" target="_blank" rel="noopener">Копия в Google Таблицах</a>
+        <a class="btn ghost" href="/founderfinance/lead-magnet/platezhnyy-kalendar-8-nedel.xlsx" download>Excel</a>
+      </div>
+    </div>
+  </div>
+
+  <form id="gate" novalidate>
+    <h2>Куда прислать запись и разбор</h2>
+    <p class="sub">Все поля обязательные. Таблицы сохраняются копией у вас, ваших цифр никто не увидит.</p>
+    <div class="fields">
+      <label>Имя<input name="name" autocomplete="name" required></label>
+      <label>Telegram<input name="tg" placeholder="@username" autocomplete="off" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+      <label>Чем занимается компания<input name="company" placeholder="сфера или название" required></label>
+      <label>Сколько человек в команде
+        <select name="team" required>
+          <option value="">выберите</option>
+          <option>только я</option>
+          <option>2-4</option>
+          <option>5-15</option>
+          <option>16-50</option>
+          <option>больше 50</option>
+        </select>
+      </label>
+      <label>Страна регистрации компании<input name="country" placeholder="например, Испания" required></label>
+      <label class="check"><input type="checkbox" name="agree" required><span>Согласен на обработку этих данных и на сообщение от Андрея Сычинникова в Telegram или на почту по теме практикума</span></label>
+      <div class="hp" aria-hidden="true"><input name="botcheck" tabindex="-1" autocomplete="off"></div>
+    </div>
+    <div class="row">
+      <button class="btn gold" type="submit" id="send">Получить таблицы</button>
+      <span class="err" id="err" role="alert"></span>
+    </div>
+  </form>
+
+  <div class="done">
+    <h2>Готово, таблицы открыты</h2>
+    <p>Нажмите «Копия в Google Таблицах»: копия сохранится у вас на Диске. Нет Google, скачайте Excel. Заполните желтые ячейки, формулы посчитают сами.</p>
+  </div>
+
+  <div class="next">
+    <div class="tool">
+      <h3>Хотите пройти на цифрах вашей компании?</h3>
+      <p>Напишите мне в Telegram слово КАРТА. Пришлите заполненный калькулятор или календарь, посмотрю лично.</p>
+      <div class="acts" style="padding-top:8px"><a class="btn gold" style="display:inline-flex" href="https://t.me/Sychinnikov_work?text=%D0%9A%D0%90%D0%A0%D0%A2%D0%90" target="_blank" rel="noopener">Написать КАРТА</a></div>
+    </div>
+    <div class="tool">
+      <h3>Бонус: колесо финансового здоровья</h3>
+      <p>Шесть сфер, от денег до дивидендов. Если цифр под рукой нет, начните с него: на выходе слабое звено компании.</p>
+      <div class="acts" style="padding-top:8px"><a class="btn ghost" style="display:inline-flex" href="/founderfinance/tool/" target="_blank" rel="noopener">Пройти колесо</a></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Андрей Сычинников · внешний операционный директор у собственников компаний в Европе</span>
+    <a href="https://t.me/Sychinnikov_work" target="_blank" rel="noopener">@Sychinnikov_work</a>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+// Прием заявок: functions/founderfinance/api/lead.js (Телеграм Андрею, журнал KV, письмо).
+// Если функция недоступна, заявка уходит напрямую в Web3Forms, как на колесе.
+var LEAD_ENDPOINT="/founderfinance/api/lead";
+var FORM_ENDPOINT="https://api.web3forms.com/submit";
+var FORM_KEY="24d71a36-877d-46e1-9956-566f0dbb8d50";
+var STORE="ff_praktikum_2110";
+var page=document.getElementById("page"), form=document.getElementById("gate");
+var err=document.getElementById("err"), btn=document.getElementById("send");
+
+function unlock(){ page.classList.add("unlocked"); }
+try{ if(localStorage.getItem(STORE)==="1") unlock(); }catch(e){ /* приватный режим */ }
+
+var TLD_IN_LOCAL=/\.(ru|com|pro|net|org|io|es|de|fr|it|kz|by|ua|uk|eu)(\.|$)/i;
+function looksMistyped(v){ var at=(v||"").indexOf("@"); return at>0 && TLD_IN_LOCAL.test(v.slice(0,at)); }
+function val(n){ var el=form.elements[n]; return el ? String(el.value||"").trim() : ""; }
+
+async function send(f){
+  var message="[ПРАКТИКУМ «ТОЧКА РОСТА» · Ковчег 21.10 · таблицы]\n"+
+    "Имя: "+f.name+"\nTelegram: "+f.tg+"\nEmail: "+f.email+
+    "\nКомпания: "+f.company+"\nКоманда: "+f.team+"\nСтрана регистрации: "+f.country;
+  var data={access_key:FORM_KEY,subject:"Практикум 21.10: "+(f.company||f.name),from_name:"Практикум · таблицы",
+    name:f.name,message:message,replyto:f.email};
+  var payload={};
+  Object.keys(data).forEach(function(k){ if(k!=="access_key") payload[k]=data[k]; });
+  payload.page=location.pathname+location.search;
+  payload.referrer=document.referrer||"";
+  payload.utm=(new URLSearchParams(location.search)).get("utm_source")||"";
+  payload.suspect=looksMistyped(f.email);
+  try{
+    var r=await fetch(LEAD_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
+    if(r.ok) return true;
+  }catch(e){ /* уходим на запасной путь */ }
+  try{
+    var r2=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});
+    return r2.ok;
+  }catch(e){ return false; }
+}
+
+form.addEventListener("submit",async function(e){
+  e.preventDefault();
+  err.textContent="";
+  if(val("botcheck")){ unlock(); return; }
+  var f={name:val("name"),tg:val("tg"),email:val("email"),company:val("company"),team:val("team"),country:val("country")};
+  var miss=[];
+  if(!f.name)miss.push("имя");
+  if(!f.tg)miss.push("Telegram");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email))miss.push("почту");
+  if(!f.company)miss.push("чем занимается компания");
+  if(!f.team)miss.push("размер команды");
+  if(!f.country)miss.push("страну");
+  if(miss.length){ err.textContent="Заполните: "+miss.join(", "); return; }
+  if(/[а-яё]/i.test(f.tg.replace(/^@/,""))){ err.textContent="Telegram пишется латиницей, например @username"; return; }
+  if(!form.elements.agree.checked){ err.textContent="Отметьте согласие на обработку данных"; return; }
+  btn.disabled=true; btn.textContent="Отправляю...";
+  await send(f);
+  try{ localStorage.setItem(STORE,"1"); }catch(e){}
+  // Таблицы открываем в любом случае: участник на эфире не должен остаться без них.
+  unlock();
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+})();
+</script>
+</body>
+</html>
