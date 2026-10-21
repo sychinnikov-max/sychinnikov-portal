@@ -793,7 +793,6 @@ body.hasbar{padding-bottom:96px}
   <nav class="nlinks">
     <a class="sitelink" href="/founderfinance/">На главную</a>
     <a href="#work">Пройти</a>
-    <a class="ncta" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener">Телеграм-бот</a>
   </nav>
 </div></header>
 
@@ -848,7 +847,6 @@ body.hasbar{padding-bottom:96px}
       <div class="btnrow">
         <a class="cta d-only" href="#work">Пройти колесо</a>
         <a class="cta ghost sitelink" href="/founderfinance/#cta">Бесплатная диагностика со мной →</a>
-        <a class="cta ghost tgonly" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener" style="display:none">Бесплатный разбор со мной →</a>
       </div>
 
       <p class="note d-only" style="margin-top:16px">Автор: Андрей Сычинников, ex-CEO и founder, выручка 1,4 mln €. Внедряю управленческий учет собственникам бизнеса.</p>
@@ -948,7 +946,7 @@ body.hasbar{padding-bottom:96px}
         <div class="gsh">
           <span class="gnum">02</span>
           <div class="gst">Ваши данные</div>
-          <p class="gsn">Имя и один контакт, по которому ответить.</p>
+          <p class="gsn">Имя и почта. Телеграм по желанию.</p>
         </div>
 
         <form class="gateform" id="gform" novalidate>
@@ -974,7 +972,7 @@ body.hasbar{padding-bottom:96px}
             </div>
 
             <div class="ffield">
-              <label class="fl" for="gtg">Телеграм</label>
+              <label class="fl" for="gtg">Телеграм, по желанию</label>
               <input class="fin" id="gtg" type="text" placeholder="@nickname" autocomplete="off" spellcheck="false">
               <p class="ferr" id="err-tg"></p>
             </div>
@@ -990,7 +988,7 @@ body.hasbar{padding-bottom:96px}
             <button class="cta" id="gsubmit" type="submit">Открыть разбор</button>
             <p class="note" id="ghint">Заполните блок о компании и ответьте на все 50 вопросов.</p>
           </div>
-          <p class="gerr" id="gerr">Не отправилось. Разбор все равно открыт. Напишите в телеграм-бот <a href="https://t.me/Sychinnikov_finance_bot" style="color:var(--gold)">@Sychinnikov_finance_bot</a>.</p>
+          <p class="gerr" id="gerr">Заявка не отправилась, но разбор открыт ниже и PDF можно скачать. Если нужен разбор со мной, напишите на <a href="mailto:sychinnikov@gmail.com" style="color:var(--gold)">sychinnikov@gmail.com</a>.</p>
         </form>
       </section>
 
@@ -1033,14 +1031,14 @@ body.hasbar{padding-bottom:96px}
         </ul>
         <p>Уйдете с дорожной картой, даже если дальше мы не работаем.</p>
         <div class="pclinks">
-          <div><b>Телеграм-бот</b><a href="https://t.me/Sychinnikov_finance_bot">t.me/Sychinnikov_finance_bot</a></div>
+          <div><b>Записаться на разбор</b><a href="mailto:sychinnikov@gmail.com">sychinnikov@gmail.com</a></div>
           <div class="sitelink"><b>Записаться на разбор</b><a href="https://sychinnikov.com/founderfinance/#cta">sychinnikov.com/founderfinance</a></div>
           <div><b>Пройти колесо заново</b><a id="selflink" href="https://sychinnikov.com/koleso/">sychinnikov.com/koleso</a></div>
         </div>
       </div>
 
       <div class="printfoot">
-        Колесо финансового здоровья компании · Founder Finance · Андрей Сычинников · ставим управленческий учет: собственник видит реальную прибыль и сколько можно забирать себе · Телеграм @Sychinnikov_finance_bot
+        Колесо финансового здоровья компании · Founder Finance · Андрей Сычинников · ставим управленческий учет: собственник видит реальную прибыль и сколько можно забирать себе · sychinnikov@gmail.com
       </div>
 
     </div>
@@ -1067,10 +1065,11 @@ body.hasbar{padding-bottom:96px}
     </ul>
     <p class="note" style="max-width:60ch;margin:16px auto 0;color:var(--ink-muted)">Уйдете с дорожной картой, даже если дальше мы не работаем.</p>
     <div class="btnrow">
-      <a class="cta" href="https://t.me/Sychinnikov_finance_bot" target="_blank" rel="noopener">Записаться на бесплатный разбор →</a>
+      <button class="cta" id="btnCall" type="button">Записаться на бесплатный разбор →</button>
       <button class="cta ghost" id="btnPdf" type="button">Скачать разбор в PDF</button>
       <button class="cta ghost" id="btnPng" type="button">Скачать колесо картинкой</button>
     </div>
+    <p class="callok" id="callok" style="display:none;margin-top:16px;color:var(--gold-bright)"></p>
     <p class="note" style="margin-top:16px">Кнопка PDF открывает окно печати: на Mac нажмите «PDF» внизу слева и выберите «Сохранить как PDF». Если сверху листа печатается адрес и дата, снимите галочку «Печатать колонтитулы» в разделе «Показать подробности».</p>
   </div>
 
@@ -1078,7 +1077,7 @@ body.hasbar{padding-bottom:96px}
 
 <footer class="foot noprint"><div class="inner">
   <p class="footlead">Ставим управленческий учет: собственник видит реальную прибыль, что ее съедает и сколько можно забирать себе, не подрезая бизнес.</p>
-  <p style="margin-top:12px">Андрей Сычинников · Founder Finance · Телеграм <a href="https://t.me/Sychinnikov_finance_bot">@Sychinnikov_finance_bot</a><span class="sitelink"> · <a href="/founderfinance/">на главную</a></span></p>
+  <p style="margin-top:12px">Андрей Сычинников · Founder Finance · почта <a href="mailto:sychinnikov@gmail.com">sychinnikov@gmail.com</a><span class="sitelink"> · <a href="/founderfinance/">на главную</a></span></p>
   <p style="margin-top:10px">Ответы хранятся в вашем браузере. Колесо не заменяет разбор ваших цифр: это способ за 20 минут увидеть, где у бизнеса тонко.</p>
 </div></footer>
 
@@ -1976,11 +1975,9 @@ function checkTg(silent){
 function checkContacts(silent){
   var e=checkEmail(silent), t=checkTg(silent);
   if(e===false||t===false)return false;
-  if(e===null&&t===null){
-    if(!silent){
-      setErr("gemail","Оставьте почту или Телеграм, хватит одного");
-      setErr("gtg","Оставьте почту или Телеграм, хватит одного");
-    }
+  // почта обязательна: заявка и ответ по разбору идут на почту, бота больше нет
+  if(e===null){
+    if(!silent)setErr("gemail","Оставьте почту, на нее ответим по разбору");
     return false;
   }
   return true;
@@ -2101,7 +2098,12 @@ async function sendLead(){
   payload.suspect=looksMistyped(state.email);
   try{
     var lr=await fetch(LEAD_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
-    if(lr.ok){ try{ if(window.ym) ym(109611431,"reachGoal","lead_submit"); }catch(e){} return true; }
+    if(lr.ok){
+      var res=null; try{ res=await lr.json(); }catch(e){}
+      // функция приняла заявку, но письмо из нее не ушло: шлем письмо из браузера,
+      // заявка обязана дойти до почты
+      if(!res||res.mail!==false){ try{ if(window.ym) ym(109611431,"reachGoal","lead_submit"); }catch(e){} return true; }
+    }
   }catch(e){ /* функция недоступна, уходим на запасной путь */ }
 
   try{
@@ -2146,7 +2148,7 @@ function exportPNG(){
   ctx.save();ctx.setLineDash([9,9]);ctx.strokeStyle="#9A875C";ctx.lineWidth=4;
   ctx.beginPath();ctx.moveTo(470,ly-7);ctx.lineTo(512,ly-7);ctx.stroke();ctx.restore();
   ctx.fillText("ТОЧКА Б, КУДА ИДЕМ",526,ly);
-  ctx.fillText("TELEGRAM @SYCHINNIKOV_FINANCE_BOT",90,ly+40);
+  ctx.fillText("SYCHINNIKOV.COM/FOUNDERFINANCE/TOOL",90,ly+40);
 
   PRINT=wasPrint;
   out.toBlob(function(blob){
@@ -2181,7 +2183,7 @@ function collectProblems(silent){
   if(!checkName(silent))
     out.push({key:"name",text:"Не указано имя."});
   if(!checkContacts(silent))
-    out.push({key:"contact",text:"Нужна почта вида name@company.com или ник вида @nickname, хватит одного."});
+    out.push({key:"contact",text:"Нужна почта вида name@company.com. Телеграм по желанию."});
   return out;
 }
 
@@ -2238,12 +2240,12 @@ function update(){
 
 function init(){
   // страница живет по двум адресам: внутри сайта и отдельной ссылкой для рассылки.
-  // во втором случае ссылки на сайт прячем, единственный выход это личный Telegram
+  // во втором случае ссылки на сайт прячем, связь через почту (бота с 21.10.2026 нет)
   // режим сайта только по «родному» адресу внутри лендинга.
   // по всем остальным адресам (/founderfinance/tool/ это основная
   // рассылочная ссылка со второй версией, /founderfinance/diagnostika/
   // это первая версия) страница работает как автономный инструмент:
-  // ссылок на сайт нет, единственный выход в телеграм-бот
+  // ссылок на сайт нет, заявка на разбор уходит Андрею на почту
   var standalone=!/^\/founderfinance\/koleso\/?$/.test(location.pathname);
   if(standalone){
     document.querySelectorAll(".sitelink").forEach(function(el){el.style.display="none";});
@@ -2351,6 +2353,42 @@ function init(){
   });
   window.addEventListener("keydown",function(e){
     if(e.key==="Escape"&&document.getElementById("wsheet").classList.contains("open"))closeSheet();
+  });
+
+  // запись на разбор: отдельная заявка Андрею на почту с контактами и итогом колеса
+  document.getElementById("btnCall").addEventListener("click",async function(){
+    var btn=this, okEl=document.getElementById("callok");
+    btn.disabled=true;btn.textContent="Отправляю...";
+    var c=counts();
+    var msg="[КОЛЕСО v2 · ХОЧЕТ РАЗБОР]\nЧеловек прошел колесо и нажал «Записаться на бесплатный разбор».\n\n"+
+      "Имя: "+(state.name||"не указано")+"\nКомпания: "+(state.company||"не указана")+
+      "\nПочта: "+(state.email||"не указана")+"\nTelegram: "+(state.tg||"не указан")+"\n\n"+
+      "Индекс: "+avg(scores()).toFixed(1)+"/10 · закрыто "+c.yes+" из "+c.total+"\n"+
+      BLOCKS.map(function(b,i){return b.name+" "+scoreOf(i).toFixed(1);}).join(" · ")+
+      "\n\nОтветить на почту в течение дня.";
+    var data={access_key:FORM_KEY,subject:"Колесо v2: хочет разбор · "+(state.company||state.name||"заявка"),
+      from_name:"Founder Finance · колесо",name:state.name||"Колесо финздоровья",message:msg};
+    if(state.email)data.replyto=state.email;
+    var payload={};
+    Object.keys(data).forEach(function(k){ if(k!=="access_key") payload[k]=data[k]; });
+    payload.page=location.pathname+location.search;payload.referrer=SRC.referrer;payload.utm=SRC.utm;
+    var sent=false;
+    try{
+      var lr=await fetch(LEAD_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
+      if(lr.ok){ var res=null; try{res=await lr.json();}catch(e){} sent=!res||res.mail!==false; }
+    }catch(e){}
+    if(!sent){
+      try{ var r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)}); sent=r.ok; }catch(e){}
+    }
+    if(sent){
+      try{ if(window.ym) ym(109611431,"reachGoal","call_request"); }catch(e){}
+      btn.style.display="none";
+      okEl.textContent="Заявка у меня. Напишу вам на "+(state.email||"почту")+" в течение дня и предложу время.";
+    }else{
+      btn.disabled=false;btn.textContent="Записаться на бесплатный разбор →";
+      okEl.innerHTML="Не отправилось. Напишите мне на <a href=\"mailto:sychinnikov@gmail.com\" style=\"color:var(--gold)\">sychinnikov@gmail.com</a>.";
+    }
+    okEl.style.display="";
   });
 
   document.getElementById("btnPng").addEventListener("click",exportPNG);
