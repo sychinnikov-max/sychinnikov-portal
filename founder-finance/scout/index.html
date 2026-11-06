@@ -287,10 +287,10 @@ var NOTE = {
   partner: 'Те, у кого клиенты твои: агентства, юристы, интеграторы, рекрутеры, клубы. Предложение о сотрудничестве со ссылкой на страницу для партнеров.',
   mine: 'Соседи по твоим десяткам с запросом или подходящие. Холодное знакомство им не пишется: заходи сам, как сосед.',
   known: 'С ними уже есть личка в Work. Видно, когда и кто писал последним.',
-  handoff: 'Бот довел разговор до точки, где нужен ты: человек готов к созвону, спросил цену или условия, или квалификация понятна.',
-  talk: 'Человек ответил, бот ведет разговор (до 3 реплик). Вся переписка в карточке.',
+  handoff: 'Нужен ты: человек предложил свое время, спросил, бот ли это, попросил договор или кейсы, или встреча не поставилась сама.',
+  talk: 'Человек ответил, бот ведет разговор по роли консультанта до записи на созвон. Вся переписка в карточке.',
   sent: 'Знакомство ушло, ждем ответа. Ответ подхватится сам за 2 минуты.',
-  call: 'Созвон назначен.',
+  call: 'Записаны на созвон: встреча в календаре, приглашение со ссылкой Meet ушло человеку.',
   rest: 'Подходят средне, явного запроса нет, сообщение не готовили.'
 };
 
@@ -404,9 +404,10 @@ function statusHTML(p) {
     case 'sending': return '<div class="st wait"><span class="sp">Отправляется…</span></div>';
     case 'sent': return '<div class="st ok"><span class="sp">Отправлено ' + hm(o.sent_at || o.at) + ', ждем ответа</span></div>';
     case 'replied': return '<div class="st rep"><span class="sp">Ответил ' + hm(o.reply_at || o.at) + '</span></div>';
-    case 'talking': return '<div class="st rep"><span class="sp">Бот ведет разговор: ' + (o.turns || 0) + ' из 3 реплик</span></div>';
+    case 'talking': return '<div class="st rep"><span class="sp">Бот ведет разговор' + (o.turns ? ', реплик: ' + o.turns : '') + (o.reason && /позже/.test(o.reason) ? '. ' + esc(o.reason) : '') + '</span></div>';
     case 'handoff': return '<div class="st fire"><span class="sp">Подключайся' + (o.reason ? ': ' + esc(o.reason) : '') + '</span>' + (o.summary ? '<span class="full">' + esc(o.summary) + '</span>' : '') + '</div>';
-    case 'call': return '<div class="st ok"><span class="sp">Созвон назначен ' + hm(o.call_at || o.at) + '</span></div>';
+    case 'call': return '<div class="st ok"><span class="sp">Созвон назначен' + (o.call_slot ? ': ' + esc(o.call_slot) + ' по Мадриду' : ' ' + hm(o.call_at || o.at)) + '</span>' +
+      (o.meet ? '<a class="btn green" href="' + esc(o.meet) + '" target="_blank" rel="noopener">Meet</a>' : '') + '</div>';
     case 'lost': return '<div class="st mute"><span class="sp">Не интересно</span></div>';
     case 'manual': return '<div class="st mute"><span class="sp">Написал сам ' + hm(o.at) + '</span><button class="btn ghost" data-act="reset" data-id="' + p.id + '">Снять</button></div>';
     case 'skip': return '<div class="st mute"><span class="sp">Не то</span><button class="btn ghost" data-act="reset" data-id="' + p.id + '">Вернуть</button></div>';

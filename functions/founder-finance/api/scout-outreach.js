@@ -41,11 +41,12 @@ const MAX_TEXT = 3000;
 // сообщение тому же человеку выглядит как спам и бьет по аккаунту.
 const FINAL = new Set(['sending', 'sent', 'replied', 'talking', 'handoff', 'call', 'lost', 'exists', 'closed']);
 // queued — только пометка отправщика «лимит на сегодня, уйдет завтра».
-const MAC_STATUSES = new Set(['queued', 'sending', 'sent', 'replied', 'talking', 'handoff', 'lost',
+const MAC_STATUSES = new Set(['queued', 'sending', 'sent', 'replied', 'talking', 'handoff', 'call', 'lost',
   'failed', 'closed', 'exists']);
 // Поля, которые отправщик может писать в запись человека.
 const MAC_FIELDS = ['sent_at', 'error', 'reply', 'reply_at', 'name', 'username', 'msg_id', 'bot_ids',
-  'last_seen', 'turns', 'dialog', 'summary', 'qualified', 'track', 'reason', 'autopilot', 'handoff_at'];
+  'last_seen', 'turns', 'dialog', 'summary', 'qualified', 'track', 'reason', 'autopilot', 'handoff_at',
+  'meet', 'call_slot', 'call_at'];
 
 async function getSettings(env) {
   const raw = await env.FISHOK_BOARD.get(SETTINGS);
@@ -160,9 +161,10 @@ export async function onRequestPost({ request, env }) {
     // Старая пометка («лимит на сегодня») не должна висеть у отправленного.
     if (b.status === 'sending' || b.status === 'sent' || b.status === 'replied') delete next.error;
     // Итог, который отметил Андрей (созвон, не интересно), отправщик не перетирает.
-    if (cur && (cur.status === 'call' || cur.status === 'lost') && b.status !== 'lost') {
+    if (cur && (cur.status === 'call' || cur.status === 'lost') && b.status !== 'lost' && b.status !== 'call') {
       next.status = cur.status;
     }
+    if (b.status === 'call' && !next.call_at) next.call_at = now;
     for (const k of MAC_FIELDS) {
       if (!(k in b)) continue;
       const v = b[k];
