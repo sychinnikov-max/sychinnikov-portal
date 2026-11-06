@@ -3,630 +3,461 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Партнерам — Андрей Сычинников · Founder Trajectory</title>
-<meta name="description" content="Коммерческое предложение для партнеров: аудит, управленческий и финансовый контур для компаний вашего клиента. Состав внедрения и комиссия партнеру 20%.">
+<title>Партнерам · Андрей Сычинников, внешний операционный директор</title>
+<meta name="description" content="Для партнеров Андрея Сычинникова: кому из ваших клиентов нужен внешний операционный директор, что получает клиент (Карта компании за две недели, дальше помесячная работа) и что получаете вы.">
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://sychinnikov.com/foundertrajectory/partneram/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:site_name" content="Founder Trajectory">
-<meta property="og:title" content="Партнерам — Андрей Сычинников">
-<meta property="og:description" content="Система управления и финансовый контур для компаний с командой. Состав работы и комиссия партнеру.">
-<meta property="og:image" content="https://sychinnikov.com/foundertrajectory/assets/people/andrei-sychinnikov/andrei-photo-portrait.jpg">
+<meta property="og:site_name" content="Андрей Сычинников">
+<meta property="og:title" content="Партнерам · Андрей Сычинников, внешний операционный директор">
+<meta property="og:description" content="Кому из ваших клиентов это нужно, что получает клиент и что получаете вы.">
+<meta property="og:image" content="https://sychinnikov.com/foundertrajectory/assets/img/og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Андрей Сычинников собирает систему управления компанией: оргструктура, рост, панель собственника">
 <meta property="og:url" content="https://sychinnikov.com/foundertrajectory/partneram/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Партнерам · Андрей Сычинников, внешний операционный директор">
+<meta name="twitter:image" content="https://sychinnikov.com/foundertrajectory/assets/img/og-1200x630.jpg">
+<meta name="author" content="Андрей Сычинников">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131210'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23C2A66A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/foundertrajectory/assets/site.css?v=20260807b">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/foundertrajectory/assets/site.css?v=20260925">
 <style>
-/* ===== партнерская страница: своя иерархия заголовков и типографика ===== */
+/* ==========================================================================
+   Партнерам, версия от 06.11.2026. Стиль и приемы главной (16-17.10).
+   Страница работает без JS: нет появления блоков по скроллу, нет меню-гармошки,
+   нет видео. Все видно сразу, в том числе во встроенном браузере Telegram.
+   ========================================================================== */
+section[id]{scroll-margin-top:74px}
+h1,.h2,h3{text-wrap:balance}
+p,li{text-wrap:pretty}
 
-/* рубрика секции это главный заголовок, под ним пояснение помельче */
-.seclabel{font-family:var(--fd);font-weight:700;font-size:clamp(34px,4.2vw,56px);line-height:1.02;
-  letter-spacing:-.015em;color:var(--gold-bright);text-wrap:balance;
-  text-shadow:0 0 44px color-mix(in oklab,var(--gold) 22%,transparent)}
-.secsub{font-family:var(--fd);font-weight:500;font-size:clamp(19px,1.75vw,26px);color:var(--ink);
-  margin-top:12px;line-height:1.2;text-wrap:balance}
-
-/* номер этапа: стоит перед словом в той же строке */
-.stagenum{font-family:var(--fb);font-weight:800;font-variant-numeric:lining-nums tabular-nums;
-  color:var(--gold-ink);background:linear-gradient(168deg,#D3AC65,#BE9450);
-  box-shadow:0 12px 32px color-mix(in oklab,var(--gold) 30%,transparent)}
-.seclabel:has(.stagenum){display:flex;align-items:flex-start;gap:.26em}
-.seclabel .stagenum{flex:none;font-size:.58em;line-height:1;
-  padding:.22em .42em;border-radius:.26em;margin-top:.14em;text-shadow:none}
-.stagenum.sm{display:inline-block;font-size:clamp(20px,1.8vw,26px);line-height:1;
-  padding:8px 16px;border-radius:12px}
-
-/* все по левому краю, единый ритм */
-.sect-head{text-align:left;max-width:none;margin:0 0 44px}
-.sect-head .sub,.sect-head .secsub{max-width:62ch}
-.sect-head .sub{margin-left:0;margin-right:0}
-.pagehero .rv{text-align:left;max-width:none;margin:0}
-.pagehero .sub{margin-left:0;margin-right:0;max-width:58ch}
-.pricenote{max-width:96ch;margin-left:0}
-.takeaway{margin-left:0;text-align:left;max-width:88ch}
-.rung{text-align:left}
-.rung .rg-price{margin-top:4px}
-
-/* переносы: заголовки не роняют одно слово на строку */
-.h2,.h3,.seclabel,.secsub,.stepn .ti,.asset .at,.metric .ml,.rung .rg-name,.vcol h4,.fitcol h4{text-wrap:balance}
-p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap:pretty}
-.pagehero h1{text-wrap:pretty;max-width:30ch;margin-left:0}
-
-/* суммы: цифры сплошной высоты, читаются лучше засечек */
-.rung .rg-price{font-family:var(--fb);font-weight:700;letter-spacing:-.02em;
-  font-variant-numeric:lining-nums tabular-nums;font-size:clamp(29px,2.8vw,39px)}
-.rung .rg-price small{font-family:var(--fb);font-weight:600;font-size:.42em}
-.metric .mtrend{font-family:var(--fb);font-weight:700;letter-spacing:-.01em;
-  font-variant-numeric:lining-nums tabular-nums;font-size:clamp(17px,1.5vw,21px);line-height:1.25}
-.rung .rg-dur{font-variant-numeric:lining-nums tabular-nums}
-
-/* три карточки в ряд, а не четыре */
-.stepper.three{grid-template-columns:repeat(3,1fr)}
-@media(max-width:980px){.stepper.three{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.stepper.three{grid-template-columns:1fr}}
-
-/* карточки: одинаковый размер текста во всех блоках */
-.asset .ad,.metric .md,.vcol li,.fitcol li{font-size:16px;line-height:1.55}
-.metric .ml{font-size:clamp(21px,1.9vw,26px)}
-.asset .at{font-size:20px}
-.rung .rg-sub{font-size:14px}
-.rung .rg-sub ul{margin-top:14px;display:flex;flex-direction:column;gap:8px;text-align:left}
-.rung .rg-sub li{list-style:none;font-size:14px;color:var(--ink-muted);padding-left:15px;position:relative;line-height:1.45}
-.rung .rg-sub li::before{content:"·";position:absolute;left:3px;color:var(--gold);font-weight:700;font-size:18px;top:-2px}
-
-/* центрирование, которое приходит из общей таблицы сайта */
-.proofbar .pb{text-align:left}
-.rung .rg-name,.rung .rg-price{justify-content:flex-start}
-
-/* выравнивание высот внутри рядов карточек */
-.stepn ul{flex:1}
-.metric .mtrend{white-space:normal}
-@supports(grid-template-rows:subgrid){
-  @media(min-width:901px){
-    .assets{grid-template-rows:repeat(3,auto)}
-    .asset{display:grid;grid-template-rows:subgrid;grid-row:span 3}
-  }
+/* ---------- шапка: на телефоне без JS остается одна кнопка ---------- */
+.nav .ncta{border-radius:999px;border:1px solid rgba(217,184,114,.5);color:var(--gold-bright);background:linear-gradient(180deg,rgba(255,240,205,.06),rgba(255,240,205,0));transition:border-color .25s,background .25s}
+.nav .ncta:hover{border-color:rgba(240,210,148,.85);background:rgba(217,184,114,.1)}
+@media(max-width:920px){
+  .nav .pnav{display:flex;position:static;flex-direction:row;background:none;border:0;padding:0;gap:0}
+  .nav .pnav a{display:none}
+  .nav .pnav a.ncta{display:inline-flex;align-items:center;width:auto;min-height:0;margin:0;padding:10px 16px;font-size:14px;font-weight:600;justify-content:center}
 }
 
-/* один правый край: плашки во всю колонку, строка внутри держит меру */
-.takeaway,.pricenote{max-width:none}
-.takeaway p,.pricenote p{max-width:80ch}
+/* ---------- первый экран: как на главной, кадр вместо видео ---------- */
+.vhero{position:relative;min-height:clamp(600px,calc(100vh - 74px),900px);display:flex;align-items:center;overflow:hidden;background:var(--bg);isolation:isolate}
+.vmedia{position:absolute;inset:0;z-index:-1}
+.vbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 50%;display:block}
+.vshade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(20,18,15,.95) 0%,rgba(20,18,15,.84) 26%,rgba(20,18,15,.34) 42%,rgba(20,18,15,0) 54%),
+  linear-gradient(180deg,rgba(20,18,15,.35) 0%,rgba(20,18,15,0) 18%,rgba(20,18,15,0) 72%,var(--bg) 100%)}
+.vhero .inner{width:100%;padding-top:clamp(40px,7vh,90px);padding-bottom:clamp(60px,10vh,120px)}
+.vcopy{max-width:610px}
+.vhero .eyebrow{display:flex;align-items:center;gap:14px;letter-spacing:.2em;font-size:12.5px;color:var(--gold-bright)}
+.vhero .eyebrow::before{content:"";flex:0 0 34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.vhero h1{max-width:15ch;margin:18px 0 0;letter-spacing:-.015em;text-shadow:0 2px 28px rgba(0,0,0,.5)}
+.vhero h1 em{font-style:normal;background:linear-gradient(176deg,#F6E3B0 0%,#E2C27F 46%,#B98F4C 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.vhero .lead{margin:22px 0 0;max-width:46ch;color:color-mix(in oklab,var(--ink) 90%,transparent)}
+.vhero .plead{margin:14px 0 0;max-width:46ch;font-size:15.5px;line-height:1.55;color:var(--gold-bright)}
+.vhero .actions{margin:30px 0 0;gap:14px;display:flex;flex-wrap:wrap;align-items:center}
+/* главная кнопка: золото с бликом и стрелкой */
+.vcta{position:relative;overflow:hidden;display:inline-flex;text-decoration:none;align-items:center;gap:14px;padding:17px 22px 17px 30px;border-radius:999px;font-size:17px;font-weight:700;letter-spacing:.01em;color:#1A140A;
+  background:linear-gradient(180deg,#F0D595 0%,#D7B26C 52%,#B68C4B 100%);
+  box-shadow:inset 0 1px 0 rgba(255,246,220,.75),inset 0 -1px 0 rgba(80,52,16,.35),0 0 0 1px rgba(255,226,160,.28),0 14px 34px -10px rgba(217,184,114,.65),0 2px 6px rgba(0,0,0,.35);
+  transition:transform .25s ease,box-shadow .25s ease}
+.vcta i{font-style:normal;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(26,20,10,.12);box-shadow:inset 0 0 0 1px rgba(26,20,10,.18);transition:transform .25s ease}
+.vcta::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);animation:vshine 5.5s ease-in-out 1.6s infinite}
+@keyframes vshine{0%,72%{left:-60%}100%{left:130%}}
+.vcta:hover{transform:translateY(-1px);background:linear-gradient(180deg,#F5DDA2 0%,#DDB974 52%,#BE9452 100%)}
+.vcta:hover i{transform:translateX(3px)}
+/* вторая кнопка: стекло и тонкая золотая рамка */
+.vghost{display:inline-flex;align-items:center;text-decoration:none;padding:17px 28px;border-radius:999px;font-size:16.5px;font-weight:600;color:var(--gold-bright);
+  background:linear-gradient(180deg,rgba(255,240,205,.07),rgba(255,240,205,.015));border:1px solid rgba(217,184,114,.42);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,240,205,.08);transition:border-color .25s,background .25s}
+.vghost:hover{border-color:rgba(240,210,148,.75);background:linear-gradient(180deg,rgba(255,240,205,.12),rgba(255,240,205,.03))}
+/* три опоры: одна стеклянная панель */
+.vpillars{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);max-width:600px;position:relative;
+  border-radius:18px;border:1px solid rgba(217,184,114,.22);
+  background:linear-gradient(180deg,rgba(40,34,26,.62),rgba(20,18,15,.42));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,240,205,.06),0 20px 50px -24px rgba(0,0,0,.8)}
+.vpillars::before{content:"";position:absolute;left:22px;right:22px;top:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(240,210,148,.85),transparent)}
+.vpillars li{position:relative;display:flex;flex-direction:column;gap:6px;padding:18px 20px 19px 22px}
+.vpillars li + li::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:1px;background:linear-gradient(180deg,transparent,rgba(217,184,114,.35),transparent)}
+.vpillars i{font-style:normal;font-family:var(--fm);font-size:11.5px;letter-spacing:.16em;color:var(--gold)}
+.vpillars b{font-family:var(--fd);font-weight:600;font-size:19px;line-height:1.1;color:var(--ink)}
+.vpillars span{font-size:13.5px;line-height:1.35;color:var(--ink-muted)}
 
-/* подзаголовок секции гротеском: воздух и цифры нормальной высоты */
-.secsub{font-family:var(--fb);font-weight:600;font-size:clamp(18px,1.5vw,21px);
-  color:var(--ink-muted);margin-top:20px;letter-spacing:0;line-height:1.35}
+/* ---------- общие приемы главной: золотые линии, фоны, зерно ---------- */
+.band{--sb:var(--bg)}.band.alt{--sb:var(--surface)}.band.deep{--sb:var(--surface-2)}
+.nsec{border-top:0;background-image:linear-gradient(90deg,transparent 4%,rgba(217,184,114,.4) 50%,transparent 96%);background-size:100% 1px;background-repeat:no-repeat;background-position:top}
+.nsec .eyebrow{display:flex;align-items:center;gap:12px}
+.nsec .eyebrow::before{content:"";flex:0 0 28px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.nbgsec{position:relative;overflow:hidden;isolation:isolate}
+.nbg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.nbg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.34;filter:saturate(.85) contrast(1.05)}
+.nbg-r img{object-position:80% 40%;-webkit-mask-image:linear-gradient(90deg,transparent 18%,#000 62%);mask-image:linear-gradient(90deg,transparent 18%,#000 62%)}
+.nbg-full img{opacity:.2}
+.nbg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sb) 0%,transparent 20%,transparent 78%,var(--sb) 100%)}
+.nbg::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(42% 60% at 12% 8%,rgba(217,184,114,.10),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.nh{margin-top:14px;max-width:24ch}
+.nk{font-family:var(--fm);font-size:12px;letter-spacing:.16em;color:var(--gold)}
+.nnote{margin-top:44px;font-size:clamp(17px,1.4vw,20px);color:var(--ink-muted);max-width:66ch;line-height:1.6}
+.nnote b{color:var(--ink);font-weight:600}
 
-/* лестница из трех тарифов, вход отдельной строкой над ней */
-.ladder{grid-template-columns:repeat(3,1fr)}
-@media(max-width:980px){.ladder{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.ladder{grid-template-columns:1fr}}
-.rung .rg-dur b{color:var(--ink);font-family:var(--fb);font-weight:700;
-  font-variant-numeric:lining-nums tabular-nums}
-.entryline{display:flex;align-items:center;gap:24px;flex-wrap:wrap;background:var(--card);
-  border:1px solid var(--hair);border-radius:16px;padding:22px 26px;margin-bottom:20px}
-.entryline .el-price{font-family:var(--fb);font-weight:700;font-size:clamp(21px,1.9vw,26px);
-  color:var(--gold-bright);white-space:nowrap}
-.entryline .el-text{font-size:16px;color:var(--ink-muted);line-height:1.5;max-width:78ch}
-.entryline .el-text b{color:var(--ink)}
-/* этапы финансового контура: два блока внутри каждого */
-.stagegroup{margin-bottom:34px}
-.stagegroup:last-of-type{margin-bottom:0}
-.stagehead{display:flex;align-items:flex-start;gap:18px;margin-bottom:20px}
-.stagenum.sm{font-size:clamp(20px,1.8vw,26px);padding:8px 16px;border-radius:12px}
-.sh-title{font-family:var(--fd);font-weight:600;font-size:clamp(22px,2.1vw,29px);line-height:1.15;color:var(--ink)}
-.sh-note{font-size:16px;color:var(--ink-muted);line-height:1.55;margin-top:8px;max-width:82ch}
-.stepper.two{grid-template-columns:1fr 1fr}
-@media(max-width:760px){.stepper.two{grid-template-columns:1fr}}
-/* цифры в проофбаре тем же гротеском, что и суммы */
-.proofbar .pbn{font-family:var(--fb);font-weight:700;letter-spacing:-.01em;
-  font-variant-numeric:lining-nums tabular-nums}
+/* стеклянные карточки с золотой кромкой */
+.gl{position:relative;border-radius:20px;border:1px solid rgba(217,184,114,.18);
+  background:linear-gradient(170deg,rgba(48,41,31,.72),rgba(24,21,17,.62));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:inset 0 1px 0 rgba(255,240,205,.05),0 24px 60px -36px rgba(0,0,0,.9);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,box-shadow .35s}
+.gl::before{content:"";position:absolute;left:24px;right:24px;top:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(240,210,148,.8),transparent)}
+.gl.hov:hover{transform:translateY(-4px);border-color:rgba(217,184,114,.42);box-shadow:inset 0 1px 0 rgba(255,240,205,.07),0 30px 70px -34px rgba(0,0,0,.95),0 0 40px -18px rgba(217,184,114,.35)}
+
+/* ---------- кому нужно ---------- */
+.npains{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.npain{padding:28px 26px 30px}
+.npain h3{font-family:var(--fd);font-weight:600;font-size:clamp(21px,1.65vw,25px);line-height:1.15;margin:18px 0 0;color:var(--ink)}
+.npain p{margin:14px 0 0;color:var(--ink-muted);font-size:16px;line-height:1.55}
+
+/* ---------- что получает клиент: два шага ---------- */
+.pflow{display:grid;grid-template-columns:minmax(0,.9fr) 64px minmax(0,1.45fr);align-items:stretch}
+.pstep{padding:30px 28px 30px;display:flex;flex-direction:column}
+.ps-top{display:flex;align-items:center;gap:16px}
+.nstep{position:relative;z-index:1;display:grid;place-items:center;flex:0 0 56px;width:56px;height:56px;border-radius:50%;font-family:var(--fm);font-size:14px;letter-spacing:.06em;color:var(--gold-bright);background:var(--sb);box-shadow:inset 0 0 0 1px rgba(217,184,114,.6)}
+.pstep.first .nstep{color:#1A140A;background:linear-gradient(180deg,#F0D595,#B68C4B);box-shadow:inset 0 1px 0 rgba(255,246,220,.7),0 0 36px -4px rgba(217,184,114,.7)}
+.nwhen{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.pstep h3{font-family:var(--fd);font-weight:600;font-size:clamp(25px,2.1vw,31px);line-height:1.12;margin:20px 0 0;color:var(--ink)}
+.pstep > p{margin:12px 0 0;color:var(--ink-muted);font-size:16px;line-height:1.55}
+.nout{margin-top:auto;padding:14px 16px;border-radius:14px;border:1px solid rgba(217,184,114,.2);background:rgba(20,18,15,.5);font-size:15px;line-height:1.5;color:var(--ink)}
+.pstep.first .nout{margin-top:22px}
+.nout i{display:block;font-style:normal;font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.parrow{display:flex;align-items:center;justify-content:center}
+.parrow span{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;color:var(--gold-bright);
+  background:var(--card);border:1px solid var(--hair-gold);box-shadow:0 0 34px color-mix(in oklab,var(--gold) 22%,transparent)}
+.pimg{position:relative;flex:1 1 auto;min-height:170px;margin:18px 0 0;border-radius:14px;overflow:hidden;border:1px solid rgba(217,184,114,.22)}
+.pimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:56% 46%;display:block}
+.pimg figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 12px;font-size:13.5px;line-height:1.4;color:var(--ink-muted);background:linear-gradient(180deg,transparent,rgba(16,14,11,.92))}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.pgi{padding:16px 18px 18px;border-radius:14px;border:1px solid rgba(217,184,114,.2);background:rgba(20,18,15,.5);transition:border-color .3s}
+.pgi:hover{border-color:rgba(217,184,114,.45)}
+.pgi i{display:block;font-style:normal;font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.pgi b{display:block;font-family:var(--fd);font-weight:600;font-size:19px;line-height:1.2;margin-top:8px;color:var(--ink)}
+.pgi span{display:block;font-size:14.5px;line-height:1.5;color:var(--ink-muted);margin-top:6px}
+
+/* ---------- что получаете вы ---------- */
+.pformats{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:18px;align-items:stretch}
+.pformat{padding:30px 30px 32px}
+.pformat h3{font-family:var(--fd);font-weight:600;font-size:clamp(24px,2vw,30px);line-height:1.15;margin:16px 0 0;color:var(--ink)}
+.pformat p{margin:12px 0 0;font-size:17px;line-height:1.55;color:var(--ink-muted)}
+.por{display:flex;align-items:center;justify-content:center}
+.por span{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:var(--fd);font-style:italic;font-size:17px;color:var(--gold-bright);
+  background:var(--sb);border:1px solid var(--hair-gold);box-shadow:0 0 30px color-mix(in oklab,var(--gold) 16%,transparent)}
+.pterms{margin-top:16px;padding:18px 24px;border-radius:16px;font-size:17px;line-height:1.55;color:var(--ink);
+  background:linear-gradient(100deg,color-mix(in oklab,var(--gold) 14%,var(--card)),color-mix(in oklab,var(--card) 70%,transparent));border:1px solid var(--hair-gold)}
+.pterms b{color:var(--gold-bright);font-weight:600}
+.pfor{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.pfor-i{padding:26px 26px 28px}
+.pfor-i p{margin-top:14px;font-size:clamp(16px,1.2vw,17.5px);line-height:1.6;color:var(--ink-muted)}
+.pfor-i p b{color:var(--ink);font-weight:600}
+
+/* ---------- почему не стыдно рекомендовать ---------- */
+.ptrust{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(32px,5vw,76px);align-items:start}
+.pportrait{margin:0;position:sticky;top:100px;border-radius:22px;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--hair-gold);
+  box-shadow:0 44px 100px rgba(0,0,0,.6),0 0 0 6px color-mix(in oklab,var(--gold) 6%,transparent)}
+.pportrait img{width:100%;height:100%;object-fit:cover;object-position:center 16%;display:block}
+.pportrait figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px 24px 20px;background:linear-gradient(180deg,transparent,rgba(12,10,8,.93) 62%)}
+.pportrait figcaption b{display:block;font-weight:600;font-size:17px}
+.pportrait figcaption span{display:block;font-size:13.5px;color:var(--ink-muted);margin-top:4px;line-height:1.45}
+.nq{list-style:none;margin:30px 0 0;padding:0;border-top:1px solid var(--hair)}
+.nq li{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:20px 0;border-bottom:1px solid var(--hair);transition:background .3s}
+.nq li:hover{background:linear-gradient(90deg,rgba(217,184,114,.06),transparent 70%)}
+.nq li .nk{padding-top:7px}
+.nq b{display:block;font-family:var(--fd);font-weight:600;font-size:clamp(20px,1.7vw,24px);line-height:1.2;color:var(--ink)}
+.nq div span{display:block;margin-top:7px;color:var(--ink-muted);font-size:16px;line-height:1.55}
+.pown{margin-top:34px;font-size:16px;line-height:1.6;color:var(--ink-muted);max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.stat{padding:20px 22px;border-radius:18px;border:1px solid var(--hair-gold);
+  background:linear-gradient(160deg,color-mix(in oklab,var(--gold) 10%,var(--card)),var(--card) 70%)}
+.stat .v{font-family:var(--fd);font-weight:700;font-size:clamp(30px,2.8vw,40px);line-height:1;color:var(--gold-bright)}
+.stat .l{font-size:14.5px;color:var(--ink-muted);margin-top:9px;line-height:1.45}
+.morelink{display:inline-block;margin-top:18px;color:var(--gold);text-decoration:none;font-weight:600;font-size:15.5px}
+.morelink:hover{text-decoration:underline}
+
+/* ---------- как начать ---------- */
+.ncta-sec{position:relative;overflow:hidden}
+.ncta-sec::after{content:"";position:absolute;width:900px;height:900px;right:-300px;top:-300px;border-radius:50%;background:radial-gradient(closest-side,rgba(217,184,114,.12),transparent);pointer-events:none}
+.pcta{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,4vw,72px);align-items:center}
+.pcta .h2{max-width:20ch;font-size:clamp(31px,3.3vw,46px);line-height:1.08}
+.pcta .sub{max-width:52ch}
+
+/* кнопки контактов, как в подвале главной */
+.fcontacts{display:grid;gap:10px;max-width:340px}
+.fct{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:14px;text-decoration:none;color:var(--ink);
+  border:1px solid rgba(217,184,114,.22);background:linear-gradient(180deg,rgba(255,240,205,.05),rgba(255,240,205,.01));
+  transition:border-color .25s,background .25s,transform .25s}
+.fct:hover{border-color:rgba(240,210,148,.6);background:linear-gradient(180deg,rgba(255,240,205,.1),rgba(255,240,205,.02));transform:translateY(-1px)}
+.fci{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#1A140A;
+  background:linear-gradient(180deg,#F0D595,#B68C4B);box-shadow:inset 0 1px 0 rgba(255,246,220,.7),0 6px 16px -6px rgba(217,184,114,.6)}
+.fci svg{width:19px;height:19px}
+.fct-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.fct-t b{font-weight:600;font-size:15px;color:var(--ink)}
+.fct-t small{font-size:13px;color:var(--ink-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fct-a{margin-left:auto;font-style:normal;color:var(--gold);opacity:.7;transition:transform .25s,opacity .25s}
+.fct:hover .fct-a{opacity:1;transform:translate(2px,-2px)}
+.pcontacts{max-width:none;gap:12px}
+.pcontacts .fct{padding:18px 20px;border-radius:18px}
+.pcontacts .fci{flex-basis:46px;width:46px;height:46px}
+.pcontacts .fci svg{width:22px;height:22px}
+.pcontacts .fct-t b{font-size:17px}
+.pcontacts .fct-t small{font-size:14px}
+.pcontacts .fct.main{border-color:rgba(217,184,114,.5);background:linear-gradient(180deg,rgba(255,240,205,.1),rgba(255,240,205,.02));box-shadow:0 0 50px -20px rgba(217,184,114,.45)}
+footer .fcta{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:6px;padding:14px 18px 14px 24px;border-radius:999px;font-size:16px;font-weight:700;color:#1A140A;
+  background:linear-gradient(180deg,#F0D595 0%,#D7B26C 52%,#B68C4B 100%);box-shadow:inset 0 1px 0 rgba(255,246,220,.75),inset 0 -1px 0 rgba(80,52,16,.35),0 12px 30px -12px rgba(217,184,114,.6)}
+footer .fcta i{font-style:normal;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(26,20,10,.12);box-shadow:inset 0 0 0 1px rgba(26,20,10,.18)}
+
+/* ---------- планшет ---------- */
+@media(max-width:1100px){.npains{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1024px){
+  .pflow{grid-template-columns:1fr}
+  .parrow{height:58px}
+  .parrow span{transform:rotate(90deg)}
+  .pimg{flex:none;min-height:0;aspect-ratio:16/9}
+}
+@media(max-width:900px){
+  .pformats{grid-template-columns:1fr;gap:12px}
+  .pfor{grid-template-columns:1fr}
+  .ptrust{grid-template-columns:1fr}
+  .pportrait{max-width:420px;position:relative;top:auto}
+  .pcta{grid-template-columns:1fr}
+}
+
+/* ---------- телефон ---------- */
+@media(max-width:760px){
+  body{padding-bottom:0}
+  /* первый экран: заголовок, кадр, текст, кнопки */
+  .vhero{display:flex;flex-direction:column;align-items:stretch;min-height:0;--gut:18px}
+  .vhero .inner,.vhero .vcopy{display:contents}
+  .vhero .eyebrow{order:1;margin:22px var(--gut) 0;letter-spacing:.11em;font-size:11px;gap:10px}
+  .vhero .eyebrow::before{flex-basis:20px}
+  .vhero h1{order:2;margin:14px var(--gut) 0;max-width:none;font-size:29px;line-height:1.14}
+  .vmedia{order:3;position:relative;inset:auto;z-index:0;margin-top:16px;aspect-ratio:1/1}
+  .vbg{object-position:100% 50%}
+  .vshade{background:linear-gradient(180deg,var(--bg) 0%,rgba(20,18,15,0) 13%,rgba(20,18,15,0) 80%,var(--bg) 100%)}
+  .vhero .lead{order:4;margin:6px var(--gut) 0;color:var(--ink-muted);font-size:16px}
+  .vhero .plead{order:5;margin:12px var(--gut) 0;font-size:15px}
+  .vhero .actions{order:6;margin:22px var(--gut) 0;flex-direction:column;align-items:stretch;gap:10px}
+  .vcta,.vghost{justify-content:center}
+  .vpillars{order:7;margin:22px var(--gut) 40px}
+  .vpillars li{padding:14px 10px 15px 14px;gap:4px}
+  .vpillars b{font-size:16px}
+  .vpillars span{font-size:12px}
+
+  .nbg-r img{-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 70%);mask-image:linear-gradient(180deg,#000 0%,transparent 70%);object-position:75% 30%;opacity:.3}
+  .npains{grid-template-columns:1fr;gap:12px}
+  .npain{padding:22px 20px 24px}
+  .npain h3{margin-top:12px}
+  .npain p{font-size:15.5px}
+  .nnote{margin-top:28px;font-size:16.5px}
+  .pstep{padding:22px 20px 24px}
+  .pstep h3{font-size:25px;margin-top:16px}
+  .pstep > p{font-size:15.5px}
+  .nout{font-size:14.5px}
+  .pgrid{grid-template-columns:1fr;gap:10px}
+  .pformat{padding:22px 20px 24px}
+  .pformat p{font-size:16px}
+  .pterms{padding:16px 18px;font-size:16px}
+  .pfor{margin-top:28px;gap:12px}
+  .pfor-i{padding:22px 20px}
+  .pportrait{max-width:none;aspect-ratio:5/4}
+  .pportrait img{object-position:center 10%}
+  .nq li{grid-template-columns:40px 1fr;padding:18px 0}
+  .nq b{font-size:20px}
+  .nq div span{font-size:15.5px}
+  .stats{grid-template-columns:1fr;gap:10px}
+  .stat{padding:18px 20px}
+  .pimg{aspect-ratio:4/3}
+  .pcta .h2{font-size:26px;line-height:1.14}
+  .pcontacts .fct{padding:15px 16px}
+  .fcontacts{max-width:none}
+}
+@media(max-width:380px){.vhero{--gut:15px}.vhero h1{font-size:27px}}
+
+/* ---------- облегченный режим для телефонов и планшетов, как на главной ---------- */
+@media (max-width:1024px),(hover:none){
+  body::after{content:none!important;display:none!important}
+  .vpillars,.vghost,.gl,.fct{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .gl{background:linear-gradient(170deg,#2A241C,#1B1814)!important}
+  .vpillars{background:linear-gradient(180deg,rgba(40,34,26,.92),rgba(20,18,15,.88))!important}
+  .vcta::after{animation:none;display:none}
+}
+@media(prefers-reduced-motion:reduce){.vcta::after{animation:none;display:none}}
 </style>
 </head>
 <body data-variant="partneram">
+
 <header class="nav"><div class="inner">
   <a class="brand" href="/foundertrajectory/">Андрей<b>·</b>Сычинников</a>
-  <button class="navtoggle" id="navtoggle" aria-label="Меню">Меню</button>
-  <nav class="nlinks" id="nlinks">
-    <a href="#chto">Что решаем</a>
-    <a href="#audit">Аудит</a>
-    <a href="#rabota">Управление</a>
-    <a href="#ceny">Форматы</a>
-    <a href="#komissiya">Комиссия</a>
-    <a class="ncta" href="#kontakty">Связаться</a>
+  <nav class="nlinks pnav" aria-label="Разделы страницы">
+    <a href="#komu">Кому нужно</a>
+    <a href="#klientu">Что получает клиент</a>
+    <a href="#vam">Что получаете вы</a>
+    <a href="#pochemu">Почему меня рекомендуют</a>
+    <a class="ncta" href="#kontakty">Написать мне</a>
   </nav>
 </div></header>
 
-<!-- ПЕРВЫЙ ЭКРАН -->
-<section class="pagehero"><div class="inner">
-  <div class="rv">
-    <div class="crumbs" style="display:flex;gap:8px"><a href="/foundertrajectory/">Главная</a> · Партнерам</div>
-    <div class="eyebrow" style="margin-top:20px">Коммерческое предложение для партнеров</div>
-    <h1 style="margin-top:14px">Внедряем управленческий и финансовый контур для&nbsp;собственников</h1>
-    <p class="sub" style="margin-top:14px">Комиссия партнеру <b>20%</b> со всех платежей клиента в&nbsp;первые три&nbsp;месяца.</p>
+<!-- 1. КТО Я И ЧТО ДЕЛАЮ ДЛЯ СОБСТВЕННИКА -->
+<section class="vhero" id="top">
+  <div class="vmedia">
+    <img class="vbg" src="/foundertrajectory/assets/video/hero-v3s-poster-end.jpg" width="1920" height="1080" alt="Андрей Сычинников собирает систему управления компанией: оргструктура, рост, панель собственника" fetchpriority="high">
+    <div class="vshade" aria-hidden="true"></div>
   </div>
-</div></section>
-
-<!-- КТО МЫ -->
-<section class="band"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel">Кто мы</div>
-    <div class="secsub">Команда, которая ставит управление и&nbsp;финансы</div>
-    <p class="sub">Ведет Андрей Сычинников, ex-CEO компании с выручкой 1,4 млн евро (120&nbsp;млн&nbsp;рублей) и MBA по&nbsp;управлению.</p>
-  </div>
-  <div class="proofbar rv">
-    <div class="pb"><div class="pbn">5 лет</div><div class="pbl">управления собственной&nbsp;компанией</div></div>
-    <div class="pb"><div class="pbn">3+ года</div><div class="pbl">внедряем финансовый&nbsp;менеджмент</div></div>
-    <div class="pb"><div class="pbn">10+ лет</div><div class="pbl">практики у финдиректоров&nbsp;команды</div></div>
-    <div class="pb"><div class="pbn">100%</div><div class="pbl">онлайн, на русском, оплата в&nbsp;евро</div></div>
-  </div>
-  <p class="sub rv" style="margin:26px 0 0">Отрасли, которые понимаем изнутри: оптовая и розничная торговля, производство, общепит, логистика и маркетплейсы.</p>
-</div></section>
-
-<!-- ЧТО РЕШАЕМ -->
-<section class="band alt" id="chto"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel">Что решаем</div>
-    <div class="secsub">Две проблемы растущей&nbsp;компании</div>
-    <p class="sub">Они одинаковые почти у всех и стоят собственнику денег каждый месяц. Начинаем с того направления, где болит&nbsp;сильнее.</p>
-  </div>
-  <div class="versus rv">
-    <div class="vcol me">
-      <h4>Управление и команда</h4>
-      <ul>
-        <li>Команда работает неэффективно, показатели не выполняются</li>
-        <li>Собственник тратит личное время на контроль и операционку</li>
-        <li>Руководители не автономны, решения возвращаются наверх</li>
-        <li>Команда работает разрозненно, ответственность размыта</li>
-      </ul>
-    </div>
-    <div class="vcol me">
-      <h4>Деньги и цифры</h4>
-      <ul>
-        <li>Точная чистая прибыль за период неизвестна</li>
-        <li>Непонятно, какие направления кормят, а какие тянут назад</li>
-        <li>Риск кассового разрыва не контролируется</li>
-        <li>Решения принимаются на интуиции, а не на показателях</li>
+  <div class="inner">
+    <div class="vcopy">
+      <div class="eyebrow">Для партнеров</div>
+      <h1>Собираю управление компанией: <em>люди, процессы, деньги</em></h1>
+      <p class="lead">Внешний операционный директор для собственника компании на 5-50&nbsp;человек. Беру на себя то, что держится на собственнике: деньги, продажи, людей и процессы. На каждом шаге рядом ИИ.</p>
+      <p class="plead">Здесь коротко: кому из ваших клиентов это нужно, что получит клиент и что получаете вы.</p>
+      <div class="actions">
+        <a class="vcta" href="#kontakty"><span>Написать мне</span><i aria-hidden="true">→</i></a>
+        <a class="vghost" href="#vam">Что получаете вы</a>
+      </div>
+      <ul class="vpillars">
+        <li><i>01</i><b>Люди</b><span>оргструктура и KPI</span></li>
+        <li><i>02</i><b>Процессы</b><span>BPMN и регламенты</span></li>
+        <li><i>03</i><b>Деньги</b><span>прибыль и календарь</span></li>
       </ul>
     </div>
   </div>
+</section>
+
+<!-- 2. КОМУ ИЗ ВАШИХ КЛИЕНТОВ ЭТО НУЖНО -->
+<section class="band alt nsec nbgsec" id="komu">
+<div class="nbg nbg-r" aria-hidden="true"><img src="/foundertrajectory/assets/img/bg-wall-2400.jpg" srcset="/foundertrajectory/assets/img/bg-wall-1200.jpg 1200w, /foundertrajectory/assets/img/bg-wall-2400.jpg 2400w" sizes="100vw" alt="" loading="lazy"></div>
+<div class="inner pad">
+  <div class="sect-head">
+    <div class="eyebrow">Кому из ваших клиентов это нужно</div>
+    <h2 class="h2 nh">Собственникам компаний на 5-50&nbsp;человек с работающим маркетингом</h2>
+    <p class="sub">Команда, клиенты и обороты уже есть, рекламный бюджет уходит каждый месяц. Не хватает системы, которая работает без собственника. Обычно это видно в один из таких моментов.</p>
+  </div>
+  <div class="npains">
+    <article class="npain gl hov"><span class="nk">01</span><h3>Маркетинг работает</h3><p>У компании есть агентство или свой маркетинг и рекламный бюджет каждый месяц. Но какие каналы окупаются, а какие только съедают бюджет, в цифрах не видно.</p></article>
+    <article class="npain gl hov"><span class="nk">02</span><h3>После внедрения CRM</h3><p>Система продаж стоит, а у собственника встает вопрос «а что с деньгами». Цифр и управления поверх CRM пока нет.</p></article>
+    <article class="npain gl hov"><span class="nk">03</span><h3>После найма</h3><p>Команда выросла, люди заняты с утра до вечера, а результата нет. Зоны размыты, спросить не с кого, и каждый новый сотрудник только добавляет хаоса.</p></article>
+    <article class="npain gl hov"><span class="nk">04</span><h3>При росте</h3><p>Обороты растут, а денег на счету к концу месяца больше не становится. Все решения по-прежнему идут через собственника.</p></article>
+  </div>
+  <p class="nnote">Дело не в людях. Компания выросла быстрее, чем система управления. <b>Ее я и ставлю вместе с собственником, и она остается в компании.</b></p>
 </div></section>
 
-<!-- РЕЗУЛЬТАТ -->
-<section class="band"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel">Результат</div>
-    <div class="secsub">Что получает&nbsp;собственник</div>
-    <p class="sub">Три изменения, по которым видно, что работа сделана. Их называет сам собственник через три&nbsp;месяца.</p>
+<!-- 3. ЧТО ПОЛУЧАЕТ ВАШ КЛИЕНТ -->
+<section class="band nsec nbgsec" id="klientu">
+<div class="nbg nbg-full" aria-hidden="true"><img src="/foundertrajectory/assets/img/bg-command-2400.jpg" srcset="/foundertrajectory/assets/img/bg-command-1200.jpg 1200w, /foundertrajectory/assets/img/bg-command-2400.jpg 2400w" sizes="100vw" alt="" loading="lazy"></div>
+<div class="inner pad">
+  <div class="sect-head">
+    <div class="eyebrow">Карта компании → помесячная работа</div>
+    <h2 class="h2 nh">Что получает ваш клиент</h2>
+    <p class="sub">Первый шаг короткий: две недели и Карта компании. Следующий только после результата на предыдущем, остановиться можно после любого этапа.</p>
   </div>
-  <div class="metrics rv">
-    <div class="metric">
-      <div class="ml">Управляет по&nbsp;цифрам</div>
-      <div class="md">Видит настоящую чистую прибыль, со своей зарплатой и налогами внутри. Понятно, какие направления кормят компанию, а какие&nbsp;съедают.</div>
-      <div class="mtrend">решения по фактам</div>
-    </div>
-    <div class="metric">
-      <div class="ml">Выходит из&nbsp;операционки</div>
-      <div class="md">Каждый руководитель знает, на какой показатель работает. Задачи перестают возвращаться наверх, команда решает&nbsp;сама.</div>
-      <div class="mtrend">бизнес не на одном человеке</div>
-    </div>
-    <div class="metric">
-      <div class="ml">Попадает в&nbsp;план</div>
-      <div class="md">Платежный календарь показывает разрывы заранее. Доводим точность планирования чистой прибыли к&nbsp;100%.</div>
-      <div class="mtrend">план сбывается</div>
-    </div>
+  <div class="pflow">
+    <article class="pstep first gl">
+      <div class="ps-top"><span class="nstep">01</span><span class="nwhen">две недели</span></div>
+      <h3>Карта компании</h3>
+      <p>Аудит: деньги, продажи, люди и процессы на одной карте, включая окупаемость каждого рекламного канала. Разбираю цифры, документы и разговоры с ключевыми людьми.</p>
+      <div class="nout"><i>На выходе</i>Три главных узких места с ценой в деньгах и дорожная карта решений. Карта остается у клиента в любом случае.</div>
+      <figure class="pimg"><img src="/foundertrajectory/assets/img/img-audit-960.jpg" width="960" height="1200" alt="Андрей Сычинников на аудите: стена отчетов, луч света на месте, где компания теряет деньги" loading="lazy"><figcaption>Аудит показывает, где именно компания теряет деньги</figcaption></figure>
+    </article>
+    <div class="parrow" aria-hidden="true"><span>→</span></div>
+    <article class="pstep gl">
+      <div class="ps-top"><span class="nstep">02</span><span class="nwhen">помесячно</span></div>
+      <h3>Внешний операционный директор</h3>
+      <p>Беру на себя то, что держится на собственнике, и ставлю систему управления. Объем работы по тому, что показала карта.</p>
+      <div class="pgrid">
+        <div class="pgi"><i>Деньги</i><b>Управленческий учет</b><span>Движение денег, отчет о прибылях и убытках, платежный календарь. Отчетность вместе с маркетингом.</span></div>
+        <div class="pgi"><i>Люди</i><b>Оргструктура и KPI</b><span>У каждой роли зона ответственности, конечный результат и показатель.</span></div>
+        <div class="pgi"><i>Процессы</i><b>Схемы и регламенты</b><span>Ключевые процессы в BPMN 2.0. Новый сотрудник входит в работу по документам, а не по памяти собственника.</span></div>
+        <div class="pgi"><i>Память</i><b>Второй мозг компании на ИИ</b><span>Решения, договоренности, документы и звонки в одном месте. Ответ на вопрос находится за секунды.</span></div>
+      </div>
+    </article>
   </div>
+  <p class="nnote">Решения принимает собственник, за результат отвечаю я. <b>Работающая система, а не презентация: все сделанное остается в компании.</b></p>
 </div></section>
 
-<!-- ЭТАП 1: АУДИТ -->
-<section class="band alt" id="audit"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel"><span class="stagenum">1</span><span>Аудит</span></div>
-    <div class="secsub">Три фазы, 3-4&nbsp;недели</div>
-    <p class="sub">Устроен как медицинское обследование: анамнез, анализы, диагноз. Без&nbsp;него внедрение превращается в&nbsp;угадывание.</p>
+<!-- 4. ЧТО ПОЛУЧАЕТЕ ВЫ -->
+<section class="band alt nsec" id="vam"><div class="inner pad">
+  <div class="sect-head">
+    <div class="eyebrow">Что получаете вы</div>
+    <h2 class="h2 nh">Два формата на ваш выбор</h2>
+    <p class="sub">Выбираете тот, что удобнее вам и вашему клиенту.</p>
   </div>
-  <div class="stepper three rv">
-    <div class="stepn">
-      <div class="wk">Фаза 1 · неделя 1-2</div>
-      <div class="ti">Диагностика команды</div>
-      <ul>
-        <li>Встреча с каждым ключевым сотрудником</li>
-        <li>Оргструктура «как по факту»</li>
-        <li>Проблемы глазами команды, по весу голосов</li>
-        <li>Расхождение картины собственника и команды</li>
-      </ul>
-      <div class="mv">Видно, кто за что отвечает на самом&nbsp;деле</div>
-    </div>
-    <div class="stepn">
-      <div class="wk">Фаза 2 · неделя 2-3</div>
-      <div class="ti">Финансовый аудит</div>
-      <ul>
-        <li>Отчет о прибыли с долями от выручки</li>
-        <li>Три сценария прибыли на 2-3 месяца</li>
-        <li>Разбор модели с финдиректором</li>
-      </ul>
-      <div class="mv">Видна настоящая прибыль и точки&nbsp;потерь</div>
-    </div>
-    <div class="stepn">
-      <div class="wk">Фаза 3 · неделя 3-4</div>
-      <div class="ti">Стратегическая сессия</div>
-      <ul>
-        <li>Гипотезы роста: эффект, скорость, цена</li>
-        <li>Выбор 3-5 главных рычагов на три месяца</li>
-        <li>Дорожная карта в Ганте: что, кто, когда</li>
-      </ul>
-      <div class="mv">План изменений, с которым можно&nbsp;работать</div>
-    </div>
+  <div class="pformats">
+    <article class="pformat gl hov">
+      <span class="nk">Формат 01</span>
+      <h3>Продаете от себя</h3>
+      <p>Предлагаете мою работу клиенту от своего имени, со своей наценкой поверх моей цены.</p>
+    </article>
+    <div class="por" aria-hidden="true"><span>или</span></div>
+    <article class="pformat gl hov">
+      <span class="nk">Формат 02</span>
+      <h3>Процент со всех оплат</h3>
+      <p>Получаете процент со всех оплат клиента в течение 12&nbsp;месяцев. Клиент платит мне напрямую.</p>
+    </article>
   </div>
-  <div class="takeaway rv" style="margin-top:30px"><p>Аудит связывает людей и деньги в одну картину: какие проблемы в команде имеют финансовый след и какой рычаг поднимет&nbsp;прибыль.</p></div>
-</div></section>
-
-<!-- ЭТАП 2: РАБОТА -->
-<section class="band" id="rabota"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel"><span class="stagenum">2</span><span>Управленческий контур</span></div>
-    <div class="secsub">Три месяца после аудита</div>
-    <p class="sub">Собираем систему, в которой компания управляется решениями по цифрам, а не присутствием собственника. Два этапа, внутри каждого два блока&nbsp;одновременно.</p>
-  </div>
-
-  <div class="stagegroup rv">
-    <div class="stagehead">
-      <span class="stagenum sm">1</span>
-      <div>
-        <div class="sh-title">Структура и решения</div>
-        <div class="sh-note">Месяц 1 и начало второго. Сначала становится понятно, кто за что отвечает, и появляется ритм, в котором решения принимаются по показателям и фиксируются, а не проговариваются и&nbsp;забываются.</div>
-      </div>
-    </div>
-    <div class="stepper two">
-      <div class="stepn">
-        <div class="wk">Блок 1.1</div>
-        <div class="ti">Структура и ответственность</div>
-        <ul>
-          <li>Целевая оргструктура и план перехода к ней</li>
-          <li>Результат каждой роли: что человек производит</li>
-          <li>Зоны ответственности без пересечений</li>
-          <li>Назначение преемника внутри компании</li>
-          <li>Разбор самой острой бизнес-задачи: причина, цель, шаги, сроки</li>
-        </ul>
-        <div class="mv">Понятно, с кого и что спрашивать</div>
-      </div>
-      <div class="stepn">
-        <div class="wk">Блок 1.2</div>
-        <div class="ti">Контур решений</div>
-        <ul>
-          <li>Четыре ключевых показателя из тех цифр, что уже есть</li>
-          <li>Реестр решений: что решили, кто, срок, ожидаемый результат</li>
-          <li>Мотивация руководителей привязана к прибыли</li>
-          <li>Регулярные встречи на три месяца вперед в календаре</li>
-          <li>Три контрольные точки по каждому показателю</li>
-        </ul>
-        <div class="mv">Решения перестают теряться</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="stagegroup rv">
-    <div class="stagehead">
-      <span class="stagenum sm">2</span>
-      <div>
-        <div class="sh-title">Процессы и передача</div>
-        <div class="sh-note">Месяцы 2 и 3. Работающий порядок закрепляется в схемах и переходит к преемнику. Это тот этап, без которого система держится на памяти людей и рассыпается через&nbsp;полгода.</div>
-      </div>
-    </div>
-    <div class="stepper two">
-      <div class="stepn">
-        <div class="wk">Блок 2.1</div>
-        <div class="ti">Регламенты процессов</div>
-        <ul>
-          <li>Ключевые процессы в нотации BPMN 2.0</li>
-          <li>Путь решения от формулировки до факта</li>
-          <li>Точки принятия решений и передачи между отделами</li>
-          <li>Ответственный на каждом шаге</li>
-          <li>Документация, по которой разбирается новый человек</li>
-        </ul>
-        <div class="mv">Порядок живет в схемах, а не в головах</div>
-      </div>
-      <div class="stepn">
-        <div class="wk">Блок 2.2</div>
-        <div class="ti">Передача преемнику</div>
-        <ul>
-          <li>Преемник ведет встречи сначала под нашим контролем</li>
-          <li>Дорожная карта в Ганте со статусами по каждой задаче</li>
-          <li>Таблица критериев внедренности</li>
-          <li>Собственник выходит на стратегические решения</li>
-          <li>Финальная приемка: преемник ведет встречу сам, мы наблюдаем</li>
-        </ul>
-        <div class="mv">Система работает без нас</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sect-head rv" style="margin-top:44px;margin-bottom:26px">
-    <div class="secsub" style="margin-top:0">Что меняется у собственника за три месяца</div>
-    <p class="sub">По каждому пункту в конце месяца можно поставить «да» или «нет». Задача работы в том, чтобы «да» становилось&nbsp;больше.</p>
-  </div>
-  <div class="fit rv">
-    <div class="fitcol yes">
-      <h4>Решения</h4>
-      <ul>
-        <li><span class="mk">✓</span> Собственник принимает решения по цифрам, а не по ощущению: от трех зафиксированных решений в месяц</li>
-        <li><span class="mk">✓</span> Принятые решения доходят до исполнения, а не остаются в протоколе</li>
-        <li><span class="mk">✓</span> У решений виден измеримый эффект на показателях компании</li>
-      </ul>
-    </div>
-    <div class="fitcol yes">
-      <h4>Управляемость</h4>
-      <ul>
-        <li><span class="mk">✓</span> Операционка занимает не больше трети времени собственника</li>
-        <li><span class="mk">✓</span> Новый сотрудник разбирается в процессе за две недели без устных пояснений</li>
-        <li><span class="mk">✓</span> Собственник одним предложением говорит, куда компания идет ближайший год</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="pricenote rv">
-    <p><b>Что остается в документах.</b> Оргструктура с зонами ответственности, реестр управленческих решений, регламенты ключевых процессов в BPMN 2.0, дорожная карта в диаграмме Ганта, показатели по ролям с еженедельной отчетностью и таблица критериев&nbsp;внедренности.</p>
-    <p style="margin-top:14px"><b>Условие входа.</b> Внутри компании есть человек, который принимает систему на себя. Без преемника мы не стартуем и говорим об этом до&nbsp;оплаты.</p>
-    <p style="margin-top:14px"><b>Ритм.</b> Два созвона в неделю. Ведут Андрей и операционный менеджер. Изменения вносятся в работу команды, а не в&nbsp;презентацию.</p>
+  <div class="pterms"><b>Условия обсуждаем лично.</b> Напишите мне, и договоримся о формате до первого знакомства с клиентом.</div>
+  <div class="pfor">
+    <article class="pfor-i gl">
+      <div class="eyebrow">Если вы маркетинговое агентство</div>
+      <p>Ваш клиент начинает видеть окупаемость рекламы по каждому каналу в цифрах. Агентству это выгодно: вместо «лиды плохие» разговор идет по цифрам, хорошие каналы получают больше бюджета, <b>клиент остается дольше.</b> Мой целевой клиент как раз тот, у кого уже есть агентство и рекламный бюджет каждый месяц.</p>
+    </article>
+    <article class="pfor-i gl">
+      <div class="eyebrow">Если вы внедряете CRM</div>
+      <p>После внедрения CRM у собственника часто встает вопрос «а что с деньгами». Вы ставите систему, я ставлю цифры и управление поверх нее, <b>и ваше внедрение не бросают через два месяца.</b></p>
+    </article>
   </div>
 </div></section>
 
-<!-- ФИНАНСОВЫЙ КОНТУР -->
-<section class="band" id="kontur"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel"><span class="stagenum">3</span><span>Финансовый контур</span></div>
-    <div class="secsub">Второе направление, идет отдельно от управленческого</div>
-    <p class="sub">Это не один отчет о прибыли. Это управленческая система, и она внедряется двумя этапами, а внутри каждого этапа два блока идут&nbsp;одновременно.</p>
-  </div>
-
-  <div class="stagegroup rv">
-    <div class="stagehead">
-      <span class="stagenum sm">1</span>
-      <div>
-        <div class="sh-title">Факт и регулярный менеджмент</div>
-        <div class="sh-note">Одновременно. Как только собран первый отчет, вокруг него сразу запускается ежемесячный ритм: закрывать период, показывать цифры собственнику, держать показатели под&nbsp;контролем.</div>
+<!-- 5. ПОЧЕМУ НЕ СТЫДНО РЕКОМЕНДОВАТЬ -->
+<section class="band nsec nbgsec" id="pochemu">
+<div class="nbg nbg-r" aria-hidden="true"><img src="/foundertrajectory/assets/img/bg-table-2400.jpg" srcset="/foundertrajectory/assets/img/bg-table-1200.jpg 1200w, /foundertrajectory/assets/img/bg-table-2400.jpg 2400w" sizes="100vw" alt="" loading="lazy" style="opacity:.22"></div>
+<div class="inner pad">
+  <div class="ptrust">
+    <figure class="pportrait">
+      <img src="/foundertrajectory/assets/people/andrei-sychinnikov/andrei-portrait-1100.jpg" width="925" height="1100" alt="Андрей Сычинников, внешний операционный директор" loading="lazy">
+      <figcaption><b>Андрей Сычинников</b><span>Внешний операционный директор. База в Испании, работаю с компаниями в Европе, на русском, онлайн.</span></figcaption>
+    </figure>
+    <div>
+      <div class="eyebrow">Правила работы</div>
+      <h2 class="h2 nh">Почему меня не стыдно рекомендовать</h2>
+      <ol class="nq">
+        <li><span class="nk">01</span><div><b>Беру не всех</b><span>На первом созвоне прямо говорю, если зона не моя.</span></div></li>
+        <li><span class="nk">02</span><div><b>NDA до первого доступа</b><span>Договор о конфиденциальности подписываем до того, как я получаю доступ к данным компании.</span></div></li>
+        <li><span class="nk">03</span><div><b>Без подписки на год</b><span>Клиент не подписывается на год. Первый шаг: две недели и Карта компании.</span></div></li>
+        <li><span class="nk">04</span><div><b>Карта остается у клиента</b><span>В любом случае, даже если дальше не работаем.</span></div></li>
+      </ol>
+      <p class="pown">Я сам собственник с 2019 года. То, что ставлю у клиентов, сначала построил в собственной компании.</p>
+      <div class="stats">
+        <div class="stat"><div class="v">15+</div><div class="l">человек в удаленной команде моей компании: производство в Китае, <span style="white-space:nowrap">e-commerce</span></div></div>
+        <div class="stat"><div class="v">1,4 млн €</div><div class="l">выручка этой компании в 2024 году</div></div>
+        <div class="stat"><div class="v">с 2019</div><div class="l">собственник и руководитель своих компаний, курс MBA</div></div>
       </div>
-    </div>
-    <div class="stepper two">
-      <div class="stepn">
-        <div class="wk">Блок 1.1</div>
-        <div class="ti">Сбор факта</div>
-        <ul>
-          <li>Движение денег (ДДС)</li>
-          <li>Отчет о прибыли и убытках</li>
-          <li>Баланс</li>
-          <li>Платежный календарь</li>
-          <li>Зарплатная ведомость</li>
-          <li>Учет сделок, запасов и налогов</li>
-          <li>Дебиторка и кредиторка</li>
-          <li>Чек-лист закрытия периода</li>
-        </ul>
-        <div class="mv">Цифры собираются вовремя и сходятся</div>
-      </div>
-      <div class="stepn">
-        <div class="wk">Блок 1.2</div>
-        <div class="ti">Регулярный менеджмент</div>
-        <ul>
-          <li>Закрытие периода каждый месяц</li>
-          <li>Презентация отчетности собственнику</li>
-          <li>Контроль ключевых показателей</li>
-          <li>Планирование месяца с руководителями</li>
-          <li>Планирование движения денег на период</li>
-          <li>Реестр управленческих решений</li>
-        </ul>
-        <div class="mv">Цифры превращаются в решения, а не в архив</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="stagegroup rv">
-    <div class="stagehead">
-      <span class="stagenum sm">2</span>
-      <div>
-        <div class="sh-title">Операционные отчеты и планирование</div>
-        <div class="sh-note">Тоже одновременно, и порядок здесь не случайный: финансовую модель невозможно построить без себестоимости и юнит-экономики. Сначала считаем, из чего складывается результат, и только потом планируем&nbsp;его.</div>
-      </div>
-    </div>
-    <div class="stepper two">
-      <div class="stepn">
-        <div class="wk">Блок 2.1</div>
-        <div class="ti">Операционные отчеты</div>
-        <ul>
-          <li>Себестоимость</li>
-          <li>Юнит-экономика</li>
-          <li>ABC-анализ с конверсиями</li>
-          <li>Оборачиваемость и расчет потребности</li>
-          <li>Неликвид и замороженные деньги</li>
-        </ul>
-        <div class="mv">Видно, где именно теряется маржа</div>
-      </div>
-      <div class="stepn">
-        <div class="wk">Блок 2.2</div>
-        <div class="ti">Планирование и бюджеты</div>
-        <ul>
-          <li>Финансовая модель</li>
-          <li>План доходов и расходов</li>
-          <li>Бюджет движения денег (БДДС)</li>
-          <li>Панель приборов собственника</li>
-          <li>План на год и сценарии к нему</li>
-        </ul>
-        <div class="mv">Компания планирует и попадает в план</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="pricenote rv">
-    <p><b>Порядок внедрения.</b> Первым идет базовый набор факта: движение денег, отчет о прибыли, баланс и платежный календарь. Регулярный менеджмент стартует не после него, а вместе с ним, с первого же собранного отчета. Второй этап подключается, когда факт собирается без&nbsp;сбоев.</p>
-    <p style="margin-top:14px"><b>Сроки.</b> Полный контур занимает от четырех до шести месяцев. Базовый набор и ежемесячный ритм появляются заметно раньше, точный состав зависит от бизнеса&nbsp;клиента.</p>
-    <p style="margin-top:14px"><b>Кто ведет.</b> Финансовый директор из нашей команды, практика в управленческом учете от десяти лет. Первичку раз в неделю отдает человек со стороны клиента, за смысл цифр и за управленческие решения отвечаем&nbsp;мы.</p>
-    <p style="margin-top:14px"><b>Состав подбирается под бизнес.</b> Торговле нужны оборачиваемость и неликвид, производству себестоимость по переделам, услугам загрузка людей. Лишние таблицы не внедряем: каждая должна кем-то заполняться&nbsp;еженедельно.</p>
-  </div>
-</div></section>
-
-<!-- ФОРМАТЫ -->
-<section class="band" id="ceny"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel">Форматы работы</div>
-  </div>
-  <div class="entryline rv">
-    <div class="el-price">Разбор бесплатно</div>
-    <div class="el-text"><b>Час разговора с собственником.</b> Называем главную проблему и первый шаг. Выводы остаются у него, даже если дальше мы не&nbsp;работаем.</div>
-  </div>
-  <div class="ladder rv">
-    <div class="rung core">
-      <div class="rg-badge">С этого начинаем</div>
-      <div class="rg-tag">Диагностика</div>
-      <div class="rg-name">Аудит траектории</div>
-      <div class="rg-dur">3-4 недели</div>
-      <div class="rg-price">По запросу</div>
-      <div class="rg-sub">Три фазы: команда, финансы, стратегическая сессия.
-        <ul>
-          <li>Оргструктура «как по факту»</li>
-          <li>Проблемы глазами команды</li>
-          <li>Отчет о прибыли и три сценария</li>
-          <li>Дорожная карта в Ганте</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rung">
-      <div class="rg-tag">Управление</div>
-      <div class="rg-name">Управленческий контур</div>
-      <div class="rg-dur">3 месяца</div>
-      <div class="rg-price">По запросу</div>
-      <div class="rg-sub">Структура, показатели, регламенты и передача преемнику.
-        <ul>
-          <li>Оргструктура и зоны ответственности</li>
-          <li>Показатели и реестр решений</li>
-          <li>Регламенты процессов в BPMN 2.0</li>
-          <li>Преемник ведет систему сам</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rung">
-      <div class="rg-tag">Деньги</div>
-      <div class="rg-name">Финансовый контур</div>
-      <div class="rg-dur">от 3 месяцев</div>
-      <div class="rg-price">По запросу</div>
-      <div class="rg-sub">Подключаем финансового директора и внедряем управленческий контур.
-        <ul>
-          <li>Факт: ДДС, прибыль, баланс, календарь</li>
-          <li>Планирование, бюджеты, панель приборов</li>
-          <li>Регулярный менеджмент внутри команды</li>
-          <li>Легкий вариант: считает человек клиента</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="pricenote rv">
-    <p><b>Управление и деньги это два направления рядом, а не ступени лестницы.</b> Если клиент берет оба, это два отдельных формата, пакета нет. На разборе говорим, с какого выгоднее стартовать именно ему.</p>
-    <p style="margin-top:14px"><b>Оплата помесячно</b>, остановиться можно после любого месяца. Первый месяц клиент оценивает по результату, а не по обещаниям.</p>
-    <p style="margin-top:14px"><b>Компании больше 30 человек.</b> Стандартный аудит рассчитан на компанию, где до 10 ключевых руководителей. Если контур шире, объем и стоимость считаем отдельно и называем до старта.</p>
-    <p style="margin-top:14px">Скидок нет. Вместо скидки может быть меньший объем работы за меньшие деньги, и мы вслух называем, чего в нем не будет. Оплата в евро на европейский счет.</p>
-  </div>
-</div></section>
-
-<!-- КОМИССИЯ -->
-<section class="band alt" id="komissiya"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel">Комиссия</div>
-    <div class="secsub">20% партнеру</div>
-    <p class="sub">Со всех платежей клиента в первые три месяца, включая аудит. Не&nbsp;с&nbsp;первого чека, а с каждого платежа за этот&nbsp;период.</p>
-  </div>
-  <div class="pricenote rv">
-    <p><b>Когда платим.</b> В течение пяти рабочих дней после того, как платеж клиента поступил к нам, по каждому платежу отдельно и с расшифровкой суммы.</p>
-    <p style="margin-top:14px"><b>Что считается вашим клиентом.</b> Компания, которую вы назвали первым и с которой мы не общались раньше. Фиксируем письмом в день передачи контакта.</p>
-    <p style="margin-top:14px"><b>Без эксклюзива и без обязательств по объему.</b> Вы ничего нам не должны, мы вам должны только комиссию по факту сделки.</p>
-    <p style="margin-top:14px"><b>Встречное направление.</b> Мы предлагаем диагностику персонала своим клиентам там, где видна проблема с людьми, но не видна ее природа. Условия в обратную сторону обсуждаем отдельно.</p>
-  </div>
-</div></section>
-
-<!-- ФИЛЬТР -->
-<section class="band"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel">Фильтр</div>
-    <div class="secsub">Кого имеет смысл передавать&nbsp;нам</div>
-    <p class="sub">Чтобы вы не тратили время на компании, где мы не дадим результата. Если клиент не подходит, говорим это сразу на&nbsp;разборе.</p>
-  </div>
-  <div class="fit rv">
-    <div class="fitcol yes">
-      <h4>Подходит</h4>
-      <ul>
-        <li><span class="mk">✓</span> Русскоязычный собственник, у которого уже есть команда</li>
-        <li><span class="mk">✓</span> Компания работает не первый год, бизнес живой</li>
-        <li><span class="mk">✓</span> Держится на собственнике или зарабатывает меньше, чем могла бы</li>
-        <li><span class="mk">✓</span> Собственник сам решает и сам будет на встречах</li>
-        <li><span class="mk">✓</span> Готов показывать реальные цифры, даже если учет в таблице</li>
-      </ul>
-    </div>
-    <div class="fitcol no">
-      <h4>Не подходит</h4>
-      <ul>
-        <li><span class="mk">×</span> Соло-предприниматель без команды</li>
-        <li><span class="mk">×</span> Нужен подрядчик руками, без изменений в управлении</li>
-        <li><span class="mk">×</span> Собственник не готов показывать реальные цифры</li>
-        <li><span class="mk">×</span> Некому раз в неделю отдавать документы</li>
-        <li><span class="mk">×</span> Компания на стадии запуска, оборотов еще нет</li>
-      </ul>
+      <a class="morelink" href="/foundertrajectory/">Подробнее обо мне и о работе →</a>
     </div>
   </div>
 </div></section>
 
-<!-- МЕХАНИКА -->
-<section class="band alt"><div class="inner pad">
-  <div class="sect-head rv">
-    <div class="seclabel">Механика</div>
-    <div class="secsub">Как передать&nbsp;клиента</div>
-    <p class="sub">Три шага. От вашего письма до первого платежа проходит от двух до четырех&nbsp;недель.</p>
-  </div>
-  <div class="stepper three rv">
-    <div class="stepn">
-      <div class="wk">Шаг 1</div>
-      <div class="ti">Пишете название&nbsp;компании</div>
-      <ul>
-        <li>Название, сфера, примерный размер команды</li>
-        <li>Что у них болит по вашим данным</li>
-        <li>Имя и контакт человека, который решает</li>
-      </ul>
-      <div class="mv">Подтверждаем письмом, что компания за&nbsp;вами</div>
+<!-- 6. КАК НАЧАТЬ -->
+<section class="band alt final nsec ncta-sec" id="kontakty"><div class="inner pad">
+  <div class="pcta">
+    <div>
+      <div class="eyebrow">Как начать</div>
+      <h2 class="h2 nh">Есть клиент, которому это нужно? Напишите мне</h2>
+      <p class="sub">В Telegram или LinkedIn. Отвечаю лично в течение 24 часов. Условия для партнеров обсуждаем лично.</p>
     </div>
-    <div class="stepn">
-      <div class="wk">Шаг 2</div>
-      <div class="ti">Проводим бесплатный&nbsp;разбор</div>
-      <ul>
-        <li>Час разговора с собственником</li>
-        <li>Называем главную проблему и первый шаг</li>
-        <li>Если работать не о чем, говорим сразу</li>
-      </ul>
-      <div class="mv">Вы получаете короткий итог&nbsp;разговора</div>
+    <div class="fcontacts pcontacts">
+      <a class="fct main" href="https://t.me/Sychinnikov_work" target="_blank" rel="noopener"><span class="fci"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 4.2 2.9 11.3c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.4zM8.6 14l9.2-5.8c.5-.3.8-.1.5.2l-7.6 6.9-.3 3.2L8.6 14z" fill="currentColor"/></svg></span><span class="fct-t"><b>Написать в Telegram</b><small>@Sychinnikov_work</small></span><i class="fct-a" aria-hidden="true">↗</i></a>
+      <a class="fct" href="https://www.linkedin.com/in/sychinnikov/" target="_blank" rel="noopener"><span class="fci"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.9 8.9H3.6V20h3.3V8.9zM5.3 3.5a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM20.4 13.6c0-3-1.6-4.9-4.3-4.9-1.4 0-2.4.8-2.8 1.5V8.9H10V20h3.3v-5.8c0-1.5.6-2.6 2-2.6s1.8 1.1 1.8 2.6V20h3.3v-6.4z" fill="currentColor"/></svg></span><span class="fct-t"><b>Написать в LinkedIn</b><small>linkedin.com/in/sychinnikov</small></span><i class="fct-a" aria-hidden="true">↗</i></a>
+      <a class="fct" href="mailto:sychinnikov@gmail.com"><span class="fci"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 7.5 8 5.6 8-5.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="fct-t"><b>Почта</b><small>sychinnikov@gmail.com</small></span><i class="fct-a" aria-hidden="true">↗</i></a>
     </div>
-    <div class="stepn">
-      <div class="wk">Шаг 3</div>
-      <div class="ti">Клиент выбирает&nbsp;формат</div>
-      <ul>
-        <li>Аудит, управление, финансы или их сочетание</li>
-        <li>Договор и оплата в евро</li>
-        <li>Комиссия уходит вам после каждого платежа</li>
-      </ul>
-      <div class="mv">Держим вас в курсе, пока идет&nbsp;работа</div>
-    </div>
-  </div>
-</div></section>
-
-<!-- КОНТАКТЫ -->
-<section class="band final kontakty" id="kontakty"><div class="inner pad">
-  <div class="sect-head rv" style="margin-bottom:0">
-    <div class="seclabel">Контакты</div>
-    <div class="secsub">Пишите напрямую</div>
-    <p class="sub">Отвечаем в течение суток. Если нужно обсудить конкретную компанию, назначим короткий&nbsp;созвон.</p>
-    <ul class="cta-list" style="margin-top:20px">
-      <li>Почта: <a href="mailto:sychinnikov@gmail.com" style="color:var(--gold)">sychinnikov@gmail.com</a></li>
-      <li>Телефон и WhatsApp: <a href="tel:+34657306353" style="color:var(--gold)">+34 657 306 353</a></li>
-      <li>Телеграм: <a href="https://t.me/Sychinnikov" style="color:var(--gold)">@Sychinnikov</a></li>
-      <li>Сайт: <a href="https://sychinnikov.com/foundertrajectory/" style="color:var(--gold)">sychinnikov.com/foundertrajectory</a></li>
-    </ul>
-    <p class="note">Работаем на территории ЕС, встречи и ведение&nbsp;онлайн.</p>
   </div>
 </div></section>
 
@@ -634,31 +465,33 @@ p,li,.sub,.asset .ad,.metric .md,.rung .rg-sub,.stepn .mv,.pricenote p{text-wrap
   <div class="fgrid">
     <div>
       <div class="ft-brand">Андрей<b style="color:var(--gold)">·</b>Сычинников</div>
-      <p>Ставим в бизнесе систему управления и финансовый контур. Компания зарабатывает больше и перестает держаться на собственнике.</p>
+      <p>Внешний операционный директор для собственника компании на 5-50 человек. Карта компании за две недели, дальше помесячная работа. На каждом шаге рядом ИИ.</p>
     </div>
     <div>
       <div class="fcol-h">Разделы</div>
       <ul class="fnav">
-        <li><a href="#chto">Что решаем</a></li>
-        <li><a href="#audit">Аудит</a></li>
-        <li><a href="#rabota">Управление</a></li>
-        <li><a href="#kontur">Финансовый контур</a></li>
-        <li><a href="#ceny">Форматы работы</a></li>
-        <li><a href="#komissiya">Комиссия партнеру</a></li>
+        <li><a href="#komu">Кому нужно</a></li>
+        <li><a href="#klientu">Что получает клиент</a></li>
+        <li><a href="#vam">Что получаете вы</a></li>
+        <li><a href="#pochemu">Почему меня рекомендуют</a></li>
+        <li><a href="/foundertrajectory/">Главная страница</a></li>
       </ul>
     </div>
     <div>
-      <div class="fcol-h">Основной сайт</div>
-      <p><a href="/foundertrajectory/">sychinnikov.com/foundertrajectory</a><br><span class="dim">Кейсы, команда и форматы работы.</span></p>
-      <p style="margin-top:14px"><a href="#kontakty">Написать нам →</a></p>
+      <div class="fcol-h">Связь</div>
+      <div class="fcontacts">
+        <a class="fct" href="https://t.me/Sychinnikov_work" target="_blank" rel="noopener"><span class="fci"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 4.2 2.9 11.3c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.4zM8.6 14l9.2-5.8c.5-.3.8-.1.5.2l-7.6 6.9-.3 3.2L8.6 14z" fill="currentColor"/></svg></span><span class="fct-t"><b>Telegram</b><small>@Sychinnikov_work</small></span><i class="fct-a" aria-hidden="true">↗</i></a>
+        <a class="fct" href="mailto:sychinnikov@gmail.com"><span class="fci"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 7.5 8 5.6 8-5.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="fct-t"><b>Почта</b><small>sychinnikov@gmail.com</small></span><i class="fct-a" aria-hidden="true">↗</i></a>
+        <a class="fct" href="https://www.linkedin.com/in/sychinnikov/" target="_blank" rel="noopener"><span class="fci"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.9 8.9H3.6V20h3.3V8.9zM5.3 3.5a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM20.4 13.6c0-3-1.6-4.9-4.3-4.9-1.4 0-2.4.8-2.8 1.5V8.9H10V20h3.3v-5.8c0-1.5.6-2.6 2-2.6s1.8 1.1 1.8 2.6V20h3.3v-6.4z" fill="currentColor"/></svg></span><span class="fct-t"><b>LinkedIn</b><small>Андрей Сычинников</small></span><i class="fct-a" aria-hidden="true">↗</i></a>
+        <a class="cta fcta" href="#kontakty"><span>Написать мне</span><i aria-hidden="true">→</i></a>
+      </div>
     </div>
   </div>
   <div class="inner fbar" style="padding-left:0;padding-right:0">
     <div>© 2026 Андрей Сычинников</div>
-    <div>Страница для партнеров · не индексируется</div>
+    <div>Работаю на русском, онлайн</div>
   </div>
 </div></footer>
 
-<script src="/foundertrajectory/assets/site.js?v=20260807b"></script>
 </body>
 </html>

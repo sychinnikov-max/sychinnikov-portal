@@ -21,18 +21,36 @@
 //        {id, action: 'cancel'}                       снять из очереди, пока не ушло
 //        {id, action: 'manual' | 'skip' | 'reset'}    «написал сам», «не то», сброс
 //        {id, action: 'status', status, ...}          отчет отправщика (только Bearer)
+//        {id, action: 'call' | 'lost' | 'takeover'}   «созвон назначен», «не интересно», «веду сам» (браузер)
+//        {action: 'settings', autopilot: true|false}  выключатель автопилота диалогов
+//
+// Автопилот (06.11 вечером, просьба Андрея): когда человек ответил, send.py
+// сам ведет разговор от имени Андрея до квалификации (не больше 3 реплик) и
+// передает Андрею: статус handoff + уведомление в Telegram. Переписка лежит в
+// поле dialog записи, чтобы Андрей видел на странице, что писал бот.
 
 import { json, authOk, bearerOk } from '../../os/api/_shared.js';
 
 const PREFIX = 'ff:scout:o:';
 const OLD_KEY = 'ff:scout:outreach'; // документ первой версии, переносится при первом чтении
+const SETTINGS = 'ff:scout:settings';
+const MAX_ITEM = 24000;
 const MAX_TEXT = 3000;
 
 // Статусы, после которых повторная отправка запрещена: второе холодное
 // сообщение тому же человеку выглядит как спам и бьет по аккаунту.
-const FINAL = new Set(['sending', 'sent', 'replied', 'exists', 'closed']);
+const FINAL = new Set(['sending', 'sent', 'replied', 'talking', 'handoff', 'call', 'lost', 'exists', 'closed']);
 // queued — только пометка отправщика «лимит на сегодня, уйдет завтра».
-const MAC_STATUSES = new Set(['queued', 'sending', 'sent', 'replied', 'failed', 'closed', 'exists']);
+const MAC_STATUSES = new Set(['queued', 'sending', 'sent', 'replied', 'talking', 'handoff', 'lost',
+  'failed', 'closed', 'exists']);
+// Поля, которые отправщик может писать в запись человека.
+const MAC_FIELDS = ['sent_at', 'error', 'reply', 'reply_at', 'name', 'username', 'msg_id', 'bot_ids',
+  'last_seen', 'turns', 'dialog', 'summary', 'qualified', 'track', 'reason', 'autopilot', 'handoff_at'];
+
+async function getSettings(env) {
+  const raw = await env.FISHOK_BOARD.get(SETTINGS);
+  try { return Object.assign({ autopilot: true }, raw ? JSON.parse(raw) : {}); } catch (e) { return { autopilot: true }; }
+}
 
 async function getItem(env, id) {
   const raw = await env.FISHOK_BOARD.get(PREFIX + id);
@@ -79,7 +97,7 @@ function str(v, max) {
 export async function onRequestGet({ request, env }) {
   if (!env.FISHOK_BOARD) return json({ error: 'хранилище не подключено' }, 500);
   if (!(await authOk(request, env))) return json({ error: 'нет доступа' }, 401);
-  return json({ items: await loadAll(env), at: new Date().toISOString() });
+  return json({ items: await loadAll(env), settings: await getSettings(env), at: new Date().toISOString() });
 }
 
 export async function onRequestPost({ request, env }) {
@@ -96,6 +114,13 @@ export async function onRequestPost({ request, env }) {
     b = await request.json();
   } catch (e) {
     return json({ error: 'тело не JSON' }, 400);
+  }
+  if (b && b.action === 'settings') {
+    const st = await getSettings(env);
+    if (typeof b.autopilot === 'boolean') st.autopilot = b.autopilot;
+    st.at = new Date().toISOString();
+    await env.FISHOK_BOARD.put(SETTINGS, JSON.stringify(st));
+    return json({ ok: true, settings: st });
   }
   const id = String((b && b.id) || '');
   if (!/^\d{1,20}$/.test(id)) return json({ error: 'нет id человека' }, 400);
@@ -119,6 +144,13 @@ export async function onRequestPost({ request, env }) {
   } else if (action === 'reset') {
     if (cur && FINAL.has(cur.status)) return json({ error: 'отправленное не сбрасывается', item: cur }, 409);
     next = null;
+  } else if (action === 'call' || action === 'lost' || action === 'takeover') {
+    // Итог разговора отмечает Андрей. «Веду сам» выключает автопилот у человека.
+    if (!cur) return json({ error: 'этому человеку еще не писали' }, 404);
+    next = Object.assign({}, cur, { at: now, autopilot: false });
+    if (action === 'call') { next.status = 'call'; next.call_at = now; }
+    if (action === 'lost') next.status = 'lost';
+    if (action === 'takeover') { next.status = 'handoff'; next.reason = 'Андрей ведет сам'; next.handoff_at = now; }
   } else if (action === 'status') {
     // Статус доставки пишет только отправщик с Мака.
     if (!bearerOk(request, env)) return json({ error: 'статус пишет только отправщик' }, 401);
@@ -127,14 +159,23 @@ export async function onRequestPost({ request, env }) {
     next = Object.assign({}, cur || {}, { status: b.status, at: now });
     // Старая пометка («лимит на сегодня») не должна висеть у отправленного.
     if (b.status === 'sending' || b.status === 'sent' || b.status === 'replied') delete next.error;
-    for (const k of ['sent_at', 'error', 'reply', 'reply_at', 'name', 'username']) {
-      if (k in b) next[k] = str(b[k], 600);
+    // Итог, который отметил Андрей (созвон, не интересно), отправщик не перетирает.
+    if (cur && (cur.status === 'call' || cur.status === 'lost') && b.status !== 'lost') {
+      next.status = cur.status;
+    }
+    for (const k of MAC_FIELDS) {
+      if (!(k in b)) continue;
+      const v = b[k];
+      next[k] = typeof v === 'string' ? str(v, 2000) : v;
     }
     if (b.text) next.text = str(b.text, MAX_TEXT);
   } else {
     return json({ error: 'неизвестное действие' }, 400);
   }
 
+  if (next && JSON.stringify(next).length > MAX_ITEM && Array.isArray(next.dialog)) {
+    next.dialog = next.dialog.slice(-8);
+  }
   await putItem(env, id, next);
   return json({ ok: true, item: next });
 }
