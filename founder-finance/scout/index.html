@@ -294,7 +294,21 @@ var NOTE = {
   rest: 'Подходят средне, явного запроса нет, сообщение не готовили.'
 };
 
-function inEnv(p) { return S.env === 'all' || (p.envs || []).indexOf(S.env) !== -1; }
+// Диалоги, которых нет в текущей карте: ручные знакомства Андрея и люди старше окна.
+// Карточка из записи KV, чтобы на странице были видны все диалоги скаута (06.11, Андрей).
+function addOutsiders() {
+  var have = {};
+  PEOPLE.forEach(function (p) { have[p.id] = 1; });
+  Object.keys(OUT).forEach(function (id) {
+    if (have[id]) return;
+    var o = OUT[id];
+    if (!o || o.status === 'skip' || o.status === 'manual' && !o.text) return;
+    PEOPLE.push({ id: Number(id), name: o.name || id, username: o.username, classified: true, envs: [],
+      fit: 0, tier: 'd', hot: false, track: o.track || null, quotes: [], source: 'manual', last: (o.sent_at || o.at || '').slice(0, 10) });
+    have[id] = 1;
+  });
+}
+function inEnv(p) { return S.env === 'all' || p.source === 'manual' || (p.envs || []).indexOf(S.env) !== -1; }
 function matchQ(p) {
   var q = S.q.trim().toLowerCase();
   if (!q) return true;
@@ -433,6 +447,7 @@ function card(p) {
     (p.neighbor ? '<span class="badge mine">моя десятка</span>' : '') +
     (p.known && !o ? '<span class="badge known">уже общались</span>' : '') +
     (p.source === 'archive' ? '<span class="badge">архив Ковчега</span>' : '') +
+    (p.source === 'manual' ? '<span class="badge">написал вручную</span>' : '') +
     '<span class="fit"><b>' + (score || 0) + '</b> · ' + dshort(p.last) + '</span></div>';
   if (meta) h += '<div class="meta">' + meta + '</div>';
   if (isPartner && p.partner_clients) h += '<div class="why">Его клиенты: ' + esc(p.partner_clients) + '</div>';
@@ -583,6 +598,7 @@ function refresh() {
   getJSON(OUT_API).then(function (d) {
     var changed = JSON.stringify(d.items || {}) !== JSON.stringify(OUT) || JSON.stringify(d.settings || {}) !== JSON.stringify(SETTINGS);
     OUT = d.items || {}; SETTINGS = d.settings || SETTINGS;
+    addOutsiders();
     if (changed && !editing) render();
   }).catch(function () {}).then(schedule);
 }
@@ -593,6 +609,7 @@ Promise.all([getJSON(MAP_API), getJSON(OUT_API).catch(function () { return { ite
     OUT = (r[1] && r[1].items) || {};
     SETTINGS = (r[1] && r[1].settings) || SETTINGS;
     PEOPLE = (DATA.people || []).filter(function (p) { return p.classified; });
+    addOutsiders();
     $('#stamp').textContent = winText() + ' · собран ' + hm(DATA.built_at);
     $('#screen').hidden = true;
     $('#app').hidden = false;
