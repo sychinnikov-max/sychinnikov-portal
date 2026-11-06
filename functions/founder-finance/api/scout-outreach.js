@@ -136,6 +136,9 @@ export async function onRequestPost({ request, env }) {
     const text = str(b.text, MAX_TEXT);
     if (!text || text.trim().length < 20) return json({ error: 'пустой текст' }, 400);
     next = { status: 'queued', text, name: str(b.name, 120), username: str(b.username, 64), queued_at: now };
+    // prio: очередь Ковчега до 15.11 идет первой (send.py ставит ее сам).
+    if (Number.isInteger(b.prio)) next.prio = b.prio;
+    if (b.auto === true) next.auto = true;
   } else if (action === 'cancel') {
     if (!cur || cur.status !== 'queued') return json({ error: 'отменить можно только до отправки', item: cur }, 409);
     next = null;
