@@ -7,27 +7,26 @@
 // отправляет и пишет статус обратно. Страница видит статус и показывает
 // «Отправлено».
 //
-// Прежние пометки жили в localStorage браузера и не переезжали между
-// телефоном и Маком. Теперь все отметки здесь, одна правда на все устройства.
+// ОДНА ЗАПИСЬ KV НА ЧЕЛОВЕКА: ff:scout:o:<id>. Первая версия держала все
+// отметки одним документом, и в первый же час он поломался: Андрей ставил
+// людей в очередь пачкой, браузер читал документ чуть устаревшим (KV читается
+// с задержкой) и записывал его целиком поверх отчета Мака. «Отправлено»
+// откатывалось в «в очереди», Мак брал человека второй раз. Дубля не случилось
+// только потому, что send.py проверяет переписку перед отправкой. Теперь
+// браузер и Мак пишут каждый в запись своего человека и друг друга не затирают.
 //
-//   GET  /founder-finance/api/scout-outreach  — все отметки. Access JWT или Bearer.
+//   GET  /founder-finance/api/scout-outreach  — все отметки {items: {id: item}}. Access JWT или Bearer.
 //   POST /founder-finance/api/scout-outreach  — одно действие над одним человеком:
 //        {id, action: 'send', text, name, username}   поставить в очередь (браузер)
 //        {id, action: 'cancel'}                       снять из очереди, пока не ушло
 //        {id, action: 'manual' | 'skip' | 'reset'}    «написал сам», «не то», сброс
 //        {id, action: 'status', status, ...}          отчет отправщика (только Bearer)
-//
-// Чтение-изменение-запись идет здесь, на сервере, по одному человеку за раз:
-// браузер и Мак никогда не перезаписывают документ целиком и не затирают
-// отметки друг друга.
-//
-// Ключ KV: ff:scout:outreach.
 
 import { json, authOk, bearerOk } from '../../os/api/_shared.js';
 
-const KEY = 'ff:scout:outreach';
+const PREFIX = 'ff:scout:o:';
+const OLD_KEY = 'ff:scout:outreach'; // документ первой версии, переносится при первом чтении
 const MAX_TEXT = 3000;
-const MAX_ITEMS = 3000;
 
 // Статусы, после которых повторная отправка запрещена: второе холодное
 // сообщение тому же человеку выглядит как спам и бьет по аккаунту.
@@ -35,20 +34,42 @@ const FINAL = new Set(['sending', 'sent', 'replied', 'exists', 'closed']);
 // queued — только пометка отправщика «лимит на сегодня, уйдет завтра».
 const MAC_STATUSES = new Set(['queued', 'sending', 'sent', 'replied', 'failed', 'closed', 'exists']);
 
-async function load(env) {
-  const raw = await env.FISHOK_BOARD.get(KEY);
-  if (!raw) return { items: {} };
-  try {
-    const doc = JSON.parse(raw);
-    return doc && typeof doc.items === 'object' ? doc : { items: {} };
-  } catch (e) {
-    return { items: {} };
-  }
+async function getItem(env, id) {
+  const raw = await env.FISHOK_BOARD.get(PREFIX + id);
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch (e) { return null; }
 }
 
-async function save(env, doc) {
-  doc.updated_at = new Date().toISOString();
-  await env.FISHOK_BOARD.put(KEY, JSON.stringify(doc));
+async function putItem(env, id, item) {
+  if (item) await env.FISHOK_BOARD.put(PREFIX + id, JSON.stringify(item));
+  else await env.FISHOK_BOARD.delete(PREFIX + id);
+}
+
+async function migrateOld(env) {
+  const raw = await env.FISHOK_BOARD.get(OLD_KEY);
+  if (!raw) return;
+  try {
+    const doc = JSON.parse(raw);
+    for (const [id, item] of Object.entries((doc && doc.items) || {})) {
+      if (!(await env.FISHOK_BOARD.get(PREFIX + id))) await putItem(env, id, item);
+    }
+  } catch (e) { /* битый старый документ не мешает новому */ }
+  await env.FISHOK_BOARD.delete(OLD_KEY);
+}
+
+async function loadAll(env) {
+  await migrateOld(env);
+  const ids = [];
+  let cursor;
+  do {
+    const page = await env.FISHOK_BOARD.list({ prefix: PREFIX, cursor });
+    for (const k of page.keys) ids.push(k.name.slice(PREFIX.length));
+    cursor = page.list_complete ? null : page.cursor;
+  } while (cursor);
+  const items = {};
+  const vals = await Promise.all(ids.map((id) => getItem(env, id)));
+  ids.forEach((id, i) => { if (vals[i]) items[id] = vals[i]; });
+  return items;
 }
 
 function str(v, max) {
@@ -58,7 +79,7 @@ function str(v, max) {
 export async function onRequestGet({ request, env }) {
   if (!env.FISHOK_BOARD) return json({ error: 'хранилище не подключено' }, 500);
   if (!(await authOk(request, env))) return json({ error: 'нет доступа' }, 401);
-  return json(await load(env));
+  return json({ items: await loadAll(env), at: new Date().toISOString() });
 }
 
 export async function onRequestPost({ request, env }) {
@@ -79,50 +100,41 @@ export async function onRequestPost({ request, env }) {
   const id = String((b && b.id) || '');
   if (!/^\d{1,20}$/.test(id)) return json({ error: 'нет id человека' }, 400);
 
-  const doc = await load(env);
-  const cur = doc.items[id] || null;
+  const cur = await getItem(env, id);
   const now = new Date().toISOString();
   const action = b.action;
+  let next = cur;
 
   if (action === 'send') {
-    if (cur && FINAL.has(cur.status)) {
-      return json({ error: 'этому человеку уже писали', item: cur }, 409);
-    }
+    if (cur && FINAL.has(cur.status)) return json({ error: 'этому человеку уже писали', item: cur }, 409);
     const text = str(b.text, MAX_TEXT);
     if (!text || text.trim().length < 20) return json({ error: 'пустой текст' }, 400);
-    if (Object.keys(doc.items).length >= MAX_ITEMS && !cur) return json({ error: 'переполнено' }, 400);
-    doc.items[id] = {
-      status: 'queued',
-      text,
-      name: str(b.name, 120),
-      username: str(b.username, 64),
-      queued_at: now,
-    };
+    next = { status: 'queued', text, name: str(b.name, 120), username: str(b.username, 64), queued_at: now };
   } else if (action === 'cancel') {
     if (!cur || cur.status !== 'queued') return json({ error: 'отменить можно только до отправки', item: cur }, 409);
-    delete doc.items[id];
+    next = null;
   } else if (action === 'manual' || action === 'skip') {
     if (cur && FINAL.has(cur.status)) return json({ error: 'уже отправлено', item: cur }, 409);
-    doc.items[id] = { status: action, name: str(b.name, 120), username: str(b.username, 64), at: now };
+    next = { status: action, name: str(b.name, 120), username: str(b.username, 64), at: now };
   } else if (action === 'reset') {
     if (cur && FINAL.has(cur.status)) return json({ error: 'отправленное не сбрасывается', item: cur }, 409);
-    delete doc.items[id];
+    next = null;
   } else if (action === 'status') {
     // Статус доставки пишет только отправщик с Мака.
     if (!bearerOk(request, env)) return json({ error: 'статус пишет только отправщик' }, 401);
     if (!MAC_STATUSES.has(b.status)) return json({ error: 'неизвестный статус' }, 400);
-    if (!cur) return json({ error: 'нет заявки на этого человека' }, 404);
-    const item = Object.assign({}, cur, { status: b.status, at: now });
+    if (!cur && !b.text) return json({ error: 'нет заявки на этого человека' }, 404);
+    next = Object.assign({}, cur || {}, { status: b.status, at: now });
     // Старая пометка («лимит на сегодня») не должна висеть у отправленного.
-    if (b.status === 'sending' || b.status === 'sent' || b.status === 'replied') delete item.error;
-    for (const k of ['sent_at', 'error', 'reply', 'reply_at']) {
-      if (k in b) item[k] = str(b[k], 600);
+    if (b.status === 'sending' || b.status === 'sent' || b.status === 'replied') delete next.error;
+    for (const k of ['sent_at', 'error', 'reply', 'reply_at', 'name', 'username']) {
+      if (k in b) next[k] = str(b[k], 600);
     }
-    doc.items[id] = item;
+    if (b.text) next.text = str(b.text, MAX_TEXT);
   } else {
     return json({ error: 'неизвестное действие' }, 400);
   }
 
-  await save(env, doc);
-  return json({ ok: true, item: doc.items[id] || null });
+  await putItem(env, id, next);
+  return json({ ok: true, item: next });
 }

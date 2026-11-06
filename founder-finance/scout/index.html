@@ -43,6 +43,24 @@ a:hover{text-decoration:underline}
 .tab b{font-family:var(--mono);color:var(--ink);margin-left:4px}
 .tab.on{border-color:var(--gold-dim);background:#2A2210;color:var(--ink)}
 .tab.on b{color:var(--gold)}
+/* Свои люди: соседи по десяткам и те, с кем уже есть личка. Выделены цветом
+   всегда, а не только когда открыты: их нельзя пропустить. */
+.tab.mine{border-color:#2E5B3E;color:var(--green)}
+.tab.mine b{color:var(--green)}
+.tab.mine.on{background:#14261B;border-color:var(--green)}
+.tab.known{border-color:#2A4566;color:var(--blue)}
+.tab.known b{color:var(--blue)}
+.tab.known.on{background:#122033;border-color:var(--blue)}
+.tab.rest{opacity:.7}
+.card.mine{border-left:4px solid var(--green)}
+.card.known{border-left:4px solid var(--blue)}
+.badge.mine{color:var(--green);border-color:#2E5B3E;background:#14261B}
+.badge.known{color:var(--blue);border-color:#2A4566;background:#122033}
+.hint{margin-top:10px;padding:9px 12px;border-radius:10px;background:var(--bg2);border:1px solid var(--line);font-size:14px}
+.hint b{color:var(--muted);font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:2px}
+.last{font-size:13px;margin-top:6px;color:var(--muted)}
+.last.wait{color:var(--fire)}
+.tabnote{font-size:13px;color:var(--soft);margin-top:12px}
 .row2{display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap}
 .chip{padding:4px 10px;border-radius:100px;border:1px solid var(--line);font-size:13px;color:var(--muted)}
 .chip.on{border-color:var(--gold-dim);color:var(--ink)}
@@ -74,7 +92,8 @@ a:hover{text-decoration:underline}
 .msg textarea{display:block;width:100%;min-height:260px;resize:vertical;border:none;border-top:1px solid var(--line);background:transparent;color:var(--ink);font:14px/1.5 var(--sans);padding:10px 12px;outline:none}
 
 .acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
-.btn{padding:9px 16px;border-radius:100px;border:1px solid var(--line2);font-size:14px}
+.btn{padding:9px 16px;border-radius:100px;border:1px solid var(--line2);font-size:14px;display:inline-block}
+a.btn.main:hover{text-decoration:none}
 .btn.main{background:var(--gold);color:#14100C;border-color:var(--gold);font-weight:700}
 .btn.main:disabled{opacity:.5;cursor:default}
 .btn.ghost{color:var(--muted)}
@@ -167,17 +186,29 @@ function group(p) {
     if (o.status === 'skip') return 'skip';
     if (BUSY[o.status]) return 'work';
   }
+  if (p.competitor) return null;
+  var warm = p.hot || p.fit >= 45;
+  if (p.neighbor && warm) return 'mine';
+  if (p.known && warm) return 'known';
   if (p.draft) return 'write';
-  if (p.tier === 'b' && !p.competitor) return 'b';
+  if (p.tier === 'b') return 'b';
   return null;
 }
 var TABS = [
   { k: 'write', t: 'Написать' },
+  { k: 'mine', t: 'Мои десятки', cls: 'mine' },
+  { k: 'known', t: 'Уже общались', cls: 'known' },
   { k: 'work', t: 'Отправлено' },
   { k: 'replied', t: 'Ответили' },
-  { k: 'b', t: 'Еще B' },
-  { k: 'skip', t: 'Не то' }
+  { k: 'b', t: 'Остальные', cls: 'rest' },
+  { k: 'skip', t: 'Не то', cls: 'rest' }
 ];
+// Пояснение под вкладкой: что это за люди и почему у них нет кнопки «Отправить».
+var TAB_NOTE = {
+  mine: 'Соседи по твоим десяткам с запросом или подходящие. Холодное знакомство им не пишется: заходи сам, как сосед.',
+  known: 'С ними уже есть личка в Work. Знакомство не пишется, видно, кто писал последним.',
+  b: 'Подходят средне (оценка 45-69), явного запроса нет, поэтому сообщение не готовили.'
+};
 
 function visible() {
   var q = S.q.trim().toLowerCase();
@@ -194,6 +225,10 @@ function visible() {
       var oa = out(a) || {}, ob = out(b) || {};
       return (ob.reply_at || ob.sent_at || ob.queued_at || ob.at || '').localeCompare(oa.reply_at || oa.sent_at || oa.queued_at || oa.at || '');
     }
+    if (S.tab === 'known') {
+      var wa = a.known_last && !a.known_last.out ? 1 : 0, wb = b.known_last && !b.known_last.out ? 1 : 0;
+      if (wa !== wb) return wb - wa;
+    }
     return (b.hot - a.hot) || (b.fit - a.fit) || (b.last || '').localeCompare(a.last || '');
   });
 }
@@ -208,7 +243,7 @@ function renderTop() {
     n[g] = (n[g] || 0) + 1;
   });
   $('#tabs').innerHTML = TABS.map(function (t) {
-    return '<button class="tab' + (S.tab === t.k ? ' on' : '') + '" data-tab="' + t.k + '">' +
+    return '<button class="tab' + (t.cls ? ' ' + t.cls : '') + (S.tab === t.k ? ' on' : '') + '" data-tab="' + t.k + '">' +
       t.t + '<b>' + (n[t.k] || 0) + '</b></button>';
   }).join('');
   var envs = (DATA.envs || []).map(function (e) { return { k: e.key, t: e.title }; });
@@ -251,11 +286,12 @@ function card(p) {
   var meta = [p.company, p.niche, p.geo, p.scale].filter(Boolean).map(esc).join(' · ');
   var q = p.quote || (p.quotes && p.quotes[0] && p.quotes[0].text) || '';
   var src = (p.quotes || []).filter(function (m) { return p.quote ? m.text.indexOf(p.quote.slice(0, 40)) !== -1 : true; })[0] || (p.quotes || [])[0];
-  var h = '<div class="card' + (p.hot ? ' hot' : '') + '" id="c' + p.id + '">';
+  var g = group(p);
+  var h = '<div class="card' + (p.hot ? ' hot' : '') + (g === 'mine' ? ' mine' : g === 'known' ? ' known' : '') + '" id="c' + p.id + '">';
   h += '<div class="who"><span class="name">' + esc(p.name) + '</span>' +
     (p.hot ? '<span class="badge fire">запрос</span>' : '') +
-    (p.neighbor ? '<span class="badge">моя десятка</span>' : '') +
-    (p.known ? '<span class="badge">уже общались</span>' : '') +
+    (p.neighbor ? '<span class="badge mine">моя десятка</span>' : '') +
+    (p.known ? '<span class="badge known">уже общались</span>' : '') +
     '<span class="fit"><b>' + p.fit + '</b> · ' + esc((p.last || '').slice(8, 10) + '.' + (p.last || '').slice(5, 7)) + '</span></div>';
   if (meta) h += '<div class="meta">' + meta + '</div>';
   if (q) {
@@ -263,7 +299,14 @@ function card(p) {
     if (src) h += '<div class="qsrc">' + esc(src.room || '') + (src.topic ? ' / ' + esc(src.topic) : '') +
       (src.link ? ' · <a href="' + esc(src.link) + '" target="_blank" rel="noopener">в чат ↗</a>' : '') + '</div>';
   }
-  if (p.why && !p.draft) h += '<div class="why">' + esc(p.why) + '</div>';
+  if (p.known_last) {
+    var mine = p.known_last.out;
+    h += '<div class="last' + (mine ? '' : ' wait') + '">В личке: последнее ' + hm(p.known_last.date) +
+      (mine ? ', твое' : ', от собеседника, ждет ответа') + '</div>';
+  }
+  if ((g === 'mine' || g === 'known') && p.approach) {
+    h += '<div class="hint"><b>С чем заходить</b>' + esc(p.approach) + '</div>';
+  } else if (p.why && !p.draft) h += '<div class="why">' + esc(p.why) + '</div>';
 
   if (p.draft && (!o || o.status === 'failed')) {
     var txt = EDITS[p.id] != null ? EDITS[p.id] : p.draft;
@@ -276,9 +319,11 @@ function card(p) {
 
   h += statusHTML(p);
   var profile = p.username ? '<a class="prof" href="https://t.me/' + esc(p.username) + '" target="_blank" rel="noopener">@' + esc(p.username) + ' ↗</a>' : '';
+  var chat = p.username ? 'https://t.me/' + esc(p.username) : 'tg://user?id=' + p.id;
   if (!o) {
     h += '<div class="acts">' +
-      (p.draft ? '<button class="btn main" data-act="send" data-id="' + p.id + '">Отправить</button>' : '') +
+      (p.draft ? '<button class="btn main" data-act="send" data-id="' + p.id + '">Отправить</button>' :
+        (g === 'mine' || g === 'known') ? '<a class="btn main" href="' + chat + '" target="_blank" rel="noopener">Открыть чат</a>' : '') +
       '<button class="btn ghost" data-act="manual" data-id="' + p.id + '">Написал сам</button>' +
       '<button class="btn ghost" data-act="skip" data-id="' + p.id + '">Не то</button>' + profile + '</div>';
   } else if (profile) {
@@ -291,8 +336,8 @@ function render() {
   renderTop();
   var all = visible();
   var items = all.slice(0, S.shown);
-  $('#list').innerHTML = items.length ? items.map(card).join('') :
-    '<div class="empty">' + (S.tab === 'write' ? 'Новых людей с черновиком нет' : 'Пусто') + '</div>';
+  $('#list').innerHTML = (TAB_NOTE[S.tab] ? '<div class="tabnote">' + TAB_NOTE[S.tab] + '</div>' : '') + (items.length ? items.map(card).join('') :
+    '<div class="empty">' + (S.tab === 'write' ? 'Новых людей с черновиком нет' : 'Пусто') + '</div>');
   $('#more').hidden = all.length <= S.shown;
 }
 
