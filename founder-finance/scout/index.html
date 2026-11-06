@@ -254,7 +254,8 @@ function card(p) {
   var h = '<div class="card' + (p.hot ? ' hot' : '') + '" id="c' + p.id + '">';
   h += '<div class="who"><span class="name">' + esc(p.name) + '</span>' +
     (p.hot ? '<span class="badge fire">запрос</span>' : '') +
-    (p.neighbor ? '<span class="badge">мой чат</span>' : '') +
+    (p.neighbor ? '<span class="badge">моя десятка</span>' : '') +
+    (p.known ? '<span class="badge">уже общались</span>' : '') +
     '<span class="fit"><b>' + p.fit + '</b> · ' + esc((p.last || '').slice(8, 10) + '.' + (p.last || '').slice(5, 7)) + '</span></div>';
   if (meta) h += '<div class="meta">' + meta + '</div>';
   if (q) {
